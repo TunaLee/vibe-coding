@@ -16,7 +16,7 @@ T = "1-5"
 def slides():
     return [
         # ── 배경 → 비유
-        light("최종_진짜최종", viz2.tiles([
+        light("파일 이름 버전 관리", viz2.tiles([
             ("기획서_v1.md", "처음 쓴 것"), ("기획서_최종.md", "피드백 반영"), ("기획서_최종_진짜.md", "PRD 쓰다 다시 고침")], 3)
               + viz2.tiles([
                   ("어느 게 최신", "파일 날짜를 열어 봐야 앎"), ("무엇이 바뀌었나", "두 파일을 나란히 놓고 비교"),
@@ -49,7 +49,7 @@ def slides():
               + flow([("커밋 A", "기획서"), ("커밋 B", "PRD"), ("고치는 중", "PRD 수정"), ("restore", "커밋 B 상태로"), ("revert", "커밋 C · B를 취소")], hl=2)
               + note("공식 문서", "revert 는 새 커밋 · restore 는 작업 폴더의 파일만 · 둘 다 기록을 지우지 않음")
               + src(("git-scm · git", "https://git-scm.com/docs/git")), T),
-        light("말로 시키기", viz2.maprows([
+        light("말로 하는 Git 작업", viz2.maprows([
             ("「지금 상태 커밋해 줘」", "git add · git commit", "메시지도 Claude가 씀"),
             ("「커밋 기록 보여 줘」", "git log", "시점 · 메시지 목록"),
             ("「방금 고친 거 취소해 줘」", "git restore", "커밋 전 수정 버림"),

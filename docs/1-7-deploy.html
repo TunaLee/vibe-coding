@@ -995,10 +995,10 @@
   <div class="body"><div class="mid"><div class="phmap v3ph"><figure class="ph"><img src="img/v1_shopdoor.webp" alt="가게 문의 영업시간 안내"><figcaption><b>가게 문의 영업시간 안내</b></figcaption></figure><div class="v2ms"><div class="v2mh"><span>가게</span><i></i><span>배포</span></div><div class="v2m" style="--d:0.00s"><div class="a">주방에서 혼자 맛보기</div><i>→</i><div class="b"><b>localhost 확인</b><small>1-6</small></div></div><div class="v2m" style="--d:0.12s"><div class="a">문 열고 간판 달기</div><i>→</i><div class="b"><b>배포</b><small>Vercel</small></div></div><div class="v2m" style="--d:0.24s"><div class="a">가게 주소</div><i>→</i><div class="b"><b>배포 주소</b><small>*.vercel.app</small></div></div><div class="v2m" style="--d:0.36s"><div class="a">메뉴를 바꿔 다시 진열</div><i>→</i><div class="b"><b>재배포</b><small>push 하면 자동</small></div></div></div></div><div class="src">출처 · <a href="https://commons.wikimedia.org/wiki/File:Door_signs_at_Stan%27s_Donuts,_Santa_Clara,_California.jpg" target="_blank" rel="noopener">사진 · dvorty (Mapillary) · CC BY-SA 4.0</a></div></div></div>
 </section>
 
-<section class="slide lt" data-title="localhost는 내 컴퓨터만">
+<section class="slide lt" data-title="localhost의 범위">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-7</span></div>
-  <h2 class="s-title sm">localhost는 내 컴퓨터만</h2>
+  <h2 class="s-title sm">localhost의 범위</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>내 브라우저</b><span>localhost 주소로 열림</span></div><div class="v2tile" style="--d:0.08s"><b>팀원 노트북</b><span>같은 주소를 넣어도 안 열림</span></div><div class="v2tile" style="--d:0.16s"><b>내 휴대폰</b><span>안 열림 · 다른 기기</span></div></div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">1-6 에서 띄운 주소 · 예</span></div><pre><code>http://localhost:3000   ← 「이 컴퓨터」라는 뜻</code></pre></div><div class="dbnote"><span>localhost</span> 주소 자체가 「지금 이 컴퓨터」를 가리킴 · 다른 기기에서는 그 기기 자신을 가리킴</div></div></div>
 </section>
@@ -1038,10 +1038,10 @@
 ✓ Logged in as 내계정</code></pre></div><div class="dbnote"><span>직접 할 것</span> 브라우저 승인은 사람이 · 비밀번호를 Claude에게 알려 주지 않음</div><div class="src">출처 · <a href="https://cli.github.com/manual/gh_auth_login" target="_blank" rel="noopener">gh auth login</a></div></div></div>
 </section>
 
-<section class="slide lt" data-title="「GitHub에 올려 줘」">
+<section class="slide lt" data-title="GitHub 업로드 요청">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-7</span></div>
-  <h2 class="s-title sm">「GitHub에 올려 줘」</h2>
+  <h2 class="s-title sm">GitHub 업로드 요청</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v1chat"><div class="v1ch">Claude Code 대화 예</div><div class="v1b me"><span>나</span><p>이 폴더를 GitHub 비공개 저장소 room-booking 으로 올려 줘</p></div><div class="v1b ai"><span>Claude</span><p>gh repo create room-booking --private --source=. --push 를 실행해도 될까요?</p></div><div class="v1b me"><span>나</span><p>응</p></div><div class="v1b ai"><span>Claude</span><p>완료 · https://github.com/내계정/room-booking</p></div></div><div class="dbnote"><span>Claude가 쓰는 명령</span> gh repo create — 원격 저장소 만들기 + 지금까지의 커밋 올리기</div><div class="src">출처 · <a href="https://cli.github.com/manual/gh_repo_create" target="_blank" rel="noopener">gh repo create</a></div></div></div>
 </section>
@@ -1084,10 +1084,10 @@
   이번 배포     https://room-booking-a1b2c3.vercel.app</code></pre></div><div class="dbnote"><span>공유할 주소</span> 프로젝트 기본 주소 · 다시 배포해도 바뀌지 않음</div><div class="src">출처 · <a href="https://vercel.com/docs/deployments/generated-urls" target="_blank" rel="noopener">Vercel · Generated URLs</a></div></div></div>
 </section>
 
-<section class="slide lt" data-title="같은 화면이 주소로">
+<section class="slide lt" data-title="배포 결과 화면">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-7</span></div>
-  <h2 class="s-title sm">같은 화면이 주소로</h2>
+  <h2 class="s-title sm">배포 결과 화면</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v1shot"><figure><img src="img/room_main.webp" alt="배포 주소로 연 회의실 예약 · localhost 와 같은 화면"/><figcaption>배포 주소로 연 회의실 예약 · localhost 와 같은 화면</figcaption></figure><div class=v1side><div class="v1sd"><b>주소만 다름</b><span>localhost → *.vercel.app</span></div><div class="v1sd"><b>코드는 그대로</b><span>GitHub 에 올린 그 파일</span></div><div class="v1sd"><b>예약 데이터</b><span>여는 브라우저마다 따로 · 1-8</span></div></div></div></div></div>
 </section>
@@ -1105,7 +1105,7 @@
   <div class="eyebrow"><span class="tag">1-7</span></div>
   <h2 class="s-title sm">수정 → 재배포</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="flow"><div class="fs"><b>말로 수정</b><span>Claude Code</span></div><div class="fa">→</div><div class="fs"><b>localhost 확인</b><span>1-6 처럼</span></div><div class="fa">→</div><div class="fs"><b>커밋 · push</b><span>「GitHub에 올려 줘」</span></div><div class="fa">→</div><div class="fs hl"><b>Vercel 자동 배포</b><span>push 를 감지</span></div><div class="fa">→</div><div class="fs"><b>같은 주소에 반영</b><span>새 링크 없음</span></div></div><div class="dbnote"><span>한 번 연결 뒤</span> Vercel 화면을 다시 열 필요 없음 · push 가 곧 배포</div><div class="src">출처 · <a href="https://vercel.com/docs/git" target="_blank" rel="noopener">Vercel · Git</a></div></div></div>
+  <div class="body"><div class="mid"><div class="flow"><div class="fs"><b>말로 수정</b><span>Claude Code</span></div><div class="fa">→</div><div class="fs"><b>localhost 확인</b><span>1-6 처럼</span></div><div class="fa">→</div><div class="fs"><b>커밋 · push</b><span>GitHub 업로드 요청</span></div><div class="fa">→</div><div class="fs hl"><b>Vercel 자동 배포</b><span>push 를 감지</span></div><div class="fa">→</div><div class="fs"><b>같은 주소에 반영</b><span>새 링크 없음</span></div></div><div class="dbnote"><span>한 번 연결 뒤</span> Vercel 화면을 다시 열 필요 없음 · push 가 곧 배포</div><div class="src">출처 · <a href="https://vercel.com/docs/git" target="_blank" rel="noopener">Vercel · Git</a></div></div></div>
 </section>
 
 <section class="slide lt" data-title="재배포 대화 예">

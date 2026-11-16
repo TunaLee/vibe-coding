@@ -137,21 +137,21 @@ def comic(cuts):
 def slides():
     return [
         # ── 코딩 = 원시인에게 사과 가르치기
-        light("사과를 처음 보는 원시인", '<div class="v1shot v1vid"><figure>'
+        light("비유 · 원시인과 사과", '<div class="v1shot v1vid"><figure>'
               '<video src="img/v1_caveman.mp4" poster="img/v1_caveman.webp" autoplay muted loop playsinline></video>'
               '<figcaption>AI 생성 영상 · Z-Image Turbo · Wan 2.2 (Apache 2.0)</figcaption></figure><div class="v1side">'
               + "".join(f'<div class="v1sd"><b>{h}</b><span>{x}</span></div>' for h, x in [
                   ("원시인", "컴퓨터 · 사전 지식 없음"), ("사과 먹는 법", "코드 · 할 일의 순서"),
                   ("알려 준 순서", "그대로 실행 · 빠진 단계는 못 함"), ("코드", "컴퓨터가 실행하는 명령의 목록")])
               + "</div></div>", T),
-        light("알려 준 것만 하는 컴퓨터", comic([
+        light("코드의 저장과 실행", comic([
             ("v1_cut1.webp", "?", "처음 본 사과", "명령 없음 → 실행 불가"),
             ("v1_cut2.webp", "이건 사과 · 먹는 것", "이름 · 먹는 법 알려 줌", "코드 작성 · 저장"),
             ("v1_cut3.webp", "사과다!", "다음 사과 · 바로 먹음", "저장된 코드 · 매번 같은 실행"),
             ("v1_cut4.webp", "?", "처음 본 배", "코드에 없는 경우 · 처리 불가")])
               + note("코딩", "컴퓨터가 실행할 명령을 프로그래밍 언어로 작성하는 일")
               + src(("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")), T),
-        light("회의실 예약도 마찬가지", '<div class="twocol"><div>'
+        light("예제 코드 · 겹치는 예약 막기", '<div class="twocol"><div>'
               + viz2.tiles([("요청", "「겹치는 예약은 막아 줘」"),
                             ("코드에 필요한 조건", "같은 회의실 · 같은 날짜 · 시간 겹침"),
                             ("겹칠 때 처리", "「이미 예약된 시간」 표시 · 저장 취소")], 1)
@@ -176,7 +176,7 @@ def slides():
               + src(("GitHub · 2021-06-29", "https://github.blog/2021-06-29-introducing-github-copilot-ai-pair-programmer/"),
                     ("OpenAI · 2022-11-30", "https://openai.com/index/chatgpt/"),
                     ("Anthropic · 2025-05-22", "https://www.anthropic.com/news/claude-4")), T),
-        light("바이브코딩이라는 말", quote(
+        light("용어의 유래", quote(
             "There's a new kind of coding I call <mark>“vibe coding”</mark>, where you fully give in to the vibes, "
             "embrace exponentials, and forget that the code even exists.",
             "Andrej Karpathy · X · 2025-02-02 · 번역 「코드가 있다는 것조차 잊고 느낌(vibe)에 맡기는 새로운 코딩」")
@@ -191,9 +191,9 @@ def slides():
               + '<div class="bn"><div class="bv">작업 길이</div><div class="bl">사람이 하면 걸리는 시간 기준</div></div>'
               + '</div></div>' + src(METR_TH), T),
         # ── 바이브코딩 = 통역사에게 맡기기
-        light("바이브코딩 = 통역사에게 맡기기", anim_vibe()
+        light("비유 · 통역사", anim_vibe()
               + note("바이브코딩", "자연어 요청 → AI가 코드 작성 → 사람이 결과 확인"), T),
-        light("비유와 실제", viz2.maprows([
+        light("비유 대응표", viz2.maprows([
             ("나", "나", "요구 사항 설명"),
             ("통역사", "AI (Claude Code)", "코드 작성"),
             ("원시인", "컴퓨터", "코드 실행"),
@@ -202,17 +202,17 @@ def slides():
         # ── 동작 원리
         light("바이브코딩의 반복 고리", anim_loop()
               + src(("Claude Code 문서 · How Claude Code works", "https://code.claude.com/docs/en/how-claude-code-works")), T),
-        light("고리 한 바퀴 · 회의실 예약 예", viz2.tiles([
+        light("반복 고리 예 · 회의실 예약", viz2.tiles([
             ("① app.js 찾기", "맥락 파악 · 파일 검색"), ("② 예약 저장 코드 읽기", "맥락 파악 · 파일 읽기"),
             ("③ 겹침 규칙 추가", "작업 · 파일 수정"), ("④ 겹치게 예약 실행", "결과 확인 · 실행"),
             ("⑤ 오류 발견 → 다시 수정", "반복 · ② 작업으로"), ("⑥ 완료 보고", "「app.js 에 겹침 막기 추가」")], 3)
               + note("사람", "④ 결과를 화면에서 다시 확인 · 다르면 수정 요청"), T),
-        light("내 일과 AI의 일", viz2.pair(
+        light("사람과 AI의 역할", viz2.pair(
             "내 일", [("만들 것 정의", "기획서 · PRD"), ("동작 확인", "화면 직접 조작"), ("공개 결정", "배포 · 공유")],
             "AI의 일", [("코드 작성", "화면 · 규칙 · 저장"), ("오류 수정", "오류 메시지 해석 · 수정"), ("반복 작업", "파일 생성 · 명령 실행")], hl="l")
               + note("판단", "결과 확인 · 공개 결정은 사람"), T),
         # ── 할 수 있는 것 · 조심할 것
-        light("바이브코딩으로 만든 것", viz2.tiles([
+        light("바이브코딩 사례", viz2.tiles([
             ("브라우저 3D 비행 게임", "fly.pieter.com · 개발자 1명 + AI"),
             ("메뉴판 사진 → 음식 그림", "MenuGen · Karpathy"),
             ("업무 도구", "예약표 · 체크리스트 (1부 실습)")], 3)
@@ -224,13 +224,13 @@ def slides():
             [("돈 · 개인정보 처리 서비스", "전문 보안 점검 필요"), ("동시 사용자가 많은 서비스", "서버 · DB 설계 필요"),
              ("코드 확인 없는 운영", "장애 원인 추적 어려움")],
             gt="지금 만들기 좋은 앱", bt="아직 어려운 앱"), T),
-        light("통역사의 빈틈", big([("약 38%", "", "AI 생성 코드 작업 중 보안 취약점 발생 비율", True)], 1)
+        light("보안 사고 사례", big([("약 38%", "", "AI 생성 코드 작업 중 보안 취약점 발생 비율", True)], 1)
               + viz2.tiles([("키 노출 · Moltbook", "화면 코드에 DB 키 포함 · 이메일 3만 5천 개 유출"),
                             ("데이터 삭제 · Replit", "AI 에이전트가 운영 DB 데이터 삭제")], 2)
               + src(("Veracode · 2026-10-29", "https://www.veracode.com/blog/fall-2026-genai-code-security"),
                     ("Wiz · 2026-02-02", "https://www.wiz.io/blog/exposed-moltbook-database-reveals-millions-of-api-keys"),
                     ("Replit CEO · 2025-07-20", "https://x.com/amasad/status/1946986468586721478")), T),
-        light("문제와 1부의 순서", viz2.maprows([
+        light("문제별 1부 단원", viz2.maprows([
             ("AI가 빈칸을 추측으로 채움", "기획서 · PRD 작성", "1-3 · 1-4"),
             ("수정 후 이전 상태 복구 불가", "Git 저장 시점", "1-5"),
             ("오류 위치 파악 어려움", "기능 단위 작업 · 확인", "1-6"),

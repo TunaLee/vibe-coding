@@ -29,7 +29,7 @@ def slides():
             viz2.maprows([
                 ("주방에서 혼자 맛보기", "localhost 확인", "1-6"), ("문 열고 간판 달기", "배포", "Vercel"),
                 ("가게 주소", "배포 주소", "*.vercel.app"), ("메뉴를 바꿔 다시 진열", "재배포", "push 하면 자동")], "가게", "배포")), T),
-        light("localhost는 내 컴퓨터만", viz2.tiles([
+        light("localhost의 범위", viz2.tiles([
             ("내 브라우저", "localhost 주소로 열림"), ("팀원 노트북", "같은 주소를 넣어도 안 열림"), ("내 휴대폰", "안 열림 · 다른 기기")], 3)
               + code("1-6 에서 띄운 주소 · 예", esc("http://localhost:3000   ← 「이 컴퓨터」라는 뜻"))
               + note("localhost", "주소 자체가 「지금 이 컴퓨터」를 가리킴 · 다른 기기에서는 그 기기 자신을 가리킴"), T),
@@ -56,7 +56,7 @@ def slides():
               + code("터미널 · 예", esc("$ gh auth login\n? Where do you use GitHub?  GitHub.com\n...\n✓ Logged in as 내계정"))
               + note("직접 할 것", "브라우저 승인은 사람이 · 비밀번호를 Claude에게 알려 주지 않음")
               + src(("gh auth login", "https://cli.github.com/manual/gh_auth_login")), T),
-        light("「GitHub에 올려 줘」", chat([
+        light("GitHub 업로드 요청", chat([
             ("me", "이 폴더를 GitHub 비공개 저장소 room-booking 으로 올려 줘"),
             ("ai", "gh repo create room-booking --private --source=. --push 를 실행해도 될까요?"),
             ("me", "응"),
@@ -85,14 +85,14 @@ def slides():
               + code("배포 완료 · 예", esc("✓ Production   https://room-booking.vercel.app\n  이번 배포     https://room-booking-a1b2c3.vercel.app"))
               + note("공유할 주소", "프로젝트 기본 주소 · 다시 배포해도 바뀌지 않음")
               + src(("Vercel · Generated URLs", "https://vercel.com/docs/deployments/generated-urls")), T),
-        light("같은 화면이 주소로", shot("room_main.webp", "배포 주소로 연 회의실 예약 · localhost 와 같은 화면", [
+        light("배포 결과 화면", shot("room_main.webp", "배포 주소로 연 회의실 예약 · localhost 와 같은 화면", [
             ("주소만 다름", "localhost → *.vercel.app"), ("코드는 그대로", "GitHub 에 올린 그 파일"), ("예약 데이터", "여는 브라우저마다 따로 · 1-8")]), T),
         light("휴대폰에서 열기", shot("room_mobile.webp", "390px 폭 · 휴대폰 화면", [
             ("PRD 완료 기준", "모바일 폭에서 가로 스크롤 없음"), ("확인 방법", "주소를 휴대폰으로 보내 열기"),
             ("깨지면", "화면 캡처를 Claude Code에 붙여 수정 요청 (1-6)")]), T),
         # ── 재배포
         light("수정 → 재배포", flow([
-            ("말로 수정", "Claude Code"), ("localhost 확인", "1-6 처럼"), ("커밋 · push", "「GitHub에 올려 줘」"),
+            ("말로 수정", "Claude Code"), ("localhost 확인", "1-6 처럼"), ("커밋 · push", "GitHub 업로드 요청"),
             ("Vercel 자동 배포", "push 를 감지"), ("같은 주소에 반영", "새 링크 없음")], hl=3)
               + note("한 번 연결 뒤", "Vercel 화면을 다시 열 필요 없음 · push 가 곧 배포")
               + src(("Vercel · Git", "https://vercel.com/docs/git")), T),
