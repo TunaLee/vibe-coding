@@ -11,7 +11,7 @@ from anim import BG, G, N, O, OK, R, S, W, _D, _t
 from deck import flow, light
 from hx import METR_TH, code, esc, metr_chart, note
 from stats_hx import big, quote, src
-from v1kit import chat, shot
+from v1kit import chat, codemap, shot
 
 T = "1-1"
 ERAS = [  # (해, 이름, 도구, 사람 몫 %, AI 몫, 사람 몫, AI가 파악하는 것) — 막대는 모양만 · 측정값 아님
@@ -113,6 +113,27 @@ def chat_anim(mode):
     return f'<div class="v1mode">{left}{right}</div>'
 
 
+LANGS = [  # (시기, 이름, 예 코드, 특징, 요리 비유)
+    ("1940년대 말 ~", "어셈블리", "mov eax, 3\nadd eax, 4", "CPU 명령 하나씩", "재료 손질부터 직접"),
+    ("1957 FORTRAN · 1991 Python", "고급 언어", "print(3 + 4)", "영어 단어 · 수식", "밀키트"),
+    ("2025 ~", "자연어", "「3 더하기 4를\n화면에 보여 줘」", "우리말 요청 → AI가 코드 작성", "식당에서 주문"),
+]
+
+
+def langs():
+    """어셈블리 → 고급 언어 → 자연어 — 같은 계산(3 + 4)을 세 방식으로 · 칸이 차례로 나타남."""
+    from hx import esc
+    c = ""
+    for i, (when, name, ex, feat, cook) in enumerate(LANGS):
+        c += (f'<div class="v1lang v1cut" style="--d:{i * .8:.1f}s"><div class="v1ly">{when}</div><b>{name}</b>'
+              f'<pre class="{"nl" if i == 2 else ""}">{esc(ex)}</pre><div class="v1lf">{feat}</div>'
+              f'<div class="v1lk"><span>요리로</span>{cook}</div></div>')
+        if i < 2:
+            c += '<i class="v1lar">→</i>'
+    return (f'<div class="v1langs">{c}</div>'
+            '<div class="v1lline"><span>기계에 가까운 말</span><b></b><span>사람에 가까운 말</span></div>')
+
+
 def comic(cuts):
     """3 · 4컷 — (그림, 말풍선, 장면, 코딩에서는). 0.8초 간격으로 한 컷씩 나타나고 멈춘다."""
     c = "".join(
@@ -139,10 +160,22 @@ def slides():
             ("v1_cut4.webp", "?", "처음 본 배", "코드에 없는 경우 · 처리 불가")])
               + note("코딩", "컴퓨터가 실행할 명령을 프로그래밍 언어로 작성하는 일")
               + src(("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")), T),
+        light("4컷의 코드 표현", codemap([
+            ("function 사과를_먹는다(사과) {", "② 알려 줌 · 먹는 법 저장"),
+            ("  집는다(사과)", "손으로 집기"),
+            ("  깨문다(사과)", "한 입 깨물기"),
+            ("  씨는_뱉는다()", "씨 뱉기"),
+            ("}", ""),
+            ('if (보이는_것 == "사과") 사과를_먹는다(보이는_것)', "③ 다음 사과 · 저장된 순서대로 실행"),
+            ("else 모른다()", "④ 배 · 코드에 없는 경우 · 처리 불가")],
+            ask="「이건 사과 · 먹는 것」", title="원시인 코드 · 모양만 (실제 문법 아님)"), T),
         light("기존 코딩과 바이브코딩", viz2.pair(
             "기존 코딩", [("① 언어 학습", "문법 · 개발 도구 사용법"), ("② 직접 작성", "모든 기능을 사람이 입력"), ("③ 오류 수정", "오류 메시지로 원인 추적")],
             "바이브코딩", [("① 말로 요청", "「로그인 화면 만들어 줘」"), ("② AI가 코드 작성", "파일 생성 · 실행"), ("③ 수정 사항만 요청", "「버튼을 크게」 「비밀번호는 8자 이상」")], hl="r")
               + note("바이브코딩", "AI와 대화를 주고받으며 프로그램을 만드는 개발 방식"), T),
+        light("프로그래밍 언어의 발전", langs()
+              + src(("IBM · FORTRAN", "https://www.ibm.com/history/fortran"), ("Python · History", "https://docs.python.org/3/license.html"),
+                    ("참고 · 알파AI스쿨 「바이브 코딩이란?」 요리 비유", "https://www.youtube.com/watch?v=cFdyp_pPgPQ")), T),
         # ── 배경 · AI 코딩 도구의 변화
         light("AI 코딩 도구의 변화", eras()
               + note("막대", "사람 몫 · AI 몫의 상대 크기 (측정값 아님)")
@@ -291,5 +324,17 @@ CSS = """
   .v1core .bx.me{border-color:#F28C28;} .v1core .bx.ai{background:#1F3A5F; border-color:#1F3A5F;} .v1core .bx.ai span{color:#C9D2E0;} .v1core .bx.ai b{color:#fff;}
   .v1core i{font-style:normal; font-size:26px; color:#F28C28; font-weight:800; text-align:center;}
   .v1core .q{position:absolute; left:50%; bottom:-20px; transform:translateX(-50%); background:#F28C28; color:#fff; font-weight:900; font-size:22px; padding:8px 26px; border-radius:999px; box-shadow:0 6px 16px rgba(242,140,40,.3);}
+  /* 언어의 발전 */
+  .v1langs{display:grid; grid-template-columns:minmax(0,1fr) 36px minmax(0,1fr) 36px minmax(0,1fr); align-items:stretch; margin-top:4px;}
+  .v1lang{border:2px solid #D9DDE3; border-radius:16px; background:#fff; padding:16px 18px; display:flex; flex-direction:column;}
+  .v1lang:last-of-type{border-color:#F28C28; background:#FFF8F0;}
+  .v1lang .v1ly{font-family:var(--mono); font-size:13.5px; font-weight:800; color:#F28C28;} .v1lang b{font-size:23px; color:#16233A; margin:2px 0 10px;}
+  .v1lang pre{margin:0; overflow:hidden; background:#1E2433; color:#E6EDF7; border-radius:10px; padding:12px 14px; font-family:var(--mono); font-size:16px; white-space:pre; min-height:62px; font-variant-ligatures:none;}
+  .v1lang pre.nl{background:#fff; color:#16233A; border:1.5px solid #F7C99A; font-family:inherit; font-weight:700; white-space:pre-wrap;}
+  .v1lang .v1lf{font-size:15.5px; color:#3A4657; margin:10px 0 8px;}
+  .v1lang .v1lk{display:block; margin-top:auto; padding:0; border:0; background:none; writing-mode:horizontal-tb; font-size:15.5px; color:#16233A; font-weight:700;} .v1lang .v1lk span{font-size:12.5px; font-weight:800; color:#E07A12; margin-right:8px;}
+  .v1lar{font-style:normal; align-self:center; text-align:center; font-size:26px; font-weight:800; color:#F28C28;}
+  .v1lline{display:flex; align-items:center; gap:12px; margin-top:16px; font-size:14px; font-weight:800; color:#6B7785;}
+  .v1lline b{flex:1; height:4px; border-radius:2px; background:linear-gradient(90deg,#1F3A5F,#F28C28);}
   .v1vid video{width:100%; max-height:440px; border:1.5px solid #D9DDE3; border-radius:12px; box-shadow:0 8px 22px rgba(15,27,45,.10); background:#F7EEDB; display:block;}
 """

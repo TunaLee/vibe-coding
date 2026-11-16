@@ -997,6 +997,18 @@
   .v1core .bx.me{border-color:#F28C28;} .v1core .bx.ai{background:#1F3A5F; border-color:#1F3A5F;} .v1core .bx.ai span{color:#C9D2E0;} .v1core .bx.ai b{color:#fff;}
   .v1core i{font-style:normal; font-size:26px; color:#F28C28; font-weight:800; text-align:center;}
   .v1core .q{position:absolute; left:50%; bottom:-20px; transform:translateX(-50%); background:#F28C28; color:#fff; font-weight:900; font-size:22px; padding:8px 26px; border-radius:999px; box-shadow:0 6px 16px rgba(242,140,40,.3);}
+  /* 언어의 발전 */
+  .v1langs{display:grid; grid-template-columns:minmax(0,1fr) 36px minmax(0,1fr) 36px minmax(0,1fr); align-items:stretch; margin-top:4px;}
+  .v1lang{border:2px solid #D9DDE3; border-radius:16px; background:#fff; padding:16px 18px; display:flex; flex-direction:column;}
+  .v1lang:last-of-type{border-color:#F28C28; background:#FFF8F0;}
+  .v1lang .v1ly{font-family:var(--mono); font-size:13.5px; font-weight:800; color:#F28C28;} .v1lang b{font-size:23px; color:#16233A; margin:2px 0 10px;}
+  .v1lang pre{margin:0; overflow:hidden; background:#1E2433; color:#E6EDF7; border-radius:10px; padding:12px 14px; font-family:var(--mono); font-size:16px; white-space:pre; min-height:62px; font-variant-ligatures:none;}
+  .v1lang pre.nl{background:#fff; color:#16233A; border:1.5px solid #F7C99A; font-family:inherit; font-weight:700; white-space:pre-wrap;}
+  .v1lang .v1lf{font-size:15.5px; color:#3A4657; margin:10px 0 8px;}
+  .v1lang .v1lk{display:block; margin-top:auto; padding:0; border:0; background:none; writing-mode:horizontal-tb; font-size:15.5px; color:#16233A; font-weight:700;} .v1lang .v1lk span{font-size:12.5px; font-weight:800; color:#E07A12; margin-right:8px;}
+  .v1lar{font-style:normal; align-self:center; text-align:center; font-size:26px; font-weight:800; color:#F28C28;}
+  .v1lline{display:flex; align-items:center; gap:12px; margin-top:16px; font-size:14px; font-weight:800; color:#6B7785;}
+  .v1lline b{flex:1; height:4px; border-radius:2px; background:linear-gradient(90deg,#1F3A5F,#F28C28);}
   .v1vid video{width:100%; max-height:440px; border:1.5px solid #D9DDE3; border-radius:12px; box-shadow:0 8px 22px rgba(15,27,45,.10); background:#F7EEDB; display:block;}
 </style>
 </head>
@@ -1082,12 +1094,30 @@
   <div class="body"><div class="mid"><div class="v1comic" style="grid-template-columns:repeat(4,1fr)"><div class="v1cut" style="--d:0.0s"><div class="pic"><img src="img/v1_cut1.webp" alt="처음 본 사과"/><span class="bub">?</span><i>1</i></div><b>처음 본 사과</b><small>명령 없음 → 실행 불가</small></div><div class="v1cut" style="--d:0.8s"><div class="pic"><img src="img/v1_cut2.webp" alt="이름 · 먹는 법 알려 줌"/><span class="bub">이건 사과 · 먹는 것</span><i>2</i></div><b>이름 · 먹는 법 알려 줌</b><small>코드 작성 · 저장</small></div><div class="v1cut" style="--d:1.6s"><div class="pic"><img src="img/v1_cut3.webp" alt="다음 사과 · 바로 먹음"/><span class="bub">사과다!</span><i>3</i></div><b>다음 사과 · 바로 먹음</b><small>저장된 코드 · 매번 같은 실행</small></div><div class="v1cut" style="--d:2.4s"><div class="pic"><img src="img/v1_cut4.webp" alt="처음 본 배"/><span class="bub">?</span><i>4</i></div><b>처음 본 배</b><small>코드에 없는 경우 · 처리 불가</small></div></div><div class="dbnote"><span>코딩</span> 컴퓨터가 실행할 명령을 프로그래밍 언어로 작성하는 일</div><div class="src">출처 · <a href="https://huggingface.co/Tongyi-MAI/Z-Image-Turbo" target="_blank" rel="noopener">AI 생성 그림 · Z-Image Turbo (Apache 2.0)</a></div></div></div>
 </section>
 
+<section class="slide lt" data-title="4컷의 코드 표현">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-1</span></div>
+  <h2 class="s-title sm">4컷의 코드 표현</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1cmask"><span>요청</span><b>「이건 사과 · 먹는 것」</b></div><div class="v1cmap"><div class="v1cmt"><span>원시인 코드 · 모양만 (실제 문법 아님)</span><span>뜻</span></div><div class="v1cmr" style="--d:0.30s"><code>function 사과를_먹는다(사과) {</code><i>→</i><span>② 알려 줌 · 먹는 법 저장</span></div><div class="v1cmr" style="--d:0.65s"><code>  집는다(사과)</code><i>→</i><span>손으로 집기</span></div><div class="v1cmr" style="--d:1.00s"><code>  깨문다(사과)</code><i>→</i><span>한 입 깨물기</span></div><div class="v1cmr" style="--d:1.35s"><code>  씨는_뱉는다()</code><i>→</i><span>씨 뱉기</span></div><div class="v1cmr" style="--d:1.70s"><code>}</code><i></i><span></span></div><div class="v1cmr" style="--d:2.05s"><code>if (보이는_것 == "사과") 사과를_먹는다(보이는_것)</code><i>→</i><span>③ 다음 사과 · 저장된 순서대로 실행</span></div><div class="v1cmr" style="--d:2.40s"><code>else 모른다()</code><i>→</i><span>④ 배 · 코드에 없는 경우 · 처리 불가</span></div></div></div></div>
+</section>
+
 <section class="slide lt" data-title="기존 코딩과 바이브코딩">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-1</span></div>
   <h2 class="s-title sm">기존 코딩과 바이브코딩</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">기존 코딩</div><div class="v2pc" style="--d:0.00s"><b>① 언어 학습</b><span>문법 · 개발 도구 사용법</span></div><div class="v2pc" style="--d:0.08s"><b>② 직접 작성</b><span>모든 기능을 사람이 입력</span></div><div class="v2pc" style="--d:0.16s"><b>③ 오류 수정</b><span>오류 메시지로 원인 추적</span></div></div><div class="v2p on"><div class="v2ph">바이브코딩</div><div class="v2pc" style="--d:0.00s"><b>① 말로 요청</b><span>「로그인 화면 만들어 줘」</span></div><div class="v2pc" style="--d:0.08s"><b>② AI가 코드 작성</b><span>파일 생성 · 실행</span></div><div class="v2pc" style="--d:0.16s"><b>③ 수정 사항만 요청</b><span>「버튼을 크게」 「비밀번호는 8자 이상」</span></div></div></div><div class="dbnote"><span>바이브코딩</span> AI와 대화를 주고받으며 프로그램을 만드는 개발 방식</div></div></div>
+</section>
+
+<section class="slide lt" data-title="프로그래밍 언어의 발전">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-1</span></div>
+  <h2 class="s-title sm">프로그래밍 언어의 발전</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1langs"><div class="v1lang v1cut" style="--d:0.0s"><div class="v1ly">1940년대 말 ~</div><b>어셈블리</b><pre class="">mov eax, 3
+add eax, 4</pre><div class="v1lf">CPU 명령 하나씩</div><div class="v1lk"><span>요리로</span>재료 손질부터 직접</div></div><i class="v1lar">→</i><div class="v1lang v1cut" style="--d:0.8s"><div class="v1ly">1957 FORTRAN · 1991 Python</div><b>고급 언어</b><pre class="">print(3 + 4)</pre><div class="v1lf">영어 단어 · 수식</div><div class="v1lk"><span>요리로</span>밀키트</div></div><i class="v1lar">→</i><div class="v1lang v1cut" style="--d:1.6s"><div class="v1ly">2025 ~</div><b>자연어</b><pre class="nl">「3 더하기 4를
+화면에 보여 줘」</pre><div class="v1lf">우리말 요청 → AI가 코드 작성</div><div class="v1lk"><span>요리로</span>식당에서 주문</div></div></div><div class="v1lline"><span>기계에 가까운 말</span><b></b><span>사람에 가까운 말</span></div><div class="src">출처 · <a href="https://www.ibm.com/history/fortran" target="_blank" rel="noopener">IBM · FORTRAN</a> · <a href="https://docs.python.org/3/license.html" target="_blank" rel="noopener">Python · History</a> · <a href="https://www.youtube.com/watch?v=cFdyp_pPgPQ" target="_blank" rel="noopener">참고 · 알파AI스쿨 「바이브 코딩이란?」 요리 비유</a></div></div></div>
 </section>
 
 <section class="slide lt" data-title="AI 코딩 도구의 변화">
