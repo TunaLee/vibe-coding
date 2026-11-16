@@ -99,7 +99,14 @@ def anim_vibe():
 def slides():
     return [
         # ── 코딩 = 원시인에게 사과 가르치기
-        light("컴퓨터 = 사과를 처음 보는 원시인", anim_teach()
+        light("사과를 처음 보는 원시인", '<div class="v1shot v1vid"><figure>'
+              '<video src="img/v1_caveman.mp4" poster="img/v1_caveman.webp" autoplay muted loop playsinline></video>'
+              '<figcaption>AI 생성 영상 · Z-Image Turbo · Wan 2.2 (Apache 2.0)</figcaption></figure><div class="v1side">'
+              + "".join(f'<div class="v1sd"><b>{h}</b><span>{x}</span></div>' for h, x in [
+                  ("처음 보는 물건", "사과가 무엇인지 모른다"), ("먹는 법도 모른다", "돌려 보고 · 냄새만 맡는다"),
+                  ("알려 준 것만 한다", "빠뜨리면 그대로 실수"), ("컴퓨터도 같다", "알려 주는 글 = 코드")])
+              + "</div></div>", T),
+        light("코딩 = 하나하나 가르치기", anim_teach()
               + src(APPLE) + note("코딩", "컴퓨터가 알아듣는 말로 · 할 일을 하나하나 빠짐없이 적는 일"), T),
         light("하나라도 빠뜨리면", anim_bug()
               + src(APPLE) + note("버그", "컴퓨터는 적힌 그대로만 한다 · 빠뜨린 한 줄이 그대로 실수가 된다"), T),
@@ -173,3 +180,9 @@ def slides():
             ("날짜 하나 · 회의실 3곳", "하루 시간표 · 30분 칸"), ("빈 칸 클릭", "예약 · 겹치면 막힘"),
             ("인터넷 주소로 공유", "1-7 배포까지"), ("내 아이디어", "같은 순서로 하나 더")]), T),
     ]
+
+
+CSS = """
+  /* 1-1 · 비유 영상 */
+  .v1vid video{width:100%; max-height:440px; border:1.5px solid #D9DDE3; border-radius:12px; box-shadow:0 8px 22px rgba(15,27,45,.10); background:#F7EEDB; display:block;}
+"""
