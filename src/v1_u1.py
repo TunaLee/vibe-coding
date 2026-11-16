@@ -11,7 +11,7 @@ from anim import BG, G, N, O, OK, R, S, W, _D, _t
 from deck import flow, light
 from hx import METR_TH, code, esc, metr_chart, note
 from stats_hx import big, quote, src
-from v1kit import chat, shot
+from v1kit import chat, codemap, shot
 
 T = "1-1"
 STEPS = ["① 이건 「사과」 · 먹는 것", "② 손으로 집는다", "③ 입에 넣고 깨문다", "④ 씨는 뱉는다"]
@@ -152,21 +152,15 @@ def slides():
             ("v1_cut4.webp", "?", "처음 본 배", "코드에 없는 경우 · 처리 불가")])
               + note("코딩", "컴퓨터가 실행할 명령을 프로그래밍 언어로 작성하는 일")
               + src(("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")), T),
-        light("예제 코드 · 겹치는 예약 막기", '<div class="twocol"><div>'
-              + viz2.tiles([("요청", "「겹치는 예약은 막아 줘」"),
-                            ("코드에 필요한 조건", "같은 회의실 · 같은 날짜 · 시간 겹침"),
-                            ("겹칠 때 처리", "「이미 예약된 시간」 표시 · 저장 취소")], 1)
-              + "</div><div>"
-              + code("app.js · 겹치는 예약 막기 (1부 예제)", esc(
-                  "const clash = load().some((x) =>\n"
-                  "  x.room === b.room &&\n"
-                  "  x.date === b.date &&\n"
-                  "  x.start < b.end && b.start < x.end);\n"
-                  "if (clash) {\n"
-                  "  $(\"err\").textContent = \"이미 예약된 시간\";\n"
-                  "  return;\n"
-                  "}"))
-              + "</div></div>", T),
+        light("예제 코드 · 겹치는 예약 막기", codemap([
+            ("const clash = load().some((x) =>", "저장된 예약 중 하나라도"),
+            ("  x.room === b.room &&", "같은 회의실"),
+            ("  x.date === b.date &&", "같은 날짜"),
+            ("  x.start < b.end && b.start < x.end);", "시간이 겹침"),
+            ("if (clash) {", "겹치는 예약이 있으면"),
+            ('  $("err").textContent = "이미 예약된 시간";', "「이미 예약된 시간」 표시"),
+            ("  return;", "저장하지 않고 멈춤"),
+            ("}", "")], ask="「겹치는 예약은 막아 줘」", title="app.js · 1부 예제"), T),
         light("기존 코딩과 바이브코딩", viz2.pair(
             "기존 코딩", [("① 언어 학습", "문법 · 개발 도구 사용법"), ("② 직접 작성", "모든 기능을 사람이 입력"), ("③ 오류 수정", "오류 메시지로 원인 추적")],
             "바이브코딩", [("① 말로 요청", "「회의실 예약 페이지 만들어 줘」"), ("② AI가 코드 작성", "파일 생성 · 실행"), ("③ 수정 사항만 요청", "「버튼을 크게」 「겹치면 막아 줘」")], hl="r")

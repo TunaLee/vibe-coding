@@ -911,6 +911,18 @@
   .v1b{display:flex; flex-direction:column; max-width:82%;} .v1b span{font-size:12px; font-weight:800; color:#6B7785; margin-bottom:3px;}
   .v1b p{margin:0; font-size:17px; line-height:1.5; padding:10px 15px; border-radius:14px; background:#fff; border:1px solid #E3E6EA; color:#16233A;}
   .v1b.me{align-self:flex-end; align-items:flex-end;} .v1b.me p{background:#FFF3E6; border-color:#F7C99A;}
+  /* vibe1 · 코드 줄 → 뜻 */
+  .v1cmask{display:flex; gap:14px; align-items:center; margin:0 0 14px; padding:12px 18px; border-radius:12px; background:#FFF3E6; border:1.5px solid #F7C99A;}
+  .v1cmask span{font-size:13px; font-weight:800; color:#E07A12;} .v1cmask b{font-size:21px; color:#16233A;}
+  .v1cmap{border:1.5px solid #D9DDE3; border-radius:14px; overflow:hidden; background:#fff;}
+  .v1cmt{display:grid; grid-template-columns:1.25fr 40px 1fr; padding:9px 18px; background:#F4F6F9; font-size:13px; font-weight:800; color:#6B7785;}
+  .v1cmt span:last-child{grid-column:3;}
+  .v1cmr{display:grid; grid-template-columns:1.25fr 40px 1fr; align-items:center; padding:9px 18px; border-top:1px solid #EEF0F3; opacity:0; animation:v1cutIn .45s ease-out var(--d) forwards;}
+  .v1cmr code{font-family:var(--mono); font-size:15.5px; color:#1F3A5F; white-space:pre; background:none; padding:0; font-variant-ligatures:none; font-feature-settings:'liga' 0, 'calt' 0;}
+  .v1cmr i{font-style:normal; color:#F28C28; font-weight:800; text-align:center;}
+  .v1cmr span{font-size:17px; color:#16233A; font-weight:600;}
+  @keyframes v1cutIn{from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none}}
+  @media print{.v1cmr{opacity:1; animation:none}}
 
   /* 1-1 · 비유 영상 */
   .v1comic{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:6px;}
@@ -1027,14 +1039,7 @@
   <div class="eyebrow"><span class="tag">1-1</span></div>
   <h2 class="s-title sm">예제 코드 · 겹치는 예약 막기</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="twocol"><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>요청</b><span>「겹치는 예약은 막아 줘」</span></div><div class="v2tile" style="--d:0.08s"><b>코드에 필요한 조건</b><span>같은 회의실 · 같은 날짜 · 시간 겹침</span></div><div class="v2tile" style="--d:0.16s"><b>겹칠 때 처리</b><span>「이미 예약된 시간」 표시 · 저장 취소</span></div></div></div><div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">app.js · 겹치는 예약 막기 (1부 예제)</span></div><pre><code>const clash = load().some((x) =&gt;
-  x.room === b.room &amp;&amp;
-  x.date === b.date &amp;&amp;
-  x.start &lt; b.end &amp;&amp; b.start &lt; x.end);
-if (clash) {
-  $("err").textContent = "이미 예약된 시간";
-  return;
-}</code></pre></div></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v1cmask"><span>요청</span><b>「겹치는 예약은 막아 줘」</b></div><div class="v1cmap"><div class="v1cmt"><span>app.js · 1부 예제</span><span>뜻</span></div><div class="v1cmr" style="--d:0.30s"><code>const clash = load().some((x) =&gt;</code><i>→</i><span>저장된 예약 중 하나라도</span></div><div class="v1cmr" style="--d:0.65s"><code>  x.room === b.room &amp;&amp;</code><i>→</i><span>같은 회의실</span></div><div class="v1cmr" style="--d:1.00s"><code>  x.date === b.date &amp;&amp;</code><i>→</i><span>같은 날짜</span></div><div class="v1cmr" style="--d:1.35s"><code>  x.start &lt; b.end &amp;&amp; b.start &lt; x.end);</code><i>→</i><span>시간이 겹침</span></div><div class="v1cmr" style="--d:1.70s"><code>if (clash) {</code><i>→</i><span>겹치는 예약이 있으면</span></div><div class="v1cmr" style="--d:2.05s"><code>  $("err").textContent = "이미 예약된 시간";</code><i>→</i><span>「이미 예약된 시간」 표시</span></div><div class="v1cmr" style="--d:2.40s"><code>  return;</code><i>→</i><span>저장하지 않고 멈춤</span></div><div class="v1cmr" style="--d:2.75s"><code>}</code><i></i><span></span></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="기존 코딩과 바이브코딩">

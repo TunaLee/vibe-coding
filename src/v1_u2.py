@@ -7,7 +7,7 @@ import viz2
 from deck import flow, lab, light
 from hx import code, esc, note, table
 from stats_hx import big, src
-from v1kit import brief, chat
+from v1kit import brief, chat, codemap
 
 T = "1-2"
 
@@ -122,12 +122,11 @@ def slides():
               + "</div></div>"
               + note("확인", "답이 오면 계정 · 설치 · 로그인 모두 끝"), T),
         # ── 실습 ③ 위임형 첫 작업
-        light("delegate_todo · 시작 상태", '<div class="twocol"><div>'
-              + viz2.tiles([("화면", "할 일 두 개 · 입력칸 · 추가 버튼"), ("동작 안 함", "추가 버튼 · 체크 줄 긋기 · 남은 개수"),
-                            ("파일", "index.html · style.css · app.js")], 1)
-              + "</div><div>"
-              + code("app.js · 시작 상태 (일부)", esc("const todos = [\n  { text: \"기획서 초안 쓰기\", done: false },\n  ...\n];\n\nfunction render() { ... }\n// 추가 · 체크 · 개수 코드 없음"))
-              + "</div></div>", T),
+        light("delegate_todo · 시작 상태", viz2.tiles([("화면", "할 일 두 개 · 입력칸 · 추가 버튼"), ("동작 안 함", "추가 버튼 · 체크 줄 긋기 · 남은 개수"),
+                                                       ("파일", "index.html · style.css · app.js")], 3)
+              + codemap([("const todos = [", "처음 보이는 할 일 목록"), ('  { text: "기획서 초안 쓰기", done: false },', "할 일 하나 · 아직 안 함"),
+                         ("];", ""), ("function render() { ... }", "목록을 화면에 그림"), ("// 추가 · 체크 · 개수 코드 없음", "버튼 동작 없음")],
+                        title="app.js · 시작 상태"), T),
         brief("1-2 ③", T, ["delegate_todo 폴더를 VS Code 로 열기", "index.html 을 브라우저로 열어 추가 버튼 눌러 보기",
                             "Claude Code 에 목표 한 줄 요청", "진행 화면에서 ① 찾기 · 읽기 ② 수정 ③ 확인 찾기", "새로고침해 직접 확인 → 다음 기능"],
               [("목표", "기능 하나씩 · 추가 → 체크 → 남은 개수"), ("확인 방법", "브라우저에서 직접 눌러 보기"),

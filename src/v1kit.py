@@ -93,6 +93,17 @@ def brief(no, u, steps, slots, keys, checks, stuck, folder="내 프로젝트 폴
     return light(f"실습 {no} 진행", head + body, u)
 
 
+def codemap(rows, ask="", title=""):
+    """코드 줄 → 우리말 뜻 — 입문자용. rows: (코드 한 줄, 뜻). ask = 사람의 요청 한 문장(위에 표시).
+    줄이 0.35초 간격으로 차례로 나타나고 멈춘다."""
+    from hx import esc
+    head = (f'<div class="v1cmask"><span>요청</span><b>{ask}</b></div>' if ask else "")
+    r = "".join(f'<div class="v1cmr" style="--d:{.3 + i * .35:.2f}s"><code>{esc(c)}</code><i>{"→" if m else ""}</i><span>{m}</span></div>'
+                for i, (c, m) in enumerate(rows))
+    t = f'<div class="v1cmt"><span>{title}</span><span>뜻</span></div>' if title else ""
+    return f'{head}<div class="v1cmap">{t}{r}</div>'
+
+
 CSS = """
   /* vibe1 · 표지 · 지도 · 다음 단원 */
   .v1cmin{margin-top:26px; font-family:var(--mono); font-size:18px; color:#F28C28; font-weight:700; position:relative;}
@@ -121,4 +132,16 @@ CSS = """
   .v1b{display:flex; flex-direction:column; max-width:82%;} .v1b span{font-size:12px; font-weight:800; color:#6B7785; margin-bottom:3px;}
   .v1b p{margin:0; font-size:17px; line-height:1.5; padding:10px 15px; border-radius:14px; background:#fff; border:1px solid #E3E6EA; color:#16233A;}
   .v1b.me{align-self:flex-end; align-items:flex-end;} .v1b.me p{background:#FFF3E6; border-color:#F7C99A;}
+  /* vibe1 · 코드 줄 → 뜻 */
+  .v1cmask{display:flex; gap:14px; align-items:center; margin:0 0 14px; padding:12px 18px; border-radius:12px; background:#FFF3E6; border:1.5px solid #F7C99A;}
+  .v1cmask span{font-size:13px; font-weight:800; color:#E07A12;} .v1cmask b{font-size:21px; color:#16233A;}
+  .v1cmap{border:1.5px solid #D9DDE3; border-radius:14px; overflow:hidden; background:#fff;}
+  .v1cmt{display:grid; grid-template-columns:1.25fr 40px 1fr; padding:9px 18px; background:#F4F6F9; font-size:13px; font-weight:800; color:#6B7785;}
+  .v1cmt span:last-child{grid-column:3;}
+  .v1cmr{display:grid; grid-template-columns:1.25fr 40px 1fr; align-items:center; padding:9px 18px; border-top:1px solid #EEF0F3; opacity:0; animation:v1cutIn .45s ease-out var(--d) forwards;}
+  .v1cmr code{font-family:var(--mono); font-size:15.5px; color:#1F3A5F; white-space:pre; background:none; padding:0; font-variant-ligatures:none; font-feature-settings:'liga' 0, 'calt' 0;}
+  .v1cmr i{font-style:normal; color:#F28C28; font-weight:800; text-align:center;}
+  .v1cmr span{font-size:17px; color:#16233A; font-weight:600;}
+  @keyframes v1cutIn{from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none}}
+  @media print{.v1cmr{opacity:1; animation:none}}
 """
