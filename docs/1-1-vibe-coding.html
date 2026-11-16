@@ -1009,6 +1009,15 @@
   .v1lar{font-style:normal; align-self:center; text-align:center; font-size:26px; font-weight:800; color:#F28C28;}
   .v1lline{display:flex; align-items:center; gap:12px; margin-top:16px; font-size:14px; font-weight:800; color:#6B7785;}
   .v1lline b{flex:1; height:4px; border-radius:2px; background:linear-gradient(90deg,#1F3A5F,#F28C28);}
+  /* 원시인 코드 */
+  .v1cc{display:grid; grid-template-columns:1.3fr 1fr; gap:22px; align-items:start; margin-top:6px;}
+  .v1cc .v1ed .code{font-size:19px;} .v1cc .v1ed .ln{height:38px; align-items:center;} .v1cc .v1ed .ln span{color:#E6EDF7; white-space:pre;}
+  .v1cc .v1ed .cut{width:26px; font-style:normal; font-size:15px; color:#F28C28; font-weight:800; text-align:center;}
+  .v1con{background:#0F131C; border-radius:14px; padding:14px 18px; min-height:200px; font-family:var(--mono); font-size:17px;}
+  .v1con .v1chd{font-family:inherit; font-size:13px; font-weight:800; color:#8A94A3; margin-bottom:12px;}
+  .v1con .cl{padding:8px 0; opacity:0; animation:v1cutIn .4s ease-out forwards; font-variant-ligatures:none;}
+  .v1con .cl.ok{color:#E6EDF7;} .v1con .cl.err{color:#FF7B72;}
+  @media print{.v1con .cl{opacity:1; animation:none}}
   .v1vid video{width:100%; max-height:440px; border:1.5px solid #D9DDE3; border-radius:12px; box-shadow:0 8px 22px rgba(15,27,45,.10); background:#F7EEDB; display:block;}
 </style>
 </head>
@@ -1094,12 +1103,12 @@
   <div class="body"><div class="mid"><div class="v1comic" style="grid-template-columns:repeat(4,1fr)"><div class="v1cut" style="--d:0.0s"><div class="pic"><img src="img/v1_cut1.webp" alt="처음 본 사과"/><span class="bub">?</span><i>1</i></div><b>처음 본 사과</b><small>명령 없음 → 실행 불가</small></div><div class="v1cut" style="--d:0.8s"><div class="pic"><img src="img/v1_cut2.webp" alt="이름 · 먹는 법 알려 줌"/><span class="bub">이건 사과 · 먹는 것</span><i>2</i></div><b>이름 · 먹는 법 알려 줌</b><small>코드 작성 · 저장</small></div><div class="v1cut" style="--d:1.6s"><div class="pic"><img src="img/v1_cut3.webp" alt="다음 사과 · 바로 먹음"/><span class="bub">사과다!</span><i>3</i></div><b>다음 사과 · 바로 먹음</b><small>저장된 코드 · 매번 같은 실행</small></div><div class="v1cut" style="--d:2.4s"><div class="pic"><img src="img/v1_cut4.webp" alt="처음 본 배"/><span class="bub">?</span><i>4</i></div><b>처음 본 배</b><small>코드에 없는 경우 · 처리 불가</small></div></div><div class="dbnote"><span>코딩</span> 컴퓨터가 실행할 명령을 프로그래밍 언어로 작성하는 일</div><div class="src">출처 · <a href="https://huggingface.co/Tongyi-MAI/Z-Image-Turbo" target="_blank" rel="noopener">AI 생성 그림 · Z-Image Turbo (Apache 2.0)</a></div></div></div>
 </section>
 
-<section class="slide lt" data-title="4컷의 코드 표현">
+<section class="slide lt" data-title="원시인 코드">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-1</span></div>
-  <h2 class="s-title sm">4컷의 코드 표현</h2>
+  <h2 class="s-title sm">원시인 코드</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1cmap"><div class="v1cmt"><span>원시인 코드 · 모양만</span><span>뜻</span></div><div class="v1cmr" style="--d:0.30s"><code>const A = "Apple"</code><i>→</i><span>② A는 사과</span></div><div class="v1cmr" style="--d:0.65s"><code>eat(A)</code><i>→</i><span>③ A를 먹음</span></div><div class="v1cmr" style="--d:1.00s"><code>const B = "Pear"</code><i>→</i><span>④ B는 배</span></div><div class="v1cmr" style="--d:1.35s"><code>eat(B)</code><i>→</i><span>④ 배 먹는 법 없음 → 오류</span></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v1cc"><div class="v1ed"><div class="bar"><b></b><b></b><b></b><span>caveman.js</span></div><div class="code"><div class="ln"><i>1</i><em class="cut">②</em><span>const apple = "사과";</span></div><div class="ln"><i>2</i><em class="cut">②</em><span>function eat(fruit) {</span></div><div class="ln"><i>3</i><em class="cut"></em><span>  console.log(fruit + " 먹음");</span></div><div class="ln"><i>4</i><em class="cut"></em><span>}</span></div><div class="ln"><i>5</i><em class="cut"></em><span></span></div><div class="ln"><i>6</i><em class="cut">③</em><span>eat(apple);</span></div><div class="ln"><i>7</i><em class="cut">④</em><span>eat(pear);</span></div></div></div><div class="v1con"><div class="v1chd">실행 결과</div><div class="cl ok" style="animation-delay:.8s">사과 먹음</div><div class="cl err" style="animation-delay:1.8s">✕ ReferenceError: pear is not defined</div></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="기존 코딩과 바이브코딩">

@@ -134,6 +134,18 @@ def langs():
             '<div class="v1lline"><span>기계에 가까운 말</span><b></b><span>사람에 가까운 말</span></div>')
 
 
+def caveman_code():
+    """4컷을 실제로 실행되는 코드로 — 선언(②) · 실행(③) · 선언 안 한 이름 호출 → 오류(④). 콘솔 줄이 차례로 나타남."""
+    from hx import esc
+    lines = [("②", 'const apple = "사과";'), ("②", "function eat(fruit) {"), ("", '  console.log(fruit + " 먹음");'), ("", "}"),
+             ("", ""), ("③", "eat(apple);"), ("④", "eat(pear);")]
+    code = "".join(f'<div class="ln"><i>{i}</i><em class="cut">{c}</em><span>{esc(t)}</span></div>' for i, (c, t) in enumerate(lines, 1))
+    out = ('<div class="v1con"><div class="v1chd">실행 결과</div>'
+           '<div class="cl ok" style="animation-delay:.8s">사과 먹음</div>'
+           '<div class="cl err" style="animation-delay:1.8s">✕ ReferenceError: pear is not defined</div></div>')
+    return f'<div class="v1cc"><div class="v1ed"><div class="bar"><b></b><b></b><b></b><span>caveman.js</span></div><div class="code">{code}</div></div>{out}</div>'
+
+
 def comic(cuts):
     """3 · 4컷 — (그림, 말풍선, 장면, 코딩에서는). 0.8초 간격으로 한 컷씩 나타나고 멈춘다."""
     c = "".join(
@@ -160,11 +172,7 @@ def slides():
             ("v1_cut4.webp", "?", "처음 본 배", "코드에 없는 경우 · 처리 불가")])
               + note("코딩", "컴퓨터가 실행할 명령을 프로그래밍 언어로 작성하는 일")
               + src(("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")), T),
-        light("4컷의 코드 표현", codemap([
-            ('const A = "Apple"', "② A는 사과"),
-            ("eat(A)", "③ A를 먹음"),
-            ('const B = "Pear"', "④ B는 배"),
-            ("eat(B)", "④ 배 먹는 법 없음 → 오류")], title="원시인 코드 · 모양만"), T),
+        light("원시인 코드", caveman_code(), T),
         light("기존 코딩과 바이브코딩", viz2.pair(
             "기존 코딩", [("① 언어 학습", "문법 · 개발 도구 사용법"), ("② 직접 작성", "모든 기능을 사람이 입력"), ("③ 오류 수정", "오류 메시지로 원인 추적")],
             "바이브코딩", [("① 말로 요청", "「로그인 화면 만들어 줘」"), ("② AI가 코드 작성", "파일 생성 · 실행"), ("③ 수정 사항만 요청", "「버튼을 크게」 「비밀번호는 8자 이상」")], hl="r")
@@ -332,5 +340,14 @@ CSS = """
   .v1lar{font-style:normal; align-self:center; text-align:center; font-size:26px; font-weight:800; color:#F28C28;}
   .v1lline{display:flex; align-items:center; gap:12px; margin-top:16px; font-size:14px; font-weight:800; color:#6B7785;}
   .v1lline b{flex:1; height:4px; border-radius:2px; background:linear-gradient(90deg,#1F3A5F,#F28C28);}
+  /* 원시인 코드 */
+  .v1cc{display:grid; grid-template-columns:1.3fr 1fr; gap:22px; align-items:start; margin-top:6px;}
+  .v1cc .v1ed .code{font-size:19px;} .v1cc .v1ed .ln{height:38px; align-items:center;} .v1cc .v1ed .ln span{color:#E6EDF7; white-space:pre;}
+  .v1cc .v1ed .cut{width:26px; font-style:normal; font-size:15px; color:#F28C28; font-weight:800; text-align:center;}
+  .v1con{background:#0F131C; border-radius:14px; padding:14px 18px; min-height:200px; font-family:var(--mono); font-size:17px;}
+  .v1con .v1chd{font-family:inherit; font-size:13px; font-weight:800; color:#8A94A3; margin-bottom:12px;}
+  .v1con .cl{padding:8px 0; opacity:0; animation:v1cutIn .4s ease-out forwards; font-variant-ligatures:none;}
+  .v1con .cl.ok{color:#E6EDF7;} .v1con .cl.err{color:#FF7B72;}
+  @media print{.v1con .cl{opacity:1; animation:none}}
   .v1vid video{width:100%; max-height:440px; border:1.5px solid #D9DDE3; border-radius:12px; box-shadow:0 8px 22px rgba(15,27,45,.10); background:#F7EEDB; display:block;}
 """
