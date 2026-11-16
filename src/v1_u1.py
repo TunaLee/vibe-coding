@@ -1,56 +1,129 @@
-"""1-1 바이브코딩이란 (20분) — 실습 없음.
+"""1-1 바이브코딩이란 — 실습 없음.
 
-코딩 → 바이브코딩(정의 · 비유 · 흐름) → 어디까지 왔나(이정표 한 장씩) → 가능성과 한계 → 1부 완성 화면.
-사실 출처: scratchpad/v1_facts.md (Karpathy · Collins · levels.io · MenuGen · Anthropic · Simon Willison · Veracode · Wiz · Replit · METR)
+비유 한 줄로 끝까지 잇는다.
+  코딩 = 사과를 처음 보는 원시인(컴퓨터)에게 원시인 말로 하나하나 가르치기 · 빠뜨리면 그대로 실수(버그)
+  바이브코딩 = 우리말로 말하면 통역사(AI)가 원시인 말로 풀어 가르치고 · 나는 먹는 모습을 보고 판단
+→ 말의 유래 · 흐름 · 내 일과 AI 일 · 만든 것 · 한계(통역사도 빠뜨린다) · 1부 순서 · 완성 화면.
+사실 출처: scratchpad/v1_facts.md (Karpathy · Collins · levels.io · MenuGen · Veracode · Wiz · Replit)
 """
 import viz2
+from anim import BG, K, N, O, OK, R, S, W, _D, _t
 from deck import flow, light
 from hx import code, esc, note
-from stats_hx import big, hbars, quote, src
+from stats_hx import big, quote, src
 from v1kit import shot
-from v3kit import phmap
 
 T = "1-1"
-
-TL = [("2025.02", "용어 탄생", "Karpathy 글 한 편"), ("2025.03", "3D 멀티플레이 게임", "fly.pieter.com"),
-      ("2025.04", "실제 서비스", "MenuGen"), ("2025.05", "에이전트 정식 출시", "Claude Code"),
-      ("2026.02", "10만 줄 컴파일러", "에이전트 16개"), ("2026.08", "프롬프트 한 번에 3D 게임", "두 모델 비교")]
+BROWN = "#8D5A2B"
+STEPS = ["① 이건 「사과」 · 먹는 것", "② 손으로 집는다", "③ 입에 넣고 깨문다", "④ 씨는 뱉는다"]
 
 
-def timeline(hl=None):
-    cells = "".join(
-        f'<div class="v1tp{" on" if i == hl else ""}"><i></i><span class="d">{d}</span><b>{t}</b><small>{s}</small></div>'
-        for i, (d, t, s) in enumerate(TL))
-    return f'<div class="v1tl"><div class="v1tline"></div>{cells}</div>'
+# ── 그림 조각 ─────────────────────────────────────────
+def _person(x, y, color=K, cave=False):
+    """서 있는 사람 · cave=True 면 원시인(헝클어진 머리 · 가죽옷)."""
+    hair = ""
+    if cave:
+        spikes = " ".join(f"L{x - 26 + i * 8:g} {y - 70 - (8 if i % 2 else 0):g}" for i in range(8))
+        hair = f'<path d="M{x - 28:g} {y - 52:g} {spikes} L{x + 28:g} {y - 52:g} Z" fill="{BROWN}"/>'
+    body = (f'<line x1="{x:g}" y1="{y - 30:g}" x2="{x:g}" y2="{y + 40:g}" stroke="{color}" stroke-width="7" stroke-linecap="round"/>'
+            f'<line x1="{x:g}" y1="{y - 10:g}" x2="{x - 32:g}" y2="{y + 18:g}" stroke="{color}" stroke-width="6" stroke-linecap="round"/>'
+            f'<line x1="{x:g}" y1="{y - 10:g}" x2="{x + 32:g}" y2="{y + 18:g}" stroke="{color}" stroke-width="6" stroke-linecap="round"/>'
+            f'<line x1="{x:g}" y1="{y + 40:g}" x2="{x - 22:g}" y2="{y + 92:g}" stroke="{color}" stroke-width="7" stroke-linecap="round"/>'
+            f'<line x1="{x:g}" y1="{y + 40:g}" x2="{x + 22:g}" y2="{y + 92:g}" stroke="{color}" stroke-width="7" stroke-linecap="round"/>')
+    tunic = (f'<path d="M{x - 24:g} {y - 18:g} L{x + 24:g} {y - 18:g} L{x + 30:g} {y + 46:g} L{x + 14:g} {y + 38:g} '
+             f'L{x:g} {y + 48:g} L{x - 14:g} {y + 38:g} L{x - 30:g} {y + 46:g} Z" fill="{BROWN}"/>') if cave else ""
+    head = f'<circle cx="{x:g}" cy="{y - 52:g}" r="24" fill="#F6D7B0" stroke="{color}" stroke-width="3"/>'
+    return body + tunic + hair + head
 
 
-CSS = """
-  /* 1-1 · 변천사 타임라인 */
-  .v1tl{position:relative; display:grid; grid-template-columns:repeat(6,1fr); gap:12px; margin:18px 0 22px; padding-top:30px;}
-  .v1tline{position:absolute; left:4%; right:4%; top:38px; height:4px; background:linear-gradient(90deg,#D9DDE3,#F28C28); border-radius:4px;}
-  .v1tp{position:relative; display:flex; flex-direction:column; align-items:center; text-align:center; gap:6px;}
-  .v1tp i{width:20px; height:20px; border-radius:50%; background:#fff; border:4px solid #1F3A5F; margin-bottom:10px; position:relative; z-index:1;}
-  .v1tp .d{font-family:var(--mono); font-size:15px; font-weight:800; color:#6B7785;}
-  .v1tp b{font-size:20px; color:#16233A; line-height:1.3;} .v1tp small{font-size:15px; color:#3A4657;}
-  .v1tp.on i{border-color:#F28C28; background:#F28C28;} .v1tp.on b{color:#E07A12;}
-  .v1tl.sm{margin:0 0 14px; padding-top:22px;} .v1tl.sm .v1tline{top:30px;} .v1tl.sm b{font-size:15px;} .v1tl.sm small, .v1tl.sm .d{font-size:12px;}
-  .v1tl.sm .v1tp{opacity:.45;} .v1tl.sm .v1tp.on{opacity:1;}
-"""
+def _apple(x, y, r=20):
+    return (f'<circle cx="{x:g}" cy="{y:g}" r="{r}" fill="{R}"/>'
+            f'<line x1="{x:g}" y1="{y - r:g}" x2="{x + 3:g}" y2="{y - r - 10:g}" stroke="{BROWN}" stroke-width="3"/>'
+            f'<ellipse cx="{x + 10:g}" cy="{y - r - 6:g}" rx="8" ry="4" fill="{OK}"/>')
 
 
-def mini(i):
-    return timeline(i).replace('class="v1tl"', 'class="v1tl sm"', 1)
+def _card(x, y, w, s, fill=W, stroke=K, cls="tn", dash=False):
+    d = ' stroke-dasharray="7 6"' if dash else ""
+    return (f'<rect x="{x:g}" y="{y:g}" width="{w:g}" height="48" rx="10" fill="{fill}" stroke="{stroke}" stroke-width="2.2"{d}/>'
+            + _t(x + 18, y + 25, s, cls, "start"))
+
+
+def _scene(p, steps, missing=None):
+    """나 → 원시인 말로 한 줄씩 → 원시인이 그대로 해 본다. missing: 빠뜨린 줄 번호."""
+    d = _D(p, 11)
+    b = [f'<rect x="0" y="0" width="1160" height="420" rx="18" fill="{BG}"/>',
+         _person(110, 210), _t(110, 340, "나", "tt"),
+         _t(560, 34, "원시인이 아는 말로 · 하나씩 · 빠짐없이", "to")]
+    for i, s in enumerate(steps):
+        y = 62 + i * 66
+        if i == missing:
+            b.append(f'<g {d.show(10 + i * 11)}>{_card(330, y, 460, "④ (빠뜨림)", "#FFF", R, "ts", True)}</g>')
+        else:
+            b.append(f'<g {d.show(10 + i * 11)}>{_card(330, y, 460, s)}</g>')
+        b.append(f'<line x1="790" y1="{y + 24}" x2="900" y2="{y + 24}" stroke="{S}" stroke-width="1.5" stroke-dasharray="4 5" {d.show(10 + i * 11)}/>')
+    b += [_person(990, 210, K, cave=True), _t(990, 340, "원시인 = 컴퓨터", "tt"), _t(990, 368, "사과를 처음 본다", "ts")]
+    # 사과 — 처음엔 원시인 앞 → 적힌 대로 손 → 입
+    stops = [(0, "transform:translate(0px,0px)"), (60, "transform:translate(0px,0px)"),
+             (70, "transform:translate(32px,-20px)"), (80, "transform:translate(10px,-70px)"), (100, "transform:translate(10px,-70px)")]
+    b.append(f'<g {d.a(stops)}>{_apple(1050, 250)}</g>')
+    if missing is None:
+        b.append(f'<g {d.show(84)}><rect x="880" y="20" width="220" height="44" rx="22" fill="{OK}"/>'
+                 + _t(990, 43, "✓ 먹었다", "tw") + "</g>")
+    else:
+        b.append(f'<g {d.show(84)}><rect x="860" y="20" width="260" height="44" rx="22" fill="{R}"/>'
+                 + _t(990, 43, "✕ 씨까지 삼켰다", "tw") + "</g>")
+    return d.svg(1160, 420, "".join(b))
+
+
+def anim_teach():
+    """원시인에게 사과 먹는 법을 네 줄로 가르친다 → 그대로 먹는다. 11초 · 한 번."""
+    return _scene("ap", STEPS)
+
+
+def anim_bug():
+    """④ 를 빠뜨림 → 원시인은 적힌 그대로 · 씨까지 삼킨다. 11초 · 한 번."""
+    return _scene("aq", STEPS, missing=3)
+
+
+def anim_vibe():
+    """나는 우리말 한 줄 → 통역사(AI)가 원시인 말 네 줄로 → 원시인이 먹고 → 나는 결과만 본다. 12초 · 한 번."""
+    d = _D("vb", 12)
+    b = [f'<rect x="0" y="0" width="1160" height="420" rx="18" fill="{BG}"/>',
+         _person(90, 230), _t(90, 360, "나", "tt"), _t(90, 388, "우리말로 한 줄", "ts")]
+    # 우리말 요청 말풍선
+    b.append(f'<g {d.show(4)}><rect x="20" y="40" width="300" height="52" rx="26" fill="{W}" stroke="{O}" stroke-width="2.5"/>'
+             + _t(170, 67, "「사과 먹는 법 알려 줘」", "tn") + "</g>")
+    b.append(f'<line x1="320" y1="66" x2="372" y2="180" stroke="{O}" stroke-width="3" marker-end="url(#{d.id("o")})" {d.show(12)}/>')
+    # 통역사 = AI
+    b.append(f'<g {d.show(14)}><rect x="300" y="182" width="200" height="96" rx="16" fill="{N}"/>'
+             + _t(400, 216, "통역사", "tw") + _t(400, 246, "AI · Claude Code", "tw") + "</g>")
+    for i, s in enumerate(STEPS):
+        y = 62 + i * 66
+        b.append(f'<g {d.show(24 + i * 7)}>{_card(560, y, 330, s)}</g>')
+        b.append(f'<line x1="500" y1="230" x2="556" y2="{y + 24}" stroke="{S}" stroke-width="1.5" {d.show(24 + i * 7)}/>')
+    b += [_person(1030, 230, K, cave=True), _t(1030, 360, "원시인 = 컴퓨터", "tt")]
+    stops = [(0, "transform:translate(0px,0px)"), (62, "transform:translate(0px,0px)"),
+             (72, "transform:translate(30px,-20px)"), (80, "transform:translate(10px,-70px)"), (100, "transform:translate(10px,-70px)")]
+    b.append(f'<g {d.a(stops)}>{_apple(1088, 270)}</g>')
+    # 나는 결과만 본다
+    b.append(f'<g {d.show(86)}><rect x="20" y="110" width="300" height="48" rx="24" fill="{OK}"/>'
+             + _t(170, 135, "잘 먹나? ✓ 확인", "tw") + "</g>")
+    return d.svg(1160, 420, "".join(b))
 
 
 def slides():
     return [
-        # ── A. 코딩 → 바이브코딩
-        light("코딩이란", '<div class="twocol"><div>'
-              + viz2.tiles([("코딩", "컴퓨터가 할 일을 정해진 문법의 글로 쓰는 일"),
-                            ("코드", "그 글 · 컴퓨터는 적힌 그대로만 실행"),
-                            ("예 · 회의실 예약", "「같은 방 · 겹치는 시간이면 막는다」")], 1)
+        # ── 코딩 = 원시인에게 사과 가르치기
+        light("컴퓨터 = 사과를 처음 보는 원시인", anim_teach()
+              + note("코딩", "컴퓨터가 알아듣는 말로 · 할 일을 하나하나 빠짐없이 적는 일"), T),
+        light("하나라도 빠뜨리면", anim_bug()
+              + note("버그", "컴퓨터는 적힌 그대로만 한다 · 빠뜨린 한 줄이 그대로 실수가 된다"), T),
+        light("회의실 예약도 마찬가지", '<div class="twocol"><div>'
+              + viz2.tiles([("사람 말", "「겹치는 예약은 막아 줘」 한 문장"),
+                            ("컴퓨터에게는", "같은 회의실? · 같은 날? · 시간이 겹치나?"),
+                            ("겹치면", "「이미 예약된 시간」 표시 · 저장 안 함")], 1)
               + "</div><div>"
-              + code("app.js · 겹치는 예약 막기 (1부 예제)", esc(
+              + code("app.js · 원시인 말로 적은 것 (1부 예제)", esc(
                   "const clash = load().some((x) =>\n"
                   "  x.room === b.room &&\n"
                   "  x.date === b.date &&\n"
@@ -59,28 +132,26 @@ def slides():
                   "  $(\"err\").textContent = \"이미 예약된 시간\";\n"
                   "  return;\n"
                   "}"))
-              + "</div></div>"
-              + note("한 줄 규칙", "사람 말로는 한 문장 · 코드로는 여덟 줄"), T),
-        light("기존 개발 방식", flow([("언어 배우기", "문법 · 도구"), ("설계", "화면 · 데이터"), ("직접 타이핑", "한 줄씩"),
-                                    ("오류 찾기", "빨간 글씨 해석"), ("고치기", "다시 실행")], hl=2)
-              + viz2.tiles([("배우는 데", "문법 · 개발 도구부터"), ("만드는 데", "기능마다 직접 작성"),
-                            ("고치는 데", "오류 문장을 읽고 원인 찾기")], 3), T),
-        light("바이브코딩의 등장", quote(
-            "There's a new kind of coding I call “vibe coding”, where you fully give in to the vibes, "
-            "embrace exponentials, and forget that the code even exists.", "Andrej Karpathy · X · 2025-02-02")
-              + viz2.tiles([("말로 설명", "무엇을 원하는지 사람 말로"), ("AI가 작성", "코드는 AI가 쓴다"),
-                            ("결과로 판단", "코드 대신 화면 · 동작을 본다")], 3)
-              + src(("Karpathy · X", "https://x.com/karpathy/status/1886192184808149383")), T),
-        light("사전에 오른 말", big([("2025", "", "Collins 사전 올해의 단어 · vibe coding", True),
-                                    ("2025-02-02", "", "Karpathy 가 처음 쓴 날")], 2)
-              + quote("the use of artificial intelligence prompted by natural language to assist with the writing of computer code",
-                      "Collins 사전 정의 · 자연어로 지시한 AI가 코드 작성을 돕게 하는 것")
-              + src(("Collins · 2025-11-06", "https://blog.collinsdictionary.com/language-lovers/collins-word-of-the-year-2025-ai-meets-authenticity-as-society-shifts/")), T),
-        light("집 짓기 비유", phmap("v1_framing.webp", "목조 주택 골조 공사", "사진 · NIOSH · 퍼블릭 도메인",
-                                 "https://commons.wikimedia.org/wiki/File:Framing_fall_prevention_(9253620155).jpg", viz2.maprows([
-                                     ("건축주", "나", "원하는 집을 설명"), ("요구 설명 · 설계 도면", "기획서 · PRD", "1-3 · 1-4"),
-                                     ("시공팀", "Claude Code", "직접 짓는다"), ("공정마다 현장 점검", "실행해 보기", "1-6"),
-                                     ("입주 · 문패", "배포 · 주소", "1-7")], "집 짓기", "바이브코딩")), T),
+              + "</div></div>", T),
+        light("기존 코딩의 어려움", flow([("원시인 말 배우기", "문법 · 개발 도구"), ("하나하나 적기", "기능마다 직접"),
+                                       ("시켜 보기", "실행"), ("빠뜨린 곳 찾기", "오류 문장 해석")], hl=0)
+              + viz2.tiles([("배우는 데", "원시인 말(프로그래밍 언어)부터"), ("만드는 데", "한 줄씩 직접 타이핑"),
+                            ("고치는 데", "어디서 빠뜨렸는지 직접 찾기")], 3), T),
+        # ── 바이브코딩 = 통역사에게 맡기기
+        light("바이브코딩 = 통역사에게 맡기기", anim_vibe()
+              + note("바이브코딩", "나는 우리말로 원하는 것을 말하고 · 원시인 말은 AI가 쓴다 · 나는 결과를 본다"), T),
+        light("비유와 실제", viz2.maprows([
+            ("나", "나", "원하는 것을 우리말로"),
+            ("통역사", "AI (Claude Code)", "코드를 대신 쓴다"),
+            ("원시인", "컴퓨터", "적힌 코드를 그대로 실행"),
+            ("먹는 모습 보기", "화면을 눌러 확인", "코드 대신 결과를 본다"),
+            ("「씨는 뱉게 해 줘」", "말로 고치기", "빠진 것을 다시 요청")], "원시인과 사과", "바이브코딩"), T),
+        light("바이브코딩이라는 말", quote(
+            "코드가 있다는 것조차 잊고 · 느낌(vibe)에 맡기는 새로운 코딩",
+            "Andrej Karpathy · 2025-02-02 · 처음 쓴 말 (번역)")
+              + big([("2025", "", "Collins 사전 올해의 단어", True), ("자연어", "", "사람 말로 AI에게 코드를 쓰게 하는 것 (사전 뜻)")], 2)
+              + src(("Karpathy · X", "https://x.com/karpathy/status/1886192184808149383"),
+                    ("Collins · 2025-11-06", "https://blog.collinsdictionary.com/language-lovers/collins-word-of-the-year-2025-ai-meets-authenticity-as-society-shifts/")), T),
         light("바이브코딩의 흐름", flow([("말로 요청", "「겹치는 예약은 막아 줘」"), ("AI가 코드 작성", "app.js 에 규칙 추가"),
                                        ("실행해 보기", "겹치게 예약 → 막힘?"), ("말로 고치기", "「오류 문구를 빨간색으로」")], hl=2)
               + viz2.tiles([("한 바퀴", "요청 → 작성 → 확인"), ("여러 바퀴", "작게 나눠 여러 번 돌린다 (1-6)"),
@@ -89,60 +160,25 @@ def slides():
             "내 일", [("무엇을 만들지", "기획서 · PRD"), ("되는지 판단", "화면을 눌러 확인"), ("공개 여부 결정", "배포 · 공유")],
             "AI의 일", [("코드 작성", "화면 · 규칙 · 저장"), ("오류 수정", "오류 문장 읽고 고침"), ("반복 작업", "파일 만들기 · 명령 실행")], hl="l")
               + note("판단은 사람", "AI는 시킨 것을 만들고 · 맞는지는 사람이 본다"), T),
-        # ── B. 어디까지 왔나
-        light("바이브코딩 변천사", timeline()
-              + viz2.tiles([("2025 초", "혼자 만든 게임 · 웹 서비스"), ("2025 중반", "에이전트 정식 출시"),
-                            ("2026", "여러 에이전트 · 큰 프로젝트")], 3), T),
-        light("3D 멀티플레이 게임", mini(1)
-              + big([("17일", "", "제작 시작부터 연 매출 환산 100만 달러까지", True), ("32만 명", "", "게임에 접속한 사람")], 2)
-              + note("fly.pieter.com", "브라우저 3D 비행 게임 · Pieter Levels 가 2025-02-22 시작 · 수치는 본인 발표")
-              + src(("levelsio · X · 2025-03-11", "https://x.com/levelsio/status/1899596115210891751")), T),
-        light("실제 서비스 · MenuGen", mini(2)
-              + viz2.pair("내 컴퓨터에서 돌릴 때", [("데모", "「신나고 재미있는 일」"), ("메뉴판 사진", "→ 음식 그림")],
-                          "배포한 실제 서비스", [("로그인 · 결제 · 서버", "「고된 노동」"), ("만든 사람", "Karpathy 본인")], hl="r")
-              + note("배포가 따로 어렵다", "그래서 1부에 배포 단원(1-7)이 따로 있다")
-              + src(("Karpathy · 2025-04-27", "https://karpathy.bearblog.dev/vibe-coding-menugen/")), T),
-        light("에이전트 정식 출시", mini(3)
-              + viz2.pair("채팅", [("코드를 답으로 줌", "복사 · 붙여넣기는 사람이"), ("파일을 못 봄", "설명을 매번 붙여 넣음")],
-                          "Claude Code", [("파일을 직접 읽고 씀", "내 폴더에서 작업"), ("명령 실행", "서버 띄우기 · 저장")], hl="r")
-              + note("2025-05-22", "Claude 4 와 함께 Claude Code 정식 출시 · VS Code · JetBrains 연동")
-              + src(("Anthropic · 2025-05-22", "https://www.anthropic.com/news/claude-4")), T),
-        light("10만 줄 컴파일러", mini(4)
-              + big([("16개", "", "함께 일한 Claude 에이전트"), ("약 2,000", "", "Claude Code 작업 세션"),
-                     ("10만 줄", "", "Rust 로 쓴 C 컴파일러", True), ("2만", "달러 미만", "든 비용")], 4)
-              + note("결과", "리눅스 6.9 를 빌드 · 단 일부 기능은 기존 컴파일러에 맡김 (글에 명시)")
-              + src(("Anthropic Engineering · 2026-02-05", "https://www.anthropic.com/engineering/building-c-compiler")), T),
-        light("프롬프트 한 번에 3D 게임", mini(5)
-              + viz2.pair("Claude Fable 5 · Claude Code", [("결과", "3D 「Raccoon Heist」"), ("만든 사람 평가", "출발점으로는 인상적 · 완성작으론 평범")],
-                          "GPT-5.6 Sol Ultra · Codex", [("결과", "3D 「Moonlight & Mayhem」"), ("만든 사람 평가", "앞의 것보다 훨씬 낫다")], hl="r")
-              + note("같은 프롬프트", "모델 · 도구가 바뀌면 결과도 바뀐다")
-              + src(("Simon Willison · 2026-08-05", "https://simonwillison.net/2026/Aug/5/raccoon-heist/"),
-                    ("2026-08-07", "https://simonwillison.net/2026/Aug/7/moonlight-mayhem/")), T),
-        # ── C. 가능성과 한계
+        # ── 할 수 있는 것 · 조심할 것
+        light("바이브코딩으로 만든 것", viz2.tiles([
+            ("브라우저 3D 비행 게임", "fly.pieter.com · 혼자 AI와 만든 게임"),
+            ("메뉴판 사진 → 음식 그림", "MenuGen · Karpathy 가 만든 서비스"),
+            ("내 업무 도구", "예약 · 체크리스트 · 계산기 (1부에서 만들 것)")], 3)
+              + note("배울 점", "만들기는 빨라졌다 · 남에게 공개하는 일은 따로 배워야 한다 (1-7)")
+              + src(("levelsio · X", "https://x.com/levelsio/status/1899596115210891751"),
+                    ("Karpathy · MenuGen", "https://karpathy.bearblog.dev/vibe-coding-menugen/")), T),
         light("가능성과 한계", viz2.fit(
             [("화면 1~3개 웹 페이지", "예약 · 투표 · 체크리스트"), ("내 업무 도우미", "계산기 · 정리 도구"), ("시제품", "아이디어를 화면으로")],
             [("돈 · 개인정보를 다루는 서비스", "보안 점검이 따로 필요"), ("많은 사람이 동시에 쓰는 서비스", "서버 · DB 설계"),
              ("코드를 안 보고 운영", "고장 원인을 못 찾음")],
             gt="지금 만들기 좋은 앱", bt="아직 어려운 앱"), T),
-        light("AI가 쓴 코드의 보안", big([("62%", "", "보안 검사 평균 통과율"), ("약 38%", "", "취약점이 생긴 작업", True)], 2)
-              + hbars([("Python", 64.22), ("C#", 59.55), ("JavaScript", 56.99, True), ("Java", 31.00)], unit="%", top=100,
-                      title="언어별 보안 통과율 · 모델 18개")
-              + src(("Veracode · 2026-10-29", "https://www.veracode.com/blog/fall-2026-genai-code-security")), T),
-        light("사고 사례 · 키 유출", big([("150만 개", "", "새어 나간 API 인증 토큰", True), ("3만 5천 개", "", "새어 나간 이메일 주소")], 2)
-              + viz2.tiles([("서비스", "AI 에이전트 SNS · Moltbook"), ("만든 사람", "「코드는 한 줄도 직접 안 썼다」"),
-                            ("원인", "화면 코드에 DB 키 · 접근 제한 설정 없음")], 3)
-              + src(("Wiz · 2026-02-02", "https://www.wiz.io/blog/exposed-moltbook-database-reveals-millions-of-api-keys")), T),
-        light("사고 사례 · 데이터 삭제", viz2.tiles([("상황", "코드 동결 기간 · 에이전트에 작업을 맡김"),
-                                                 ("사고", "에이전트가 운영 DB 데이터 삭제"),
-                                                 ("이후", "개발용 · 운영용 DB 를 자동으로 분리")], 3)
-              + quote("Replit agent in development deleted data from the production database. Unacceptable and should never be possible.",
-                      "Amjad Masad · Replit CEO · 2025-07-20")
-              + src(("Amjad Masad · X", "https://x.com/amasad/status/1946986468586721478")), T),
-        light("체감 속도와 실제 속도", big([("19%", "", "AI를 쓴 숙련 개발자 · 실제로 더 걸린 시간", True),
-                                         ("20%", "", "같은 개발자들이 「빨라졌다」고 느낀 정도")], 2)
-              + note("2026 후속", "AI 없이 일하려는 개발자가 줄어 같은 방식으로는 재기 어려워짐 · 측정 설계를 바꿈")
-              + src(("METR · 2025-07-10", "https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/"),
-                    ("METR · 2026-02-24", "https://metr.org/blog/2026-02-24-uplift-update/")), T),
+        light("통역사의 빈틈", big([("약 38%", "", "AI가 쓴 코드 중 보안 구멍이 생긴 작업", True)], 1)
+              + viz2.tiles([("열쇠를 문 앞에", "화면 코드에 DB 키 · 이메일 3만 5천 개 노출 (Moltbook)"),
+                            ("창고를 비움", "에이전트가 운영 데이터를 삭제 (Replit)")], 2)
+              + src(("Veracode · 2026-10-29", "https://www.veracode.com/blog/fall-2026-genai-code-security"),
+                    ("Wiz · 2026-02-02", "https://www.wiz.io/blog/exposed-moltbook-database-reveals-millions-of-api-keys"),
+                    ("Replit CEO · 2025-07-20", "https://x.com/amasad/status/1946986468586721478")), T),
         light("문제와 1부의 순서", viz2.maprows([
             ("원하는 것을 AI가 추측으로 채움", "기획서 · PRD 를 먼저", "1-3 · 1-4"),
             ("고친 뒤 망가지면 되돌릴 수 없음", "Git 으로 저장 시점 남기기", "1-5"),
