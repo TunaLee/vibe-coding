@@ -154,6 +154,8 @@ def slides():
                                             ("AI가 파악", "앞뒤 코드")], 1) + '</div></div>'
               + src(("GitHub Copilot 문서 · inline suggestions", "https://docs.github.com/en/copilot/using-github-copilot/getting-code-suggestions-in-your-ide-with-github-copilot")), T),
         light("대화형 방식 · 예", chat_anim("chat"), T),
+        light("위임형 방식 · 예", chat_anim("agent")
+              + src(("Claude Code 문서 · How Claude Code works", "https://code.claude.com/docs/en/how-claude-code-works")), T),
         light("AI 코딩 도구의 실제 속도", big([("19%", "", "AI를 쓴 숙련 개발자 · 실제로 더 걸린 시간", True),
                                              ("20%", "", "같은 개발자들이 「빨라졌다」고 느낀 정도")], 2)
               + viz2.tiles([("대상", "숙련 개발자 16명 · 실제 작업 246건"),
@@ -161,8 +163,6 @@ def slides():
                             ("2026 후속", "AI 없이 일하려는 개발자 감소 · 측정 방식 변경")], 3)
               + src(("METR · 2025-07-10", "https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/"),
                     ("METR · 2026-02-24", "https://metr.org/blog/2026-02-24-uplift-update/")), T),
-        light("위임형 방식 · 예", chat_anim("agent")
-              + src(("Claude Code 문서 · How Claude Code works", "https://code.claude.com/docs/en/how-claude-code-works")), T),
         light("LLM과 코딩 에이전트", comic([
             ("v1_brain1.webp", "생각만", "LLM", "글 읽기 · 글 쓰기 · 판단"),
             ("v1_brain2.webp", "+ 도구", "LLM + 도구", "파일 읽기 · 검색 · 명령 실행"),
