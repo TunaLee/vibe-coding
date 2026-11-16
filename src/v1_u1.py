@@ -16,7 +16,6 @@ from v1kit import shot
 T = "1-1"
 STEPS = ["① 이건 「사과」 · 먹는 것", "② 손으로 집는다", "③ 입에 넣고 깨문다", "④ 씨는 뱉는다"]
 DONE = ["사과를 알아봄", "손으로 집음", "깨물어 먹음", "씨를 뱉음"]
-APPLE = ("사과 사진 · Evan-Amos · CC0", "https://commons.wikimedia.org/wiki/File:Honeycrisp-Apple.jpg")
 
 
 # ── 그림 조각 — 가르치는 말(코드)을 한 줄씩 실행하고 · 원시인이 한 일이 옆에 쌓인다 ──
@@ -58,22 +57,6 @@ def _run(d, cx, cw, rx, rw, t0, step, missing=None, typed=None):
 def _badge(d, t, x, w, ok, s):
     c = OK if ok else R
     return f'<g {d.show(t)}><rect x="{x}" y="330" width="{w}" height="46" rx="23" fill="{c}"/>{_t(x + w / 2, 354, s, "tw")}</g>'
-
-
-def _scene(p, missing=None):
-    d = _D(p, 12)
-    b = [_panel(20, 300, "원시인 = 컴퓨터"),
-         f'<image href="img/v1_apple.webp" x="70" y="70" width="200" height="181"/>',
-         _t(170, 290, "사과를 처음 본다", "tn"), _t(170, 320, "적힌 것만 그대로 한다", "ts"),
-         _panel(350, 440, "가르치는 말", "= 코드"), _panel(820, 320, "원시인이 한 일", "= 실행 결과")]
-    b += _run(d, 370, 400, 840, 280, 14, 16, missing)
-    b.append(_badge(d, 84, 840, 280, missing is None, "잘 먹었다" if missing is None else "버그 · 씨까지 삼킴"))
-    return d.svg(1160, 400, "".join(b))
-
-
-def anim_bug():
-    """④ 를 빠뜨림 → 실행은 그대로 → 씨까지 삼킨다. 12초 · 한 번."""
-    return _scene("aq", missing=3)
 
 
 def anim_vibe():
@@ -165,8 +148,6 @@ def slides():
             ("v1_cut4.webp", "?", "처음 본 배", "코드에 없는 경우 · 처리 불가")])
               + note("코딩", "컴퓨터가 실행할 명령을 프로그래밍 언어로 작성하는 일")
               + src(("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")), T),
-        light("하나라도 빠뜨리면", anim_bug()
-              + src(APPLE) + note("버그", "빠지거나 잘못 적힌 명령 때문에 생기는 오동작"), T),
         light("회의실 예약도 마찬가지", '<div class="twocol"><div>'
               + viz2.tiles([("요청", "「겹치는 예약은 막아 줘」"),
                             ("코드에 필요한 조건", "같은 회의실 · 같은 날짜 · 시간 겹침"),
