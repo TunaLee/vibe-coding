@@ -1,6 +1,6 @@
 """vibe1 공통 도구 — 단원 표지 · 1부 지도 · 다음 단원 · 화면 · 대화 · 실습 진행. 단원 모듈(v1_u1 … v1_u8)이 쓴다.
 
-바이브코딩 온라인 강의 1부 — 입문 (200분). 단원마다 HTML 한 파일(docs/1-N-이름.html).
+바이브코딩 온라인 강의 1부 — 입문. 단원마다 HTML 한 파일(docs/1-N-이름.html).
 공통 예제 = 회의실 예약 페이지 (labs/room_booking). 수강생은 같은 순서로 자기 아이디어를 만든다.
 이어지는 산출물: 1-3 기획서.md → 1-4 PRD.md → 1-5 첫 커밋 → 1-6 앱 → 1-7 배포 주소 → 1-8 회고 → 2부
 """
@@ -9,7 +9,7 @@ from hx import note
 
 FOLDER = "labs/room_booking"
 
-# (단원, 제목, 분, 이 단원에서 남는 것)
+# (단원, 제목, 분 — 화면에 쓰지 않음, 이 단원에서 남는 것)
 UNITS = [
     ("1-1", "바이브코딩이란", 20, "만들 것의 그림"),
     ("1-2", "도구 · 실습 환경", 30, "계정 3개 · 설치"),
@@ -37,7 +37,6 @@ def cover(u):
   <div class="glow"></div>
   <div class="kick">바이브코딩 · {u}</div>
   <h1>{title}</h1>
-  <div class="v1cmin">{mins}분</div>
 </section>'''
 
 
@@ -58,9 +57,9 @@ def nextup(u):
     _, _, _, out = UNITS[i]
     if i + 1 < len(UNITS):
         c, t, m, nout = UNITS[i + 1]
-        nxt = f'<a class="v1next" href="{file_of(c)}"><span>{c} · {m}분</span><b>{t}</b><small>→ {nout}</small></a>'
+        nxt = f'<a class="v1next" href="{file_of(c)}"><span>{c}</span><b>{t}</b><small>→ {nout}</small></a>'
     else:
-        nxt = '<div class="v1next"><span>2부 · 200분</span><b>바이브 코딩 심화</b><small>→ DB · 외부 연동 · 품질 관리</small></div>'
+        nxt = '<div class="v1next"><span>2부</span><b>바이브 코딩 심화</b><small>→ DB · 외부 연동 · 품질 관리</small></div>'
     return f'''<section class="slide dk" data-title="다음 단원">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="v1end"><div class="v1got"><span>{u}에서 남은 것</span><b>{out}</b></div>{nxt}</div>
