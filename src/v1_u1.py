@@ -103,7 +103,7 @@ def anim_loop():
                 + _t(cx, cy - 9, t, "tw", extra='style="font-size:18px"') + _t(cx, cy + 15, sub, "tw", extra='style="font-size:13px;font-weight:600;opacity:.8"') + "</g>")
     b = [f'<rect x="0" y="0" width="1160" height="400" rx="18" fill="{BG}"/>',
          f'<g {d.show(2)}><rect x="30" y="52" width="230" height="68" rx="14" fill="#FFF3E6" stroke="{O}" stroke-width="2.5"/>'
-         + _t(145, 76, "내 요청", "tt") + _t(145, 102, "「겹치는 예약 막아 줘」", "ts") + "</g>",
+         + _t(145, 76, "내 요청", "tt") + _t(145, 102, "「로그인 화면 만들어 줘」", "ts") + "</g>",
          f'<line x1="262" y1="86" x2="476" y2="86" stroke="{O}" stroke-width="3" marker-end="url(#{d.id("o")})" {d.show(10)}/>',
          node(580, 86, "① 맥락 파악", "파일 찾기 · 읽기", 16),
          f'<path d="M675 96 Q770 130 742 248" fill="none" stroke="{N}" stroke-width="3" marker-end="url(#{d.id("k")})" {d.show(26)}/>',
@@ -119,7 +119,7 @@ def anim_loop():
              + _t(1030, 281, "완료 · 결과 보고", "tn") + _t(1030, 304, "확인 통과", "ts") + "</g>")
     b.append(f'<g {d.show(90)}><rect x="830" y="52" width="300" height="68" rx="14" fill="{W}" stroke="{S}" stroke-width="2" stroke-dasharray="6 5"/>'
              + _t(980, 76, "사람 · 언제든 끼어들기", "tt") + _t(980, 102, "「좀 이상한데?」 → 수정 요청", "ts") + "</g>")
-    for x, y, t, at in ((580, 30, "「app.js 부터 봐야겠다」", 20), (720, 352, "「코드에 규칙을 넣자」", 36), (440, 352, "「겹치게 예약해 봐야겠다」", 52)):
+    for x, y, t, at in ((580, 30, "「폴더부터 봐야겠다」", 20), (720, 352, "「login.html 을 만들자」", 36), (440, 352, "「잘못된 이메일로 시험」", 52)):
         b.append(f'<g {d.show(at)}><rect x="{x - 105}" y="{y - 17}" width="210" height="34" rx="17" fill="{W}" stroke="{G}" stroke-width="1.5"/>'
                  + _t(x, y + 1, t, "ts", extra='style="font-size:14px;fill:#3A4657"') + "</g>")
     b.append(f'<path d="M830 96 Q760 170 650 196" fill="none" stroke="{S}" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#{d.id("k")})" {d.show(90)}/>')
@@ -127,7 +127,7 @@ def anim_loop():
 
 
 def autocomplete_anim():
-    """편집기 · 사람이 한 줄 입력 → AI가 회색으로 다음 줄 제안 → Tab 수락 · 두 번 반복 후 정지 (약 8초).
+    """편집기 · 로그인 함수 첫 줄 입력 → AI가 회색으로 검사 줄 제안 → Tab 수락 · 두 번 반복 후 정지 (약 9초).
     참고: GitHub Copilot 「inline suggestion」 화면 (회색 제안 → Tab 수락)."""
     from hx import esc
     def typed(txt, t0, dur):
@@ -137,22 +137,23 @@ def autocomplete_anim():
     def ghost(txt, t_show, t_ok):
         return (f'<span class="gh" style="animation:v1ghIn .4s ease-out {t_show}s forwards, v1ghOk .35s ease-out {t_ok}s forwards">{esc(txt)}</span>')
     L = [
-        ("me", "const clash = load().some((x) =>", .3, 2.2),
-        ("ai", "  x.room === b.room &&", 2.8, 4.3),
-        ("ai", "  x.date === b.date &&", 2.8, 4.3),
-        ("ai", "  x.start < b.end && b.start < x.end);", 2.8, 4.3),
-        ("me", "if (clash) {", 4.9, .9),
-        ("ai", '  $("err").textContent = "이미 예약된 시간";', 6.1, 7.4),
-        ("ai", "  return;", 6.1, 7.4),
-        ("ai", "}", 6.1, 7.4),
+        ("me", "function login(email, password) {", .3, 2.2),
+        ("ai", '  if (!email.includes("@"))', 2.8, 4.3),
+        ("ai", '    return "이메일 형식 오류";', 2.8, 4.3),
+        ("ai", "  if (password.length < 8)", 2.8, 4.3),
+        ("ai", '    return "비밀번호 8자 이상";', 2.8, 4.3),
+        ("ai", '  return "로그인 성공";', 2.8, 4.3),
+        ("ai", "}", 2.8, 4.3),
+        ("me", "loginBtn.onclick = () =>", 4.9, 1.6),
+        ("ai", "  alert(login(email.value, pw.value));", 7.0, 8.2),
     ]
     rows = ""
     for i, (who, txt, a, b) in enumerate(L, 1):
         body = typed(txt, a, b) if who == "me" else ghost(txt, a, b)
         rows += f'<div class="ln"><i>{i}</i>{body}</div>'
-    keys = "".join(f'<div class="v1tab" style="animation:v1tabIn 1s ease-out {t}s forwards"><kbd>Tab</kbd><span>수락</span></div>' for t in (3.5, 6.8))
+    keys = "".join(f'<div class="v1tab" style="animation:v1tabIn 1s ease-out {t}s forwards"><kbd>Tab</kbd><span>수락</span></div>' for t in (3.5, 7.6))
     tags = "".join(f'<div class="v1sug" style="top:{y}px; animation:v1ghIn .4s ease-out {t}s forwards, v1out .3s ease-in {t + 1.6}s forwards">AI 제안 · 회색</div>'
-                   for y, t in ((52, 2.8), (183, 6.1)))
+                   for y, t in ((52, 2.8), (282, 7.0)))
     return f'<div class="v1ed"><div class="bar"><b></b><b></b><b></b><span>app.js · 편집기 화면 예</span></div><div class="code">{rows}{tags}{keys}</div></div>'
 
 
@@ -174,21 +175,21 @@ def chat_anim(mode):
     참고: Claude Code 문서 「How Claude Code works」 · 코딩애플 「AI 에이전트 만드는 기초 기술」 단계 표시."""
     from hx import esc
     if mode == "chat":
-        ask = "회의실 예약이 겹치면 막는 자바스크립트 코드 써 줘"
+        ask = "로그인 화면 HTML 코드 써 줘"
         t_send = .3 + len(ask) * .07
-        reply = ['<p class="v1ln" style="animation-delay:{:.1f}s">예약을 저장하기 전에 아래 코드를 넣으면 된다.</p>'.format(t_send + 1.0),
-                 '<pre class="v1ln" style="animation-delay:{:.1f}s">{}</pre>'.format(t_send + 1.5, esc("const clash = list.some((x) => ...);\nif (clash) return;"))]
+        reply = ['<p class="v1ln" style="animation-delay:{:.1f}s">아래 코드를 login.html 로 저장하면 된다.</p>'.format(t_send + 1.0),
+                 '<pre class="v1ln" style="animation-delay:{:.1f}s">{}</pre>'.format(t_send + 1.5, esc('<form>\n  <input type="email">\n  <input type="password">\n  <button>로그인</button>\n</form>'))]
         left = (f'<div class="v1cw"><div class="v1hd">채팅 화면 예</div>'
                 f'<div class="v1me"><p>{_typed_ko(ask, .3)}</p></div>'
                 f'<div class="v1dots" style="animation-delay:{t_send + .2:.1f}s, {t_send + .95:.1f}s"><b></b><b></b><b></b></div>'
                 f'<div class="v1ai">{"".join(reply)}</div></div>')
         right = ('<div class="v1side2"><div class="v1hh">사람이 이어서 할 일</div>'
-                 + _todo(["app.js 열기", "넣을 위치 찾기", "붙여넣기 · 저장", "브라우저에서 실행", "오류 나면 다시 질문"], t_send + 2.4)
+                 + _todo(["새 파일 만들기 · 이름 정하기", "코드 붙여넣기 · 저장", "브라우저로 열기", "동작 안 하면 다시 질문", "받은 코드 다시 붙여넣기"], t_send + 2.4)
                  + f'<div class="v1gr" style="animation-delay:{t_send + 5.6:.1f}s">AI가 파악 · <b>요청 문장</b></div></div>')
     else:
-        ask = "겹치는 예약은 막아 줘"
+        ask = "로그인 화면 만들어 줘"
         t_send = .3 + len(ask) * .07
-        steps = [("app.js 읽기", "예약 저장 부분 찾음"), ("app.js 수정", "겹침 규칙 7줄 추가"), ("실행해 확인", "겹치게 예약 → 「이미 예약된 시간」")]
+        steps = [("폴더 확인", "기존 파일 · 스타일 파악"), ("파일 작성", "login.html · login.js"), ("실행해 확인", "잘못된 이메일 → 「이메일 형식 오류」")]
         rows = ""
         for i, (h, sub) in enumerate(steps):
             t = t_send + .9 + i * 1.4
@@ -197,7 +198,7 @@ def chat_anim(mode):
         t_end = t_send + .9 + 3 * 1.4
         left = (f'<div class="v1cw cc"><div class="v1hd">Claude Code 화면 예</div>'
                 f'<div class="v1me"><p>{_typed_ko(ask, .3)}</p></div>{rows}'
-                f'<div class="v1ai"><p class="v1ln" style="animation-delay:{t_end:.1f}s">완료 · 겹치는 예약은 저장되지 않는다.</p></div></div>')
+                f'<div class="v1ai"><p class="v1ln" style="animation-delay:{t_end:.1f}s">완료 · login.html 을 열면 된다.</p></div></div>')
         right = ('<div class="v1side2"><div class="v1hh">사람이 할 일</div>'
                  + _todo(["목표 한 줄 요청", "화면에서 결과 확인"], t_end + .6, cls="me2")
                  + f'<div class="v1gr" style="animation-delay:{t_end + 1.8:.1f}s">AI가 파악 · <b>목표</b></div></div>')
@@ -232,7 +233,7 @@ def slides():
               + src(("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")), T),
         light("기존 코딩과 바이브코딩", viz2.pair(
             "기존 코딩", [("① 언어 학습", "문법 · 개발 도구 사용법"), ("② 직접 작성", "모든 기능을 사람이 입력"), ("③ 오류 수정", "오류 메시지로 원인 추적")],
-            "바이브코딩", [("① 말로 요청", "「회의실 예약 페이지 만들어 줘」"), ("② AI가 코드 작성", "파일 생성 · 실행"), ("③ 수정 사항만 요청", "「버튼을 크게」 「겹치면 막아 줘」")], hl="r")
+            "바이브코딩", [("① 말로 요청", "「로그인 화면 만들어 줘」"), ("② AI가 코드 작성", "파일 생성 · 실행"), ("③ 수정 사항만 요청", "「버튼을 크게」 「비밀번호는 8자 이상」")], hl="r")
               + note("바이브코딩", "AI와 대화를 주고받으며 프로그램을 만드는 개발 방식"), T),
         # ── 배경 · AI 코딩 도구의 변화
         light("AI 코딩 도구의 변화", eras()
@@ -262,9 +263,9 @@ def slides():
               + src(("Claude Code 문서 · How Claude Code works", "https://code.claude.com/docs/en/how-claude-code-works"),
                     ("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")), T),
         light("용어의 유래", quote(
-            "There's a new kind of coding I call <mark>“vibe coding”</mark>, where you fully give in to the vibes, "
-            "embrace exponentials, and forget that the code even exists.",
-            "Andrej Karpathy · X · 2025-02-02 · 번역 「코드가 있다는 것조차 잊고 느낌(vibe)에 맡기는 새로운 코딩」")
+            "내가 <mark>「바이브코딩」</mark>이라고 부르는 새로운 코딩 방식이 있다. 느낌(vibe)에 완전히 몸을 맡기고, "
+            "AI의 빠른 발전을 받아들이고, 코드가 있다는 사실조차 잊는 방식이다.",
+            "Andrej Karpathy · X · 2025-02-02 · 원문 「There's a new kind of coding I call “vibe coding”…」")
               + viz2.tiles([("2023-01 · Karpathy", "「가장 인기 있는 새 프로그래밍 언어는 영어」"),
                             ("2025-02 · Karpathy", "「바이브코딩」 처음 사용"),
                             ("2025-11 · Collins 사전", "올해의 단어 선정")], 3)
@@ -287,10 +288,10 @@ def slides():
         # ── 동작 원리
         light("바이브코딩의 반복 고리", anim_loop()
               + src(("Claude Code 문서 · How Claude Code works", "https://code.claude.com/docs/en/how-claude-code-works")), T),
-        light("반복 고리 예 · 회의실 예약", viz2.tiles([
-            ("① app.js 찾기", "맥락 파악 · 파일 검색"), ("② 예약 저장 코드 읽기", "맥락 파악 · 파일 읽기"),
-            ("③ 겹침 규칙 추가", "작업 · 파일 수정"), ("④ 겹치게 예약 실행", "결과 확인 · 실행"),
-            ("⑤ 오류 발견 → 다시 수정", "반복 · ② 작업으로"), ("⑥ 완료 보고", "「app.js 에 겹침 막기 추가」")], 3)
+        light("반복 고리 예 · 로그인 화면", viz2.tiles([
+            ("① 폴더 확인", "맥락 파악 · 파일 목록"), ("② 기존 스타일 읽기", "맥락 파악 · 파일 읽기"),
+            ("③ login.html · login.js 작성", "작업 · 파일 생성"), ("④ 잘못된 이메일 입력", "결과 확인 · 실행"),
+            ("⑤ 오류 문구 안 뜸 → 다시 수정", "반복 · ③ 작업으로"), ("⑥ 완료 보고", "「로그인 화면 추가 · 형식 검사 포함」")], 3)
               + note("사람", "④ 결과를 화면에서 다시 확인 · 다르면 수정 요청"), T),
         light("사람과 AI의 역할", viz2.pair(
             "내 일", [("만들 것 정의", "기획서 · PRD"), ("동작 확인", "화면 직접 조작"), ("공개 결정", "배포 · 공유")],
@@ -321,7 +322,7 @@ def slides():
             ("오류 위치 파악 어려움", "기능 단위 작업 · 확인", "1-6"),
             ("키 · 개인정보 노출", "공개 전 점검", "1-7")], "바이브코딩의 문제", "1부에서 하는 일"), T),
         light("1부 완성 화면", shot("room_main.webp", "회의실 예약 · 1부 공통 예제 완성본", [
-            ("하루 시간표", "회의실 3곳 · 30분 단위"), ("예약", "빈 칸 클릭 · 겹치면 차단"),
+            ("하루 시간표", "회의실 3곳 · 30분 단위"), ("예약", "빈 칸 클릭 · 이미 찬 시간은 예약 불가"),
             ("공유", "배포 주소 (1-7)"), ("내 앱", "같은 순서로 하나 더")]), T),
     ]
 
