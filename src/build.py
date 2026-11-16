@@ -34,9 +34,23 @@ def _write(name, tpl, title, parts):
     print(name, len(parts) - 1, "장")
 
 
+def make_lab_zips():
+    """실습 뼈대 → docs/dl/<이름>.zip (덱에서 바로 내려받기)."""
+    import zipfile
+    dl = ROOT / "docs" / "dl"
+    dl.mkdir(exist_ok=True)
+    for name in ("delegate_todo",):
+        src = ROOT / "labs" / name
+        with zipfile.ZipFile(dl / f"{name}.zip", "w", zipfile.ZIP_DEFLATED) as z:
+            for f in sorted(src.rglob("*")):
+                if f.is_file() and f.name != ".DS_Store":
+                    z.write(f, Path(name) / f.relative_to(src))
+
+
 def build_part1():
     import v1kit
     import v3kit
+    make_lab_zips()
     only = [x for x in os.environ.get("P1_ONLY", "").split(",") if x]
     for i, (u, title, _, _) in enumerate(v1kit.UNITS, 1):
         if only and str(i) not in only:

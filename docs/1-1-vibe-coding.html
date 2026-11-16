@@ -934,6 +934,9 @@
   .v1era em{font-style:normal; font-size:13px; font-weight:800; min-width:30px;} .v1era em.me{color:#1F3A5F;} .v1era em.ai{color:#E07A12;}
   .v1era small{font-size:15px; color:#3A4657; line-height:1.4;}
   .qt mark{background:#FFE08A; padding:0 3px; border-radius:3px;}
+  .v1era .grasp{margin-top:12px; padding-top:10px; border-top:1px dashed #D9DDE3; font-size:15px; color:#6B7785;} .v1era .grasp b{display:inline; font-size:17px; color:#E07A12;}
+  .v1ghost{color:#8A94A3; font-style:italic;}
+  .v1mode{display:grid; grid-template-columns:1.35fr 1fr; gap:24px; align-items:start;}
   .v1vid video{width:100%; max-height:440px; border:1.5px solid #D9DDE3; border-radius:12px; box-shadow:0 8px 22px rgba(15,27,45,.10); background:#F7EEDB; display:block;}
 </style>
 </head>
@@ -1047,7 +1050,42 @@ if (clash) {
   <div class="eyebrow"><span class="tag">1-1</span></div>
   <h2 class="s-title sm">AI 코딩 도구의 변화</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1eras"><div class="v1era v1cut" style="--d:0.0s; margin-top:68px"><div class="yr">2021</div><b>자동완성</b><span class="tl">GitHub Copilot</span><div class="bar"><i class="me" style="width:85%"></i><i class="ai" style="width:15%"></i></div><div class="row"><em class="me">사람</em><small>나머지 작성 · 실행 · 수정</small></div><div class="row"><em class="ai">AI</em><small>다음 줄 · 함수 제안</small></div></div><div class="v1era v1cut" style="--d:0.8s; margin-top:34px"><div class="yr">2022</div><b>채팅</b><span class="tl">ChatGPT</span><div class="bar"><i class="me" style="width:55%"></i><i class="ai" style="width:45%"></i></div><div class="row"><em class="me">사람</em><small>복사 · 붙여넣기 · 실행 · 오류 전달</small></div><div class="row"><em class="ai">AI</em><small>코드를 답으로 작성</small></div></div><div class="v1era v1cut" style="--d:1.6s; margin-top:0px"><div class="yr">2025</div><b>에이전트</b><span class="tl">Claude Code</span><div class="bar"><i class="me" style="width:15%"></i><i class="ai" style="width:85%"></i></div><div class="row"><em class="me">사람</em><small>요청 · 결과 판단</small></div><div class="row"><em class="ai">AI</em><small>파일 읽기 · 작성 · 실행 · 확인</small></div></div></div><div class="dbnote"><span>막대</span> 사람 몫 · AI 몫의 상대 크기 (측정값 아님)</div><div class="src">출처 · <a href="https://github.blog/2021-06-29-introducing-github-copilot-ai-pair-programmer/" target="_blank" rel="noopener">GitHub · 2021-06-29</a> · <a href="https://openai.com/index/chatgpt/" target="_blank" rel="noopener">OpenAI · 2022-11-30</a> · <a href="https://www.anthropic.com/news/claude-4" target="_blank" rel="noopener">Anthropic · 2025-05-22</a></div></div></div>
+  <div class="body"><div class="mid"><div class="v1eras"><div class="v1era v1cut" style="--d:0.0s; margin-top:68px"><div class="yr">2021</div><b>자동완성</b><span class="tl">GitHub Copilot</span><div class="bar"><i class="me" style="width:85%"></i><i class="ai" style="width:15%"></i></div><div class="row"><em class="me">사람</em><small>위치 · 구조 결정 · 작성 · 실행</small></div><div class="row"><em class="ai">AI</em><small>다음 줄 · 함수 제안</small></div><div class="grasp">AI가 파악 · <b>앞뒤 코드</b></div></div><div class="v1era v1cut" style="--d:0.8s; margin-top:34px"><div class="yr">2022</div><b>대화형</b><span class="tl">ChatGPT</span><div class="bar"><i class="me" style="width:55%"></i><i class="ai" style="width:45%"></i></div><div class="row"><em class="me">사람</em><small>붙일 위치 찾기 · 붙여넣기 · 실행</small></div><div class="row"><em class="ai">AI</em><small>요청한 코드 작성</small></div><div class="grasp">AI가 파악 · <b>요청 문장</b></div></div><div class="v1era v1cut" style="--d:1.6s; margin-top:0px"><div class="yr">2025</div><b>위임형</b><span class="tl">Claude Code</span><div class="bar"><i class="me" style="width:15%"></i><i class="ai" style="width:85%"></i></div><div class="row"><em class="me">사람</em><small>목표 · 결과 판단</small></div><div class="row"><em class="ai">AI</em><small>파일 찾기 · 수정 · 실행 · 확인</small></div><div class="grasp">AI가 파악 · <b>목표</b></div></div></div><div class="dbnote"><span>막대</span> 사람 몫 · AI 몫의 상대 크기 (측정값 아님)</div><div class="src">출처 · <a href="https://github.blog/2021-06-29-introducing-github-copilot-ai-pair-programmer/" target="_blank" rel="noopener">GitHub · 2021-06-29</a> · <a href="https://openai.com/index/chatgpt/" target="_blank" rel="noopener">OpenAI · 2022-11-30</a> · <a href="https://www.anthropic.com/news/claude-4" target="_blank" rel="noopener">Anthropic · 2025-05-22</a></div></div></div>
+</section>
+
+<section class="slide lt" data-title="자동완성 방식 · 예">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-1</span></div>
+  <h2 class="s-title sm">자동완성 방식 · 예</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1mode"><div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">app.js · 편집기 화면 예</span></div><pre><code>const clash = load().some((x) =&gt;
+  x.room === b.room &amp;&amp;<span class="v1ghost">
+  x.date === b.date &amp;&amp;
+  x.start &lt; b.end &amp;&amp; b.start &lt; x.end);</span></code></pre></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>사람</b><span>파일 · 위치 · 첫 줄 직접 입력</span></div><div class="v2tile" style="--d:0.08s"><b>AI</b><span>회색 글자로 다음 줄 제안 · Tab 으로 수락</span></div><div class="v2tile" style="--d:0.16s"><b>AI가 파악</b><span>앞뒤 코드</span></div></div></div></div></div></div>
+</section>
+
+<section class="slide lt" data-title="대화형 방식 · 예">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-1</span></div>
+  <h2 class="s-title sm">대화형 방식 · 예</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1mode"><div><div class="v1chat"><div class="v1ch">채팅 화면 예</div><div class="v1b me"><span>나</span><p>회의실 예약이 겹치면 막는 자바스크립트 코드 써 줘</p></div><div class="v1b ai"><span>Claude</span><p>예약을 저장하기 전에 아래 코드를 넣으면 된다.<br/>const clash = list.some(...)<br/>if (clash) return;</p></div></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>사람</b><span>넣을 파일 · 위치 찾기 · 붙여넣기 · 실행 · 오류 전달</span></div><div class="v2tile" style="--d:0.08s"><b>AI</b><span>요청한 코드 조각 작성</span></div><div class="v2tile" style="--d:0.16s"><b>AI가 파악</b><span>요청 문장</span></div></div></div></div></div></div>
+</section>
+
+<section class="slide lt" data-title="AI 코딩 도구의 실제 속도">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-1</span></div>
+  <h2 class="s-title sm">AI 코딩 도구의 실제 속도</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="bns c2"><div class="bn hl" style="--d:0.00s"><div class="bv">19%<small></small></div><div class="bl">AI를 쓴 숙련 개발자 · 실제로 더 걸린 시간</div></div><div class="bn" style="--d:0.12s"><div class="bv">20%<small></small></div><div class="bl">같은 개발자들이 「빨라졌다」고 느낀 정도</div></div></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>대상</b><span>숙련 개발자 16명 · 실제 작업 246건</span></div><div class="v2tile" style="--d:0.08s"><b>도구</b><span>Cursor + Claude 3.5 · 3.7 Sonnet (2025년 초)</span></div><div class="v2tile" style="--d:0.16s"><b>2026 후속</b><span>AI 없이 일하려는 개발자 감소 · 측정 방식 변경</span></div></div><div class="src">출처 · <a href="https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/" target="_blank" rel="noopener">METR · 2025-07-10</a> · <a href="https://metr.org/blog/2026-02-24-uplift-update/" target="_blank" rel="noopener">METR · 2026-02-24</a></div></div></div>
+</section>
+
+<section class="slide lt" data-title="위임형 방식 · 예">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-1</span></div>
+  <h2 class="s-title sm">위임형 방식 · 예</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1mode"><div><div class="v1chat"><div class="v1ch">Claude Code 화면 예</div><div class="v1b me"><span>나</span><p>겹치는 예약은 막아 줘</p></div><div class="v1b ai"><span>Claude</span><p>app.js 에서 예약 저장 부분을 찾았다.<br/>같은 회의실 · 같은 날 · 시간이 겹치면 막는 규칙을 넣었다.<br/>겹치게 예약해 보니 「이미 예약된 시간」이 뜬다.</p></div></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>사람</b><span>목표 한 줄 · 결과 판단</span></div><div class="v2tile" style="--d:0.08s"><b>AI</b><span>파일 찾기 · 수정 · 실행 · 확인 · 보고</span></div><div class="v2tile" style="--d:0.16s"><b>AI가 파악</b><span>목표</span></div></div></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="용어의 유래">

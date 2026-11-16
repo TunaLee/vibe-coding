@@ -1,0 +1,9 @@
+body { font-family: -apple-system, "Pretendard", sans-serif; background: #f6f7f9; color: #16233a; }
+main { max-width: 480px; margin: 48px auto; background: #fff; padding: 28px; border-radius: 16px; box-shadow: 0 6px 20px rgba(0,0,0,.06); }
+form { display: flex; gap: 8px; }
+form input { flex: 1; padding: 10px 12px; border: 1px solid #d9dde3; border-radius: 10px; font-size: 16px; }
+button { padding: 10px 16px; border: 0; border-radius: 10px; background: #f28c28; color: #fff; font-weight: 700; font-size: 16px; }
+ul { list-style: none; padding: 0; margin: 20px 0; }
+li { display: flex; gap: 10px; align-items: center; padding: 10px 4px; border-bottom: 1px solid #eef0f3; }
+li.done span { text-decoration: line-through; color: #9aa6b5; }
+#count { color: #6b7785; }

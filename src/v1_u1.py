@@ -11,7 +11,7 @@ from anim import BG, G, N, O, OK, R, S, W, _D, _t
 from deck import flow, light
 from hx import METR_TH, code, esc, metr_chart, note
 from stats_hx import big, quote, src
-from v1kit import shot
+from v1kit import chat, shot
 
 T = "1-1"
 STEPS = ["① 이건 「사과」 · 먹는 것", "② 손으로 집는다", "③ 입에 넣고 깨문다", "④ 씨는 뱉는다"]
@@ -74,22 +74,23 @@ def anim_vibe():
     return d.svg(1160, 400, "".join(b))
 
 
-ERAS = [  # (해, 이름, 도구, 사람 몫 %, AI 몫 설명, 사람 몫 설명) — 막대는 모양만 · 측정값 아님
-    ("2021", "자동완성", "GitHub Copilot", 85, "다음 줄 · 함수 제안", "나머지 작성 · 실행 · 수정"),
-    ("2022", "채팅", "ChatGPT", 55, "코드를 답으로 작성", "복사 · 붙여넣기 · 실행 · 오류 전달"),
-    ("2025", "에이전트", "Claude Code", 15, "파일 읽기 · 작성 · 실행 · 확인", "요청 · 결과 판단"),
+ERAS = [  # (해, 이름, 도구, 사람 몫 %, AI 몫, 사람 몫, AI가 파악하는 것) — 막대는 모양만 · 측정값 아님
+    ("2021", "자동완성", "GitHub Copilot", 85, "다음 줄 · 함수 제안", "위치 · 구조 결정 · 작성 · 실행", "앞뒤 코드"),
+    ("2022", "대화형", "ChatGPT", 55, "요청한 코드 작성", "붙일 위치 찾기 · 붙여넣기 · 실행", "요청 문장"),
+    ("2025", "위임형", "Claude Code", 15, "파일 찾기 · 수정 · 실행 · 확인", "목표 · 결과 판단", "목표"),
 ]
 
 
 def eras():
     """AI 코딩 도구 3단 계단 — 칸이 차례로 나타나고 사람 몫 막대가 줄어든다."""
     c = ""
-    for i, (y, name, tool, h, ai, me) in enumerate(ERAS):
+    for i, (y, name, tool, h, ai, me, grasp) in enumerate(ERAS):
         c += (f'<div class="v1era v1cut" style="--d:{i * .8:.1f}s; margin-top:{(2 - i) * 34}px">'
               f'<div class="yr">{y}</div><b>{name}</b><span class="tl">{tool}</span>'
               f'<div class="bar"><i class="me" style="width:{h}%"></i><i class="ai" style="width:{100 - h}%"></i></div>'
               f'<div class="row"><em class="me">사람</em><small>{me}</small></div>'
-              f'<div class="row"><em class="ai">AI</em><small>{ai}</small></div></div>')
+              f'<div class="row"><em class="ai">AI</em><small>{ai}</small></div>'
+              f'<div class="grasp">AI가 파악 · <b>{grasp}</b></div></div>')
     return f'<div class="v1eras">{c}</div>'
 
 
@@ -176,6 +177,27 @@ def slides():
               + src(("GitHub · 2021-06-29", "https://github.blog/2021-06-29-introducing-github-copilot-ai-pair-programmer/"),
                     ("OpenAI · 2022-11-30", "https://openai.com/index/chatgpt/"),
                     ("Anthropic · 2025-05-22", "https://www.anthropic.com/news/claude-4")), T),
+        light("자동완성 방식 · 예", '<div class="v1mode"><div>'
+              + code("app.js · 편집기 화면 예", esc("const clash = load().some((x) =>\n  x.room === b.room &&⟦\n  x.date === b.date &&\n  x.start < b.end && b.start < x.end);⟧").replace("⟦", '<span class="v1ghost">').replace("⟧", "</span>"))
+              + '</div><div>' + viz2.tiles([("사람", "파일 · 위치 · 첫 줄 직접 입력"), ("AI", "회색 글자로 다음 줄 제안 · Tab 으로 수락"),
+                                            ("AI가 파악", "앞뒤 코드")], 1) + '</div></div>', T),
+        light("대화형 방식 · 예", '<div class="v1mode"><div>'
+              + chat([("me", "회의실 예약이 겹치면 막는 자바스크립트 코드 써 줘"),
+                      ("ai", "예약을 저장하기 전에 아래 코드를 넣으면 된다.\nconst clash = list.some(...)\nif (clash) return;")], "채팅 화면 예")
+              + '</div><div>' + viz2.tiles([("사람", "넣을 파일 · 위치 찾기 · 붙여넣기 · 실행 · 오류 전달"), ("AI", "요청한 코드 조각 작성"),
+                                            ("AI가 파악", "요청 문장")], 1) + '</div></div>', T),
+        light("AI 코딩 도구의 실제 속도", big([("19%", "", "AI를 쓴 숙련 개발자 · 실제로 더 걸린 시간", True),
+                                             ("20%", "", "같은 개발자들이 「빨라졌다」고 느낀 정도")], 2)
+              + viz2.tiles([("대상", "숙련 개발자 16명 · 실제 작업 246건"),
+                            ("도구", "Cursor + Claude 3.5 · 3.7 Sonnet (2025년 초)"),
+                            ("2026 후속", "AI 없이 일하려는 개발자 감소 · 측정 방식 변경")], 3)
+              + src(("METR · 2025-07-10", "https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/"),
+                    ("METR · 2026-02-24", "https://metr.org/blog/2026-02-24-uplift-update/")), T),
+        light("위임형 방식 · 예", '<div class="v1mode"><div>'
+              + chat([("me", "겹치는 예약은 막아 줘"),
+                      ("ai", "app.js 에서 예약 저장 부분을 찾았다.\n같은 회의실 · 같은 날 · 시간이 겹치면 막는 규칙을 넣었다.\n겹치게 예약해 보니 「이미 예약된 시간」이 뜬다.")], "Claude Code 화면 예")
+              + '</div><div>' + viz2.tiles([("사람", "목표 한 줄 · 결과 판단"), ("AI", "파일 찾기 · 수정 · 실행 · 확인 · 보고"),
+                                            ("AI가 파악", "목표")], 1) + '</div></div>', T),
         light("용어의 유래", quote(
             "There's a new kind of coding I call <mark>“vibe coding”</mark>, where you fully give in to the vibes, "
             "embrace exponentials, and forget that the code even exists.",
@@ -264,5 +286,8 @@ CSS = """
   .v1era em{font-style:normal; font-size:13px; font-weight:800; min-width:30px;} .v1era em.me{color:#1F3A5F;} .v1era em.ai{color:#E07A12;}
   .v1era small{font-size:15px; color:#3A4657; line-height:1.4;}
   .qt mark{background:#FFE08A; padding:0 3px; border-radius:3px;}
+  .v1era .grasp{margin-top:12px; padding-top:10px; border-top:1px dashed #D9DDE3; font-size:15px; color:#6B7785;} .v1era .grasp b{display:inline; font-size:17px; color:#E07A12;}
+  .v1ghost{color:#8A94A3; font-style:italic;}
+  .v1mode{display:grid; grid-template-columns:1.35fr 1fr; gap:24px; align-items:start;}
   .v1vid video{width:100%; max-height:440px; border:1.5px solid #D9DDE3; border-radius:12px; box-shadow:0 8px 22px rgba(15,27,45,.10); background:#F7EEDB; display:block;}
 """

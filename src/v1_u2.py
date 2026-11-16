@@ -42,18 +42,6 @@ def slides():
             ("ai", "1. 회의실은 몇 곳이고 이름은?\n2. 누가 예약하나 — 팀원 전체?\n3. 예약 단위는 30분 · 1시간?\n"
                    "4. 겹치는 예약은 막아야 하나?\n5. 휴대폰에서도 보나?")], "Claude 대화 예")
               + note("질문을 받는 요청", "바로 만들게 하지 않고 · 빠진 것을 먼저 묻게 한다 (1-3 에서 다시 씀)"), T),
-        # ── 왜 에이전트인가 — 채팅 · 자동완성 도구의 실제 속도
-        light("AI 코딩 도구의 실제 속도", big([("19%", "", "AI를 쓴 숙련 개발자 · 실제로 더 걸린 시간", True),
-                                             ("20%", "", "같은 개발자들이 「빨라졌다」고 느낀 정도")], 2)
-              + viz2.tiles([("대상", "숙련 개발자 16명 · 실제 작업 246건"),
-                            ("도구", "Cursor + Claude 3.5 · 3.7 Sonnet (2025년 초)"),
-                            ("2026 후속", "AI 없이 일하려는 개발자가 줄어 측정 방식을 바꿈")], 3)
-              + src(("METR · 2025-07-10", "https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/"),
-                    ("METR · 2026-02-24", "https://metr.org/blog/2026-02-24-uplift-update/")), T),
-        light("에이전트의 등장", viz2.pair(
-            "답만 주는 AI", [("AI", "코드를 답으로 준다"), ("사람", "복사 · 붙여넣기 · 실행 · 오류 전달"), ("병목", "옮기고 확인하는 사람 손")],
-            "에이전트", [("AI", "파일을 직접 읽고 고친다"), ("AI", "실행하고 오류를 보고 다시 고친다"), ("사람", "원하는 것 · 결과 판단")], hl="r")
-              + note("Claude Code", "이 강의에서 쓰는 에이전트 · 내 폴더에서 직접 일한다"), T),
         # ── Claude Code
         light("Claude Code", '<div class="twocol"><div>'
               + viz2.tiles([("내 폴더에서 일하는 Claude", "파일을 읽고 · 만들고 · 고친다"), ("명령 실행", "서버 띄우기 · 저장 · 올리기"),
@@ -108,11 +96,11 @@ def slides():
               + viz2.tiles([("아이디", "GitHub 하나로 두 곳"), ("비밀번호", "Vercel 에 따로 만들지 않음"),
                             ("연결", "Vercel 이 내 저장소를 읽도록 허용")], 3), T),
         # ── 실습
-        lab("1-2", "실습 환경 준비", T, "계정 세 개 · Claude Code 설치 · 프로젝트 폴더에서 첫 요청",
-            ["Claude 가입 · Pro 이상", "GitHub 가입 · Vercel 은 GitHub 로 가입", "VS Code · Claude Code 확장 설치",
-             "내 프로젝트 폴더를 만들어 VS Code 로 열기", "Claude Code 에 첫 요청"],
-            ["claude --version 이 버전을 보여 줌", "Claude Code 가 첫 요청에 답함", "GitHub · Vercel 로그인 상태"],
-            files="labs/room_booking (예시)"),
+        lab("1-2", "실습 환경 준비 · 첫 위임", T, "계정 세 개 · Claude Code 설치 · 할 일 목록 기능을 목표 한 줄로 맡기기",
+            ["Claude 가입 · Pro 이상 · GitHub · Vercel 가입", "VS Code · Claude Code 확장 설치",
+             "내 프로젝트 폴더에서 첫 요청", "delegate_todo 폴더를 열고 브라우저로 확인", "기능 세 개를 목표 한 줄씩 맡기기"],
+            ["claude --version 이 버전을 보여 줌", "추가 · 체크 · 남은 개수가 브라우저에서 동작", "코드는 직접 고치지 않음"],
+            files='<a class="dl" href="dl/delegate_todo.zip" download>delegate_todo.zip</a>'),
         brief("1-2 ①", T, ["claude.ai 가입 · 요금제 확인", "github.com 가입", "vercel.com → GitHub 로 계속하기",
                             "VS Code 설치 → 확장 「Claude Code」", "터미널에서 claude --version"],
               [("계정", "Claude (Pro 이상) · GitHub · Vercel"), ("설치", "VS Code · Claude Code 확장"),
@@ -133,6 +121,26 @@ def slides():
               + code("터미널 · 설치 확인 예", esc("$ claude --version\n2.x.x (Claude Code)\n\n$ git --version\ngit version 2.x"))
               + "</div></div>"
               + note("확인", "답이 오면 계정 · 설치 · 로그인 모두 끝"), T),
+        # ── 실습 ③ 위임형 첫 작업
+        light("delegate_todo · 시작 상태", '<div class="twocol"><div>'
+              + viz2.tiles([("화면", "할 일 두 개 · 입력칸 · 추가 버튼"), ("동작 안 함", "추가 버튼 · 체크 줄 긋기 · 남은 개수"),
+                            ("파일", "index.html · style.css · app.js")], 1)
+              + "</div><div>"
+              + code("app.js · 시작 상태 (일부)", esc("const todos = [\n  { text: \"기획서 초안 쓰기\", done: false },\n  ...\n];\n\nfunction render() { ... }\n// 추가 · 체크 · 개수 코드 없음"))
+              + "</div></div>", T),
+        brief("1-2 ③", T, ["delegate_todo 폴더를 VS Code 로 열기", "index.html 을 브라우저로 열어 추가 버튼 눌러 보기",
+                            "Claude Code 에 목표 한 줄 요청", "진행 화면에서 ① 찾기 · 읽기 ② 수정 ③ 확인 찾기", "새로고침해 직접 확인 → 다음 기능"],
+              [("목표", "기능 하나씩 · 추가 → 체크 → 남은 개수"), ("확인 방법", "브라우저에서 직접 눌러 보기"),
+               ("하지 말 것", "코드 직접 수정 · 세 기능 한 번에 요청")],
+              ["목표 한 줄", "브라우저 확인", "하나씩"],
+              ["추가한 할 일이 목록에 생김", "체크하면 줄이 그어짐", "「남은 할 일: N」 표시"],
+              "버튼이 그대로면 브라우저 새로고침 · 증상을 그대로 말로 전달", folder="delegate_todo"),
+        light("위임형 진행 화면 · 예", '<div class="twocol"><div>'
+              + chat([("me", "추가 버튼을 누르면 입력한 할 일이 목록에 생기게 해 줘"),
+                      ("ai", "① index.html · app.js 를 읽었다.\n② app.js 에 추가 버튼 처리 코드를 넣었다.\n③ 입력칸이 비면 추가하지 않게 했다.\n브라우저를 새로고침해 확인해 줘.")], "Claude Code 화면 예")
+              + "</div><div>"
+              + viz2.tiles([("① 맥락 파악", "파일 읽기"), ("② 작업", "app.js 수정"), ("③ 결과 확인", "빈 입력 처리 · 사람 확인 요청")], 1)
+              + "</div></div>", T),
         light("막히는 곳", viz2.tiles([
             ("claude 명령이 없다", "터미널을 새로 열기 · 설치 후 다시"), ("Free 계정", "Claude Code 로그인 불가 → Pro 이상"),
             ("Windows · Git 없음", "Git for Windows 설치"), ("회사 PC 설치 막힘", "웹 claude.ai/code 로")], 2)
