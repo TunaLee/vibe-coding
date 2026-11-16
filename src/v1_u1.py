@@ -7,9 +7,9 @@
 사실 출처: scratchpad/v1_facts.md (Karpathy · Collins · levels.io · MenuGen · Veracode · Wiz · Replit)
 """
 import viz2
-from anim import BG, G, N, O, OK, R, W, _D, _t
+from anim import BG, G, N, O, OK, R, S, W, _D, _t
 from deck import flow, light
-from hx import code, esc, note
+from hx import METR_TH, code, esc, metr_chart, note
 from stats_hx import big, quote, src
 from v1kit import shot
 
@@ -91,6 +91,54 @@ def anim_vibe():
     return d.svg(1160, 400, "".join(b))
 
 
+ERAS = [  # (해, 이름, 도구, 사람 몫 %, AI 몫 설명, 사람 몫 설명) — 막대는 모양만 · 측정값 아님
+    ("2021", "자동완성", "GitHub Copilot", 85, "다음 줄 · 함수 제안", "나머지 작성 · 실행 · 수정"),
+    ("2022", "채팅", "ChatGPT", 55, "코드를 답으로 작성", "복사 · 붙여넣기 · 실행 · 오류 전달"),
+    ("2025", "에이전트", "Claude Code", 15, "파일 읽기 · 작성 · 실행 · 확인", "요청 · 결과 판단"),
+]
+
+
+def eras():
+    """AI 코딩 도구 3단 계단 — 칸이 차례로 나타나고 사람 몫 막대가 줄어든다."""
+    c = ""
+    for i, (y, name, tool, h, ai, me) in enumerate(ERAS):
+        c += (f'<div class="v1era v1cut" style="--d:{i * .8:.1f}s; margin-top:{(2 - i) * 34}px">'
+              f'<div class="yr">{y}</div><b>{name}</b><span class="tl">{tool}</span>'
+              f'<div class="bar"><i class="me" style="width:{h}%"></i><i class="ai" style="width:{100 - h}%"></i></div>'
+              f'<div class="row"><em class="me">사람</em><small>{me}</small></div>'
+              f'<div class="row"><em class="ai">AI</em><small>{ai}</small></div></div>')
+    return f'<div class="v1eras">{c}</div>'
+
+
+def anim_loop():
+    """공식 에이전트 루프 — 요청 → 맥락 파악 → 작업 → 결과 확인 → (반복) → 완료 · 사람은 언제든 끼어듦. 9초 · 한 번.
+    참고: Claude Code 문서 「How Claude Code works」 agentic loop 도해 · IBM Technology 「What Is Vibe Coding?」 02:18~02:38."""
+    d = _D("lp", 9)
+    def node(cx, cy, t, sub, at):
+        return (f'<g {d.show(at)}><rect x="{cx - 95}" y="{cy - 32}" width="190" height="64" rx="14" fill="{N}"/>'
+                + _t(cx, cy - 9, t, "tw", extra='style="font-size:18px"') + _t(cx, cy + 15, sub, "tw", extra='style="font-size:13px;font-weight:600;opacity:.8"') + "</g>")
+    b = [f'<rect x="0" y="0" width="1160" height="400" rx="18" fill="{BG}"/>',
+         f'<g {d.show(2)}><rect x="30" y="52" width="230" height="68" rx="14" fill="#FFF3E6" stroke="{O}" stroke-width="2.5"/>'
+         + _t(145, 76, "내 요청", "tt") + _t(145, 102, "「겹치는 예약 막아 줘」", "ts") + "</g>",
+         f'<line x1="262" y1="86" x2="476" y2="86" stroke="{O}" stroke-width="3" marker-end="url(#{d.id("o")})" {d.show(10)}/>',
+         node(580, 86, "① 맥락 파악", "파일 찾기 · 읽기", 16),
+         f'<path d="M675 96 Q770 130 742 248" fill="none" stroke="{N}" stroke-width="3" marker-end="url(#{d.id("k")})" {d.show(26)}/>',
+         node(720, 290, "② 작업", "코드 수정 · 명령 실행", 32),
+         f'<path d="M622 300 Q580 330 538 300" fill="none" stroke="{N}" stroke-width="3" marker-end="url(#{d.id("k")})" {d.show(42)}/>',
+         node(440, 290, "③ 결과 확인", "실행 · 오류 확인", 48)]
+    close = [(0, "stroke-dashoffset:260;opacity:0"), (58, "stroke-dashoffset:260;opacity:0"), (59, "stroke-dashoffset:260;opacity:1"), (70, "stroke-dashoffset:0;opacity:1"), (100, "stroke-dashoffset:0;opacity:1")]
+    b.append(f'<path d="M420 256 Q412 150 486 120" fill="none" stroke="{O}" stroke-width="4" stroke-dasharray="260" '
+             f'marker-end="url(#{d.id("o")})" {d.a(close)}/>')
+    b.append(f'<g {d.show(70)}>' + _t(580, 200, "반복", "to", extra='style="font-size:20px"') + _t(580, 224, "완료될 때까지", "ts") + "</g>")
+    b.append(f'<line x1="816" y1="290" x2="926" y2="290" stroke="{OK}" stroke-width="3" marker-end="url(#{d.id("g")})" {d.show(78)}/>')
+    b.append(f'<g {d.show(82)}><rect x="930" y="258" width="200" height="64" rx="14" fill="{W}" stroke="{OK}" stroke-width="2.5"/>'
+             + _t(1030, 281, "완료 · 결과 보고", "tn") + _t(1030, 304, "확인 통과", "ts") + "</g>")
+    b.append(f'<g {d.show(90)}><rect x="830" y="52" width="300" height="68" rx="14" fill="{W}" stroke="{S}" stroke-width="2" stroke-dasharray="6 5"/>'
+             + _t(980, 76, "사람", "tt") + _t(980, 102, "결과 보고 수정 요청 · 언제든 끼어들기", "ts") + "</g>")
+    b.append(f'<path d="M830 96 Q760 170 650 196" fill="none" stroke="{S}" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#{d.id("k")})" {d.show(90)}/>')
+    return d.svg(1160, 400, "".join(b))
+
+
 def comic(cuts):
     """4컷 — (그림, 말풍선, 장면, 코딩에서는). 0.8초 간격으로 한 컷씩 나타나고 멈춘다."""
     c = "".join(
@@ -138,6 +186,23 @@ def slides():
                                        ("실행", "결과 확인"), ("오류 수정", "오류 메시지 해석")], hl=0)
               + viz2.tiles([("학습", "프로그래밍 언어 · 개발 도구 사용법"), ("작성", "모든 기능을 사람이 직접 입력"),
                             ("수정", "오류 메시지로 원인 추적")], 3), T),
+        # ── 배경 · AI 코딩 도구의 변화
+        light("AI 코딩 도구의 변화", eras()
+              + note("막대", "사람 몫 · AI 몫의 상대 크기 (측정값 아님)")
+              + src(("GitHub · 2021-06-29", "https://github.blog/2021-06-29-introducing-github-copilot-ai-pair-programmer/"),
+                    ("OpenAI · 2022-11-30", "https://openai.com/index/chatgpt/"),
+                    ("Anthropic · 2025-05-22", "https://www.anthropic.com/news/claude-4")), T),
+        light("바이브코딩이라는 말", viz2.maprows([
+            ("2023-01 · Karpathy", "「가장 인기 있는 새 프로그래밍 언어는 영어」", "자연어로 지시하는 시대 예고"),
+            ("2025-02 · Karpathy", "「바이브코딩」 처음 사용", "코드 대신 느낌(vibe)과 결과로 만들기"),
+            ("2025-11 · Collins 사전", "올해의 단어 선정", "자연어 지시로 AI가 코드를 작성하는 방식")], "시점", "사건")
+              + src(("Karpathy · 2023-01-24", "https://x.com/karpathy/status/1617979122625712128"),
+                    ("Karpathy · 2025-02-02", "https://x.com/karpathy/status/1886192184808149383"),
+                    ("Collins · 2025-11-06", "https://blog.collinsdictionary.com/language-lovers/collins-word-of-the-year-2025-ai-meets-authenticity-as-society-shifts/")), T),
+        light("AI가 혼자 끝내는 작업 길이", '<div class="mwrap">' + metr_chart() + '<div class="mcards">'
+              + '<div class="bn hl"><div class="bv">105<small>일</small></div><div class="bl">작업 길이 2배 주기 (2024년 이후)</div></div>'
+              + '<div class="bn"><div class="bv">작업 길이</div><div class="bl">사람이 하면 걸리는 시간 기준</div></div>'
+              + '</div></div>' + src(METR_TH), T),
         # ── 바이브코딩 = 통역사에게 맡기기
         light("바이브코딩 = 통역사에게 맡기기", anim_vibe()
               + note("바이브코딩", "자연어 요청 → AI가 코드 작성 → 사람이 결과 확인"), T),
@@ -147,16 +212,14 @@ def slides():
             ("원시인", "컴퓨터", "코드 실행"),
             ("먹는 모습 보기", "화면 확인", "코드 대신 결과로 판단"),
             ("「씨는 뱉게 해 줘」", "수정 요청", "자연어로 다시 요청")], "원시인과 사과", "바이브코딩"), T),
-        light("바이브코딩이라는 말", quote(
-            "코드가 있다는 것조차 잊고 느낌(vibe)에 맡기는 새로운 방식의 코딩",
-            "Andrej Karpathy · 2025-02-02 · 처음 쓴 말 (번역)")
-              + big([("2025", "", "Collins 사전 올해의 단어", True), ("사전 뜻", "", "자연어 지시로 AI가 코드를 작성하는 방식")], 2)
-              + src(("Karpathy · X", "https://x.com/karpathy/status/1886192184808149383"),
-                    ("Collins · 2025-11-06", "https://blog.collinsdictionary.com/language-lovers/collins-word-of-the-year-2025-ai-meets-authenticity-as-society-shifts/")), T),
-        light("바이브코딩의 흐름", flow([("말로 요청", "「겹치는 예약은 막아 줘」"), ("AI가 코드 작성", "app.js 규칙 추가"),
-                                       ("실행", "겹치는 예약 시도"), ("수정 요청", "「오류 문구를 빨간색으로」")], hl=2)
-              + viz2.tiles([("한 바퀴", "요청 → 작성 → 확인"), ("반복", "기능 단위로 여러 바퀴 (1-6)"),
-                            ("사람의 역할", "요구 사항 정의 · 결과 판단")], 3), T),
+        # ── 동작 원리
+        light("바이브코딩의 반복 고리", anim_loop()
+              + src(("Claude Code 문서 · How Claude Code works", "https://code.claude.com/docs/en/how-claude-code-works")), T),
+        light("고리 한 바퀴 · 회의실 예약 예", viz2.tiles([
+            ("① app.js 찾기", "맥락 파악 · 파일 검색"), ("② 예약 저장 코드 읽기", "맥락 파악 · 파일 읽기"),
+            ("③ 겹침 규칙 추가", "작업 · 파일 수정"), ("④ 겹치게 예약 실행", "결과 확인 · 실행"),
+            ("⑤ 오류 발견 → 다시 수정", "반복 · ② 작업으로"), ("⑥ 완료 보고", "「app.js 에 겹침 막기 추가」")], 3)
+              + note("사람", "④ 결과를 화면에서 다시 확인 · 다르면 수정 요청"), T),
         light("내 일과 AI의 일", viz2.pair(
             "내 일", [("만들 것 정의", "기획서 · PRD"), ("동작 확인", "화면 직접 조작"), ("공개 결정", "배포 · 공유")],
             "AI의 일", [("코드 작성", "화면 · 규칙 · 저장"), ("오류 수정", "오류 메시지 해석 · 수정"), ("반복 작업", "파일 생성 · 명령 실행")], hl="l")
@@ -203,5 +266,15 @@ CSS = """
   .v1cut .pic i{position:absolute; left:10px; top:10px; width:28px; height:28px; border-radius:50%; background:#F28C28; color:#fff; font-style:normal; font-weight:800; font-size:15px; display:grid; place-items:center;}
   .v1cut b{display:block; font-size:19px; color:#16233A; margin-top:12px; line-height:1.3;}
   .v1cut small{display:block; font-size:15px; color:#E07A12; font-weight:700; margin-top:4px;}
+  .v1eras{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; align-items:start; margin-top:4px;}
+  .v1era{border:2px solid #D9DDE3; border-radius:16px; background:#fff; padding:18px 20px;}
+  .v1era:last-child{border-color:#F28C28; background:#FFF8F0;}
+  .v1era .yr{font-family:var(--mono); font-size:15px; font-weight:800; color:#F28C28;}
+  .v1era b{display:block; font-size:24px; color:#16233A; margin-top:2px;} .v1era .tl{font-size:15px; color:#6B7785;}
+  .v1era .bar{display:flex; height:14px; border-radius:7px; overflow:hidden; margin:14px 0 10px;}
+  .v1era .bar .me{background:#1F3A5F;} .v1era .bar .ai{background:#F28C28;}
+  .v1era .row{display:flex; gap:10px; align-items:baseline; margin-top:6px;}
+  .v1era em{font-style:normal; font-size:13px; font-weight:800; min-width:30px;} .v1era em.me{color:#1F3A5F;} .v1era em.ai{color:#E07A12;}
+  .v1era small{font-size:15px; color:#3A4657; line-height:1.4;}
   .v1vid video{width:100%; max-height:440px; border:1.5px solid #D9DDE3; border-radius:12px; box-shadow:0 8px 22px rgba(15,27,45,.10); background:#F7EEDB; display:block;}
 """
