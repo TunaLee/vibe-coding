@@ -71,11 +71,6 @@ def _scene(p, missing=None):
     return d.svg(1160, 400, "".join(b))
 
 
-def anim_teach():
-    """가르치는 말 네 줄을 한 줄씩 실행 → 원시인이 그대로 해서 잘 먹는다. 12초 · 한 번."""
-    return _scene("ap")
-
-
 def anim_bug():
     """④ 를 빠뜨림 → 실행은 그대로 → 씨까지 삼킨다. 12초 · 한 번."""
     return _scene("aq", missing=3)
@@ -115,8 +110,13 @@ def slides():
                   ("원시인", "컴퓨터 · 사전 지식 없음"), ("사과 먹는 법", "코드 · 할 일의 순서"),
                   ("알려 준 순서", "그대로 실행 · 빠진 단계는 못 함"), ("코드", "컴퓨터가 실행하는 명령의 목록")])
               + "</div></div>", T),
-        light("코딩 = 하나하나 가르치기", anim_teach()
-              + src(APPLE) + note("코딩", "컴퓨터가 실행할 명령을 프로그래밍 언어로 작성하는 일"), T),
+        light("알려 준 것만 하는 컴퓨터", comic([
+            ("v1_cut1.webp", "?", "처음 본 사과", "명령 없음 → 실행 불가"),
+            ("v1_cut2.webp", "이건 사과 · 먹는 것", "이름 · 먹는 법 알려 줌", "코드 작성 · 저장"),
+            ("v1_cut3.webp", "사과다!", "다음 사과 · 바로 먹음", "저장된 코드 · 매번 같은 실행"),
+            ("v1_cut4.webp", "?", "처음 본 배", "코드에 없는 경우 · 처리 불가")])
+              + note("코딩", "컴퓨터가 실행할 명령을 프로그래밍 언어로 작성하는 일")
+              + src(("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")), T),
         light("하나라도 빠뜨리면", anim_bug()
               + src(APPLE) + note("버그", "빠지거나 잘못 적힌 명령 때문에 생기는 오동작"), T),
         light("회의실 예약도 마찬가지", '<div class="twocol"><div>'
@@ -199,7 +199,7 @@ CSS = """
   @media print{.v1cut{opacity:1; animation:none}}
   .v1cut .pic{position:relative; border:1.5px solid #D9DDE3; border-radius:12px; overflow:hidden; background:#F7EEDB;}
   .v1cut img{display:block; width:100%; aspect-ratio:16/9; object-fit:cover;}
-  .v1cut .bub{position:absolute; right:10px; top:10px; background:#fff; border:2px solid #16233A; border-radius:16px; padding:5px 12px; font-size:17px; font-weight:800; color:#16233A;}
+  .v1cut .bub{position:absolute; right:10px; bottom:10px; background:#fff; border:2px solid #16233A; border-radius:16px; padding:5px 12px; font-size:17px; font-weight:800; color:#16233A;}
   .v1cut .pic i{position:absolute; left:10px; top:10px; width:28px; height:28px; border-radius:50%; background:#F28C28; color:#fff; font-style:normal; font-weight:800; font-size:15px; display:grid; place-items:center;}
   .v1cut b{display:block; font-size:19px; color:#16233A; margin-top:12px; line-height:1.3;}
   .v1cut small{display:block; font-size:15px; color:#E07A12; font-weight:700; margin-top:4px;}
