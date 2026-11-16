@@ -156,6 +156,54 @@ def autocomplete_anim():
     return f'<div class="v1ed"><div class="bar"><b></b><b></b><b></b><span>app.js · 편집기 화면 예</span></div><div class="code">{rows}{tags}{keys}</div></div>'
 
 
+def _typed_ko(txt, t0, step=.07):
+    """한 글자씩 나타나는 입력 — 글자마다 시작 시각을 따로 준다(한글 폭과 무관)."""
+    from hx import esc
+    return "".join(f'<span class="v1k" style="animation-delay:{t0 + i * step:.2f}s">{esc(ch)}</span>' for i, ch in enumerate(txt))
+
+
+def _todo(items, t0, gap=.6, cls=""):
+    return "".join(f'<div class="v1td {cls}" style="animation-delay:{t0 + i * gap:.2f}s"><i>{i + 1}</i><span>{x}</span></div>'
+                   for i, x in enumerate(items))
+
+
+def chat_anim(mode):
+    """대화형 · 위임형 화면 애니메이션 — 한 번 재생 후 정지.
+    대화형: 요청 입력 → AI 코드 조각 답 → 사람이 이어서 할 일 다섯 개.
+    위임형: 목표 한 줄 → AI 도구 단계(● 진행 → ✓ 완료) 셋 → 사람 할 일 두 개.
+    참고: Claude Code 문서 「How Claude Code works」 · 코딩애플 「AI 에이전트 만드는 기초 기술」 단계 표시."""
+    from hx import esc
+    if mode == "chat":
+        ask = "회의실 예약이 겹치면 막는 자바스크립트 코드 써 줘"
+        t_send = .3 + len(ask) * .07
+        reply = ['<p class="v1ln" style="animation-delay:{:.1f}s">예약을 저장하기 전에 아래 코드를 넣으면 된다.</p>'.format(t_send + 1.0),
+                 '<pre class="v1ln" style="animation-delay:{:.1f}s">{}</pre>'.format(t_send + 1.5, esc("const clash = list.some((x) => ...);\nif (clash) return;"))]
+        left = (f'<div class="v1cw"><div class="v1hd">채팅 화면 예</div>'
+                f'<div class="v1me"><p>{_typed_ko(ask, .3)}</p></div>'
+                f'<div class="v1dots" style="animation-delay:{t_send + .2:.1f}s, {t_send + .95:.1f}s"><b></b><b></b><b></b></div>'
+                f'<div class="v1ai">{"".join(reply)}</div></div>')
+        right = ('<div class="v1side2"><div class="v1hh">사람이 이어서 할 일</div>'
+                 + _todo(["app.js 열기", "넣을 위치 찾기", "붙여넣기 · 저장", "브라우저에서 실행", "오류 나면 다시 질문"], t_send + 2.4)
+                 + f'<div class="v1gr" style="animation-delay:{t_send + 5.6:.1f}s">AI가 파악 · <b>요청 문장</b></div></div>')
+    else:
+        ask = "겹치는 예약은 막아 줘"
+        t_send = .3 + len(ask) * .07
+        steps = [("app.js 읽기", "예약 저장 부분 찾음"), ("app.js 수정", "겹침 규칙 7줄 추가"), ("실행해 확인", "겹치게 예약 → 「이미 예약된 시간」")]
+        rows = ""
+        for i, (h, sub) in enumerate(steps):
+            t = t_send + .9 + i * 1.4
+            rows += (f'<div class="v1st" style="animation-delay:{t:.1f}s"><span class="v1ic"><span class="v1run" style="animation-delay:{t:.1f}s, {t + 1.0:.1f}s">●</span>'
+                     f'<span class="v1ok" style="animation-delay:{t + 1.0:.1f}s">✓</span></span><b>{h}</b><small>{sub}</small></div>')
+        t_end = t_send + .9 + 3 * 1.4
+        left = (f'<div class="v1cw cc"><div class="v1hd">Claude Code 화면 예</div>'
+                f'<div class="v1me"><p>{_typed_ko(ask, .3)}</p></div>{rows}'
+                f'<div class="v1ai"><p class="v1ln" style="animation-delay:{t_end:.1f}s">완료 · 겹치는 예약은 저장되지 않는다.</p></div></div>')
+        right = ('<div class="v1side2"><div class="v1hh">사람이 할 일</div>'
+                 + _todo(["목표 한 줄 요청", "화면에서 결과 확인"], t_end + .6, cls="me2")
+                 + f'<div class="v1gr" style="animation-delay:{t_end + 1.8:.1f}s">AI가 파악 · <b>목표</b></div></div>')
+    return f'<div class="v1mode">{left}{right}</div>'
+
+
 def comic(cuts):
     """3 · 4컷 — (그림, 말풍선, 장면, 코딩에서는). 0.8초 간격으로 한 컷씩 나타나고 멈춘다."""
     c = "".join(
@@ -196,11 +244,7 @@ def slides():
               + '</div><div>' + viz2.tiles([("사람", "파일 · 위치 · 첫 줄 직접 입력"), ("AI", "회색 글자로 다음 줄 제안 · Tab 으로 수락"),
                                             ("AI가 파악", "앞뒤 코드")], 1) + '</div></div>'
               + src(("GitHub Copilot 문서 · inline suggestions", "https://docs.github.com/en/copilot/using-github-copilot/getting-code-suggestions-in-your-ide-with-github-copilot")), T),
-        light("대화형 방식 · 예", '<div class="v1mode"><div>'
-              + chat([("me", "회의실 예약이 겹치면 막는 자바스크립트 코드 써 줘"),
-                      ("ai", "예약을 저장하기 전에 아래 코드를 넣으면 된다.\nconst clash = list.some(...)\nif (clash) return;")], "채팅 화면 예")
-              + '</div><div>' + viz2.tiles([("사람", "넣을 파일 · 위치 찾기 · 붙여넣기 · 실행 · 오류 전달"), ("AI", "요청한 코드 조각 작성"),
-                                            ("AI가 파악", "요청 문장")], 1) + '</div></div>', T),
+        light("대화형 방식 · 예", chat_anim("chat"), T),
         light("AI 코딩 도구의 실제 속도", big([("19%", "", "AI를 쓴 숙련 개발자 · 실제로 더 걸린 시간", True),
                                              ("20%", "", "같은 개발자들이 「빨라졌다」고 느낀 정도")], 2)
               + viz2.tiles([("대상", "숙련 개발자 16명 · 실제 작업 246건"),
@@ -208,11 +252,8 @@ def slides():
                             ("2026 후속", "AI 없이 일하려는 개발자 감소 · 측정 방식 변경")], 3)
               + src(("METR · 2025-07-10", "https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/"),
                     ("METR · 2026-02-24", "https://metr.org/blog/2026-02-24-uplift-update/")), T),
-        light("위임형 방식 · 예", '<div class="v1mode"><div>'
-              + chat([("me", "겹치는 예약은 막아 줘"),
-                      ("ai", "app.js 에서 예약 저장 부분을 찾았다.\n같은 회의실 · 같은 날 · 시간이 겹치면 막는 규칙을 넣었다.\n겹치게 예약해 보니 「이미 예약된 시간」이 뜬다.")], "Claude Code 화면 예")
-              + '</div><div>' + viz2.tiles([("사람", "목표 한 줄 · 결과 판단"), ("AI", "파일 찾기 · 수정 · 실행 · 확인 · 보고"),
-                                            ("AI가 파악", "목표")], 1) + '</div></div>', T),
+        light("위임형 방식 · 예", chat_anim("agent")
+              + src(("Claude Code 문서 · How Claude Code works", "https://code.claude.com/docs/en/how-claude-code-works")), T),
         light("LLM과 코딩 에이전트", comic([
             ("v1_brain1.webp", "생각만", "LLM", "글 읽기 · 글 쓰기 · 판단"),
             ("v1_brain2.webp", "+ 도구", "LLM + 도구", "파일 읽기 · 검색 · 명령 실행"),
@@ -332,5 +373,25 @@ CSS = """
   .v1tab kbd{padding:6px 14px; border-radius:8px; background:#F28C28; color:#fff; font-weight:800; font-size:15px; box-shadow:0 3px 0 #B8641A;}
   .v1tab span{color:#F7C99A; font-size:14px; font-weight:700;}
   @media print{.v1ed .ty{width:auto} .v1ed .gh{opacity:1; color:#E6EDF7; font-style:normal}}
+  /* 대화형 · 위임형 화면 */
+  .v1cw{border:1.5px solid #D9DDE3; border-radius:16px; background:#F7F8FA; padding:16px 20px; min-height:330px; display:flex; flex-direction:column; gap:10px;}
+  .v1cw.cc{background:#1E2433; border-color:#1E2433;} .v1cw .v1hd{font-size:13px; font-weight:800; color:#6B7785;} .v1cw.cc .v1hd{color:#8A94A3;}
+  .v1cw .v1me{align-self:flex-end; max-width:88%;} .v1cw .v1me p{margin:0; padding:10px 15px; border-radius:14px; background:#FFF3E6; border:1px solid #F7C99A; font-size:17px; color:#16233A; white-space:normal;}
+  .v1cw .v1k{display:inline; opacity:0; animation:v1ghIn .01s linear forwards;}
+  .v1cw .v1dots{display:flex; gap:5px; padding:6px 2px; opacity:0; animation:v1ghIn .2s forwards, v1out .2s forwards;}
+  .v1cw .v1dots b{width:8px; height:8px; border-radius:50%; background:#9AA6B5;}
+  .v1cw .v1ai .v1ln{margin:0 0 8px; opacity:0; animation:v1cutIn .4s ease-out forwards; font-size:17px; color:#16233A;}
+  .v1cw.cc .v1ai .v1ln, .v1cw .v1ai pre.v1ln{color:#E6EDF7;}
+  .v1cw .v1ai pre{background:#1E2433; color:#E6EDF7; padding:10px 14px; border-radius:10px; font-family:var(--mono); font-size:15px; white-space:pre; font-variant-ligatures:none;}
+  .v1st{display:grid; grid-template-columns:26px 130px 1fr; gap:8px; align-items:baseline; opacity:0; animation:v1cutIn .35s ease-out forwards; color:#E6EDF7; font-size:16px;}
+  .v1st small{color:#98A3B6; font-size:14.5px;} .v1st .v1ic{position:relative; display:inline-block; width:18px; height:18px;}
+  .v1st .v1run, .v1st .v1ok{position:absolute; left:0; top:0; font-weight:800; line-height:18px; background:none; border:0; padding:0;}
+  .v1st .v1run{color:#F28C28; opacity:0; animation:v1ghIn .2s forwards, v1out .2s forwards;} .v1st .v1ok{color:#3FB950; opacity:0; animation:v1ghIn .2s forwards;}
+  .v1side2 .v1hh{font-size:15px; font-weight:800; color:#6B7785; margin:4px 0 10px;}
+  .v1td{display:flex; gap:12px; align-items:center; padding:12px 14px; margin-bottom:8px; border-radius:12px; background:#fff; border:1.5px solid #D9DDE3; opacity:0; animation:v1cutIn .4s ease-out forwards;}
+  .v1td i{width:26px; height:26px; border-radius:50%; background:#1F3A5F; color:#fff; font-style:normal; font-weight:800; font-size:14px; display:grid; place-items:center; flex:none;}
+  .v1td span{font-size:18px; color:#16233A; font-weight:600;} .v1td.me2{border-color:#F28C28; background:#FFF8F0;} .v1td.me2 i{background:#F28C28;}
+  .v1side2 .v1gr{margin-top:12px; font-size:15px; color:#6B7785; opacity:0; animation:v1ghIn .4s forwards;} .v1side2 .v1gr b{color:#E07A12; font-size:17px;}
+  @media print{.v1cw .v1k,.v1cw .v1ai .v1ln,.v1st,.v1st .v1ok,.v1td,.v1side2 .v1gr{opacity:1; animation:none} .v1cw .v1dots,.v1st .v1run{display:none}}
   .v1vid video{width:100%; max-height:440px; border:1.5px solid #D9DDE3; border-radius:12px; box-shadow:0 8px 22px rgba(15,27,45,.10); background:#F7EEDB; display:block;}
 """
