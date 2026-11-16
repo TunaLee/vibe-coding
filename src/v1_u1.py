@@ -117,7 +117,10 @@ def anim_loop():
     b.append(f'<g {d.show(82)}><rect x="930" y="258" width="200" height="64" rx="14" fill="{W}" stroke="{OK}" stroke-width="2.5"/>'
              + _t(1030, 281, "완료 · 결과 보고", "tn") + _t(1030, 304, "확인 통과", "ts") + "</g>")
     b.append(f'<g {d.show(90)}><rect x="830" y="52" width="300" height="68" rx="14" fill="{W}" stroke="{S}" stroke-width="2" stroke-dasharray="6 5"/>'
-             + _t(980, 76, "사람", "tt") + _t(980, 102, "결과 보고 수정 요청 · 언제든 끼어들기", "ts") + "</g>")
+             + _t(980, 76, "사람 · 언제든 끼어들기", "tt") + _t(980, 102, "「좀 이상한데?」 → 수정 요청", "ts") + "</g>")
+    for x, y, t, at in ((580, 30, "「app.js 부터 봐야겠다」", 20), (720, 352, "「코드에 규칙을 넣자」", 36), (440, 352, "「겹치게 예약해 봐야겠다」", 52)):
+        b.append(f'<g {d.show(at)}><rect x="{x - 105}" y="{y - 17}" width="210" height="34" rx="17" fill="{W}" stroke="{G}" stroke-width="1.5"/>'
+                 + _t(x, y + 1, t, "ts", extra='style="font-size:14px;fill:#3A4657"') + "</g>")
     b.append(f'<path d="M830 96 Q760 170 650 196" fill="none" stroke="{S}" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#{d.id("k")})" {d.show(90)}/>')
     return d.svg(1160, 400, "".join(b))
 
@@ -163,20 +166,23 @@ def slides():
                   "  return;\n"
                   "}"))
               + "</div></div>", T),
-        light("기존 코딩의 어려움", flow([("언어 학습", "문법 · 개발 도구"), ("코드 작성", "기능마다 직접 입력"),
-                                       ("실행", "결과 확인"), ("오류 수정", "오류 메시지 해석")], hl=0)
-              + viz2.tiles([("학습", "프로그래밍 언어 · 개발 도구 사용법"), ("작성", "모든 기능을 사람이 직접 입력"),
-                            ("수정", "오류 메시지로 원인 추적")], 3), T),
+        light("기존 코딩과 바이브코딩", viz2.pair(
+            "기존 코딩", [("① 언어 학습", "문법 · 개발 도구 사용법"), ("② 직접 작성", "모든 기능을 사람이 입력"), ("③ 오류 수정", "오류 메시지로 원인 추적")],
+            "바이브코딩", [("① 말로 요청", "「회의실 예약 페이지 만들어 줘」"), ("② AI가 코드 작성", "파일 생성 · 실행"), ("③ 수정 사항만 요청", "「버튼을 크게」 「겹치면 막아 줘」")], hl="r")
+              + note("바이브코딩", "AI와 대화를 주고받으며 프로그램을 만드는 개발 방식"), T),
         # ── 배경 · AI 코딩 도구의 변화
         light("AI 코딩 도구의 변화", eras()
               + note("막대", "사람 몫 · AI 몫의 상대 크기 (측정값 아님)")
               + src(("GitHub · 2021-06-29", "https://github.blog/2021-06-29-introducing-github-copilot-ai-pair-programmer/"),
                     ("OpenAI · 2022-11-30", "https://openai.com/index/chatgpt/"),
                     ("Anthropic · 2025-05-22", "https://www.anthropic.com/news/claude-4")), T),
-        light("바이브코딩이라는 말", viz2.maprows([
-            ("2023-01 · Karpathy", "「가장 인기 있는 새 프로그래밍 언어는 영어」", "자연어로 지시하는 시대 예고"),
-            ("2025-02 · Karpathy", "「바이브코딩」 처음 사용", "코드 대신 느낌(vibe)과 결과로 만들기"),
-            ("2025-11 · Collins 사전", "올해의 단어 선정", "자연어 지시로 AI가 코드를 작성하는 방식")], "시점", "사건")
+        light("바이브코딩이라는 말", quote(
+            "There's a new kind of coding I call <mark>“vibe coding”</mark>, where you fully give in to the vibes, "
+            "embrace exponentials, and forget that the code even exists.",
+            "Andrej Karpathy · X · 2025-02-02 · 번역 「코드가 있다는 것조차 잊고 느낌(vibe)에 맡기는 새로운 코딩」")
+              + viz2.tiles([("2023-01 · Karpathy", "「가장 인기 있는 새 프로그래밍 언어는 영어」"),
+                            ("2025-02 · Karpathy", "「바이브코딩」 처음 사용"),
+                            ("2025-11 · Collins 사전", "올해의 단어 선정")], 3)
               + src(("Karpathy · 2023-01-24", "https://x.com/karpathy/status/1617979122625712128"),
                     ("Karpathy · 2025-02-02", "https://x.com/karpathy/status/1886192184808149383"),
                     ("Collins · 2025-11-06", "https://blog.collinsdictionary.com/language-lovers/collins-word-of-the-year-2025-ai-meets-authenticity-as-society-shifts/")), T),
@@ -257,5 +263,6 @@ CSS = """
   .v1era .row{display:flex; gap:10px; align-items:baseline; margin-top:6px;}
   .v1era em{font-style:normal; font-size:13px; font-weight:800; min-width:30px;} .v1era em.me{color:#1F3A5F;} .v1era em.ai{color:#E07A12;}
   .v1era small{font-size:15px; color:#3A4657; line-height:1.4;}
+  .qt mark{background:#FFE08A; padding:0 3px; border-radius:3px;}
   .v1vid video{width:100%; max-height:440px; border:1.5px solid #D9DDE3; border-radius:12px; box-shadow:0 8px 22px rgba(15,27,45,.10); background:#F7EEDB; display:block;}
 """
