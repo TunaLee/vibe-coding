@@ -1055,14 +1055,6 @@
   <div class="body"><div class="mid"><div class="v1comic" style="grid-template-columns:repeat(4,1fr)"><div class="v1cut" style="--d:0.0s"><div class="pic"><img src="img/v1_cut1.webp" alt="처음 본 사과"/><span class="bub">?</span><i>1</i></div><b>처음 본 사과</b><small>명령 없음 → 실행 불가</small></div><div class="v1cut" style="--d:0.8s"><div class="pic"><img src="img/v1_cut2.webp" alt="이름 · 먹는 법 알려 줌"/><span class="bub">이건 사과 · 먹는 것</span><i>2</i></div><b>이름 · 먹는 법 알려 줌</b><small>코드 작성 · 저장</small></div><div class="v1cut" style="--d:1.6s"><div class="pic"><img src="img/v1_cut3.webp" alt="다음 사과 · 바로 먹음"/><span class="bub">사과다!</span><i>3</i></div><b>다음 사과 · 바로 먹음</b><small>저장된 코드 · 매번 같은 실행</small></div><div class="v1cut" style="--d:2.4s"><div class="pic"><img src="img/v1_cut4.webp" alt="처음 본 배"/><span class="bub">?</span><i>4</i></div><b>처음 본 배</b><small>코드에 없는 경우 · 처리 불가</small></div></div><div class="dbnote"><span>코딩</span> 컴퓨터가 실행할 명령을 프로그래밍 언어로 작성하는 일</div><div class="src">출처 · <a href="https://huggingface.co/Tongyi-MAI/Z-Image-Turbo" target="_blank" rel="noopener">AI 생성 그림 · Z-Image Turbo (Apache 2.0)</a></div></div></div>
 </section>
 
-<section class="slide lt" data-title="예제 코드 · 겹치는 예약 막기">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">1-1</span></div>
-  <h2 class="s-title sm">예제 코드 · 겹치는 예약 막기</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1cmask"><span>요청</span><b>「겹치는 예약은 막아 줘」</b></div><div class="v1cmap"><div class="v1cmt"><span>app.js · 1부 예제</span><span>뜻</span></div><div class="v1cmr" style="--d:0.30s"><code>const clash = load().some((x) =&gt;</code><i>→</i><span>저장된 예약 중 하나라도</span></div><div class="v1cmr" style="--d:0.65s"><code>  x.room === b.room &amp;&amp;</code><i>→</i><span>같은 회의실</span></div><div class="v1cmr" style="--d:1.00s"><code>  x.date === b.date &amp;&amp;</code><i>→</i><span>같은 날짜</span></div><div class="v1cmr" style="--d:1.35s"><code>  x.start &lt; b.end &amp;&amp; b.start &lt; x.end);</code><i>→</i><span>시간이 겹침</span></div><div class="v1cmr" style="--d:1.70s"><code>if (clash) {</code><i>→</i><span>겹치는 예약이 있으면</span></div><div class="v1cmr" style="--d:2.05s"><code>  $("err").textContent = "이미 예약된 시간";</code><i>→</i><span>「이미 예약된 시간」 표시</span></div><div class="v1cmr" style="--d:2.40s"><code>  return;</code><i>→</i><span>저장하지 않고 멈춤</span></div><div class="v1cmr" style="--d:2.75s"><code>}</code><i></i><span></span></div></div></div></div>
-</section>
-
 <section class="slide lt" data-title="기존 코딩과 바이브코딩">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-1</span></div>
