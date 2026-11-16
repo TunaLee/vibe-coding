@@ -1011,7 +1011,7 @@
   .v1lline b{flex:1; height:4px; border-radius:2px; background:linear-gradient(90deg,#1F3A5F,#F28C28);}
   /* 원시인 코드 */
   .v1cc{display:grid; grid-template-columns:1.3fr 1fr; gap:22px; align-items:start; margin-top:6px;}
-  .v1cc .v1ed .code{font-size:19px;} .v1cc .v1ed .ln{height:38px; align-items:center;} .v1cc .v1ed .ln span{color:#E6EDF7; white-space:pre;}
+  .v1cc .v1ed .code{font-size:18px;} .v1cc .v1ed .ln{height:34px; align-items:center;} .v1cc .v1ed .ln span{color:#E6EDF7; white-space:pre;}
   .v1cc .v1ed .cut{width:26px; font-style:normal; font-size:15px; color:#F28C28; font-weight:800; text-align:center;}
   .v1con{background:#0F131C; border-radius:14px; padding:14px 18px; min-height:200px; font-family:var(--mono); font-size:17px;}
   .v1con .v1chd{font-family:inherit; font-size:13px; font-weight:800; color:#8A94A3; margin-bottom:12px;}
@@ -1103,12 +1103,20 @@
   <div class="body"><div class="mid"><div class="v1comic" style="grid-template-columns:repeat(4,1fr)"><div class="v1cut" style="--d:0.0s"><div class="pic"><img src="img/v1_cut1.webp" alt="처음 본 사과"/><span class="bub">?</span><i>1</i></div><b>처음 본 사과</b><small>명령 없음 → 실행 불가</small></div><div class="v1cut" style="--d:0.8s"><div class="pic"><img src="img/v1_cut2.webp" alt="이름 · 먹는 법 알려 줌"/><span class="bub">이건 사과 · 먹는 것</span><i>2</i></div><b>이름 · 먹는 법 알려 줌</b><small>코드 작성 · 저장</small></div><div class="v1cut" style="--d:1.6s"><div class="pic"><img src="img/v1_cut3.webp" alt="다음 사과 · 바로 먹음"/><span class="bub">사과다!</span><i>3</i></div><b>다음 사과 · 바로 먹음</b><small>저장된 코드 · 매번 같은 실행</small></div><div class="v1cut" style="--d:2.4s"><div class="pic"><img src="img/v1_cut4.webp" alt="처음 본 배"/><span class="bub">?</span><i>4</i></div><b>처음 본 배</b><small>코드에 없는 경우 · 처리 불가</small></div></div><div class="dbnote"><span>코딩</span> 컴퓨터가 실행할 명령을 프로그래밍 언어로 작성하는 일</div><div class="src">출처 · <a href="https://huggingface.co/Tongyi-MAI/Z-Image-Turbo" target="_blank" rel="noopener">AI 생성 그림 · Z-Image Turbo (Apache 2.0)</a></div></div></div>
 </section>
 
+<section class="slide lt" data-title="알고리즘">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-1</span></div>
+  <h2 class="s-title sm">알고리즘</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="flow"><div class="fs"><b>① 집기</b><span>손으로 사과 잡기</span></div><div class="fa">→</div><div class="fs"><b>② 깨물기</b><span>한 입</span></div><div class="fa">→</div><div class="fs"><b>③ 씨 뱉기</b><span>씨는 먹지 않음</span></div></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>알고리즘</b><span>문제를 푸는 순서 있는 절차</span></div><div class="v2tile" style="--d:0.08s"><b>코드</b><span>알고리즘을 프로그래밍 언어로 적은 것</span></div><div class="v2tile" style="--d:0.16s"><b>조건</b><span>순서 · 빠짐없음 · 끝이 있음</span></div></div></div></div>
+</section>
+
 <section class="slide lt" data-title="원시인 코드">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-1</span></div>
   <h2 class="s-title sm">원시인 코드</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1cc"><div class="v1ed"><div class="bar"><b></b><b></b><b></b><span>caveman.js</span></div><div class="code"><div class="ln"><i>1</i><em class="cut">②</em><span>const apple = "사과";</span></div><div class="ln"><i>2</i><em class="cut">②</em><span>function eat(fruit) {</span></div><div class="ln"><i>3</i><em class="cut"></em><span>  console.log(fruit + " 먹음");</span></div><div class="ln"><i>4</i><em class="cut"></em><span>}</span></div><div class="ln"><i>5</i><em class="cut"></em><span></span></div><div class="ln"><i>6</i><em class="cut">③</em><span>eat(apple);</span></div><div class="ln"><i>7</i><em class="cut">④</em><span>eat(pear);</span></div></div></div><div class="v1con"><div class="v1chd">실행 결과</div><div class="cl ok" style="animation-delay:.8s">사과 먹음</div><div class="cl err" style="animation-delay:1.8s">✕ ReferenceError: pear is not defined</div></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v1cc"><div class="v1ed"><div class="bar"><b></b><b></b><b></b><span>caveman.js</span></div><div class="code"><div class="ln"><i>1</i><em class="cut"></em><span>const apple = "사과";</span></div><div class="ln"><i>2</i><em class="cut"></em><span>function eat(fruit) {</span></div><div class="ln"><i>3</i><em class="cut">①</em><span>  console.log(fruit + " 집기");</span></div><div class="ln"><i>4</i><em class="cut">②</em><span>  console.log(fruit + " 깨물기");</span></div><div class="ln"><i>5</i><em class="cut">③</em><span>  console.log("씨 뱉기");</span></div><div class="ln"><i>6</i><em class="cut"></em><span>}</span></div><div class="ln"><i>7</i><em class="cut"></em><span></span></div><div class="ln"><i>8</i><em class="cut"></em><span>eat(apple);</span></div><div class="ln"><i>9</i><em class="cut"></em><span>eat(pear);</span></div></div></div><div class="v1con"><div class="v1chd">실행 결과</div><div class="cl ok" style="animation-delay:.6s">사과 집기</div><div class="cl ok" style="animation-delay:1.0s">사과 깨물기</div><div class="cl ok" style="animation-delay:1.4s">씨 뱉기</div><div class="cl err" style="animation-delay:2.2s">✕ ReferenceError: pear is not defined</div></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="기존 코딩과 바이브코딩">
