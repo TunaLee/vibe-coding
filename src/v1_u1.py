@@ -127,12 +127,12 @@ def anim_loop():
 
 
 def comic(cuts):
-    """4컷 — (그림, 말풍선, 장면, 코딩에서는). 0.8초 간격으로 한 컷씩 나타나고 멈춘다."""
+    """3 · 4컷 — (그림, 말풍선, 장면, 코딩에서는). 0.8초 간격으로 한 컷씩 나타나고 멈춘다."""
     c = "".join(
         f'<div class="v1cut" style="--d:{i * .8:.1f}s"><div class="pic"><img src="img/{img}" alt="{scene}"/>'
         f'<span class="bub">{bub}</span><i>{i + 1}</i></div><b>{scene}</b><small>{code}</small></div>'
         for i, (img, bub, scene, code) in enumerate(cuts))
-    return f'<div class="v1comic">{c}</div>'
+    return f'<div class="v1comic" style="grid-template-columns:repeat({len(cuts)},1fr)">{c}</div>'
 
 
 def slides():
@@ -198,6 +198,13 @@ def slides():
                       ("ai", "app.js 에서 예약 저장 부분을 찾았다.\n같은 회의실 · 같은 날 · 시간이 겹치면 막는 규칙을 넣었다.\n겹치게 예약해 보니 「이미 예약된 시간」이 뜬다.")], "Claude Code 화면 예")
               + '</div><div>' + viz2.tiles([("사람", "목표 한 줄 · 결과 판단"), ("AI", "파일 찾기 · 수정 · 실행 · 확인 · 보고"),
                                             ("AI가 파악", "목표")], 1) + '</div></div>', T),
+        light("LLM과 코딩 에이전트", comic([
+            ("v1_brain1.webp", "생각만", "LLM", "글 읽기 · 글 쓰기 · 판단"),
+            ("v1_brain2.webp", "+ 도구", "LLM + 도구", "파일 읽기 · 검색 · 명령 실행"),
+            ("v1_brain3.webp", "작업 · 확인", "코딩 에이전트", "도구로 작업 · 결과 확인 반복")])
+              + note("에이전트", "판단하는 모델 + 행동하는 도구")
+              + src(("Claude Code 문서 · How Claude Code works", "https://code.claude.com/docs/en/how-claude-code-works"),
+                    ("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")), T),
         light("용어의 유래", quote(
             "There's a new kind of coding I call <mark>“vibe coding”</mark>, where you fully give in to the vibes, "
             "embrace exponentials, and forget that the code even exists.",
