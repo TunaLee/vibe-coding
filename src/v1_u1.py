@@ -2,122 +2,107 @@
 
 비유 한 줄로 끝까지 잇는다.
   코딩 = 사과를 처음 보는 원시인(컴퓨터)에게 원시인 말로 하나하나 가르치기 · 빠뜨리면 그대로 실수(버그)
-  바이브코딩 = 우리말로 말하면 통역사(AI)가 원시인 말로 풀어 가르치고 · 나는 먹는 모습을 보고 판단
+  바이브코딩 = 우리말로 말하면 통역사(AI)가 원시인 말(코드)로 풀어 쓰고 · 나는 결과를 보고 판단
 → 말의 유래 · 흐름 · 내 일과 AI 일 · 만든 것 · 한계(통역사도 빠뜨린다) · 1부 순서 · 완성 화면.
 사실 출처: scratchpad/v1_facts.md (Karpathy · Collins · levels.io · MenuGen · Veracode · Wiz · Replit)
 """
 import viz2
-from anim import BG, K, N, O, OK, R, S, W, _D, _t
+from anim import BG, G, N, O, OK, R, W, _D, _t
 from deck import flow, light
 from hx import code, esc, note
 from stats_hx import big, quote, src
 from v1kit import shot
 
 T = "1-1"
-BROWN = "#8D5A2B"
 STEPS = ["① 이건 「사과」 · 먹는 것", "② 손으로 집는다", "③ 입에 넣고 깨문다", "④ 씨는 뱉는다"]
+DONE = ["사과를 알아봄", "손으로 집음", "깨물어 먹음", "씨를 뱉음"]
+APPLE = ("사과 사진 · Evan-Amos · CC0", "https://commons.wikimedia.org/wiki/File:Honeycrisp-Apple.jpg")
 
 
-# ── 그림 조각 ─────────────────────────────────────────
-def _person(x, y, color=K, cave=False):
-    """서 있는 사람 · cave=True 면 원시인(헝클어진 머리 · 가죽옷)."""
-    hair = ""
-    if cave:
-        spikes = " ".join(f"L{x - 26 + i * 8:g} {y - 70 - (8 if i % 2 else 0):g}" for i in range(8))
-        hair = f'<path d="M{x - 28:g} {y - 52:g} {spikes} L{x + 28:g} {y - 52:g} Z" fill="{BROWN}"/>'
-    body = (f'<line x1="{x:g}" y1="{y - 30:g}" x2="{x:g}" y2="{y + 40:g}" stroke="{color}" stroke-width="7" stroke-linecap="round"/>'
-            f'<line x1="{x:g}" y1="{y - 10:g}" x2="{x - 32:g}" y2="{y + 18:g}" stroke="{color}" stroke-width="6" stroke-linecap="round"/>'
-            f'<line x1="{x:g}" y1="{y - 10:g}" x2="{x + 32:g}" y2="{y + 18:g}" stroke="{color}" stroke-width="6" stroke-linecap="round"/>'
-            f'<line x1="{x:g}" y1="{y + 40:g}" x2="{x - 22:g}" y2="{y + 92:g}" stroke="{color}" stroke-width="7" stroke-linecap="round"/>'
-            f'<line x1="{x:g}" y1="{y + 40:g}" x2="{x + 22:g}" y2="{y + 92:g}" stroke="{color}" stroke-width="7" stroke-linecap="round"/>')
-    tunic = (f'<path d="M{x - 24:g} {y - 18:g} L{x + 24:g} {y - 18:g} L{x + 30:g} {y + 46:g} L{x + 14:g} {y + 38:g} '
-             f'L{x:g} {y + 48:g} L{x - 14:g} {y + 38:g} L{x - 30:g} {y + 46:g} Z" fill="{BROWN}"/>') if cave else ""
-    head = f'<circle cx="{x:g}" cy="{y - 52:g}" r="24" fill="#F6D7B0" stroke="{color}" stroke-width="3"/>'
-    return body + tunic + hair + head
+# ── 그림 조각 — 가르치는 말(코드)을 한 줄씩 실행하고 · 원시인이 한 일이 옆에 쌓인다 ──
+def _panel(x, w, title, sub=""):
+    return (f'<rect x="{x}" y="10" width="{w}" height="380" rx="16" fill="{W}" stroke="{G}" stroke-width="2"/>'
+            + _t(x + 22, 40, title, "tt", "start") + (_t(x + w - 22, 40, sub, "ts", "end") if sub else ""))
 
 
-def _apple(x, y, r=20):
-    return (f'<circle cx="{x:g}" cy="{y:g}" r="{r}" fill="{R}"/>'
-            f'<line x1="{x:g}" y1="{y - r:g}" x2="{x + 3:g}" y2="{y - r - 10:g}" stroke="{BROWN}" stroke-width="3"/>'
-            f'<ellipse cx="{x + 10:g}" cy="{y - r - 6:g}" rx="8" ry="4" fill="{OK}"/>')
+def _row(x, y, w, s, kind="code"):
+    if kind == "miss":
+        return (f'<rect x="{x}" y="{y}" width="{w}" height="50" rx="10" fill="#FFF5F5" stroke="{R}" stroke-width="2" stroke-dasharray="7 6"/>'
+                + _t(x + 18, y + 26, "④ (빠뜨림)", "ts", "start", f'style="fill:{R};font-weight:700"'))
+    if kind in ("ok", "bad"):
+        c = OK if kind == "ok" else R
+        return (f'<rect x="{x}" y="{y}" width="{w}" height="50" rx="10" fill="{W}" stroke="{c}" stroke-width="2"/>'
+                + _t(x + 18, y + 26, ("✓ " if kind == "ok" else "✕ ") + s, "tn", "start", f'style="fill:{c}"'))
+    return (f'<rect x="{x}" y="{y}" width="{w}" height="50" rx="10" fill="{BG}" stroke="{G}" stroke-width="1.5"/>'
+            + _t(x + 18, y + 26, s, "tn", "start"))
 
 
-def _card(x, y, w, s, fill=W, stroke=K, cls="tn", dash=False):
-    d = ' stroke-dasharray="7 6"' if dash else ""
-    return (f'<rect x="{x:g}" y="{y:g}" width="{w:g}" height="48" rx="10" fill="{fill}" stroke="{stroke}" stroke-width="2.2"{d}/>'
-            + _t(x + 18, y + 25, s, cls, "start"))
-
-
-def _scene(p, steps, missing=None):
-    """나 → 원시인 말로 한 줄씩 → 원시인이 그대로 해 본다. missing: 빠뜨린 줄 번호."""
-    d = _D(p, 11)
-    b = [f'<rect x="0" y="0" width="1160" height="420" rx="18" fill="{BG}"/>',
-         _person(110, 210), _t(110, 340, "나", "tt"),
-         _t(560, 34, "원시인이 아는 말로 · 하나씩 · 빠짐없이", "to")]
-    for i, s in enumerate(steps):
+def _run(d, cx, cw, rx, rw, t0, step, missing=None, typed=None):
+    """코드 줄(cx) · 실행 표시 · 한 일(rx). t0 = 실행 시작 %, step = 줄 간격 %. typed = 줄이 나타나는 % 목록."""
+    b = []
+    for i, s in enumerate(STEPS):
         y = 62 + i * 66
-        if i == missing:
-            b.append(f'<g {d.show(10 + i * 11)}>{_card(330, y, 460, "④ (빠뜨림)", "#FFF", R, "ts", True)}</g>')
-        else:
-            b.append(f'<g {d.show(10 + i * 11)}>{_card(330, y, 460, s)}</g>')
-        b.append(f'<line x1="790" y1="{y + 24}" x2="900" y2="{y + 24}" stroke="{S}" stroke-width="1.5" stroke-dasharray="4 5" {d.show(10 + i * 11)}/>')
-    b += [_person(990, 210, K, cave=True), _t(990, 340, "원시인 = 컴퓨터", "tt"), _t(990, 368, "사과를 처음 본다", "ts")]
-    # 사과 — 처음엔 원시인 앞 → 적힌 대로 손 → 입
-    stops = [(0, "transform:translate(0px,0px)"), (60, "transform:translate(0px,0px)"),
-             (70, "transform:translate(32px,-20px)"), (80, "transform:translate(10px,-70px)"), (100, "transform:translate(10px,-70px)")]
-    b.append(f'<g {d.a(stops)}>{_apple(1050, 250)}</g>')
-    if missing is None:
-        b.append(f'<g {d.show(84)}><rect x="880" y="20" width="220" height="44" rx="22" fill="{OK}"/>'
-                 + _t(990, 43, "✓ 먹었다", "tw") + "</g>")
-    else:
-        b.append(f'<g {d.show(84)}><rect x="860" y="20" width="260" height="44" rx="22" fill="{R}"/>'
-                 + _t(990, 43, "✕ 씨까지 삼켰다", "tw") + "</g>")
-    return d.svg(1160, 420, "".join(b))
+        row = _row(cx, y, cw, s, "miss" if i == missing else "code")
+        b.append(f'<g {d.show(typed[i])}>{row}</g>' if typed else row)
+        res = _row(rx, y, rw, "씨까지 삼킴" if i == missing else DONE[i], "bad" if i == missing else "ok")
+        b.append(f'<g {d.show(t0 + i * step + 4)}>{res}</g>')
+    # 실행 중인 줄 — 주황 테두리가 한 줄씩 내려간다
+    st = [(0, "opacity:0;transform:translateY(0px)"), (t0 - 2, "opacity:0;transform:translateY(0px)"), (t0, "opacity:1;transform:translateY(0px)")]
+    for i in range(1, 4):
+        st += [(t0 + i * step - 2, f"opacity:1;transform:translateY({(i - 1) * 66}px)"), (t0 + i * step, f"opacity:1;transform:translateY({i * 66}px)")]
+    st += [(t0 + 4 * step, "opacity:1;transform:translateY(198px)"), (t0 + 4 * step + 3, "opacity:0;transform:translateY(198px)"), (100, "opacity:0;transform:translateY(198px)")]
+    b.append(f'<rect x="{cx - 6}" y="56" width="{cw + 12}" height="62" rx="13" fill="none" stroke="{O}" stroke-width="3.5" {d.a(st)}/>')
+    return b
+
+
+def _badge(d, t, x, w, ok, s):
+    c = OK if ok else R
+    return f'<g {d.show(t)}><rect x="{x}" y="330" width="{w}" height="46" rx="23" fill="{c}"/>{_t(x + w / 2, 354, s, "tw")}</g>'
+
+
+def _scene(p, missing=None):
+    d = _D(p, 12)
+    b = [_panel(20, 300, "원시인 = 컴퓨터"),
+         f'<image href="img/v1_apple.webp" x="70" y="70" width="200" height="181"/>',
+         _t(170, 290, "사과를 처음 본다", "tn"), _t(170, 320, "적힌 것만 그대로 한다", "ts"),
+         _panel(350, 440, "가르치는 말", "= 코드"), _panel(820, 320, "원시인이 한 일", "= 실행 결과")]
+    b += _run(d, 370, 400, 840, 280, 14, 16, missing)
+    b.append(_badge(d, 84, 840, 280, missing is None, "잘 먹었다" if missing is None else "버그 · 씨까지 삼킴"))
+    return d.svg(1160, 400, "".join(b))
 
 
 def anim_teach():
-    """원시인에게 사과 먹는 법을 네 줄로 가르친다 → 그대로 먹는다. 11초 · 한 번."""
-    return _scene("ap", STEPS)
+    """가르치는 말 네 줄을 한 줄씩 실행 → 원시인이 그대로 해서 잘 먹는다. 12초 · 한 번."""
+    return _scene("ap")
 
 
 def anim_bug():
-    """④ 를 빠뜨림 → 원시인은 적힌 그대로 · 씨까지 삼킨다. 11초 · 한 번."""
-    return _scene("aq", STEPS, missing=3)
+    """④ 를 빠뜨림 → 실행은 그대로 → 씨까지 삼킨다. 12초 · 한 번."""
+    return _scene("aq", missing=3)
 
 
 def anim_vibe():
-    """나는 우리말 한 줄 → 통역사(AI)가 원시인 말 네 줄로 → 원시인이 먹고 → 나는 결과만 본다. 12초 · 한 번."""
-    d = _D("vb", 12)
-    b = [f'<rect x="0" y="0" width="1160" height="420" rx="18" fill="{BG}"/>',
-         _person(90, 230), _t(90, 360, "나", "tt"), _t(90, 388, "우리말로 한 줄", "ts")]
-    # 우리말 요청 말풍선
-    b.append(f'<g {d.show(4)}><rect x="20" y="40" width="300" height="52" rx="26" fill="{W}" stroke="{O}" stroke-width="2.5"/>'
-             + _t(170, 67, "「사과 먹는 법 알려 줘」", "tn") + "</g>")
-    b.append(f'<line x1="320" y1="66" x2="372" y2="180" stroke="{O}" stroke-width="3" marker-end="url(#{d.id("o")})" {d.show(12)}/>')
-    # 통역사 = AI
-    b.append(f'<g {d.show(14)}><rect x="300" y="182" width="200" height="96" rx="16" fill="{N}"/>'
-             + _t(400, 216, "통역사", "tw") + _t(400, 246, "AI · Claude Code", "tw") + "</g>")
-    for i, s in enumerate(STEPS):
-        y = 62 + i * 66
-        b.append(f'<g {d.show(24 + i * 7)}>{_card(560, y, 330, s)}</g>')
-        b.append(f'<line x1="500" y1="230" x2="556" y2="{y + 24}" stroke="{S}" stroke-width="1.5" {d.show(24 + i * 7)}/>')
-    b += [_person(1030, 230, K, cave=True), _t(1030, 360, "원시인 = 컴퓨터", "tt")]
-    stops = [(0, "transform:translate(0px,0px)"), (62, "transform:translate(0px,0px)"),
-             (72, "transform:translate(30px,-20px)"), (80, "transform:translate(10px,-70px)"), (100, "transform:translate(10px,-70px)")]
-    b.append(f'<g {d.a(stops)}>{_apple(1088, 270)}</g>')
-    # 나는 결과만 본다
-    b.append(f'<g {d.show(86)}><rect x="20" y="110" width="300" height="48" rx="24" fill="{OK}"/>'
-             + _t(170, 135, "잘 먹나? ✓ 확인", "tw") + "</g>")
-    return d.svg(1160, 420, "".join(b))
+    """나는 우리말 한 줄 → AI(통역사)가 코드 네 줄을 쓴다 → 실행 → 나는 결과만 본다. 13초 · 한 번."""
+    d = _D("vb", 13)
+    b = [_panel(20, 280, "나"),
+         f'<g {d.show(3)}><rect x="40" y="80" width="240" height="56" rx="28" fill="#FFF3E6" stroke="{O}" stroke-width="2.5"/>'
+         + _t(160, 109, "「사과 먹는 법 알려 줘」", "tn") + "</g>",
+         _t(160, 170, "우리말 한 줄", "ts"),
+         f'<line x1="282" y1="108" x2="362" y2="108" stroke="{O}" stroke-width="3" marker-end="url(#{d.id("o")})" {d.show(8)}/>',
+         _panel(350, 440, "AI가 쓰는 코드", "통역사"), _panel(820, 320, "컴퓨터가 한 일", "= 실행 결과")]
+    b += _run(d, 370, 400, 840, 280, 44, 9, typed=[12, 19, 26, 33])
+    b.append(_badge(d, 84, 840, 280, True, "잘 먹었다"))
+    b.append(f'<g {d.show(90)}><rect x="40" y="330" width="240" height="46" rx="23" fill="{N}"/>{_t(160, 354, "결과만 보고 판단", "tw")}</g>')
+    return d.svg(1160, 400, "".join(b))
 
 
 def slides():
     return [
         # ── 코딩 = 원시인에게 사과 가르치기
         light("컴퓨터 = 사과를 처음 보는 원시인", anim_teach()
-              + note("코딩", "컴퓨터가 알아듣는 말로 · 할 일을 하나하나 빠짐없이 적는 일"), T),
+              + src(APPLE) + note("코딩", "컴퓨터가 알아듣는 말로 · 할 일을 하나하나 빠짐없이 적는 일"), T),
         light("하나라도 빠뜨리면", anim_bug()
-              + note("버그", "컴퓨터는 적힌 그대로만 한다 · 빠뜨린 한 줄이 그대로 실수가 된다"), T),
+              + src(APPLE) + note("버그", "컴퓨터는 적힌 그대로만 한다 · 빠뜨린 한 줄이 그대로 실수가 된다"), T),
         light("회의실 예약도 마찬가지", '<div class="twocol"><div>'
               + viz2.tiles([("사람 말", "「겹치는 예약은 막아 줘」 한 문장"),
                             ("컴퓨터에게는", "같은 회의실? · 같은 날? · 시간이 겹치나?"),

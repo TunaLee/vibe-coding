@@ -6,7 +6,7 @@
 import viz2
 from deck import flow, lab, light
 from hx import code, esc, note, table
-from stats_hx import src
+from stats_hx import big, src
 from v1kit import brief, chat
 
 T = "1-2"
@@ -42,6 +42,18 @@ def slides():
             ("ai", "1. 회의실은 몇 곳이고 이름은?\n2. 누가 예약하나 — 팀원 전체?\n3. 예약 단위는 30분 · 1시간?\n"
                    "4. 겹치는 예약은 막아야 하나?\n5. 휴대폰에서도 보나?")], "Claude 대화 예")
               + note("질문을 받는 요청", "바로 만들게 하지 않고 · 빠진 것을 먼저 묻게 한다 (1-3 에서 다시 씀)"), T),
+        # ── 왜 에이전트인가 — 채팅 · 자동완성 도구의 실제 속도
+        light("AI 코딩 도구의 실제 속도", big([("19%", "", "AI를 쓴 숙련 개발자 · 실제로 더 걸린 시간", True),
+                                             ("20%", "", "같은 개발자들이 「빨라졌다」고 느낀 정도")], 2)
+              + viz2.tiles([("대상", "숙련 개발자 16명 · 실제 작업 246건"),
+                            ("도구", "Cursor + Claude 3.5 · 3.7 Sonnet (2025년 초)"),
+                            ("2026 후속", "AI 없이 일하려는 개발자가 줄어 측정 방식을 바꿈")], 3)
+              + src(("METR · 2025-07-10", "https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/"),
+                    ("METR · 2026-02-24", "https://metr.org/blog/2026-02-24-uplift-update/")), T),
+        light("에이전트의 등장", viz2.pair(
+            "답만 주는 AI", [("AI", "코드를 답으로 준다"), ("사람", "복사 · 붙여넣기 · 실행 · 오류 전달"), ("병목", "옮기고 확인하는 사람 손")],
+            "에이전트", [("AI", "파일을 직접 읽고 고친다"), ("AI", "실행하고 오류를 보고 다시 고친다"), ("사람", "원하는 것 · 결과 판단")], hl="r")
+              + note("Claude Code", "이 강의에서 쓰는 에이전트 · 내 폴더에서 직접 일한다"), T),
         # ── Claude Code
         light("Claude Code", '<div class="twocol"><div>'
               + viz2.tiles([("내 폴더에서 일하는 Claude", "파일을 읽고 · 만들고 · 고친다"), ("명령 실행", "서버 띄우기 · 저장 · 올리기"),
