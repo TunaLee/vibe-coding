@@ -8,6 +8,7 @@ from pathlib import Path
 import viz2
 from deck import ba, flow, lab, light
 from hx import checks, code, esc, note
+from stats_hx import src
 from v1kit import brief, chat, shot
 
 T = "1-3"
@@ -86,6 +87,12 @@ def slides():
                             ("한 화면에서", "날짜별 시간표")], 4)
               + note("예", "「팀원 20명이 회의를 잡을 때, 회의실 3곳의 빈 시간을 날짜별 시간표 한 화면에서 보고 예약」"), T),
         # ── 기획서
+        light("모호한 요청과 구체적 요청", viz2.pair(
+            "모호한 요청", [("요리", "「소금 적당히」 → 사람마다 다른 양"), ("내비게이션", "「좋은 데로 데려다줘」 → 목적지 불명 · 안내 불가")],
+            "구체적 요청", [("요리", "「소금 1g」 → 누가 해도 같은 맛"), ("내비게이션", "「서울역 → 강남역 · 가장 빠른 길」 → 경로 안내")], hl="r")
+              + note("기획서", "만들 앱의 목적지를 구체적으로 적는 문서")
+              + src(("참고 · 알파AI스쿨 「바이브 코딩이란?」", "https://www.youtube.com/watch?v=cFdyp_pPgPQ"),
+                    ("참고 · 한빛미디어 「바이브 코딩 입문 1강」", "https://www.youtube.com/watch?v=n6xAUiTTrZU")), T),
         light("기획서", viz2.pair(
             "머릿속 아이디어", [("회의실 예약 페이지", "누가 쓰는지 · 왜 필요한지 · 어떤 화면인지 흐림"),
                             ("Claude에게 설명할 때", "말할 때마다 내용이 바뀜")],
