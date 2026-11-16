@@ -127,7 +127,7 @@ def langs():
     for i, (when, name, ex, feat, cook) in enumerate(LANGS):
         c += (f'<div class="v1lang v1cut" style="--d:{i * .8:.1f}s"><div class="v1ly">{when}</div><b>{name}</b>'
               f'<pre class="{"nl" if i == 2 else ""}">{esc(ex)}</pre><div class="v1lf">{feat}</div>'
-              f'<div class="v1lk"><span>요리로</span>{cook}</div></div>')
+              f'<div class="v1lk">{cook}</div></div>')
         if i < 2:
             c += '<i class="v1lar">→</i>'
     return (f'<div class="v1langs">{c}</div>'
@@ -328,7 +328,7 @@ CSS = """
   .v1lang pre{margin:0; overflow:hidden; background:#1E2433; color:#E6EDF7; border-radius:10px; padding:12px 14px; font-family:var(--mono); font-size:16px; white-space:pre; min-height:62px; font-variant-ligatures:none;}
   .v1lang pre.nl{background:#fff; color:#16233A; border:1.5px solid #F7C99A; font-family:inherit; font-weight:700; white-space:pre-wrap;}
   .v1lang .v1lf{font-size:15.5px; color:#3A4657; margin:10px 0 8px;}
-  .v1lang .v1lk{display:block; margin-top:auto; padding:0; border:0; background:none; writing-mode:horizontal-tb; font-size:15.5px; color:#16233A; font-weight:700;} .v1lang .v1lk span{font-size:12.5px; font-weight:800; color:#E07A12; margin-right:8px;}
+  .v1lang .v1lk{display:block; margin-top:auto; padding:8px 12px; border-radius:10px; background:#F4F6F9; writing-mode:horizontal-tb; font-size:15.5px; color:#16233A; font-weight:700;} .v1lang .v1lk span{font-size:12.5px; font-weight:800; color:#E07A12; margin-right:8px;}
   .v1lar{font-style:normal; align-self:center; text-align:center; font-size:26px; font-weight:800; color:#F28C28;}
   .v1lline{display:flex; align-items:center; gap:12px; margin-top:16px; font-size:14px; font-weight:800; color:#6B7785;}
   .v1lline b{flex:1; height:4px; border-radius:2px; background:linear-gradient(90deg,#1F3A5F,#F28C28);}

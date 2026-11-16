@@ -50,7 +50,7 @@ def slides():
               "https://commons.wikimedia.org/wiki/File:Blueprint_of_elevation_by_Alice_Trythall_Washburn.jpg", viz2.maprows([
                   ("조감도", "기획서", "어떤 집인지 · 왜"), ("설계 도면", "PRD", "치수 · 재료 · 방 배치"),
                   ("시공팀", "Claude Code", "도면대로 짓기"), ("준공 검사", "완료 기준", "도면대로 지었나"),
-                  ("이번에 안 짓는 별채", "MVP 제외", "다음 공사로")], "집 짓기", "앱 만들기")), T),
+                  ("이번에 안 짓는 별채", "MVP 제외", "다음 공사")], "집 짓기", "앱 만들기")), T),
         # ── PRD
         light("PRD", viz2.tiles([
             ("무엇을 만드나", "기능 · 화면 · 데이터"), ("어디까지 만드나", "MVP 범위 · 제외"), ("다 됐는지 어떻게 아나", "완료 기준")], 3)

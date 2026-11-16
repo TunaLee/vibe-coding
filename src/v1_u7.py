@@ -86,7 +86,7 @@ def slides():
               + note("공유할 주소", "프로젝트 기본 주소 · 다시 배포해도 바뀌지 않음")
               + src(("Vercel · Generated URLs", "https://vercel.com/docs/deployments/generated-urls")), T),
         light("배포 결과 화면", shot("room_main.webp", "배포 주소로 연 회의실 예약 · localhost 와 같은 화면", [
-            ("주소만 다름", "localhost → *.vercel.app"), ("코드는 그대로", "GitHub 에 올린 그 파일"), ("예약 데이터", "여는 브라우저마다 따로 · 1-8")]), T),
+            ("주소만 다름", "localhost → *.vercel.app"), ("코드 동일", "GitHub 에 올린 파일"), ("예약 데이터", "여는 브라우저마다 따로 · 1-8")]), T),
         light("휴대폰에서 열기", shot("room_mobile.webp", "390px 폭 · 휴대폰 화면", [
             ("PRD 완료 기준", "모바일 폭에서 가로 스크롤 없음"), ("확인 방법", "주소를 휴대폰으로 보내 열기"),
             ("깨지면", "화면 캡처를 Claude Code에 붙여 수정 요청 (1-6)")]), T),
