@@ -126,6 +126,36 @@ def anim_loop():
     return d.svg(1160, 400, "".join(b))
 
 
+def autocomplete_anim():
+    """편집기 · 사람이 한 줄 입력 → AI가 회색으로 다음 줄 제안 → Tab 수락 · 두 번 반복 후 정지 (약 8초).
+    참고: GitHub Copilot 「inline suggestion」 화면 (회색 제안 → Tab 수락)."""
+    from hx import esc
+    def typed(txt, t0, dur):
+        n = len(txt)
+        return (f'<span class="ty" style="--n:{n}ch; animation:v1type {dur}s steps({n}) {t0}s forwards, '
+                f'v1caret .5s step-end {t0}s {int(dur / .5) + 2}">{esc(txt)}</span>')
+    def ghost(txt, t_show, t_ok):
+        return (f'<span class="gh" style="animation:v1ghIn .4s ease-out {t_show}s forwards, v1ghOk .35s ease-out {t_ok}s forwards">{esc(txt)}</span>')
+    L = [
+        ("me", "const clash = load().some((x) =>", .3, 2.2),
+        ("ai", "  x.room === b.room &&", 2.8, 4.3),
+        ("ai", "  x.date === b.date &&", 2.8, 4.3),
+        ("ai", "  x.start < b.end && b.start < x.end);", 2.8, 4.3),
+        ("me", "if (clash) {", 4.9, .9),
+        ("ai", '  $("err").textContent = "이미 예약된 시간";', 6.1, 7.4),
+        ("ai", "  return;", 6.1, 7.4),
+        ("ai", "}", 6.1, 7.4),
+    ]
+    rows = ""
+    for i, (who, txt, a, b) in enumerate(L, 1):
+        body = typed(txt, a, b) if who == "me" else ghost(txt, a, b)
+        rows += f'<div class="ln"><i>{i}</i>{body}</div>'
+    keys = "".join(f'<div class="v1tab" style="animation:v1tabIn 1s ease-out {t}s forwards"><kbd>Tab</kbd><span>수락</span></div>' for t in (3.5, 6.8))
+    tags = "".join(f'<div class="v1sug" style="top:{y}px; animation:v1ghIn .4s ease-out {t}s forwards, v1out .3s ease-in {t + 1.6}s forwards">AI 제안 · 회색</div>'
+                   for y, t in ((52, 2.8), (183, 6.1)))
+    return f'<div class="v1ed"><div class="bar"><b></b><b></b><b></b><span>app.js · 편집기 화면 예</span></div><div class="code">{rows}{tags}{keys}</div></div>'
+
+
 def comic(cuts):
     """3 · 4컷 — (그림, 말풍선, 장면, 코딩에서는). 0.8초 간격으로 한 컷씩 나타나고 멈춘다."""
     c = "".join(
@@ -171,10 +201,10 @@ def slides():
               + src(("GitHub · 2021-06-29", "https://github.blog/2021-06-29-introducing-github-copilot-ai-pair-programmer/"),
                     ("OpenAI · 2022-11-30", "https://openai.com/index/chatgpt/"),
                     ("Anthropic · 2025-05-22", "https://www.anthropic.com/news/claude-4")), T),
-        light("자동완성 방식 · 예", '<div class="v1mode"><div>'
-              + code("app.js · 편집기 화면 예", esc("const clash = load().some((x) =>\n  x.room === b.room &&⟦\n  x.date === b.date &&\n  x.start < b.end && b.start < x.end);⟧").replace("⟦", '<span class="v1ghost">').replace("⟧", "</span>"))
+        light("자동완성 방식 · 예", '<div class="v1mode"><div>' + autocomplete_anim()
               + '</div><div>' + viz2.tiles([("사람", "파일 · 위치 · 첫 줄 직접 입력"), ("AI", "회색 글자로 다음 줄 제안 · Tab 으로 수락"),
-                                            ("AI가 파악", "앞뒤 코드")], 1) + '</div></div>', T),
+                                            ("AI가 파악", "앞뒤 코드")], 1) + '</div></div>'
+              + src(("GitHub Copilot 문서 · inline suggestions", "https://docs.github.com/en/copilot/using-github-copilot/getting-code-suggestions-in-your-ide-with-github-copilot")), T),
         light("대화형 방식 · 예", '<div class="v1mode"><div>'
               + chat([("me", "회의실 예약이 겹치면 막는 자바스크립트 코드 써 줘"),
                       ("ai", "예약을 저장하기 전에 아래 코드를 넣으면 된다.\nconst clash = list.some(...)\nif (clash) return;")], "채팅 화면 예")
@@ -290,5 +320,26 @@ CSS = """
   .v1era .grasp{margin-top:12px; padding-top:10px; border-top:1px dashed #D9DDE3; font-size:15px; color:#6B7785;} .v1era .grasp b{display:inline; font-size:17px; color:#E07A12;}
   .v1ghost{color:#8A94A3; font-style:italic;}
   .v1mode{display:grid; grid-template-columns:1.35fr 1fr; gap:24px; align-items:start;}
+  /* 자동완성 편집기 */
+  .v1ed{background:#1E2433; border-radius:14px; overflow:hidden; box-shadow:0 10px 26px rgba(15,27,45,.18);}
+  .v1ed .bar{display:flex; gap:7px; align-items:center; padding:10px 14px; background:#161B27;}
+  .v1ed .bar b{width:11px; height:11px; border-radius:50%; background:#3A4252;} .v1ed .bar b:nth-child(1){background:#FF5F57;} .v1ed .bar b:nth-child(2){background:#FEBC2E;} .v1ed .bar b:nth-child(3){background:#28C840;}
+  .v1ed .bar span{margin-left:8px; font-size:13px; color:#8A94A3; font-family:var(--mono);}
+  .v1ed .code{position:relative; padding:14px 0 18px; font-family:var(--mono); font-size:16px; line-height:2.05; font-variant-ligatures:none; font-feature-settings:'liga' 0, 'calt' 0;}
+  .v1ed .ln{display:flex; white-space:pre; height:32.8px;}
+  .v1ed .ln i{width:44px; text-align:right; padding-right:16px; color:#4B5568; font-style:normal;}
+  .v1ed .ty{display:inline-block; overflow:hidden; width:0; color:#E6EDF7; border-right:2px solid transparent; vertical-align:top;}
+  .v1ed .gh{opacity:0; color:#98A3B6; font-style:italic;}
+  @keyframes v1type{to{width:var(--n)}}
+  @keyframes v1caret{0%{border-right-color:#F28C28} 50%{border-right-color:transparent}}
+  @keyframes v1ghIn{to{opacity:1}}
+  @keyframes v1ghOk{from{color:#98A3B6; font-style:italic} to{color:#E6EDF7; font-style:normal; opacity:1}}
+  @keyframes v1out{to{opacity:0}}
+  @keyframes v1tabIn{0%{opacity:0; transform:scale(.8)} 25%{opacity:1; transform:scale(1)} 45%{transform:scale(.92)} 60%{transform:scale(1)} 80%{opacity:1} 100%{opacity:0}}
+  .v1sug{position:absolute; right:16px; opacity:0; padding:4px 10px; border-radius:8px; background:#2A3142; color:#C9D2E0; font-size:13px; font-family:var(--sans,inherit);}
+  .v1tab{position:absolute; right:16px; bottom:16px; opacity:0; display:flex; gap:8px; align-items:center;}
+  .v1tab kbd{padding:6px 14px; border-radius:8px; background:#F28C28; color:#fff; font-weight:800; font-size:15px; box-shadow:0 3px 0 #B8641A;}
+  .v1tab span{color:#F7C99A; font-size:14px; font-weight:700;}
+  @media print{.v1ed .ty{width:auto} .v1ed .gh{opacity:1; color:#E6EDF7; font-style:normal}}
   .v1vid video{width:100%; max-height:440px; border:1.5px solid #D9DDE3; border-radius:12px; box-shadow:0 8px 22px rgba(15,27,45,.10); background:#F7EEDB; display:block;}
 """
