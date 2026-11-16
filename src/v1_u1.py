@@ -14,66 +14,6 @@ from stats_hx import big, quote, src
 from v1kit import chat, shot
 
 T = "1-1"
-STEPS = ["① 이건 「사과」 · 먹는 것", "② 손으로 집는다", "③ 입에 넣고 깨문다", "④ 씨는 뱉는다"]
-DONE = ["사과를 알아봄", "손으로 집음", "깨물어 먹음", "씨를 뱉음"]
-
-
-# ── 그림 조각 — 가르치는 말(코드)을 한 줄씩 실행하고 · 원시인이 한 일이 옆에 쌓인다 ──
-def _panel(x, w, title, sub=""):
-    return (f'<rect x="{x}" y="10" width="{w}" height="380" rx="16" fill="{W}" stroke="{G}" stroke-width="2"/>'
-            + _t(x + 22, 40, title, "tt", "start") + (_t(x + w - 22, 40, sub, "ts", "end") if sub else ""))
-
-
-def _row(x, y, w, s, kind="code"):
-    if kind == "miss":
-        return (f'<rect x="{x}" y="{y}" width="{w}" height="50" rx="10" fill="#FFF5F5" stroke="{R}" stroke-width="2" stroke-dasharray="7 6"/>'
-                + _t(x + 18, y + 26, "④ (빠뜨림)", "ts", "start", f'style="fill:{R};font-weight:700"'))
-    if kind in ("ok", "bad"):
-        c = OK if kind == "ok" else R
-        return (f'<rect x="{x}" y="{y}" width="{w}" height="50" rx="10" fill="{W}" stroke="{c}" stroke-width="2"/>'
-                + _t(x + 18, y + 26, ("✓ " if kind == "ok" else "✕ ") + s, "tn", "start", f'style="fill:{c}"'))
-    return (f'<rect x="{x}" y="{y}" width="{w}" height="50" rx="10" fill="{BG}" stroke="{G}" stroke-width="1.5"/>'
-            + _t(x + 18, y + 26, s, "tn", "start"))
-
-
-def _run(d, cx, cw, rx, rw, t0, step, missing=None, typed=None):
-    """코드 줄(cx) · 실행 표시 · 한 일(rx). t0 = 실행 시작 %, step = 줄 간격 %. typed = 줄이 나타나는 % 목록."""
-    b = []
-    for i, s in enumerate(STEPS):
-        y = 62 + i * 66
-        row = _row(cx, y, cw, s, "miss" if i == missing else "code")
-        b.append(f'<g {d.show(typed[i])}>{row}</g>' if typed else row)
-        res = _row(rx, y, rw, "씨까지 삼킴" if i == missing else DONE[i], "bad" if i == missing else "ok")
-        b.append(f'<g {d.show(t0 + i * step + 4)}>{res}</g>')
-    # 실행 중인 줄 — 주황 테두리가 한 줄씩 내려간다
-    st = [(0, "opacity:0;transform:translateY(0px)"), (t0 - 2, "opacity:0;transform:translateY(0px)"), (t0, "opacity:1;transform:translateY(0px)")]
-    for i in range(1, 4):
-        st += [(t0 + i * step - 2, f"opacity:1;transform:translateY({(i - 1) * 66}px)"), (t0 + i * step, f"opacity:1;transform:translateY({i * 66}px)")]
-    st += [(t0 + 4 * step, "opacity:1;transform:translateY(198px)"), (t0 + 4 * step + 3, "opacity:0;transform:translateY(198px)"), (100, "opacity:0;transform:translateY(198px)")]
-    b.append(f'<rect x="{cx - 6}" y="56" width="{cw + 12}" height="62" rx="13" fill="none" stroke="{O}" stroke-width="3.5" {d.a(st)}/>')
-    return b
-
-
-def _badge(d, t, x, w, ok, s):
-    c = OK if ok else R
-    return f'<g {d.show(t)}><rect x="{x}" y="330" width="{w}" height="46" rx="23" fill="{c}"/>{_t(x + w / 2, 354, s, "tw")}</g>'
-
-
-def anim_vibe():
-    """나는 우리말 한 줄 → AI(통역사)가 코드 네 줄을 쓴다 → 실행 → 나는 결과만 본다. 13초 · 한 번."""
-    d = _D("vb", 13)
-    b = [_panel(20, 280, "나"),
-         f'<g {d.show(3)}><rect x="40" y="80" width="240" height="56" rx="28" fill="#FFF3E6" stroke="{O}" stroke-width="2.5"/>'
-         + _t(160, 109, "「사과 먹는 법 알려 줘」", "tn") + "</g>",
-         _t(160, 170, "우리말 한 줄", "ts"),
-         f'<line x1="282" y1="108" x2="362" y2="108" stroke="{O}" stroke-width="3" marker-end="url(#{d.id("o")})" {d.show(8)}/>',
-         _panel(350, 440, "AI가 쓰는 코드", "통역사"), _panel(820, 320, "컴퓨터가 한 일", "= 실행 결과")]
-    b += _run(d, 370, 400, 840, 280, 44, 9, typed=[12, 19, 26, 33])
-    b.append(_badge(d, 84, 840, 280, True, "잘 먹었다"))
-    b.append(f'<g {d.show(90)}><rect x="40" y="330" width="240" height="46" rx="23" fill="{N}"/>{_t(160, 354, "결과만 보고 판단", "tw")}</g>')
-    return d.svg(1160, 400, "".join(b))
-
-
 ERAS = [  # (해, 이름, 도구, 사람 몫 %, AI 몫, 사람 몫, AI가 파악하는 것) — 막대는 모양만 · 측정값 아님
     ("2021", "자동완성", "GitHub Copilot", 85, "다음 줄 · 함수 제안", "위치 · 구조 결정 · 작성 · 실행", "앞뒤 코드"),
     ("2022", "대화형", "ChatGPT", 55, "요청한 코드 작성", "붙일 위치 찾기 · 붙여넣기 · 실행", "요청 문장"),
@@ -92,38 +32,6 @@ def eras():
               f'<div class="row"><em class="ai">AI</em><small>{ai}</small></div>'
               f'<div class="grasp">AI가 파악 · <b>{grasp}</b></div></div>')
     return f'<div class="v1eras">{c}</div>'
-
-
-def anim_loop():
-    """공식 에이전트 루프 — 요청 → 맥락 파악 → 작업 → 결과 확인 → (반복) → 완료 · 사람은 언제든 끼어듦. 9초 · 한 번.
-    참고: Claude Code 문서 「How Claude Code works」 agentic loop 도해 · IBM Technology 「What Is Vibe Coding?」 02:18~02:38."""
-    d = _D("lp", 9)
-    def node(cx, cy, t, sub, at):
-        return (f'<g {d.show(at)}><rect x="{cx - 95}" y="{cy - 32}" width="190" height="64" rx="14" fill="{N}"/>'
-                + _t(cx, cy - 9, t, "tw", extra='style="font-size:18px"') + _t(cx, cy + 15, sub, "tw", extra='style="font-size:13px;font-weight:600;opacity:.8"') + "</g>")
-    b = [f'<rect x="0" y="0" width="1160" height="400" rx="18" fill="{BG}"/>',
-         f'<g {d.show(2)}><rect x="30" y="52" width="230" height="68" rx="14" fill="#FFF3E6" stroke="{O}" stroke-width="2.5"/>'
-         + _t(145, 76, "내 요청", "tt") + _t(145, 102, "「로그인 화면 만들어 줘」", "ts") + "</g>",
-         f'<line x1="262" y1="86" x2="476" y2="86" stroke="{O}" stroke-width="3" marker-end="url(#{d.id("o")})" {d.show(10)}/>',
-         node(580, 86, "① 맥락 파악", "파일 찾기 · 읽기", 16),
-         f'<path d="M675 96 Q770 130 742 248" fill="none" stroke="{N}" stroke-width="3" marker-end="url(#{d.id("k")})" {d.show(26)}/>',
-         node(720, 290, "② 작업", "코드 수정 · 명령 실행", 32),
-         f'<path d="M622 300 Q580 330 538 300" fill="none" stroke="{N}" stroke-width="3" marker-end="url(#{d.id("k")})" {d.show(42)}/>',
-         node(440, 290, "③ 결과 확인", "실행 · 오류 확인", 48)]
-    close = [(0, "stroke-dashoffset:260;opacity:0"), (58, "stroke-dashoffset:260;opacity:0"), (59, "stroke-dashoffset:260;opacity:1"), (70, "stroke-dashoffset:0;opacity:1"), (100, "stroke-dashoffset:0;opacity:1")]
-    b.append(f'<path d="M420 256 Q412 150 486 120" fill="none" stroke="{O}" stroke-width="4" stroke-dasharray="260" '
-             f'marker-end="url(#{d.id("o")})" {d.a(close)}/>')
-    b.append(f'<g {d.show(70)}>' + _t(580, 200, "반복", "to", extra='style="font-size:20px"') + _t(580, 224, "완료될 때까지", "ts") + "</g>")
-    b.append(f'<line x1="816" y1="290" x2="926" y2="290" stroke="{OK}" stroke-width="3" marker-end="url(#{d.id("g")})" {d.show(78)}/>')
-    b.append(f'<g {d.show(82)}><rect x="930" y="258" width="200" height="64" rx="14" fill="{W}" stroke="{OK}" stroke-width="2.5"/>'
-             + _t(1030, 281, "완료 · 결과 보고", "tn") + _t(1030, 304, "확인 통과", "ts") + "</g>")
-    b.append(f'<g {d.show(90)}><rect x="830" y="52" width="300" height="68" rx="14" fill="{W}" stroke="{S}" stroke-width="2" stroke-dasharray="6 5"/>'
-             + _t(980, 76, "사람 · 언제든 끼어들기", "tt") + _t(980, 102, "「좀 이상한데?」 → 수정 요청", "ts") + "</g>")
-    for x, y, t, at in ((580, 30, "「폴더부터 봐야겠다」", 20), (720, 352, "「login.html 을 만들자」", 36), (440, 352, "「잘못된 이메일로 시험」", 52)):
-        b.append(f'<g {d.show(at)}><rect x="{x - 105}" y="{y - 17}" width="210" height="34" rx="17" fill="{W}" stroke="{G}" stroke-width="1.5"/>'
-                 + _t(x, y + 1, t, "ts", extra='style="font-size:14px;fill:#3A4657"') + "</g>")
-    b.append(f'<path d="M830 96 Q760 170 650 196" fill="none" stroke="{S}" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#{d.id("k")})" {d.show(90)}/>')
-    return d.svg(1160, 400, "".join(b))
 
 
 def autocomplete_anim():
@@ -276,27 +184,6 @@ def slides():
               + '<div class="bn hl"><div class="bv">105<small>일</small></div><div class="bl">작업 길이 2배 주기 (2024년 이후)</div></div>'
               + '<div class="bn"><div class="bv">작업 길이</div><div class="bl">사람이 하면 걸리는 시간 기준</div></div>'
               + '</div></div>' + src(METR_TH), T),
-        # ── 바이브코딩 = 통역사에게 맡기기
-        light("비유 · 통역사", anim_vibe()
-              + note("바이브코딩", "자연어 요청 → AI가 코드 작성 → 사람이 결과 확인"), T),
-        light("비유 대응표", viz2.maprows([
-            ("나", "나", "요구 사항 설명"),
-            ("통역사", "AI (Claude Code)", "코드 작성"),
-            ("원시인", "컴퓨터", "코드 실행"),
-            ("먹는 모습 보기", "화면 확인", "코드 대신 결과로 판단"),
-            ("「씨는 뱉게 해 줘」", "수정 요청", "자연어로 다시 요청")], "원시인과 사과", "바이브코딩"), T),
-        # ── 동작 원리
-        light("바이브코딩의 반복 고리", anim_loop()
-              + src(("Claude Code 문서 · How Claude Code works", "https://code.claude.com/docs/en/how-claude-code-works")), T),
-        light("반복 고리 예 · 로그인 화면", viz2.tiles([
-            ("① 폴더 확인", "맥락 파악 · 파일 목록"), ("② 기존 스타일 읽기", "맥락 파악 · 파일 읽기"),
-            ("③ login.html · login.js 작성", "작업 · 파일 생성"), ("④ 잘못된 이메일 입력", "결과 확인 · 실행"),
-            ("⑤ 오류 문구 안 뜸 → 다시 수정", "반복 · ③ 작업으로"), ("⑥ 완료 보고", "「로그인 화면 추가 · 형식 검사 포함」")], 3)
-              + note("사람", "④ 결과를 화면에서 다시 확인 · 다르면 수정 요청"), T),
-        light("사람과 AI의 역할", viz2.pair(
-            "내 일", [("만들 것 정의", "기획서 · PRD"), ("동작 확인", "화면 직접 조작"), ("공개 결정", "배포 · 공유")],
-            "AI의 일", [("코드 작성", "화면 · 규칙 · 저장"), ("오류 수정", "오류 메시지 해석 · 수정"), ("반복 작업", "파일 생성 · 명령 실행")], hl="l")
-              + note("판단", "결과 확인 · 공개 결정은 사람"), T),
         # ── 할 수 있는 것 · 조심할 것
         light("바이브코딩 사례", viz2.tiles([
             ("브라우저 3D 비행 게임", "fly.pieter.com · 개발자 1명 + AI"),
@@ -316,11 +203,14 @@ def slides():
               + src(("Veracode · 2026-10-29", "https://www.veracode.com/blog/fall-2026-genai-code-security"),
                     ("Wiz · 2026-02-02", "https://www.wiz.io/blog/exposed-moltbook-database-reveals-millions-of-api-keys"),
                     ("Replit CEO · 2025-07-20", "https://x.com/amasad/status/1946986468586721478")), T),
-        light("문제별 1부 단원", viz2.maprows([
-            ("AI가 빈칸을 추측으로 채움", "기획서 · PRD 작성", "1-3 · 1-4"),
-            ("수정 후 이전 상태 복구 불가", "Git 저장 시점", "1-5"),
-            ("오류 위치 파악 어려움", "기능 단위 작업 · 확인", "1-6"),
-            ("키 · 개인정보 노출", "공개 전 점검", "1-7")], "바이브코딩의 문제", "1부에서 하는 일"), T),
+        light("1부의 핵심 · 요청에 맞는 결과", '<div class="v1core">'
+              '<div class="bx me"><span>내 요청</span><b>「로그인 화면 만들어 줘」</b></div><i>→</i>'
+              '<div class="bx ai"><span>AI 작업</span><b>읽기 · 작성 · 실행 · 확인</b></div><i>→</i>'
+              '<div class="bx out"><span>결과</span><b>로그인 화면</b></div>'
+              '<div class="q">요청 = 결과 ?</div></div>'
+              + flow([("기획서", "무엇을 · 누구를 (1-3)"), ("PRD", "기능 · 완료 기준 (1-4)"), ("Git", "되돌릴 저장 시점 (1-5)"),
+                      ("작게 요청 · 확인", "기능 하나씩 (1-6)"), ("공개 전 점검", "키 · 개인정보 (1-7)")], hl=-1)
+              + note("1부", "요청에 맞는 결과를 얻는 과정 · 기획서 → PRD → Git → 요청 · 확인 → 배포"), T),
         light("1부 완성 화면", shot("room_main.webp", "회의실 예약 · 1부 공통 예제 완성본", [
             ("하루 시간표", "회의실 3곳 · 30분 단위"), ("예약", "빈 칸 클릭 · 이미 찬 시간은 예약 불가"),
             ("공유", "배포 주소 (1-7)"), ("내 앱", "같은 순서로 하나 더")]), T),
@@ -394,5 +284,12 @@ CSS = """
   .v1td span{font-size:18px; color:#16233A; font-weight:600;} .v1td.me2{border-color:#F28C28; background:#FFF8F0;} .v1td.me2 i{background:#F28C28;}
   .v1side2 .v1gr{margin-top:12px; font-size:15px; color:#6B7785; opacity:0; animation:v1ghIn .4s forwards;} .v1side2 .v1gr b{color:#E07A12; font-size:17px;}
   @media print{.v1cw .v1k,.v1cw .v1ai .v1ln,.v1st,.v1st .v1ok,.v1td,.v1side2 .v1gr{opacity:1; animation:none} .v1cw .v1dots,.v1st .v1run{display:none}}
+  /* 1부의 핵심 */
+  .v1core{position:relative; display:grid; grid-template-columns:1fr 44px 1fr 44px 1fr; align-items:center; margin:6px 0 34px; padding:26px 24px 46px; border-radius:18px; background:#FFF8F0; border:2px solid #F28C28;}
+  .v1core .bx{background:#fff; border:2px solid #D9DDE3; border-radius:14px; padding:16px 18px; text-align:center;}
+  .v1core .bx span{display:block; font-size:14px; font-weight:800; color:#6B7785;} .v1core .bx b{display:block; font-size:20px; color:#16233A; margin-top:4px;}
+  .v1core .bx.me{border-color:#F28C28;} .v1core .bx.ai{background:#1F3A5F; border-color:#1F3A5F;} .v1core .bx.ai span{color:#C9D2E0;} .v1core .bx.ai b{color:#fff;}
+  .v1core i{font-style:normal; font-size:26px; color:#F28C28; font-weight:800; text-align:center;}
+  .v1core .q{position:absolute; left:50%; bottom:-20px; transform:translateX(-50%); background:#F28C28; color:#fff; font-weight:900; font-size:22px; padding:8px 26px; border-radius:999px; box-shadow:0 6px 16px rgba(242,140,40,.3);}
   .v1vid video{width:100%; max-height:440px; border:1.5px solid #D9DDE3; border-radius:12px; box-shadow:0 8px 22px rgba(15,27,45,.10); background:#F7EEDB; display:block;}
 """
