@@ -5,8 +5,13 @@
 from deck import light
 
 
+SHOW_SRC = False  # 출처 줄 표시 — 현재 전 덱에서 숨김
+
+
 def src(*items):
-    """출처 줄. items: (이름, url) — 슬라이드 왼쪽 아래."""
+    """출처 줄. items: (이름, url) — 슬라이드 오른쪽 위. SHOW_SRC 가 False 면 빈 문자열."""
+    if not SHOW_SRC:
+        return ""
     links = " · ".join(f'<a href="{u}" target="_blank" rel="noopener">{n}</a>' for n, u in items)
     return f'<div class="src">출처 · {links}</div>'
 

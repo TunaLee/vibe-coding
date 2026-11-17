@@ -544,8 +544,7 @@ def ch0():
              METR_FRR, METR_TH),
         light("에이전트의 구조", viz2.agent_anatomy()
               + note("다음", "LLM을 뺀 나머지 전부 = 하네스"), "Ch0"),
-        light("채팅 → 에이전트 연표", timeline()
-              + note("출처", "OpenAI (2023.06 · 2025.07) · Anthropic (2024.11 · 2025.02 · 2025.10)"), "Ch0"),
+        light("채팅 → 에이전트 연표", timeline(), "Ch0"),
     ]
 
 
