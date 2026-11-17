@@ -17,6 +17,53 @@ def pic(img, cap, side):
     return shot(img, cap, side)
 
 
+SPARK = '<svg class="spk" viewBox="0 0 20 20"><path d="M10 1v18M1 10h18M3.6 3.6l12.8 12.8M16.4 3.6L3.6 16.4" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>'
+
+
+def vs_window():
+    """VS Code 한 화면 — 탐색기 · 편집기 · 터미널 · Claude Code 패널이 차례로."""
+    return ('<div class="v1vs">'
+            '<div class="v1vsbar"><i></i><i></i><i></i><span>내 프로젝트 폴더 — VS Code</span></div>'
+            '<div class="v1vsbody">'
+            '<div class="v1vsact"><b>▤</b><b>⌕</b><b>⧉</b><b class="sp" style="--d:3.0s">' + SPARK + '</b></div>'
+            '<div class="v1vsp v1vsexp" style="--d:.4s"><em>①</em><small>탐색기</small>'
+            '<p>▾ 내 프로젝트 폴더</p><p>· 기획서.md</p><p>· PRD.md</p><p>· index.html</p></div>'
+            '<div class="v1vsp v1vsed" style="--d:1.1s"><em>②</em><small>index.html</small>'
+            '<p><span class="t">&lt;h1&gt;</span>회의실 예약<span class="t">&lt;/h1&gt;</span></p>'
+            '<p><span class="t">&lt;button&gt;</span>예약하기<span class="t">&lt;/button&gt;</span></p></div>'
+            '<div class="v1vsp v1vscl" style="--d:2.6s"><em>④</em><small>' + SPARK + ' Claude Code</small>'
+            '<p class="me">예약 버튼을 파란색으로 바꿔 줘</p><p class="ai">index.html 수정 완료</p></div>'
+            '<div class="v1vsp v1vster" style="--d:1.8s"><em>③</em><small>터미널</small><p>$ claude --version</p></div>'
+            '</div></div>')
+
+
+def ext_anim():
+    """확장 = 앱 — Marketplace 선반의 확장이 VS Code 안으로 들어가 꽂힌다."""
+    items = [("한국어 언어 팩", "한국어 메뉴", ""), ("Python", "Python 코드 지원", ""), ("Claude Code", "AI 대화 패널", "on")]
+    shelf = "".join(f'<div class="v1exs {c}" style="--d:{.3 + i * .35:.2f}s"><b>{n}</b><span>{d}</span></div>' for i, (n, d, c) in enumerate(items))
+    slot = "".join(f'<div class="v1exin {c}" style="--d:{1.6 + i * .5:.2f}s">+ {n}</div>' for i, (n, d, c) in enumerate(items))
+    return ('<div class="v1ex">'
+            f'<div class="v1exshelf"><small>Marketplace</small>{shelf}</div>'
+            '<div class="v1exarr">설치 →</div>'
+            '<div class="v1exbox"><small>VS Code</small><div class="v1exbase">기본 · 편집기 · 터미널</div>'
+            f'{slot}</div></div>')
+
+
+def ext_install():
+    """확장 보기에서 검색 → Install → ✻ 아이콘 · 상태 표시줄."""
+    return ('<div class="v1vs v1ei">'
+            '<div class="v1vsbar"><i></i><i></i><i></i><span>확장 보기 · ⇧⌘X</span></div>'
+            '<div class="v1eibody">'
+            '<div class="v1vsact"><b>▤</b><b>⌕</b><b class="on">⧉</b><b class="sp" style="--d:3.4s">' + SPARK + '</b></div>'
+            '<div class="v1eipane"><small>EXTENSIONS: MARKETPLACE</small>'
+            '<div class="v1eisearch"><span class="ty">Claude Code</span></div>'
+            '<div class="v1eicard" style="--d:1.5s"><div class="lg">' + SPARK + '</div><div><b>Claude Code</b>'
+            '<span>Anthropic ✓</span><span class="id">anthropic.claude-code</span></div>'
+            '<div class="v1eibtn"><span class="i1">Install</span><span class="i2">설치됨</span></div></div>'
+            '</div></div>'
+            '<div class="v1eistat" style="--d:3.6s">' + SPARK + ' Claude Code</div></div>')
+
+
 def slides():
     return [
         # ── 도구 네 개
@@ -53,13 +100,23 @@ def slides():
             ("JetBrains", "플러그인"), ("데스크톱 앱", "macOS · Windows"), ("웹", "claude.ai/code · 클라우드")], 5)
               + note("공통", "어디서 쓰든 같은 엔진 · 같은 설정 · 같은 CLAUDE.md")
               + src(("Claude Code 문서 · platforms", "https://code.claude.com/docs/en/platforms")), T),
-        light("이 강의의 선택 · VS Code", viz2.tiles([
-            ("편집기 (IDE)", "코드를 보고 고치는 프로그램 · VS Code"), ("터미널", "마우스 클릭 대신 글자 명령으로 컴퓨터를 다루는 창"),
-            ("VS Code 한 화면", "파일 트리 · 편집기 · Claude Code 대화 · 터미널")], 3)
-              + flow([("VS Code 설치", "code.visualstudio.com"), ("확장 검색", "「Claude Code」"), ("설치", "공식 확장"),
-                      ("폴더 열기", "내 프로젝트 폴더"), ("로그인", "Claude 계정")])
-              + src(("참고 · 혼잡스 「바이브코딩 이 지도 한장으로」", "https://www.youtube.com/watch?v=HNtS6WGGhNU"),
-                    ("참고 · 비디오머그 「나만 안 해 바이브 코딩」", "https://www.youtube.com/watch?v=C9aQKsL2NVM")), T),
+        light("이 강의의 선택 · VS Code", '<div class="twocol v1vsgrid"><div>' + vs_window() + "</div><div>"
+              + viz2.tiles([("① 탐색기", "폴더 안 파일 목록"), ("② 편집기", "파일 내용 보기 · 고치기"),
+                            ("③ 터미널", "글자 명령으로 컴퓨터를 다루는 창"), ("④ Claude Code 패널", "확장 설치 뒤 생김")], 1)
+              + "</div></div>"
+              + note("VS Code", "Microsoft 의 무료 코드 편집기 · 파일 · 터미널 · AI 대화를 한 화면에"), T),
+        light("확장 프로그램", '<div class="twocol v1vsgrid"><div>' + ext_anim() + "</div><div>"
+              + viz2.maprows([("휴대폰", "VS Code", "기본 기능만 든 상태"), ("앱 스토어", "Marketplace", "확장을 찾고 설치하는 곳"),
+                              ("앱", "확장 프로그램", "언어 · 디버거 · 도구를 더함")], "비유", "VS Code")
+              + "</div></div>"
+              + note("Claude Code 확장", "VS Code 안에 Claude Code 대화 패널을 더함 · 게시자 Anthropic")
+              + src(("VS Code 문서 · Extensions", "https://code.visualstudio.com/docs/getstarted/extensions")), T),
+        light("Claude Code 확장 설치", '<div class="twocol v1vsgrid"><div>' + ext_install() + "</div><div>"
+              + viz2.tiles([("① 확장 보기 열기", "⇧⌘X · Windows Ctrl+Shift+X"), ("② 검색", "「Claude Code」 · 게시자 Anthropic 확인"),
+                            ("③ Install", "설치 버튼"), ("④ Spark 아이콘", "왼쪽 막대 · 패널 열기 · 로그인")], 1)
+              + "</div></div>"
+              + note("안 보이면", "VS Code 1.94 이상 · 설치 뒤 VS Code 재시작")
+              + src(("Claude Code 문서 · VS Code", "https://code.claude.com/docs/en/vs-code")), T),
         light("Claude Code 설치", '<div class="twocol"><div>'
               + code("macOS · 터미널", esc("curl -fsSL https://claude.ai/install.sh | bash"))
               + code("Windows · PowerShell", esc("irm https://claude.ai/install.ps1 | iex"))
@@ -133,6 +190,56 @@ def slides():
 
 
 CSS = """
+  /* 1-2 · VS Code 화면 · 확장 · 설치 (v1vs · v1ex · v1ei) */
+  .v1vsgrid{grid-template-columns:1.15fr 1fr; align-items:center;}
+  .v1vs{background:#1F2430; border-radius:12px; overflow:hidden; box-shadow:0 8px 24px rgba(22,35,58,.18); font-size:13px; color:#C9D1DC;}
+  .v1vsbar{display:flex; align-items:center; gap:6px; padding:8px 12px; background:#2A3040;}
+  .v1vsbar i{width:10px; height:10px; border-radius:50%; background:#5A6375;} .v1vsbar span{margin-left:10px; font-size:12px; color:#9AA4B5;}
+  .v1vsbody{display:grid; grid-template-columns:38px 140px 1fr 170px; grid-template-rows:200px 92px; height:292px;}
+  .v1vsact{grid-row:1/3; background:#262B38; display:flex; flex-direction:column; align-items:center; gap:14px; padding-top:12px;}
+  .v1vsact b{font-size:17px; color:#7D8698; font-weight:400;} .v1vsact b.on{color:#fff;}
+  .v1vsact b.sp{color:#F28C28; opacity:0; animation:v1vsIn .4s var(--d) forwards;}
+  .v1vsp{position:relative; padding:10px 12px; border-left:1px solid #343B4B; opacity:0; animation:v1vsIn .5s var(--d) forwards;}
+  .v1vsp em{position:absolute; right:8px; top:6px; font-style:normal; font-size:15px; font-weight:800; color:#F28C28;}
+  .v1vsp small{display:block; font-size:11px; letter-spacing:.04em; color:#8A94A6; margin-bottom:8px;}
+  .v1vsp p{margin:0 0 6px; font-size:13px;}
+  .v1vsexp{background:#222735;} .v1vsed{background:#1B1F2A;} .v1vsed .t{color:#6FA8DC;}
+  .v1vscl{grid-row:1/3; grid-column:4; background:#262B38; border:2px solid #F28C28;}
+  .v1vscl p{padding:6px 8px; border-radius:8px; font-size:12px;} .v1vscl .me{background:#3A4257;} .v1vscl .ai{background:#2F3647; color:#A9D18E;}
+  .v1vster{grid-column:2/4; grid-row:2; background:#181C25; border-top:1px solid #343B4B; font-family:ui-monospace,monospace;}
+    .spk{width:1em; height:1em; vertical-align:-2px;}
+  @keyframes v1vsIn{from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:none}}
+
+  .v1ex{display:grid; grid-template-columns:1fr 70px 1fr; align-items:center; gap:8px;}
+  .v1exshelf,.v1exbox{background:#F7EEDB; border-radius:14px; padding:14px; min-height:270px;}
+  .v1exbox{background:#EAF0F7;}
+  .v1exshelf small,.v1exbox small{display:block; font-size:13px; font-weight:700; color:#6B7785; margin-bottom:10px;}
+  .v1exs{background:#fff; border-radius:10px; padding:10px 12px; margin-bottom:10px; border:1px solid #E3D6BC; opacity:0; animation:v1vsIn .4s var(--d) forwards;}
+  .v1exs b{display:block; font-size:16px; color:#16233A;} .v1exs span{font-size:13px; color:#6B7785;}
+  .v1exs.on{border:2px solid #F28C28;}
+  .v1exarr{font-size:15px; font-weight:700; color:#F28C28; text-align:center;}
+  .v1exbase{background:#16233A; color:#fff; border-radius:10px; padding:14px 12px; font-size:15px; margin-bottom:10px;}
+  .v1exin{background:#fff; border-left:4px solid #8A94A6; border-radius:8px; padding:9px 12px; margin-bottom:8px; font-size:15px; font-weight:700; color:#16233A;
+    opacity:0; animation:v1exIn .5s var(--d) forwards;}
+  .v1exin.on{border-left-color:#F28C28; color:#C76A12;}
+  @keyframes v1exIn{from{opacity:0; transform:translateX(-60px)} to{opacity:1; transform:none}}
+
+  .v1eibody{display:grid; grid-template-columns:38px 1fr; height:250px;}
+  .v1eipane{padding:12px 14px; background:#222735;} .v1eipane small{font-size:11px; color:#8A94A6; letter-spacing:.04em;}
+  .v1eisearch{margin:10px 0 14px; background:#1B1F2A; border:1px solid #4A90D9; border-radius:6px; padding:7px 10px; height:18px;}
+  .v1eisearch .ty{display:inline-block; overflow:hidden; white-space:nowrap; width:0; color:#fff; font-size:14px; animation:v1eiType .9s .4s steps(11) forwards;}
+  @keyframes v1eiType{to{width:11ch}}
+  .v1eicard{display:grid; grid-template-columns:44px 1fr auto; gap:10px; align-items:center; background:#2A3040; border-radius:8px; padding:10px; opacity:0; animation:v1vsIn .4s var(--d) forwards;}
+  .v1eicard .lg{width:40px; height:40px; border-radius:8px; background:#D97757; color:#fff; font-size:22px; display:flex; align-items:center; justify-content:center;}
+  .v1eicard b{display:block; color:#fff; font-size:15px;} .v1eicard span{display:block; font-size:12px; color:#A9B4C4;} .v1eicard .id{color:#7D8698;}
+  .v1eibtn{position:relative; width:64px; height:26px;}
+  .v1eibtn span{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; border-radius:5px; font-size:12px; font-weight:700;}
+  .v1eibtn .i1{background:#2F7ED8; color:#fff; animation:v1eiOut .3s 2.5s forwards;}
+  .v1eibtn .i2{background:#3A4257; color:#C9D1DC; opacity:0; animation:v1vsIn .3s 2.7s forwards;}
+  @keyframes v1eiOut{to{opacity:0; transform:scale(.9)}}
+  .v1eistat{background:#F28C28; color:#fff; font-size:12px; font-weight:700; text-align:right; padding:5px 12px; opacity:0; animation:v1vsIn .4s var(--d) forwards;}
+  @media print{.v1vsp,.v1vsact b.sp,.v1exs,.v1exin,.v1eicard,.v1eistat,.v1eibtn .i2{opacity:1; animation:none; transform:none}
+    .v1eisearch .ty{width:11ch; animation:none} .v1eibtn .i1{opacity:0; animation:none}}
   /* 1-2 · Claude 와 Claude Code 그림 */
   .v1u2cmp{display:grid; grid-template-columns:1fr 1fr; gap:22px; margin-bottom:14px;}
   .v1u2cmp figure{margin:0; display:flex; align-items:center; gap:14px; background:#F7EEDB; border-radius:14px; padding:8px 16px;}
