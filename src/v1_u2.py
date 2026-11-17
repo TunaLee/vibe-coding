@@ -156,10 +156,6 @@ def slides():
               + viz2.tiles([("① 맥락 파악", "파일 읽기"), ("② 작업", "app.js 수정"), ("③ 결과 확인", "빈 입력 처리 · 사람 확인 요청")], 1)
               + "</div></div>"
               + note("요청 = 결과 ?", "브라우저에서 직접 눌러 요청과 같은지 확인"), T),
-        light("막히는 곳", viz2.tiles([
-            ("claude 명령 없음", "터미널 새로 열기 · 설치 다시"), ("Free 계정", "Claude Code 로그인 불가 · Pro 이상"),
-            ("Windows · Git 없음", "Git for Windows 설치"), ("회사 PC 설치 막힘", "웹 claude.ai/code")], 2)
-              + src(("Claude Code 문서 · setup", "https://code.claude.com/docs/en/setup")), T),
     ]
 
 
