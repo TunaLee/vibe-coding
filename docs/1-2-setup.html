@@ -924,6 +924,21 @@
   @keyframes v1cutIn{from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none}}
   @media print{.v1cmr{opacity:1; animation:none}}
 
+  /* 1-2 · Claude 와 Claude Code — 같은 요청 두 길 (v1cc) */
+  .v1ccq{display:inline-block; background:#16233A; color:#fff; font-size:18px; font-weight:700; padding:9px 18px; border-radius:22px; margin-bottom:16px;}
+  .v1ccr{display:grid; grid-template-columns:170px 1fr 120px; gap:14px; align-items:center; margin-bottom:16px;}
+  .v1cch{display:flex; flex-direction:column; align-items:flex-start;}
+  .v1cch img{width:120px; height:68px; object-fit:cover; border-radius:10px; margin-bottom:6px;}
+  .v1cch b{font-size:21px; color:#16233A;} .v1cch small{font-size:13px; color:#6B7785;}
+  .v1ccl{display:grid; grid-template-columns:repeat(5,1fr); gap:8px;}
+  .v1ccs{border-radius:12px; padding:12px 10px; min-height:84px; opacity:0; animation:v1ccIn .45s var(--d) forwards;}
+  .v1ccs em{display:inline-block; font-style:normal; font-size:12.5px; font-weight:800; padding:2px 9px; border-radius:10px; margin-bottom:7px;}
+  .v1ccs span{display:block; font-size:16px; font-weight:600; color:#16233A; line-height:1.35;}
+  .v1ccs.h{background:#FFF1E2; border:2px solid #F28C28;} .v1ccs.h em{background:#F28C28; color:#fff;}
+  .v1ccs.a{background:#EAF0F7; border:2px solid #C9D6E6;} .v1ccs.a em{background:#16233A; color:#fff;}
+  .v1cct{font-size:19px; font-weight:800; color:#C76A12; text-align:center; opacity:0; animation:v1ccIn .45s var(--d) forwards;}
+  @keyframes v1ccIn{from{opacity:0; transform:translateX(-10px)} to{opacity:1; transform:none}}
+  @media print{.v1ccs,.v1cct{opacity:1; animation:none}}
   /* 1-2 · 공식 화면 캡처 + 번호 상자 (v1an) */
   .v1an{margin:0;} .v1anw{position:relative; border-radius:10px; overflow:hidden; box-shadow:0 8px 24px rgba(22,35,58,.18);}
   .v1anw img{display:block; width:100%;}
@@ -1028,7 +1043,7 @@
   <div class="eyebrow"><span class="tag">1-2</span></div>
   <h2 class="s-title sm">Claude와 Claude Code</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1u2cmp"><figure><img src="img/v1_brain1.webp" alt="LLM"/><figcaption><b>Claude</b> · 대화형</figcaption></figure><figure><img src="img/v1_brain3.webp" alt="코딩 에이전트"/><figcaption><b>Claude Code</b> · 위임형</figcaption></figure></div><div class="v2pair"><div class="v2p"><div class="v2ph">Claude</div><div class="v2pc" style="--d:0.00s"><b>결과</b><span>답변 글 · 코드 조각</span></div><div class="v2pc" style="--d:0.08s"><b>파일</b><span>사람이 복사 · 붙여넣기</span></div></div><div class="v2p on"><div class="v2ph">Claude Code</div><div class="v2pc" style="--d:0.00s"><b>결과</b><span>내 폴더의 파일</span></div><div class="v2pc" style="--d:0.08s"><b>파일</b><span>직접 읽기 · 만들기 · 고치기 · 실행</span></div></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v1cc"><div class="v1ccq">요청 · 「회의실 예약 페이지 만들어 줘」</div><div class="v1ccr"><div class="v1cch"><img src="img/v1_brain1.webp" alt="Claude"/><b>Claude</b><small>claude.ai · 대화형</small></div><div class="v1ccl"><div class="v1ccs a" style="--d:0.60s"><em>AI</em><span>코드를 글로 답함</span></div><div class="v1ccs h" style="--d:1.15s"><em>사람</em><span>코드 복사</span></div><div class="v1ccs h" style="--d:1.70s"><em>사람</em><span>파일 만들어 붙여넣기</span></div><div class="v1ccs h" style="--d:2.25s"><em>사람</em><span>저장 · 브라우저로 열기</span></div><div class="v1ccs h" style="--d:2.80s"><em>사람</em><span>오류 나면 다시 질문</span></div></div><div class="v1cct" style="--d:3.35s">사람 손 4번</div></div><div class="v1ccr"><div class="v1cch"><img src="img/v1_brain3.webp" alt="Claude Code"/><b>Claude Code</b><small>VS Code · 터미널 · 위임형</small></div><div class="v1ccl"><div class="v1ccs a" style="--d:4.40s"><em>AI</em><span>폴더 파일 읽기</span></div><div class="v1ccs a" style="--d:4.95s"><em>AI</em><span>index.html 만들기</span></div><div class="v1ccs a" style="--d:5.50s"><em>AI</em><span>실행 · 확인</span></div><div class="v1ccs a" style="--d:6.05s"><em>AI</em><span>오류 직접 고침</span></div><div class="v1ccs h" style="--d:6.60s"><em>사람</em><span>결과 확인</span></div></div><div class="v1cct" style="--d:7.15s">사람 손 1번</div></div></div><div class="dbnote"><span>차이</span> 내 컴퓨터 파일에 AI 손이 닿는가 · Claude 는 글로 답함 · Claude Code 는 파일을 직접 만들고 고침</div></div></div>
 </section>
 
 <section class="slide lt" data-title="Claude Code를 쓰는 곳">

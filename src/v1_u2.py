@@ -28,6 +28,25 @@ def annot(img, alt, boxes, cap):
             f'<figcaption>{cap}</figcaption></figure>')
 
 
+def cc_lanes():
+    """같은 요청 · 두 길 — Claude 는 사람 손이 네 번, Claude Code 는 AI 가 끝까지."""
+    req = '<div class="v1ccq">요청 · 「회의실 예약 페이지 만들어 줘」</div>'
+    rows = [
+        ("v1_brain1.webp", "Claude", "claude.ai · 대화형", 0.6, [
+            ("AI", "코드를 글로 답함"), ("사람", "코드 복사"), ("사람", "파일 만들어 붙여넣기"),
+            ("사람", "저장 · 브라우저로 열기"), ("사람", "오류 나면 다시 질문")], "사람 손 4번"),
+        ("v1_brain3.webp", "Claude Code", "VS Code · 터미널 · 위임형", 4.4, [
+            ("AI", "폴더 파일 읽기"), ("AI", "index.html 만들기"), ("AI", "실행 · 확인"),
+            ("AI", "오류 직접 고침"), ("사람", "결과 확인")], "사람 손 1번")]
+    out = req
+    for img, name, sub, d0, steps, tot in rows:
+        st = "".join(f'<div class="v1ccs {"h" if who == "사람" else "a"}" style="--d:{d0 + i * .55:.2f}s"><em>{who}</em><span>{t}</span></div>'
+                     for i, (who, t) in enumerate(steps))
+        out += (f'<div class="v1ccr"><div class="v1cch"><img src="img/{img}" alt="{name}"/><b>{name}</b><small>{sub}</small></div>'
+                f'<div class="v1ccl">{st}</div><div class="v1cct" style="--d:{d0 + len(steps) * .55:.2f}s">{tot}</div></div>')
+    return f'<div class="v1cc">{out}</div>'
+
+
 def slides():
     return [
         # ── 도구 네 개
@@ -45,13 +64,8 @@ def slides():
               + "</div></div>"
               + note("소크라테스식 대화", "답 대신 질문을 하나씩 · 내 답으로 다음 질문 (1-3)"), T),
         # ── Claude Code
-        light("Claude와 Claude Code", '<div class="v1u2cmp">'
-              + '<figure><img src="img/v1_brain1.webp" alt="LLM"/><figcaption><b>Claude</b> · 대화형</figcaption></figure>'
-              + '<figure><img src="img/v1_brain3.webp" alt="코딩 에이전트"/><figcaption><b>Claude Code</b> · 위임형</figcaption></figure></div>'
-              + viz2.pair(
-                  "Claude", [("결과", "답변 글 · 코드 조각"), ("파일", "사람이 복사 · 붙여넣기")],
-                  "Claude Code", [("결과", "내 폴더의 파일"), ("파일", "직접 읽기 · 만들기 · 고치기 · 실행")], hl="r")
-              + src(("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")), T),
+        light("Claude와 Claude Code", cc_lanes()
+              + note("차이", "내 컴퓨터 파일에 AI 손이 닿는가 · Claude 는 글로 답함 · Claude Code 는 파일을 직접 만들고 고침"), T),
         light("Claude Code를 쓰는 곳", viz2.tiles([
             ("터미널", "명령어 창 · 기능이 가장 많음"), ("VS Code", "확장 프로그램 · 파일을 보며"),
             ("JetBrains", "플러그인"), ("데스크톱 앱", "macOS · Windows"), ("웹", "claude.ai/code · 클라우드")], 5)
@@ -152,6 +166,21 @@ def slides():
 
 
 CSS = """
+  /* 1-2 · Claude 와 Claude Code — 같은 요청 두 길 (v1cc) */
+  .v1ccq{display:inline-block; background:#16233A; color:#fff; font-size:18px; font-weight:700; padding:9px 18px; border-radius:22px; margin-bottom:16px;}
+  .v1ccr{display:grid; grid-template-columns:170px 1fr 120px; gap:14px; align-items:center; margin-bottom:16px;}
+  .v1cch{display:flex; flex-direction:column; align-items:flex-start;}
+  .v1cch img{width:120px; height:68px; object-fit:cover; border-radius:10px; margin-bottom:6px;}
+  .v1cch b{font-size:21px; color:#16233A;} .v1cch small{font-size:13px; color:#6B7785;}
+  .v1ccl{display:grid; grid-template-columns:repeat(5,1fr); gap:8px;}
+  .v1ccs{border-radius:12px; padding:12px 10px; min-height:84px; opacity:0; animation:v1ccIn .45s var(--d) forwards;}
+  .v1ccs em{display:inline-block; font-style:normal; font-size:12.5px; font-weight:800; padding:2px 9px; border-radius:10px; margin-bottom:7px;}
+  .v1ccs span{display:block; font-size:16px; font-weight:600; color:#16233A; line-height:1.35;}
+  .v1ccs.h{background:#FFF1E2; border:2px solid #F28C28;} .v1ccs.h em{background:#F28C28; color:#fff;}
+  .v1ccs.a{background:#EAF0F7; border:2px solid #C9D6E6;} .v1ccs.a em{background:#16233A; color:#fff;}
+  .v1cct{font-size:19px; font-weight:800; color:#C76A12; text-align:center; opacity:0; animation:v1ccIn .45s var(--d) forwards;}
+  @keyframes v1ccIn{from{opacity:0; transform:translateX(-10px)} to{opacity:1; transform:none}}
+  @media print{.v1ccs,.v1cct{opacity:1; animation:none}}
   /* 1-2 · 공식 화면 캡처 + 번호 상자 (v1an) */
   .v1an{margin:0;} .v1anw{position:relative; border-radius:10px; overflow:hidden; box-shadow:0 8px 24px rgba(22,35,58,.18);}
   .v1anw img{display:block; width:100%;}
