@@ -24,7 +24,38 @@ def stack():
     return f'<div class="v1cmw"><div class="v1cms"><div class="v1cmh">기록 저장소</div>{cards}</div><div>{term}</div></div>'
 
 
+FILES = [("발표자료.pptx", "10월 2일"), ("발표자료_v2.pptx", "10월 5일"), ("발표자료_최종.pptx", "10월 8일"),
+         ("발표자료_최종_수정.pptx", "10월 9일"), ("발표자료_진짜최종.pptx", "10월 10일"), ("발표자료_진짜진짜마지막.pptx", "10월 11일")]
+
+
+def files():
+    """폴더 창에 pptx 사본이 하나씩 늘어남 + 생기는 문제 세 줄."""
+    rows = "".join(f'<div class="v1fr" style="--d:{.3 + i * .55:.2f}s"><i>P</i><b>{n}</b><small>{d}</small></div>'
+                   for i, (n, d) in enumerate(FILES))
+    d0 = .3 + len(FILES) * .55
+    probs = "".join(f'<div class="v1fp" style="--d:{d0 + i * .4:.2f}s"><b>{h}</b><span>{t}</span></div>' for i, (h, t) in enumerate([
+        ("어느 게 최신", "날짜 · 파일을 열어 봐야 앎"), ("무엇이 바뀌었나", "두 파일을 나란히 놓고 비교"),
+        ("이전 상태 복구", "사본을 지웠으면 불가")]))
+    return (f'<div class="v1fw"><div class="v1fd"><div class="v1fdh">내 문서 › 팀 발표</div>{rows}</div>'
+            f'<div class="v1fps">{probs}</div></div>')
+
+
 CSS = """
+  /* 1-5 · 파일 이름 버전 관리 (v1f) */
+  .v1fw{display:grid; grid-template-columns:1.25fr 1fr; gap:30px; align-items:center; margin-top:14px;}
+  .v1fd{border:1.5px solid #D9DDE3; border-radius:14px; background:#fff; overflow:hidden;}
+  .v1fdh{background:#F2F4F7; padding:10px 18px; font-size:15px; font-weight:800; color:#6B7785; border-bottom:1.5px solid #D9DDE3;}
+  .v1fr{display:grid; grid-template-columns:34px 1fr auto; gap:12px; align-items:center; padding:11px 18px; border-bottom:1px solid #EEF0F3;
+    opacity:0; animation:v1fIn .45s var(--d) forwards;}
+  .v1fr:last-child{border-bottom:none; background:#FFF8F0;}
+  .v1fr i{display:inline-flex; width:30px; height:36px; border-radius:4px; background:#D35230; color:#fff; font-style:normal; font-weight:900;
+    font-size:15px; align-items:center; justify-content:center;}
+  .v1fr b{font-size:20px; color:#16233A; font-weight:700;} .v1fr small{font-size:14px; color:#6B7785;}
+  .v1fps{display:flex; flex-direction:column; gap:14px;}
+  .v1fp{border-left:5px solid #F28C28; background:#FFF1E2; border-radius:10px; padding:14px 18px; opacity:0; animation:v1fIn .45s var(--d) forwards;}
+  .v1fp b{display:block; font-size:21px; color:#16233A; margin-bottom:4px;} .v1fp span{font-size:16px; color:#4A5563;}
+  @keyframes v1fIn{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
+  @media print{.v1fr,.v1fp{opacity:1; animation:none}}
   .v1cmw{display:grid; grid-template-columns:1.1fr 1fr; gap:26px; align-items:center;}
   .v1cms{display:flex; flex-direction:column-reverse; gap:10px; border:2px dashed #D9DDE3; border-radius:16px; padding:18px 18px 14px; background:#F7F8FA; min-height:280px; justify-content:flex-start;}
   .v1cmh{order:-1; font-size:14px; font-weight:800; color:#6B7785; text-align:center; margin-top:6px;}
@@ -41,12 +72,7 @@ CSS = """
 def slides():
     return [
         # ── 배경 → 비유
-        light("파일 이름 버전 관리", viz2.tiles([
-            ("기획서_v1.md", "처음 쓴 것"), ("기획서_최종.md", "피드백 반영"), ("기획서_최종_진짜.md", "PRD 쓰다 다시 고침")], 3)
-              + viz2.tiles([
-                  ("어느 게 최신", "파일 날짜를 열어 봐야 앎"), ("무엇이 바뀌었나", "두 파일을 나란히 놓고 비교"),
-                  ("이전 상태 복구", "복사본 없으면 불가")], 3)
-              + note("코드", "파일 수십 개가 함께 바뀜 · 파일 이름 복사로 관리 불가"), T),
+        light("파일 이름 버전 관리", files(), T),
         light("비유 · 세이브 포인트", phmap(
             "v1_u5_savepoint.webp", "세이브 포인트 · 저장한 지점부터 다시 시작", "AI 생성 그림 · Z-Image Turbo (Apache 2.0)",
             "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo",

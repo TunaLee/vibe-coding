@@ -936,6 +936,21 @@
   @keyframes v1cutIn{from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none}}
   @media print{.v1cmr{opacity:1; animation:none}}
 
+  /* 1-5 · 파일 이름 버전 관리 (v1f) */
+  .v1fw{display:grid; grid-template-columns:1.25fr 1fr; gap:30px; align-items:center; margin-top:14px;}
+  .v1fd{border:1.5px solid #D9DDE3; border-radius:14px; background:#fff; overflow:hidden;}
+  .v1fdh{background:#F2F4F7; padding:10px 18px; font-size:15px; font-weight:800; color:#6B7785; border-bottom:1.5px solid #D9DDE3;}
+  .v1fr{display:grid; grid-template-columns:34px 1fr auto; gap:12px; align-items:center; padding:11px 18px; border-bottom:1px solid #EEF0F3;
+    opacity:0; animation:v1fIn .45s var(--d) forwards;}
+  .v1fr:last-child{border-bottom:none; background:#FFF8F0;}
+  .v1fr i{display:inline-flex; width:30px; height:36px; border-radius:4px; background:#D35230; color:#fff; font-style:normal; font-weight:900;
+    font-size:15px; align-items:center; justify-content:center;}
+  .v1fr b{font-size:20px; color:#16233A; font-weight:700;} .v1fr small{font-size:14px; color:#6B7785;}
+  .v1fps{display:flex; flex-direction:column; gap:14px;}
+  .v1fp{border-left:5px solid #F28C28; background:#FFF1E2; border-radius:10px; padding:14px 18px; opacity:0; animation:v1fIn .45s var(--d) forwards;}
+  .v1fp b{display:block; font-size:21px; color:#16233A; margin-bottom:4px;} .v1fp span{font-size:16px; color:#4A5563;}
+  @keyframes v1fIn{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
+  @media print{.v1fr,.v1fp{opacity:1; animation:none}}
   .v1cmw{display:grid; grid-template-columns:1.1fr 1fr; gap:26px; align-items:center;}
   .v1cms{display:flex; flex-direction:column-reverse; gap:10px; border:2px dashed #D9DDE3; border-radius:16px; padding:18px 18px 14px; background:#F7F8FA; min-height:280px; justify-content:flex-start;}
   .v1cmh{order:-1; font-size:14px; font-weight:800; color:#6B7785; text-align:center; margin-top:6px;}
@@ -1019,7 +1034,7 @@
   <div class="eyebrow"><span class="tag">1-5</span></div>
   <h2 class="s-title sm">파일 이름 버전 관리</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>기획서_v1.md</b><span>처음 쓴 것</span></div><div class="v2tile" style="--d:0.08s"><b>기획서_최종.md</b><span>피드백 반영</span></div><div class="v2tile" style="--d:0.16s"><b>기획서_최종_진짜.md</b><span>PRD 쓰다 다시 고침</span></div></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>어느 게 최신</b><span>파일 날짜를 열어 봐야 앎</span></div><div class="v2tile" style="--d:0.08s"><b>무엇이 바뀌었나</b><span>두 파일을 나란히 놓고 비교</span></div><div class="v2tile" style="--d:0.16s"><b>이전 상태 복구</b><span>복사본 없으면 불가</span></div></div><div class="dbnote"><span>코드</span> 파일 수십 개가 함께 바뀜 · 파일 이름 복사로 관리 불가</div></div></div>
+  <div class="body"><div class="mid"><div class="v1fw"><div class="v1fd"><div class="v1fdh">내 문서 › 팀 발표</div><div class="v1fr" style="--d:0.30s"><i>P</i><b>발표자료.pptx</b><small>10월 2일</small></div><div class="v1fr" style="--d:0.85s"><i>P</i><b>발표자료_v2.pptx</b><small>10월 5일</small></div><div class="v1fr" style="--d:1.40s"><i>P</i><b>발표자료_최종.pptx</b><small>10월 8일</small></div><div class="v1fr" style="--d:1.95s"><i>P</i><b>발표자료_최종_수정.pptx</b><small>10월 9일</small></div><div class="v1fr" style="--d:2.50s"><i>P</i><b>발표자료_진짜최종.pptx</b><small>10월 10일</small></div><div class="v1fr" style="--d:3.05s"><i>P</i><b>발표자료_진짜진짜마지막.pptx</b><small>10월 11일</small></div></div><div class="v1fps"><div class="v1fp" style="--d:3.60s"><b>어느 게 최신</b><span>날짜 · 파일을 열어 봐야 앎</span></div><div class="v1fp" style="--d:4.00s"><b>무엇이 바뀌었나</b><span>두 파일을 나란히 놓고 비교</span></div><div class="v1fp" style="--d:4.40s"><b>이전 상태 복구</b><span>사본을 지웠으면 불가</span></div></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="비유 · 세이브 포인트">
