@@ -12,6 +12,31 @@ from v3kit import phmap
 
 T = "1-5"
 
+LOG = [("dfb369b", "첫 화면 완성", "index.html 생성"), ("8fcbe80", "버튼 추가", "로그인 버튼"), ("0b491e3", "색상 수정", "버튼 주황색")]
+
+
+def stack():
+    """커밋이 아래에서 위로 하나씩 쌓임(v1 → v3) + 같은 기록의 터미널 출력. 실제 git 으로 만든 해시."""
+    cards = "".join(
+        f'<div class="v1cm" style="animation-delay:{.4 + i * .9:.1f}s"><span class="v">v{i + 1}</span><code>{h}</code><b>{m}</b><small>{d}</small></div>'
+        for i, (h, m, d) in enumerate(LOG))
+    term = code("터미널 · git log --oneline", esc("\n".join(f"{h} {m}" for h, m, _ in reversed(LOG))))
+    return f'<div class="v1cmw"><div class="v1cms"><div class="v1cmh">기록 저장소</div>{cards}</div><div>{term}</div></div>'
+
+
+CSS = """
+  .v1cmw{display:grid; grid-template-columns:1.1fr 1fr; gap:26px; align-items:center;}
+  .v1cms{display:flex; flex-direction:column-reverse; gap:10px; border:2px dashed #D9DDE3; border-radius:16px; padding:18px 18px 14px; background:#F7F8FA; min-height:280px; justify-content:flex-start;}
+  .v1cmh{order:-1; font-size:14px; font-weight:800; color:#6B7785; text-align:center; margin-top:6px;}
+  .v1cm{display:grid; grid-template-columns:44px 84px 1fr; align-items:baseline; gap:8px; padding:12px 16px; border-radius:12px; background:#fff; border:2px solid #1F3A5F;
+        opacity:0; animation:v1cmIn .5s ease-out forwards;}
+  .v1cm:last-of-type{border-color:#F28C28; background:#FFF8F0;}
+  .v1cm .v{font-weight:900; color:#F28C28; font-size:18px;} .v1cm code{font-family:var(--mono); font-size:15px; color:#6B7785; background:none;}
+  .v1cm b{font-size:19px; color:#16233A;} .v1cm small{grid-column:3; font-size:14.5px; color:#6B7785;}
+  @keyframes v1cmIn{from{opacity:0; transform:translateY(-24px)} to{opacity:1; transform:none}}
+  @media print{.v1cm{opacity:1; animation:none}}
+"""
+
 
 def slides():
     return [
@@ -21,12 +46,12 @@ def slides():
               + viz2.tiles([
                   ("어느 게 최신", "파일 날짜를 열어 봐야 앎"), ("무엇이 바뀌었나", "두 파일을 나란히 놓고 비교"),
                   ("이전 상태 복구", "복사본 없으면 불가")], 3)
-              + note("코드에서는", "파일 수십 개가 함께 바뀜 · 이름 붙여 복사하는 방식이 통하지 않음"), T),
-        light("세이브 포인트 비유", phmap(
-            "v1_savepoint.webp", "게임 속 세이브 포인트", "그림 · David Revoy · CC BY 4.0",
-            "https://commons.wikimedia.org/wiki/File:2023-03-30_Concept-art-for-a-fictive-video-game-Save-Point_by-David-Revoy.jpg",
+              + note("코드", "파일 수십 개가 함께 바뀜 · 파일 이름 복사로 관리 불가"), T),
+        light("비유 · 세이브 포인트", phmap(
+            "v1_u5_savepoint.webp", "세이브 포인트 · 저장한 지점부터 다시 시작", "AI 생성 그림 · Z-Image Turbo (Apache 2.0)",
+            "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo",
             viz2.maprows([
-                ("세이브 포인트에서 저장", "커밋 (commit)", "지금 상태를 기록"), ("저장 슬롯 이름", "커밋 메시지", "「예약 창 추가」"),
+                ("세이브 포인트에서 저장", "커밋 (commit)", "지금 상태를 기록"), ("저장 슬롯 이름", "커밋 메시지", "「버튼 추가」"),
                 ("저장 목록", "기록 (log)", "언제 · 무엇을"), ("불러오기", "되돌리기", "저장 시점 복원"),
                 ("클라우드 저장", "GitHub", "다른 컴퓨터에서도")], "게임", "Git")), T),
         # ── Git · commit · 되돌리기
@@ -35,26 +60,25 @@ def slides():
               + viz2.pair(
                   "복사본으로 관리", [("파일마다 사본", "기획서_최종_진짜.md"), ("바뀐 곳", "눈으로 비교")],
                   "Git으로 관리", [("파일은 하나", "기획서.md 그대로"), ("바뀐 곳", "커밋마다 자동으로 남음")])
-              + note("공식 정의", "git commit — 「Record changes to the repository」 · 저장소에 변경을 기록"), T),
+              + note("commit", "저장소에 변경을 기록 (git 공식 문서)"), T),
         light("커밋 하나에 남는 것", viz2.tiles([
-            ("바뀐 내용", "어느 파일의 어느 줄"), ("메시지", "「PRD 완료 기준 추가」"),
-            ("시각 · 작성자", "언제 · 누가"), ("고유 번호", "a3f9c1e 같은 해시")], 4)
-              + code("기록 보기 · 예", esc(
-                  "a3f9c1e  PRD 완료 기준 추가        2026-11-20 14:12\n"
-                  "7b21d04  기획서 · PRD 첫 버전      2026-11-20 13:40"))
-              + note("메시지", "무엇을 바꿨는지 한 줄 · 나중에 되돌릴 시점을 찾는 이름표"), T),
+            ("바뀐 내용", "어느 파일의 어느 줄"), ("메시지", "「버튼 추가」"),
+            ("시각 · 작성자", "언제 · 누가"), ("고유 번호", "8fcbe80 같은 해시")], 4)
+              + note("메시지", "무엇을 바꿨는지 한 줄 · 되돌릴 시점을 찾는 이름표"), T),
+        light("커밋 기록 쌓기", stack()
+              + src(("참고 · 혼잡스 「바이브코딩 한 장 지도」", "https://www.youtube.com/watch?v=HNtS6WGGhNU")), T),
         light("되돌리기 두 가지", viz2.pair(
             "아직 커밋 전", [("restore", "마지막 커밋 상태로 파일을 되돌림"), ("쓰는 때", "방금 고친 것이 마음에 안 들 때")],
             "이미 커밋한 뒤", [("revert", "그 커밋을 되돌리는 새 커밋을 만듦"), ("기록", "지우지 않고 「되돌림」도 남김")], hl="r")
-              + flow([("커밋 A", "기획서"), ("커밋 B", "PRD"), ("고치는 중", "PRD 수정"), ("restore", "커밋 B 상태로"), ("revert", "커밋 C · B를 취소")], hl=2)
-              + note("공식 문서", "revert 는 새 커밋 · restore 는 작업 폴더의 파일만 · 둘 다 기록을 지우지 않음")
+              + code("터미널 · git revert 뒤 git log --oneline", esc(
+                  "5b00623 Revert \"색상 수정\"\n0b491e3 색상 수정\n8fcbe80 버튼 추가"))
               + src(("git-scm · git", "https://git-scm.com/docs/git")), T),
         light("말로 하는 Git 작업", viz2.maprows([
             ("「지금 상태 커밋해 줘」", "git add · git commit", "메시지도 Claude가 씀"),
             ("「커밋 기록 보여 줘」", "git log", "시점 · 메시지 목록"),
             ("「방금 고친 거 취소해 줘」", "git restore", "커밋 전 수정 버림"),
             ("「마지막 커밋 되돌려 줘」", "git revert", "되돌리는 새 커밋")], "Claude Code에 하는 말", "실행되는 명령")
-              + note("명령어", "외우지 않아도 됨 · 무엇을 하는지만 알면 됨"), T),
+              + note("명령 실행", "Claude Code · 사람은 결과 확인"), T),
         # ── GitHub · push / pull
         light("GitHub", viz2.pair(
             "Git", [("어디에", "내 컴퓨터"), ("하는 일", "저장 시점 기록 · 되돌리기"), ("없으면", "기록이 이 컴퓨터에만")],
@@ -67,7 +91,7 @@ def slides():
                   ("push", "로컬 커밋을 원격 저장소에 올림"), ("pull", "원격의 변경을 내 컴퓨터로 가져와 합침")], 2)
               + src(("GitHub Docs · About Git", "https://docs.github.com/en/get-started/using-git/about-git")), T),
         light("커밋하는 시점", viz2.tiles([
-            ("기능 하나가 됐을 때", "「예약 창 저장까지 동작」"), ("크게 바꾸기 전", "디자인을 갈아엎기 전"),
+            ("기능 하나가 됐을 때", "「로그인 버튼 동작」"), ("크게 바꾸기 전", "디자인을 갈아엎기 전"),
             ("확인이 끝났을 때", "브라우저로 보고 이상 없음")], 3)
               + flow([("요청", "기능 하나"), ("확인", "브라우저"), ("커밋", "세이브"), ("다음 요청", "")], hl=2)
               + note("1-6 에서", "이 고리를 태스크마다 반복"), T),
@@ -81,11 +105,11 @@ def slides():
               [("목표", "이 폴더를 Git으로 관리 · 첫 커밋"), ("대상", "기획서.md · PRD.md"), ("메시지", "무엇을 담았는지 한 줄")],
               ["Git 시작", "첫 커밋", "커밋 기록", "되돌리기"],
               ["기록에 내 메시지가 보임", "취소한 줄이 원래대로 돌아옴"],
-              "Git이 없다고 나오면 「Git 설치 방법 알려 줘」 · 이름 · 이메일을 물으면 GitHub 가입 정보로"),
+              "Git 없음 → 「Git 설치 방법 알려 줘」 · 이름 · 이메일 질문 → GitHub 가입 정보 입력"),
         light("실습 1-5 확인", chat([
             ("me", "이 폴더를 Git으로 관리하고, 기획서랑 PRD를 첫 커밋으로 남겨 줘."),
             ("ai", "Git 저장소를 만들고 기획서.md · PRD.md 를 커밋했다.\n메시지: 「기획서 · PRD 첫 버전」")], "첫 커밋 대화 예")
-              + code("커밋 기록 · 예", esc("7b21d04  기획서 · PRD 첫 버전"))
+              + code("터미널 · git log --oneline", esc("624e0e2 기획서 · PRD 첫 버전"))
               + viz2.tiles([
                   ("커밋 1개", "메시지에 무엇을 담았는지"), ("되돌리기", "PRD.md 가 커밋 상태 그대로"), ("다음 단원", "이 폴더에 앱을 만듦")], 3), T),
     ]

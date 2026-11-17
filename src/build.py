@@ -3,6 +3,7 @@
 
 사용: python3 src/build.py [part1 | part3]
   1부 — 단원마다 한 파일  docs/1-1-vibe-coding.html …  (P1_ONLY=3,6 으로 일부만)
+  2부 — 단원마다 한 파일  docs/2-1-preview.html …  (P2_ONLY=2,5 로 일부만)
   3부 — 단원마다 한 파일  docs/3-1-harness.html …  + 합본 docs/3-all.html
 """
 import importlib
@@ -61,6 +62,23 @@ def build_part1():
         _write(v1kit.file_of(u), tpl, f"{u} {title}", parts)
 
 
+def build_part2():
+    import v1kit
+    import v2kit
+    import v3kit
+    only = [x for x in os.environ.get("P2_ONLY", "").split(",") if x]
+    for i, (u, title, _, _) in enumerate(v2kit.UNITS, 1):
+        if only and str(i) not in only:
+            continue
+        try:
+            mod = importlib.import_module(f"v2_u{i}")
+        except ModuleNotFoundError:
+            continue
+        tpl = _tpl(BASE_CSS + v3kit.CSS + v1kit.CSS + v2kit.CSS + getattr(mod, "CSS", ""))
+        parts = [art.DEFS, v2kit.cover(u), v2kit.roadmap(u)] + mod.slides() + [v2kit.nextup(u)]
+        _write(v2kit.file_of(u), tpl, f"{u} {title}", parts)
+
+
 def build_part3():
     import v3kit
     import vibe3
@@ -76,5 +94,7 @@ if __name__ == "__main__":
     arg = sys.argv[1:]
     if arg in ([], ["part1"]):
         build_part1()
+    if arg in ([], ["part2"]):
+        build_part2()
     if arg in ([], ["part3"]):
         build_part3()

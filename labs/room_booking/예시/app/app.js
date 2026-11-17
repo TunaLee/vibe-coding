@@ -49,7 +49,7 @@ $("bookForm").addEventListener("submit", (e) => {
   const f = e.target;
   const b = { id: Date.now(), room: picked.room, date: day, start: f.start.value, end: f.end.value, who: f.who.value.trim(), title: f.title.value.trim() };
   if (b.end <= b.start) { e.preventDefault(); $("err").textContent = "끝 시간이 시작보다 늦어야 한다"; return; }
-  // F4 겹침 막기
+  // F4 중복 예약 차단
   const clash = load().some((x) => x.room === b.room && x.date === b.date && x.start < b.end && b.start < x.end);
   if (clash) { e.preventDefault(); $("err").textContent = "이미 예약된 시간"; return; }
   save([...load(), b]);

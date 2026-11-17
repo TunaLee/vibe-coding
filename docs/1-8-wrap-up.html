@@ -926,6 +926,10 @@
 
   /* v1 · 1-8 화면 캡처 높이 (메모가 내비 바에 걸리지 않게) */
   .v1shot img{max-height:340px;}
+  /* 1-8 · 요청 = 결과 ? */
+  .v1u8q{display:flex; justify-content:center; align-items:center; gap:18px; margin:0 0 22px; padding:18px; border-radius:16px; background:#FFF8F0; border:2px solid #F28C28;}
+  .v1u8q span{font-size:26px; font-weight:800; color:#16233A; padding:8px 22px; border-radius:12px; background:#fff; border:2px solid #D9DDE3;}
+  .v1u8q i{font-style:normal; font-size:30px; font-weight:900; color:#F28C28;} .v1u8q em{font-style:normal; font-size:30px; font-weight:900; color:#F28C28;}
 </style>
 </head>
 <body>
@@ -994,12 +998,12 @@
   <div class="body"><div class="mid"><div class="v1map"><a class="v1u done" href="1-1-vibe-coding.html"><span class="c">1-1</span><b>바이브코딩이란</b><small>바이브코딩 개념</small></a><a class="v1u done" href="1-2-setup.html"><span class="c">1-2</span><b>도구 · 실습 환경</b><small>계정 3개 · 설치</small></a><a class="v1u done" href="1-3-planning.html"><span class="c">1-3</span><b>기획서 작성</b><small>기획서.md</small></a><a class="v1u done" href="1-4-prd.html"><span class="c">1-4</span><b>요구사항 정의 (PRD)</b><small>PRD.md</small></a><a class="v1u done" href="1-5-git.html"><span class="c">1-5</span><b>Git · GitHub 기초</b><small>첫 커밋</small></a><a class="v1u done" href="1-6-build.html"><span class="c">1-6</span><b>바이브코딩 실습</b><small>동작하는 앱</small></a><a class="v1u done" href="1-7-deploy.html"><span class="c">1-7</span><b>배포</b><small>공유 주소</small></a><a class="v1u on" href="1-8-wrap-up.html"><span class="c">1-8</span><b>마무리</b><small>회고 → 2부</small></a></div><div class="dbnote"><span>공통 예제</span> 회의실 예약 페이지 · 같은 순서로 내 아이디어를 만든다</div></div></div>
 </section>
 
-<section class="slide lt" data-title="1부 산출물">
+<section class="slide lt" data-title="1부 회고 · 요청 = 결과 ?">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-8</span></div>
-  <h2 class="s-title sm">1부 산출물</h2>
+  <h2 class="s-title sm">1부 회고 · 요청 = 결과 ?</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="flow"><div class="fs"><b>기획서.md</b><span>1-3 · 무엇을 왜</span></div><div class="fa">→</div><div class="fs"><b>PRD.md</b><span>1-4 · 기능 · 완료 기준</span></div><div class="fa">→</div><div class="fs"><b>커밋 기록</b><span>1-5 · 되돌릴 지점</span></div><div class="fa">→</div><div class="fs"><b>동작하는 앱</b><span>1-6 · localhost</span></div><div class="fa">→</div><div class="fs hl"><b>배포 주소</b><span>1-7 · *.vercel.app</span></div></div><div class="dbnote"><span>같은 순서</span> 기획서 → PRD → 구현 → 배포 · 2부에서도 그대로</div></div></div>
+  <div class="body"><div class="mid"><div class="v1u8q"><span>내 요청</span><i>=</i><span>결과</span><em>?</em></div><div class="flow"><div class="fs"><b>기획서.md</b><span>무엇을 · 누구를 (1-3)</span></div><div class="fa">→</div><div class="fs"><b>PRD.md</b><span>기능 · 완료 기준 (1-4)</span></div><div class="fa">→</div><div class="fs"><b>커밋 기록</b><span>되돌릴 지점 (1-5)</span></div><div class="fa">→</div><div class="fs"><b>동작하는 앱</b><span>작게 요청 · 확인 (1-6)</span></div><div class="fa">→</div><div class="fs"><b>배포 주소</b><span>점검 · 공유 (1-7)</span></div></div><div class="dbnote"><span>다섯 단계</span> 요청과 결과의 차이를 줄이는 순서 · 2부에서도 같음</div><div class="src">출처 · <a href="https://www.youtube.com/watch?v=HNtS6WGGhNU" target="_blank" rel="noopener">참고 · 혼잡스 「바이브코딩 한 장 지도」 아이디어 → 코드 → 배포 → 서비스</a></div></div></div>
 </section>
 
 <section class="slide lt" data-title="결과 공유">
@@ -1007,9 +1011,9 @@
   <div class="eyebrow"><span class="tag">1-8</span></div>
   <h2 class="s-title sm">결과 공유</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2tiles c2"><div class="v2tile" style="--d:0.00s"><b>배포 주소</b><span>프로젝트명.vercel.app</span></div><div class="v2tile" style="--d:0.08s"><b>한 줄 소개</b><span>기획서의 서비스 컨셉</span></div><div class="v2tile" style="--d:0.16s"><b>완료 기준</b><span>PRD 체크리스트 몇 개 통과</span></div><div class="v2tile" style="--d:0.24s"><b>가장 오래 걸린 곳</b><span>다시 요청한 횟수가 많은 기능</span></div></div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">공유 글 · 예</span></div><pre><code>회의실 예약 · https://room-booking.vercel.app
-날짜별 회의실 3곳 시간표 · 겹치는 예약은 막힘
-완료 기준 5개 중 5개 · 겹침 막기에서 요청 3번</code></pre></div></div></div>
+  <div class="body"><div class="mid"><div class="v2tiles c4"><div class="v2tile" style="--d:0.00s"><b>배포 주소</b><span>프로젝트명.vercel.app</span></div><div class="v2tile" style="--d:0.08s"><b>한 줄 소개</b><span>기획서의 서비스 컨셉</span></div><div class="v2tile" style="--d:0.16s"><b>완료 기준</b><span>PRD 체크리스트 통과 수</span></div><div class="v2tile" style="--d:0.24s"><b>가장 오래 걸린 곳</b><span>다시 요청이 많았던 기능</span></div></div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">공유 글 · 예</span></div><pre><code>회의실 예약 · https://room-booking.vercel.app
+날짜별 회의실 3곳 시간표 · 이미 찬 시간은 예약 불가
+완료 기준 5개 중 5개 · 예약 시간 확인 기능에서 요청 3번</code></pre></div></div></div>
 </section>
 
 <section class="slide lt" data-title="회고 질문">
@@ -1017,15 +1021,7 @@
   <div class="eyebrow"><span class="tag">1-8</span></div>
   <h2 class="s-title sm">회고 질문</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2tiles c2"><div class="v2tile" style="--d:0.00s"><b>기획서와 달라진 것</b><span>만들면서 빼거나 더한 기능</span></div><div class="v2tile" style="--d:0.08s"><b>다시 요청한 곳</b><span>첫 요청에 빠져 있던 말</span></div><div class="v2tile" style="--d:0.16s"><b>되돌린 적</b><span>커밋으로 돌아간 순간</span></div><div class="v2tile" style="--d:0.24s"><b>다음에 붙일 것</b><span>쓰다 보니 아쉬운 기능</span></div></div><div class="dbnote"><span>기록</span> 답은 PRD.md 맨 아래 「회고」 칸에 · 2부 기획의 출발점</div></div></div>
-</section>
-
-<section class="slide lt" data-title="예제 앱의 한계">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">1-8</span></div>
-  <h2 class="s-title sm">예제 앱의 한계</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>예약 공유 불가</b><span>예약이 내 브라우저에만 저장</span></div><div class="v2tile" style="--d:0.08s"><b>알림 부재</b><span>알림 · 다른 서비스 연결 없음</span></div><div class="v2tile" style="--d:0.16s"><b>수동 오류 확인</b><span>겹침 · 취소를 직접 클릭해 확인</span></div></div><div class="dbnote"><span>공통점</span> PRD 의 MVP 범위에서 「제외」로 둔 것 · 1부의 실수가 아니라 다음 단계</div></div></div>
+  <div class="body"><div class="mid"><div class="v2tiles c2"><div class="v2tile" style="--d:0.00s"><b>요청과 결과가 달랐던 곳</b><span>첫 요청에 빠져 있던 말</span></div><div class="v2tile" style="--d:0.08s"><b>기획서와 달라진 것</b><span>만들면서 빼거나 더한 기능</span></div><div class="v2tile" style="--d:0.16s"><b>되돌린 적</b><span>커밋으로 돌아간 순간</span></div><div class="v2tile" style="--d:0.24s"><b>다음에 붙일 것</b><span>쓰다 보니 아쉬운 기능</span></div></div><div class="dbnote"><span>기록</span> PRD.md 맨 아래 「회고」 칸 · 2부 기획의 입력</div></div></div>
 </section>
 
 <section class="slide lt" data-title="저장 위치 · localStorage">
@@ -1033,23 +1029,7 @@
   <div class="eyebrow"><span class="tag">1-8</span></div>
   <h2 class="s-title sm">저장 위치 · localStorage</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1shot"><figure><img src="img/room_empty.webp" alt="같은 주소 · 팀원 브라우저에서 연 화면 — 내 예약 5건이 없음"/><figcaption>같은 주소 · 팀원 브라우저에서 연 화면 — 내 예약 5건이 없음</figcaption></figure><div class=v1side><div class="v1sd"><b>저장 위치</b><span>app.js · localStorage.setItem — 각 브라우저 안</span></div><div class="v1sd"><b>내 노트북</b><span>예약 5건이 보임</span></div><div class="v1sd"><b>팀원 휴대폰</b><span>빈 시간표</span></div></div></div><div class="dbnote"><span>필요한 것</span> 모두가 같은 곳에 쓰고 읽는 저장소 = 데이터베이스 → 2-2 · 2-5</div></div></div>
-</section>
-
-<section class="slide lt" data-title="알림 부재">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">1-8</span></div>
-  <h2 class="s-title sm">알림 부재</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">지금</div><div class="v2pc" style="--d:0.00s"><b>예약 저장</b><span>페이지 안에서 끝</span></div><div class="v2pc" style="--d:0.08s"><b>팀에 알리기</b><span>단톡방에 다시 써야 함</span></div></div><div class="v2p on"><div class="v2ph">2부에서 붙일 것</div><div class="v2pc" style="--d:0.00s"><b>API</b><span>다른 서비스에 정해진 방식으로 요청</span></div><div class="v2pc" style="--d:0.08s"><b>MCP</b><span>Claude Code가 외부 도구를 직접 다룸</span></div></div></div><div class="dbnote"><span>2부</span> 2-3 MCP란 · 2-6 외부 서비스 연결</div></div></div>
-</section>
-
-<section class="slide lt" data-title="수동 오류 확인">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">1-8</span></div>
-  <h2 class="s-title sm">수동 오류 확인</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">지금</div><div class="v2pc" style="--d:0.00s"><b>확인 방법</b><span>겹치는 시간을 직접 넣어 봄</span></div><div class="v2pc" style="--d:0.08s"><b>고친 뒤</b><span>모든 기능을 다시 클릭</span></div><div class="v2pc" style="--d:0.16s"><b>배포 뒤 오류</b><span>누가 말해 줘야 앎</span></div></div><div class="v2p on"><div class="v2ph">2부에서 배울 것</div><div class="v2pc" style="--d:0.00s"><b>테스트</b><span>AI가 확인 코드를 쓰고 실행</span></div><div class="v2pc" style="--d:0.08s"><b>디버깅</b><span>에러 메시지 → Claude Code → 수정</span></div><div class="v2pc" style="--d:0.16s"><b>모니터링</b><span>배포 뒤 Vercel 로그로 확인</span></div></div></div><div class="dbnote"><span>2부</span> 2-7 품질 관리 · 테스트 · 디버깅 · 2-8 배포 및 모니터링</div></div></div>
+  <div class="body"><div class="mid"><div class="v1shot"><figure><img src="img/room_empty.webp" alt="같은 주소 · 팀원 브라우저에서 연 화면 — 내 예약 5건 없음"/><figcaption>같은 주소 · 팀원 브라우저에서 연 화면 — 내 예약 5건 없음</figcaption></figure><div class=v1side><div class="v1sd"><b>저장 위치</b><span>localStorage · 각 브라우저 안</span></div><div class="v1sd"><b>내 노트북</b><span>예약 5건 표시</span></div><div class="v1sd"><b>팀원 휴대폰</b><span>빈 시간표</span></div></div></div><div class="dbnote"><span>필요한 것</span> 모두가 같은 곳에 쓰고 읽는 저장소 = 데이터베이스 (2-2 · 2-5)</div></div></div>
 </section>
 
 <section class="slide lt" data-title="한계별 2부 단원">
@@ -1057,7 +1037,7 @@
   <div class="eyebrow"><span class="tag">1-8</span></div>
   <h2 class="s-title sm">한계별 2부 단원</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2ms"><div class="v2mh"><span>1부의 아쉬움</span><i></i><span>2부</span></div><div class="v2m" style="--d:0.00s"><div class="a">예약 공유 불가</div><i>→</i><div class="b"><b>데이터베이스 (Supabase)</b><small>2-2 · 2-5</small></div></div><div class="v2m" style="--d:0.12s"><div class="a">알림 부재</div><i>→</i><div class="b"><b>API · MCP</b><small>2-3 · 2-6</small></div></div><div class="v2m" style="--d:0.24s"><div class="a">수동 오류 확인</div><i>→</i><div class="b"><b>테스트 · 디버깅</b><small>2-7</small></div></div><div class="v2m" style="--d:0.36s"><div class="a">운영 상태 확인 불가</div><i>→</i><div class="b"><b>모니터링</b><small>2-8</small></div></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v2ms"><div class="v2mh"><span>예제 앱의 한계</span><i></i><span>2부</span></div><div class="v2m" style="--d:0.00s"><div class="a">예약 공유 불가 · 브라우저마다 따로 저장</div><i>→</i><div class="b"><b>데이터베이스 (Supabase)</b><small>2-2 · 2-5</small></div></div><div class="v2m" style="--d:0.12s"><div class="a">공휴일 · 휴무 직접 확인 · 달력과 따로</div><i>→</i><div class="b"><b>외부 API · MCP</b><small>2-3 · 2-6</small></div></div><div class="v2m" style="--d:0.24s"><div class="a">수동 오류 확인 · 기능마다 직접 클릭</div><i>→</i><div class="b"><b>테스트 · 디버깅</b><small>2-7</small></div></div><div class="v2m" style="--d:0.36s"><div class="a">운영 상태 확인 불가 · 사용자 제보에 의존</div><i>→</i><div class="b"><b>모니터링 · 로그</b><small>2-8</small></div></div></div><div class="dbnote"><span>공통점</span> PRD 의 MVP 에서 「제외」로 둔 범위 · 다음 단계</div></div></div>
 </section>
 
 <section class="slide lt" data-title="2부 지도">
@@ -1065,7 +1045,7 @@
   <div class="eyebrow"><span class="tag">1-8</span></div>
   <h2 class="s-title sm">2부 지도</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>2-1 미리보기</b><span>DB · MCP 의 자리</span></div><div class="v2tile" style="--d:0.08s"><b>2-2 데이터베이스</b><span>표 · 행 · 열 · Supabase</span></div><div class="v2tile" style="--d:0.16s"><b>2-3 MCP</b><span>API 와 MCP</span></div><div class="v2tile" style="--d:0.24s"><b>2-4 기획 · 요구사항</b><span>PRD 에 데이터 · 연동 · 권한</span></div><div class="v2tile" style="--d:0.32s"><b>2-5 데이터 다루기</b><span>저장 · 조회 · 로그인</span></div><div class="v2tile" style="--d:0.40s"><b>2-6 외부 서비스</b><span>API 키 · MCP</span></div><div class="v2tile" style="--d:0.48s"><b>2-7 품질 관리</b><span>테스트 · 디버깅</span></div><div class="v2tile" style="--d:0.56s"><b>2-8 배포 · 모니터링</b><span>환경변수 · 로그</span></div><div class="v2tile" style="--d:0.64s"><b>2-9 마무리</b><span>운영 체크리스트</span></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>2-1 미리보기</b><span>DB · MCP 개요</span></div><div class="v2tile" style="--d:0.08s"><b>2-2 데이터베이스</b><span>표 · 행 · 열 · Supabase</span></div><div class="v2tile" style="--d:0.16s"><b>2-3 MCP</b><span>API 와 MCP</span></div><div class="v2tile" style="--d:0.24s"><b>2-4 기획 · 요구사항</b><span>PRD 에 데이터 · 연동 · 권한</span></div><div class="v2tile" style="--d:0.32s"><b>2-5 데이터 다루기</b><span>저장 · 조회 · 로그인</span></div><div class="v2tile" style="--d:0.40s"><b>2-6 외부 서비스</b><span>API 키 · MCP</span></div><div class="v2tile" style="--d:0.48s"><b>2-7 품질 관리</b><span>테스트 · 디버깅</span></div><div class="v2tile" style="--d:0.56s"><b>2-8 배포 · 모니터링</b><span>환경변수 · 로그</span></div><div class="v2tile" style="--d:0.64s"><b>2-9 마무리</b><span>운영 체크리스트</span></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="내 회고 기록">
@@ -1073,7 +1053,7 @@
   <div class="eyebrow"><span class="tag">1-8</span></div>
   <h2 class="s-title sm">내 회고 기록</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><table class="dbt"><thead><tr><th>질문</th><th>내 답</th></tr></thead><tbody><tr><td>배포 주소</td><td></td></tr><tr><td>완료 기준 통과</td><td>  개 중   개</td></tr><tr><td>기획서와 달라진 것</td><td></td></tr><tr><td>가장 많이 다시 요청한 곳</td><td></td></tr><tr><td>2부에서 붙이고 싶은 것</td><td></td></tr></tbody></table><div class="dbnote"><span>가져갈 것</span> 이 표 · 기획서.md · PRD.md → 2-4 기획의 입력</div></div></div>
+  <div class="body"><div class="mid"><table class="dbt"><thead><tr><th>질문</th><th>내 답</th></tr></thead><tbody><tr><td>배포 주소</td><td></td></tr><tr><td>완료 기준 통과</td><td>  개 중   개</td></tr><tr><td>요청과 결과가 달랐던 곳</td><td></td></tr><tr><td>기획서와 달라진 것</td><td></td></tr><tr><td>2부에서 붙이고 싶은 것</td><td></td></tr></tbody></table><div class="dbnote"><span>가져갈 것</span> 이 표 · 기획서.md · PRD.md → 2-4 기획의 입력</div></div></div>
 </section>
 
 <section class="slide dk" data-title="다음 단원">

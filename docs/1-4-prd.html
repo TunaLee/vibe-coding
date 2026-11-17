@@ -923,6 +923,13 @@
   .v1cmr span{font-size:17px; color:#16233A; font-weight:600;}
   @keyframes v1cutIn{from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none}}
   @media print{.v1cmr{opacity:1; animation:none}}
+
+  /* 1-4 · PRD 칸별 예 */
+  .v1pxs{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:6px;}
+  .v1px{border:1.5px solid #D9DDE3; border-radius:14px; background:#fff; padding:16px 18px; display:flex; flex-direction:column; gap:8px;}
+  .v1px b{font-size:20px; color:#16233A;}
+  .v1px .v1pl{display:block; font-family:inherit; font-weight:600; font-size:15.5px; color:#1F3A5F; background:#F4F6F9; border-radius:8px; padding:9px 12px; white-space:pre-wrap; letter-spacing:0; font-variant-ligatures:none;}
+  .v1px > span:last-child{font-size:15.5px; color:#3A4657;}
 </style>
 </head>
 <body>
@@ -996,7 +1003,7 @@
   <div class="eyebrow"><span class="tag">1-4</span></div>
   <h2 class="s-title sm">기획서만 넘긴 경우</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2ms"><div class="v2mh"><span>Claude Code가 정할 것</span><i></i><span>기획서에 있는 것</span></div><div class="v2m" style="--d:0.00s"><div class="a">로그인</div><i>→</i><div class="b"><b>넣을지 뺄지</b><small>기획서는 「하지 않을 것」에만 한 줄</small></div></div><div class="v2m" style="--d:0.12s"><div class="a">예약 단위</div><i>→</i><div class="b"><b>1시간 · 30분 · 자유 입력</b><small>기획서에 없음</small></div></div><div class="v2m" style="--d:0.24s"><div class="a">저장 위치</div><i>→</i><div class="b"><b>서버 DB · 내 브라우저</b><small>기획서에 없음</small></div></div><div class="v2m" style="--d:0.36s"><div class="a">겹친 예약</div><i>→</i><div class="b"><b>막기 · 경고만</b><small>「안 된다」의 방식이 없음</small></div></div><div class="v2m" style="--d:0.48s"><div class="a">다 됐는지</div><i>→</i><div class="b"><b>어디까지 만들면 끝인지</b><small>기준이 없음</small></div></div></div><div class="dbnote"><span>빈 칸</span> Claude Code가 추측으로 채움 · 매번 다르게</div></div></div>
+  <div class="body"><div class="mid"><div class="v2ms"><div class="v2mh"><span>Claude Code가 정할 것</span><i></i><span>기획서에 있는 것</span></div><div class="v2m" style="--d:0.00s"><div class="a">로그인</div><i>→</i><div class="b"><b>넣을지 뺄지</b><small>기획서는 「하지 않을 것」에만 한 줄</small></div></div><div class="v2m" style="--d:0.12s"><div class="a">예약 단위</div><i>→</i><div class="b"><b>1시간 · 30분 · 자유 입력</b><small>기획서에 없음</small></div></div><div class="v2m" style="--d:0.24s"><div class="a">저장 위치</div><i>→</i><div class="b"><b>서버 DB · 내 브라우저</b><small>기획서에 없음</small></div></div><div class="v2m" style="--d:0.36s"><div class="a">같은 시간 중복 예약</div><i>→</i><div class="b"><b>막기 · 경고만</b><small>처리 방식 없음</small></div></div><div class="v2m" style="--d:0.48s"><div class="a">완성 범위</div><i>→</i><div class="b"><b>어디까지 만들면 끝인지</b><small>기준 없음</small></div></div></div><div class="dbnote"><span>빈 칸</span> Claude Code가 추측으로 채움 · 대화마다 다른 결과</div></div></div>
 </section>
 
 <section class="slide lt" data-title="추측의 결과 · 예">
@@ -1004,7 +1011,7 @@
   <div class="eyebrow"><span class="tag">1-4</span></div>
   <h2 class="s-title sm">추측의 결과 · 예</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">기획서만 · 예</div><div class="v2pc" style="--d:0.00s"><b>예약 단위</b><span>1시간 칸으로 만듦</span></div><div class="v2pc" style="--d:0.08s"><b>겹친 예약</b><span>경고 창만 띄우고 저장</span></div><div class="v2pc" style="--d:0.16s"><b>저장</b><span>서버를 새로 만들려 함</span></div></div><div class="v2p on"><div class="v2ph">PRD 와 함께 · 예</div><div class="v2pc" style="--d:0.00s"><b>예약 단위</b><span>30분 칸</span></div><div class="v2pc" style="--d:0.08s"><b>겹친 예약</b><span>저장하지 않고 「이미 예약된 시간」</span></div><div class="v2pc" style="--d:0.16s"><b>저장</b><span>브라우저 localStorage</span></div></div></div><div class="dbnote"><span>예</span> 같은 기획서로도 결과가 달라지는 지점 · 실제 결과는 대화마다 다름</div></div></div>
+  <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">기획서만 · 예</div><div class="v2pc" style="--d:0.00s"><b>예약 단위</b><span>1시간 칸</span></div><div class="v2pc" style="--d:0.08s"><b>중복 예약</b><span>경고 창만 띄우고 저장</span></div><div class="v2pc" style="--d:0.16s"><b>저장</b><span>서버를 새로 만들려 함</span></div></div><div class="v2p on"><div class="v2ph">PRD 와 함께 · 예</div><div class="v2pc" style="--d:0.00s"><b>예약 단위</b><span>30분 칸</span></div><div class="v2pc" style="--d:0.08s"><b>중복 예약</b><span>저장하지 않고 「이미 예약된 시간」</span></div><div class="v2pc" style="--d:0.16s"><b>저장</b><span>브라우저 localStorage</span></div></div></div><div class="dbnote"><span>예</span> 같은 기획서로도 결과가 달라지는 지점 · 실제 결과는 대화마다 다름</div></div></div>
 </section>
 
 <section class="slide lt" data-title="조감도와 설계 도면">
@@ -1012,7 +1019,7 @@
   <div class="eyebrow"><span class="tag">1-4</span></div>
   <h2 class="s-title sm">조감도와 설계 도면</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="phmap v3ph"><figure class="ph"><img src="img/v1_blueprint.webp" alt="건물 입면 도면"><figcaption><b>건물 입면 도면</b></figcaption></figure><div class="v2ms"><div class="v2mh"><span>집 짓기</span><i></i><span>앱 만들기</span></div><div class="v2m" style="--d:0.00s"><div class="a">조감도</div><i>→</i><div class="b"><b>기획서</b><small>어떤 집인지 · 왜</small></div></div><div class="v2m" style="--d:0.12s"><div class="a">설계 도면</div><i>→</i><div class="b"><b>PRD</b><small>치수 · 재료 · 방 배치</small></div></div><div class="v2m" style="--d:0.24s"><div class="a">시공팀</div><i>→</i><div class="b"><b>Claude Code</b><small>도면대로 짓기</small></div></div><div class="v2m" style="--d:0.36s"><div class="a">준공 검사</div><i>→</i><div class="b"><b>완료 기준</b><small>도면대로 지었나</small></div></div><div class="v2m" style="--d:0.48s"><div class="a">이번에 안 짓는 별채</div><i>→</i><div class="b"><b>MVP 제외</b><small>다음 공사</small></div></div></div></div><div class="src">출처 · <a href="https://commons.wikimedia.org/wiki/File:Blueprint_of_elevation_by_Alice_Trythall_Washburn.jpg" target="_blank" rel="noopener">도면 · Alice Trythall Washburn · 퍼블릭 도메인</a></div></div></div>
+  <div class="body"><div class="mid"><div class="phmap v3ph"><figure class="ph"><img src="img/v1_u4_blueprint.webp" alt="조감도와 설계 도면"><figcaption><b>조감도와 설계 도면</b></figcaption></figure><div class="v2ms"><div class="v2mh"><span>집 짓기</span><i></i><span>앱 만들기</span></div><div class="v2m" style="--d:0.00s"><div class="a">조감도</div><i>→</i><div class="b"><b>기획서</b><small>어떤 집인지 · 왜</small></div></div><div class="v2m" style="--d:0.12s"><div class="a">설계 도면</div><i>→</i><div class="b"><b>PRD</b><small>방 배치 · 치수 · 재료</small></div></div><div class="v2m" style="--d:0.24s"><div class="a">준공 검사</div><i>→</i><div class="b"><b>완료 기준</b><small>도면대로 지었나</small></div></div></div></div><div class="src">출처 · <a href="https://huggingface.co/Tongyi-MAI/Z-Image-Turbo" target="_blank" rel="noopener">AI 생성 그림 · Z-Image Turbo (Apache 2.0)</a></div></div></div>
 </section>
 
 <section class="slide lt" data-title="PRD">
@@ -1020,7 +1027,7 @@
   <div class="eyebrow"><span class="tag">1-4</span></div>
   <h2 class="s-title sm">PRD</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>무엇을 만드나</b><span>기능 · 화면 · 데이터</span></div><div class="v2tile" style="--d:0.08s"><b>어디까지 만드나</b><span>MVP 범위 · 제외</span></div><div class="v2tile" style="--d:0.16s"><b>다 됐는지 어떻게 아나</b><span>완료 기준</span></div></div><div class="dbnote"><span>PRD</span> Product Requirements Document · 제품 요구사항 문서 · 만들 것을 확인할 수 있는 문장으로</div></div></div>
+  <div class="body"><div class="mid"><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>만들 것</b><span>기능 · 화면 · 데이터</span></div><div class="v2tile" style="--d:0.08s"><b>범위</b><span>MVP 포함 · 제외</span></div><div class="v2tile" style="--d:0.16s"><b>완료 기준</b><span>확인할 수 있는 문장</span></div></div><div class="dbnote"><span>PRD</span> Product Requirements Document · 제품 요구사항 문서 · 만들 것을 확인 가능한 문장으로 적은 문서</div></div></div>
 </section>
 
 <section class="slide lt" data-title="기획서와 PRD">
@@ -1044,7 +1051,7 @@
   <div class="eyebrow"><span class="tag">1-4</span></div>
   <h2 class="s-title sm">기획서.md → PRD.md</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2ms"><div class="v2mh"><span>기획서.md (1-3)</span><i></i><span>PRD.md (1-4)</span></div><div class="v2m" style="--d:0.00s"><div class="a">서비스 컨셉</div><i>→</i><div class="b"><b>1. 목표 · 3. 기능 명세</b><small>한 문장 → 기능 F1~F5</small></div></div><div class="v2m" style="--d:0.12s"><div class="a">화면 구성</div><i>→</i><div class="b"><b>4. 화면별 요소</b><small>화면 이름 → 화면마다 보이는 것</small></div></div><div class="v2m" style="--d:0.24s"><div class="a">이번에 하지 않을 것</div><i>→</i><div class="b"><b>2. MVP 범위 · 제외</b><small>로그인 · 알림 · 반복 예약</small></div></div><div class="v2m" style="--d:0.36s"><div class="a">문제점</div><i>→</i><div class="b"><b>6. 완료 기준</b><small>「두 팀이 마주침」 → 「겹치는 예약은 막힌다」</small></div></div></div><div class="dbnote"><span>새로 정하는 것</span> 5. 데이터 항목 · 저장 위치 · 예약 단위</div></div></div>
+  <div class="body"><div class="mid"><div class="v2ms"><div class="v2mh"><span>기획서.md (1-3)</span><i></i><span>PRD.md (1-4)</span></div><div class="v2m" style="--d:0.00s"><div class="a">서비스 컨셉</div><i>→</i><div class="b"><b>1. 목표 · 3. 기능 명세</b><small>한 문장 → 기능 F1~F5</small></div></div><div class="v2m" style="--d:0.12s"><div class="a">화면 구성</div><i>→</i><div class="b"><b>4. 화면별 요소</b><small>화면 이름 → 화면마다 보이는 것</small></div></div><div class="v2m" style="--d:0.24s"><div class="a">이번에 하지 않을 것</div><i>→</i><div class="b"><b>2. MVP 범위 · 제외</b><small>로그인 · 알림 · 반복 예약</small></div></div><div class="v2m" style="--d:0.36s"><div class="a">문제점</div><i>→</i><div class="b"><b>6. 완료 기준</b><small>「두 팀이 마주침」 → 「같은 시간 예약은 막힌다」</small></div></div></div><div class="dbnote"><span>새로 정하는 것</span> 5. 데이터 항목 · 저장 위치 · 예약 단위</div></div></div>
 </section>
 
 <section class="slide lt" data-title="MVP">
@@ -1052,81 +1059,23 @@
   <div class="eyebrow"><span class="tag">1-4</span></div>
   <h2 class="s-title sm">MVP</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">다 넣은 버전</div><div class="v2pc" style="--d:0.00s"><b>기능</b><span>예약 · 로그인 · 알림 · 반복 예약 · 통계</span></div><div class="v2pc" style="--d:0.08s"><b>결과</b><span>1부 안에 끝나지 않음 · 확인할 것도 많음</span></div></div><div class="v2p on"><div class="v2ph">MVP</div><div class="v2pc" style="--d:0.00s"><b>기능</b><span>시간표 · 예약 · 취소 · 겹침 막기</span></div><div class="v2pc" style="--d:0.08s"><b>결과</b><span>단톡방 문제를 지금 풀 수 있음</span></div></div></div><div class="dbnote"><span>MVP</span> Minimum Viable Product · 문제를 풀 수 있는 가장 작은 버전</div></div></div>
+  <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">다 넣은 버전</div><div class="v2pc" style="--d:0.00s"><b>기능</b><span>예약 · 로그인 · 알림 · 반복 예약 · 통계</span></div><div class="v2pc" style="--d:0.08s"><b>결과</b><span>1부 안에 완성 불가 · 확인 항목 증가</span></div></div><div class="v2p on"><div class="v2ph">MVP</div><div class="v2pc" style="--d:0.00s"><b>기능</b><span>시간표 · 예약 · 취소 · 중복 예약 막기</span></div><div class="v2pc" style="--d:0.08s"><b>결과</b><span>1부 안에 완성 · 단톡방 예약 문제 해결</span></div></div></div><div class="dbnote"><span>MVP</span> Minimum Viable Product · 문제를 풀 수 있는 가장 작은 버전</div></div></div>
 </section>
 
-<section class="slide lt" data-title="MVP 고르는 질문">
+<section class="slide lt" data-title="MVP 선택 기준">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-4</span></div>
-  <h2 class="s-title sm">MVP 고르는 질문</h2>
+  <h2 class="s-title sm">MVP 선택 기준</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>이것 없이도 문제가 풀리나</b><span>풀리면 → 제외</span></div><div class="v2tile" style="--d:0.08s"><b>1부 안에 만들 수 있나</b><span>로그인 · 서버 저장은 → 제외</span></div><div class="v2tile" style="--d:0.16s"><b>혼자 확인할 수 있나</b><span>브라우저로 눌러 보고 판단</span></div></div><div class="v2ms"><div class="v2mh"><span>기능</span><i></i><span>판단</span></div><div class="v2m" style="--d:0.00s"><div class="a">알림</div><i>→</i><div class="b"><b>제외</b><small>시간표를 보면 문제는 풀림</small></div></div><div class="v2m" style="--d:0.12s"><div class="a">겹침 막기</div><i>→</i><div class="b"><b>포함</b><small>문제점 「두 팀이 마주침」의 답</small></div></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>문제 해결에 필수</b><span>필수 아님 → 제외</span></div><div class="v2tile" style="--d:0.08s"><b>1부 안에 구현</b><span>로그인 · 서버 저장 → 제외</span></div><div class="v2tile" style="--d:0.16s"><b>혼자 확인 가능</b><span>브라우저로 눌러 보고 판단</span></div></div><div class="v2ms"><div class="v2mh"><span>기능</span><i></i><span>판단</span></div><div class="v2m" style="--d:0.00s"><div class="a">알림</div><i>→</i><div class="b"><b>제외</b><small>시간표만으로 문제 해결</small></div></div><div class="v2m" style="--d:0.12s"><div class="a">중복 예약 막기</div><i>→</i><div class="b"><b>포함</b><small>문제점 「두 팀이 마주침」 해결</small></div></div></div><div class="dbnote"><span>제외 칸</span> PRD 에 적어 두면 Claude Code가 덧붙이지 않음</div></div></div>
 </section>
 
-<section class="slide lt" data-title="MVP 범위 · 예">
+<section class="slide lt" data-title="PRD 칸별 예">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-4</span></div>
-  <h2 class="s-title sm">MVP 범위 · 예</h2>
+  <h2 class="s-title sm">PRD 칸별 예</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="twocol"><div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">PRD.md · 예</span></div><pre><code>## 2. MVP 범위
-| 포함 | 제외 (다음 버전) |
-|---|---|
-| 날짜 선택 · 시간표 보기 | 로그인 |
-| 예약 추가 · 취소 | 팀원 간 공유 (서버 저장) |
-| 겹치는 예약 막기 | 슬랙 알림 · 반복 예약 |</code></pre></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>포함</b><span>문제점을 푸는 데 꼭 필요한 것</span></div><div class="v2tile" style="--d:0.08s"><b>제외</b><span>다음 버전 · 2부에서</span></div></div></div></div><div class="dbnote"><span>제외 칸</span> Claude Code가 덧붙이지 않게 적어 둠</div></div></div>
-</section>
-
-<section class="slide lt" data-title="기능 명세">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">1-4</span></div>
-  <h2 class="s-title sm">기능 명세</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="twocol"><div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">PRD.md · 예</span></div><pre><code>## 3. 기능 명세
-- F1 날짜 선택: 기본값 오늘 · 이전 / 다음 날 버튼
-- F2 시간표: 회의실 3열 × 09:00~18:00, 30분 칸
-- F3 예약 추가: 빈 칸 클릭 → 예약 창 (이름 · 회의 이름 · 시작 · 끝)
-- F4 겹침 막기: 같은 회의실 · 겹치는 시간이면 저장하지 않고 「이미 예약된 시간」 표시
-- F5 예약 취소: 예약 칸 클릭 → 상세 → 취소</code></pre></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>번호 붙이기</b><span>F1 ~ F5 · 1-6 에서 하나씩 구현</span></div><div class="v2tile" style="--d:0.08s"><b>한 줄에 하나</b><span>무엇을 누르면 · 무엇이 되는지</span></div></div></div></div><div class="dbnote"><span>1-6</span> 기능 번호 = 구현 순서의 단위</div></div></div>
-</section>
-
-<section class="slide lt" data-title="화면별 요소">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">1-4</span></div>
-  <h2 class="s-title sm">화면별 요소</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="twocol"><div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">PRD.md · 예</span></div><pre><code>## 4. 화면별 요소
-- 시간표: 상단 날짜 · 화살표 / 회의실 이름 3개 / 시간 줄 / 예약 칸(회의 이름 · 이름)
-- 예약 창: 입력 4개 · 저장 · 닫기 · 오류 문구 자리</code></pre></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>화면마다</b><span>보이는 것 · 누르는 것</span></div><div class="v2tile" style="--d:0.08s"><b>오류 자리</b><span>「오류 문구 자리」까지</span></div></div></div></div><div class="dbnote"><span>쓰는 법</span> 기획서의 화면 이름을 그대로 가져옴</div></div></div>
-</section>
-
-<section class="slide lt" data-title="데이터 항목">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">1-4</span></div>
-  <h2 class="s-title sm">데이터 항목</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="twocol"><div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">PRD.md · 예</span></div><pre><code>## 5. 데이터 항목
-| 항목 | 예 |
-|---|---|
-| 회의실 | 대회의실 |
-| 날짜 | 2026-11-20 |
-| 시작 · 끝 | 14:00 · 15:00 |
-| 이름 | 김하늘 |
-| 회의 이름 | 주간 회의 |
-
-저장: 브라우저 localStorage (MVP)</code></pre></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>저장할 값</b><span>회의실 · 날짜 · 시간 · 이름 · 회의 이름</span></div><div class="v2tile" style="--d:0.08s"><b>예 값</b><span>칸마다 실제 예 하나</span></div></div></div></div><div class="dbnote"><span>저장 위치</span> MVP 는 내 브라우저 · 팀원과 공유는 2부 DB</div></div></div>
-</section>
-
-<section class="slide lt" data-title="완료 기준">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">1-4</span></div>
-  <h2 class="s-title sm">완료 기준</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="twocol"><div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">PRD.md · 예</span></div><pre><code>## 6. 완료 기준
-- [ ] 오늘 날짜 시간표가 첫 화면에 보인다
-- [ ] 대회의실 14:00~15:00 예약 후 새로고침해도 남아 있다
-- [ ] 같은 회의실 14:30~15:30 예약은 막힌다
-- [ ] 예약을 취소하면 칸이 비워진다
-- [ ] 모바일 폭(390px)에서도 가로 스크롤 없이 보인다</code></pre></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>체크 상자</b><span>- [ ] 로 한 줄씩</span></div><div class="v2tile" style="--d:0.08s"><b>눌러서 확인</b><span>브라우저에서 직접 해 볼 수 있는 문장</span></div></div></div></div><div class="dbnote"><span>1-6</span> 구현 뒤 이 목록으로 확인</div></div></div>
+  <div class="body"><div class="mid"><div class="v1pxs"><div class="v1px"><b>기능 명세</b><span class="v1pl">F3 예약 추가: 빈 칸 클릭 → 예약 창 (이름 · 회의 이름 · 시작 · 끝)</span><span>번호 = 1-6 구현 단위 · 한 줄에 기능 하나</span></div><div class="v1px"><b>화면별 요소</b><span class="v1pl">예약 창: 입력 4개 · 저장 · 닫기 · 오류 문구 자리</span><span>보이는 것 · 누르는 것 · 오류 문구 자리</span></div><div class="v1px"><b>데이터 항목</b><span class="v1pl">날짜 · 2026-11-20</span><span>저장할 값마다 실제 예 하나 · 저장 위치</span></div><div class="v1px"><b>완료 기준</b><span class="v1pl">예약을 취소하면 칸이 비워진다</span><span>체크 상자 · 브라우저에서 직접 확인</span></div></div><div class="dbnote"><span>파일</span> labs/room_booking/예시/PRD.md</div></div></div>
 </section>
 
 <section class="slide lt" data-title="확인 가능한 완료 기준">
@@ -1137,7 +1086,7 @@
   <div class="body"><div class="mid"><div class="ba">
   <div class="b"><div class="lab">Before</div><div class="q">「예약이 잘 된다」<br/>「겹치지 않게 한다」</div></div>
   <div class="arr">→</div>
-  <div class="a"><div class="lab">After</div><div class="q">「대회의실 1시간 예약 후 새로고침해도 남아 있다」<br/>「같은 회의실 · 30분 겹친 예약은 막힌다」</div></div>
+  <div class="a"><div class="lab">After</div><div class="q">「대회의실 1시간 예약 후 새로고침해도 남아 있다」<br/>「같은 회의실 · 같은 시간 예약은 막힌다」</div></div>
 </div><div class="banote">값 · 동작 · 결과가 다 들어간 문장</div></div></div>
 </section>
 
@@ -1152,7 +1101,7 @@
 ## 3. 기능 명세
 ## 4. 화면별 요소
 ## 5. 데이터 항목
-## 6. 완료 기준</code></pre></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>여섯 칸</b><span>목표 · 범위 · 기능 · 화면 · 데이터 · 완료 기준</span></div><div class="v2tile" style="--d:0.08s"><b>분량</b><span>기획서보다 길고 구체적</span></div><div class="v2tile" style="--d:0.16s"><b>다음</b><span>1-6 에서 Claude Code가 이 파일로 계획을 세움</span></div></div></div></div><div class="dbnote"><span>파일</span> labs/room_booking/예시/PRD.md</div></div></div>
+## 6. 완료 기준</code></pre></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>여섯 칸</b><span>목표 · 범위 · 기능 · 화면 · 데이터 · 완료 기준</span></div><div class="v2tile" style="--d:0.08s"><b>분량</b><span>기획서보다 길고 구체적</span></div><div class="v2tile" style="--d:0.16s"><b>다음 단계</b><span>1-6 · Claude Code가 이 파일로 계획 작성</span></div></div></div></div><div class="dbnote"><span>파일</span> labs/room_booking/예시/PRD.md</div></div></div>
 </section>
 
 <section class="slide lt" data-title="Claude Code로 PRD 만들기">
@@ -1160,7 +1109,7 @@
   <div class="eyebrow"><span class="tag">1-4</span></div>
   <h2 class="s-title sm">Claude Code로 PRD 만들기</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="flow"><div class="fs"><b>기획서.md</b><span>1-3 산출물</span></div><div class="fa">→</div><div class="fs"><b>읽기</b><span>Claude Code</span></div><div class="fa">→</div><div class="fs hl"><b>빈 칸 질문</b><span>단위 · 저장 · 범위</span></div><div class="fa">→</div><div class="fs"><b>내가 답함</b><span>MVP 판단</span></div><div class="fa">→</div><div class="fs"><b>PRD.md</b><span>파일로 저장</span></div><div class="fa">→</div><div class="fs"><b>내가 확인</b><span>완료 기준</span></div></div><div class="dbnote"><span>사람이 정할 것</span> MVP 포함 · 제외 · 완료 기준 · 파일은 Claude Code가 씀</div></div></div>
+  <div class="body"><div class="mid"><div class="flow"><div class="fs"><b>기획서.md</b><span>1-3 산출물</span></div><div class="fa">→</div><div class="fs"><b>읽기</b><span>Claude Code</span></div><div class="fa">→</div><div class="fs hl"><b>빈 칸 질문</b><span>단위 · 저장 · 범위</span></div><div class="fa">→</div><div class="fs"><b>답변</b><span>MVP 판단 · 사람</span></div><div class="fa">→</div><div class="fs"><b>PRD.md</b><span>파일로 저장</span></div><div class="fa">→</div><div class="fs"><b>확인</b><span>완료 기준 · 사람</span></div></div><div class="dbnote"><span>사람이 정할 것</span> MVP 포함 · 제외 · 완료 기준 · 파일 작성은 Claude Code</div></div></div>
 </section>
 
 <section class="slide lt" data-title="Claude Code · 대화 예">
@@ -1176,7 +1125,7 @@
   <div class="eyebrow"><span class="tag">1-4</span></div>
   <h2 class="s-title sm">PRD 다듬기 요청</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>확인 못 하는 문장</b><span>완료 기준 중 눌러서 확인할 수 없는 줄 찾기</span></div><div class="v2tile" style="--d:0.08s"><b>큰 기능</b><span>MVP 에 비해 큰 기능 골라내기</span></div><div class="v2tile" style="--d:0.16s"><b>빠진 상황</b><span>끝 시간이 시작보다 빠를 때 · 빈 칸일 때</span></div></div><div class="dbnote"><span>결정</span> 제안은 Claude Code · 넣을지는 내가</div></div></div>
+  <div class="body"><div class="mid"><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>확인 못 하는 문장</b><span>완료 기준 중 눌러서 확인할 수 없는 줄</span></div><div class="v2tile" style="--d:0.08s"><b>큰 기능</b><span>MVP 에 비해 큰 기능</span></div><div class="v2tile" style="--d:0.16s"><b>빠진 상황</b><span>끝 시간이 시작보다 빠를 때 · 빈 칸일 때</span></div></div><div class="dbnote"><span>결정</span> 제안은 Claude Code · 채택 여부는 사람</div></div></div>
 </section>
 
 <section class="slide lt labs" data-title="[실습 1-4] 기획서로 PRD 만들기">
@@ -1196,7 +1145,7 @@
   <div class="eyebrow"><span class="tag">1-4</span></div>
   <h2 class="s-title sm">실습 1-4 진행</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="kithead"><span>작업 위치</span><code>내 프로젝트 폴더</code><em>요청 문장은 내가 쓴다 · 예시는 labs/room_booking</em></div><div class="bf"><div class="bf-l"><div class="bh">요청에 들어갈 것</div><div class="bs"><b>목표</b><span>PRD.md · 여섯 칸</span></div><div class="bs"><b>입력</b><span>기획서.md (1-3)</span></div><div class="bs"><b>진행 방식</b><span>정해지지 않은 것은 먼저 질문</span></div><div class="bs"><b>하지 말 것</b><span>코드 작성 · 기획서에 없는 기능 추가</span></div></div><div class="bf-r"><div class="bh">순서</div><ol><li>기획서.md 가 있는 폴더 열기</li><li>Claude Code에 요청</li><li>빈 칸 질문에 답하기</li><li>다듬기 요청</li><li>PRD.md 확인</li></ol><div class="bh">키워드</div><div class="bk"><code>MVP</code><code>포함 · 제외</code><code>완료 기준</code><code>체크 상자</code></div></div></div><div class="qk2"><b>확인</b><ul><li>PRD.md 파일이 생김</li><li>완료 기준을 브라우저에서 해 볼 수 있음</li></ul></div><div class="dbnote"><span>막히면</span> 코드부터 만들기 시작하면 Esc 로 멈추고 「문서만」을 덧붙여 다시</div></div></div>
+  <div class="body"><div class="mid"><div class="kithead"><span>작업 위치</span><code>내 프로젝트 폴더</code><em>요청 문장은 내가 쓴다 · 예시 labs/room_booking</em></div><div class="bf"><div class="bf-l"><div class="bh">요청에 들어갈 것</div><div class="bs"><b>목표</b><span>PRD.md · 여섯 칸</span></div><div class="bs"><b>입력</b><span>기획서.md (1-3)</span></div><div class="bs"><b>진행 방식</b><span>정해지지 않은 것은 먼저 질문</span></div><div class="bs"><b>하지 말 것</b><span>코드 작성 · 기획서에 없는 기능 추가</span></div></div><div class="bf-r"><div class="bh">순서</div><ol><li>기획서.md 가 있는 폴더 열기</li><li>Claude Code에 요청</li><li>빈 칸 질문에 답하기</li><li>다듬기 요청</li><li>PRD.md 확인</li></ol><div class="bh">키워드</div><div class="bk"><code>MVP</code><code>포함 · 제외</code><code>완료 기준</code><code>체크 상자</code></div></div></div><div class="qk2"><b>확인</b><ul><li>PRD.md 파일이 생김</li><li>완료 기준을 브라우저에서 해 볼 수 있음</li></ul></div><div class="dbnote"><span>막히면</span> 코드부터 만들기 시작하면 Esc 로 멈추고 「문서만」을 덧붙여 다시</div></div></div>
 </section>
 
 <section class="slide lt" data-title="실습 1-4 확인">

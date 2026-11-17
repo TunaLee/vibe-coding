@@ -923,6 +923,14 @@
   .v1cmr span{font-size:17px; color:#16233A; font-weight:600;}
   @keyframes v1cutIn{from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none}}
   @media print{.v1cmr{opacity:1; animation:none}}
+
+  /* 1-7 · 비유 두 컷 */
+  .v1u7cut{display:grid; grid-template-columns:1fr 40px 1fr; gap:10px; align-items:center; margin:0 0 16px;}
+  .v1u7cut figure{margin:0; border:1.5px solid #D9DDE3; border-radius:14px; overflow:hidden; background:#F7EEDB;}
+  .v1u7cut img{display:block; width:100%; aspect-ratio:16/9; object-fit:cover;}
+  .v1u7cut figcaption{display:flex; gap:12px; align-items:baseline; padding:10px 14px; background:#fff;}
+  .v1u7cut figcaption b{font-size:19px; color:#16233A;} .v1u7cut figcaption span{font-size:15px; color:#E07A12; font-weight:700;}
+  .v1u7cut i{font-style:normal; text-align:center; font-size:28px; font-weight:800; color:#F28C28;}
 </style>
 </head>
 <body>
@@ -999,12 +1007,12 @@
   <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">배포 전</div><div class="v2pc" style="--d:0.00s"><b>주소</b><span>localhost — 내 컴퓨터 안</span></div><div class="v2pc" style="--d:0.08s"><b>열 수 있는 사람</b><span>나 혼자</span></div><div class="v2pc" style="--d:0.16s"><b>컴퓨터를 끄면</b><span>앱도 꺼짐</span></div></div><div class="v2p on"><div class="v2ph">배포 후</div><div class="v2pc" style="--d:0.00s"><b>주소</b><span>room-booking.vercel.app 형식</span></div><div class="v2pc" style="--d:0.08s"><b>열 수 있는 사람</b><span>주소를 받은 누구나</span></div><div class="v2pc" style="--d:0.16s"><b>컴퓨터를 끄면</b><span>그대로 열림</span></div></div></div><div class="dbnote"><span>배포</span> 내 컴퓨터에서 돌던 앱을 인터넷 주소로 공개하는 일</div></div></div>
 </section>
 
-<section class="slide lt" data-title="가게 문 열기 비유">
+<section class="slide lt" data-title="비유 · 가게 문 열기">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-7</span></div>
-  <h2 class="s-title sm">가게 문 열기 비유</h2>
+  <h2 class="s-title sm">비유 · 가게 문 열기</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="phmap v3ph"><figure class="ph"><img src="img/v1_shopdoor.webp" alt="가게 문의 영업시간 안내"><figcaption><b>가게 문의 영업시간 안내</b></figcaption></figure><div class="v2ms"><div class="v2mh"><span>가게</span><i></i><span>배포</span></div><div class="v2m" style="--d:0.00s"><div class="a">주방에서 혼자 맛보기</div><i>→</i><div class="b"><b>localhost 확인</b><small>1-6</small></div></div><div class="v2m" style="--d:0.12s"><div class="a">문 열고 간판 달기</div><i>→</i><div class="b"><b>배포</b><small>Vercel</small></div></div><div class="v2m" style="--d:0.24s"><div class="a">가게 주소</div><i>→</i><div class="b"><b>배포 주소</b><small>*.vercel.app</small></div></div><div class="v2m" style="--d:0.36s"><div class="a">메뉴를 바꿔 다시 진열</div><i>→</i><div class="b"><b>재배포</b><small>push 하면 자동</small></div></div></div></div><div class="src">출처 · <a href="https://commons.wikimedia.org/wiki/File:Door_signs_at_Stan%27s_Donuts,_Santa_Clara,_California.jpg" target="_blank" rel="noopener">사진 · dvorty (Mapillary) · CC BY-SA 4.0</a></div></div></div>
+  <div class="body"><div class="mid"><div class="v1u7cut"><figure><img src="img/v1_u7_kitchen.webp" alt="주방 안에서 혼자 맛보기"/><figcaption><b>주방 안 시식</b><span>localhost · 나만 확인</span></figcaption></figure><i>→</i><figure><img src="img/v1_u7_open.webp" alt="가게 문 열기"/><figcaption><b>가게 문 열기</b><span>배포 · 주소로 누구나</span></figcaption></figure></div><div class="v2tiles c2"><div class="v2tile" style="--d:0.00s"><b>가게 주소</b><span>배포 주소 · *.vercel.app</span></div><div class="v2tile" style="--d:0.08s"><b>메뉴 교체 · 재진열</b><span>재배포 · push 하면 자동</span></div></div><div class="src">출처 · <a href="https://huggingface.co/Tongyi-MAI/Z-Image-Turbo" target="_blank" rel="noopener">AI 생성 그림 · Z-Image Turbo (Apache 2.0)</a></div></div></div>
 </section>
 
 <section class="slide lt" data-title="localhost의 범위">
@@ -1012,15 +1020,7 @@
   <div class="eyebrow"><span class="tag">1-7</span></div>
   <h2 class="s-title sm">localhost의 범위</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>내 브라우저</b><span>localhost 주소로 열림</span></div><div class="v2tile" style="--d:0.08s"><b>팀원 노트북</b><span>같은 주소를 넣어도 안 열림</span></div><div class="v2tile" style="--d:0.16s"><b>내 휴대폰</b><span>안 열림 · 다른 기기</span></div></div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">1-6 에서 띄운 주소 · 예</span></div><pre><code>http://localhost:3000   ← 「이 컴퓨터」라는 뜻</code></pre></div><div class="dbnote"><span>localhost</span> 주소 자체가 「지금 이 컴퓨터」를 가리킴 · 다른 기기에서는 그 기기 자신을 가리킴</div></div></div>
-</section>
-
-<section class="slide lt" data-title="배포가 필요한 순간">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">1-7</span></div>
-  <h2 class="s-title sm">배포가 필요한 순간</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2tiles c2"><div class="v2tile" style="--d:0.00s"><b>링크로 보여 주기</b><span>팀원에게 주소 하나만 전달</span></div><div class="v2tile" style="--d:0.08s"><b>휴대폰에서 확인</b><span>PRD 완료 기준 · 390px 폭</span></div><div class="v2tile" style="--d:0.16s"><b>컴퓨터를 꺼도</b><span>앱은 계속 열림</span></div><div class="v2tile" style="--d:0.24s"><b>고치면 같은 주소에</b><span>새 링크를 돌릴 필요 없음</span></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>내 브라우저</b><span>localhost 주소로 열림</span></div><div class="v2tile" style="--d:0.08s"><b>팀원 노트북</b><span>같은 주소를 넣어도 안 열림</span></div><div class="v2tile" style="--d:0.16s"><b>내 휴대폰</b><span>안 열림 · 다른 기기</span></div></div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">1-6 에서 띄운 주소 · 예</span></div><pre><code>http://localhost:3000</code></pre></div><div class="dbnote"><span>localhost</span> 「지금 이 컴퓨터」를 가리키는 주소 · 다른 기기에서는 그 기기 자신</div></div></div>
 </section>
 
 <section class="slide lt" data-title="배포 흐름">
@@ -1028,7 +1028,7 @@
   <div class="eyebrow"><span class="tag">1-7</span></div>
   <h2 class="s-title sm">배포 흐름</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="flow"><div class="fs"><b>내 컴퓨터</b><span>앱 · 커밋</span></div><div class="fa">→</div><div class="fs"><b>GitHub</b><span>코드 보관 (1-5)</span></div><div class="fa">→</div><div class="fs hl"><b>Vercel</b><span>코드를 가져가 공개</span></div><div class="fa">→</div><div class="fs"><b>주소</b><span>*.vercel.app</span></div><div class="fa">→</div><div class="fs"><b>팀원</b><span>링크로 접속</span></div></div><div class="v2tiles c2"><div class="v2tile" style="--d:0.00s"><b>연결 ① Claude Code → GitHub</b><span>gh 로 저장소 만들고 올리기 · 말로 시킴</span></div><div class="v2tile" style="--d:0.08s"><b>연결 ② GitHub → Vercel</b><span>한 번 연결해 두면 이후 자동</span></div></div></div></div>
+  <div class="body"><div class="mid"><div class="flow"><div class="fs"><b>내 컴퓨터</b><span>앱 · 커밋</span></div><div class="fa">→</div><div class="fs"><b>GitHub</b><span>코드 보관 (1-5)</span></div><div class="fa">→</div><div class="fs hl"><b>Vercel</b><span>코드를 가져가 공개</span></div><div class="fa">→</div><div class="fs"><b>주소</b><span>*.vercel.app</span></div><div class="fa">→</div><div class="fs"><b>팀원</b><span>링크로 접속</span></div></div><div class="v2tiles c2"><div class="v2tile" style="--d:0.00s"><b>연결 ① Claude Code → GitHub</b><span>gh 로 저장소 생성 · 업로드 · 요청 한 줄</span></div><div class="v2tile" style="--d:0.08s"><b>연결 ② GitHub → Vercel</b><span>한 번 연결해 두면 이후 자동</span></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="gh · GitHub 명령 도구">
@@ -1036,7 +1036,7 @@
   <div class="eyebrow"><span class="tag">1-7</span></div>
   <h2 class="s-title sm">gh · GitHub 명령 도구</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>gh</b><span>GitHub 공식 명령 도구 · 저장소 만들기 · 올리기</span></div><div class="v2tile" style="--d:0.08s"><b>Claude Code가 대신 실행</b><span>명령을 외울 필요 없음</span></div><div class="v2tile" style="--d:0.16s"><b>한 번만</b><span>설치 · 로그인 연결</span></div></div><div class="twocol"><div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">macOS</span></div><pre><code>brew install gh</code></pre></div></div><div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">Windows</span></div><pre><code>winget install --id GitHub.cli --source winget</code></pre></div></div></div><div class="dbnote"><span>Windows</span> 설치 뒤 터미널을 새 창으로 열어야 gh 가 잡힘</div><div class="src">출처 · <a href="https://cli.github.com/" target="_blank" rel="noopener">GitHub CLI</a></div></div></div>
+  <div class="body"><div class="mid"><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>gh</b><span>GitHub 공식 명령 도구 · 저장소 만들기 · 올리기</span></div><div class="v2tile" style="--d:0.08s"><b>Claude Code가 실행</b><span>명령 암기 불필요</span></div><div class="v2tile" style="--d:0.16s"><b>한 번만</b><span>설치 · 로그인 연결</span></div></div><div class="twocol"><div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">macOS</span></div><pre><code>brew install gh</code></pre></div></div><div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">Windows</span></div><pre><code>winget install --id GitHub.cli --source winget</code></pre></div></div></div><div class="dbnote"><span>Windows</span> 설치 뒤 터미널 새 창에서 gh 인식</div><div class="src">출처 · <a href="https://cli.github.com/" target="_blank" rel="noopener">GitHub CLI</a></div></div></div>
 </section>
 
 <section class="slide lt" data-title="gh 로그인 연결">
@@ -1076,7 +1076,7 @@
 ├── style.css
 ├── app.js
 ├── 기획서.md     1-3
-└── PRD.md        1-4</code></pre></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>파일 목록</b><span>내 폴더와 같은가</span></div><div class="v2tile" style="--d:0.08s"><b>커밋 기록</b><span>1-5 · 1-6 커밋이 보이나</span></div><div class="v2tile" style="--d:0.16s"><b>자물쇠 표시</b><span>비공개인가</span></div></div></div></div></div></div>
+└── PRD.md        1-4</code></pre></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>파일 목록</b><span>내 폴더와 동일</span></div><div class="v2tile" style="--d:0.08s"><b>커밋 기록</b><span>1-5 · 1-6 커밋</span></div><div class="v2tile" style="--d:0.16s"><b>자물쇠 표시</b><span>비공개 저장소</span></div></div></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="Vercel 프로젝트 가져오기">
@@ -1096,20 +1096,12 @@
   이번 배포     https://room-booking-a1b2c3.vercel.app</code></pre></div><div class="dbnote"><span>공유할 주소</span> 프로젝트 기본 주소 · 다시 배포해도 바뀌지 않음</div><div class="src">출처 · <a href="https://vercel.com/docs/deployments/generated-urls" target="_blank" rel="noopener">Vercel · Generated URLs</a></div></div></div>
 </section>
 
-<section class="slide lt" data-title="배포 결과 화면">
+<section class="slide lt" data-title="배포 주소로 연 화면">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-7</span></div>
-  <h2 class="s-title sm">배포 결과 화면</h2>
+  <h2 class="s-title sm">배포 주소로 연 화면</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1shot"><figure><img src="img/room_main.webp" alt="배포 주소로 연 회의실 예약 · localhost 와 같은 화면"/><figcaption>배포 주소로 연 회의실 예약 · localhost 와 같은 화면</figcaption></figure><div class=v1side><div class="v1sd"><b>주소만 다름</b><span>localhost → *.vercel.app</span></div><div class="v1sd"><b>코드 동일</b><span>GitHub 에 올린 파일</span></div><div class="v1sd"><b>예약 데이터</b><span>여는 브라우저마다 따로 · 1-8</span></div></div></div></div></div>
-</section>
-
-<section class="slide lt" data-title="휴대폰에서 열기">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">1-7</span></div>
-  <h2 class="s-title sm">휴대폰에서 열기</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1shot"><figure><img src="img/room_mobile.webp" alt="390px 폭 · 휴대폰 화면"/><figcaption>390px 폭 · 휴대폰 화면</figcaption></figure><div class=v1side><div class="v1sd"><b>PRD 완료 기준</b><span>모바일 폭에서 가로 스크롤 없음</span></div><div class="v1sd"><b>확인 방법</b><span>주소를 휴대폰으로 보내 열기</span></div><div class="v1sd"><b>깨지면</b><span>화면 캡처를 Claude Code에 붙여 수정 요청 (1-6)</span></div></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v1shot"><figure><img src="img/room_mobile.webp" alt="배포 주소 · 390px 휴대폰 화면"/><figcaption>배포 주소 · 390px 휴대폰 화면</figcaption></figure><div class=v1side><div class="v1sd"><b>localhost 와 차이</b><span>주소만 다름 · 코드 동일</span></div><div class="v1sd"><b>PRD 완료 기준</b><span>모바일 폭에서 가로 스크롤 없음</span></div><div class="v1sd"><b>확인 방법</b><span>주소를 휴대폰으로 보내 열기</span></div><div class="v1sd"><b>깨질 때</b><span>화면 캡처 첨부 · 수정 요청 (1-6)</span></div></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="수정 → 재배포">
@@ -1117,23 +1109,7 @@
   <div class="eyebrow"><span class="tag">1-7</span></div>
   <h2 class="s-title sm">수정 → 재배포</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="flow"><div class="fs"><b>말로 수정</b><span>Claude Code</span></div><div class="fa">→</div><div class="fs"><b>localhost 확인</b><span>1-6 처럼</span></div><div class="fa">→</div><div class="fs"><b>커밋 · push</b><span>GitHub 업로드 요청</span></div><div class="fa">→</div><div class="fs hl"><b>Vercel 자동 배포</b><span>push 를 감지</span></div><div class="fa">→</div><div class="fs"><b>같은 주소에 반영</b><span>새 링크 없음</span></div></div><div class="dbnote"><span>한 번 연결 뒤</span> Vercel 화면을 다시 열 필요 없음 · push 가 곧 배포</div><div class="src">출처 · <a href="https://vercel.com/docs/git" target="_blank" rel="noopener">Vercel · Git</a></div></div></div>
-</section>
-
-<section class="slide lt" data-title="재배포 대화 예">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">1-7</span></div>
-  <h2 class="s-title sm">재배포 대화 예</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1chat"><div class="v1ch">Claude Code 대화 예</div><div class="v1b me"><span>나</span><p>예약 칸 색을 연한 초록으로 바꿔 줘</p></div><div class="v1b ai"><span>Claude</span><p>style.css 의 .cell.busy 색 변경 완료</p></div><div class="v1b me"><span>나</span><p>localhost 에서 확인했어 · 커밋하고 GitHub에 올려 줘</p></div><div class="v1b ai"><span>Claude</span><p>커밋 「예약 칸 색 변경」 → push 완료 · Vercel 새 배포 시작</p></div></div><div class="dbnote"><span>확인</span> 1~2분 뒤 같은 주소를 새로고침</div></div></div>
-</section>
-
-<section class="slide lt" data-title="Production · Preview">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">1-7</span></div>
-  <h2 class="s-title sm">Production · Preview</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2pair"><div class="v2p on"><div class="v2ph">Production</div><div class="v2pc" style="--d:0.00s"><b>언제</b><span>main 브랜치에 커밋 · push</span></div><div class="v2pc" style="--d:0.08s"><b>주소</b><span>프로젝트 기본 주소</span></div><div class="v2pc" style="--d:0.16s"><b>누가 봄</b><span>공유한 팀원 모두</span></div></div><div class="v2p"><div class="v2ph">Preview</div><div class="v2pc" style="--d:0.00s"><b>언제</b><span>다른 브랜치 · PR</span></div><div class="v2pc" style="--d:0.08s"><b>주소</b><span>브랜치마다 고유 주소</span></div><div class="v2pc" style="--d:0.16s"><b>쓰임</b><span>공개 전에 미리 확인</span></div></div></div><div class="dbnote"><span>1부에서는</span> main 하나로 Production 만 · Preview 는 이름만 알아 두기</div><div class="src">출처 · <a href="https://vercel.com/docs/deployments/environments" target="_blank" rel="noopener">Vercel · Environments</a></div></div></div>
+  <div class="body"><div class="mid"><div class="twocol"><div><div class="v1chat"><div class="v1ch">Claude Code 대화 예</div><div class="v1b me"><span>나</span><p>예약 칸 색을 연한 초록으로 바꿔 줘</p></div><div class="v1b ai"><span>Claude</span><p>style.css 의 .cell.busy 색 변경 완료</p></div><div class="v1b me"><span>나</span><p>커밋하고 GitHub에 올려 줘</p></div><div class="v1b ai"><span>Claude</span><p>커밋 「예약 칸 색 변경」 → push 완료 · Vercel 새 배포 시작</p></div></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>① 수정 요청</b><span>Claude Code</span></div><div class="v2tile" style="--d:0.08s"><b>② localhost 확인</b><span>1-6 과 같음</span></div><div class="v2tile" style="--d:0.16s"><b>③ 커밋 · push</b><span>업로드 요청</span></div><div class="v2tile" style="--d:0.24s"><b>④ Vercel 자동 배포</b><span>push 감지 · 1~2분</span></div><div class="v2tile" style="--d:0.32s"><b>⑤ 같은 주소에 반영</b><span>새 링크 없음</span></div></div></div></div><div class="src">출처 · <a href="https://vercel.com/docs/git" target="_blank" rel="noopener">Vercel · Git</a></div></div></div>
 </section>
 
 <section class="slide lt" data-title="공개 전 확인">
@@ -1141,7 +1117,7 @@
   <div class="eyebrow"><span class="tag">1-7</span></div>
   <h2 class="s-title sm">공개 전 확인</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2tiles c2"><div class="v2tile" style="--d:0.00s"><b>키 · 비밀번호</b><span>코드 · 파일에 들어 있지 않은가</span></div><div class="v2tile" style="--d:0.08s"><b>개인정보</b><span>실제 이름 · 연락처 대신 예시 값</span></div><div class="v2tile" style="--d:0.16s"><b>배포 주소는 공개</b><span>주소를 아는 누구나 열 수 있음</span></div><div class="v2tile" style="--d:0.24s"><b>Hobby 는 개인 · 비상업</b><span>회사 서비스는 Pro 이상</span></div></div><div class="dbnote"><span>Claude Code에게</span> 「올리기 전에 키 · 개인정보가 들어간 파일이 있는지 찾아 줘」</div><div class="src">출처 · <a href="https://vercel.com/legal/terms" target="_blank" rel="noopener">Vercel Terms</a> · <a href="https://vercel.com/docs/plans/hobby" target="_blank" rel="noopener">Hobby</a></div></div></div>
+  <div class="body"><div class="mid"><div class="v2tiles c2"><div class="v2tile" style="--d:0.00s"><b>키 · 비밀번호</b><span>코드 · 파일에 들어 있지 않은가</span></div><div class="v2tile" style="--d:0.08s"><b>개인정보</b><span>실제 이름 · 연락처 대신 예시 값</span></div><div class="v2tile" style="--d:0.16s"><b>배포 주소는 공개</b><span>주소를 아는 누구나 열 수 있음</span></div><div class="v2tile" style="--d:0.24s"><b>Hobby 는 개인 · 비상업</b><span>회사 서비스는 Pro 이상</span></div></div><div class="dbnote"><span>점검 요청 예</span> 「올리기 전에 키 · 개인정보가 들어간 파일이 있는지 찾아 줘」</div><div class="src">출처 · <a href="https://vercel.com/legal/terms" target="_blank" rel="noopener">Vercel Terms</a> · <a href="https://vercel.com/docs/plans/hobby" target="_blank" rel="noopener">Hobby</a></div></div></div>
 </section>
 
 <section class="slide lt labs" data-title="[실습 1-7] 내 앱 배포">
@@ -1151,7 +1127,7 @@
   <div class="rule"></div>
   <div class="body"><div class="labgrid">
     <div class="lc goal"><div class="lh">목표</div><p>1-6 에서 만든 앱을 GitHub 에 올리고 Vercel 주소로 공개</p><div class="lf">사용 파일 · 1-6 의 내 앱 폴더</div></div>
-    <div class="lc steps"><div class="lh">단계</div><ol><li>gh 설치 · 로그인 연결</li><li>Claude Code에게 「GitHub 비공개 저장소로 올려 줘」</li><li>Vercel 에서 저장소 가져오기 · Deploy → 휴대폰으로 열기</li><li>한 곳 고쳐 push → 같은 주소에 반영 확인</li></ol></div>
+    <div class="lc steps"><div class="lh">단계</div><ol><li>gh 설치 · 로그인 연결</li><li>Claude Code 에 저장소 생성 · 업로드 요청</li><li>Vercel 에서 저장소 가져오기 · Deploy → 휴대폰으로 열기</li><li>한 곳 고쳐 push → 같은 주소에 반영 확인</li></ol></div>
     <div class="lc done"><div class="lh">완료 기준</div><ul><li>저장소에 내 파일 · 커밋 기록</li><li>*.vercel.app 주소로 앱이 열림</li><li>수정 한 번이 재배포로 반영</li></ul></div>
   </div></div>
 </section>
@@ -1161,7 +1137,7 @@
   <div class="eyebrow"><span class="tag">1-7</span></div>
   <h2 class="s-title sm">실습 1-7 진행</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="kithead"><span>작업 위치</span><code>1-6 의 내 앱 폴더</code><em>요청 문장은 내가 쓴다 · 예시는 labs/room_booking</em></div><div class="bf"><div class="bf-l"><div class="bh">요청에 들어갈 것</div><div class="bs"><b>목표</b><span>이 폴더를 GitHub 에 올리기</span></div><div class="bs"><b>저장소</b><span>이름 · 비공개</span></div><div class="bs"><b>올리기 전</b><span>키 · 개인정보 점검</span></div><div class="bs"><b>하지 말 것</b><span>기존 커밋 지우기 · 공개 저장소</span></div></div><div class="bf-r"><div class="bh">순서</div><ol><li>gh auth login (브라우저 승인)</li><li>올리기 전 키 · 개인정보 점검 요청</li><li>저장소 만들고 올리기 요청</li><li>Vercel 가져오기 · Deploy</li><li>수정 → 「GitHub에 올려 줘」</li></ol><div class="bh">키워드</div><div class="bk"><code>GitHub</code><code>비공개</code><code>gh</code><code>push</code><code>Vercel</code></div></div></div><div class="qk2"><b>확인</b><ul><li>저장소 주소가 열림</li><li>배포 주소가 열림</li><li>수정 뒤 같은 주소에 반영</li></ul></div><div class="dbnote"><span>막히면</span> 오류 문구를 그대로 Claude Code에 붙여 넣기 · 아래 「막히는 곳」</div></div></div>
+  <div class="body"><div class="mid"><div class="kithead"><span>작업 위치</span><code>1-6 의 내 앱 폴더</code><em>요청 문장은 내가 쓴다 · 예시 labs/room_booking</em></div><div class="bf"><div class="bf-l"><div class="bh">요청에 들어갈 것</div><div class="bs"><b>목표</b><span>이 폴더를 GitHub 에 올리기</span></div><div class="bs"><b>저장소</b><span>이름 · 비공개</span></div><div class="bs"><b>올리기 전</b><span>키 · 개인정보 점검</span></div><div class="bs"><b>하지 말 것</b><span>기존 커밋 지우기 · 공개 저장소</span></div></div><div class="bf-r"><div class="bh">순서</div><ol><li>gh auth login (브라우저 승인)</li><li>올리기 전 키 · 개인정보 점검 요청</li><li>저장소 만들고 올리기 요청</li><li>Vercel 가져오기 · Deploy</li><li>수정 → 커밋 · push 요청</li></ol><div class="bh">키워드</div><div class="bk"><code>GitHub</code><code>비공개</code><code>gh</code><code>push</code><code>Vercel</code></div></div></div><div class="qk2"><b>확인</b><ul><li>저장소 주소가 열림</li><li>배포 주소가 열림</li><li>수정 뒤 같은 주소에 반영</li></ul></div><div class="dbnote"><span>막히면</span> 오류 문구 그대로 전달 · 「막히는 곳」 참고</div></div></div>
 </section>
 
 <section class="slide lt" data-title="실습 1-7 확인">

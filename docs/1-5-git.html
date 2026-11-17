@@ -923,6 +923,17 @@
   .v1cmr span{font-size:17px; color:#16233A; font-weight:600;}
   @keyframes v1cutIn{from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none}}
   @media print{.v1cmr{opacity:1; animation:none}}
+
+  .v1cmw{display:grid; grid-template-columns:1.1fr 1fr; gap:26px; align-items:center;}
+  .v1cms{display:flex; flex-direction:column-reverse; gap:10px; border:2px dashed #D9DDE3; border-radius:16px; padding:18px 18px 14px; background:#F7F8FA; min-height:280px; justify-content:flex-start;}
+  .v1cmh{order:-1; font-size:14px; font-weight:800; color:#6B7785; text-align:center; margin-top:6px;}
+  .v1cm{display:grid; grid-template-columns:44px 84px 1fr; align-items:baseline; gap:8px; padding:12px 16px; border-radius:12px; background:#fff; border:2px solid #1F3A5F;
+        opacity:0; animation:v1cmIn .5s ease-out forwards;}
+  .v1cm:last-of-type{border-color:#F28C28; background:#FFF8F0;}
+  .v1cm .v{font-weight:900; color:#F28C28; font-size:18px;} .v1cm code{font-family:var(--mono); font-size:15px; color:#6B7785; background:none;}
+  .v1cm b{font-size:19px; color:#16233A;} .v1cm small{grid-column:3; font-size:14.5px; color:#6B7785;}
+  @keyframes v1cmIn{from{opacity:0; transform:translateY(-24px)} to{opacity:1; transform:none}}
+  @media print{.v1cm{opacity:1; animation:none}}
 </style>
 </head>
 <body>
@@ -996,15 +1007,15 @@
   <div class="eyebrow"><span class="tag">1-5</span></div>
   <h2 class="s-title sm">파일 이름 버전 관리</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>기획서_v1.md</b><span>처음 쓴 것</span></div><div class="v2tile" style="--d:0.08s"><b>기획서_최종.md</b><span>피드백 반영</span></div><div class="v2tile" style="--d:0.16s"><b>기획서_최종_진짜.md</b><span>PRD 쓰다 다시 고침</span></div></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>어느 게 최신</b><span>파일 날짜를 열어 봐야 앎</span></div><div class="v2tile" style="--d:0.08s"><b>무엇이 바뀌었나</b><span>두 파일을 나란히 놓고 비교</span></div><div class="v2tile" style="--d:0.16s"><b>이전 상태 복구</b><span>복사본 없으면 불가</span></div></div><div class="dbnote"><span>코드에서는</span> 파일 수십 개가 함께 바뀜 · 이름 붙여 복사하는 방식이 통하지 않음</div></div></div>
+  <div class="body"><div class="mid"><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>기획서_v1.md</b><span>처음 쓴 것</span></div><div class="v2tile" style="--d:0.08s"><b>기획서_최종.md</b><span>피드백 반영</span></div><div class="v2tile" style="--d:0.16s"><b>기획서_최종_진짜.md</b><span>PRD 쓰다 다시 고침</span></div></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>어느 게 최신</b><span>파일 날짜를 열어 봐야 앎</span></div><div class="v2tile" style="--d:0.08s"><b>무엇이 바뀌었나</b><span>두 파일을 나란히 놓고 비교</span></div><div class="v2tile" style="--d:0.16s"><b>이전 상태 복구</b><span>복사본 없으면 불가</span></div></div><div class="dbnote"><span>코드</span> 파일 수십 개가 함께 바뀜 · 파일 이름 복사로 관리 불가</div></div></div>
 </section>
 
-<section class="slide lt" data-title="세이브 포인트 비유">
+<section class="slide lt" data-title="비유 · 세이브 포인트">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-5</span></div>
-  <h2 class="s-title sm">세이브 포인트 비유</h2>
+  <h2 class="s-title sm">비유 · 세이브 포인트</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="phmap v3ph"><figure class="ph"><img src="img/v1_savepoint.webp" alt="게임 속 세이브 포인트"><figcaption><b>게임 속 세이브 포인트</b></figcaption></figure><div class="v2ms"><div class="v2mh"><span>게임</span><i></i><span>Git</span></div><div class="v2m" style="--d:0.00s"><div class="a">세이브 포인트에서 저장</div><i>→</i><div class="b"><b>커밋 (commit)</b><small>지금 상태를 기록</small></div></div><div class="v2m" style="--d:0.12s"><div class="a">저장 슬롯 이름</div><i>→</i><div class="b"><b>커밋 메시지</b><small>「예약 창 추가」</small></div></div><div class="v2m" style="--d:0.24s"><div class="a">저장 목록</div><i>→</i><div class="b"><b>기록 (log)</b><small>언제 · 무엇을</small></div></div><div class="v2m" style="--d:0.36s"><div class="a">불러오기</div><i>→</i><div class="b"><b>되돌리기</b><small>저장 시점 복원</small></div></div><div class="v2m" style="--d:0.48s"><div class="a">클라우드 저장</div><i>→</i><div class="b"><b>GitHub</b><small>다른 컴퓨터에서도</small></div></div></div></div><div class="src">출처 · <a href="https://commons.wikimedia.org/wiki/File:2023-03-30_Concept-art-for-a-fictive-video-game-Save-Point_by-David-Revoy.jpg" target="_blank" rel="noopener">그림 · David Revoy · CC BY 4.0</a></div></div></div>
+  <div class="body"><div class="mid"><div class="phmap v3ph"><figure class="ph"><img src="img/v1_u5_savepoint.webp" alt="세이브 포인트 · 저장한 지점부터 다시 시작"><figcaption><b>세이브 포인트 · 저장한 지점부터 다시 시작</b></figcaption></figure><div class="v2ms"><div class="v2mh"><span>게임</span><i></i><span>Git</span></div><div class="v2m" style="--d:0.00s"><div class="a">세이브 포인트에서 저장</div><i>→</i><div class="b"><b>커밋 (commit)</b><small>지금 상태를 기록</small></div></div><div class="v2m" style="--d:0.12s"><div class="a">저장 슬롯 이름</div><i>→</i><div class="b"><b>커밋 메시지</b><small>「버튼 추가」</small></div></div><div class="v2m" style="--d:0.24s"><div class="a">저장 목록</div><i>→</i><div class="b"><b>기록 (log)</b><small>언제 · 무엇을</small></div></div><div class="v2m" style="--d:0.36s"><div class="a">불러오기</div><i>→</i><div class="b"><b>되돌리기</b><small>저장 시점 복원</small></div></div><div class="v2m" style="--d:0.48s"><div class="a">클라우드 저장</div><i>→</i><div class="b"><b>GitHub</b><small>다른 컴퓨터에서도</small></div></div></div></div><div class="src">출처 · <a href="https://huggingface.co/Tongyi-MAI/Z-Image-Turbo" target="_blank" rel="noopener">AI 생성 그림 · Z-Image Turbo (Apache 2.0)</a></div></div></div>
 </section>
 
 <section class="slide lt" data-title="Git">
@@ -1012,7 +1023,7 @@
   <div class="eyebrow"><span class="tag">1-5</span></div>
   <h2 class="s-title sm">Git</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="flow"><div class="fs"><b>파일 수정</b><span>기획서.md · PRD.md</span></div><div class="fa">→</div><div class="fs"><b>저장할 파일 고르기</b><span>add</span></div><div class="fa">→</div><div class="fs hl"><b>이름 붙여 기록</b><span>commit</span></div><div class="fa">→</div><div class="fs"><b>기록에 쌓임</b><span>log 로 보기</span></div></div><div class="v2pair"><div class="v2p"><div class="v2ph">복사본으로 관리</div><div class="v2pc" style="--d:0.00s"><b>파일마다 사본</b><span>기획서_최종_진짜.md</span></div><div class="v2pc" style="--d:0.08s"><b>바뀐 곳</b><span>눈으로 비교</span></div></div><div class="v2p on"><div class="v2ph">Git으로 관리</div><div class="v2pc" style="--d:0.00s"><b>파일은 하나</b><span>기획서.md 그대로</span></div><div class="v2pc" style="--d:0.08s"><b>바뀐 곳</b><span>커밋마다 자동으로 남음</span></div></div></div><div class="dbnote"><span>공식 정의</span> git commit — 「Record changes to the repository」 · 저장소에 변경을 기록</div></div></div>
+  <div class="body"><div class="mid"><div class="flow"><div class="fs"><b>파일 수정</b><span>기획서.md · PRD.md</span></div><div class="fa">→</div><div class="fs"><b>저장할 파일 고르기</b><span>add</span></div><div class="fa">→</div><div class="fs hl"><b>이름 붙여 기록</b><span>commit</span></div><div class="fa">→</div><div class="fs"><b>기록에 쌓임</b><span>log 로 보기</span></div></div><div class="v2pair"><div class="v2p"><div class="v2ph">복사본으로 관리</div><div class="v2pc" style="--d:0.00s"><b>파일마다 사본</b><span>기획서_최종_진짜.md</span></div><div class="v2pc" style="--d:0.08s"><b>바뀐 곳</b><span>눈으로 비교</span></div></div><div class="v2p on"><div class="v2ph">Git으로 관리</div><div class="v2pc" style="--d:0.00s"><b>파일은 하나</b><span>기획서.md 그대로</span></div><div class="v2pc" style="--d:0.08s"><b>바뀐 곳</b><span>커밋마다 자동으로 남음</span></div></div></div><div class="dbnote"><span>commit</span> 저장소에 변경을 기록 (git 공식 문서)</div></div></div>
 </section>
 
 <section class="slide lt" data-title="커밋 하나에 남는 것">
@@ -1020,8 +1031,17 @@
   <div class="eyebrow"><span class="tag">1-5</span></div>
   <h2 class="s-title sm">커밋 하나에 남는 것</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2tiles c4"><div class="v2tile" style="--d:0.00s"><b>바뀐 내용</b><span>어느 파일의 어느 줄</span></div><div class="v2tile" style="--d:0.08s"><b>메시지</b><span>「PRD 완료 기준 추가」</span></div><div class="v2tile" style="--d:0.16s"><b>시각 · 작성자</b><span>언제 · 누가</span></div><div class="v2tile" style="--d:0.24s"><b>고유 번호</b><span>a3f9c1e 같은 해시</span></div></div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">기록 보기 · 예</span></div><pre><code>a3f9c1e  PRD 완료 기준 추가        2026-11-20 14:12
-7b21d04  기획서 · PRD 첫 버전      2026-11-20 13:40</code></pre></div><div class="dbnote"><span>메시지</span> 무엇을 바꿨는지 한 줄 · 나중에 되돌릴 시점을 찾는 이름표</div></div></div>
+  <div class="body"><div class="mid"><div class="v2tiles c4"><div class="v2tile" style="--d:0.00s"><b>바뀐 내용</b><span>어느 파일의 어느 줄</span></div><div class="v2tile" style="--d:0.08s"><b>메시지</b><span>「버튼 추가」</span></div><div class="v2tile" style="--d:0.16s"><b>시각 · 작성자</b><span>언제 · 누가</span></div><div class="v2tile" style="--d:0.24s"><b>고유 번호</b><span>8fcbe80 같은 해시</span></div></div><div class="dbnote"><span>메시지</span> 무엇을 바꿨는지 한 줄 · 되돌릴 시점을 찾는 이름표</div></div></div>
+</section>
+
+<section class="slide lt" data-title="커밋 기록 쌓기">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-5</span></div>
+  <h2 class="s-title sm">커밋 기록 쌓기</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1cmw"><div class="v1cms"><div class="v1cmh">기록 저장소</div><div class="v1cm" style="animation-delay:0.4s"><span class="v">v1</span><code>dfb369b</code><b>첫 화면 완성</b><small>index.html 생성</small></div><div class="v1cm" style="animation-delay:1.3s"><span class="v">v2</span><code>8fcbe80</code><b>버튼 추가</b><small>로그인 버튼</small></div><div class="v1cm" style="animation-delay:2.2s"><span class="v">v3</span><code>0b491e3</code><b>색상 수정</b><small>버튼 주황색</small></div></div><div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">터미널 · git log --oneline</span></div><pre><code>0b491e3 색상 수정
+8fcbe80 버튼 추가
+dfb369b 첫 화면 완성</code></pre></div></div></div><div class="src">출처 · <a href="https://www.youtube.com/watch?v=HNtS6WGGhNU" target="_blank" rel="noopener">참고 · 혼잡스 「바이브코딩 한 장 지도」</a></div></div></div>
 </section>
 
 <section class="slide lt" data-title="되돌리기 두 가지">
@@ -1029,7 +1049,9 @@
   <div class="eyebrow"><span class="tag">1-5</span></div>
   <h2 class="s-title sm">되돌리기 두 가지</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">아직 커밋 전</div><div class="v2pc" style="--d:0.00s"><b>restore</b><span>마지막 커밋 상태로 파일을 되돌림</span></div><div class="v2pc" style="--d:0.08s"><b>쓰는 때</b><span>방금 고친 것이 마음에 안 들 때</span></div></div><div class="v2p on"><div class="v2ph">이미 커밋한 뒤</div><div class="v2pc" style="--d:0.00s"><b>revert</b><span>그 커밋을 되돌리는 새 커밋을 만듦</span></div><div class="v2pc" style="--d:0.08s"><b>기록</b><span>지우지 않고 「되돌림」도 남김</span></div></div></div><div class="flow"><div class="fs"><b>커밋 A</b><span>기획서</span></div><div class="fa">→</div><div class="fs"><b>커밋 B</b><span>PRD</span></div><div class="fa">→</div><div class="fs hl"><b>고치는 중</b><span>PRD 수정</span></div><div class="fa">→</div><div class="fs"><b>restore</b><span>커밋 B 상태로</span></div><div class="fa">→</div><div class="fs"><b>revert</b><span>커밋 C · B를 취소</span></div></div><div class="dbnote"><span>공식 문서</span> revert 는 새 커밋 · restore 는 작업 폴더의 파일만 · 둘 다 기록을 지우지 않음</div><div class="src">출처 · <a href="https://git-scm.com/docs/git" target="_blank" rel="noopener">git-scm · git</a></div></div></div>
+  <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">아직 커밋 전</div><div class="v2pc" style="--d:0.00s"><b>restore</b><span>마지막 커밋 상태로 파일을 되돌림</span></div><div class="v2pc" style="--d:0.08s"><b>쓰는 때</b><span>방금 고친 것이 마음에 안 들 때</span></div></div><div class="v2p on"><div class="v2ph">이미 커밋한 뒤</div><div class="v2pc" style="--d:0.00s"><b>revert</b><span>그 커밋을 되돌리는 새 커밋을 만듦</span></div><div class="v2pc" style="--d:0.08s"><b>기록</b><span>지우지 않고 「되돌림」도 남김</span></div></div></div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">터미널 · git revert 뒤 git log --oneline</span></div><pre><code>5b00623 Revert "색상 수정"
+0b491e3 색상 수정
+8fcbe80 버튼 추가</code></pre></div><div class="src">출처 · <a href="https://git-scm.com/docs/git" target="_blank" rel="noopener">git-scm · git</a></div></div></div>
 </section>
 
 <section class="slide lt" data-title="말로 하는 Git 작업">
@@ -1037,7 +1059,7 @@
   <div class="eyebrow"><span class="tag">1-5</span></div>
   <h2 class="s-title sm">말로 하는 Git 작업</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2ms"><div class="v2mh"><span>Claude Code에 하는 말</span><i></i><span>실행되는 명령</span></div><div class="v2m" style="--d:0.00s"><div class="a">「지금 상태 커밋해 줘」</div><i>→</i><div class="b"><b>git add · git commit</b><small>메시지도 Claude가 씀</small></div></div><div class="v2m" style="--d:0.12s"><div class="a">「커밋 기록 보여 줘」</div><i>→</i><div class="b"><b>git log</b><small>시점 · 메시지 목록</small></div></div><div class="v2m" style="--d:0.24s"><div class="a">「방금 고친 거 취소해 줘」</div><i>→</i><div class="b"><b>git restore</b><small>커밋 전 수정 버림</small></div></div><div class="v2m" style="--d:0.36s"><div class="a">「마지막 커밋 되돌려 줘」</div><i>→</i><div class="b"><b>git revert</b><small>되돌리는 새 커밋</small></div></div></div><div class="dbnote"><span>명령어</span> 외우지 않아도 됨 · 무엇을 하는지만 알면 됨</div></div></div>
+  <div class="body"><div class="mid"><div class="v2ms"><div class="v2mh"><span>Claude Code에 하는 말</span><i></i><span>실행되는 명령</span></div><div class="v2m" style="--d:0.00s"><div class="a">「지금 상태 커밋해 줘」</div><i>→</i><div class="b"><b>git add · git commit</b><small>메시지도 Claude가 씀</small></div></div><div class="v2m" style="--d:0.12s"><div class="a">「커밋 기록 보여 줘」</div><i>→</i><div class="b"><b>git log</b><small>시점 · 메시지 목록</small></div></div><div class="v2m" style="--d:0.24s"><div class="a">「방금 고친 거 취소해 줘」</div><i>→</i><div class="b"><b>git restore</b><small>커밋 전 수정 버림</small></div></div><div class="v2m" style="--d:0.36s"><div class="a">「마지막 커밋 되돌려 줘」</div><i>→</i><div class="b"><b>git revert</b><small>되돌리는 새 커밋</small></div></div></div><div class="dbnote"><span>명령 실행</span> Claude Code · 사람은 결과 확인</div></div></div>
 </section>
 
 <section class="slide lt" data-title="GitHub">
@@ -1061,7 +1083,7 @@
   <div class="eyebrow"><span class="tag">1-5</span></div>
   <h2 class="s-title sm">커밋하는 시점</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>기능 하나가 됐을 때</b><span>「예약 창 저장까지 동작」</span></div><div class="v2tile" style="--d:0.08s"><b>크게 바꾸기 전</b><span>디자인을 갈아엎기 전</span></div><div class="v2tile" style="--d:0.16s"><b>확인이 끝났을 때</b><span>브라우저로 보고 이상 없음</span></div></div><div class="flow"><div class="fs"><b>요청</b><span>기능 하나</span></div><div class="fa">→</div><div class="fs"><b>확인</b><span>브라우저</span></div><div class="fa">→</div><div class="fs hl"><b>커밋</b><span>세이브</span></div><div class="fa">→</div><div class="fs"><b>다음 요청</b></div></div><div class="dbnote"><span>1-6 에서</span> 이 고리를 태스크마다 반복</div></div></div>
+  <div class="body"><div class="mid"><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>기능 하나가 됐을 때</b><span>「로그인 버튼 동작」</span></div><div class="v2tile" style="--d:0.08s"><b>크게 바꾸기 전</b><span>디자인을 갈아엎기 전</span></div><div class="v2tile" style="--d:0.16s"><b>확인이 끝났을 때</b><span>브라우저로 보고 이상 없음</span></div></div><div class="flow"><div class="fs"><b>요청</b><span>기능 하나</span></div><div class="fa">→</div><div class="fs"><b>확인</b><span>브라우저</span></div><div class="fa">→</div><div class="fs hl"><b>커밋</b><span>세이브</span></div><div class="fa">→</div><div class="fs"><b>다음 요청</b></div></div><div class="dbnote"><span>1-6 에서</span> 이 고리를 태스크마다 반복</div></div></div>
 </section>
 
 <section class="slide lt labs" data-title="[실습 1-5] 첫 커밋">
@@ -1081,7 +1103,7 @@
   <div class="eyebrow"><span class="tag">1-5</span></div>
   <h2 class="s-title sm">실습 1-5 진행</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="kithead"><span>작업 위치</span><code>내 프로젝트 폴더</code><em>요청 문장은 내가 쓴다 · 예시는 labs/room_booking</em></div><div class="bf"><div class="bf-l"><div class="bh">요청에 들어갈 것</div><div class="bs"><b>목표</b><span>이 폴더를 Git으로 관리 · 첫 커밋</span></div><div class="bs"><b>대상</b><span>기획서.md · PRD.md</span></div><div class="bs"><b>메시지</b><span>무엇을 담았는지 한 줄</span></div></div><div class="bf-r"><div class="bh">순서</div><ol><li>폴더 열기 · Claude Code 실행</li><li>Git 시작 + 첫 커밋 요청</li><li>기록 보기</li><li>PRD.md 아무 줄 고치기</li><li>「방금 고친 거 취소」 요청</li></ol><div class="bh">키워드</div><div class="bk"><code>Git 시작</code><code>첫 커밋</code><code>커밋 기록</code><code>되돌리기</code></div></div></div><div class="qk2"><b>확인</b><ul><li>기록에 내 메시지가 보임</li><li>취소한 줄이 원래대로 돌아옴</li></ul></div><div class="dbnote"><span>막히면</span> Git이 없다고 나오면 「Git 설치 방법 알려 줘」 · 이름 · 이메일을 물으면 GitHub 가입 정보로</div></div></div>
+  <div class="body"><div class="mid"><div class="kithead"><span>작업 위치</span><code>내 프로젝트 폴더</code><em>요청 문장은 내가 쓴다 · 예시 labs/room_booking</em></div><div class="bf"><div class="bf-l"><div class="bh">요청에 들어갈 것</div><div class="bs"><b>목표</b><span>이 폴더를 Git으로 관리 · 첫 커밋</span></div><div class="bs"><b>대상</b><span>기획서.md · PRD.md</span></div><div class="bs"><b>메시지</b><span>무엇을 담았는지 한 줄</span></div></div><div class="bf-r"><div class="bh">순서</div><ol><li>폴더 열기 · Claude Code 실행</li><li>Git 시작 + 첫 커밋 요청</li><li>기록 보기</li><li>PRD.md 아무 줄 고치기</li><li>「방금 고친 거 취소」 요청</li></ol><div class="bh">키워드</div><div class="bk"><code>Git 시작</code><code>첫 커밋</code><code>커밋 기록</code><code>되돌리기</code></div></div></div><div class="qk2"><b>확인</b><ul><li>기록에 내 메시지가 보임</li><li>취소한 줄이 원래대로 돌아옴</li></ul></div><div class="dbnote"><span>막히면</span> Git 없음 → 「Git 설치 방법 알려 줘」 · 이름 · 이메일 질문 → GitHub 가입 정보 입력</div></div></div>
 </section>
 
 <section class="slide lt" data-title="실습 1-5 확인">
@@ -1089,7 +1111,7 @@
   <div class="eyebrow"><span class="tag">1-5</span></div>
   <h2 class="s-title sm">실습 1-5 확인</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1chat"><div class="v1ch">첫 커밋 대화 예</div><div class="v1b me"><span>나</span><p>이 폴더를 Git으로 관리하고, 기획서랑 PRD를 첫 커밋으로 남겨 줘.</p></div><div class="v1b ai"><span>Claude</span><p>Git 저장소를 만들고 기획서.md · PRD.md 를 커밋했다.<br/>메시지: 「기획서 · PRD 첫 버전」</p></div></div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">커밋 기록 · 예</span></div><pre><code>7b21d04  기획서 · PRD 첫 버전</code></pre></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>커밋 1개</b><span>메시지에 무엇을 담았는지</span></div><div class="v2tile" style="--d:0.08s"><b>되돌리기</b><span>PRD.md 가 커밋 상태 그대로</span></div><div class="v2tile" style="--d:0.16s"><b>다음 단원</b><span>이 폴더에 앱을 만듦</span></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v1chat"><div class="v1ch">첫 커밋 대화 예</div><div class="v1b me"><span>나</span><p>이 폴더를 Git으로 관리하고, 기획서랑 PRD를 첫 커밋으로 남겨 줘.</p></div><div class="v1b ai"><span>Claude</span><p>Git 저장소를 만들고 기획서.md · PRD.md 를 커밋했다.<br/>메시지: 「기획서 · PRD 첫 버전」</p></div></div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">터미널 · git log --oneline</span></div><pre><code>624e0e2 기획서 · PRD 첫 버전</code></pre></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>커밋 1개</b><span>메시지에 무엇을 담았는지</span></div><div class="v2tile" style="--d:0.08s"><b>되돌리기</b><span>PRD.md 가 커밋 상태 그대로</span></div><div class="v2tile" style="--d:0.16s"><b>다음 단원</b><span>이 폴더에 앱을 만듦</span></div></div></div></div>
 </section>
 
 <section class="slide dk" data-title="다음 단원">

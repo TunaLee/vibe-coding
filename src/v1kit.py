@@ -79,14 +79,14 @@ def chat(turns, label="대화 예"):
     return f'<div class="v1chat"><div class="v1ch">{label}</div>{b}</div>'
 
 
-def brief(no, u, steps, slots, keys, checks, stuck, folder="내 프로젝트 폴더"):
+def brief(no, u, steps, slots, keys, checks, stuck, folder="내 프로젝트 폴더", example=FOLDER):
     """실습 진행 — 「요청에 들어갈 것」 · 순서 · 키워드 · 확인. 요청 문장은 수강생이 쓴다."""
     st = "".join(f"<li>{x}</li>" for x in steps)
     sl = "".join(f'<div class="bs"><b>{k}</b><span>{v}</span></div>' for k, v in slots)
     kw = "".join(f"<code>{x}</code>" for x in keys)
     ck = "".join(f"<li>{x}</li>" for x in checks)
     head = (f'<div class="kithead"><span>작업 위치</span><code>{folder}</code>'
-            f'<em>요청 문장은 내가 쓴다 · 예시는 {FOLDER}</em></div>')
+            f'<em>요청 문장은 내가 쓴다{f" · 예시 {example}" if example else ""}</em></div>')
     body = (f'<div class="bf"><div class="bf-l"><div class="bh">요청에 들어갈 것</div>{sl}</div>'
             f'<div class="bf-r"><div class="bh">순서</div><ol>{st}</ol><div class="bh">키워드</div><div class="bk">{kw}</div></div></div>'
             f'<div class="qk2"><b>확인</b><ul>{ck}</ul></div>' + note("막히면", stuck))
