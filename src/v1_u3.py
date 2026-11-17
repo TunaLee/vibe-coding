@@ -23,7 +23,57 @@ def _heads():
     return "\n".join(x for x in _plan().split("\n") if x.startswith("#"))
 
 
+# IT 기업 개발 흐름 — (단계, 담당, 산출물, 1부 단원, 1부에서 하는 일)
+DEVFLOW = [
+    ("기획", "기획자 · PM", "기획서", "1-3", "기획서.md"),
+    ("요구사항 정의", "PM · 개발 리드", "PRD", "1-4", "PRD.md"),
+    ("설계", "디자이너 · 개발자", "화면 · 구조 설계", "1-6", "Plan Mode 계획"),
+    ("개발 계획", "개발 리드", "태스크 · 일정", "1-6", "태스크 T1~T6"),
+    ("개발", "개발자", "코드 · 커밋", "1-5 · 1-6", "Claude Code · Git"),
+    ("테스트", "QA", "버그 목록", "1-6", "완료 기준 확인"),
+    ("배포 · 회고", "개발 · 운영", "서비스 주소", "1-7 · 1-8", "배포 주소 · 회고"),
+]
+
+
+def _devflow():
+    c = "".join(f'<div class="v1dfc" style="--d:{.3 + i * .6:.1f}s"><i>{i + 1}</i><b>{st}</b>'
+                f'<span>{who}</span><em>{out}</em></div>' for i, (st, who, out, _, _) in enumerate(DEVFLOW))
+    return f'<div class="v1df">{c}</div>'
+
+
+def _devmap():
+    head = "".join(f'<div class="v1dmh">{st}</div>' for st, *_ in DEVFLOW)
+    co = "".join(f'<div class="v1dmc">{who}</div>' for _, who, *_ in DEVFLOW)
+    me = "".join(f'<div class="v1dmm" style="--d:{.4 + i * .45:.2f}s"><small>{u}</small><b>{w}</b></div>'
+                 for i, (_, _, _, u, w) in enumerate(DEVFLOW))
+    return (f'<div class="v1dm"><div class="v1dml"></div>{head}'
+            f'<div class="v1dml">회사<small>역할별 담당자</small></div>{co}'
+            f'<div class="v1dml on">1부<small>나 · Claude · Claude Code</small></div>{me}</div>')
+
+
 CSS = """
+  /* 1-3 · IT 기업 개발 흐름 (v1df · v1dm) */
+  .v1df{display:grid; grid-template-columns:repeat(7,1fr); gap:10px; margin-top:26px;}
+  .v1dfc{position:relative; background:#fff; border:2px solid #C9D6E6; border-radius:14px; padding:16px 10px 18px; text-align:center;
+    opacity:0; animation:v1dfIn .5s var(--d) forwards;}
+  .v1dfc:not(:last-child)::after{content:"→"; position:absolute; right:-14px; top:44%; font-size:20px; font-weight:800; color:#F28C28;}
+  .v1dfc i{display:inline-flex; width:30px; height:30px; border-radius:50%; background:#16233A; color:#fff; font-style:normal;
+    font-weight:800; align-items:center; justify-content:center; font-size:15px; margin-bottom:10px;}
+  .v1dfc b{display:block; font-size:21px; color:#16233A; margin-bottom:12px; letter-spacing:-.02em;}
+  .v1dfc span{display:block; font-size:15px; color:#6B7785; margin-bottom:12px; min-height:38px;}
+  .v1dfc em{display:inline-block; font-style:normal; font-size:15px; font-weight:700; color:#C76A12; background:#FFF1E2;
+    border-radius:10px; padding:5px 9px;}
+  .v1dm{display:grid; grid-template-columns:150px repeat(7,1fr); gap:8px; margin-top:22px; align-items:stretch;}
+  .v1dmh{font-size:18px; font-weight:800; color:#16233A; text-align:center; padding-bottom:6px; border-bottom:3px solid #16233A;}
+  .v1dml{font-size:20px; font-weight:800; color:#16233A; display:flex; flex-direction:column; justify-content:center;}
+  .v1dml small{font-size:13px; font-weight:600; color:#6B7785; margin-top:4px;} .v1dml.on{color:#C76A12;}
+  .v1dmc{background:#EAF0F7; border-radius:12px; padding:16px 8px; font-size:15.5px; font-weight:600; color:#16233A; text-align:center;
+    display:flex; align-items:center; justify-content:center; min-height:84px;}
+  .v1dmm{background:#FFF1E2; border:2px solid #F28C28; border-radius:12px; padding:12px 8px; text-align:center; min-height:84px;
+    display:flex; flex-direction:column; justify-content:center; opacity:0; animation:v1dfIn .45s var(--d) forwards;}
+  .v1dmm small{font-size:14px; font-weight:800; color:#C76A12; margin-bottom:5px;} .v1dmm b{font-size:16px; color:#16233A;}
+  @keyframes v1dfIn{from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none}}
+  @media print{.v1dfc,.v1dmm{opacity:1; animation:none}}
   .v1big{font-size:34px; font-weight:800; color:#16233A; line-height:1.35; text-align:center; margin:18px 0 22px; letter-spacing:-.02em;}
   .v1big em{font-style:normal; color:#F28C28;}
   .v1u3im{width:100%; border-radius:14px; border:1.5px solid #D9DDE3; background:#F7EEDB; display:block;}
@@ -32,6 +82,9 @@ CSS = """
 
 def slides():
     return [
+        # ── IT 기업의 개발 흐름
+        light("IT 기업의 개발 흐름", _devflow(), T),
+        light("회사의 흐름과 1부", _devmap(), T),
         # ── 무엇을 만들까
         light("작게 만들 수 있는 앱 예", viz2.tiles([
             ("회의실 예약", "날짜별 시간표 · 같은 시간 중복 예약 방지"), ("점심 메뉴 투표", "후보 올리기 · 한 표씩"),
