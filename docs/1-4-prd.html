@@ -884,6 +884,18 @@
   .ha.weak ul{margin:0; padding-left:20px; font-size:17px; color:#C62828; line-height:1.7; font-weight:600;}
   .an{margin:2px 0 8px;}
 
+  /* 실습 순서 · 요청 칸 — 한 장에 한 가지 */
+  .v1st{list-style:none; margin:6px 0 18px; padding:0; display:flex; flex-direction:column; gap:12px;}
+  .v1st li{display:flex; align-items:center; gap:16px; background:#F4F6F9; border-radius:14px; padding:14px 20px;
+    opacity:0; animation:v1stIn .4s var(--d) forwards;}
+  .v1st em{flex:none; width:36px; height:36px; border-radius:50%; background:#16233A; color:#fff; font-style:normal; font-weight:800;
+    font-size:18px; display:flex; align-items:center; justify-content:center;}
+  .v1st span{font-size:22px; font-weight:600; color:#16233A;}
+  .v1sls{display:grid; grid-template-columns:1fr; gap:14px; margin-top:8px;}
+  .v1sl{background:#FFF7EE; border:2px solid #F2C58F; border-radius:16px; padding:16px 24px; display:flex; align-items:baseline; gap:20px; opacity:0; animation:v1stIn .4s var(--d) forwards;}
+  .v1sl b{flex:none; width:130px; font-size:18px; color:#C76A12;} .v1sl span{font-size:24px; font-weight:700; color:#16233A; line-height:1.4;}
+  @keyframes v1stIn{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
+  @media print{.v1st li,.v1sl{opacity:1; animation:none}}
   /* vibe1 · 표지 · 지도 · 다음 단원 */
   .v1cmin{margin-top:26px; font-family:var(--mono); font-size:18px; color:#F28C28; font-weight:700; position:relative;}
   .v1map{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin:6px 0 18px;}
@@ -1140,12 +1152,19 @@
   </div></div>
 </section>
 
-<section class="slide lt" data-title="실습 1-4 진행">
+<section class="slide lt" data-title="실습 1-4 순서">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-4</span></div>
-  <h2 class="s-title sm">실습 1-4 진행</h2>
+  <h2 class="s-title sm">실습 1-4 순서</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="kithead"><span>작업 위치</span><code>내 프로젝트 폴더</code><em>요청 문장은 내가 쓴다 · 예시 labs/room_booking</em></div><div class="bf"><div class="bf-l"><div class="bh">요청에 들어갈 것</div><div class="bs"><b>목표</b><span>PRD.md · 여섯 칸</span></div><div class="bs"><b>입력</b><span>기획서.md (1-3)</span></div><div class="bs"><b>진행 방식</b><span>정해지지 않은 것은 먼저 질문</span></div><div class="bs"><b>하지 말 것</b><span>코드 작성 · 기획서에 없는 기능 추가</span></div></div><div class="bf-r"><div class="bh">순서</div><ol><li>기획서.md 가 있는 폴더 열기</li><li>Claude Code에 요청</li><li>빈 칸 질문에 답하기</li><li>다듬기 요청</li><li>PRD.md 확인</li></ol><div class="bh">키워드</div><div class="bk"><code>MVP</code><code>포함 · 제외</code><code>완료 기준</code><code>체크 상자</code></div></div></div><div class="qk2"><b>확인</b><ul><li>PRD.md 파일이 생김</li><li>완료 기준을 브라우저에서 해 볼 수 있음</li></ul></div><div class="dbnote"><span>막히면</span> 코드부터 만들기 시작하면 Esc 로 멈추고 「문서만」을 덧붙여 다시</div></div></div>
+  <div class="body"><div class="mid"><ol class="v1st"><li style="--d:0.00s"><em>1</em><span>기획서.md 가 있는 폴더 열기</span></li><li style="--d:0.25s"><em>2</em><span>Claude Code에 요청</span></li><li style="--d:0.50s"><em>3</em><span>빈 칸 질문에 답하기</span></li><li style="--d:0.75s"><em>4</em><span>다듬기 요청</span></li><li style="--d:1.00s"><em>5</em><span>PRD.md 확인</span></li></ol><div class="qk2"><b>확인</b><ul><li>PRD.md 파일이 생김</li><li>완료 기준을 브라우저에서 해 볼 수 있음</li></ul></div></div></div>
+</section>
+<section class="slide lt" data-title="실습 1-4 요청에 들어갈 것">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-4</span></div>
+  <h2 class="s-title sm">실습 1-4 요청에 들어갈 것</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1sls"><div class="v1sl" style="--d:0.00s"><b>목표</b><span>PRD.md · 여섯 칸</span></div><div class="v1sl" style="--d:0.20s"><b>입력</b><span>기획서.md (1-3)</span></div><div class="v1sl" style="--d:0.40s"><b>진행 방식</b><span>정해지지 않은 것은 먼저 질문</span></div><div class="v1sl" style="--d:0.60s"><b>하지 말 것</b><span>코드 작성 · 기획서에 없는 기능 추가</span></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="실습 1-4 확인">

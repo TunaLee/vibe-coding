@@ -884,6 +884,18 @@
   .ha.weak ul{margin:0; padding-left:20px; font-size:17px; color:#C62828; line-height:1.7; font-weight:600;}
   .an{margin:2px 0 8px;}
 
+  /* 실습 순서 · 요청 칸 — 한 장에 한 가지 */
+  .v1st{list-style:none; margin:6px 0 18px; padding:0; display:flex; flex-direction:column; gap:12px;}
+  .v1st li{display:flex; align-items:center; gap:16px; background:#F4F6F9; border-radius:14px; padding:14px 20px;
+    opacity:0; animation:v1stIn .4s var(--d) forwards;}
+  .v1st em{flex:none; width:36px; height:36px; border-radius:50%; background:#16233A; color:#fff; font-style:normal; font-weight:800;
+    font-size:18px; display:flex; align-items:center; justify-content:center;}
+  .v1st span{font-size:22px; font-weight:600; color:#16233A;}
+  .v1sls{display:grid; grid-template-columns:1fr; gap:14px; margin-top:8px;}
+  .v1sl{background:#FFF7EE; border:2px solid #F2C58F; border-radius:16px; padding:16px 24px; display:flex; align-items:baseline; gap:20px; opacity:0; animation:v1stIn .4s var(--d) forwards;}
+  .v1sl b{flex:none; width:130px; font-size:18px; color:#C76A12;} .v1sl span{font-size:24px; font-weight:700; color:#16233A; line-height:1.4;}
+  @keyframes v1stIn{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
+  @media print{.v1st li,.v1sl{opacity:1; animation:none}}
   /* vibe1 · 표지 · 지도 · 다음 단원 */
   .v1cmin{margin-top:26px; font-family:var(--mono); font-size:18px; color:#F28C28; font-weight:700; position:relative;}
   .v1map{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin:6px 0 18px;}
@@ -1149,12 +1161,19 @@
   </div></div>
 </section>
 
-<section class="slide lt" data-title="실습 1-3 진행">
+<section class="slide lt" data-title="실습 1-3 순서">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-3</span></div>
-  <h2 class="s-title sm">실습 1-3 진행</h2>
+  <h2 class="s-title sm">실습 1-3 순서</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="kithead"><span>작업 위치</span><code>claude.ai → 내 프로젝트 폴더/기획서.md</code><em>요청 문장은 내가 쓴다 · 예시 labs/room_booking</em></div><div class="bf"><div class="bf-l"><div class="bh">요청에 들어갈 것</div><div class="bs"><b>목표</b><span>기획서 초안 · 다섯 칸</span></div><div class="bs"><b>입력</b><span>내 한 줄 아이디어</span></div><div class="bs"><b>진행 방식</b><span>소크라테스식 대화 · 질문 하나씩</span></div><div class="bs"><b>하지 말 것</b><span>로그인 · 결제 · 외부 연동 넣기</span></div></div><div class="bf-r"><div class="bh">순서</div><ol><li>claude.ai 새 대화</li><li>한 줄 아이디어 보내기</li><li>질문에 답하기</li><li>초안 → 피드백 요청</li><li>기획서.md 로 저장</li></ol><div class="bh">키워드</div><div class="bk"><code>배경</code><code>문제점</code><code>목표 이용자</code><code>하지 않을 것</code></div></div></div><div class="qk2"><b>확인</b><ul><li>다섯 칸이 모두 내 사실로 채워짐</li><li>「하지 않을 것」 칸이 있음</li></ul></div><div class="dbnote"><span>막히면</span> 아이디어가 없으면 ② 반복하는 일 · 「이번 주에 같은 일을 두 번 했나」</div></div></div>
+  <div class="body"><div class="mid"><ol class="v1st"><li style="--d:0.00s"><em>1</em><span>claude.ai 새 대화</span></li><li style="--d:0.25s"><em>2</em><span>한 줄 아이디어 보내기</span></li><li style="--d:0.50s"><em>3</em><span>질문에 답하기</span></li><li style="--d:0.75s"><em>4</em><span>초안 → 피드백 요청</span></li><li style="--d:1.00s"><em>5</em><span>기획서.md 로 저장</span></li></ol><div class="qk2"><b>확인</b><ul><li>다섯 칸이 모두 내 사실로 채워짐</li><li>「하지 않을 것」 칸이 있음</li></ul></div></div></div>
+</section>
+<section class="slide lt" data-title="실습 1-3 요청에 들어갈 것">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-3</span></div>
+  <h2 class="s-title sm">실습 1-3 요청에 들어갈 것</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1sls"><div class="v1sl" style="--d:0.00s"><b>목표</b><span>기획서 초안 · 다섯 칸</span></div><div class="v1sl" style="--d:0.20s"><b>입력</b><span>내 한 줄 아이디어</span></div><div class="v1sl" style="--d:0.40s"><b>진행 방식</b><span>소크라테스식 대화 · 질문 하나씩</span></div><div class="v1sl" style="--d:0.60s"><b>하지 말 것</b><span>로그인 · 결제 · 외부 연동 넣기</span></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="실습 1-3 확인">

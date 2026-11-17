@@ -884,6 +884,18 @@
   .ha.weak ul{margin:0; padding-left:20px; font-size:17px; color:#C62828; line-height:1.7; font-weight:600;}
   .an{margin:2px 0 8px;}
 
+  /* 실습 순서 · 요청 칸 — 한 장에 한 가지 */
+  .v1st{list-style:none; margin:6px 0 18px; padding:0; display:flex; flex-direction:column; gap:12px;}
+  .v1st li{display:flex; align-items:center; gap:16px; background:#F4F6F9; border-radius:14px; padding:14px 20px;
+    opacity:0; animation:v1stIn .4s var(--d) forwards;}
+  .v1st em{flex:none; width:36px; height:36px; border-radius:50%; background:#16233A; color:#fff; font-style:normal; font-weight:800;
+    font-size:18px; display:flex; align-items:center; justify-content:center;}
+  .v1st span{font-size:22px; font-weight:600; color:#16233A;}
+  .v1sls{display:grid; grid-template-columns:1fr; gap:14px; margin-top:8px;}
+  .v1sl{background:#FFF7EE; border:2px solid #F2C58F; border-radius:16px; padding:16px 24px; display:flex; align-items:baseline; gap:20px; opacity:0; animation:v1stIn .4s var(--d) forwards;}
+  .v1sl b{flex:none; width:130px; font-size:18px; color:#C76A12;} .v1sl span{font-size:24px; font-weight:700; color:#16233A; line-height:1.4;}
+  @keyframes v1stIn{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
+  @media print{.v1st li,.v1sl{opacity:1; animation:none}}
   /* vibe1 · 표지 · 지도 · 다음 단원 */
   .v1cmin{margin-top:26px; font-family:var(--mono); font-size:18px; color:#F28C28; font-weight:700; position:relative;}
   .v1map{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin:6px 0 18px;}
@@ -1148,12 +1160,19 @@
   </div></div>
 </section>
 
-<section class="slide lt" data-title="실습 2-5 진행">
+<section class="slide lt" data-title="실습 2-5 순서">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">2-5</span></div>
-  <h2 class="s-title sm">실습 2-5 진행</h2>
+  <h2 class="s-title sm">실습 2-5 순서</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="kithead"><span>작업 위치</span><code>내 프로젝트 폴더</code><em>요청 문장은 내가 쓴다 · 예시 labs/room_booking_v2</em></div><div class="bf"><div class="bf-l"><div class="bh">요청에 들어갈 것</div><div class="bs"><b>목표</b><span>예약 DB 저장 · 로그인 · 내 예약만 수정 · 취소</span></div><div class="bs"><b>입력</b><span>PRD v2 · 5 · 7 칸</span></div><div class="bs"><b>진행 방식</b><span>표 설계 먼저 보여 주기 · 태스크 하나씩</span></div><div class="bs"><b>하지 말 것</b><span>secret 키를 앱 코드에 넣기</span></div></div><div class="bf-r"><div class="bh">순서</div><ol><li>Supabase 프로젝트 만들기</li><li>표 설계 · SQL 실행</li><li>저장 · 조회를 DB 로 교체</li><li>로그인 · RLS</li><li>두 계정 확인</li></ol><div class="bh">키워드</div><div class="bk"><code>Supabase</code><code>publishable 키</code><code>RLS</code><code>로그인</code></div></div></div><div class="qk2"><b>확인</b><ul><li>Table Editor 에 예약 행이 생김</li><li>계정 B 로 계정 A 예약 취소 불가</li></ul></div><div class="dbnote"><span>막히면</span> SQL 오류는 SQL Editor 의 빨간 문구를 그대로 Claude Code에 붙여 넣기</div></div></div>
+  <div class="body"><div class="mid"><ol class="v1st"><li style="--d:0.00s"><em>1</em><span>Supabase 프로젝트 만들기</span></li><li style="--d:0.25s"><em>2</em><span>표 설계 · SQL 실행</span></li><li style="--d:0.50s"><em>3</em><span>저장 · 조회를 DB 로 교체</span></li><li style="--d:0.75s"><em>4</em><span>로그인 · RLS</span></li><li style="--d:1.00s"><em>5</em><span>두 계정 확인</span></li></ol><div class="qk2"><b>확인</b><ul><li>Table Editor 에 예약 행이 생김</li><li>계정 B 로 계정 A 예약 취소 불가</li></ul></div></div></div>
+</section>
+<section class="slide lt" data-title="실습 2-5 요청에 들어갈 것">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">2-5</span></div>
+  <h2 class="s-title sm">실습 2-5 요청에 들어갈 것</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1sls"><div class="v1sl" style="--d:0.00s"><b>목표</b><span>예약 DB 저장 · 로그인 · 내 예약만 수정 · 취소</span></div><div class="v1sl" style="--d:0.20s"><b>입력</b><span>PRD v2 · 5 · 7 칸</span></div><div class="v1sl" style="--d:0.40s"><b>진행 방식</b><span>표 설계 먼저 보여 주기 · 태스크 하나씩</span></div><div class="v1sl" style="--d:0.60s"><b>하지 말 것</b><span>secret 키를 앱 코드에 넣기</span></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="실습 2-5 확인">

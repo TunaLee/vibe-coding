@@ -884,6 +884,18 @@
   .ha.weak ul{margin:0; padding-left:20px; font-size:17px; color:#C62828; line-height:1.7; font-weight:600;}
   .an{margin:2px 0 8px;}
 
+  /* 실습 순서 · 요청 칸 — 한 장에 한 가지 */
+  .v1st{list-style:none; margin:6px 0 18px; padding:0; display:flex; flex-direction:column; gap:12px;}
+  .v1st li{display:flex; align-items:center; gap:16px; background:#F4F6F9; border-radius:14px; padding:14px 20px;
+    opacity:0; animation:v1stIn .4s var(--d) forwards;}
+  .v1st em{flex:none; width:36px; height:36px; border-radius:50%; background:#16233A; color:#fff; font-style:normal; font-weight:800;
+    font-size:18px; display:flex; align-items:center; justify-content:center;}
+  .v1st span{font-size:22px; font-weight:600; color:#16233A;}
+  .v1sls{display:grid; grid-template-columns:1fr; gap:14px; margin-top:8px;}
+  .v1sl{background:#FFF7EE; border:2px solid #F2C58F; border-radius:16px; padding:16px 24px; display:flex; align-items:baseline; gap:20px; opacity:0; animation:v1stIn .4s var(--d) forwards;}
+  .v1sl b{flex:none; width:130px; font-size:18px; color:#C76A12;} .v1sl span{font-size:24px; font-weight:700; color:#16233A; line-height:1.4;}
+  @keyframes v1stIn{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
+  @media print{.v1st li,.v1sl{opacity:1; animation:none}}
   /* vibe1 · 표지 · 지도 · 다음 단원 */
   .v1cmin{margin-top:26px; font-family:var(--mono); font-size:18px; color:#F28C28; font-weight:700; position:relative;}
   .v1map{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin:6px 0 18px;}
@@ -1123,20 +1135,34 @@ claude</code></pre></div><div class="v2tiles c1"><div class="v2tile" style="--d:
   </div></div>
 </section>
 
-<section class="slide lt" data-title="실습 1-2 ① 진행">
+<section class="slide lt" data-title="실습 1-2 ① 순서">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-2</span></div>
-  <h2 class="s-title sm">실습 1-2 ① 진행</h2>
+  <h2 class="s-title sm">실습 1-2 ① 순서</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="kithead"><span>작업 위치</span><code>바탕화면/내 프로젝트 폴더</code><em>요청 문장은 내가 쓴다 · 예시 labs/room_booking</em></div><div class="bf"><div class="bf-l"><div class="bh">요청에 들어갈 것</div><div class="bs"><b>계정</b><span>Claude (Pro 이상) · GitHub · Vercel</span></div><div class="bs"><b>설치</b><span>VS Code · Claude Code 확장</span></div><div class="bs"><b>폴더</b><span>바탕화면에 내 아이디어 이름 폴더</span></div></div><div class="bf-r"><div class="bh">순서</div><ol><li>claude.ai 가입 · 요금제 확인</li><li>github.com 가입</li><li>vercel.com → GitHub 로 계속하기</li><li>VS Code 설치 → 확장 「Claude Code」</li><li>터미널에서 claude --version</li></ol><div class="bh">키워드</div><div class="bk"><code>Pro</code><code>GitHub로 계속하기</code><code>Claude Code 확장</code><code>claude --version</code></div></div></div><div class="qk2"><b>확인</b><ul><li>세 사이트 모두 로그인된 상태</li><li>VS Code 왼쪽에 Claude 아이콘</li></ul></div><div class="dbnote"><span>막히면</span> 회사 PC 에서 설치가 막히면 웹 claude.ai/code · 1-6 전까지 해결</div></div></div>
+  <div class="body"><div class="mid"><ol class="v1st"><li style="--d:0.00s"><em>1</em><span>claude.ai 가입 · 요금제 확인</span></li><li style="--d:0.25s"><em>2</em><span>github.com 가입</span></li><li style="--d:0.50s"><em>3</em><span>vercel.com → GitHub 로 계속하기</span></li><li style="--d:0.75s"><em>4</em><span>VS Code 설치 → 확장 「Claude Code」</span></li><li style="--d:1.00s"><em>5</em><span>터미널에서 claude --version</span></li></ol><div class="qk2"><b>확인</b><ul><li>세 사이트 모두 로그인된 상태</li><li>VS Code 왼쪽에 Claude 아이콘</li></ul></div></div></div>
+</section>
+<section class="slide lt" data-title="실습 1-2 ① 준비">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-2</span></div>
+  <h2 class="s-title sm">실습 1-2 ① 준비</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1sls"><div class="v1sl" style="--d:0.00s"><b>계정</b><span>Claude (Pro 이상) · GitHub · Vercel</span></div><div class="v1sl" style="--d:0.20s"><b>설치</b><span>VS Code · Claude Code 확장</span></div><div class="v1sl" style="--d:0.40s"><b>폴더</b><span>바탕화면에 내 아이디어 이름 폴더</span></div></div></div></div>
 </section>
 
-<section class="slide lt" data-title="실습 1-2 ② 진행">
+<section class="slide lt" data-title="실습 1-2 ② 순서">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-2</span></div>
-  <h2 class="s-title sm">실습 1-2 ② 진행</h2>
+  <h2 class="s-title sm">실습 1-2 ② 순서</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="kithead"><span>작업 위치</span><code>바탕화면/내 프로젝트 폴더</code><em>요청 문장은 내가 쓴다 · 예시 labs/room_booking</em></div><div class="bf"><div class="bf-l"><div class="bh">요청에 들어갈 것</div><div class="bs"><b>목표</b><span>이 폴더의 현재 상태 듣기</span></div><div class="bs"><b>범위</b><span>이 폴더 안만</span></div><div class="bs"><b>하지 말 것</b><span>아직 파일 만들지 않기</span></div></div><div class="bf-r"><div class="bh">순서</div><ol><li>VS Code → 폴더 열기</li><li>Claude Code 열기 · 로그인</li><li>폴더 신뢰 허용</li><li>첫 요청 보내기</li><li>답 읽기</li></ol><div class="bh">키워드</div><div class="bk"><code>폴더 열기</code><code>로그인</code><code>첫 요청</code></div></div></div><div class="qk2"><b>확인</b><ul><li>Claude Code 가 폴더 내용을 답함</li><li>파일이 새로 생기지 않음</li></ul></div><div class="dbnote"><span>막히면</span> 로그인 창이 안 뜨면 VS Code 재시작</div></div></div>
+  <div class="body"><div class="mid"><ol class="v1st"><li style="--d:0.00s"><em>1</em><span>VS Code → 폴더 열기</span></li><li style="--d:0.25s"><em>2</em><span>Claude Code 열기 · 로그인</span></li><li style="--d:0.50s"><em>3</em><span>폴더 신뢰 허용</span></li><li style="--d:0.75s"><em>4</em><span>첫 요청 보내기</span></li><li style="--d:1.00s"><em>5</em><span>답 읽기</span></li></ol><div class="qk2"><b>확인</b><ul><li>Claude Code 가 폴더 내용을 답함</li><li>파일이 새로 생기지 않음</li></ul></div></div></div>
+</section>
+<section class="slide lt" data-title="실습 1-2 ② 요청에 들어갈 것">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-2</span></div>
+  <h2 class="s-title sm">실습 1-2 ② 요청에 들어갈 것</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1sls"><div class="v1sl" style="--d:0.00s"><b>목표</b><span>이 폴더의 현재 상태 듣기</span></div><div class="v1sl" style="--d:0.20s"><b>범위</b><span>이 폴더 안만</span></div><div class="v1sl" style="--d:0.40s"><b>하지 말 것</b><span>아직 파일 만들지 않기</span></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="첫 요청 결과 예">
@@ -1155,12 +1181,19 @@ claude</code></pre></div><div class="v2tiles c1"><div class="v2tile" style="--d:
   <div class="body"><div class="mid"><div class="v1shot"><figure><img src="img/v1_u2_todo_start.webp" alt="delegate_todo · index.html 을 브라우저로 연 화면"/><figcaption>delegate_todo · index.html 을 브라우저로 연 화면</figcaption></figure><div class=v1side><div class="v1sd"><b>보이는 것</b><span>할 일 두 개 · 입력칸 · 추가 버튼</span></div><div class="v1sd"><b>동작 안 함</b><span>추가 버튼 · 체크 줄 긋기 · 남은 개수</span></div><div class="v1sd"><b>파일</b><span>index.html · style.css · app.js</span></div></div></div></div></div>
 </section>
 
-<section class="slide lt" data-title="실습 1-2 ③ 진행">
+<section class="slide lt" data-title="실습 1-2 ③ 순서">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-2</span></div>
-  <h2 class="s-title sm">실습 1-2 ③ 진행</h2>
+  <h2 class="s-title sm">실습 1-2 ③ 순서</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="kithead"><span>작업 위치</span><code>delegate_todo</code><em>요청 문장은 내가 쓴다</em></div><div class="bf"><div class="bf-l"><div class="bh">요청에 들어갈 것</div><div class="bs"><b>목표</b><span>기능 하나씩 · 추가 → 체크 → 남은 개수</span></div><div class="bs"><b>확인 방법</b><span>브라우저에서 직접 누르기</span></div><div class="bs"><b>하지 말 것</b><span>코드 직접 수정 · 세 기능 한 번에 요청</span></div></div><div class="bf-r"><div class="bh">순서</div><ol><li>delegate_todo 폴더를 VS Code 로 열기</li><li>index.html 을 브라우저로 열어 추가 버튼 눌러 보기</li><li>Claude Code 에 목표 한 줄 요청</li><li>진행 화면에서 ① 읽기 ② 수정 ③ 확인 찾기</li><li>새로고침 · 직접 확인 → 다음 기능</li></ol><div class="bh">키워드</div><div class="bk"><code>목표 한 줄</code><code>브라우저 확인</code><code>하나씩</code></div></div></div><div class="qk2"><b>확인</b><ul><li>추가한 할 일이 목록에 생김</li><li>체크하면 줄이 그어짐</li><li>「남은 할 일: N」 표시</li></ul></div><div class="dbnote"><span>막히면</span> 버튼이 그대로면 브라우저 새로고침 · 증상 그대로 전달</div></div></div>
+  <div class="body"><div class="mid"><ol class="v1st"><li style="--d:0.00s"><em>1</em><span>delegate_todo 폴더를 VS Code 로 열기</span></li><li style="--d:0.25s"><em>2</em><span>index.html 을 브라우저로 열어 추가 버튼 눌러 보기</span></li><li style="--d:0.50s"><em>3</em><span>Claude Code 에 목표 한 줄 요청</span></li><li style="--d:0.75s"><em>4</em><span>진행 화면에서 ① 읽기 ② 수정 ③ 확인 찾기</span></li><li style="--d:1.00s"><em>5</em><span>새로고침 · 직접 확인 → 다음 기능</span></li></ol><div class="qk2"><b>확인</b><ul><li>추가한 할 일이 목록에 생김</li><li>체크하면 줄이 그어짐</li><li>「남은 할 일: N」 표시</li></ul></div></div></div>
+</section>
+<section class="slide lt" data-title="실습 1-2 ③ 요청에 들어갈 것">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-2</span></div>
+  <h2 class="s-title sm">실습 1-2 ③ 요청에 들어갈 것</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1sls"><div class="v1sl" style="--d:0.00s"><b>목표</b><span>기능 하나씩 · 추가 → 체크 → 남은 개수</span></div><div class="v1sl" style="--d:0.20s"><b>확인 방법</b><span>브라우저에서 직접 누르기</span></div><div class="v1sl" style="--d:0.40s"><b>하지 말 것</b><span>코드 직접 수정 · 세 기능 한 번에 요청</span></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="위임형 진행 화면 · 예">

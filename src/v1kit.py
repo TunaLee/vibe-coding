@@ -79,18 +79,15 @@ def chat(turns, label="대화 예"):
     return f'<div class="v1chat"><div class="v1ch">{label}</div>{b}</div>'
 
 
-def brief(no, u, steps, slots, keys, checks, stuck, folder="내 프로젝트 폴더", example=FOLDER):
-    """실습 진행 — 「요청에 들어갈 것」 · 순서 · 키워드 · 확인. 요청 문장은 수강생이 쓴다."""
-    st = "".join(f"<li>{x}</li>" for x in steps)
-    sl = "".join(f'<div class="bs"><b>{k}</b><span>{v}</span></div>' for k, v in slots)
-    kw = "".join(f"<code>{x}</code>" for x in keys)
+def brief(no, u, steps, slots, keys, checks, stuck, folder="내 프로젝트 폴더", example=FOLDER, slot_title="요청에 들어갈 것"):
+    """실습 진행 — 두 장으로 나눈다. ① 순서 + 확인 ② 요청에 들어갈 것.
+    keys · stuck · folder · example 은 화면에 내지 않는다(호출부 호환용)."""
+    st = "".join(f'<li style="--d:{i * .25:.2f}s"><em>{i + 1}</em><span>{x}</span></li>' for i, x in enumerate(steps))
     ck = "".join(f"<li>{x}</li>" for x in checks)
-    head = (f'<div class="kithead"><span>작업 위치</span><code>{folder}</code>'
-            f'<em>요청 문장은 내가 쓴다{f" · 예시 {example}" if example else ""}</em></div>')
-    body = (f'<div class="bf"><div class="bf-l"><div class="bh">요청에 들어갈 것</div>{sl}</div>'
-            f'<div class="bf-r"><div class="bh">순서</div><ol>{st}</ol><div class="bh">키워드</div><div class="bk">{kw}</div></div></div>'
-            f'<div class="qk2"><b>확인</b><ul>{ck}</ul></div>' + note("막히면", stuck))
-    return light(f"실습 {no} 진행", head + body, u)
+    a = light(f"실습 {no} 순서", f'<ol class="v1st">{st}</ol><div class="qk2"><b>확인</b><ul>{ck}</ul></div>', u)
+    sl = "".join(f'<div class="v1sl" style="--d:{i * .2:.2f}s"><b>{k}</b><span>{v}</span></div>' for i, (k, v) in enumerate(slots))
+    b = light(f"실습 {no} {slot_title}", f'<div class="v1sls">{sl}</div>', u)
+    return a + "\n" + b
 
 
 def codemap(rows, ask="", title=""):
@@ -105,6 +102,18 @@ def codemap(rows, ask="", title=""):
 
 
 CSS = """
+  /* 실습 순서 · 요청 칸 — 한 장에 한 가지 */
+  .v1st{list-style:none; margin:6px 0 18px; padding:0; display:flex; flex-direction:column; gap:12px;}
+  .v1st li{display:flex; align-items:center; gap:16px; background:#F4F6F9; border-radius:14px; padding:14px 20px;
+    opacity:0; animation:v1stIn .4s var(--d) forwards;}
+  .v1st em{flex:none; width:36px; height:36px; border-radius:50%; background:#16233A; color:#fff; font-style:normal; font-weight:800;
+    font-size:18px; display:flex; align-items:center; justify-content:center;}
+  .v1st span{font-size:22px; font-weight:600; color:#16233A;}
+  .v1sls{display:grid; grid-template-columns:1fr; gap:14px; margin-top:8px;}
+  .v1sl{background:#FFF7EE; border:2px solid #F2C58F; border-radius:16px; padding:16px 24px; display:flex; align-items:baseline; gap:20px; opacity:0; animation:v1stIn .4s var(--d) forwards;}
+  .v1sl b{flex:none; width:130px; font-size:18px; color:#C76A12;} .v1sl span{font-size:24px; font-weight:700; color:#16233A; line-height:1.4;}
+  @keyframes v1stIn{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
+  @media print{.v1st li,.v1sl{opacity:1; animation:none}}
   /* vibe1 · 표지 · 지도 · 다음 단원 */
   .v1cmin{margin-top:26px; font-family:var(--mono); font-size:18px; color:#F28C28; font-weight:700; position:relative;}
   .v1map{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin:6px 0 18px;}
