@@ -25,7 +25,7 @@ def annot(img, alt, boxes, cap):
     b = "".join(f'<div class="v1anb" style="--d:{.4 + i * .7:.1f}s; left:{l}%; top:{t}%; width:{w}%; height:{h}%">'
                 f'<em>{n}</em><span>{lab}</span></div>' for i, (n, lab, l, t, w, h) in enumerate(boxes))
     return (f'<figure class="v1an"><div class="v1anw"><img src="img/{img}" alt="{alt}"/>{b}</div>'
-            f'<figcaption>{cap}</figcaption></figure>')
+            + (f'<figcaption>{cap}</figcaption>' if cap else '') + '</figure>')
 
 
 def cc_lanes():
@@ -73,24 +73,22 @@ def slides():
               + src(("Claude Code 문서 · platforms", "https://code.claude.com/docs/en/platforms")), T),
         light("VS Code", '<div class="twocol v1vsgrid"><div>' + annot("vscode_overview.webp", "VS Code 화면", [
                   ("①", "탐색기", 4.1, 4.5, 14.9, 92), ("②", "편집기", 19.1, 4.5, 58, 65),
-                  ("③", "터미널", 19.1, 69.8, 58, 27.5), ("④", "AI 대화", 77.4, 4.5, 22.4, 92.8)], "VS Code 화면 · 공식 문서") + "</div><div>"
-              + viz2.tiles([("VS Code", "Microsoft 의 무료 코드 편집기"), ("① 탐색기", "폴더 안 파일 목록"), ("② 편집기", "파일 내용 보기 · 고치기"),
-                            ("③ 터미널", "글자 명령으로 컴퓨터를 다루는 창"), ("④ AI 대화 패널", "Claude Code 확장 설치 뒤 여기서 대화")], 1)
+                  ("③", "터미널", 19.1, 69.8, 58, 27.5), ("④", "AI 대화", 77.4, 4.5, 22.4, 92.8)], "") + "</div><div>"
+              + viz2.tiles([("① 탐색기", "파일 목록"), ("② 편집기", "파일 내용"),
+                            ("③ 터미널", "명령어 창"), ("④ AI 대화", "Claude Code 패널")], 1)
               + "</div></div>"
               + src(VSDOC), T),
         light("확장 프로그램", '<div class="twocol v1vsgrid"><div>' + annot("vscode_ext_list.webp", "Marketplace 확장 목록", [
-                  ("①", "검색", 10.5, 9.7, 88, 7.5), ("②", "확장 목록", 9, 16.5, 82, 82), ("③", "Install", 91, 28.5, 8, 66)],
-                  "확장 보기 · Marketplace 목록") + "</div><div>"
-              + viz2.maprows([("휴대폰", "VS Code", "기본 기능만 든 상태"), ("앱 스토어", "Marketplace", "확장을 찾고 설치하는 곳"),
-                              ("앱", "확장 프로그램", "언어 · 디버거 · 도구를 더함")], "비유", "VS Code")
+                  ("①", "검색", 10.5, 12.2, 88, 9.8), ("②", "확장 목록", 9, 23, 82, 76), ("③", "Install", 91, 36, 8, 63)],
+                  "") + "</div><div>"
+              + viz2.maprows([("휴대폰", "VS Code", ""), ("앱 스토어", "Marketplace", ""), ("앱", "확장 프로그램", "")])
               + "</div></div>"
-              + note("Claude Code 확장", "VS Code 안에 Claude Code 대화 패널을 더함 · 게시자 Anthropic")
               + src(("VS Code 문서 · Extensions", "https://code.visualstudio.com/docs/getstarted/extensions"), VSDOC), T),
         light("Claude Code 확장 설치", '<div class="twocol v1vsgrid"><div>' + annot("vscode_ext_install.webp", "확장 설치 화면", [
                   ("①", "확장 보기", 0, 69, 6.8, 13), ("②", "검색", 9.6, 22.5, 30.4, 7.5), ("③", "Install", 31, 45.5, 10, 8.5)],
-                  "확장 설치 화면 · 예시는 Python 확장 · VS Code 1.94 이상") + "</div><div>"
-              + viz2.tiles([("① 확장 보기 열기", "⇧⌘X · Windows Ctrl+Shift+X"), ("② 검색", "「Claude Code」 · 게시자 Anthropic"),
-                            ("③ Install", "설치 버튼"), ("④ Spark 아이콘", "왼쪽 막대 · 패널 열기 · 로그인")], 1)
+                  "") + "</div><div>"
+              + viz2.tiles([("① 확장 보기", "⇧⌘X · Ctrl+Shift+X"), ("② 검색", "Claude Code · Anthropic"),
+                            ("③ Install", "설치"), ("④ Spark 아이콘", "로그인")], 1)
               + "</div></div>"
               + src(("Claude Code 문서 · VS Code", "https://code.claude.com/docs/en/vs-code"), VSDOC), T),
         light("Claude Code 설치", '<div class="twocol"><div>'
