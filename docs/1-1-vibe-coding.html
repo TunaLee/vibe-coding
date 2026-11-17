@@ -924,6 +924,14 @@
   @keyframes v1cutIn{from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none}}
   @media print{.v1cmr{opacity:1; animation:none}}
 
+  /* 1-1 · 알고리즘 단계 */
+  .v1alist{display:flex; flex-direction:column; gap:10px;}
+  .v1al{display:grid; grid-template-columns:34px 1fr auto; gap:10px; align-items:center; padding:11px 16px; border:1.5px solid #E3E6EA; border-left:5px solid #1F3A5F; border-radius:10px; background:#fff; opacity:0; animation:v1cutIn .4s ease-out var(--d) forwards;}
+  .v1al i{font-style:normal; font-weight:800; color:#1F3A5F; font-size:18px;} .v1al b{font-size:18px; color:#16233A;}
+  .v1al em{font-style:normal; font-size:12px; font-weight:800; padding:3px 9px; border-radius:10px; background:#EEF1F5; color:#3A4657;}
+  .v1al.k{border-left-color:#F28C28; background:#FFF8F0;} .v1al.k em{background:#F28C28; color:#fff;}
+  @media print{.v1al{opacity:1; animation:none}}
+
   /* 1-1 · 순서도 */
   .v1flow{margin:56px 0 10px;}
   .v1frow{display:flex; align-items:center; gap:6px;}
@@ -1204,12 +1212,20 @@ add eax, 4</pre><div class="v1lf">CPU 명령 하나씩</div><div class="v1lk">�
   <div class="body"><div class="mid"><div class="v1shot"><figure><img src="img/v1_algo_context.webp" alt="회사 안을 들여다보는 AI"/><figcaption>AI · 회사 밖에서 보이는 정보만</figcaption></figure><div class="v1side"><div class="v1sd"><b>AI에게 맡길 수 있는 것</b><span>흔한 로그인 · 예약 화면 · 코드 작성 · 반복 수정</span></div><div class="v1sd"><b>AI에게 맡길 수 없는 것</b><span>회사 규칙 · 업무 예외 · 사용자 습관 = 비즈니스 로직</span></div><div class="v1sd"><b>사람이 할 일</b><span>규칙 정하기 · AI가 만든 순서 읽기 · 빠진 곳 피드백</span></div><div class="v1sd"><b>알고리즘 이해</b><span>피드백의 기준 · 순서 · 조건 · 예외 읽기</span></div></div></div><div class="src">출처 · <a href="https://huggingface.co/Tongyi-MAI/Z-Image-Turbo" target="_blank" rel="noopener">AI 생성 그림 · Z-Image Turbo (Apache 2.0)</a></div></div></div>
 </section>
 
-<section class="slide lt" data-title="알고리즘">
+<section class="slide lt" data-title="알고리즘 · 라면 끓이기">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-1</span></div>
-  <h2 class="s-title sm">알고리즘</h2>
+  <h2 class="s-title sm">알고리즘 · 라면 끓이기</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1shot"><figure><img src="img/v1_algo_steps.webp" alt="세 개의 디딤돌 · 집기 · 깨물기 · 씨 뱉기"/><figcaption>사과 먹기 · 디딤돌 세 개</figcaption></figure><div class="v1side"><div class="v1sd"><b>알고리즘</b><span>문제를 푸는 순서 있는 절차</span></div><div class="v1sd"><b>사과 먹기</b><span>① 집기 → ② 깨물기 → ③ 씨 뱉기</span></div><div class="v1sd"><b>조건</b><span>순서 · 빠짐없음 · 끝이 있음</span></div><div class="v1sd"><b>코드</b><span>알고리즘을 프로그래밍 언어로 적은 것</span></div></div></div><div class="src">출처 · <a href="https://huggingface.co/Tongyi-MAI/Z-Image-Turbo" target="_blank" rel="noopener">AI 생성 그림 · Z-Image Turbo (Apache 2.0)</a></div></div></div>
+  <div class="body"><div class="mid"><div class="v1shot"><figure><img src="img/v1_algo_ramen.webp" alt="라면 끓이기"/><figcaption>알고리즘 · 문제를 푸는 순서 있는 절차</figcaption></figure><div class="v1alist"><div class="v1al" style="--d:0.3s"><i>①</i><b>냄비에 물 550ml</b><em>순서</em></div><div class="v1al" style="--d:0.8s"><i>②</i><b>불 켜기</b><em>순서</em></div><div class="v1al k" style="--d:1.3s"><i>③</i><b>물이 끓었나? 아니면 기다리기</b><em>조건</em></div><div class="v1al k" style="--d:1.8s"><i>④</i><b>끓을 때까지 ③ 다시</b><em>반복</em></div><div class="v1al" style="--d:2.3s"><i>⑤</i><b>면 · 스프 넣기</b><em>순서</em></div><div class="v1al" style="--d:2.8s"><i>⑥</i><b>4분 30초 뒤 불 끄기</b><em>끝</em></div></div></div><div class="dbnote"><span>알고리즘의 세 가지</span> 순서 · 조건(갈림길) · 반복 · 정해진 끝</div><div class="src">출처 · <a href="https://huggingface.co/Tongyi-MAI/Z-Image-Turbo" target="_blank" rel="noopener">AI 생성 그림 · Z-Image Turbo (Apache 2.0)</a></div></div></div>
+</section>
+
+<section class="slide lt" data-title="알고리즘 · 사과 먹기">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-1</span></div>
+  <h2 class="s-title sm">알고리즘 · 사과 먹기</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1shot"><figure><img src="img/v1_algo_steps.webp" alt="세 개의 디딤돌 · 집기 · 깨물기 · 씨 뱉기"/><figcaption>사과 먹기 · 디딤돌 세 개</figcaption></figure><div class="v1alist"><div class="v1al k" style="--d:0.3s"><i>①</i><b>과일이 사과인가? 아니면 멈춤</b><em>조건</em></div><div class="v1al" style="--d:0.8s"><i>②</i><b>손으로 집기</b><em>순서</em></div><div class="v1al" style="--d:1.3s"><i>③</i><b>한 입 깨물기</b><em>순서</em></div><div class="v1al" style="--d:1.8s"><i>④</i><b>씨 뱉기</b><em>끝</em></div></div></div><div class="dbnote"><span>코드</span> 이 순서를 프로그래밍 언어로 적은 것 · 원시인 코드의 eat()</div><div class="src">출처 · <a href="https://huggingface.co/Tongyi-MAI/Z-Image-Turbo" target="_blank" rel="noopener">AI 생성 그림 · Z-Image Turbo (Apache 2.0)</a></div></div></div>
 </section>
 
 <section class="slide lt" data-title="순서도 · 사과 먹기">

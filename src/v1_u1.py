@@ -177,6 +177,13 @@ def fb_steps():
             f'<div class="v1fbr">{fb}</div></div>')
 
 
+def algo_list(rows):
+    """알고리즘 단계 — (번호, 내용, 꼬리표). 꼬리표 「조건」 「반복」은 주황. 0.5초 간격으로 한 줄씩."""
+    r = "".join(f'<div class="v1al{" k" if tag in ("조건", "반복") else ""}" style="--d:{.3 + i * .5:.1f}s"><i>{n}</i><b>{t}</b>'
+                f'{f"<em>{tag}</em>" if tag else ""}</div>' for i, (n, t, tag) in enumerate(rows))
+    return f'<div class="v1alist">{r}</div>'
+
+
 def comic(cuts):
     """3 · 4컷 — (그림, 말풍선, 장면, 코딩에서는). 0.8초 간격으로 한 컷씩 나타나고 멈춘다."""
     c = "".join(
@@ -233,12 +240,19 @@ def slides():
                   ("알고리즘 이해", "피드백의 기준 · 순서 · 조건 · 예외 읽기")])
               + "</div></div>"
               + src(("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")), T),
-        light("알고리즘", '<div class="v1shot"><figure><img src="img/v1_algo_steps.webp" alt="세 개의 디딤돌 · 집기 · 깨물기 · 씨 뱉기"/>'
-              '<figcaption>사과 먹기 · 디딤돌 세 개</figcaption></figure><div class="v1side">'
-              + "".join(f'<div class="v1sd"><b>{h}</b><span>{x}</span></div>' for h, x in [
-                  ("알고리즘", "문제를 푸는 순서 있는 절차"), ("사과 먹기", "① 집기 → ② 깨물기 → ③ 씨 뱉기"),
-                  ("조건", "순서 · 빠짐없음 · 끝이 있음"), ("코드", "알고리즘을 프로그래밍 언어로 적은 것")])
-              + "</div></div>"
+        light("알고리즘 · 라면 끓이기", '<div class="v1shot"><figure><img src="img/v1_algo_ramen.webp" alt="라면 끓이기"/>'
+              '<figcaption>알고리즘 · 문제를 푸는 순서 있는 절차</figcaption></figure>'
+              + algo_list([("①", "냄비에 물 550ml", "순서"), ("②", "불 켜기", "순서"), ("③", "물이 끓었나? 아니면 기다리기", "조건"),
+                           ("④", "끓을 때까지 ③ 다시", "반복"), ("⑤", "면 · 스프 넣기", "순서"), ("⑥", "4분 30초 뒤 불 끄기", "끝")])
+              + "</div>"
+              + note("알고리즘의 세 가지", "순서 · 조건(갈림길) · 반복 · 정해진 끝")
+              + src(("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")), T),
+        light("알고리즘 · 사과 먹기", '<div class="v1shot"><figure><img src="img/v1_algo_steps.webp" alt="세 개의 디딤돌 · 집기 · 깨물기 · 씨 뱉기"/>'
+              '<figcaption>사과 먹기 · 디딤돌 세 개</figcaption></figure>'
+              + algo_list([("①", "과일이 사과인가? 아니면 멈춤", "조건"), ("②", "손으로 집기", "순서"), ("③", "한 입 깨물기", "순서"),
+                           ("④", "씨 뱉기", "끝")])
+              + "</div>"
+              + note("코드", "이 순서를 프로그래밍 언어로 적은 것 · 원시인 코드의 eat()")
               + src(("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")), T),
         light("순서도 · 사과 먹기", flowchart()
               + note("순서도", "알고리즘을 도형과 화살표로 그린 그림 · 처리 · 조건 · 순서가 한눈에"), T),
@@ -300,6 +314,14 @@ def slides():
 
 
 CSS = """
+  /* 1-1 · 알고리즘 단계 */
+  .v1alist{display:flex; flex-direction:column; gap:10px;}
+  .v1al{display:grid; grid-template-columns:34px 1fr auto; gap:10px; align-items:center; padding:11px 16px; border:1.5px solid #E3E6EA; border-left:5px solid #1F3A5F; border-radius:10px; background:#fff; opacity:0; animation:v1cutIn .4s ease-out var(--d) forwards;}
+  .v1al i{font-style:normal; font-weight:800; color:#1F3A5F; font-size:18px;} .v1al b{font-size:18px; color:#16233A;}
+  .v1al em{font-style:normal; font-size:12px; font-weight:800; padding:3px 9px; border-radius:10px; background:#EEF1F5; color:#3A4657;}
+  .v1al.k{border-left-color:#F28C28; background:#FFF8F0;} .v1al.k em{background:#F28C28; color:#fff;}
+  @media print{.v1al{opacity:1; animation:none}}
+
   /* 1-1 · 순서도 */
   .v1flow{margin:56px 0 10px;}
   .v1frow{display:flex; align-items:center; gap:6px;}
