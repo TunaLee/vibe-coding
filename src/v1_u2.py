@@ -71,7 +71,7 @@ def slides():
             ("JetBrains", "플러그인"), ("데스크톱 앱", "macOS · Windows"), ("웹", "claude.ai/code · 클라우드")], 5)
               + note("공통", "어디서 쓰든 같은 엔진 · 같은 설정 · 같은 CLAUDE.md")
               + src(("Claude Code 문서 · platforms", "https://code.claude.com/docs/en/platforms")), T),
-        light("이 강의의 선택 · VS Code", '<div class="twocol v1vsgrid"><div>' + annot("vscode_overview.webp", "VS Code 화면", [
+        light("VS Code", '<div class="twocol v1vsgrid"><div>' + annot("vscode_overview.webp", "VS Code 화면", [
                   ("①", "탐색기", 4.1, 4.5, 14.9, 92), ("②", "편집기", 19.1, 4.5, 58, 65),
                   ("③", "터미널", 19.1, 69.8, 58, 27.5), ("④", "AI 대화", 77.4, 4.5, 22.4, 92.8)], "VS Code 화면 · 공식 문서") + "</div><div>"
               + viz2.tiles([("VS Code", "Microsoft 의 무료 코드 편집기"), ("① 탐색기", "폴더 안 파일 목록"), ("② 편집기", "파일 내용 보기 · 고치기"),
