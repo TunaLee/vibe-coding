@@ -80,13 +80,6 @@ def slides():
                       ("ai", "끝낸 일은 지우나요, 남겨 두나요?")], "Claude 대화 예")
               + "</div></div>"
               + note("소크라테스식 대화", "답 대신 질문을 하나씩 · 내 답으로 다음 질문 (1-3)"), T),
-        light("Claude 요금제", table(["요금제", "월 요금", "사용량", "Claude Code"], [
-            ["Free", "$0", "기본", "✕"],
-            ["<b>Pro</b>", "<b>$20</b> · 연 결제 시 월 $17", "기준", "<b>○</b>"],
-            ["Max", "$100", "Pro 의 5배", "○"],
-            ["Ultra", "$200", "Pro 의 10배", "○"]])
-              + note("1부 기준", "Claude Code 는 Pro 이상 · 회사 Team · Enterprise 계정도 가능")
-              + src(("claude.com/pricing · 2026-11", "https://claude.com/pricing"), ("Claude Code setup", "https://code.claude.com/docs/en/setup")), T),
         # ── Claude Code
         light("Claude와 Claude Code", '<div class="v1u2cmp">'
               + '<figure><img src="img/v1_brain1.webp" alt="LLM"/><figcaption><b>Claude</b> · 대화형</figcaption></figure>'
