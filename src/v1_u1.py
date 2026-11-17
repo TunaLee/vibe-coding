@@ -285,12 +285,6 @@ def slides():
             [("돈 · 개인정보 처리 서비스", "전문 보안 점검 필요"), ("동시 사용자가 많은 서비스", "서버 · DB 설계 필요"),
              ("코드 확인 없는 운영", "장애 원인 추적 어려움")],
             gt="지금 만들기 좋은 앱", bt="아직 어려운 앱"), T),
-        light("보안 사고 사례", big([("약 38%", "", "AI 생성 코드 작업 중 보안 취약점 발생 비율", True)], 1)
-              + viz2.tiles([("키 노출 · Moltbook", "화면 코드에 DB 키 포함 · 이메일 3만 5천 개 유출"),
-                            ("데이터 삭제 · Replit", "AI 에이전트가 운영 DB 데이터 삭제")], 2)
-              + src(("Veracode · 2026-10-29", "https://www.veracode.com/blog/fall-2026-genai-code-security"),
-                    ("Wiz · 2026-02-02", "https://www.wiz.io/blog/exposed-moltbook-database-reveals-millions-of-api-keys"),
-                    ("Replit CEO · 2025-07-20", "https://x.com/amasad/status/1946986468586721478")), T),
         light("1부의 핵심 · 요청에 맞는 결과", '<div class="v1core">'
               '<div class="bx me"><span>내 요청</span><b>「로그인 화면 만들어 줘」</b></div><i>→</i>'
               '<div class="bx ai"><span>AI 작업</span><b>읽기 · 작성 · 실행 · 확인</b></div><i>→</i>'
