@@ -203,31 +203,11 @@ def slides():
             ("v1_cut4.webp", "?", "처음 본 배", "코드에 없는 경우 · 처리 불가")])
               + note("코딩", "컴퓨터가 실행할 명령을 프로그래밍 언어로 작성하는 일")
               + src(("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")), T),
-        light("알고리즘", '<div class="v1shot"><figure><img src="img/v1_algo_steps.webp" alt="세 개의 디딤돌 · 집기 · 깨물기 · 씨 뱉기"/>'
-              '<figcaption>사과 먹기 · 디딤돌 세 개</figcaption></figure><div class="v1side">'
-              + "".join(f'<div class="v1sd"><b>{h}</b><span>{x}</span></div>' for h, x in [
-                  ("알고리즘", "문제를 푸는 순서 있는 절차"), ("사과 먹기", "① 집기 → ② 깨물기 → ③ 씨 뱉기"),
-                  ("조건", "순서 · 빠짐없음 · 끝이 있음"), ("코드", "알고리즘을 프로그래밍 언어로 적은 것")])
-              + "</div></div>"
-              + src(("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")), T),
-        light("순서도 · 사과 먹기", flowchart()
-              + note("순서도", "알고리즘을 도형과 화살표로 그린 그림 · 처리 · 조건 · 순서가 한눈에"), T),
         light("원시인 코드", caveman_code(), T),
         light("기존 코딩과 바이브코딩", viz2.pair(
             "기존 코딩", [("① 언어 학습", "문법 · 개발 도구 사용법"), ("② 직접 작성", "모든 기능을 사람이 입력"), ("③ 오류 수정", "오류 메시지로 원인 추적")],
             "바이브코딩", [("① 말로 요청", "「로그인 화면 만들어 줘」"), ("② AI가 코드 작성", "파일 생성 · 실행"), ("③ 수정 사항만 요청", "「버튼을 크게」 「비밀번호는 8자 이상」")], hl="r")
               + note("바이브코딩", "AI와 대화를 주고받으며 프로그램을 만드는 개발 방식"), T),
-        light("위임의 한계", '<div class="v1shot"><figure><img src="img/v1_algo_context.webp" alt="회사 안을 들여다보는 AI"/>'
-              '<figcaption>AI · 회사 밖에서 보이는 정보만</figcaption></figure><div class="v1side">'
-              + "".join(f'<div class="v1sd"><b>{h}</b><span>{x}</span></div>' for h, x in [
-                  ("AI에게 맡길 수 있는 것", "흔한 로그인 · 예약 화면 · 코드 작성 · 반복 수정"),
-                  ("AI에게 맡길 수 없는 것", "회사 규칙 · 업무 예외 · 사용자 습관 = 비즈니스 로직"),
-                  ("사람이 할 일", "규칙 정하기 · AI가 만든 순서 읽기 · 빠진 곳 피드백"),
-                  ("알고리즘 이해", "피드백의 기준 · 순서 · 조건 · 예외 읽기")])
-              + "</div></div>"
-              + src(("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")), T),
-        light("알고리즘 피드백 · 예", fb_steps()
-              + note("요청 팁", "「순서를 단계로 보여 줘」 → 단계를 읽고 빠진 규칙 · 예외를 지적"), T),
         light("프로그래밍 언어의 발전", langs()
               + src(("IBM · FORTRAN", "https://www.ibm.com/history/fortran"), ("Python · History", "https://docs.python.org/3/license.html"),
                     ("참고 · 알파AI스쿨 「바이브 코딩이란?」 요리 비유", "https://www.youtube.com/watch?v=cFdyp_pPgPQ")), T),
@@ -244,6 +224,26 @@ def slides():
         light("대화형 방식 · 예", chat_anim("chat"), T),
         light("위임형 방식 · 예", chat_anim("agent")
               + src(("Claude Code 문서 · How Claude Code works", "https://code.claude.com/docs/en/how-claude-code-works")), T),
+        light("위임의 한계", '<div class="v1shot"><figure><img src="img/v1_algo_context.webp" alt="회사 안을 들여다보는 AI"/>'
+              '<figcaption>AI · 회사 밖에서 보이는 정보만</figcaption></figure><div class="v1side">'
+              + "".join(f'<div class="v1sd"><b>{h}</b><span>{x}</span></div>' for h, x in [
+                  ("AI에게 맡길 수 있는 것", "흔한 로그인 · 예약 화면 · 코드 작성 · 반복 수정"),
+                  ("AI에게 맡길 수 없는 것", "회사 규칙 · 업무 예외 · 사용자 습관 = 비즈니스 로직"),
+                  ("사람이 할 일", "규칙 정하기 · AI가 만든 순서 읽기 · 빠진 곳 피드백"),
+                  ("알고리즘 이해", "피드백의 기준 · 순서 · 조건 · 예외 읽기")])
+              + "</div></div>"
+              + src(("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")), T),
+        light("알고리즘", '<div class="v1shot"><figure><img src="img/v1_algo_steps.webp" alt="세 개의 디딤돌 · 집기 · 깨물기 · 씨 뱉기"/>'
+              '<figcaption>사과 먹기 · 디딤돌 세 개</figcaption></figure><div class="v1side">'
+              + "".join(f'<div class="v1sd"><b>{h}</b><span>{x}</span></div>' for h, x in [
+                  ("알고리즘", "문제를 푸는 순서 있는 절차"), ("사과 먹기", "① 집기 → ② 깨물기 → ③ 씨 뱉기"),
+                  ("조건", "순서 · 빠짐없음 · 끝이 있음"), ("코드", "알고리즘을 프로그래밍 언어로 적은 것")])
+              + "</div></div>"
+              + src(("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")), T),
+        light("순서도 · 사과 먹기", flowchart()
+              + note("순서도", "알고리즘을 도형과 화살표로 그린 그림 · 처리 · 조건 · 순서가 한눈에"), T),
+        light("알고리즘 피드백 · 예", fb_steps()
+              + note("요청 팁", "「순서를 단계로 보여 줘」 → 단계를 읽고 빠진 규칙 · 예외를 지적"), T),
         light("AI 코딩 도구의 실제 속도", big([("19%", "", "AI를 쓴 숙련 개발자 · 실제로 더 걸린 시간", True),
                                              ("20%", "", "같은 개발자들이 「빨라졌다」고 느낀 정도")], 2)
               + viz2.tiles([("대상", "숙련 개발자 16명 · 실제 작업 246건"),
