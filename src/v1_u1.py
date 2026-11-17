@@ -198,7 +198,7 @@ def slides():
         # ── 코딩 = 원시인에게 사과 가르치기
         light("비유 · 원시인과 사과", '<div class="v1shot v1vid"><figure>'
               '<video src="img/v1_caveman.mp4" poster="img/v1_caveman.webp" autoplay muted loop playsinline></video>'
-              '<figcaption>AI 생성 영상 · Z-Image Turbo · Wan 2.2 (Apache 2.0)</figcaption></figure><div class="v1side">'
+              '</figure><div class="v1side">'
               + "".join(f'<div class="v1sd"><b>{h}</b><span>{x}</span></div>' for h, x in [
                   ("원시인", "컴퓨터 · 사전 지식 없음"), ("사과 먹는 법", "코드 · 할 일의 순서"),
                   ("알려 준 순서", "그대로 실행 · 빠진 단계는 못 함"), ("코드", "컴퓨터가 실행하는 명령의 목록")])

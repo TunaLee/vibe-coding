@@ -5,12 +5,15 @@
 from deck import light
 
 
-SHOW_SRC = False  # 출처 줄 표시 — 현재 전 덱에서 숨김
+# 출처 줄은 외부 공식 자료(연구 · 공식 문서 · 가격표 · 원문 게시물)를 인용할 때만 보인다.
+# 그림 생성 표기 · 참고 영상 · 퍼블릭 도메인 사진 표기는 화면에 내지 않는다(CC BY 사진은 표기 의무라 남김).
+HIDE_SRC = ("AI 생성 그림", "참고")
 
 
 def src(*items):
-    """출처 줄. items: (이름, url) — 슬라이드 오른쪽 위. SHOW_SRC 가 False 면 빈 문자열."""
-    if not SHOW_SRC:
+    """출처 줄. items: (이름, url) — 슬라이드 오른쪽 위. HIDE_SRC 로 시작하는 항목은 뺀다."""
+    items = [(n, u) for n, u in items if not n.startswith(HIDE_SRC) and "퍼블릭 도메인" not in n]
+    if not items:
         return ""
     links = " · ".join(f'<a href="{u}" target="_blank" rel="noopener">{n}</a>' for n, u in items)
     return f'<div class="src">출처 · {links}</div>'

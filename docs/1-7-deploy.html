@@ -1036,7 +1036,7 @@
   <div class="eyebrow"><span class="tag">1-7</span></div>
   <h2 class="s-title sm">gh · GitHub 명령 도구</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>gh</b><span>GitHub 공식 명령 도구 · 저장소 만들기 · 올리기</span></div><div class="v2tile" style="--d:0.08s"><b>Claude Code가 실행</b><span>명령 암기 불필요</span></div><div class="v2tile" style="--d:0.16s"><b>한 번만</b><span>설치 · 로그인 연결</span></div></div><div class="twocol"><div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">macOS</span></div><pre><code>brew install gh</code></pre></div></div><div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">Windows</span></div><pre><code>winget install --id GitHub.cli --source winget</code></pre></div></div></div><div class="dbnote"><span>Windows</span> 설치 뒤 터미널 새 창에서 gh 인식</div></div></div>
+  <div class="body"><div class="mid"><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>gh</b><span>GitHub 공식 명령 도구 · 저장소 만들기 · 올리기</span></div><div class="v2tile" style="--d:0.08s"><b>Claude Code가 실행</b><span>명령 암기 불필요</span></div><div class="v2tile" style="--d:0.16s"><b>한 번만</b><span>설치 · 로그인 연결</span></div></div><div class="twocol"><div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">macOS</span></div><pre><code>brew install gh</code></pre></div></div><div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">Windows</span></div><pre><code>winget install --id GitHub.cli --source winget</code></pre></div></div></div><div class="dbnote"><span>Windows</span> 설치 뒤 터미널 새 창에서 gh 인식</div><div class="src">출처 · <a href="https://cli.github.com/" target="_blank" rel="noopener">GitHub CLI</a></div></div></div>
 </section>
 
 <section class="slide lt" data-title="gh 로그인 연결">
@@ -1047,7 +1047,7 @@
   <div class="body"><div class="mid"><div class="flow"><div class="fs"><b>gh auth login</b><span>터미널에서 실행</span></div><div class="fa">→</div><div class="fs"><b>GitHub.com · HTTPS</b><span>기본값 선택</span></div><div class="fa">→</div><div class="fs hl"><b>브라우저 인증</b><span>코드 입력 · 승인</span></div><div class="fa">→</div><div class="fs"><b>연결 완료</b><span>내 계정으로 명령 실행</span></div></div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">터미널 · 예</span></div><pre><code>$ gh auth login
 ? Where do you use GitHub?  GitHub.com
 ...
-✓ Logged in as 내계정</code></pre></div><div class="dbnote"><span>직접 할 것</span> 브라우저 승인은 사람이 · 비밀번호를 Claude에게 알려 주지 않음</div></div></div>
+✓ Logged in as 내계정</code></pre></div><div class="dbnote"><span>직접 할 것</span> 브라우저 승인은 사람이 · 비밀번호를 Claude에게 알려 주지 않음</div><div class="src">출처 · <a href="https://cli.github.com/manual/gh_auth_login" target="_blank" rel="noopener">gh auth login</a></div></div></div>
 </section>
 
 <section class="slide lt" data-title="GitHub 업로드 요청">
@@ -1055,7 +1055,7 @@
   <div class="eyebrow"><span class="tag">1-7</span></div>
   <h2 class="s-title sm">GitHub 업로드 요청</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1chat"><div class="v1ch">Claude Code 대화 예</div><div class="v1b me"><span>나</span><p>이 폴더를 GitHub 비공개 저장소 room-booking 으로 올려 줘</p></div><div class="v1b ai"><span>Claude</span><p>gh repo create room-booking --private --source=. --push 를 실행해도 될까요?</p></div><div class="v1b me"><span>나</span><p>응</p></div><div class="v1b ai"><span>Claude</span><p>완료 · https://github.com/내계정/room-booking</p></div></div><div class="dbnote"><span>Claude가 쓰는 명령</span> gh repo create — 원격 저장소 만들기 + 지금까지의 커밋 올리기</div></div></div>
+  <div class="body"><div class="mid"><div class="v1chat"><div class="v1ch">Claude Code 대화 예</div><div class="v1b me"><span>나</span><p>이 폴더를 GitHub 비공개 저장소 room-booking 으로 올려 줘</p></div><div class="v1b ai"><span>Claude</span><p>gh repo create room-booking --private --source=. --push 를 실행해도 될까요?</p></div><div class="v1b me"><span>나</span><p>응</p></div><div class="v1b ai"><span>Claude</span><p>완료 · https://github.com/내계정/room-booking</p></div></div><div class="dbnote"><span>Claude가 쓰는 명령</span> gh repo create — 원격 저장소 만들기 + 지금까지의 커밋 올리기</div><div class="src">출처 · <a href="https://cli.github.com/manual/gh_repo_create" target="_blank" rel="noopener">gh repo create</a></div></div></div>
 </section>
 
 <section class="slide lt" data-title="공개 · 비공개 저장소">
@@ -1063,7 +1063,7 @@
   <div class="eyebrow"><span class="tag">1-7</span></div>
   <h2 class="s-title sm">공개 · 비공개 저장소</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">공개 (public)</div><div class="v2pc" style="--d:0.00s"><b>누가 보나</b><span>인터넷의 누구나 코드를 봄</span></div><div class="v2pc" style="--d:0.08s"><b>맞는 경우</b><span>공개해도 되는 연습 코드</span></div></div><div class="v2p on"><div class="v2ph">비공개 (private)</div><div class="v2pc" style="--d:0.00s"><b>누가 보나</b><span>나와 초대한 사람만</span></div><div class="v2pc" style="--d:0.08s"><b>맞는 경우</b><span>회사 업무 · 이 실습</span></div></div></div><div class="dbnote"><span>GitHub Free</span> 비공개 저장소도 개수 제한 없음 · 일부 기능만 유료</div></div></div>
+  <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">공개 (public)</div><div class="v2pc" style="--d:0.00s"><b>누가 보나</b><span>인터넷의 누구나 코드를 봄</span></div><div class="v2pc" style="--d:0.08s"><b>맞는 경우</b><span>공개해도 되는 연습 코드</span></div></div><div class="v2p on"><div class="v2ph">비공개 (private)</div><div class="v2pc" style="--d:0.00s"><b>누가 보나</b><span>나와 초대한 사람만</span></div><div class="v2pc" style="--d:0.08s"><b>맞는 경우</b><span>회사 업무 · 이 실습</span></div></div></div><div class="dbnote"><span>GitHub Free</span> 비공개 저장소도 개수 제한 없음 · 일부 기능만 유료</div><div class="src">출처 · <a href="https://docs.github.com/en/get-started/learning-about-github/githubs-plans" target="_blank" rel="noopener">GitHub plans</a></div></div></div>
 </section>
 
 <section class="slide lt" data-title="올라간 저장소 확인">
@@ -1093,7 +1093,7 @@
   <h2 class="s-title sm">배포 주소</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v2tiles c2"><div class="v2tile" style="--d:0.00s"><b>프로젝트 기본 주소</b><span>프로젝트명.vercel.app</span></div><div class="v2tile" style="--d:0.08s"><b>배포마다 고유 주소</b><span>버전마다 따로 생김 · 기본 공개</span></div></div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">배포 완료 · 예</span></div><pre><code>✓ Production   https://room-booking.vercel.app
-  이번 배포     https://room-booking-a1b2c3.vercel.app</code></pre></div><div class="dbnote"><span>공유할 주소</span> 프로젝트 기본 주소 · 다시 배포해도 바뀌지 않음</div></div></div>
+  이번 배포     https://room-booking-a1b2c3.vercel.app</code></pre></div><div class="dbnote"><span>공유할 주소</span> 프로젝트 기본 주소 · 다시 배포해도 바뀌지 않음</div><div class="src">출처 · <a href="https://vercel.com/docs/deployments/generated-urls" target="_blank" rel="noopener">Vercel · Generated URLs</a></div></div></div>
 </section>
 
 <section class="slide lt" data-title="배포 주소로 연 화면">
@@ -1109,7 +1109,7 @@
   <div class="eyebrow"><span class="tag">1-7</span></div>
   <h2 class="s-title sm">수정 → 재배포</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="twocol"><div><div class="v1chat"><div class="v1ch">Claude Code 대화 예</div><div class="v1b me"><span>나</span><p>예약 칸 색을 연한 초록으로 바꿔 줘</p></div><div class="v1b ai"><span>Claude</span><p>style.css 의 .cell.busy 색 변경 완료</p></div><div class="v1b me"><span>나</span><p>커밋하고 GitHub에 올려 줘</p></div><div class="v1b ai"><span>Claude</span><p>커밋 「예약 칸 색 변경」 → push 완료 · Vercel 새 배포 시작</p></div></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>① 수정 요청</b><span>Claude Code</span></div><div class="v2tile" style="--d:0.08s"><b>② localhost 확인</b><span>1-6 과 같음</span></div><div class="v2tile" style="--d:0.16s"><b>③ 커밋 · push</b><span>업로드 요청</span></div><div class="v2tile" style="--d:0.24s"><b>④ Vercel 자동 배포</b><span>push 감지 · 1~2분</span></div><div class="v2tile" style="--d:0.32s"><b>⑤ 같은 주소에 반영</b><span>새 링크 없음</span></div></div></div></div></div></div>
+  <div class="body"><div class="mid"><div class="twocol"><div><div class="v1chat"><div class="v1ch">Claude Code 대화 예</div><div class="v1b me"><span>나</span><p>예약 칸 색을 연한 초록으로 바꿔 줘</p></div><div class="v1b ai"><span>Claude</span><p>style.css 의 .cell.busy 색 변경 완료</p></div><div class="v1b me"><span>나</span><p>커밋하고 GitHub에 올려 줘</p></div><div class="v1b ai"><span>Claude</span><p>커밋 「예약 칸 색 변경」 → push 완료 · Vercel 새 배포 시작</p></div></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>① 수정 요청</b><span>Claude Code</span></div><div class="v2tile" style="--d:0.08s"><b>② localhost 확인</b><span>1-6 과 같음</span></div><div class="v2tile" style="--d:0.16s"><b>③ 커밋 · push</b><span>업로드 요청</span></div><div class="v2tile" style="--d:0.24s"><b>④ Vercel 자동 배포</b><span>push 감지 · 1~2분</span></div><div class="v2tile" style="--d:0.32s"><b>⑤ 같은 주소에 반영</b><span>새 링크 없음</span></div></div></div></div><div class="src">출처 · <a href="https://vercel.com/docs/git" target="_blank" rel="noopener">Vercel · Git</a></div></div></div>
 </section>
 
 <section class="slide lt" data-title="공개 전 확인">
@@ -1117,7 +1117,7 @@
   <div class="eyebrow"><span class="tag">1-7</span></div>
   <h2 class="s-title sm">공개 전 확인</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2tiles c2"><div class="v2tile" style="--d:0.00s"><b>키 · 비밀번호</b><span>코드 · 파일에 들어 있지 않은가</span></div><div class="v2tile" style="--d:0.08s"><b>개인정보</b><span>실제 이름 · 연락처 대신 예시 값</span></div><div class="v2tile" style="--d:0.16s"><b>배포 주소는 공개</b><span>주소를 아는 누구나 열 수 있음</span></div><div class="v2tile" style="--d:0.24s"><b>Hobby 는 개인 · 비상업</b><span>회사 서비스는 Pro 이상</span></div></div><div class="dbnote"><span>점검 요청 예</span> 「올리기 전에 키 · 개인정보가 들어간 파일이 있는지 찾아 줘」</div></div></div>
+  <div class="body"><div class="mid"><div class="v2tiles c2"><div class="v2tile" style="--d:0.00s"><b>키 · 비밀번호</b><span>코드 · 파일에 들어 있지 않은가</span></div><div class="v2tile" style="--d:0.08s"><b>개인정보</b><span>실제 이름 · 연락처 대신 예시 값</span></div><div class="v2tile" style="--d:0.16s"><b>배포 주소는 공개</b><span>주소를 아는 누구나 열 수 있음</span></div><div class="v2tile" style="--d:0.24s"><b>Hobby 는 개인 · 비상업</b><span>회사 서비스는 Pro 이상</span></div></div><div class="dbnote"><span>점검 요청 예</span> 「올리기 전에 키 · 개인정보가 들어간 파일이 있는지 찾아 줘」</div><div class="src">출처 · <a href="https://vercel.com/legal/terms" target="_blank" rel="noopener">Vercel Terms</a> · <a href="https://vercel.com/docs/plans/hobby" target="_blank" rel="noopener">Hobby</a></div></div></div>
 </section>
 
 <section class="slide lt labs" data-title="[실습 1-7] 내 앱 배포">
