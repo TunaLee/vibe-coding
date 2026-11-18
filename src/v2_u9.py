@@ -16,7 +16,7 @@ T = "2-9"
 
 def slides():
     return [
-        light("2부 회고 · 요청 = 결과 ?", '<div class="v2u9q"><span>내 요청</span><i>=</i><span>결과</span><em>?</em></div>'
+        light("2부 회고", '<div class="v2u9q"><span>내 요청</span><i>=</i><span>결과</span><em>?</em></div>'
               + flow([("PRD v2", "2-4 · 데이터 · 권한"), ("DB · 로그인", "2-5 · Supabase"), ("API · MCP", "2-6 · 공휴일"),
                       ("테스트 · 리뷰", "2-7 · 자동 확인"), ("환경변수 · 로그", "2-8 · 배포 뒤")], hl=-1)
               + note("흐름", "1부와 같은 순서 · 데이터 · 외부 연결 · 검사가 더해짐"), T),

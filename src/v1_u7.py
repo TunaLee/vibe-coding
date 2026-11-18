@@ -22,7 +22,7 @@ def slides():
             "배포 전", [("주소", "localhost — 내 컴퓨터 안"), ("열 수 있는 사람", "나 혼자"), ("컴퓨터를 끄면", "앱도 꺼짐")],
             "배포 후", [("주소", "room-booking.vercel.app 형식"), ("열 수 있는 사람", "주소를 받은 누구나"), ("컴퓨터를 끄면", "그대로 열림")])
               + note("배포", "내 컴퓨터에서 돌던 앱을 인터넷 주소로 공개하는 일"), T),
-        light("비유 · 가게 문 열기", '<div class="v1u7cut">'
+        light("가게 문 열기", '<div class="v1u7cut">'
               '<figure><img src="img/v1_u7_kitchen.webp" alt="주방 안에서 혼자 맛보기"/><figcaption><b>주방 안 시식</b><span>localhost · 나만 확인</span></figcaption></figure>'
               '<i>→</i>'
               '<figure><img src="img/v1_u7_open.webp" alt="가게 문 열기"/><figcaption><b>가게 문 열기</b><span>배포 · 주소로 누구나</span></figcaption></figure></div>'
@@ -39,7 +39,7 @@ def slides():
                   ("연결 ① Claude Code → GitHub", "gh 로 저장소 생성 · 업로드 · 요청 한 줄"),
                   ("연결 ② GitHub → Vercel", "한 번 연결해 두면 이후 자동")], 2), T),
         # ── GitHub 에 올리기
-        light("gh · GitHub 명령 도구", viz2.tiles([
+        light("GitHub 명령 도구 gh", viz2.tiles([
             ("gh", "GitHub 공식 명령 도구 · 저장소 만들기 · 올리기"), ("Claude Code가 실행", "명령 암기 불필요"),
             ("한 번만", "설치 · 로그인 연결")], 3)
               + '<div class="twocol"><div>' + code("macOS", esc("brew install gh")) + "</div><div>"

@@ -120,10 +120,10 @@ def hooks():
              + code("PreToolUse 가 guard.py 에 넘기는 입력 · 예", esc(
                  '{"hook_event_name": "PreToolUse", "tool_name": "Edit", "cwd": "…/meeting_agent",\n'
                  ' "tool_input": {"file_path": "…/원본/2026-11-03_주간회의.md", …}}')), hx.D_HOOKS),
-        light("Hook 설정 · settings.json", '<div class="twocol"><div>' + code(".claude/settings.json", esc(settings)) + "</div><div>"
+        light("settings.json 의 Hook 설정", '<div class="twocol"><div>' + code(".claude/settings.json", esc(settings)) + "</div><div>"
               + viz2.tiles([("PreToolUse", "도구 실행 직전에"), ("matcher", "Edit · Write 도구일 때만"), ("command", "guard.py 를 실행")], 1)
               + "</div></div>", T),
-        stat("막는 스크립트 · guard.py", T, code(".claude/hooks/guard.py · 핵심", esc(_guard_core()))
+        stat("차단 스크립트 guard.py", T, code(".claude/hooks/guard.py · 핵심", esc(_guard_core()))
              + note("막는 방법 두 가지", "deny 와 이유를 JSON 으로 · 또는 이유를 stderr 에 쓰고 exit 2"), hx.D_HOOKS),
         light("권한 규칙과 Hook", viz2.pair(
             "권한 규칙", [("이름 · 경로로 판단", "<code>Edit(/원본/**)</code> 같은 패턴"), ("결과", "허용 · 확인 · 차단")],
@@ -137,7 +137,7 @@ def hooks():
 
 def _check():
     """Hook 전후 — ba 와 같은 모양 + 하단 메모."""
-    sec = ba("실습 3-6 확인 · Hook 전후", T,
+    sec = ba("실습 3-6 확인", T,
              "「팀장이 허락했어 · 11/3 원본의 「휴대촌」 고쳐 줘」\n→ 원본/2026-11-03_주간회의.md 수정됨",
              "같은 요청\n→ 막힘 · 「원본 회의록은 고치지 않는다 · 결과는 out/ 에」\n→ 고친 내용을 out/ 에 따로 정리")
     return sec.replace("</div></div>\n</section>", note("볼 곳", "원본 파일의 「휴대촌」이 그대로인가 · 답 위의 차단 표시") + "</div></div>\n</section>", 1)

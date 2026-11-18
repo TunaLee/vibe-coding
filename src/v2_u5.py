@@ -62,7 +62,7 @@ def slides():
             ("me", "PRD 5칸 데이터 구조를 읽고 Supabase 표 설계를 제안해 줘. 만들기 전에 표 모양부터 보여 줘"),
             ("ai", "제안 · rooms · bookings 두 표. 같은 회의실 · 같은 시간 예약을 DB 에서도 막을까요?"),
             ("me", "응 · 화면과 DB 둘 다에서 막아 줘"),
-            ("ai", "표 설계 · SQL 파일 저장 완료 · SQL Editor 에서 실행 필요")], "Claude Code · 대화 예")
+            ("ai", "표 설계 · SQL 파일 저장 완료 · SQL Editor 에서 실행 필요")], "Claude Code 대화 예")
               + note("사람이 정할 것", "표 이름 · 열 · 지켜야 할 규칙 · SQL 은 Claude Code"), T),
         # ── Supabase 연결
         light("Supabase 연결 순서", flow([("새 프로젝트", "supabase.com · 무료"), ("표 만들기", "SQL Editor · 실행"),
@@ -81,14 +81,14 @@ def slides():
             ("Update · 수정", "행 고치기", "회의 이름 바꾸기"),
             ("Delete · 삭제", "행 지우기", "예약 취소")], "CRUD", "회의실 예약에서")
               + note("CRUD", "데이터를 다루는 네 동작 · 거의 모든 앱의 기본"), T),
-        light("CRUD · 코드 뜻", codemap([
+        light("CRUD 코드 뜻", codemap([
             ('supabase.from("bookings").insert({ room_id: 1, … })', "예약 표에 한 줄 저장"),
             ('supabase.from("bookings").select("*").eq("date", day)', "그 날짜 예약 모두 조회"),
             ('supabase.from("bookings").update({ title: "주간 회의" }).eq("id", 7)', "7번 예약 이름 수정"),
             ('supabase.from("bookings").delete().eq("id", 7)', "7번 예약 삭제")],
             ask="localStorage 대신 Supabase bookings 표에 저장 · 조회하게 바꿔 줘", title="Claude Code가 쓴 코드 · 예")
               + note("확인", "Supabase 대시보드 Table Editor · 행이 늘고 줄어드는지"), T),
-        light("저장 위치 · 전후", '<div class="v2u5lb">1부 · localStorage</div>'
+        light("저장 위치 전후", '<div class="v2u5lb">1부 · localStorage</div>'
               + lane([("내 노트북", "예약 입력"), ("내 브라우저", "localStorage"), ("팀원 휴대폰", "시간표")],
                      [(0, 1, "대회의실 · 주간 회의", .4, True)], [(2, "빈 시간표", "no", 1.8)], h=190)
               + '<div class="v2u5lb"><b>2부 · Supabase</b></div>'
@@ -96,7 +96,7 @@ def slides():
                      [(0, 1, "대회의실 · 주간 회의", 2.8, False), (1, 2, "대회의실 · 주간 회의", 4.0, True)],
                      [(1, "행 1개 추가", "ok", 3.9), (2, "같은 시간표", "ok", 5.2)], h=190), T),
         # ── 로그인
-        light("로그인 · Supabase Auth", flow([("가입", "이메일 · 비밀번호"), ("확인 메일", "링크 클릭"), ("로그인", "signInWithPassword"),
+        light("Supabase Auth 로그인", flow([("가입", "이메일 · 비밀번호"), ("확인 메일", "링크 클릭"), ("로그인", "signInWithPassword"),
                                             ("예약 저장", "user_id = 로그인 계정")], hl=3)
               + viz2.tiles([("계정 목록", "대시보드 Authentication › Users"), ("예약자 이름", "입력 칸 대신 로그인 계정")], 2)
               + src(("Supabase · Auth", "https://supabase.com/docs/guides/auth")), T),
@@ -107,10 +107,10 @@ def slides():
             "RLS 켜짐", [("규칙", "DB 가 행마다 확인"), ("남의 예약 취소", "DB 에서 거절"), ("화면 우회", "소용없음")])
               + note("RLS", "Row Level Security · 행 단위 권한 · 표마다 켜기")
               + src(RLS), T),
-        light("비유 · 팀 게시판", shot("v2_u5_board.webp", "팀 게시판 · 내 쪽지만 떼기", [
+        light("팀 게시판", shot("v2_u5_board.webp", "팀 게시판 · 내 쪽지만 떼기", [
             ("게시판 보기", "모두 읽기 · 로그인 전에도"), ("쪽지 붙이기", "로그인한 팀원"), ("쪽지 떼기", "내 이름표가 붙은 쪽지만")])
               + src(GEN), T),
-        light("RLS 정책 · 코드 뜻", codemap([
+        light("RLS 정책 코드 뜻", codemap([
             ("alter table bookings enable row level security;", "예약 표에 RLS 켜기"),
             ('create policy "모두 보기" on bookings for select', "읽기 규칙 · 누구나"),
             ("  using ( true );", "모든 행 · 조건 없음"),
@@ -124,7 +124,7 @@ def slides():
                                [(1, "예약자 ≠ B · 거절", "no", 1.6), (2, "A 의 요청 · 삭제", "ok", 5.3)], h=200)
               + note("규칙 위치", "DB 안 · 화면 · 코드를 우회해도 같은 결과")
               + src(RLS), T),
-        light("권한 확인 · 계정 두 개", flow([("계정 A 로그인", "예약 하나 추가"), ("계정 B 로그인", "다른 브라우저 · 시크릿 창"),
+        light("계정 두 개로 권한 확인", flow([("계정 A 로그인", "예약 하나 추가"), ("계정 B 로그인", "다른 브라우저 · 시크릿 창"),
                                           ("A 의 예약 열기", "취소 버튼 없음"), ("B 로 취소 시도", "DB 에서 거절"), ("A 로 취소", "성공")], hl=3)
               + note("시크릿 창", "같은 컴퓨터에서 두 번째 계정 · 로그인 정보가 따로"), T),
         # ── 실습

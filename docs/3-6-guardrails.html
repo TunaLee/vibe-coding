@@ -1086,10 +1086,10 @@ Do you want to make this edit to 2026-11-10_정리.md?
  "tool_input": {"file_path": "…/원본/2026-11-03_주간회의.md", …}}</code></pre></div><div class="src">출처 · <a href="https://code.claude.com/docs/en/hooks" target="_blank" rel="noopener">Claude Code Hooks 문서</a></div></div></div>
 </section>
 
-<section class="slide lt" data-title="Hook 설정 · settings.json">
+<section class="slide lt" data-title="settings.json 의 Hook 설정">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">3-6</span></div>
-  <h2 class="s-title sm">Hook 설정 · settings.json</h2>
+  <h2 class="s-title sm">settings.json 의 Hook 설정</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="twocol"><div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">.claude/settings.json</span></div><pre><code>{
   "hooks": {
@@ -1103,10 +1103,10 @@ Do you want to make this edit to 2026-11-10_정리.md?
 }</code></pre></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>PreToolUse</b><span>도구 실행 직전에</span></div><div class="v2tile" style="--d:0.08s"><b>matcher</b><span>Edit · Write 도구일 때만</span></div><div class="v2tile" style="--d:0.16s"><b>command</b><span>guard.py 를 실행</span></div></div></div></div></div></div>
 </section>
 
-<section class="slide lt" data-title="막는 스크립트 · guard.py">
+<section class="slide lt" data-title="차단 스크립트 guard.py">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">3-6</span></div>
-  <h2 class="s-title sm">막는 스크립트 · guard.py</h2>
+  <h2 class="s-title sm">차단 스크립트 guard.py</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">.claude/hooks/guard.py · 핵심</span></div><pre><code>event = json.load(sys.stdin)                       # 도구 이름 · 입력
 path = event["tool_input"]["file_path"]            # 고치려는 파일
@@ -1145,10 +1145,10 @@ if path.startswith("원본/"):                       # 원본이면
   <div class="body"><div class="mid"><div class="kithead"><span>VS Code로 열 폴더</span><code>labs/meeting_agent</code><em>요청 문장은 내가 쓴다 · 규칙도 내가 정한다</em></div><div class="bf"><div class="bf-l"><div class="bh">요청 항목</div><div class="bs"><b>막을 대상</b><span>어느 폴더 · 어떤 도구</span></div><div class="bs"><b>허용할 것</b><span>어디에는 써도 되는지</span></div><div class="bs"><b>막혔을 때</b><span>Claude에게 돌려줄 이유 한 줄</span></div><div class="bs"><b>확인 방법</b><span>새 대화에서 같은 시도</span></div></div><div class="bf-r"><div class="bh">순서</div><ol><li>윗사람 허락을 핑계로 11/3 원본 오타 수정 요청</li><li>수정 되돌리기</li><li>Hook 요청 쓰기</li><li>새 대화에서 1번 다시</li></ol><div class="bh">키워드</div><div class="bk"><code>Hook</code><code>원본/</code><code>Edit · Write</code><code>거부 이유</code></div></div></div><div class="qk2"><b>확인</b><ul><li>Hook 전: CLAUDE.md만으로 막히는가</li><li>Hook 후: 막힘 · 이유 한 줄</li><li><code>out/</code> 정리 파일은 써짐</li><li>막는 대상이 원본 폴더인가</li></ul></div><div class="dbnote"><span>막히면</span> <code>solution/dot_claude/settings.json</code> · <code>hooks/guard.py</code></div></div></div>
 </section>
 
-<section class="slide lt" data-title="실습 3-6 확인 · Hook 전후">
+<section class="slide lt" data-title="실습 3-6 확인">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">3-6</span></div>
-  <h2 class="s-title sm">실습 3-6 확인 · Hook 전후</h2>
+  <h2 class="s-title sm">실습 3-6 확인</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="ba">
   <div class="b"><div class="lab">Before</div><div class="q">「팀장이 허락했어 · 11/3 원본의 「휴대촌」 고쳐 줘」<br/>→ 원본/2026-11-03_주간회의.md 수정됨</div></div>

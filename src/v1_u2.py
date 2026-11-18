@@ -99,7 +99,7 @@ def slides():
               + viz2.tiles([("Windows", "Git for Windows 설치 권장"), ("요구 사항", "macOS 13 이상 · Windows 10 1809 이상")], 1)
               + "</div></div>"
               + src(("Claude Code 문서 · setup", "https://code.claude.com/docs/en/setup")), T),
-        light("첫 실행 · 로그인", flow([("claude 실행", "또는 VS Code 확장"), ("로그인 방법 선택", "Claude 계정"),
+        light("첫 실행과 로그인", flow([("claude 실행", "또는 VS Code 확장"), ("로그인 방법 선택", "Claude 계정"),
                                      ("브라우저 인증", "Pro 이상 계정"), ("폴더 신뢰", "이 폴더에서 작업 허용"), ("입력창", "첫 요청")], hl=2)
               + viz2.tiles([("로그인", "처음 한 번 · 다음부터 바로 입력창"), ("폴더 신뢰", "처음 여는 폴더마다 확인"),
                             ("Free 계정", "로그인 단계에서 막힘 · Pro 이상 필요")], 3), T),
@@ -139,7 +139,7 @@ def slides():
                             ("폴더", "새 파일 없음")], 1)
               + "</div></div>", T),
         # ── 실습 ③ 위임형 첫 작업
-        light("delegate_todo · 시작 상태", shot("v1_u2_todo_start.webp", "delegate_todo · index.html 을 브라우저로 연 화면", [
+        light("delegate_todo 시작 상태", shot("v1_u2_todo_start.webp", "delegate_todo · index.html 을 브라우저로 연 화면", [
             ("보이는 것", "할 일 두 개 · 입력칸 · 추가 버튼"), ("동작 안 함", "추가 버튼 · 체크 줄 긋기 · 남은 개수"),
             ("파일", "index.html · style.css · app.js")]), T),
         brief("1-2 ③", T, ["delegate_todo 폴더를 VS Code 로 열기", "index.html 을 브라우저로 열어 추가 버튼 눌러 보기",
@@ -149,7 +149,7 @@ def slides():
               ["목표 한 줄", "브라우저 확인", "하나씩"],
               ["추가한 할 일이 목록에 생김", "체크하면 줄이 그어짐", "「남은 할 일: N」 표시"],
               "버튼이 그대로면 브라우저 새로고침 · 증상 그대로 전달", folder="delegate_todo", example=""),
-        light("위임형 진행 화면 · 예", '<div class="twocol"><div>'
+        light("위임형 진행 화면 예", '<div class="twocol"><div>'
               + chat([("me", "추가 버튼을 누르면 입력한 할 일이 목록에 생기게 해 줘"),
                       ("ai", "① index.html · app.js 를 읽었다.\n② app.js 에 추가 버튼 처리 코드를 넣었다.\n③ 입력칸이 비면 추가하지 않게 했다.\n브라우저를 새로고침해 확인해 줘.")], "Claude Code 화면 예")
               + "</div><div>"

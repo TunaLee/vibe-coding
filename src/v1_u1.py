@@ -196,7 +196,7 @@ def comic(cuts):
 def slides():
     return [
         # ── 코딩 = 원시인에게 사과 가르치기
-        light("비유 · 원시인과 사과", '<div class="v1shot v1vid"><figure>'
+        light("원시인과 사과", '<div class="v1shot v1vid"><figure>'
               '<video src="img/v1_caveman.mp4" poster="img/v1_caveman.webp" autoplay muted loop playsinline></video>'
               '</figure><div class="v1side">'
               + "".join(f'<div class="v1sd"><b>{h}</b><span>{x}</span></div>' for h, x in [
@@ -224,12 +224,12 @@ def slides():
               + src(("GitHub · 2021-06-29", "https://github.blog/2021-06-29-introducing-github-copilot-ai-pair-programmer/"),
                     ("OpenAI · 2022-11-30", "https://openai.com/index/chatgpt/"),
                     ("Anthropic · 2025-05-22", "https://www.anthropic.com/news/claude-4")), T),
-        light("자동완성 방식 · 예", '<div class="v1mode"><div>' + autocomplete_anim()
+        light("자동완성 방식 예", '<div class="v1mode"><div>' + autocomplete_anim()
               + '</div><div>' + viz2.tiles([("사람", "파일 · 위치 · 첫 줄 직접 입력"), ("AI", "회색 글자로 다음 줄 제안 · Tab 으로 수락"),
                                             ("AI가 파악", "앞뒤 코드")], 1) + '</div></div>'
               + src(("GitHub Copilot 문서 · inline suggestions", "https://docs.github.com/en/copilot/using-github-copilot/getting-code-suggestions-in-your-ide-with-github-copilot")), T),
-        light("대화형 방식 · 예", chat_anim("chat"), T),
-        light("위임형 방식 · 예", chat_anim("agent")
+        light("대화형 방식 예", chat_anim("chat"), T),
+        light("위임형 방식 예", chat_anim("agent")
               + src(("Claude Code 문서 · How Claude Code works", "https://code.claude.com/docs/en/how-claude-code-works")), T),
         light("위임의 한계", '<div class="v1shot"><figure><img src="img/v1_algo_context.webp" alt="회사 안을 들여다보는 AI"/>'
               '<figcaption>AI · 회사 밖에서 보이는 정보만</figcaption></figure><div class="v1side">'
@@ -240,23 +240,23 @@ def slides():
                   ("알고리즘 이해", "피드백의 기준 · 순서 · 조건 · 예외 읽기")])
               + "</div></div>"
               + src(("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")), T),
-        light("알고리즘 · 라면 끓이기", '<div class="v1shot"><figure><img src="img/v1_algo_ramen.webp" alt="라면 끓이기"/>'
+        light("라면 끓이기 알고리즘", '<div class="v1shot"><figure><img src="img/v1_algo_ramen.webp" alt="라면 끓이기"/>'
               '<figcaption>알고리즘 · 문제를 푸는 순서 있는 절차</figcaption></figure>'
               + algo_list([("①", "냄비에 물 550ml", "순서"), ("②", "불 켜기", "순서"), ("③", "물이 끓었나? 아니면 기다리기", "조건"),
                            ("④", "끓을 때까지 ③ 다시", "반복"), ("⑤", "면 · 스프 넣기", "순서"), ("⑥", "4분 30초 뒤 불 끄기", "끝")])
               + "</div>"
               + note("알고리즘의 세 가지", "순서 · 조건(갈림길) · 반복 · 정해진 끝")
               + src(("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")), T),
-        light("알고리즘 · 사과 먹기", '<div class="v1shot"><figure><img src="img/v1_algo_steps.webp" alt="세 개의 디딤돌 · 집기 · 깨물기 · 씨 뱉기"/>'
+        light("사과 먹기 알고리즘", '<div class="v1shot"><figure><img src="img/v1_algo_steps.webp" alt="세 개의 디딤돌 · 집기 · 깨물기 · 씨 뱉기"/>'
               '<figcaption>사과 먹기 · 디딤돌 세 개</figcaption></figure>'
               + algo_list([("①", "과일이 사과인가? 아니면 멈춤", "조건"), ("②", "손으로 집기", "순서"), ("③", "한 입 깨물기", "순서"),
                            ("④", "씨 뱉기", "끝")])
               + "</div>"
               + note("코드", "이 순서를 프로그래밍 언어로 적은 것 · 원시인 코드의 eat()")
               + src(("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")), T),
-        light("순서도 · 사과 먹기", flowchart()
+        light("사과 먹기 순서도", flowchart()
               + note("순서도", "알고리즘을 도형과 화살표로 그린 그림 · 처리 · 조건 · 순서가 한눈에"), T),
-        light("알고리즘 피드백 · 예", fb_steps()
+        light("알고리즘 피드백 예", fb_steps()
               + note("요청 팁", "「순서를 단계로 보여 줘」 → 단계를 읽고 빠진 규칙 · 예외를 지적"), T),
         light("AI 코딩 도구의 실제 속도", big([("19%", "", "AI를 쓴 숙련 개발자 · 실제로 더 걸린 시간", True),
                                              ("20%", "", "같은 개발자들이 「빨라졌다」고 느낀 정도")], 2)
@@ -299,7 +299,7 @@ def slides():
             [("돈 · 개인정보 처리 서비스", "전문 보안 점검 필요"), ("동시 사용자가 많은 서비스", "서버 · DB 설계 필요"),
              ("코드 확인 없는 운영", "장애 원인 추적 어려움")],
             gt="지금 만들기 좋은 앱", bt="아직 어려운 앱"), T),
-        light("1부의 핵심 · 요청에 맞는 결과", '<div class="v1core">'
+        light("요청과 결과", '<div class="v1core">'
               '<div class="bx me"><span>내 요청</span><b>「로그인 화면 만들어 줘」</b></div><i>→</i>'
               '<div class="bx ai"><span>AI 작업</span><b>읽기 · 작성 · 실행 · 확인</b></div><i>→</i>'
               '<div class="bx out"><span>결과</span><b>로그인 화면</b></div>'

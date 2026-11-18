@@ -206,7 +206,7 @@ def slides():
     return [
         # ── 배경 → 비유
         light("파일 이름 버전 관리", files(), T),
-        light("비유 · 세이브 포인트", phmap(
+        light("세이브 포인트", phmap(
             "v1_u5_savepoint.webp", "세이브 포인트 · 저장한 지점부터 다시 시작", "AI 생성 그림 · Z-Image Turbo (Apache 2.0)",
             "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo",
             viz2.maprows([

@@ -52,7 +52,7 @@ def stepflow(steps):
 def slides():
     return [
         # ── 환경변수
-        light("배포 뒤 동작 안 함 · 원인", envmove()
+        light("배포 뒤 오류 원인", envmove()
               + note("환경변수 등록", "키를 Vercel 프로젝트 설정에 따로 입력 · .env 는 GitHub 에 올리지 않음 (2-6)"), T),
         light("Vercel 환경변수 등록", flow([
             ("Vercel 프로젝트", "1-7 에서 만든 것"), ("Settings", "Environment Variables"), ("Key · Value", ".env 한 줄씩 · Import .env 가능"),
@@ -66,7 +66,7 @@ def slides():
             "1부 방식", [("에러를 아는 때", "사용자가 단톡방에 제보"), ("방문 수", "모름"), ("원인 찾기", "제보 내용 추측")],
             "모니터링", [("에러를 아는 때", "로그에 빨간 줄 · 바로"), ("방문 수", "날짜별 그래프"), ("원인 찾기", "요청 · 상태 코드 · 에러 원문")])
               + note("모니터링", "배포한 뒤에도 서비스가 잘 돌아가는지 지켜보는 일"), T),
-        light("비유 · 가게 운영", phmap(
+        light("가게 운영", phmap(
             "v2_u8_shop.webp", "가게 운영 · 손님 수 · 고장 신고", *ZIMG,
             viz2.maprows([
                 ("가게 문 열기 (1-7)", "배포", "주소로 누구나"), ("손님 수 세기", "Web Analytics", "방문자 · 페이지 뷰"),
@@ -96,7 +96,7 @@ def slides():
             ("수정 · 테스트", "2-7 흐름"), ("push", "자동 재배포 (1-7)"), ("로그 재확인", "빨간 줄 사라짐")])
               + note("급할 때", "Instant Rollback · 바로 이전 배포로 되돌린 뒤 천천히 수정 (Hobby 는 직전 배포만)")
               + src(("Vercel · Instant Rollback", "https://vercel.com/docs/instant-rollback")), T),
-        light("대응 예 · 공휴일 표시 실패", chat([
+        light("공휴일 표시 실패 대응", chat([
             ("me", "배포 주소에서 공휴일이 안 보여. Vercel 로그:\nGET /api/holidays 500 · Error: HOLIDAY_API_KEY is not set"),
             ("ai", "코드 문제 아님 · Vercel 환경변수에 HOLIDAY_API_KEY 없음.\nSettings → Environment Variables 에 Secret 으로 등록 → Redeploy"),
             ("me", "등록하고 Redeploy 했어"),

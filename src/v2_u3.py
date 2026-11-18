@@ -89,7 +89,7 @@ def slides():
             "공휴일을 직접 입력", [("목록", "해마다 사람이 입력"), ("대체공휴일 · 임시공휴일", "발표 뒤 다시 수정"), ("틀리면", "공휴일에 예약 받음")],
             "가진 곳에 묻기 · API", [("목록", "한국천문연구원 특일 정보"), ("갱신", "제공하는 쪽이 관리"), ("앱이 할 일", "연도 · 월을 보내고 답 받기")])
               + note("API", "다른 프로그램의 기능 · 데이터를 정해진 형식으로 요청하는 창구"), T),
-        light("비유 · 메뉴판과 주문서", phmap("v2_u3_menu.webp", "메뉴판을 보고 주문하는 손님", *GEN, viz2.maprows([
+        light("메뉴판과 주문서", phmap("v2_u3_menu.webp", "메뉴판을 보고 주문하는 손님", *GEN, viz2.maprows([
             ("다른 가게 주방", "공휴일 서버", "한국천문연구원 · 1-6 의 주방 = 서버"), ("메뉴판", "API 목록", "공휴일 · 국경일 · 24절기"),
             ("주문서 양식", "요청 형식", "연도 · 월 · 서비스 키"), ("회원 카드", "서비스 키", "이용자 확인 (2-6)"),
             ("받은 음식", "응답", "날짜 · 이름 · 휴일 여부")], "식당", "API")), T),
@@ -107,7 +107,7 @@ def slides():
         # ── MCP
         light("Claude Code와 Supabase 사이", relay()
               + note("MCP 연결 뒤", "Claude Code 가 Supabase 에 직접 실행 · 결과까지 확인"), T),
-        light("비유 · USB-C", phmap("usbc_port.webp", "노트북의 USB-C 포트", "사진 · Logant547 · CC BY 4.0",
+        light("USB-C 포트", phmap("usbc_port.webp", "노트북의 USB-C 포트", "사진 · Logant547 · CC BY 4.0",
                                     "https://commons.wikimedia.org/wiki/File:USB-C_connector_on_a_laptop.jpg", viz2.maprows([
             ("노트북", "Claude Code", "도구를 쓰는 쪽"), ("USB-C 규격", "MCP", "연결 · 주고받는 형식"),
             ("모니터 · 외장 디스크", "MCP 서버", "Supabase · 브라우저 · 노션"),

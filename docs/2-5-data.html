@@ -1057,7 +1057,7 @@
   <div class="eyebrow"><span class="tag">2-5</span></div>
   <h2 class="s-title sm">AI와 데이터 구조 설계</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1chat"><div class="v1ch">Claude Code · 대화 예</div><div class="v1b me"><span>나</span><p>PRD 5칸 데이터 구조를 읽고 Supabase 표 설계를 제안해 줘. 만들기 전에 표 모양부터 보여 줘</p></div><div class="v1b ai"><span>Claude</span><p>제안 · rooms · bookings 두 표. 같은 회의실 · 같은 시간 예약을 DB 에서도 막을까요?</p></div><div class="v1b me"><span>나</span><p>응 · 화면과 DB 둘 다에서 막아 줘</p></div><div class="v1b ai"><span>Claude</span><p>표 설계 · SQL 파일 저장 완료 · SQL Editor 에서 실행 필요</p></div></div><div class="dbnote"><span>사람이 정할 것</span> 표 이름 · 열 · 지켜야 할 규칙 · SQL 은 Claude Code</div></div></div>
+  <div class="body"><div class="mid"><div class="v1chat"><div class="v1ch">Claude Code 대화 예</div><div class="v1b me"><span>나</span><p>PRD 5칸 데이터 구조를 읽고 Supabase 표 설계를 제안해 줘. 만들기 전에 표 모양부터 보여 줘</p></div><div class="v1b ai"><span>Claude</span><p>제안 · rooms · bookings 두 표. 같은 회의실 · 같은 시간 예약을 DB 에서도 막을까요?</p></div><div class="v1b me"><span>나</span><p>응 · 화면과 DB 둘 다에서 막아 줘</p></div><div class="v1b ai"><span>Claude</span><p>표 설계 · SQL 파일 저장 완료 · SQL Editor 에서 실행 필요</p></div></div><div class="dbnote"><span>사람이 정할 것</span> 표 이름 · 열 · 지켜야 할 규칙 · SQL 은 Claude Code</div></div></div>
 </section>
 
 <section class="slide lt" data-title="Supabase 연결 순서">
@@ -1084,26 +1084,26 @@
   <div class="body"><div class="mid"><div class="v2ms"><div class="v2mh"><span>CRUD</span><i></i><span>회의실 예약에서</span></div><div class="v2m" style="--d:0.00s"><div class="a">Create · 저장</div><i>→</i><div class="b"><b>새 행 추가</b><small>예약 추가</small></div></div><div class="v2m" style="--d:0.12s"><div class="a">Read · 조회</div><i>→</i><div class="b"><b>행 읽기</b><small>시간표 보기</small></div></div><div class="v2m" style="--d:0.24s"><div class="a">Update · 수정</div><i>→</i><div class="b"><b>행 고치기</b><small>회의 이름 바꾸기</small></div></div><div class="v2m" style="--d:0.36s"><div class="a">Delete · 삭제</div><i>→</i><div class="b"><b>행 지우기</b><small>예약 취소</small></div></div></div><div class="dbnote"><span>CRUD</span> 데이터를 다루는 네 동작 · 거의 모든 앱의 기본</div></div></div>
 </section>
 
-<section class="slide lt" data-title="CRUD · 코드 뜻">
+<section class="slide lt" data-title="CRUD 코드 뜻">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">2-5</span></div>
-  <h2 class="s-title sm">CRUD · 코드 뜻</h2>
+  <h2 class="s-title sm">CRUD 코드 뜻</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v1cmask"><span>요청</span><b>localStorage 대신 Supabase bookings 표에 저장 · 조회하게 바꿔 줘</b></div><div class="v1cmap"><div class="v1cmt"><span>Claude Code가 쓴 코드 · 예</span><span>뜻</span></div><div class="v1cmr" style="--d:0.30s"><code>supabase.from("bookings").insert({ room_id: 1, … })</code><i>→</i><span>예약 표에 한 줄 저장</span></div><div class="v1cmr" style="--d:0.65s"><code>supabase.from("bookings").select("*").eq("date", day)</code><i>→</i><span>그 날짜 예약 모두 조회</span></div><div class="v1cmr" style="--d:1.00s"><code>supabase.from("bookings").update({ title: "주간 회의" }).eq("id", 7)</code><i>→</i><span>7번 예약 이름 수정</span></div><div class="v1cmr" style="--d:1.35s"><code>supabase.from("bookings").delete().eq("id", 7)</code><i>→</i><span>7번 예약 삭제</span></div></div><div class="dbnote"><span>확인</span> Supabase 대시보드 Table Editor · 행이 늘고 줄어드는지</div></div></div>
 </section>
 
-<section class="slide lt" data-title="저장 위치 · 전후">
+<section class="slide lt" data-title="저장 위치 전후">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">2-5</span></div>
-  <h2 class="s-title sm">저장 위치 · 전후</h2>
+  <h2 class="s-title sm">저장 위치 전후</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v2u5lb">1부 · localStorage</div><div class="v2mv" style="height:190px"><div class="v2mvn" style="left:16.67%; width:30.3%; --l:0.4s"><b>내 노트북</b><span>예약 입력</span></div><div class="v2mvn" style="left:50.00%; width:30.3%; --l:1.5s"><b>내 브라우저</b><span>localStorage</span></div><div class="v2mvn" style="left:83.33%; width:30.3%; --l:99.0s"><b>팀원 휴대폰</b><span>시간표</span></div><i class="v2mva" style="left:33.33%">→</i><i class="v2mva" style="left:66.67%">→</i><div class="v2mvt keep" style="--a:16.67%; --b:50.00%; --d:0.4s">대회의실 · 주간 회의</div><div class="v2mvr no" style="left:83.33%; --d:1.8s">✕ 빈 시간표</div></div><div class="v2u5lb"><b>2부 · Supabase</b></div><div class="v2mv" style="height:190px"><div class="v2mvn" style="left:16.67%; width:30.3%; --l:2.8s"><b>내 노트북</b><span>예약 입력</span></div><div class="v2mvn" style="left:50.00%; width:30.3%; --l:3.9s"><b>Supabase</b><span>bookings 표</span></div><div class="v2mvn" style="left:83.33%; width:30.3%; --l:5.1s"><b>팀원 휴대폰</b><span>시간표</span></div><i class="v2mva" style="left:33.33%">→</i><i class="v2mva" style="left:66.67%">→</i><div class="v2mvt" style="--a:16.67%; --b:50.00%; --d:2.8s">대회의실 · 주간 회의</div><div class="v2mvt keep" style="--a:50.00%; --b:83.33%; --d:4.0s">대회의실 · 주간 회의</div><div class="v2mvr ok" style="left:50.00%; --d:3.9s">✓ 행 1개 추가</div><div class="v2mvr ok" style="left:83.33%; --d:5.2s">✓ 같은 시간표</div></div></div></div>
 </section>
 
-<section class="slide lt" data-title="로그인 · Supabase Auth">
+<section class="slide lt" data-title="Supabase Auth 로그인">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">2-5</span></div>
-  <h2 class="s-title sm">로그인 · Supabase Auth</h2>
+  <h2 class="s-title sm">Supabase Auth 로그인</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="flow"><div class="fs"><b>가입</b><span>이메일 · 비밀번호</span></div><div class="fa">→</div><div class="fs"><b>확인 메일</b><span>링크 클릭</span></div><div class="fa">→</div><div class="fs"><b>로그인</b><span>signInWithPassword</span></div><div class="fa">→</div><div class="fs hl"><b>예약 저장</b><span>user_id = 로그인 계정</span></div></div><div class="v2tiles c2"><div class="v2tile" style="--d:0.00s"><b>계정 목록</b><span>대시보드 Authentication › Users</span></div><div class="v2tile" style="--d:0.08s"><b>예약자 이름</b><span>입력 칸 대신 로그인 계정</span></div></div><div class="src">출처 · <a href="https://supabase.com/docs/guides/auth" target="_blank" rel="noopener">Supabase · Auth</a></div></div></div>
 </section>
@@ -1116,18 +1116,18 @@
   <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">RLS 꺼짐</div><div class="v2pc" style="--d:0.00s"><b>publishable 키를 가진 누구나</b><span>모든 예약 읽기 · 수정 · 삭제</span></div><div class="v2pc" style="--d:0.08s"><b>남의 예약 취소</b><span>가능</span></div><div class="v2pc" style="--d:0.16s"><b>화면에서 버튼 숨기기</b><span>개발자 도구로 우회</span></div></div><div class="v2p on"><div class="v2ph">RLS 켜짐</div><div class="v2pc" style="--d:0.00s"><b>규칙</b><span>DB 가 행마다 확인</span></div><div class="v2pc" style="--d:0.08s"><b>남의 예약 취소</b><span>DB 에서 거절</span></div><div class="v2pc" style="--d:0.16s"><b>화면 우회</b><span>소용없음</span></div></div></div><div class="dbnote"><span>RLS</span> Row Level Security · 행 단위 권한 · 표마다 켜기</div><div class="src">출처 · <a href="https://supabase.com/docs/guides/database/postgres/row-level-security" target="_blank" rel="noopener">Supabase · Row Level Security</a></div></div></div>
 </section>
 
-<section class="slide lt" data-title="비유 · 팀 게시판">
+<section class="slide lt" data-title="팀 게시판">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">2-5</span></div>
-  <h2 class="s-title sm">비유 · 팀 게시판</h2>
+  <h2 class="s-title sm">팀 게시판</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v1shot"><figure><img src="img/v2_u5_board.webp" alt="팀 게시판 · 내 쪽지만 떼기"/><figcaption>팀 게시판 · 내 쪽지만 떼기</figcaption></figure><div class=v1side><div class="v1sd"><b>게시판 보기</b><span>모두 읽기 · 로그인 전에도</span></div><div class="v1sd"><b>쪽지 붙이기</b><span>로그인한 팀원</span></div><div class="v1sd"><b>쪽지 떼기</b><span>내 이름표가 붙은 쪽지만</span></div></div></div></div></div>
 </section>
 
-<section class="slide lt" data-title="RLS 정책 · 코드 뜻">
+<section class="slide lt" data-title="RLS 정책 코드 뜻">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">2-5</span></div>
-  <h2 class="s-title sm">RLS 정책 · 코드 뜻</h2>
+  <h2 class="s-title sm">RLS 정책 코드 뜻</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v1cmask"><span>요청</span><b>PRD 7칸 권한대로 bookings 표에 RLS 정책을 만들어 줘</b></div><div class="v1cmap"><div class="v1cmt"><span>Claude Code가 쓴 SQL · 예</span><span>뜻</span></div><div class="v1cmr" style="--d:0.30s"><code>alter table bookings enable row level security;</code><i>→</i><span>예약 표에 RLS 켜기</span></div><div class="v1cmr" style="--d:0.65s"><code>create policy "모두 보기" on bookings for select</code><i>→</i><span>읽기 규칙 · 누구나</span></div><div class="v1cmr" style="--d:1.00s"><code>  using ( true );</code><i>→</i><span>모든 행 · 조건 없음</span></div><div class="v1cmr" style="--d:1.35s"><code>create policy "내 예약만 삭제" on bookings for delete</code><i>→</i><span>삭제 규칙</span></div><div class="v1cmr" style="--d:1.70s"><code>  to authenticated</code><i>→</i><span>로그인한 사람만</span></div><div class="v1cmr" style="--d:2.05s"><code>  using ( (select auth.uid()) = user_id );</code><i>→</i><span>로그인 계정 = 예약자인 행만</span></div></div><div class="src">출처 · <a href="https://supabase.com/docs/guides/database/postgres/row-level-security" target="_blank" rel="noopener">Supabase · Row Level Security</a></div></div></div>
 </section>
@@ -1140,10 +1140,10 @@
   <div class="body"><div class="mid"><div class="v2mv" style="height:200px"><div class="v2mvn" style="left:16.67%; width:30.3%; --l:0.4s"><b>팀원 브라우저</b><span>계정 A · 계정 B</span></div><div class="v2mvn" style="left:50.00%; width:30.3%; --l:1.5s"><b>Supabase</b><span>RLS 규칙 확인</span></div><div class="v2mvn" style="left:83.33%; width:30.3%; --l:5.2s"><b>bookings</b><span>7번 · 예약자 A</span></div><i class="v2mva" style="left:33.33%">→</i><i class="v2mva" style="left:66.67%">→</i><div class="v2mvt" style="--a:16.67%; --b:50.00%; --d:0.4s">B · 7번 삭제</div><div class="v2mvt" style="--a:16.67%; --b:50.00%; --d:2.8s">A · 7번 삭제</div><div class="v2mvt keep" style="--a:50.00%; --b:83.33%; --d:4.1s">삭제 실행</div><div class="v2mvr no" style="left:50.00%; --d:1.6s">✕ 예약자 ≠ B · 거절</div><div class="v2mvr ok" style="left:83.33%; --d:5.3s">✓ A 의 요청 · 삭제</div></div><div class="dbnote"><span>규칙 위치</span> DB 안 · 화면 · 코드를 우회해도 같은 결과</div><div class="src">출처 · <a href="https://supabase.com/docs/guides/database/postgres/row-level-security" target="_blank" rel="noopener">Supabase · Row Level Security</a></div></div></div>
 </section>
 
-<section class="slide lt" data-title="권한 확인 · 계정 두 개">
+<section class="slide lt" data-title="계정 두 개로 권한 확인">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">2-5</span></div>
-  <h2 class="s-title sm">권한 확인 · 계정 두 개</h2>
+  <h2 class="s-title sm">계정 두 개로 권한 확인</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="flow"><div class="fs"><b>계정 A 로그인</b><span>예약 하나 추가</span></div><div class="fa">→</div><div class="fs"><b>계정 B 로그인</b><span>다른 브라우저 · 시크릿 창</span></div><div class="fa">→</div><div class="fs"><b>A 의 예약 열기</b><span>취소 버튼 없음</span></div><div class="fa">→</div><div class="fs hl"><b>B 로 취소 시도</b><span>DB 에서 거절</span></div><div class="fa">→</div><div class="fs"><b>A 로 취소</b><span>성공</span></div></div><div class="dbnote"><span>시크릿 창</span> 같은 컴퓨터에서 두 번째 계정 · 로그인 정보가 따로</div></div></div>
 </section>

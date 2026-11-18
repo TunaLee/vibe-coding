@@ -1018,10 +1018,10 @@
   <div class="body"><div class="mid"><div class="v2ms"><div class="v2mh"><span>Claude Code가 정할 것</span><i></i><span>기획서에 있는 것</span></div><div class="v2m" style="--d:0.00s"><div class="a">로그인</div><i>→</i><div class="b"><b>넣을지 뺄지</b><small>기획서는 「하지 않을 것」에만 한 줄</small></div></div><div class="v2m" style="--d:0.12s"><div class="a">예약 단위</div><i>→</i><div class="b"><b>1시간 · 30분 · 자유 입력</b><small>기획서에 없음</small></div></div><div class="v2m" style="--d:0.24s"><div class="a">저장 위치</div><i>→</i><div class="b"><b>서버 DB · 내 브라우저</b><small>기획서에 없음</small></div></div><div class="v2m" style="--d:0.36s"><div class="a">같은 시간 중복 예약</div><i>→</i><div class="b"><b>막기 · 경고만</b><small>처리 방식 없음</small></div></div><div class="v2m" style="--d:0.48s"><div class="a">완성 범위</div><i>→</i><div class="b"><b>어디까지 만들면 끝인지</b><small>기준 없음</small></div></div></div><div class="dbnote"><span>빈 칸</span> Claude Code가 추측으로 채움 · 대화마다 다른 결과</div></div></div>
 </section>
 
-<section class="slide lt" data-title="추측의 결과 · 예">
+<section class="slide lt" data-title="추측의 결과 예">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-4</span></div>
-  <h2 class="s-title sm">추측의 결과 · 예</h2>
+  <h2 class="s-title sm">추측의 결과 예</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">기획서만 · 예</div><div class="v2pc" style="--d:0.00s"><b>예약 단위</b><span>1시간 칸</span></div><div class="v2pc" style="--d:0.08s"><b>중복 예약</b><span>경고 창만 띄우고 저장</span></div><div class="v2pc" style="--d:0.16s"><b>저장</b><span>서버를 새로 만들려 함</span></div></div><div class="v2p on"><div class="v2ph">PRD 와 함께 · 예</div><div class="v2pc" style="--d:0.00s"><b>예약 단위</b><span>30분 칸</span></div><div class="v2pc" style="--d:0.08s"><b>중복 예약</b><span>저장하지 않고 「이미 예약된 시간」</span></div><div class="v2pc" style="--d:0.16s"><b>저장</b><span>브라우저 localStorage</span></div></div></div><div class="dbnote"><span>예</span> 같은 기획서로도 결과가 달라지는 지점 · 실제 결과는 대화마다 다름</div></div></div>
 </section>
@@ -1102,10 +1102,10 @@
 </div><div class="banote">값 · 동작 · 결과가 다 들어간 문장</div></div></div>
 </section>
 
-<section class="slide lt" data-title="PRD 예 · 전체 구조">
+<section class="slide lt" data-title="PRD 예 전체 구조">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-4</span></div>
-  <h2 class="s-title sm">PRD 예 · 전체 구조</h2>
+  <h2 class="s-title sm">PRD 예 전체 구조</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="twocol"><div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">PRD.md · 칸 제목</span></div><pre><code># 회의실 예약 페이지 — PRD (MVP)
 ## 1. 목표
@@ -1124,12 +1124,12 @@
   <div class="body"><div class="mid"><div class="flow"><div class="fs"><b>기획서.md</b><span>1-3 산출물</span></div><div class="fa">→</div><div class="fs"><b>읽기</b><span>Claude Code</span></div><div class="fa">→</div><div class="fs hl"><b>빈 칸 질문</b><span>단위 · 저장 · 범위</span></div><div class="fa">→</div><div class="fs"><b>답변</b><span>MVP 판단 · 사람</span></div><div class="fa">→</div><div class="fs"><b>PRD.md</b><span>파일로 저장</span></div><div class="fa">→</div><div class="fs"><b>확인</b><span>완료 기준 · 사람</span></div></div><div class="dbnote"><span>사람이 정할 것</span> MVP 포함 · 제외 · 완료 기준 · 파일 작성은 Claude Code</div></div></div>
 </section>
 
-<section class="slide lt" data-title="Claude Code · 대화 예">
+<section class="slide lt" data-title="Claude Code 대화 예">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-4</span></div>
-  <h2 class="s-title sm">Claude Code · 대화 예</h2>
+  <h2 class="s-title sm">Claude Code 대화 예</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1chat"><div class="v1ch">Claude Code · 대화 예</div><div class="v1b me"><span>나</span><p>기획서.md 를 읽고 PRD.md 를 만들어 줘. 정해지지 않은 것은 먼저 물어봐 줘</p></div><div class="v1b ai"><span>Claude</span><p>예약 단위는 30분과 1시간 중 무엇으로 할까요? 예약은 어디에 저장할까요?</p></div><div class="v1b me"><span>나</span><p>30분 칸 · 내 브라우저에 저장 · 로그인은 빼</p></div><div class="v1b ai"><span>Claude</span><p>PRD.md 저장 완료 · 완료 기준 5개 확인 필요</p></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v1chat"><div class="v1ch">Claude Code 대화 예</div><div class="v1b me"><span>나</span><p>기획서.md 를 읽고 PRD.md 를 만들어 줘. 정해지지 않은 것은 먼저 물어봐 줘</p></div><div class="v1b ai"><span>Claude</span><p>예약 단위는 30분과 1시간 중 무엇으로 할까요? 예약은 어디에 저장할까요?</p></div><div class="v1b me"><span>나</span><p>30분 칸 · 내 브라우저에 저장 · 로그인은 빼</p></div><div class="v1b ai"><span>Claude</span><p>PRD.md 저장 완료 · 완료 기준 5개 확인 필요</p></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="PRD 다듬기 요청">

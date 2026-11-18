@@ -1033,10 +1033,10 @@
   <div class="body"><div class="mid"><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>API 키</b><span>서비스가 호출한 사람을 알아보는 비밀 문자열</span></div><div class="v2tile" style="--d:0.08s"><b>노출되면</b><span>남이 내 이름으로 호출 · 한도 소진 · 요금</span></div><div class="v2tile" style="--d:0.16s"><b>보관</b><span>.env 파일 · 서버에서만 읽기</span></div></div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">모양 · 예 (가짜 값)</span></div><pre><code>HOLIDAY_API_KEY=a1b2c3d4e5f6...</code></pre></div></div></div>
 </section>
 
-<section class="slide lt" data-title="비유 · 출입증">
+<section class="slide lt" data-title="출입증">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">2-6</span></div>
-  <h2 class="s-title sm">비유 · 출입증</h2>
+  <h2 class="s-title sm">출입증</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v1shot"><figure><img src="img/v2_u6_key.webp" alt="출입증 · 잠긴 서랍에 보관"/><figcaption>출입증 · 잠긴 서랍에 보관</figcaption></figure><div class=v1side><div class="v1sd"><b>출입증</b><span>API 키</span></div><div class="v1sd"><b>출입문</b><span>외부 서비스</span></div><div class="v1sd"><b>잠긴 서랍</b><span>.env · 서버</span></div><div class="v1sd"><b>게시판에 붙인 출입증</b><span>코드 · GitHub 에 적은 키</span></div></div></div></div></div>
 </section>
@@ -1089,26 +1089,26 @@
   <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">브라우저 → 공공데이터포털</div><div class="v2pc" style="--d:0.00s"><b>키 위치</b><span>앱 코드 · 브라우저에 내려감</span></div><div class="v2pc" style="--d:0.08s"><b>보이는 곳</b><span>개발자 도구 · 네트워크 탭</span></div><div class="v2pc" style="--d:0.16s"><b>결과</b><span>누구나 키 복사</span></div></div><div class="v2p on"><div class="v2ph">브라우저 → 서버 함수 → 공공데이터포털</div><div class="v2pc" style="--d:0.00s"><b>키 위치</b><span>Vercel 서버 · 환경변수</span></div><div class="v2pc" style="--d:0.08s"><b>보이는 곳</b><span>없음 · 결과만 내려감</span></div><div class="v2pc" style="--d:0.16s"><b>결과</b><span>키 노출 없음</span></div></div></div></div></div>
 </section>
 
-<section class="slide lt" data-title="서버 함수 · 키 숨기기">
+<section class="slide lt" data-title="서버 함수의 키 보호">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">2-6</span></div>
-  <h2 class="s-title sm">서버 함수 · 키 숨기기</h2>
+  <h2 class="s-title sm">서버 함수의 키 보호</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v2mv" style="height:190px"><div class="v2mvn" style="left:16.67%; width:30.3%; --l:0.4s"><b>브라우저</b><span>시간표</span></div><div class="v2mvn" style="left:50.00%; width:30.3%; --l:1.5s"><b>서버 함수</b><span>api/holidays · Vercel</span></div><div class="v2mvn" style="left:83.33%; width:30.3%; --l:2.9s"><b>공공데이터포털</b><span>특일 정보</span></div><i class="v2mva" style="left:33.33%">→</i><i class="v2mva" style="left:66.67%">→</i><div class="v2mvt" style="--a:16.67%; --b:50.00%; --d:0.4s">12월 공휴일?</div><div class="v2mvt" style="--a:50.00%; --b:83.33%; --d:1.8s">연 · 월 + 인증키</div><div class="v2mvt" style="--a:83.33%; --b:50.00%; --d:3.2s">20261225 · 기독탄신일</div><div class="v2mvt keep" style="--a:50.00%; --b:16.67%; --d:4.6s">12-25 · 기독탄신일</div><div class="v2mvr ok" style="left:50.00%; --d:2.2s">✓ 인증키는 여기서만</div><div class="v2mvr ok" style="left:16.67%; --d:5.9s">✓ 키 없음 · 결과만</div></div><div class="v1cmap"><div class="v1cmr" style="--d:0.30s"><code>api/holidays.js</code><i>→</i><span>Vercel 이 서버에서 실행하는 파일</span></div><div class="v1cmr" style="--d:0.65s"><code>export function GET(request)</code><i>→</i><span>주소로 요청이 오면 실행</span></div><div class="v1cmr" style="--d:1.00s"><code>process.env.HOLIDAY_API_KEY</code><i>→</i><span>키는 서버 안에서만 읽기</span></div></div><div class="src">출처 · <a href="https://vercel.com/docs/functions" target="_blank" rel="noopener">Vercel · Functions</a></div></div></div>
 </section>
 
-<section class="slide lt" data-title="공휴일 차단 · 대화 예">
+<section class="slide lt" data-title="공휴일 차단 대화 예">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">2-6</span></div>
-  <h2 class="s-title sm">공휴일 차단 · 대화 예</h2>
+  <h2 class="s-title sm">공휴일 차단 대화 예</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1chat"><div class="v1ch">Claude Code · 대화 예</div><div class="v1b me"><span>나</span><p>공휴일에는 예약을 막아 줘. 공휴일은 공공데이터포털 특일 정보 API 에서 받고, 키는 서버 함수에서만 읽게 해 줘</p></div><div class="v1b ai"><span>Claude</span><p>계획 · api/holidays.js 생성 → 시간표에서 호출. 공휴일 띠 문구는 「공휴일 · 기독탄신일」 형식으로 할까요?</p></div><div class="v1b me"><span>나</span><p>응</p></div><div class="v1b ai"><span>Claude</span><p>완료 · 2026-12-25 시간표에 공휴일 띠 · 예약 창 막힘</p></div></div><div class="dbnote"><span>확인</span> 12월 25일 · 1월 1일 시간표 열기 · 빈 칸 클릭</div></div></div>
+  <div class="body"><div class="mid"><div class="v1chat"><div class="v1ch">Claude Code 대화 예</div><div class="v1b me"><span>나</span><p>공휴일에는 예약을 막아 줘. 공휴일은 공공데이터포털 특일 정보 API 에서 받고, 키는 서버 함수에서만 읽게 해 줘</p></div><div class="v1b ai"><span>Claude</span><p>계획 · api/holidays.js 생성 → 시간표에서 호출. 공휴일 띠 문구는 「공휴일 · 기독탄신일」 형식으로 할까요?</p></div><div class="v1b me"><span>나</span><p>응</p></div><div class="v1b ai"><span>Claude</span><p>완료 · 2026-12-25 시간표에 공휴일 띠 · 예약 창 막힘</p></div></div><div class="dbnote"><span>확인</span> 12월 25일 · 1월 1일 시간표 열기 · 빈 칸 클릭</div></div></div>
 </section>
 
-<section class="slide lt" data-title="공휴일 · 전후">
+<section class="slide lt" data-title="공휴일 반영 전후">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">2-6</span></div>
-  <h2 class="s-title sm">공휴일 · 전후</h2>
+  <h2 class="s-title sm">공휴일 반영 전후</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="ba">
   <div class="b"><div class="lab">Before</div><div class="q">12월 25일 시간표 → 평일과 같음<br/>예약 창 열림 · 다음 날 정리</div></div>
