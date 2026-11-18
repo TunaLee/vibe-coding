@@ -936,6 +936,40 @@
   @keyframes v1cutIn{from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none}}
   @media print{.v1cmr{opacity:1; animation:none}}
 
+  /* 1-5 · diff 가 구역을 지나는 모습 (v1d) */
+  .v1dW{display:grid; grid-template-columns:1fr 1.15fr; gap:22px; align-items:stretch;}
+  .v1dE{border-radius:12px; background:#1E2633; padding:0 0 10px; overflow:hidden;}
+  .v1dEh{display:flex; justify-content:space-between; padding:9px 14px; background:#2A3445; color:#C9D3E0; font-size:14px; font-weight:700;}
+  .v1dx{color:#F7C99A; opacity:0; animation:v1dIn .4s var(--d) forwards;}
+  .v1dEl{display:grid; grid-template-columns:28px 1fr; align-items:center; padding:5px 14px; min-height:30px;}
+  .v1dEl i{font-style:normal; color:#6B7785; font-size:13px; font-family:var(--mono);}
+  .v1dEl tt{grid-column:2; grid-row:1; font-family:var(--mono); font-size:15.5px; color:#E6EDF3; background:none; padding:0;}
+  .v1dnew{background:rgba(242,140,40,.18)!important; border-radius:4px; opacity:0; animation:v1dIn .4s var(--d) forwards;}
+  .v1dPs{display:grid;}
+  .v1dP{grid-area:1/1; border:1.5px solid #D9DDE3; border-radius:12px; background:#fff; overflow:hidden; opacity:0; animation:v1dIn .4s var(--d) forwards;}
+  .v1dP.o,.v1dC.o,.v1dx.o{animation:v1dIn .4s var(--d) forwards, v1dOut .3s var(--o) forwards;}
+  .v1dold.o{opacity:1; animation:v1dOut .3s var(--o) forwards;}
+  .v1dPh{display:flex; gap:12px; align-items:baseline; padding:9px 14px; background:#F4F6F9; border-bottom:1px solid #E3E6EA;}
+  .v1dPh code{font-family:var(--mono); font-size:15px; font-weight:800; color:#16233A; background:none; padding:0;}
+  .v1dPh span{font-size:13.5px; color:#6B7785;}
+  .v1dL{display:grid; grid-template-columns:22px 1fr; padding:7px 14px; background:#FDECEA;}
+  .v1dL.p{background:#E8F5E9;}
+  .v1dL b{color:#C62828; font-family:var(--mono);} .v1dL.p b{color:#2E7D32;}
+  .v1dL code{font-family:var(--mono); font-size:15px; color:#16233A; background:none; padding:0;}
+  .v1d0{padding:22px 14px; font-size:17px; font-weight:700; color:#2E7D32;}
+  .v1dZs{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:18px;}
+  .v1dZ{border:2px solid #C9D6E6; border-radius:12px; background:#F7F8FA; padding:9px 10px; min-height:84px;}
+  .v1dZ:last-child{border-color:#16233A;}
+  .v1dZ b{display:block; font-size:16px; color:#16233A; text-align:center; margin-bottom:7px;}
+  .v1dC{background:#FFF1E2; border:2px solid #F28C28; border-radius:9px; padding:6px 8px; font-size:14px; font-weight:700; color:#16233A; text-align:center;
+    opacity:0; animation:v1dIn .4s var(--d) forwards;}
+  .v1dC.k{background:#fff; border-color:#1F3A5F;}
+  .v1dQs{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:10px 12.5% 0;}
+  .v1dQ{text-align:center; font-family:var(--mono); font-size:14px; font-weight:700; color:#16233A; background:#EAF0F7; border-radius:14px; padding:5px 0;
+    animation:v1gHi 1.3s var(--d1);}
+  @keyframes v1dIn{from{opacity:0; transform:translateY(-6px)} to{opacity:1; transform:none}}
+  @keyframes v1dOut{from{opacity:1} to{opacity:0; visibility:hidden}}
+  @media print{.v1dP,.v1dC,.v1dnew,.v1dx{opacity:1; animation:none} .v1dP.o,.v1dC.o,.v1dold.o{display:none} .v1dQ{animation:none}}
   /* 1-5 · Git 작업 흐름 (v1g) */
   .v1gtop{display:grid; grid-template-columns:3fr 1fr; gap:10px; margin-bottom:8px;}
   .v1gtop span{font-size:14px; font-weight:800; text-align:center; padding:5px 0; border-radius:8px;}
@@ -1133,6 +1167,14 @@ dfb369b 첫 화면 완성</code></pre></div></div></div></div></div>
   <h2 class="s-title sm">Git 작업 흐름</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v1g"><div class="v1gtop"><span class="me">내 컴퓨터</span><span class="net">인터넷</span></div><div class="v1grow"><div class="v1gz "><div class="v1gzh"><b>작업 폴더</b><small>working directory · 파일 수정</small></div><div class="v1gzb"><div class="v1gc  o" style="--d:1.0s; --o:2.0s">index.html · 수정</div><div class="v1gc  o" style="--d:6.0s; --o:6.8s">style.css · 수정</div><div class="v1gc pl" style="--d:11.6s">index.html · 문구 바뀜</div></div></div><div class="v1gp" style="--d1:1.8s; --d2:6.6s"><tt>git add</tt><i>→</i></div><div class="v1gz "><div class="v1gzh"><b>스테이징 영역</b><small>staging area · 커밋할 파일</small></div><div class="v1gzb"><div class="v1gc  o" style="--d:2.2s; --o:3.4s">index.html</div><div class="v1gc  o" style="--d:7.0s; --o:7.8s">style.css</div></div></div><div class="v1gp" style="--d1:3.2s; --d2:7.6s"><tt>git commit</tt><i>→</i></div><div class="v1gz "><div class="v1gzh"><b>로컬 저장소</b><small>repository · 커밋 기록</small></div><div class="v1gzb"><div class="v1gk " style="--d:0.2s"><tt>dfb369b</tt><b>첫 화면 완성</b></div><div class="v1gk " style="--d:3.6s"><tt>8fcbe80</tt><b>버튼 추가</b></div><div class="v1gk " style="--d:8.0s"><tt>0b491e3</tt><b>색상 수정</b></div><div class="v1gk pl" style="--d:11.2s"><b>문구 수정 · 받아 옴</b></div></div></div><div class="v1gp" style="--d1:4.6s; --d2:8.6s"><tt>git push</tt><i>→</i></div><div class="v1gz rm"><div class="v1gzh"><b>GitHub</b><small>remote · 원격 저장소</small></div><div class="v1gzb"><div class="v1gk " style="--d:0.2s"><tt>dfb369b</tt><b>첫 화면 완성</b></div><div class="v1gk " style="--d:5.0s"><tt>8fcbe80</tt><b>버튼 추가</b></div><div class="v1gk " style="--d:9.0s"><tt>0b491e3</tt><b>색상 수정</b></div><div class="v1gk pl" style="--d:10.0s"><b>문구 수정 · 다른 컴퓨터</b></div></div></div></div><div class="v1gpull" style="--d1:10.8s; --d2:10.8s"><i>←</i><tt>git pull</tt><span>원격의 새 커밋을 받아 내 폴더에 합침</span></div></div><div class="src">출처 · <a href="https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F" target="_blank" rel="noopener">Pro Git · What is Git?</a> · <a href="https://docs.github.com/en/get-started/using-git/about-git" target="_blank" rel="noopener">GitHub Docs · About Git</a></div></div></div>
+</section>
+
+<section class="slide lt" data-title="코드 변경과 diff">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-5</span></div>
+  <h2 class="s-title sm">코드 변경과 diff</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1dW"><div class="v1dE"><div class="v1dEh">style.css<span class="v1dx o" style="--d:1.2s; --o:7.2s">● 수정됨</span></div><div class="v1dEl"><i>1</i><tt>body { margin: 0; }</tt></div><div class="v1dEl"><i>2</i><tt class="v1dold o" style="--d:0.1s; --o:1.2s">.btn { background: #1F3A5F; }</tt><tt class="v1dnew" style="--d:1.3s">.btn { background: #F28C28; }</tt></div><div class="v1dEl"><i>3</i><tt>.btn:hover { opacity: .9; }</tt></div></div><div class="v1dPs"><div class="v1dP o" style="--d:2.2s; --o:4.6s"><div class="v1dPh"><code>git diff</code><span>작업 폴더 ↔ 스테이징</span></div><div class="v1dL"><b>-</b><code>.btn { background: #1F3A5F; }</code></div><div class="v1dL p"><b>+</b><code>.btn { background: #F28C28; }</code></div></div><div class="v1dP o" style="--d:4.8s; --o:7.2s"><div class="v1dPh"><code>git diff --staged</code><span>스테이징 ↔ 마지막 커밋</span></div><div class="v1dL"><b>-</b><code>.btn { background: #1F3A5F; }</code></div><div class="v1dL p"><b>+</b><code>.btn { background: #F28C28; }</code></div></div><div class="v1dP o" style="--d:7.4s; --o:9.6s"><div class="v1dPh"><code>git diff --staged</code><span>스테이징 ↔ 마지막 커밋</span></div><div class="v1d0">변경 없음 · 커밋에 기록됨</div></div><div class="v1dP" style="--d:9.8s"><div class="v1dPh"><code>GitHub · 커밋 0b491e3</code><span>색상 수정 · +1 −1</span></div><div class="v1dL"><b>-</b><code>.btn { background: #1F3A5F; }</code></div><div class="v1dL p"><b>+</b><code>.btn { background: #F28C28; }</code></div></div></div></div><div class="v1dZs"><div class="v1dZ"><b>작업 폴더</b><div class="v1dC o" style="--d:1.2s; --o:4.6s">style.css · +1 −1</div></div><div class="v1dZ"><b>스테이징</b><div class="v1dC o" style="--d:4.8s; --o:7.2s">style.css · +1 −1</div></div><div class="v1dZ"><b>로컬 저장소</b><div class="v1dC k" style="--d:7.4s">0b491e3 색상 수정</div></div><div class="v1dZ"><b>GitHub</b><div class="v1dC k" style="--d:9.8s">0b491e3 색상 수정</div></div></div><div class="v1dQs"><span class="v1dQ" style="--d1:4.6s">git add</span><span class="v1dQ" style="--d1:7.2s">git commit</span><span class="v1dQ" style="--d1:9.6s">git push</span></div></div></div>
 </section>
 
 <section class="slide lt" data-title="커밋하는 시점">

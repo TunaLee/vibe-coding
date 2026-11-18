@@ -74,7 +74,71 @@ def gitflow():
             + '</div><div class="v1gpull" style="--d1:10.8s; --d2:10.8s"><i>←</i><tt>git pull</tt><span>원격의 새 커밋을 받아 내 폴더에 합침</span></div></div>')
 
 
+def diffflow():
+    """style.css 한 줄 수정 → git diff(빨강 · 초록) → add 뒤 --staged → commit 뒤 변경 없음 → push 뒤 GitHub 에 같은 diff.
+    아래 띠의 「변경 1건」이 작업 폴더 → 스테이징 → 로컬 저장소 → GitHub 으로 옮겨 간다. 커밋 0b491e3 은 LOG 의 실제 기록."""
+    h, m, _ = LOG[2]
+
+    def st(d, o=None):
+        return f'style="--d:{d}s{f"; --o:{o}s" if o else ""}"'
+
+    old, new = ".btn { background: #1F3A5F; }", ".btn { background: #F28C28; }"
+    editor = (f'<div class="v1dE"><div class="v1dEh">style.css<span class="v1dx o" {st(1.2, 7.2)}>● 수정됨</span></div>'
+              f'<div class="v1dEl"><i>1</i><tt>body {{ margin: 0; }}</tt></div>'
+              f'<div class="v1dEl"><i>2</i><tt class="v1dold o" {st(.1, 1.2)}>{old}</tt><tt class="v1dnew" {st(1.3)}>{new}</tt></div>'
+              f'<div class="v1dEl"><i>3</i><tt>.btn:hover {{ opacity: .9; }}</tt></div></div>')
+    dl = (f'<div class="v1dL"><b>-</b><code>{old}</code></div><div class="v1dL p"><b>+</b><code>{new}</code></div>')
+    panes = [  # (명령, 비교 대상, 내용, 나타남, 사라짐)
+        ("git diff", "작업 폴더 ↔ 스테이징", dl, 2.2, 4.6),
+        ("git diff --staged", "스테이징 ↔ 마지막 커밋", dl, 4.8, 7.2),
+        ("git diff --staged", "스테이징 ↔ 마지막 커밋", '<div class="v1d0">변경 없음 · 커밋에 기록됨</div>', 7.4, 9.6),
+        (f"GitHub · 커밋 {h}", f"{m} · +1 −1", dl, 9.8, None)]
+    pv = "".join(f'<div class="v1dP{" o" if o else ""}" {st(d, o)}><div class="v1dPh"><code>{c}</code><span>{t}</span></div>{b}</div>'
+                 for c, t, b, d, o in panes)
+    zones = [("작업 폴더", 1.2, 4.6, "style.css · +1 −1"), ("스테이징", 4.8, 7.2, "style.css · +1 −1"),
+             ("로컬 저장소", 7.4, None, f"{h} {m}"), ("GitHub", 9.8, None, f"{h} {m}")]
+    zs = "".join(f'<div class="v1dZ"><b>{n}</b><div class="v1dC{" o" if o else ""}{" k" if i > 1 else ""}" {st(d, o)}>{c}</div></div>'
+                 for i, (n, d, o, c) in enumerate(zones))
+    pills = "".join(f'<span class="v1dQ" style="--d1:{d}s">{c}</span>' for c, d in (("git add", 4.6), ("git commit", 7.2), ("git push", 9.6)))
+    return (f'<div class="v1dW">{editor}<div class="v1dPs">{pv}</div></div>'
+            f'<div class="v1dZs">{zs}</div><div class="v1dQs">{pills}</div>')
+
+
 CSS = """
+  /* 1-5 · diff 가 구역을 지나는 모습 (v1d) */
+  .v1dW{display:grid; grid-template-columns:1fr 1.15fr; gap:22px; align-items:stretch;}
+  .v1dE{border-radius:12px; background:#1E2633; padding:0 0 10px; overflow:hidden;}
+  .v1dEh{display:flex; justify-content:space-between; padding:9px 14px; background:#2A3445; color:#C9D3E0; font-size:14px; font-weight:700;}
+  .v1dx{color:#F7C99A; opacity:0; animation:v1dIn .4s var(--d) forwards;}
+  .v1dEl{display:grid; grid-template-columns:28px 1fr; align-items:center; padding:5px 14px; min-height:30px;}
+  .v1dEl i{font-style:normal; color:#6B7785; font-size:13px; font-family:var(--mono);}
+  .v1dEl tt{grid-column:2; grid-row:1; font-family:var(--mono); font-size:15.5px; color:#E6EDF3; background:none; padding:0;}
+  .v1dnew{background:rgba(242,140,40,.18)!important; border-radius:4px; opacity:0; animation:v1dIn .4s var(--d) forwards;}
+  .v1dPs{display:grid;}
+  .v1dP{grid-area:1/1; border:1.5px solid #D9DDE3; border-radius:12px; background:#fff; overflow:hidden; opacity:0; animation:v1dIn .4s var(--d) forwards;}
+  .v1dP.o,.v1dC.o,.v1dx.o{animation:v1dIn .4s var(--d) forwards, v1dOut .3s var(--o) forwards;}
+  .v1dold.o{opacity:1; animation:v1dOut .3s var(--o) forwards;}
+  .v1dPh{display:flex; gap:12px; align-items:baseline; padding:9px 14px; background:#F4F6F9; border-bottom:1px solid #E3E6EA;}
+  .v1dPh code{font-family:var(--mono); font-size:15px; font-weight:800; color:#16233A; background:none; padding:0;}
+  .v1dPh span{font-size:13.5px; color:#6B7785;}
+  .v1dL{display:grid; grid-template-columns:22px 1fr; padding:7px 14px; background:#FDECEA;}
+  .v1dL.p{background:#E8F5E9;}
+  .v1dL b{color:#C62828; font-family:var(--mono);} .v1dL.p b{color:#2E7D32;}
+  .v1dL code{font-family:var(--mono); font-size:15px; color:#16233A; background:none; padding:0;}
+  .v1d0{padding:22px 14px; font-size:17px; font-weight:700; color:#2E7D32;}
+  .v1dZs{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:18px;}
+  .v1dZ{border:2px solid #C9D6E6; border-radius:12px; background:#F7F8FA; padding:9px 10px; min-height:84px;}
+  .v1dZ:last-child{border-color:#16233A;}
+  .v1dZ b{display:block; font-size:16px; color:#16233A; text-align:center; margin-bottom:7px;}
+  .v1dC{background:#FFF1E2; border:2px solid #F28C28; border-radius:9px; padding:6px 8px; font-size:14px; font-weight:700; color:#16233A; text-align:center;
+    opacity:0; animation:v1dIn .4s var(--d) forwards;}
+  .v1dC.k{background:#fff; border-color:#1F3A5F;}
+  .v1dQs{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:10px 12.5% 0;}
+  .v1dQ{text-align:center; font-family:var(--mono); font-size:14px; font-weight:700; color:#16233A; background:#EAF0F7; border-radius:14px; padding:5px 0;
+    animation:v1gHi 1.3s var(--d1);}
+  @keyframes v1dIn{from{opacity:0; transform:translateY(-6px)} to{opacity:1; transform:none}}
+  @keyframes v1dOut{from{opacity:1} to{opacity:0; visibility:hidden}}
+  @media print{.v1dP,.v1dC,.v1dnew,.v1dx{opacity:1; animation:none} .v1dP.o,.v1dC.o,.v1dold.o{display:none} .v1dQ{animation:none}}
   /* 1-5 · Git 작업 흐름 (v1g) */
   .v1gtop{display:grid; grid-template-columns:3fr 1fr; gap:10px; margin-bottom:8px;}
   .v1gtop span{font-size:14px; font-weight:800; text-align:center; padding:5px 0; border-radius:8px;}
@@ -176,6 +240,7 @@ def slides():
         light("Git 작업 흐름", gitflow()
               + src(("Pro Git · What is Git?", "https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F"),
                     ("GitHub Docs · About Git", "https://docs.github.com/en/get-started/using-git/about-git")), T),
+        light("코드 변경과 diff", diffflow(), T),
         light("커밋하는 시점", viz2.tiles([
             ("기능 하나가 됐을 때", "「로그인 버튼 동작」"), ("크게 바꾸기 전", "디자인을 갈아엎기 전"),
             ("확인이 끝났을 때", "브라우저로 보고 이상 없음")], 3)
