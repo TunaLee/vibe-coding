@@ -937,12 +937,24 @@
   @media print{.v1cmr{opacity:1; animation:none}}
 
   /* 1-7 · 비유 두 컷 */
-  .v1u7cut{display:grid; grid-template-columns:1fr 40px 1fr; gap:10px; align-items:center; margin:0 0 16px;}
-  .v1u7cut figure{margin:0; border:1.5px solid #D9DDE3; border-radius:14px; overflow:hidden; background:#F7EEDB;}
-  .v1u7cut img{display:block; width:100%; aspect-ratio:16/9; object-fit:cover;}
-  .v1u7cut figcaption{display:flex; gap:12px; align-items:baseline; padding:10px 14px; background:#fff;}
-  .v1u7cut figcaption b{font-size:19px; color:#16233A;} .v1u7cut figcaption span{font-size:15px; color:#E07A12; font-weight:700;}
-  .v1u7cut i{font-style:normal; text-align:center; font-size:28px; font-weight:800; color:#F28C28;}
+  /* 1-7 · 문서 파일과 공유 링크 (v1sh) */
+  .v1sh{display:grid; grid-template-columns:1fr 50px 1fr; gap:12px; align-items:stretch; margin:4px 0 16px;}
+  .v1shc{border:2px solid #C9D6E6; border-radius:16px; background:#fff; padding:18px 22px; display:flex; flex-direction:column; gap:12px;
+    opacity:0; animation:v1shIn .6s var(--d) forwards;}
+  .v1shc.on{border-color:#F28C28; background:#FFF8F0;}
+  .v1shh{font-size:22px; font-weight:800; color:#16233A;}
+  .v1shf{display:flex; flex-direction:column; gap:2px; border-left:6px solid #2B579A; background:#F4F6F9; border-radius:8px; padding:10px 14px;}
+  .v1shf b{font-size:19px; color:#16233A;} .v1shf small{font-size:14px; color:#6B7785;}
+  .v1shl{font-family:var(--mono); font-size:16px; font-weight:700; color:#1F3A5F; background:#EAF0F7; border-radius:20px; padding:9px 16px;}
+  .v1shw{font-size:17px; color:#3A4657; font-weight:600;}
+  .v1shps{display:flex; gap:10px;}
+  .v1shp{font-size:15px; font-weight:700; color:#fff; background:#1F3A5F; border-radius:16px; padding:6px 14px; opacity:0; animation:v1shIn .5s var(--d) forwards;}
+  .v1shm{margin-top:auto; font-size:17px; font-weight:800; color:#E07A12;}
+  .v1sha{font-style:normal; align-self:center; text-align:center; font-size:34px; font-weight:800; color:#F28C28; opacity:0; animation:v1shIn .5s var(--d) forwards;}
+  .v1shu{display:flex; gap:16px; align-items:baseline; border:2px dashed #F28C28; border-radius:14px; padding:14px 22px; opacity:0; animation:v1shIn .6s var(--d) forwards;}
+  .v1shu b{font-size:20px; color:#16233A;} .v1shu span{font-size:18px; color:#3A4657;} .v1shu em{margin-left:auto; font-style:normal; font-size:17px; font-weight:800; color:#E07A12;}
+  @keyframes v1shIn{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
+  @media print{.v1shc,.v1shp,.v1sha,.v1shu{opacity:1; animation:none}}
 </style>
 </head>
 <body>
@@ -1019,12 +1031,12 @@
   <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">배포 전</div><div class="v2pc" style="--d:0.00s"><b>주소</b><span>localhost — 내 컴퓨터 안</span></div><div class="v2pc" style="--d:0.08s"><b>열 수 있는 사람</b><span>나 혼자</span></div><div class="v2pc" style="--d:0.16s"><b>컴퓨터를 끄면</b><span>앱도 꺼짐</span></div></div><div class="v2p on"><div class="v2ph">배포 후</div><div class="v2pc" style="--d:0.00s"><b>주소</b><span>room-booking.vercel.app 형식</span></div><div class="v2pc" style="--d:0.08s"><b>열 수 있는 사람</b><span>주소를 받은 누구나</span></div><div class="v2pc" style="--d:0.16s"><b>컴퓨터를 끄면</b><span>그대로 열림</span></div></div></div><div class="dbnote"><span>배포</span> 내 컴퓨터에서 돌던 앱을 인터넷 주소로 공개하는 일</div></div></div>
 </section>
 
-<section class="slide lt" data-title="가게 문 열기">
+<section class="slide lt" data-title="문서 파일과 공유 링크">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-7</span></div>
-  <h2 class="s-title sm">가게 문 열기</h2>
+  <h2 class="s-title sm">문서 파일과 공유 링크</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1u7cut"><figure><img src="img/v1_u7_kitchen.webp" alt="주방 안에서 혼자 맛보기"/><figcaption><b>주방 안 시식</b><span>localhost · 나만 확인</span></figcaption></figure><i>→</i><figure><img src="img/v1_u7_open.webp" alt="가게 문 열기"/><figcaption><b>가게 문 열기</b><span>배포 · 주소로 누구나</span></figcaption></figure></div><div class="v2tiles c2"><div class="v2tile" style="--d:0.00s"><b>가게 주소</b><span>배포 주소 · *.vercel.app</span></div><div class="v2tile" style="--d:0.08s"><b>메뉴 교체 · 재진열</b><span>재배포 · push 하면 자동</span></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v1sh"><div class="v1shc" style="--d:.3s"><div class="v1shh">내 컴퓨터의 문서 파일</div><div class="v1shf"><b>회의실예약.docx</b><small>내 컴퓨터 · 바탕화면</small></div><div class="v1shw">열 수 있는 사람 · 나</div><div class="v1shm">= localhost</div></div><i class="v1sha" style="--d:1.4s">→</i><div class="v1shc on" style="--d:1.8s"><div class="v1shh">공유 링크</div><div class="v1shl">https://… /회의실예약</div><div class="v1shps"><span class="v1shp" style="--d:2.6s">팀장</span><span class="v1shp" style="--d:3.1s">팀원</span><span class="v1shp" style="--d:3.6s">휴대폰</span></div><div class="v1shm">= 배포 주소 · *.vercel.app</div></div></div><div class="v1shu" style="--d:4.4s"><b>문서를 고치면</b><span>링크로 보는 사람에게 바로 반영</span><em>= 재배포 · push 하면 자동</em></div></div></div>
 </section>
 
 <section class="slide lt" data-title="localhost의 범위">

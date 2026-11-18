@@ -1,6 +1,6 @@
 """1-7 배포.
 
-배포란 → 비유(주방 안 시식 → 가게 문 열기 · 생성 그림) → localhost 의 범위 → 흐름(GitHub → Vercel → 주소)
+배포란 → 비유(내 컴퓨터의 문서 파일 → 공유 링크 · 애니메이션) → localhost 의 범위 → 흐름(GitHub → Vercel → 주소)
 → GitHub에 올리기(gh · 말로) → Vercel 가져오기 · 주소 → push 하면 자동 재배포 · Production / Preview → 공개 전 확인 → 실습.
 사실 출처: cli.github.com (gh 설치 · gh auth login · gh repo create) · vercel.com/docs/git · vercel.com/docs/deployments/generated-urls
 · vercel.com/docs/plans/hobby · docs.github.com (plans)
@@ -22,12 +22,7 @@ def slides():
             "배포 전", [("주소", "localhost — 내 컴퓨터 안"), ("열 수 있는 사람", "나 혼자"), ("컴퓨터를 끄면", "앱도 꺼짐")],
             "배포 후", [("주소", "room-booking.vercel.app 형식"), ("열 수 있는 사람", "주소를 받은 누구나"), ("컴퓨터를 끄면", "그대로 열림")])
               + note("배포", "내 컴퓨터에서 돌던 앱을 인터넷 주소로 공개하는 일"), T),
-        light("가게 문 열기", '<div class="v1u7cut">'
-              '<figure><img src="img/v1_u7_kitchen.webp" alt="주방 안에서 혼자 맛보기"/><figcaption><b>주방 안 시식</b><span>localhost · 나만 확인</span></figcaption></figure>'
-              '<i>→</i>'
-              '<figure><img src="img/v1_u7_open.webp" alt="가게 문 열기"/><figcaption><b>가게 문 열기</b><span>배포 · 주소로 누구나</span></figcaption></figure></div>'
-              + viz2.tiles([("가게 주소", "배포 주소 · *.vercel.app"), ("메뉴 교체 · 재진열", "재배포 · push 하면 자동")], 2)
-              + src(("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")), T),
+        light("문서 파일과 공유 링크", _share(), T),
         light("localhost의 범위", viz2.tiles([
             ("내 브라우저", "localhost 주소로 열림"), ("팀원 노트북", "같은 주소를 넣어도 안 열림"), ("내 휴대폰", "안 열림 · 다른 기기")], 3)
               + code("1-6 에서 띄운 주소 · 예", esc("http://localhost:3000"))
@@ -122,12 +117,38 @@ def slides():
     ]
 
 
+def _share():
+    """비유 — 내 컴퓨터의 문서 파일(나만 열림) → 공유 링크(링크를 받은 누구나) → 문서를 고치면 링크로 보는 사람에게 바로 반영."""
+    ppl = "".join(f'<span class="v1shp" style="--d:{2.6 + i * .5:.1f}s">{n}</span>' for i, n in enumerate(("팀장", "팀원", "휴대폰")))
+    return ('<div class="v1sh">'
+            '<div class="v1shc" style="--d:.3s"><div class="v1shh">내 컴퓨터의 문서 파일</div>'
+            '<div class="v1shf"><b>회의실예약.docx</b><small>내 컴퓨터 · 바탕화면</small></div>'
+            '<div class="v1shw">열 수 있는 사람 · 나</div><div class="v1shm">= localhost</div></div>'
+            '<i class="v1sha" style="--d:1.4s">→</i>'
+            '<div class="v1shc on" style="--d:1.8s"><div class="v1shh">공유 링크</div>'
+            '<div class="v1shl">https://… /회의실예약</div>'
+            f'<div class="v1shps">{ppl}</div><div class="v1shm">= 배포 주소 · *.vercel.app</div></div></div>'
+            '<div class="v1shu" style="--d:4.4s"><b>문서를 고치면</b><span>링크로 보는 사람에게 바로 반영</span><em>= 재배포 · push 하면 자동</em></div>')
+
+
 CSS = """
   /* 1-7 · 비유 두 컷 */
-  .v1u7cut{display:grid; grid-template-columns:1fr 40px 1fr; gap:10px; align-items:center; margin:0 0 16px;}
-  .v1u7cut figure{margin:0; border:1.5px solid #D9DDE3; border-radius:14px; overflow:hidden; background:#F7EEDB;}
-  .v1u7cut img{display:block; width:100%; aspect-ratio:16/9; object-fit:cover;}
-  .v1u7cut figcaption{display:flex; gap:12px; align-items:baseline; padding:10px 14px; background:#fff;}
-  .v1u7cut figcaption b{font-size:19px; color:#16233A;} .v1u7cut figcaption span{font-size:15px; color:#E07A12; font-weight:700;}
-  .v1u7cut i{font-style:normal; text-align:center; font-size:28px; font-weight:800; color:#F28C28;}
+  /* 1-7 · 문서 파일과 공유 링크 (v1sh) */
+  .v1sh{display:grid; grid-template-columns:1fr 50px 1fr; gap:12px; align-items:stretch; margin:4px 0 16px;}
+  .v1shc{border:2px solid #C9D6E6; border-radius:16px; background:#fff; padding:18px 22px; display:flex; flex-direction:column; gap:12px;
+    opacity:0; animation:v1shIn .6s var(--d) forwards;}
+  .v1shc.on{border-color:#F28C28; background:#FFF8F0;}
+  .v1shh{font-size:22px; font-weight:800; color:#16233A;}
+  .v1shf{display:flex; flex-direction:column; gap:2px; border-left:6px solid #2B579A; background:#F4F6F9; border-radius:8px; padding:10px 14px;}
+  .v1shf b{font-size:19px; color:#16233A;} .v1shf small{font-size:14px; color:#6B7785;}
+  .v1shl{font-family:var(--mono); font-size:16px; font-weight:700; color:#1F3A5F; background:#EAF0F7; border-radius:20px; padding:9px 16px;}
+  .v1shw{font-size:17px; color:#3A4657; font-weight:600;}
+  .v1shps{display:flex; gap:10px;}
+  .v1shp{font-size:15px; font-weight:700; color:#fff; background:#1F3A5F; border-radius:16px; padding:6px 14px; opacity:0; animation:v1shIn .5s var(--d) forwards;}
+  .v1shm{margin-top:auto; font-size:17px; font-weight:800; color:#E07A12;}
+  .v1sha{font-style:normal; align-self:center; text-align:center; font-size:34px; font-weight:800; color:#F28C28; opacity:0; animation:v1shIn .5s var(--d) forwards;}
+  .v1shu{display:flex; gap:16px; align-items:baseline; border:2px dashed #F28C28; border-radius:14px; padding:14px 22px; opacity:0; animation:v1shIn .6s var(--d) forwards;}
+  .v1shu b{font-size:20px; color:#16233A;} .v1shu span{font-size:18px; color:#3A4657;} .v1shu em{margin-left:auto; font-style:normal; font-size:17px; font-weight:800; color:#E07A12;}
+  @keyframes v1shIn{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
+  @media print{.v1shc,.v1shp,.v1sha,.v1shu{opacity:1; animation:none}}
 """
