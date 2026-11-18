@@ -47,7 +47,7 @@ def brief(no, ch, steps, slots, keys, checks, stuck):
     ck = "".join(f"<li>{x}</li>" for x in checks)
     head = (f'<div class="kithead"><span>VS Code로 열 폴더</span><code>{FOLDER}</code>'
             f'<em>요청 문장은 내가 쓴다 · 규칙도 내가 정한다</em></div>')
-    body = (f'<div class="bf"><div class="bf-l"><div class="bh">요청에 들어갈 것</div>{sl}</div>'
+    body = (f'<div class="bf"><div class="bf-l"><div class="bh">요청 항목</div>{sl}</div>'
             f'<div class="bf-r"><div class="bh">순서</div><ol>{st}</ol><div class="bh">키워드</div><div class="bk">{kw}</div></div></div>'
             f'<div class="qk2"><b>확인</b><ul>{ck}</ul></div>' + note("막히면", stuck))
     return light(f"실습 {no} 진행", head + body, ch)
