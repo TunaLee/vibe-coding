@@ -90,7 +90,7 @@ def slides():
         # ── 업무 도구별 ──
         light("노션 MCP", logo("notion_logo.webp", "Notion", "https://commons.wikimedia.org/wiki/File:Notion-logo.svg") + viz2.pair(
             "읽기 도구", [("notion-search", "제목 · 주제로 찾기"), ("notion-fetch", "페이지 열기"), ("notion-query-meeting-notes", "회의록 찾기")],
-            "쓰기 도구", [("notion-create-pages", "새 페이지"), ("notion-update-page", "내용 · 속성 고치기"), ("notion-delete-pages", "휴지통으로")], hl="l")
+            "쓰기 도구", [("notion-create-pages", "새 페이지"), ("notion-update-page", "내용 · 속성 고치기"), ("notion-delete-pages", "휴지통 이동")], hl="l")
               + note("주소 · 로그인", "<code>https://mcp.notion.com/mcp</code> · OAuth 로그인"), t),
         light("슬랙 MCP", logo("slack_logo.webp", "Slack", "https://commons.wikimedia.org/wiki/File:Slack_icon_2019.svg") + viz2.pair(
             "읽기", [("검색", "메시지 · 파일 · 채널 · 사용자"), ("읽기", "채널 · 스레드 · 캔버스")],

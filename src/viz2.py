@@ -269,8 +269,8 @@ def calc_compare():
     def col(cls, head, rows, d0):
         r = "".join(f'<div class="tv2r" style="--d:{d0 + i * .45:.2f}s"><b>{a}</b><span>{b}</span></div>' for i, (a, b) in enumerate(rows))
         return f'<div class="tv2c {cls}"><div class="tv2h">{head}</div>{r}</div>'
-    a = col("no", "도구 없이", [("질문", "4,817 × 293 = ?"), ("LLM", "다음 숫자를 확률로 이어 씀"), ("답", "「1,411,281입니다」 <em class=x>✕</em>")], 0)
-    b = col("yes", "계산 도구가 있으면", [("LLM", "calc 도구를 (4817 * 293)로 부르기로 결정"), ("도구", "실제로 계산 → 1,411,381"), ("답", "「1,411,381입니다」 <em class=o>✓</em>")], 1.6)
+    a = col("no", "도구 없이", [("질문", "4,817 × 293 = ?"), ("LLM", "다음 숫자를 확률로 이어 씀"), ("답", "「1,411,281」 <em class=x>✕</em>")], 0)
+    b = col("yes", "계산 도구가 있으면", [("LLM", "calc 도구를 (4817 * 293)로 부르기로 결정"), ("도구", "실제로 계산 → 1,411,381"), ("답", "「1,411,381」 <em class=o>✓</em>")], 1.6)
     return f'<div class="tv2">{a}<div class="tv2a">→</div>{b}</div>'
 
 
