@@ -42,15 +42,17 @@ def files():
 
 def gitflow():
     """작업 폴더 → (add) 스테이징 → (commit) 로컬 저장소 → (push) GitHub · (pull) 되돌아옴. 구조는 Pro Git 「세 가지 상태」 + 원격."""
+    K = 2.2  # 장면 사이 간격 배율 (전체 약 27초)
+
     def chip(t, d, o=None, cls=""):
-        st = f"--d:{d}s" + (f"; --o:{o}s" if o else "")
+        st = f"--d:{d * K:.2f}s" + (f"; --o:{o * K:.2f}s" if o else "")
         return f'<div class="v1gc {cls}{" o" if o else ""}" style="{st}">{t}</div>'
 
     def cm(h, m, d, cls=""):
-        return f'<div class="v1gk {cls}" style="--d:{d}s">{f"<tt>{h}</tt>" if h else ""}<b>{m}</b></div>'
+        return f'<div class="v1gk {cls}" style="--d:{d * K:.2f}s">{f"<tt>{h}</tt>" if h else ""}<b>{m}</b></div>'
 
     def pill(cmd, d1, d2=None):
-        an = f"--d1:{d1}s; --d2:{d2 if d2 else d1}s"
+        an = f"--d1:{d1 * K:.2f}s; --d2:{(d2 if d2 else d1) * K:.2f}s"
         return f'<div class="v1gp" style="{an}"><tt>{cmd}</tt><i>→</i></div>'
 
     wd = (chip("index.html · 수정", 1.0, 2.0) + chip("style.css · 수정", 6.0, 6.8)
@@ -71,7 +73,7 @@ def gitflow():
             + col("로컬 저장소", "repository · 커밋 기록", loc)
             + pill("git push", 4.6, 8.6)
             + col("GitHub", "remote · 원격 저장소", rem, "rm")
-            + '</div><div class="v1gpull" style="--d1:10.8s; --d2:10.8s"><i>←</i><tt>git pull</tt><span>원격의 새 커밋을 받아 내 폴더에 합침</span></div></div>')
+            + f'</div><div class="v1gpull" style="--d1:{10.8 * K:.2f}s; --d2:{10.8 * K:.2f}s"><i>←</i><tt>git pull</tt><span>원격의 새 커밋을 받아 내 폴더에 합침</span></div></div>')
 
 
 def diffflow():
@@ -153,15 +155,15 @@ CSS = """
   .v1gzh b{display:block; font-size:19px; color:#16233A;} .v1gzh small{font-size:12px; color:#6B7785;}
   .v1gzb{flex:1; display:flex; flex-direction:column-reverse; justify-content:flex-end; gap:7px; padding:10px;}
   .v1gc{background:#FFF1E2; border:2px solid #F28C28; border-radius:9px; padding:8px 9px; font-size:15px; font-weight:700; color:#16233A; text-align:center;
-    opacity:0; animation:v1gIn .35s var(--d) forwards;}
-  .v1gc.o{animation:v1gIn .35s var(--d) forwards, v1gOut .35s var(--o) forwards;}
+    opacity:0; animation:v1gIn .6s var(--d) forwards;}
+  .v1gc.o{animation:v1gIn .6s var(--d) forwards, v1gOut .6s var(--o) forwards;}
   .v1gk{background:#fff; border:2px solid #1F3A5F; border-radius:9px; padding:7px 9px; opacity:0; animation:v1gIn .4s var(--d) forwards;}
   .v1gk tt{display:block; font-family:var(--mono); font-size:12.5px; color:#6B7785; background:none; padding:0;}
   .v1gk b{font-size:15px; color:#16233A;}
   .v1gk.pl,.v1gc.pl{border-color:#2E7D5B; background:#EAF6EF;}
   .v1gp{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px;}
   .v1gp tt{font-family:var(--mono); font-size:13.5px; font-weight:700; color:#16233A; background:#EAF0F7; border-radius:14px; padding:5px 8px; white-space:nowrap;
-    animation:v1gHi 1.3s var(--d1), v1gHi 1.3s var(--d2);}
+    animation:v1gHi 2.4s var(--d1), v1gHi 2.4s var(--d2);}
   .v1gp i{font-style:normal; font-size:26px; font-weight:800; color:#F28C28;}
   .v1gpull{margin-top:12px; display:flex; align-items:center; gap:12px; justify-content:center; border:2px dashed #2E7D5B; border-radius:12px; padding:9px;
     opacity:0; animation:v1gIn .4s var(--d1) forwards;}
