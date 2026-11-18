@@ -936,40 +936,35 @@
   @keyframes v1cutIn{from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none}}
   @media print{.v1cmr{opacity:1; animation:none}}
 
-  /* 1-5 · diff 가 구역을 지나는 모습 (v1d) */
-  .v1dW{display:grid; grid-template-columns:1fr 1.15fr; gap:22px; align-items:stretch;}
-  .v1dE{border-radius:12px; background:#1E2633; padding:0 0 10px; overflow:hidden;}
-  .v1dEh{display:flex; justify-content:space-between; padding:9px 14px; background:#2A3445; color:#C9D3E0; font-size:14px; font-weight:700;}
-  .v1dx{color:#F7C99A; opacity:0; animation:v1dIn .4s var(--d) forwards;}
-  .v1dEl{display:grid; grid-template-columns:28px 1fr; align-items:center; padding:5px 14px; min-height:30px;}
-  .v1dEl i{font-style:normal; color:#6B7785; font-size:13px; font-family:var(--mono);}
-  .v1dEl tt{grid-column:2; grid-row:1; font-family:var(--mono); font-size:15.5px; color:#E6EDF3; background:none; padding:0;}
-  .v1dnew{background:rgba(242,140,40,.18)!important; border-radius:4px; opacity:0; animation:v1dIn .4s var(--d) forwards;}
-  .v1dPs{display:grid;}
-  .v1dP{grid-area:1/1; border:1.5px solid #D9DDE3; border-radius:12px; background:#fff; overflow:hidden; opacity:0; animation:v1dIn .4s var(--d) forwards;}
-  .v1dP.o,.v1dC.o,.v1dx.o{animation:v1dIn .4s var(--d) forwards, v1dOut .3s var(--o) forwards;}
-  .v1dold.o{opacity:1; animation:v1dOut .3s var(--o) forwards;}
-  .v1dPh{display:flex; gap:12px; align-items:baseline; padding:9px 14px; background:#F4F6F9; border-bottom:1px solid #E3E6EA;}
-  .v1dPh code{font-family:var(--mono); font-size:15px; font-weight:800; color:#16233A; background:none; padding:0;}
-  .v1dPh span{font-size:13.5px; color:#6B7785;}
-  .v1dL{display:grid; grid-template-columns:22px 1fr; padding:7px 14px; background:#FDECEA;}
-  .v1dL.p{background:#E8F5E9;}
-  .v1dL b{color:#C62828; font-family:var(--mono);} .v1dL.p b{color:#2E7D32;}
-  .v1dL code{font-family:var(--mono); font-size:15px; color:#16233A; background:none; padding:0;}
-  .v1d0{padding:22px 14px; font-size:17px; font-weight:700; color:#2E7D32;}
-  .v1dZs{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:18px;}
-  .v1dZ{border:2px solid #C9D6E6; border-radius:12px; background:#F7F8FA; padding:9px 10px; min-height:84px;}
-  .v1dZ:last-child{border-color:#16233A;}
-  .v1dZ b{display:block; font-size:16px; color:#16233A; text-align:center; margin-bottom:7px;}
-  .v1dC{background:#FFF1E2; border:2px solid #F28C28; border-radius:9px; padding:6px 8px; font-size:14px; font-weight:700; color:#16233A; text-align:center;
-    opacity:0; animation:v1dIn .4s var(--d) forwards;}
-  .v1dC.k{background:#fff; border-color:#1F3A5F;}
-  .v1dQs{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:10px 12.5% 0;}
-  .v1dQ{text-align:center; font-family:var(--mono); font-size:14px; font-weight:700; color:#16233A; background:#EAF0F7; border-radius:14px; padding:5px 0;
-    animation:v1gHi 1.3s var(--d1);}
-  @keyframes v1dIn{from{opacity:0; transform:translateY(-6px)} to{opacity:1; transform:none}}
-  @keyframes v1dOut{from{opacity:1} to{opacity:0; visibility:hidden}}
-  @media print{.v1dP,.v1dC,.v1dnew,.v1dx{opacity:1; animation:none} .v1dP.o,.v1dC.o,.v1dold.o{display:none} .v1dQ{animation:none}}
+  /* 1-5 · diff — 네 구역의 파일 내용과 이웃 구역 사이 차이 (v2) */
+  .v2q0{display:flex; gap:10px; margin-bottom:12px;}
+  .v2q{font-family:var(--mono); font-size:14px; font-weight:700; color:#16233A; background:#EAF0F7; border-radius:14px; padding:5px 12px;
+    animation:v1gHi 1.6s var(--d1);}
+  .v2zs{display:grid; grid-template-columns:repeat(4,1fr); gap:10px;}
+  .v2z{border:2px solid #C9D6E6; border-radius:12px; background:#F7F8FA; overflow:hidden;} .v2z.gh{border-color:#16233A;}
+  .v2zh{padding:7px 10px; border-bottom:1.5px solid #D9DDE3; background:#fff;}
+  .v2zh b{font-size:17px; color:#16233A; margin-right:6px;} .v2zh small{font-size:12px; color:#6B7785;}
+  .v2zb{display:grid; padding:8px; min-height:118px;}
+  .v2s{grid-area:1/1; opacity:0; animation:v2In .3s var(--a) forwards, v2Out .25s var(--b) forwards;}
+  .v2l{display:grid; grid-template-columns:16px 1fr; align-items:center; padding:3px 4px; border-radius:5px;}
+  .v2l i{font-style:normal; font-size:11px; color:#9AA6B5; font-family:var(--mono);}
+  .v2l tt{font-family:var(--mono); font-size:13px; color:#16233A; white-space:nowrap;}
+  .v2l.c{background:#FFE7CC;}
+  .v2s em{display:inline-block; margin-top:6px; font-style:normal; font-size:12px; font-weight:800; color:#fff; background:#F28C28; border-radius:9px; padding:2px 9px;}
+  .v2dw{display:grid; grid-template-columns:repeat(8,1fr); column-gap:10px; margin-top:12px;}
+  .v2dp{border:1.5px solid #D9DDE3; border-radius:12px; background:#fff; overflow:hidden;}
+  .v2dp.a{grid-column:1 / span 3; margin-left:50%;} .v2dp.b{grid-column:4 / span 3; margin-left:50%;}
+  .v2dp{width:calc(100% + 0px);}
+  .v2dh{display:flex; gap:10px; align-items:baseline; padding:7px 12px; background:#F4F6F9; border-bottom:1px solid #E3E6EA;}
+  .v2dh tt{font-family:var(--mono); font-size:14px; font-weight:800; color:#16233A;} .v2dh span{font-size:12.5px; color:#6B7785;}
+  .v2db{display:grid; min-height:96px;}
+  .v2d{display:grid; grid-template-columns:18px 1fr; padding:4px 12px; background:#FDECEA;}
+  .v2d.p{background:#E8F5E9;} .v2d b{color:#C62828; font-family:var(--mono);} .v2d.p b{color:#2E7D32;}
+  .v2d tt{font-family:var(--mono); font-size:14px; color:#16233A;}
+  .v2d0{padding:14px 12px; font-size:15px; font-weight:700; color:#6B7785;}
+  @keyframes v2In{from{opacity:0; transform:translateY(-4px)} to{opacity:1; transform:none}}
+  @keyframes v2Out{to{opacity:0; visibility:hidden}}
+  @media print{.v2s{animation:none; opacity:0} .v2s[style*="--b:99s"]{opacity:1} .v2q{animation:none}}
   /* 1-5 · Git 작업 흐름 (v1g) */
   .v1gtop{display:grid; grid-template-columns:3fr 1fr; gap:10px; margin-bottom:8px;}
   .v1gtop span{font-size:14px; font-weight:800; text-align:center; padding:5px 0; border-radius:8px;}
@@ -1174,7 +1169,7 @@ dfb369b 첫 화면 완성</code></pre></div></div></div></div></div>
   <div class="eyebrow"><span class="tag">1-5</span></div>
   <h2 class="s-title sm">코드 변경과 diff</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1dW"><div class="v1dE"><div class="v1dEh">style.css<span class="v1dx o" style="--d:1.2s; --o:7.2s">● 수정됨</span></div><div class="v1dEl"><i>1</i><tt>body { margin: 0; }</tt></div><div class="v1dEl"><i>2</i><tt class="v1dold o" style="--d:0.1s; --o:1.2s">.btn { background: #1F3A5F; }</tt><tt class="v1dnew" style="--d:1.3s">.btn { background: #F28C28; }</tt></div><div class="v1dEl"><i>3</i><tt>.btn:hover { opacity: .9; }</tt></div></div><div class="v1dPs"><div class="v1dP o" style="--d:2.2s; --o:4.6s"><div class="v1dPh"><code>git diff</code><span>작업 폴더 ↔ 스테이징</span></div><div class="v1dL"><b>-</b><code>.btn { background: #1F3A5F; }</code></div><div class="v1dL p"><b>+</b><code>.btn { background: #F28C28; }</code></div></div><div class="v1dP o" style="--d:4.8s; --o:7.2s"><div class="v1dPh"><code>git diff --staged</code><span>스테이징 ↔ 마지막 커밋</span></div><div class="v1dL"><b>-</b><code>.btn { background: #1F3A5F; }</code></div><div class="v1dL p"><b>+</b><code>.btn { background: #F28C28; }</code></div></div><div class="v1dP o" style="--d:7.4s; --o:9.6s"><div class="v1dPh"><code>git diff --staged</code><span>스테이징 ↔ 마지막 커밋</span></div><div class="v1d0">변경 없음 · 커밋에 기록됨</div></div><div class="v1dP" style="--d:9.8s"><div class="v1dPh"><code>GitHub · 커밋 0b491e3</code><span>색상 수정 · +1 −1</span></div><div class="v1dL"><b>-</b><code>.btn { background: #1F3A5F; }</code></div><div class="v1dL p"><b>+</b><code>.btn { background: #F28C28; }</code></div></div></div></div><div class="v1dZs"><div class="v1dZ"><b>작업 폴더</b><div class="v1dC o" style="--d:1.2s; --o:4.6s">style.css · +1 −1</div></div><div class="v1dZ"><b>스테이징</b><div class="v1dC o" style="--d:4.8s; --o:7.2s">style.css · +1 −1</div></div><div class="v1dZ"><b>로컬 저장소</b><div class="v1dC k" style="--d:7.4s">0b491e3 색상 수정</div></div><div class="v1dZ"><b>GitHub</b><div class="v1dC k" style="--d:9.8s">0b491e3 색상 수정</div></div></div><div class="v1dQs"><span class="v1dQ" style="--d1:4.6s">git add</span><span class="v1dQ" style="--d1:7.2s">git commit</span><span class="v1dQ" style="--d1:9.6s">git push</span></div></div></div>
+  <div class="body"><div class="mid"><div class="v2q0"><span class="v2q" style="--d1:2s">편집 1 · 색 바꿈</span><span class="v2q" style="--d1:4s">편집 2 · 줄 추가</span><span class="v2q" style="--d1:7s">git add</span><span class="v2q" style="--d1:10s">git commit</span><span class="v2q" style="--d1:13s">git push</span></div><div class="v2zs"><div class="v2z"><div class="v2zh"><b>작업 폴더</b><small>내가 고치는 파일</small></div><div class="v2zb"><div class="v2s" style="--a:0s;--b:2s"><div class="v2l"><i>1</i><tt>body { margin: 0; }</tt></div><div class="v2l"><i>2</i><tt>.btn { color: navy; }</tt></div></div><div class="v2s" style="--a:2s;--b:4s"><div class="v2l"><i>1</i><tt>body { margin: 0; }</tt></div><div class="v2l c"><i>2</i><tt>.btn { color: orange; }</tt></div><em>수정됨 · 1줄</em></div><div class="v2s" style="--a:4s;--b:10s"><div class="v2l"><i>1</i><tt>body { margin: 0; }</tt></div><div class="v2l c"><i>2</i><tt>.btn { color: orange; }</tt></div><div class="v2l c"><i>3</i><tt>.btn { padding: 8px; }</tt></div><em>수정됨 · 2줄</em></div><div class="v2s" style="--a:10s;--b:99s"><div class="v2l"><i>1</i><tt>body { margin: 0; }</tt></div><div class="v2l"><i>2</i><tt>.btn { color: orange; }</tt></div><div class="v2l"><i>3</i><tt>.btn { padding: 8px; }</tt></div></div></div></div><div class="v2z"><div class="v2zh"><b>스테이징</b><small>git add 로 담은 것</small></div><div class="v2zb"><div class="v2s" style="--a:0s;--b:7s"><div class="v2l"><i>1</i><tt>body { margin: 0; }</tt></div><div class="v2l"><i>2</i><tt>.btn { color: navy; }</tt></div></div><div class="v2s" style="--a:7s;--b:10s"><div class="v2l"><i>1</i><tt>body { margin: 0; }</tt></div><div class="v2l c"><i>2</i><tt>.btn { color: orange; }</tt></div><div class="v2l c"><i>3</i><tt>.btn { padding: 8px; }</tt></div><em>커밋 대기</em></div><div class="v2s" style="--a:10s;--b:99s"><div class="v2l"><i>1</i><tt>body { margin: 0; }</tt></div><div class="v2l"><i>2</i><tt>.btn { color: orange; }</tt></div><div class="v2l"><i>3</i><tt>.btn { padding: 8px; }</tt></div></div></div></div><div class="v2z"><div class="v2zh"><b>로컬 저장소</b><small>마지막 커밋</small></div><div class="v2zb"><div class="v2s" style="--a:0s;--b:10s"><div class="v2l"><i>1</i><tt>body { margin: 0; }</tt></div><div class="v2l"><i>2</i><tt>.btn { color: navy; }</tt></div></div><div class="v2s" style="--a:10s;--b:99s"><div class="v2l"><i>1</i><tt>body { margin: 0; }</tt></div><div class="v2l"><i>2</i><tt>.btn { color: orange; }</tt></div><div class="v2l"><i>3</i><tt>.btn { padding: 8px; }</tt></div><em>새 커밋</em></div></div></div><div class="v2z gh"><div class="v2zh"><b>GitHub</b><small>push 한 커밋</small></div><div class="v2zb"><div class="v2s" style="--a:0s;--b:13s"><div class="v2l"><i>1</i><tt>body { margin: 0; }</tt></div><div class="v2l"><i>2</i><tt>.btn { color: navy; }</tt></div></div><div class="v2s" style="--a:13s;--b:99s"><div class="v2l"><i>1</i><tt>body { margin: 0; }</tt></div><div class="v2l"><i>2</i><tt>.btn { color: orange; }</tt></div><div class="v2l"><i>3</i><tt>.btn { padding: 8px; }</tt></div><em>새 커밋</em></div></div></div></div><div class="v2dw"><div class="v2dp a"><div class="v2dh"><tt>git diff</tt><span>작업 폴더 ↔ 스테이징</span></div><div class="v2db"><div class="v2s" style="--a:0s;--b:2s"><div class="v2d0">차이 없음</div></div><div class="v2s" style="--a:2s;--b:4s"><div class="v2d m"><b>−</b><tt>.btn { color: navy; }</tt></div><div class="v2d p"><b>+</b><tt>.btn { color: orange; }</tt></div></div><div class="v2s" style="--a:4s;--b:7s"><div class="v2d m"><b>−</b><tt>.btn { color: navy; }</tt></div><div class="v2d p"><b>+</b><tt>.btn { color: orange; }</tt></div><div class="v2d p"><b>+</b><tt>.btn { padding: 8px; }</tt></div></div><div class="v2s" style="--a:7s;--b:99s"><div class="v2d0">차이 없음</div></div></div></div><div class="v2dp b"><div class="v2dh"><tt>git diff --staged</tt><span>스테이징 ↔ 로컬 저장소</span></div><div class="v2db"><div class="v2s" style="--a:0s;--b:7s"><div class="v2d0">차이 없음</div></div><div class="v2s" style="--a:7s;--b:10s"><div class="v2d m"><b>−</b><tt>.btn { color: navy; }</tt></div><div class="v2d p"><b>+</b><tt>.btn { color: orange; }</tt></div><div class="v2d p"><b>+</b><tt>.btn { padding: 8px; }</tt></div></div><div class="v2s" style="--a:10s;--b:99s"><div class="v2d0">차이 없음</div></div></div></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="커밋하는 시점">

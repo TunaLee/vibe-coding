@@ -75,70 +75,73 @@ def gitflow():
 
 
 def diffflow():
-    """style.css 한 줄 수정 → git diff(빨강 · 초록) → add 뒤 --staged → commit 뒤 변경 없음 → push 뒤 GitHub 에 같은 diff.
-    아래 띠의 「변경 1건」이 작업 폴더 → 스테이징 → 로컬 저장소 → GitHub 으로 옮겨 간다. 커밋 0b491e3 은 LOG 의 실제 기록."""
-    h, m, _ = LOG[2]
+    """Git 이 계속 비교하는 모습 — 네 구역에 파일 내용이 그대로 보이고, 이웃 구역 사이의 차이가 diff 창 두 개에 나타난다.
+    편집 두 번(색 바꿈 · 줄 추가) → diff 가 늘어남 → add (diff 가 스테이징↔저장소 쪽으로 이동) → commit (diff 0) → push. 15초 · 한 번."""
+    A, B, C = ".btn { color: navy; }", ".btn { color: orange; }", ".btn { padding: 8px; }"
+    V0 = [("body { margin: 0; }", ""), (A, "")]
+    V1 = [("body { margin: 0; }", ""), (B, "c")]
+    V2 = [("body { margin: 0; }", ""), (B, "c"), (C, "c")]
 
-    def st(d, o=None):
-        return f'style="--d:{d}s{f"; --o:{o}s" if o else ""}"'
+    def snap(lines, a, b=99, tag="", hl=True):
+        ln = "".join(f'<div class="v2l{" c" if (k and hl) else ""}"><i>{i + 1}</i><tt>{t}</tt></div>' for i, (t, k) in enumerate(lines))
+        return f'<div class="v2s" style="--a:{a}s;--b:{b}s">{ln}{f"<em>{tag}</em>" if tag else ""}</div>'
 
-    old, new = ".btn { background: #1F3A5F; }", ".btn { background: #F28C28; }"
-    editor = (f'<div class="v1dE"><div class="v1dEh">style.css<span class="v1dx o" {st(1.2, 7.2)}>● 수정됨</span></div>'
-              f'<div class="v1dEl"><i>1</i><tt>body {{ margin: 0; }}</tt></div>'
-              f'<div class="v1dEl"><i>2</i><tt class="v1dold o" {st(.1, 1.2)}>{old}</tt><tt class="v1dnew" {st(1.3)}>{new}</tt></div>'
-              f'<div class="v1dEl"><i>3</i><tt>.btn:hover {{ opacity: .9; }}</tt></div></div>')
-    dl = (f'<div class="v1dL"><b>-</b><code>{old}</code></div><div class="v1dL p"><b>+</b><code>{new}</code></div>')
-    panes = [  # (명령, 비교 대상, 내용, 나타남, 사라짐)
-        ("git diff", "작업 폴더 ↔ 스테이징", dl, 2.2, 4.6),
-        ("git diff --staged", "스테이징 ↔ 마지막 커밋", dl, 4.8, 7.2),
-        ("git diff --staged", "스테이징 ↔ 마지막 커밋", '<div class="v1d0">변경 없음 · 커밋에 기록됨</div>', 7.4, 9.6),
-        (f"GitHub · 커밋 {h}", f"{m} · +1 −1", dl, 9.8, None)]
-    pv = "".join(f'<div class="v1dP{" o" if o else ""}" {st(d, o)}><div class="v1dPh"><code>{c}</code><span>{t}</span></div>{b}</div>'
-                 for c, t, b, d, o in panes)
-    zones = [("작업 폴더", 1.2, 4.6, "style.css · +1 −1"), ("스테이징", 4.8, 7.2, "style.css · +1 −1"),
-             ("로컬 저장소", 7.4, None, f"{h} {m}"), ("GitHub", 9.8, None, f"{h} {m}")]
-    zs = "".join(f'<div class="v1dZ"><b>{n}</b><div class="v1dC{" o" if o else ""}{" k" if i > 1 else ""}" {st(d, o)}>{c}</div></div>'
-                 for i, (n, d, o, c) in enumerate(zones))
-    pills = "".join(f'<span class="v1dQ" style="--d1:{d}s">{c}</span>' for c, d in (("git add", 4.6), ("git commit", 7.2), ("git push", 9.6)))
-    return (f'<div class="v1dW">{editor}<div class="v1dPs">{pv}</div></div>'
-            f'<div class="v1dZs">{zs}</div><div class="v1dQs">{pills}</div>')
+    zones = [
+        ("작업 폴더", "내가 고치는 파일", snap(V0, 0, 2, "", False) + snap(V1, 2, 4, "수정됨 · 1줄") + snap(V2, 4, 10, "수정됨 · 2줄") + snap(V2, 10, 99, "", False)),
+        ("스테이징", "git add 로 담은 것", snap(V0, 0, 7, "", False) + snap(V2, 7, 10, "커밋 대기") + snap(V2, 10, 99, "", False)),
+        ("로컬 저장소", "마지막 커밋", snap(V0, 0, 10, "", False) + snap(V2, 10, 99, "새 커밋", False)),
+        ("GitHub", "push 한 커밋", snap(V0, 0, 13, "", False) + snap(V2, 13, 99, "새 커밋", False)),
+    ]
+    zs = "".join(f'<div class="v2z{" gh" if i == 3 else ""}"><div class="v2zh"><b>{n}</b><small>{sub}</small></div><div class="v2zb">{body}</div></div>'
+                 for i, (n, sub, body) in enumerate(zones))
 
+    def dl(rows):
+        return "".join(f'<div class="v2d {k}"><b>{"−" if k == "m" else "+"}</b><tt>{t}</tt></div>' for k, t in rows)
+
+    empty = '<div class="v2d0">차이 없음</div>'
+    d1 = (f'<div class="v2s" style="--a:0s;--b:2s">{empty}</div>'
+          f'<div class="v2s" style="--a:2s;--b:4s">{dl([("m", A), ("p", B)])}</div>'
+          f'<div class="v2s" style="--a:4s;--b:7s">{dl([("m", A), ("p", B), ("p", C)])}</div>'
+          f'<div class="v2s" style="--a:7s;--b:99s">{empty}</div>')
+    d2 = (f'<div class="v2s" style="--a:0s;--b:7s">{empty}</div>'
+          f'<div class="v2s" style="--a:7s;--b:10s">{dl([("m", A), ("p", B), ("p", C)])}</div>'
+          f'<div class="v2s" style="--a:10s;--b:99s">{empty}</div>')
+    diffs = (f'<div class="v2dw"><div class="v2dp a"><div class="v2dh"><tt>git diff</tt><span>작업 폴더 ↔ 스테이징</span></div><div class="v2db">{d1}</div></div>'
+             f'<div class="v2dp b"><div class="v2dh"><tt>git diff --staged</tt><span>스테이징 ↔ 로컬 저장소</span></div><div class="v2db">{d2}</div></div></div>')
+    steps = [("편집 1 · 색 바꿈", 2), ("편집 2 · 줄 추가", 4), ("git add", 7), ("git commit", 10), ("git push", 13)]
+    st = "".join(f'<span class="v2q" style="--d1:{t}s">{x}</span>' for x, t in steps)
+    return f'<div class="v2q0">{st}</div><div class="v2zs">{zs}</div>{diffs}'
 
 CSS = """
-  /* 1-5 · diff 가 구역을 지나는 모습 (v1d) */
-  .v1dW{display:grid; grid-template-columns:1fr 1.15fr; gap:22px; align-items:stretch;}
-  .v1dE{border-radius:12px; background:#1E2633; padding:0 0 10px; overflow:hidden;}
-  .v1dEh{display:flex; justify-content:space-between; padding:9px 14px; background:#2A3445; color:#C9D3E0; font-size:14px; font-weight:700;}
-  .v1dx{color:#F7C99A; opacity:0; animation:v1dIn .4s var(--d) forwards;}
-  .v1dEl{display:grid; grid-template-columns:28px 1fr; align-items:center; padding:5px 14px; min-height:30px;}
-  .v1dEl i{font-style:normal; color:#6B7785; font-size:13px; font-family:var(--mono);}
-  .v1dEl tt{grid-column:2; grid-row:1; font-family:var(--mono); font-size:15.5px; color:#E6EDF3; background:none; padding:0;}
-  .v1dnew{background:rgba(242,140,40,.18)!important; border-radius:4px; opacity:0; animation:v1dIn .4s var(--d) forwards;}
-  .v1dPs{display:grid;}
-  .v1dP{grid-area:1/1; border:1.5px solid #D9DDE3; border-radius:12px; background:#fff; overflow:hidden; opacity:0; animation:v1dIn .4s var(--d) forwards;}
-  .v1dP.o,.v1dC.o,.v1dx.o{animation:v1dIn .4s var(--d) forwards, v1dOut .3s var(--o) forwards;}
-  .v1dold.o{opacity:1; animation:v1dOut .3s var(--o) forwards;}
-  .v1dPh{display:flex; gap:12px; align-items:baseline; padding:9px 14px; background:#F4F6F9; border-bottom:1px solid #E3E6EA;}
-  .v1dPh code{font-family:var(--mono); font-size:15px; font-weight:800; color:#16233A; background:none; padding:0;}
-  .v1dPh span{font-size:13.5px; color:#6B7785;}
-  .v1dL{display:grid; grid-template-columns:22px 1fr; padding:7px 14px; background:#FDECEA;}
-  .v1dL.p{background:#E8F5E9;}
-  .v1dL b{color:#C62828; font-family:var(--mono);} .v1dL.p b{color:#2E7D32;}
-  .v1dL code{font-family:var(--mono); font-size:15px; color:#16233A; background:none; padding:0;}
-  .v1d0{padding:22px 14px; font-size:17px; font-weight:700; color:#2E7D32;}
-  .v1dZs{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:18px;}
-  .v1dZ{border:2px solid #C9D6E6; border-radius:12px; background:#F7F8FA; padding:9px 10px; min-height:84px;}
-  .v1dZ:last-child{border-color:#16233A;}
-  .v1dZ b{display:block; font-size:16px; color:#16233A; text-align:center; margin-bottom:7px;}
-  .v1dC{background:#FFF1E2; border:2px solid #F28C28; border-radius:9px; padding:6px 8px; font-size:14px; font-weight:700; color:#16233A; text-align:center;
-    opacity:0; animation:v1dIn .4s var(--d) forwards;}
-  .v1dC.k{background:#fff; border-color:#1F3A5F;}
-  .v1dQs{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:10px 12.5% 0;}
-  .v1dQ{text-align:center; font-family:var(--mono); font-size:14px; font-weight:700; color:#16233A; background:#EAF0F7; border-radius:14px; padding:5px 0;
-    animation:v1gHi 1.3s var(--d1);}
-  @keyframes v1dIn{from{opacity:0; transform:translateY(-6px)} to{opacity:1; transform:none}}
-  @keyframes v1dOut{from{opacity:1} to{opacity:0; visibility:hidden}}
-  @media print{.v1dP,.v1dC,.v1dnew,.v1dx{opacity:1; animation:none} .v1dP.o,.v1dC.o,.v1dold.o{display:none} .v1dQ{animation:none}}
+  /* 1-5 · diff — 네 구역의 파일 내용과 이웃 구역 사이 차이 (v2) */
+  .v2q0{display:flex; gap:10px; margin-bottom:12px;}
+  .v2q{font-family:var(--mono); font-size:14px; font-weight:700; color:#16233A; background:#EAF0F7; border-radius:14px; padding:5px 12px;
+    animation:v1gHi 1.6s var(--d1);}
+  .v2zs{display:grid; grid-template-columns:repeat(4,1fr); gap:10px;}
+  .v2z{border:2px solid #C9D6E6; border-radius:12px; background:#F7F8FA; overflow:hidden;} .v2z.gh{border-color:#16233A;}
+  .v2zh{padding:7px 10px; border-bottom:1.5px solid #D9DDE3; background:#fff;}
+  .v2zh b{font-size:17px; color:#16233A; margin-right:6px;} .v2zh small{font-size:12px; color:#6B7785;}
+  .v2zb{display:grid; padding:8px; min-height:118px;}
+  .v2s{grid-area:1/1; opacity:0; animation:v2In .3s var(--a) forwards, v2Out .25s var(--b) forwards;}
+  .v2l{display:grid; grid-template-columns:16px 1fr; align-items:center; padding:3px 4px; border-radius:5px;}
+  .v2l i{font-style:normal; font-size:11px; color:#9AA6B5; font-family:var(--mono);}
+  .v2l tt{font-family:var(--mono); font-size:13px; color:#16233A; white-space:nowrap;}
+  .v2l.c{background:#FFE7CC;}
+  .v2s em{display:inline-block; margin-top:6px; font-style:normal; font-size:12px; font-weight:800; color:#fff; background:#F28C28; border-radius:9px; padding:2px 9px;}
+  .v2dw{display:grid; grid-template-columns:repeat(8,1fr); column-gap:10px; margin-top:12px;}
+  .v2dp{border:1.5px solid #D9DDE3; border-radius:12px; background:#fff; overflow:hidden;}
+  .v2dp.a{grid-column:1 / span 3; margin-left:50%;} .v2dp.b{grid-column:4 / span 3; margin-left:50%;}
+  .v2dp{width:calc(100% + 0px);}
+  .v2dh{display:flex; gap:10px; align-items:baseline; padding:7px 12px; background:#F4F6F9; border-bottom:1px solid #E3E6EA;}
+  .v2dh tt{font-family:var(--mono); font-size:14px; font-weight:800; color:#16233A;} .v2dh span{font-size:12.5px; color:#6B7785;}
+  .v2db{display:grid; min-height:96px;}
+  .v2d{display:grid; grid-template-columns:18px 1fr; padding:4px 12px; background:#FDECEA;}
+  .v2d.p{background:#E8F5E9;} .v2d b{color:#C62828; font-family:var(--mono);} .v2d.p b{color:#2E7D32;}
+  .v2d tt{font-family:var(--mono); font-size:14px; color:#16233A;}
+  .v2d0{padding:14px 12px; font-size:15px; font-weight:700; color:#6B7785;}
+  @keyframes v2In{from{opacity:0; transform:translateY(-4px)} to{opacity:1; transform:none}}
+  @keyframes v2Out{to{opacity:0; visibility:hidden}}
+  @media print{.v2s{animation:none; opacity:0} .v2s[style*="--b:99s"]{opacity:1} .v2q{animation:none}}
   /* 1-5 · Git 작업 흐름 (v1g) */
   .v1gtop{display:grid; grid-template-columns:3fr 1fr; gap:10px; margin-bottom:8px;}
   .v1gtop span{font-size:14px; font-weight:800; text-align:center; padding:5px 0; border-radius:8px;}
