@@ -40,7 +40,71 @@ def files():
             f'<div class="v1fps">{probs}</div></div>')
 
 
+def gitflow():
+    """작업 폴더 → (add) 스테이징 → (commit) 로컬 저장소 → (push) GitHub · (pull) 되돌아옴. 구조는 Pro Git 「세 가지 상태」 + 원격."""
+    def chip(t, d, o=None, cls=""):
+        st = f"--d:{d}s" + (f"; --o:{o}s" if o else "")
+        return f'<div class="v1gc {cls}{" o" if o else ""}" style="{st}">{t}</div>'
+
+    def cm(h, m, d, cls=""):
+        return f'<div class="v1gk {cls}" style="--d:{d}s">{f"<tt>{h}</tt>" if h else ""}<b>{m}</b></div>'
+
+    def pill(cmd, d1, d2=None):
+        an = f"--d1:{d1}s; --d2:{d2 if d2 else d1}s"
+        return f'<div class="v1gp" style="{an}"><tt>{cmd}</tt><i>→</i></div>'
+
+    wd = (chip("index.html · 수정", 1.0, 2.0) + chip("style.css · 수정", 6.0, 6.8)
+          + chip("index.html · 문구 바뀜", 11.6, cls="pl"))
+    stg = chip("index.html", 2.2, 3.4) + chip("style.css", 7.0, 7.8)
+    loc = cm("dfb369b", "첫 화면 완성", .2) + cm("8fcbe80", "버튼 추가", 3.6) + cm("0b491e3", "색상 수정", 8.0) + cm("", "문구 수정 · 받아 옴", 11.2, "pl")
+    rem = cm("dfb369b", "첫 화면 완성", .2) + cm("8fcbe80", "버튼 추가", 5.0) + cm("0b491e3", "색상 수정", 9.0) + cm("", "문구 수정 · 다른 컴퓨터", 10.0, "pl")
+
+    def col(name, en, body, cls=""):
+        return f'<div class="v1gz {cls}"><div class="v1gzh"><b>{name}</b><small>{en}</small></div><div class="v1gzb">{body}</div></div>'
+
+    return ('<div class="v1g"><div class="v1gtop"><span class="me">내 컴퓨터</span><span class="net">인터넷</span></div>'
+            '<div class="v1grow">'
+            + col("작업 폴더", "working directory · 파일 수정", wd)
+            + pill("git add", 1.8, 6.6)
+            + col("스테이징 영역", "staging area · 커밋할 파일", stg)
+            + pill("git commit", 3.2, 7.6)
+            + col("로컬 저장소", "repository · 커밋 기록", loc)
+            + pill("git push", 4.6, 8.6)
+            + col("GitHub", "remote · 원격 저장소", rem, "rm")
+            + '</div><div class="v1gpull" style="--d1:10.8s; --d2:10.8s"><i>←</i><tt>git pull</tt><span>원격의 새 커밋을 받아 내 폴더에 합침</span></div></div>')
+
+
 CSS = """
+  /* 1-5 · Git 작업 흐름 (v1g) */
+  .v1gtop{display:grid; grid-template-columns:3fr 1fr; gap:10px; margin-bottom:8px;}
+  .v1gtop span{font-size:14px; font-weight:800; text-align:center; padding:5px 0; border-radius:8px;}
+  .v1gtop .me{background:#EAF0F7; color:#16233A;} .v1gtop .net{background:#16233A; color:#fff;}
+  .v1grow{display:grid; grid-template-columns:1fr 86px 1fr 96px 1fr 86px 1fr; align-items:stretch;}
+  .v1gz{border:2px solid #C9D6E6; border-radius:14px; background:#F7F8FA; display:flex; flex-direction:column; min-height:300px;}
+  .v1gz.rm{border-color:#16233A;}
+  .v1gzh{padding:10px 10px 8px; border-bottom:1.5px solid #D9DDE3; text-align:center;}
+  .v1gzh b{display:block; font-size:19px; color:#16233A;} .v1gzh small{font-size:12px; color:#6B7785;}
+  .v1gzb{flex:1; display:flex; flex-direction:column-reverse; justify-content:flex-end; gap:7px; padding:10px;}
+  .v1gc{background:#FFF1E2; border:2px solid #F28C28; border-radius:9px; padding:8px 9px; font-size:15px; font-weight:700; color:#16233A; text-align:center;
+    opacity:0; animation:v1gIn .35s var(--d) forwards;}
+  .v1gc.o{animation:v1gIn .35s var(--d) forwards, v1gOut .35s var(--o) forwards;}
+  .v1gk{background:#fff; border:2px solid #1F3A5F; border-radius:9px; padding:7px 9px; opacity:0; animation:v1gIn .4s var(--d) forwards;}
+  .v1gk tt{display:block; font-family:var(--mono); font-size:12.5px; color:#6B7785; background:none; padding:0;}
+  .v1gk b{font-size:15px; color:#16233A;}
+  .v1gk.pl,.v1gc.pl{border-color:#2E7D5B; background:#EAF6EF;}
+  .v1gp{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px;}
+  .v1gp tt{font-family:var(--mono); font-size:13.5px; font-weight:700; color:#16233A; background:#EAF0F7; border-radius:14px; padding:5px 8px; white-space:nowrap;
+    animation:v1gHi 1.3s var(--d1), v1gHi 1.3s var(--d2);}
+  .v1gp i{font-style:normal; font-size:26px; font-weight:800; color:#F28C28;}
+  .v1gpull{margin-top:12px; display:flex; align-items:center; gap:12px; justify-content:center; border:2px dashed #2E7D5B; border-radius:12px; padding:9px;
+    opacity:0; animation:v1gIn .4s var(--d1) forwards;}
+  .v1gpull i{font-style:normal; font-size:24px; font-weight:800; color:#2E7D5B;}
+  .v1gpull tt{font-family:var(--mono); font-size:15px; font-weight:700; color:#fff; background:#2E7D5B; border-radius:14px; padding:5px 12px;}
+  .v1gpull span{font-size:16px; color:#16233A; font-weight:600;}
+  @keyframes v1gIn{from{opacity:0; transform:translateY(-8px)} to{opacity:1; transform:none}}
+  @keyframes v1gOut{from{opacity:1} to{opacity:0; height:0; padding:0; margin:0; border-width:0}}
+  @keyframes v1gHi{0%,100%{background:#EAF0F7; color:#16233A} 15%,75%{background:#F28C28; color:#fff}}
+  @media print{.v1gc,.v1gk,.v1gpull{opacity:1; animation:none} .v1gc.o{display:none} .v1gp tt{animation:none}}
   /* 1-5 · 파일 이름 버전 관리 (v1f) */
   .v1fw{display:grid; grid-template-columns:1.25fr 1fr; gap:30px; align-items:center; margin-top:14px;}
   .v1fd{border:1.5px solid #D9DDE3; border-radius:14px; background:#fff; overflow:hidden;}
@@ -81,9 +145,7 @@ def slides():
                 ("저장 목록", "기록 (log)", "언제 · 무엇을"), ("불러오기", "되돌리기", "저장 시점 복원"),
                 ("클라우드 저장", "GitHub", "다른 컴퓨터에서도")], "게임", "Git")), T),
         # ── Git · commit · 되돌리기
-        light("Git", flow([
-            ("파일 수정", "기획서.md · PRD.md"), ("저장할 파일 고르기", "add"), ("이름 붙여 기록", "commit"), ("기록에 쌓임", "log 로 보기")], hl=2)
-              + viz2.pair(
+        light("Git", viz2.pair(
                   "복사본으로 관리", [("파일마다 사본", "기획서_최종_진짜.md"), ("바뀐 곳", "눈으로 비교")],
                   "Git으로 관리", [("파일은 하나", "기획서.md 그대로"), ("바뀐 곳", "커밋마다 자동으로 남음")])
               + note("commit", "저장소에 변경을 기록 (git 공식 문서)"), T),
@@ -111,11 +173,9 @@ def slides():
             "GitHub", [("어디에", "인터넷 (원격 저장소)"), ("하는 일", "기록 보관 · 공유 · 다른 컴퓨터에서 받기"), ("1-7 에서", "Vercel 배포와 연결")])
               + note("원격 저장소", "내 컴퓨터 밖에 둔 같은 기록 · Free 요금제도 비공개 저장소 무제한")
               + src(("GitHub plans", "https://docs.github.com/en/get-started/learning-about-github/githubs-plans")), T),
-        light("push · pull", flow([
-            ("내 컴퓨터", "커밋 3개"), ("push", "원격에 올림"), ("GitHub", "같은 커밋 3개"), ("pull", "원격 변경을 받아 합침"), ("다른 컴퓨터", "같은 상태")], hl=1)
-              + viz2.tiles([
-                  ("push", "로컬 커밋을 원격 저장소에 올림"), ("pull", "원격의 변경을 내 컴퓨터로 가져와 합침")], 2)
-              + src(("GitHub Docs · About Git", "https://docs.github.com/en/get-started/using-git/about-git")), T),
+        light("Git 작업 흐름", gitflow()
+              + src(("Pro Git · What is Git?", "https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F"),
+                    ("GitHub Docs · About Git", "https://docs.github.com/en/get-started/using-git/about-git")), T),
         light("커밋하는 시점", viz2.tiles([
             ("기능 하나가 됐을 때", "「로그인 버튼 동작」"), ("크게 바꾸기 전", "디자인을 갈아엎기 전"),
             ("확인이 끝났을 때", "브라우저로 보고 이상 없음")], 3)

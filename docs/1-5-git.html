@@ -936,6 +936,36 @@
   @keyframes v1cutIn{from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none}}
   @media print{.v1cmr{opacity:1; animation:none}}
 
+  /* 1-5 · Git 작업 흐름 (v1g) */
+  .v1gtop{display:grid; grid-template-columns:3fr 1fr; gap:10px; margin-bottom:8px;}
+  .v1gtop span{font-size:14px; font-weight:800; text-align:center; padding:5px 0; border-radius:8px;}
+  .v1gtop .me{background:#EAF0F7; color:#16233A;} .v1gtop .net{background:#16233A; color:#fff;}
+  .v1grow{display:grid; grid-template-columns:1fr 86px 1fr 96px 1fr 86px 1fr; align-items:stretch;}
+  .v1gz{border:2px solid #C9D6E6; border-radius:14px; background:#F7F8FA; display:flex; flex-direction:column; min-height:300px;}
+  .v1gz.rm{border-color:#16233A;}
+  .v1gzh{padding:10px 10px 8px; border-bottom:1.5px solid #D9DDE3; text-align:center;}
+  .v1gzh b{display:block; font-size:19px; color:#16233A;} .v1gzh small{font-size:12px; color:#6B7785;}
+  .v1gzb{flex:1; display:flex; flex-direction:column-reverse; justify-content:flex-end; gap:7px; padding:10px;}
+  .v1gc{background:#FFF1E2; border:2px solid #F28C28; border-radius:9px; padding:8px 9px; font-size:15px; font-weight:700; color:#16233A; text-align:center;
+    opacity:0; animation:v1gIn .35s var(--d) forwards;}
+  .v1gc.o{animation:v1gIn .35s var(--d) forwards, v1gOut .35s var(--o) forwards;}
+  .v1gk{background:#fff; border:2px solid #1F3A5F; border-radius:9px; padding:7px 9px; opacity:0; animation:v1gIn .4s var(--d) forwards;}
+  .v1gk tt{display:block; font-family:var(--mono); font-size:12.5px; color:#6B7785; background:none; padding:0;}
+  .v1gk b{font-size:15px; color:#16233A;}
+  .v1gk.pl,.v1gc.pl{border-color:#2E7D5B; background:#EAF6EF;}
+  .v1gp{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px;}
+  .v1gp tt{font-family:var(--mono); font-size:13.5px; font-weight:700; color:#16233A; background:#EAF0F7; border-radius:14px; padding:5px 8px; white-space:nowrap;
+    animation:v1gHi 1.3s var(--d1), v1gHi 1.3s var(--d2);}
+  .v1gp i{font-style:normal; font-size:26px; font-weight:800; color:#F28C28;}
+  .v1gpull{margin-top:12px; display:flex; align-items:center; gap:12px; justify-content:center; border:2px dashed #2E7D5B; border-radius:12px; padding:9px;
+    opacity:0; animation:v1gIn .4s var(--d1) forwards;}
+  .v1gpull i{font-style:normal; font-size:24px; font-weight:800; color:#2E7D5B;}
+  .v1gpull tt{font-family:var(--mono); font-size:15px; font-weight:700; color:#fff; background:#2E7D5B; border-radius:14px; padding:5px 12px;}
+  .v1gpull span{font-size:16px; color:#16233A; font-weight:600;}
+  @keyframes v1gIn{from{opacity:0; transform:translateY(-8px)} to{opacity:1; transform:none}}
+  @keyframes v1gOut{from{opacity:1} to{opacity:0; height:0; padding:0; margin:0; border-width:0}}
+  @keyframes v1gHi{0%,100%{background:#EAF0F7; color:#16233A} 15%,75%{background:#F28C28; color:#fff}}
+  @media print{.v1gc,.v1gk,.v1gpull{opacity:1; animation:none} .v1gc.o{display:none} .v1gp tt{animation:none}}
   /* 1-5 · 파일 이름 버전 관리 (v1f) */
   .v1fw{display:grid; grid-template-columns:1.25fr 1fr; gap:30px; align-items:center; margin-top:14px;}
   .v1fd{border:1.5px solid #D9DDE3; border-radius:14px; background:#fff; overflow:hidden;}
@@ -1050,7 +1080,7 @@
   <div class="eyebrow"><span class="tag">1-5</span></div>
   <h2 class="s-title sm">Git</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="flow"><div class="fs"><b>파일 수정</b><span>기획서.md · PRD.md</span></div><div class="fa">→</div><div class="fs"><b>저장할 파일 고르기</b><span>add</span></div><div class="fa">→</div><div class="fs hl"><b>이름 붙여 기록</b><span>commit</span></div><div class="fa">→</div><div class="fs"><b>기록에 쌓임</b><span>log 로 보기</span></div></div><div class="v2pair"><div class="v2p"><div class="v2ph">복사본으로 관리</div><div class="v2pc" style="--d:0.00s"><b>파일마다 사본</b><span>기획서_최종_진짜.md</span></div><div class="v2pc" style="--d:0.08s"><b>바뀐 곳</b><span>눈으로 비교</span></div></div><div class="v2p on"><div class="v2ph">Git으로 관리</div><div class="v2pc" style="--d:0.00s"><b>파일은 하나</b><span>기획서.md 그대로</span></div><div class="v2pc" style="--d:0.08s"><b>바뀐 곳</b><span>커밋마다 자동으로 남음</span></div></div></div><div class="dbnote"><span>commit</span> 저장소에 변경을 기록 (git 공식 문서)</div></div></div>
+  <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">복사본으로 관리</div><div class="v2pc" style="--d:0.00s"><b>파일마다 사본</b><span>기획서_최종_진짜.md</span></div><div class="v2pc" style="--d:0.08s"><b>바뀐 곳</b><span>눈으로 비교</span></div></div><div class="v2p on"><div class="v2ph">Git으로 관리</div><div class="v2pc" style="--d:0.00s"><b>파일은 하나</b><span>기획서.md 그대로</span></div><div class="v2pc" style="--d:0.08s"><b>바뀐 곳</b><span>커밋마다 자동으로 남음</span></div></div></div><div class="dbnote"><span>commit</span> 저장소에 변경을 기록 (git 공식 문서)</div></div></div>
 </section>
 
 <section class="slide lt" data-title="커밋 하나에 남는 것">
@@ -1097,12 +1127,12 @@ dfb369b 첫 화면 완성</code></pre></div></div></div></div></div>
   <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">Git</div><div class="v2pc" style="--d:0.00s"><b>어디에</b><span>내 컴퓨터</span></div><div class="v2pc" style="--d:0.08s"><b>하는 일</b><span>저장 시점 기록 · 되돌리기</span></div><div class="v2pc" style="--d:0.16s"><b>없으면</b><span>기록이 이 컴퓨터에만</span></div></div><div class="v2p on"><div class="v2ph">GitHub</div><div class="v2pc" style="--d:0.00s"><b>어디에</b><span>인터넷 (원격 저장소)</span></div><div class="v2pc" style="--d:0.08s"><b>하는 일</b><span>기록 보관 · 공유 · 다른 컴퓨터에서 받기</span></div><div class="v2pc" style="--d:0.16s"><b>1-7 에서</b><span>Vercel 배포와 연결</span></div></div></div><div class="dbnote"><span>원격 저장소</span> 내 컴퓨터 밖에 둔 같은 기록 · Free 요금제도 비공개 저장소 무제한</div><div class="src">출처 · <a href="https://docs.github.com/en/get-started/learning-about-github/githubs-plans" target="_blank" rel="noopener">GitHub plans</a></div></div></div>
 </section>
 
-<section class="slide lt" data-title="push · pull">
+<section class="slide lt" data-title="Git 작업 흐름">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-5</span></div>
-  <h2 class="s-title sm">push · pull</h2>
+  <h2 class="s-title sm">Git 작업 흐름</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="flow"><div class="fs"><b>내 컴퓨터</b><span>커밋 3개</span></div><div class="fa">→</div><div class="fs hl"><b>push</b><span>원격에 올림</span></div><div class="fa">→</div><div class="fs"><b>GitHub</b><span>같은 커밋 3개</span></div><div class="fa">→</div><div class="fs"><b>pull</b><span>원격 변경을 받아 합침</span></div><div class="fa">→</div><div class="fs"><b>다른 컴퓨터</b><span>같은 상태</span></div></div><div class="v2tiles c2"><div class="v2tile" style="--d:0.00s"><b>push</b><span>로컬 커밋을 원격 저장소에 올림</span></div><div class="v2tile" style="--d:0.08s"><b>pull</b><span>원격의 변경을 내 컴퓨터로 가져와 합침</span></div></div><div class="src">출처 · <a href="https://docs.github.com/en/get-started/using-git/about-git" target="_blank" rel="noopener">GitHub Docs · About Git</a></div></div></div>
+  <div class="body"><div class="mid"><div class="v1g"><div class="v1gtop"><span class="me">내 컴퓨터</span><span class="net">인터넷</span></div><div class="v1grow"><div class="v1gz "><div class="v1gzh"><b>작업 폴더</b><small>working directory · 파일 수정</small></div><div class="v1gzb"><div class="v1gc  o" style="--d:1.0s; --o:2.0s">index.html · 수정</div><div class="v1gc  o" style="--d:6.0s; --o:6.8s">style.css · 수정</div><div class="v1gc pl" style="--d:11.6s">index.html · 문구 바뀜</div></div></div><div class="v1gp" style="--d1:1.8s; --d2:6.6s"><tt>git add</tt><i>→</i></div><div class="v1gz "><div class="v1gzh"><b>스테이징 영역</b><small>staging area · 커밋할 파일</small></div><div class="v1gzb"><div class="v1gc  o" style="--d:2.2s; --o:3.4s">index.html</div><div class="v1gc  o" style="--d:7.0s; --o:7.8s">style.css</div></div></div><div class="v1gp" style="--d1:3.2s; --d2:7.6s"><tt>git commit</tt><i>→</i></div><div class="v1gz "><div class="v1gzh"><b>로컬 저장소</b><small>repository · 커밋 기록</small></div><div class="v1gzb"><div class="v1gk " style="--d:0.2s"><tt>dfb369b</tt><b>첫 화면 완성</b></div><div class="v1gk " style="--d:3.6s"><tt>8fcbe80</tt><b>버튼 추가</b></div><div class="v1gk " style="--d:8.0s"><tt>0b491e3</tt><b>색상 수정</b></div><div class="v1gk pl" style="--d:11.2s"><b>문구 수정 · 받아 옴</b></div></div></div><div class="v1gp" style="--d1:4.6s; --d2:8.6s"><tt>git push</tt><i>→</i></div><div class="v1gz rm"><div class="v1gzh"><b>GitHub</b><small>remote · 원격 저장소</small></div><div class="v1gzb"><div class="v1gk " style="--d:0.2s"><tt>dfb369b</tt><b>첫 화면 완성</b></div><div class="v1gk " style="--d:5.0s"><tt>8fcbe80</tt><b>버튼 추가</b></div><div class="v1gk " style="--d:9.0s"><tt>0b491e3</tt><b>색상 수정</b></div><div class="v1gk pl" style="--d:10.0s"><b>문구 수정 · 다른 컴퓨터</b></div></div></div></div><div class="v1gpull" style="--d1:10.8s; --d2:10.8s"><i>←</i><tt>git pull</tt><span>원격의 새 커밋을 받아 내 폴더에 합침</span></div></div><div class="src">출처 · <a href="https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F" target="_blank" rel="noopener">Pro Git · What is Git?</a> · <a href="https://docs.github.com/en/get-started/using-git/about-git" target="_blank" rel="noopener">GitHub Docs · About Git</a></div></div></div>
 </section>
 
 <section class="slide lt" data-title="커밋하는 시점">
