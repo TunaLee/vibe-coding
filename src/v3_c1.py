@@ -116,7 +116,7 @@ def slides():
               + note("참고", "Claude Code 「How Claude Code works」 · IBM Technology 「AI Model vs Agentic Harness」 · 부품은 업무마다 골라 씀"), T),
         light("Claude Code = 기본 하네스", viz2.pair(
             "처음부터 있는 것", [("내장 도구", "파일 · 검색 · 실행 · 웹"), ("컨텍스트 관리", "한도 근처에서 자동 요약"), ("권한 모드", "수정 · 명령 전 확인")],
-            "내가 더하는 것", [("CLAUDE.md · Skill", "지시 · 절차"), ("MCP", "노션 · 슬랙 · 드라이브"), ("Hook · Sub Agent", "강제 규칙 · 검토")])
+            "추가 구성", [("CLAUDE.md · Skill", "지시 · 절차"), ("MCP", "노션 · 슬랙 · 드라이브"), ("Hook · Sub Agent", "강제 규칙 · 검토")])
               + note("Claude Code 문서", "Skill · MCP · Hook · Sub Agent = 기본 루프 위에 얹는 층"), T),
         pick("신입사원 온보딩과의 비교", T, repl=[("평가셋", "검토 Agent")]),
         part("지시 · CLAUDE.md", "기한을 지어냄 · 형식이 매번 다름", ("CLAUDE.md", "대화마다 먼저 읽는 규칙"),

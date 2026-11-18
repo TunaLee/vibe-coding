@@ -81,7 +81,7 @@ def slides():
               + code("배포 완료 · 예", esc("✓ Production   https://room-booking.vercel.app\n  이번 배포     https://room-booking-a1b2c3.vercel.app"))
               + note("공유할 주소", "프로젝트 기본 주소 · 다시 배포해도 바뀌지 않음")
               + src(("Vercel · Generated URLs", "https://vercel.com/docs/deployments/generated-urls")), T),
-        light("배포 주소로 연 화면", shot("room_mobile.webp", "배포 주소 · 390px 휴대폰 화면", [
+        light("배포 화면", shot("room_mobile.webp", "배포 주소 · 390px 휴대폰 화면", [
             ("localhost 와 차이", "주소만 다름 · 코드 동일"), ("PRD 완료 기준", "모바일 폭에서 가로 스크롤 없음"),
             ("확인 방법", "주소를 휴대폰으로 보내 열기"), ("깨질 때", "화면 캡처 첨부 · 수정 요청 (1-6)")]), T),
         # ── 재배포

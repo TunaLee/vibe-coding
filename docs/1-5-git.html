@@ -1112,10 +1112,10 @@
   <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">복사본으로 관리</div><div class="v2pc" style="--d:0.00s"><b>파일마다 사본</b><span>기획서_최종_진짜.md</span></div><div class="v2pc" style="--d:0.08s"><b>바뀐 곳</b><span>눈으로 비교</span></div></div><div class="v2p on"><div class="v2ph">Git으로 관리</div><div class="v2pc" style="--d:0.00s"><b>파일은 하나</b><span>기획서.md 그대로</span></div><div class="v2pc" style="--d:0.08s"><b>바뀐 곳</b><span>커밋마다 자동으로 남음</span></div></div></div><div class="dbnote"><span>commit</span> 저장소에 변경을 기록 (git 공식 문서)</div></div></div>
 </section>
 
-<section class="slide lt" data-title="커밋 하나에 남는 것">
+<section class="slide lt" data-title="커밋 구성">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-5</span></div>
-  <h2 class="s-title sm">커밋 하나에 남는 것</h2>
+  <h2 class="s-title sm">커밋 구성</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v2tiles c4"><div class="v2tile" style="--d:0.00s"><b>바뀐 내용</b><span>어느 파일의 어느 줄</span></div><div class="v2tile" style="--d:0.08s"><b>메시지</b><span>「버튼 추가」</span></div><div class="v2tile" style="--d:0.16s"><b>시각 · 작성자</b><span>언제 · 누가</span></div><div class="v2tile" style="--d:0.24s"><b>고유 번호</b><span>8fcbe80 같은 해시</span></div></div><div class="dbnote"><span>메시지</span> 무엇을 바꿨는지 한 줄 · 되돌릴 시점을 찾는 이름표</div></div></div>
 </section>
@@ -1140,10 +1140,10 @@ dfb369b 첫 화면 완성</code></pre></div></div></div></div></div>
 8fcbe80 버튼 추가</code></pre></div><div class="src">출처 · <a href="https://git-scm.com/docs/git" target="_blank" rel="noopener">git-scm · git</a></div></div></div>
 </section>
 
-<section class="slide lt" data-title="말로 하는 Git 작업">
+<section class="slide lt" data-title="Git 작업 요청">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-5</span></div>
-  <h2 class="s-title sm">말로 하는 Git 작업</h2>
+  <h2 class="s-title sm">Git 작업 요청</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v2ms"><div class="v2mh"><span>Claude Code에 하는 말</span><i></i><span>실행되는 명령</span></div><div class="v2m" style="--d:0.00s"><div class="a">「지금 상태 커밋해 줘」</div><i>→</i><div class="b"><b>git add · git commit</b><small>메시지도 Claude가 씀</small></div></div><div class="v2m" style="--d:0.12s"><div class="a">「커밋 기록 보여 줘」</div><i>→</i><div class="b"><b>git log</b><small>시점 · 메시지 목록</small></div></div><div class="v2m" style="--d:0.24s"><div class="a">「방금 고친 거 취소해 줘」</div><i>→</i><div class="b"><b>git restore</b><small>커밋 전 수정 버림</small></div></div><div class="v2m" style="--d:0.36s"><div class="a">「마지막 커밋 되돌려 줘」</div><i>→</i><div class="b"><b>git revert</b><small>되돌리는 새 커밋</small></div></div></div><div class="dbnote"><span>명령 실행</span> Claude Code · 사람은 결과 확인</div></div></div>
 </section>
@@ -1172,10 +1172,10 @@ dfb369b 첫 화면 완성</code></pre></div></div></div></div></div>
   <div class="body"><div class="mid"><div class="v2q0"><span class="v2q" style="--d1:2s">편집 1 · 색 바꿈</span><span class="v2q" style="--d1:4s">편집 2 · 줄 추가</span><span class="v2q" style="--d1:7s">git add</span><span class="v2q" style="--d1:10s">git commit</span><span class="v2q" style="--d1:13s">git push</span></div><div class="v2zs"><div class="v2z"><div class="v2zh"><b>작업 폴더</b><small>내가 고치는 파일</small></div><div class="v2zb"><div class="v2s" style="--a:0s;--b:2s"><div class="v2l"><i>1</i><tt>body { margin: 0; }</tt></div><div class="v2l"><i>2</i><tt>.btn { color: navy; }</tt></div></div><div class="v2s" style="--a:2s;--b:4s"><div class="v2l"><i>1</i><tt>body { margin: 0; }</tt></div><div class="v2l c"><i>2</i><tt>.btn { color: orange; }</tt></div><em>수정됨 · 1줄</em></div><div class="v2s" style="--a:4s;--b:10s"><div class="v2l"><i>1</i><tt>body { margin: 0; }</tt></div><div class="v2l c"><i>2</i><tt>.btn { color: orange; }</tt></div><div class="v2l c"><i>3</i><tt>.btn { padding: 8px; }</tt></div><em>수정됨 · 2줄</em></div><div class="v2s" style="--a:10s;--b:99s"><div class="v2l"><i>1</i><tt>body { margin: 0; }</tt></div><div class="v2l"><i>2</i><tt>.btn { color: orange; }</tt></div><div class="v2l"><i>3</i><tt>.btn { padding: 8px; }</tt></div></div></div></div><div class="v2z"><div class="v2zh"><b>스테이징</b><small>git add 로 담은 것</small></div><div class="v2zb"><div class="v2s" style="--a:0s;--b:7s"><div class="v2l"><i>1</i><tt>body { margin: 0; }</tt></div><div class="v2l"><i>2</i><tt>.btn { color: navy; }</tt></div></div><div class="v2s" style="--a:7s;--b:10s"><div class="v2l"><i>1</i><tt>body { margin: 0; }</tt></div><div class="v2l c"><i>2</i><tt>.btn { color: orange; }</tt></div><div class="v2l c"><i>3</i><tt>.btn { padding: 8px; }</tt></div><em>커밋 대기</em></div><div class="v2s" style="--a:10s;--b:99s"><div class="v2l"><i>1</i><tt>body { margin: 0; }</tt></div><div class="v2l"><i>2</i><tt>.btn { color: orange; }</tt></div><div class="v2l"><i>3</i><tt>.btn { padding: 8px; }</tt></div></div></div></div><div class="v2z"><div class="v2zh"><b>로컬 저장소</b><small>마지막 커밋</small></div><div class="v2zb"><div class="v2s" style="--a:0s;--b:10s"><div class="v2l"><i>1</i><tt>body { margin: 0; }</tt></div><div class="v2l"><i>2</i><tt>.btn { color: navy; }</tt></div></div><div class="v2s" style="--a:10s;--b:99s"><div class="v2l"><i>1</i><tt>body { margin: 0; }</tt></div><div class="v2l"><i>2</i><tt>.btn { color: orange; }</tt></div><div class="v2l"><i>3</i><tt>.btn { padding: 8px; }</tt></div><em>새 커밋</em></div></div></div><div class="v2z gh"><div class="v2zh"><b>GitHub</b><small>push 한 커밋</small></div><div class="v2zb"><div class="v2s" style="--a:0s;--b:13s"><div class="v2l"><i>1</i><tt>body { margin: 0; }</tt></div><div class="v2l"><i>2</i><tt>.btn { color: navy; }</tt></div></div><div class="v2s" style="--a:13s;--b:99s"><div class="v2l"><i>1</i><tt>body { margin: 0; }</tt></div><div class="v2l"><i>2</i><tt>.btn { color: orange; }</tt></div><div class="v2l"><i>3</i><tt>.btn { padding: 8px; }</tt></div><em>새 커밋</em></div></div></div></div><div class="v2dw"><div class="v2dp a"><div class="v2dh"><tt>git diff</tt><span>작업 폴더 ↔ 스테이징</span></div><div class="v2db"><div class="v2s" style="--a:0s;--b:2s"><div class="v2d0">차이 없음</div></div><div class="v2s" style="--a:2s;--b:4s"><div class="v2d m"><b>−</b><tt>.btn { color: navy; }</tt></div><div class="v2d p"><b>+</b><tt>.btn { color: orange; }</tt></div></div><div class="v2s" style="--a:4s;--b:7s"><div class="v2d m"><b>−</b><tt>.btn { color: navy; }</tt></div><div class="v2d p"><b>+</b><tt>.btn { color: orange; }</tt></div><div class="v2d p"><b>+</b><tt>.btn { padding: 8px; }</tt></div></div><div class="v2s" style="--a:7s;--b:99s"><div class="v2d0">차이 없음</div></div></div></div><div class="v2dp b"><div class="v2dh"><tt>git diff --staged</tt><span>스테이징 ↔ 로컬 저장소</span></div><div class="v2db"><div class="v2s" style="--a:0s;--b:7s"><div class="v2d0">차이 없음</div></div><div class="v2s" style="--a:7s;--b:10s"><div class="v2d m"><b>−</b><tt>.btn { color: navy; }</tt></div><div class="v2d p"><b>+</b><tt>.btn { color: orange; }</tt></div><div class="v2d p"><b>+</b><tt>.btn { padding: 8px; }</tt></div></div><div class="v2s" style="--a:10s;--b:99s"><div class="v2d0">차이 없음</div></div></div></div></div></div></div>
 </section>
 
-<section class="slide lt" data-title="커밋하는 시점">
+<section class="slide lt" data-title="커밋 시점">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-5</span></div>
-  <h2 class="s-title sm">커밋하는 시점</h2>
+  <h2 class="s-title sm">커밋 시점</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>기능 하나가 됐을 때</b><span>「로그인 버튼 동작」</span></div><div class="v2tile" style="--d:0.08s"><b>크게 바꾸기 전</b><span>디자인을 갈아엎기 전</span></div><div class="v2tile" style="--d:0.16s"><b>확인이 끝났을 때</b><span>브라우저로 보고 이상 없음</span></div></div><div class="flow"><div class="fs"><b>요청</b><span>기능 하나</span></div><div class="fa">→</div><div class="fs"><b>확인</b><span>브라우저</span></div><div class="fa">→</div><div class="fs hl"><b>커밋</b><span>세이브</span></div><div class="fa">→</div><div class="fs"><b>다음 요청</b></div></div><div class="dbnote"><span>1-6 에서</span> 이 고리를 태스크마다 반복</div></div></div>
 </section>
@@ -1199,10 +1199,10 @@ dfb369b 첫 화면 완성</code></pre></div></div></div></div></div>
   <div class="rule"></div>
   <div class="body"><div class="mid"><ol class="v1st"><li style="--d:0.00s"><em>1</em><span>폴더 열기 · Claude Code 실행</span></li><li style="--d:0.25s"><em>2</em><span>Git 시작 + 첫 커밋 요청</span></li><li style="--d:0.50s"><em>3</em><span>기록 보기</span></li><li style="--d:0.75s"><em>4</em><span>PRD.md 아무 줄 고치기</span></li><li style="--d:1.00s"><em>5</em><span>「방금 고친 거 취소」 요청</span></li></ol><div class="qk2"><b>확인</b><ul><li>기록에 내 메시지가 보임</li><li>취소한 줄이 원래대로 돌아옴</li></ul></div></div></div>
 </section>
-<section class="slide lt" data-title="실습 1-5 요청에 들어갈 것">
+<section class="slide lt" data-title="실습 1-5 요청 항목">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-5</span></div>
-  <h2 class="s-title sm">실습 1-5 요청에 들어갈 것</h2>
+  <h2 class="s-title sm">실습 1-5 요청 항목</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v1sls"><div class="v1sl" style="--d:0.00s"><b>목표</b><span>이 폴더를 Git으로 관리 · 첫 커밋</span></div><div class="v1sl" style="--d:0.20s"><b>대상</b><span>기획서.md · PRD.md</span></div><div class="v1sl" style="--d:0.40s"><b>메시지</b><span>무엇을 담았는지 한 줄</span></div></div></div></div>
 </section>
@@ -1217,7 +1217,7 @@ dfb369b 첫 화면 완성</code></pre></div></div></div></div></div>
 
 <section class="slide dk" data-title="다음 단원">
   <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="v1end"><div class="v1got"><span>1-5에서 남은 것</span><b>첫 커밋</b></div><a class="v1next" href="1-6-build.html"><span>1-6</span><b>바이브코딩 실습</b><small>→ 동작하는 앱</small></a></div>
+  <div class="v1end"><div class="v1got"><span>1-5 산출물</span><b>첫 커밋</b></div><a class="v1next" href="1-6-build.html"><span>1-6</span><b>바이브코딩 실습</b><small>→ 동작하는 앱</small></a></div>
 </section>
 
     </div>

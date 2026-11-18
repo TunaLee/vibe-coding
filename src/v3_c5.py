@@ -84,7 +84,7 @@ def structure():
 
 def calling():
     return [
-        light("Skill이 호출되는 순간", anim.skill_trigger()
+        light("Skill 호출 시점", anim.skill_trigger()
               + note("참고", "Claude Code 문서 「Skills」 · Claude 「What are skills?」 · IBM Technology 「What AI Agent Skills Are and How They Work」"), T),
         ba("description 비교", T, "description: 회의록 관련\n\n무엇을 하는지 없음\n언제 쓰는지 없음\n→ 비슷한 요청에도 안 불리거나 엉뚱할 때 불림",
            "description: 회의록을 할 일 · 결정 · 공유 초안으로 정리할 때.\n「회의록 정리해 줘」 「할 일 뽑아 줘」 같은 요청에 쓴다.\n\n→ 하는 일 + 요청 예문"),
@@ -173,7 +173,7 @@ def practice():
         light("Skill 없이 받은 결과 예", side("대화창 · 11/10 정리", without, [
             ("기한 표시 없음", "보안팀 미팅 · 기한 미정이 안 보임"), ("근거 없음", "원문 어느 줄인지 모름"),
             ("지난 할 일 없음", "11/3 배너 시안 확인이 빠짐"), ("저장 안 됨", "대화창에만 · 매번 형식이 다름")]), T),
-        light("Skill로 받은 결과 예", code("out/2026-11-10_정리.md", esc(with_))
+        light("Skill 결과 예", code("out/2026-11-10_정리.md", esc(with_))
               + note("달라진 곳", "기한 미정 · 근거 · 지난 할 일 상태 · 파일 저장 — 모두 SKILL.md 의 한 줄씩"), T),
         light("SKILL.md 수정 루프", flow([("결과 읽기", "out/ 정리 파일"), ("바꿀 것 말하기", "「담당을 맨 앞 열로」"),
                                        ("Claude가 수정", "SKILL.md 형식 줄"), ("새 대화", "같은 요청으로 확인")], hl=1)

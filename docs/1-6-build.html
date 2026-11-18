@@ -1055,10 +1055,10 @@
 </div><div class="banote">승인 전에는 파일이 바뀌지 않음 · 계획 단계에서 고치는 비용이 가장 작음</div></div></div>
 </section>
 
-<section class="slide lt" data-title="한 번에 만들 때의 문제">
+<section class="slide lt" data-title="일괄 구현의 문제">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-6</span></div>
-  <h2 class="s-title sm">한 번에 만들 때의 문제</h2>
+  <h2 class="s-title sm">일괄 구현의 문제</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>오류 위치 파악 어려움</b><span>여러 파일이 동시에 바뀜</span></div><div class="v2tile" style="--d:0.08s"><b>연쇄 오류</b><span>예약 수정 → 날짜 기능 고장</span></div><div class="v2tile" style="--d:0.16s"><b>복구 지점 없음</b><span>중간 커밋 없음</span></div></div><div class="v2pair"><div class="v2p"><div class="v2ph">한 번에</div><div class="v2pc" style="--d:0.00s"><b>요청 1번</b><span>T1~T6 전부</span></div><div class="v2pc" style="--d:0.08s"><b>확인</b><span>끝나고 한꺼번에</span></div></div><div class="v2p on"><div class="v2ph">하나씩</div><div class="v2pc" style="--d:0.00s"><b>요청 6번</b><span>T1 · T2 · … · T6</span></div><div class="v2pc" style="--d:0.08s"><b>확인</b><span>태스크마다 · 문제 범위가 태스크 하나</span></div></div></div></div></div>
 </section>
@@ -1148,10 +1148,10 @@
   <div class="body"><div class="mid"><div class="v1shot"><figure><img src="img/room_mobile.webp" alt="폭 390px · 세 회의실이 한 화면에"/><figcaption>폭 390px · 세 회의실이 한 화면에</figcaption></figure><div class=v1side><div class="v1sd"><b>완료 기준</b><span>390px 에서 가로 스크롤 없음</span></div><div class="v1sd"><b>확인 방법</b><span>브라우저 창을 좁히기</span></div><div class="v1sd"><b>수정 요청 예</b><span>「폭 390px 에서 가로 스크롤이 생겨」</span></div></div></div></div></div>
 </section>
 
-<section class="slide lt" data-title="완료 기준으로 확인">
+<section class="slide lt" data-title="완료 기준 확인">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-6</span></div>
-  <h2 class="s-title sm">완료 기준으로 확인</h2>
+  <h2 class="s-title sm">완료 기준 확인</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><table class="dbt"><thead><tr><th>PRD 완료 기준</th><th>확인 방법</th><th>결과</th></tr></thead><tbody><tr><td>오늘 시간표가 첫 화면</td><td>주소 열기</td><td>✓</td></tr><tr><td>예약 후 새로고침해도 남음</td><td>대회의실 14:00~15:00 예약 → 새로고침</td><td>✓</td></tr><tr><td>같은 시간 중복 예약은 막힘</td><td>같은 회의실 14:30~15:30</td><td>✓</td></tr><tr><td>취소하면 칸이 비워짐</td><td>예약 칸 → 취소</td><td>✓</td></tr><tr><td>390px 에서 가로 스크롤 없음</td><td>창 좁히기</td><td>✓</td></tr></tbody></table><div class="dbnote"><span>확인 방식</span> 완료 기준 다섯 줄 하나씩 대조</div></div></div>
 </section>
@@ -1219,10 +1219,10 @@
   <div class="rule"></div>
   <div class="body"><div class="mid"><ol class="v1st"><li style="--d:0.00s"><em>1</em><span>Shift+Tab 으로 plan 모드</span></li><li style="--d:0.25s"><em>2</em><span>PRD.md 로 계획 요청</span></li><li style="--d:0.50s"><em>3</em><span>계획에서 MVP 밖 기능 빼기</span></li><li style="--d:0.75s"><em>4</em><span>승인</span></li></ol><div class="qk2"><b>확인</b><ul><li>태스크마다 PRD 기능 번호가 붙음</li><li>로그인 · 서버 저장 같은 제외 항목이 없음</li></ul></div></div></div>
 </section>
-<section class="slide lt" data-title="실습 1-6 ① 요청에 들어갈 것">
+<section class="slide lt" data-title="실습 1-6 ① 요청 항목">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-6</span></div>
-  <h2 class="s-title sm">실습 1-6 ① 요청에 들어갈 것</h2>
+  <h2 class="s-title sm">실습 1-6 ① 요청 항목</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v1sls"><div class="v1sl" style="--d:0.00s"><b>목표</b><span>PRD.md 대로 구현할 계획</span></div><div class="v1sl" style="--d:0.20s"><b>나누기</b><span>태스크 단위 · 하나씩 확인할 수 있게</span></div><div class="v1sl" style="--d:0.40s"><b>범위</b><span>PRD 의 제외 항목은 넣지 않기</span></div><div class="v1sl" style="--d:0.60s"><b>하지 말 것</b><span>계획 승인 전 파일 수정</span></div></div></div></div>
 </section>
@@ -1234,10 +1234,10 @@
   <div class="rule"></div>
   <div class="body"><div class="mid"><ol class="v1st"><li style="--d:0.00s"><em>1</em><span>태스크 하나 요청</span></li><li style="--d:0.25s"><em>2</em><span>서버 띄워 브라우저로 확인</span></li><li style="--d:0.50s"><em>3</em><span>그 기능의 완료 기준 대조</span></li><li style="--d:0.75s"><em>4</em><span>「커밋해 줘」</span></li><li style="--d:1.00s"><em>5</em><span>다음 태스크</span></li></ol><div class="qk2"><b>확인</b><ul><li>태스크마다 브라우저로 직접 눌러 봄</li><li>커밋 기록이 태스크 수만큼 쌓임</li></ul></div></div></div>
 </section>
-<section class="slide lt" data-title="실습 1-6 ② 요청에 들어갈 것">
+<section class="slide lt" data-title="실습 1-6 ② 요청 항목">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-6</span></div>
-  <h2 class="s-title sm">실습 1-6 ② 요청에 들어갈 것</h2>
+  <h2 class="s-title sm">실습 1-6 ② 요청 항목</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v1sls"><div class="v1sl" style="--d:0.00s"><b>태스크</b><span>「계획의 T3만」</span></div><div class="v1sl" style="--d:0.20s"><b>보여야 할 화면</b><span>끝나면 무엇이 보여야 하는지</span></div><div class="v1sl" style="--d:0.40s"><b>고칠 때</b><span>어디 · 지금 · 원하는 것</span></div><div class="v1sl" style="--d:0.60s"><b>확인 뒤</b><span>커밋 요청</span></div></div></div></div>
 </section>
@@ -1257,7 +1257,7 @@ c9d3f17  T5 예약 상세 · 취소
 
 <section class="slide dk" data-title="다음 단원">
   <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="v1end"><div class="v1got"><span>1-6에서 남은 것</span><b>동작하는 앱</b></div><a class="v1next" href="1-7-deploy.html"><span>1-7</span><b>배포</b><small>→ 공유 주소</small></a></div>
+  <div class="v1end"><div class="v1got"><span>1-6 산출물</span><b>동작하는 앱</b></div><a class="v1next" href="1-7-deploy.html"><span>1-7</span><b>배포</b><small>→ 공유 주소</small></a></div>
 </section>
 
     </div>

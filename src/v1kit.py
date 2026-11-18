@@ -62,7 +62,7 @@ def nextup(u):
         nxt = '<div class="v1next"><span>2부</span><b>바이브 코딩 심화</b><small>→ DB · 외부 연동 · 품질 관리</small></div>'
     return f'''<section class="slide dk" data-title="다음 단원">
   <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="v1end"><div class="v1got"><span>{u}에서 남은 것</span><b>{out}</b></div>{nxt}</div>
+  <div class="v1end"><div class="v1got"><span>{u} 산출물</span><b>{out}</b></div>{nxt}</div>
 </section>'''
 
 
@@ -79,7 +79,7 @@ def chat(turns, label="대화 예"):
     return f'<div class="v1chat"><div class="v1ch">{label}</div>{b}</div>'
 
 
-def brief(no, u, steps, slots, keys, checks, stuck, folder="내 프로젝트 폴더", example=FOLDER, slot_title="요청에 들어갈 것"):
+def brief(no, u, steps, slots, keys, checks, stuck, folder="내 프로젝트 폴더", example=FOLDER, slot_title="요청 항목"):
     """실습 진행 — 두 장으로 나눈다. ① 순서 + 확인 ② 요청에 들어갈 것.
     keys · stuck · folder · example 은 화면에 내지 않는다(호출부 호환용)."""
     st = "".join(f'<li style="--d:{i * .25:.2f}s"><em>{i + 1}</em><span>{x}</span></li>' for i, x in enumerate(steps))

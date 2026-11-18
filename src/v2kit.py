@@ -62,7 +62,7 @@ def nextup(u):
         nxt = '<a class="v1next" href="3-1-harness.html"><span>3부</span><b>하네스 엔지니어링</b><small>→ 내 업무 에이전트</small></a>'
     return f'''<section class="slide dk" data-title="다음 단원">
   <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="v1end"><div class="v1got"><span>{u}에서 남은 것</span><b>{out}</b></div>{nxt}</div>
+  <div class="v1end"><div class="v1got"><span>{u} 산출물</span><b>{out}</b></div>{nxt}</div>
 </section>'''
 
 

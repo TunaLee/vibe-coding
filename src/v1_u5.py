@@ -218,7 +218,7 @@ def slides():
                   "복사본으로 관리", [("파일마다 사본", "기획서_최종_진짜.md"), ("바뀐 곳", "눈으로 비교")],
                   "Git으로 관리", [("파일은 하나", "기획서.md 그대로"), ("바뀐 곳", "커밋마다 자동으로 남음")])
               + note("commit", "저장소에 변경을 기록 (git 공식 문서)"), T),
-        light("커밋 하나에 남는 것", viz2.tiles([
+        light("커밋 구성", viz2.tiles([
             ("바뀐 내용", "어느 파일의 어느 줄"), ("메시지", "「버튼 추가」"),
             ("시각 · 작성자", "언제 · 누가"), ("고유 번호", "8fcbe80 같은 해시")], 4)
               + note("메시지", "무엇을 바꿨는지 한 줄 · 되돌릴 시점을 찾는 이름표"), T),
@@ -230,7 +230,7 @@ def slides():
               + code("터미널 · git revert 뒤 git log --oneline", esc(
                   "5b00623 Revert \"색상 수정\"\n0b491e3 색상 수정\n8fcbe80 버튼 추가"))
               + src(("git-scm · git", "https://git-scm.com/docs/git")), T),
-        light("말로 하는 Git 작업", viz2.maprows([
+        light("Git 작업 요청", viz2.maprows([
             ("「지금 상태 커밋해 줘」", "git add · git commit", "메시지도 Claude가 씀"),
             ("「커밋 기록 보여 줘」", "git log", "시점 · 메시지 목록"),
             ("「방금 고친 거 취소해 줘」", "git restore", "커밋 전 수정 버림"),
@@ -246,7 +246,7 @@ def slides():
               + src(("Pro Git · What is Git?", "https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F"),
                     ("GitHub Docs · About Git", "https://docs.github.com/en/get-started/using-git/about-git")), T),
         light("코드 변경과 diff", diffflow(), T),
-        light("커밋하는 시점", viz2.tiles([
+        light("커밋 시점", viz2.tiles([
             ("기능 하나가 됐을 때", "「로그인 버튼 동작」"), ("크게 바꾸기 전", "디자인을 갈아엎기 전"),
             ("확인이 끝났을 때", "브라우저로 보고 이상 없음")], 3)
               + flow([("요청", "기능 하나"), ("확인", "브라우저"), ("커밋", "세이브"), ("다음 요청", "")], hl=2)

@@ -1057,10 +1057,10 @@
   <div class="body"><div class="mid"><div class="v1cmask"><span>요청</span><b>공휴일 API 키를 .env 에 두고 .gitignore 에 추가해 줘</b></div><div class="v1cmap"><div class="v1cmt"><span>파일 · 코드 · 예</span><span>뜻</span></div><div class="v1cmr" style="--d:0.30s"><code>.env</code><i>→</i><span>비밀 값을 적는 파일</span></div><div class="v1cmr" style="--d:0.65s"><code>HOLIDAY_API_KEY=발급받은_키</code><i>→</i><span>이름 = 값 · 한 줄에 하나</span></div><div class="v1cmr" style="--d:1.00s"><code>.gitignore</code><i>→</i><span>Git 이 무시할 파일 목록</span></div><div class="v1cmr" style="--d:1.35s"><code>.env</code><i>→</i><span>이 줄 하나 · .env 는 커밋 · push 제외</span></div><div class="v1cmr" style="--d:1.70s"><code>process.env.HOLIDAY_API_KEY</code><i>→</i><span>코드에서 이름으로 값 읽기</span></div></div><div class="dbnote"><span>확인</span> git status 에 .env 가 안 보이면 정상</div></div></div>
 </section>
 
-<section class="slide lt" data-title="push 할 때 .env">
+<section class="slide lt" data-title="push 와 .env">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">2-6</span></div>
-  <h2 class="s-title sm">push 할 때 .env</h2>
+  <h2 class="s-title sm">push 와 .env</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v2mv" style="height:200px"><div class="v2mvn" style="left:16.67%; width:30.3%; --l:0.4s"><b>프로젝트 폴더</b><span>app.js · .env</span></div><div class="v2mvn" style="left:50.00%; width:30.3%; --l:1.5s"><b>git commit · push</b><span>.gitignore 확인</span></div><div class="v2mvn" style="left:83.33%; width:30.3%; --l:2.7s"><b>GitHub</b><span>공개 저장소</span></div><i class="v2mva" style="left:33.33%">→</i><i class="v2mva" style="left:66.67%">→</i><div class="v2mvt" style="--a:16.67%; --b:50.00%; --d:0.4s">app.js</div><div class="v2mvt keep" style="--a:50.00%; --b:83.33%; --d:1.6s">app.js</div><div class="v2mvt" style="--a:16.67%; --b:50.00%; --d:3.0s">.env</div><div class="v2mvr no" style="left:50.00%; --d:4.2s">✕ .env · 제외</div><div class="v2mvr ok" style="left:83.33%; --d:5.0s">✓ 키 없음</div></div><div class="dbnote"><span>.gitignore</span> 목록에 있는 파일은 커밋 · push 에서 빠짐 · 키는 내 컴퓨터에만</div></div></div>
 </section>
@@ -1169,10 +1169,10 @@
   <div class="rule"></div>
   <div class="body"><div class="mid"><ol class="v1st"><li style="--d:0.00s"><em>1</em><span>인증키 발급</span></li><li style="--d:0.25s"><em>2</em><span>.env · .gitignore</span></li><li style="--d:0.50s"><em>3</em><span>서버 함수 · 공휴일 차단</span></li><li style="--d:0.75s"><em>4</em><span>Supabase MCP 연결</span></li><li style="--d:1.00s"><em>5</em><span>MCP 로 조회</span></li></ol><div class="qk2"><b>확인</b><ul><li>공휴일 시간표에 띠 · 예약 창 안 열림</li><li>.env 가 git status 에 없음</li></ul></div></div></div>
 </section>
-<section class="slide lt" data-title="실습 2-6 요청에 들어갈 것">
+<section class="slide lt" data-title="실습 2-6 요청 항목">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">2-6</span></div>
-  <h2 class="s-title sm">실습 2-6 요청에 들어갈 것</h2>
+  <h2 class="s-title sm">실습 2-6 요청 항목</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v1sls"><div class="v1sl" style="--d:0.00s"><b>목표</b><span>공휴일 예약 차단 · Supabase MCP</span></div><div class="v1sl" style="--d:0.20s"><b>입력</b><span>PRD v2 · 6 칸 · 인증키</span></div><div class="v1sl" style="--d:0.40s"><b>진행 방식</b><span>키는 서버 함수에서만 · 태스크 하나씩</span></div><div class="v1sl" style="--d:0.60s"><b>하지 말 것</b><span>키를 대화창 · 코드 · 커밋에 넣기</span></div></div></div></div>
 </section>
@@ -1187,7 +1187,7 @@
 
 <section class="slide dk" data-title="다음 단원">
   <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="v1end"><div class="v1got"><span>2-6에서 남은 것</span><b>API 키 · MCP 연결</b></div><a class="v1next" href="2-7-quality.html"><span>2-7</span><b>품질 관리 · 테스트 · 디버깅</b><small>→ 테스트 · 수정 기록</small></a></div>
+  <div class="v1end"><div class="v1got"><span>2-6 산출물</span><b>API 키 · MCP 연결</b></div><a class="v1next" href="2-7-quality.html"><span>2-7</span><b>품질 관리 · 테스트 · 디버깅</b><small>→ 테스트 · 수정 기록</small></a></div>
 </section>
 
     </div>

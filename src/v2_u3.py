@@ -117,7 +117,7 @@ def slides():
               + viz2.pair(
                   "API", [("부르는 쪽", "내 앱 코드"), ("형식", "서비스마다 다름"), ("쓰는 때", "이용자가 앱을 쓸 때")],
                   "MCP", [("부르는 쪽", "Claude Code · AI"), ("형식", "하나의 규격 · 말로 요청"), ("쓰는 때", "내가 앱을 만들 때")]), T),
-        light("앱 만들 때 쓰는 MCP", hub()
+        light("앱 개발용 MCP", hub()
               + src(("Supabase MCP", "https://supabase.com/docs/guides/getting-started/mcp"),
                     ("Playwright MCP", "https://github.com/microsoft/playwright-mcp"), MCP_DOC), T),
         light("Supabase MCP 대화 예", chat([

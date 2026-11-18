@@ -44,7 +44,7 @@ def slides():
             ("process.env.HOLIDAY_API_KEY", "코드에서 이름으로 값 읽기")],
             ask="공휴일 API 키를 .env 에 두고 .gitignore 에 추가해 줘", title="파일 · 코드 · 예")
               + note("확인", "git status 에 .env 가 안 보이면 정상"), T),
-        light("push 할 때 .env", lane([("프로젝트 폴더", "app.js · .env"), ("git commit · push", ".gitignore 확인"), ("GitHub", "공개 저장소")],
+        light("push 와 .env", lane([("프로젝트 폴더", "app.js · .env"), ("git commit · push", ".gitignore 확인"), ("GitHub", "공개 저장소")],
                                      [(0, 1, "app.js", .4, False), (1, 2, "app.js", 1.6, True), (0, 1, ".env", 3.0, False)],
                                      [(1, ".env · 제외", "no", 4.2), (2, "키 없음", "ok", 5.0)], h=200)
               + note(".gitignore", "목록에 있는 파일은 커밋 · push 에서 빠짐 · 키는 내 컴퓨터에만"), T),
