@@ -134,33 +134,80 @@ def langs():
             '<div class="v1lline"><span>기계에 가까운 말</span><b></b><span>사람에 가까운 말</span></div>')
 
 
-def ramen_flow():
-    """알고리즘 · 라면 끓이기 순서도 — 처리(순서) → ◇ 조건 → 아니오면 기다렸다 되돌아감(반복) → 예면 다음 → 끝.
-    도형이 흐름 순서대로 나타나고, 반복 화살표는 두 번 깜빡인다. 오른쪽은 도형 뜻."""
-    def box(x, y, w, t, d, cls=""):
-        return (f'<g class="v1fw {cls}" style="--d:{d}s"><rect x="{x - w / 2}" y="{y - 25}" width="{w}" height="50" rx="{25 if cls == "ov" else 10}"/>'
-                f'<text x="{x}" y="{y + 6}">{t}</text></g>')
-    def arr(path, d, lab="", lx=0, ly=0, cls=""):
-        t = f'<text class="lb" x="{lx}" y="{ly}">{lab}</text>' if lab else ""
-        return f'<g class="v1fw ar {cls}" style="--d:{d}s"><path d="{path}" marker-end="url(#v1fwA)"/>{t}</g>'
-    svg = ('<svg class="v1fwS" viewBox="0 0 900 360"><defs><marker id="v1fwA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">'
-           '<path d="M0 0L10 5L0 10z" fill="#3A4657"/></marker></defs>'
-           + box(65, 90, 100, "시작", .3, "ov") + arr("M115 90H158", .8)
-           + box(240, 90, 160, "물 550ml 붓기", 1.1) + arr("M320 90H363", 1.6)
-           + box(435, 90, 140, "불 켜기", 1.9) + arr("M505 90H533", 2.4)
-           + '<g class="v1fw dm" style="--d:2.7s"><path d="M535 90L620 40L705 90L620 140z"/><text x="620" y="96">물이 끓었나?</text></g>'
-           + arr("M705 90H738", 3.6, "아니오", 722, 58) + box(810, 90, 140, "1분 기다리기", 3.9)
-           + arr("M810 65V18H620V38", 4.8, "반복", 715, 12, "lp")
-           + arr("M620 140V253", 6.6, "예", 636, 200)
-           + box(620, 280, 160, "면 · 스프 넣기", 7.0) + arr("M540 280H492", 7.6)
-           + box(405, 280, 170, "4분 30초 끓이기", 7.9) + arr("M320 280H272", 8.4)
-           + box(205, 280, 130, "불 끄기", 8.7) + arr("M140 280H112", 9.2)
-           + box(65, 280, 90, "끝", 9.5, "ov") + "</svg>")
+def _fbox(x, y, w, t, d, cls="", r=None, h=50):
+    """순서도 칸 — r 이 있으면 처음엔 「?」, r 초에 글자가 드러남."""
+    txt = (f'<text class="qm" x="{x}" y="{y + 6}" style="--r:{r}s">?</text><text class="rv" x="{x}" y="{y + 6}" style="--r:{r}s">{t}</text>'
+           if r else f'<text x="{x}" y="{y + 6}">{t}</text>')
+    return (f'<g class="v1fw {cls}" style="--d:{d}s"><rect x="{x - w / 2}" y="{y - h / 2}" width="{w}" height="{h}" rx="{h / 2 if "ov" in cls else 10}"/>'
+            f'{txt}</g>')
+
+
+def _fdm(x, y, w, h, t, d, r=None):
+    pts = f"M{x - w / 2} {y}L{x} {y - h / 2}L{x + w / 2} {y}L{x} {y + h / 2}z"
+    txt = (f'<text class="qm" x="{x}" y="{y + 6}" style="--r:{r}s">?</text><text class="rv" x="{x}" y="{y + 6}" style="--r:{r}s">{t}</text>'
+           if r else f'<text x="{x}" y="{y + 6}">{t}</text>')
+    return f'<g class="v1fw dm" style="--d:{d}s"><path d="{pts}"/>{txt}</g>'
+
+
+def _farr(mk, path, d, lab="", lx=0, ly=0, cls="", r=None):
+    st = f' style="--r:{r}s"' if r else ""
+    t = f'<text class="lb{" rv" if r else ""}" x="{lx}" y="{ly}"{st}>{lab}</text>' if lab else ""
+    return f'<g class="v1fw ar {cls}" style="--d:{d}s"><path d="{path}" marker-end="url(#{mk})"/>{t}</g>'
+
+
+def _fmarker(mk):
+    return (f'<defs><marker id="{mk}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">'
+            '<path d="M0 0L10 5L0 10z" fill="#3A4657"/></marker></defs>')
+
+
+def milk_flow():
+    """알고리즘 · 우유와 아보카도 — 「우유 하나 사 와. 아보카도 있으면 6개 사 와」.
+    위: 부탁한 뜻(우유 1개 → ◇ 아보카도 → 아보카도 6개) · 아래: 남편이 한 일(◇ 아보카도 → 우유 6개). 오른쪽은 알고리즘 뜻."""
+    A = lambda *x, **k: _farr("v1mkA", *x, **k)
+    top = ('<svg class="v1fwS" viewBox="0 0 860 160">' + _fmarker("v1mkA")
+           + _fbox(45, 60, 80, "시작", 1.2, "ov") + A("M85 60H118", 1.5)
+           + _fbox(200, 60, 160, "우유 1개 사기", 1.8) + A("M280 60H318", 2.1)
+           + _fdm(420, 60, 200, 90, "아보카도 있나?", 2.4) + A("M520 60H573", 2.8, "예", 546, 48)
+           + _fbox(670, 60, 190, "아보카도 6개 사기", 3.1) + A("M765 60H797", 3.4)
+           + _fbox(828, 60, 60, "끝", 3.6, "ov")
+           + A("M420 105V140H828V87", 3.9, "아니오", 470, 132) + "</svg>")
+    bot = ('<svg class="v1fwS" viewBox="0 0 860 160">'
+           + _fbox(45, 60, 80, "시작", 5.4, "ov") + A("M85 60H118", 5.7)
+           + _fdm(220, 60, 200, 90, "아보카도 있나?", 6.0) + A("M320 60H373", 6.4, "예", 346, 48)
+           + _fbox(460, 60, 170, "우유 6개 사기", 6.8, "bad") + A("M545 60H797", 7.4)
+           + _fbox(828, 60, 60, "끝", 7.6, "ov")
+           + A("M220 105V135H373", 8.0, "아니오", 270, 128) + _fbox(460, 135, 170, "우유 1개 사기", 8.2, h=40)
+           + A("M545 135H828V87", 8.4) + "</svg>")
+    left = (f'<div class="v1mkQ" style="--d:.3s"><span>부탁</span>「우유 하나 사 와. 아보카도 있으면 6개 사 와」</div>'
+            f'<div class="v1mkR" style="--d:1.2s"><em>부탁한 뜻</em>{top}</div>'
+            f'<div class="v1mkR x" style="--d:5.4s"><em>남편이 한 일</em>{bot}</div>')
     side = "".join(f'<div class="v1fwk" style="--d:{d}s"><i class="{c}"></i><b>{h}</b><span>{x}</span></div>' for c, h, x, d in [
-        ("bx", "처리 · 순서", "정해진 차례대로 할 일", 1.1), ("dm", "조건", "예 · 아니오 갈림길", 2.7),
-        ("lp", "반복", "조건이 맞을 때까지 되돌아감", 4.8), ("ov", "시작 · 끝", "정해진 끝이 있음", 9.5)])
-    return (f'<div class="v1fwW"><div>{svg}</div><div class="v1fwR"><div class="v1fwD"><b>알고리즘</b>'
+        ("bx", "순서", "무엇을 먼저 하나", 9.4), ("dm", "조건", "「있으면」이 어디에 걸리나", 10.0), ("ov", "끝", "언제 멈추나", 10.6)])
+    return (f'<div class="v1fwW"><div class="v1mkL">{left}</div><div class="v1fwR"><div class="v1fwD" style="--d:9s"><b>알고리즘</b>'
             f'<span>문제를 푸는 순서 있는 절차 · 그림으로 그리면 순서도</span></div>{side}</div></div>')
+
+
+def ramen_flow():
+    """생각해 보기 · 라면 끓이기 — 빈 순서도(칸마다 「?」)가 먼저 나오고, 6초부터 칸 글자가 하나씩 드러남.
+    처리(순서) → ◇ 조건 → 아니오면 기다렸다 되돌아감(반복) → 예면 다음 → 끝."""
+    A = lambda *x, **k: _farr("v1fwA", *x, **k)
+    svg = ('<svg class="v1fwS" viewBox="0 0 900 360">' + _fmarker("v1fwA")
+           + _fbox(65, 90, 100, "시작", .3, "ov") + A("M115 90H158", .5)
+           + _fbox(240, 90, 160, "물 550ml 붓기", .7, r=6) + A("M320 90H363", .9)
+           + _fbox(435, 90, 140, "불 켜기", 1.1, r=7.2) + A("M505 90H533", 1.3)
+           + _fdm(620, 90, 170, 100, "물이 끓었나?", 1.5, r=8.4)
+           + A("M705 90H738", 1.7, "아니오", 722, 58, r=8.4) + _fbox(810, 90, 140, "1분 기다리기", 1.9, r=9.6)
+           + A("M810 65V18H620V38", 2.1, "반복", 715, 12, "lp", r=10.8)
+           + A("M620 140V253", 2.3, "예", 636, 200, r=8.4)
+           + _fbox(620, 280, 160, "면 · 스프 넣기", 2.5, r=12) + A("M540 280H492", 2.7)
+           + _fbox(405, 280, 170, "4분 30초 끓이기", 2.9, r=13.2) + A("M320 280H272", 3.1)
+           + _fbox(205, 280, 130, "불 끄기", 3.3, r=14.4) + A("M140 280H112", 3.5)
+           + _fbox(65, 280, 90, "끝", 3.7, "ov") + "</svg>")
+    side = "".join(f'<div class="v1fwk" style="--d:{d}s"><i class="{c}"></i><b>{h}</b><span>{x}</span></div>' for c, h, x, d in [
+        ("bx", "처리", "무엇부터 하나", 4.2), ("dm", "조건", "어디서 갈라지나", 4.6),
+        ("lp", "반복", "어디로 되돌아가나", 5.0), ("ov", "끝", "언제 멈추나", 5.4)])
+    return (f'<div class="v1fwW"><div>{svg}</div><div class="v1fwR"><div class="v1fwD" style="--d:3.9s"><b>생각해 보기</b>'
+            f'<span>라면 끓이기 · 빈칸 「?」 채우기</span></div>{side}</div></div>')
 
 
 def flowchart():
@@ -253,7 +300,8 @@ def slides():
                   ("알고리즘 이해", "피드백의 기준 · 순서 · 조건 · 예외 읽기")])
               + "</div></div>"
               + src(("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")), T),
-        light("알고리즘", ramen_flow(), T),
+        light("알고리즘", milk_flow(), T),
+        light("라면 끓이기 알고리즘", ramen_flow(), T),
         light("사과 먹기 알고리즘", '<div class="v1shot"><figure><img src="img/v1_algo_steps.webp" alt="세 개의 디딤돌 · 집기 · 깨물기 · 씨 뱉기"/>'
               '<figcaption>사과 먹기 · 디딤돌 세 개</figcaption></figure>'
               + algo_list([("①", "과일이 사과인가? 아니면 멈춤", "조건"), ("②", "손으로 집기", "순서"), ("③", "한 입 깨물기", "순서"),
@@ -459,6 +507,18 @@ CSS = """
   .v1fwR{display:flex; flex-direction:column; gap:12px;}
   .v1fwD{background:#16233A; color:#fff; border-radius:14px; padding:14px 18px;}
   .v1fwD b{display:block; font-size:22px; margin-bottom:4px;} .v1fwD span{font-size:16px; color:#D6DEEA;}
+  .v1fw .qm{fill:#E07A12; font-size:26px; animation:v1fwOut .4s var(--r) forwards;}
+  .v1fw .rv{opacity:0; animation:v1fwIn .5s var(--r) forwards;}
+  .v1fw.bad rect{fill:#FDECEA; stroke:#C0392B; stroke-width:3;} .v1fw.bad text{fill:#A93226;}
+  .v1fw.bad{animation:v1fwIn .6s var(--d) forwards, v1fwP 1s calc(var(--d) + .8s) 2;}
+  .v1fwD{opacity:0; animation:v1fwIn .6s var(--d) forwards;}
+  .v1mkL{display:flex; flex-direction:column; gap:10px;}
+  .v1mkQ{font-size:21px; font-weight:800; color:#16233A; background:#FFF8F0; border:2px solid #F28C28; border-radius:14px; padding:10px 16px;
+    opacity:0; animation:v1fwIn .6s var(--d) forwards;}
+  .v1mkQ span{font-size:14px; color:#fff; background:#F28C28; border-radius:8px; padding:3px 9px; margin-right:10px; vertical-align:middle;}
+  .v1mkR{border:1.5px solid #D9DDE3; border-radius:14px; padding:8px 12px 2px; opacity:0; animation:v1fwIn .6s var(--d) forwards;}
+  .v1mkR.x{border-color:#E6B0AA; background:#FFFAFA;}
+  .v1mkR em{font-style:normal; font-size:15px; font-weight:800; color:#6B7785;} .v1mkR.x em{color:#A93226;}
   .v1fwk{display:grid; grid-template-columns:34px 1fr; gap:2px 12px; align-items:center; background:#F4F6F9; border-radius:12px; padding:10px 14px;
     opacity:0; animation:v1fwIn .6s var(--d) forwards;}
   .v1fwk i{grid-row:1/span 2; width:30px; height:22px; border:2.5px solid #1F3A5F; border-radius:5px; background:#fff;}
@@ -468,6 +528,7 @@ CSS = """
   .v1fwk b{font-size:18px; color:#16233A;} .v1fwk span{font-size:15px; color:#3A4657;}
   @keyframes v1fwIn{from{opacity:0} to{opacity:1}}
   @keyframes v1fwP{50%{opacity:.25}}
-  @media print{.v1fw,.v1fwk{opacity:1; animation:none}}
+  @keyframes v1fwOut{to{opacity:0}}
+  @media print{.v1fw,.v1fwk,.v1fwD,.v1mkQ,.v1mkR,.v1fw .rv{opacity:1; animation:none} .v1fw .qm{display:none}}
   .v1vid video{width:100%; max-height:440px; border:1.5px solid #D9DDE3; border-radius:12px; box-shadow:0 8px 22px rgba(15,27,45,.10); background:#F7EEDB; display:block;}
 """
