@@ -28,7 +28,7 @@ def slides():
         light("컨텍스트의 구성", anim.context_fill()
               + note("참고", "Claude Code 문서 「Explore the context window」 · NetworkChuck 「Why LLMs get dumb」 · IBM Technology 「What is a Context Window?」"), T),
         # ── CLAUDE.md
-        light("대화마다 먼저 읽는 메모", viz2.pair(
+        light("CLAUDE.md 자동 로드", viz2.pair(
             "CLAUDE.md 없이", [("새 대화마다 다시 설명", "「원본은 고치지 마 · 결과는 out/ 에」"), ("설명을 빠뜨리면", "원본에 바로 씀")],
             "CLAUDE.md 있으면", [("대화 시작 때 자동으로 읽음", "요청 전에 규칙이 올라가 있음"), ("요약 뒤에도", "디스크에서 다시 읽어 올림")])
               + note("공식 문서", "새 대화는 빈 컨텍스트로 시작 · CLAUDE.md 가 대화 사이에 규칙을 이어 줌"), T),
@@ -40,7 +40,7 @@ def slides():
                   ("「고객 명단은 빼 줘」", "개인정보는 결과에 옮기지 않는다", "")], "또 한 말", "CLAUDE.md 한 줄")
               + note("공식 문서", "다시 설명하게 되는 것을 적어 두는 곳"), T),
         # ── 범위
-        light("적용 범위 세 곳", viz2.tiles([
+        light("CLAUDE.md 적용 범위", viz2.tiles([
             ("Project · ./CLAUDE.md", "이 프로젝트 · git으로 팀 공유"), ("User · ~/.claude/CLAUDE.md", "내 모든 프로젝트 · 나만"),
             ("Local · ./CLAUDE.local.md", "이 프로젝트 · 나만 · .gitignore 에 추가")], 3)
               + code("파일 위치", esc(
@@ -55,7 +55,7 @@ def slides():
               + '<div class="twocol"><div>' + code("~/.claude/CLAUDE.md · 예", esc("- 답은 한국어로 짧게\n- 날짜는 11/10 처럼 월/일"))
               + "</div><div>" + code("CLAUDE.local.md · 예", esc("- 내 노션 회의록 페이지: 주간 회의 2026\n- 결과 확인은 VS Code 로"))
               + "</div></div>", T),
-        light("겹친 범위의 읽는 순서", flow([("관리 정책", "회사"), ("User", "~/.claude/"), ("Project", "./CLAUDE.md"), ("Local", "./CLAUDE.local.md")], hl=2)
+        light("범위가 겹칠 때의 우선순위", flow([("관리 정책", "회사"), ("User", "~/.claude/"), ("Project", "./CLAUDE.md"), ("Local", "./CLAUDE.local.md")], hl=2)
               + viz2.pair(
                   "어긋난 예", [("User 「결과는 바탕화면에」", "Project 「결과는 out/ 에」"), ("결과", "어느 쪽에 저장할지 정해지지 않음")],
                   "맞춘 예", [("User 저장 위치 줄을 뺌", "Project 「결과는 out/ 에」 한 곳에만"), ("결과", "늘 out/")], hl="r")

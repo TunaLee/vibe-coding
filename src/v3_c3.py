@@ -41,7 +41,7 @@ def slides():
     return [divider("03", "MCP 연결", "")] + [
         # ── 배경 ──
         pick("도구가 필요한 이유", t),
-        light("노션에 있는 회의록", viz2.pair(
+        light("노션 회의록", viz2.pair(
             "도구 없이", [("회의록 위치", "노션 페이지 · Claude는 열지 못함"), ("사람이 하는 일", "페이지 복사 → 대화창에 붙여 넣기"),
                         ("다음 회의록도", "같은 복사 · 붙여 넣기")],
             "노션 도구가 있으면", [("찾기", "notion-search · 제목으로 페이지 찾기"), ("읽기", "notion-fetch · 페이지 내용 가져오기"),
@@ -68,7 +68,7 @@ def slides():
                   "├── 클라이언트 ② ──── 슬랙 MCP 서버\n"
                   "└── 클라이언트 ③ ──── 구글 드라이브 MCP 서버"))
               + note("서버마다 하나", "Claude Code(호스트)가 연결한 서버 수만큼 클라이언트를 만듦"), t),
-        light("서버가 보내는 도구 목록 예", code("노션 MCP · 도구 목록 일부", esc(
+        light("MCP 도구 목록 예시", code("노션 MCP · 도구 목록 일부", esc(
             "notion-search      페이지 · 데이터베이스를 제목이나 주제로 찾기\n"
             "notion-fetch       페이지 · 데이터베이스 내용 열기\n"
             "notion-query-meeting-notes   회의록을 제목 등으로 찾기\n"
@@ -81,7 +81,7 @@ def slides():
             "로컬 · 내 PC에서 실행", [("예", "내 PC 파일 · 사내 DB"), ("등록", "<code>claude mcp add 이름 -- 실행 명령</code>")],
             "URL · 인터넷 주소로 접속", [("예", "노션 · 슬랙 · 구글 드라이브"), ("등록", "<code>claude mcp add --transport http 이름 주소</code>")])
               + note("업무 서비스", "대부분 URL 연결 · 로그인은 /mcp 에서"), t),
-        light("연결 범위 세 곳", viz2.tiles([
+        light("MCP 연결 범위", viz2.tiles([
             ("Local · 기본", "이 프로젝트 · 나만 · <code>~/.claude.json</code>"), ("Project", "이 프로젝트 · 팀 공유 · <code>.mcp.json</code>"),
             ("User", "내 모든 프로젝트 · 나만 · <code>~/.claude.json</code>")], 3)
               + code(".mcp.json · Project 범위 예", esc(

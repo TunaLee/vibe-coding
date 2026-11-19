@@ -24,7 +24,7 @@ def side(title, src, rows, cols=1):
 
 def background():
     return [
-        light("매번 같은 설명", viz2.tiles([
+        light("반복 설명 문제", viz2.tiles([
             ("회의록 정리", "「결정 · 할 일 · 열린 질문으로 나눠 줘」"), ("주간 보고", "「지난주 대비 · 경고는 빨간색」"),
             ("메일 답장", "「규정 근거 한 줄 · 존댓말」")], 3)
               + code("회의록마다 같은 설명 · 예", esc(
@@ -62,7 +62,7 @@ def structure():
               + note("회의록 실습", "프로젝트 위치 · <code>labs/meeting_agent/.claude/skills/</code>"), T),
         light("Skill 폴더 구조", code("폴더", esc(tree))
               + note("SKILL.md 하나면 시작", "양식 · 스크립트는 필요해질 때 추가"), T),
-        light("frontmatter의 두 줄", side("SKILL.md 맨 위", FRONT, [
+        light("frontmatter 필수 항목", side("SKILL.md 맨 위", FRONT, [
             ("name", "/ 메뉴에 뜨는 이름 · 생략하면 폴더 이름"), ("description", "무엇을 · 언제 · Claude가 고르는 기준"),
             ("--- 사이", "YAML · 모든 필드는 선택 · description 권장")]), T),
         light("자주 쓰는 추가 필드", viz2.tiles([
@@ -96,7 +96,7 @@ def calling():
             "자동", [("언제", "요청이 description 과 맞을 때"), ("예", "「11/10 회의록 정리해 줘」")],
             "직접", [("언제", "/ 뒤에 Skill 이름"), ("예", "<code>/meeting-notes 11/10</code> → 11/10 이 인자로")], hl="r")
               + note("인자", "본문의 <code>$ARGUMENTS</code> 자리에 / 뒤의 말이 들어감"), T),
-        light("사람만 부르는 Skill", side("SKILL.md 맨 위", "---\nname: send-summary\ndescription: 정리본을 슬랙에 보낼 때\ndisable-model-invocation: true\n---", [
+        light("직접 호출 전용 Skill", side("SKILL.md 맨 위", "---\nname: send-summary\ndescription: 정리본을 슬랙에 보낼 때\ndisable-model-invocation: true\n---", [
             ("자동 호출 꺼짐", "Claude가 스스로 부르지 않음"), ("/send-summary 로만", "사람이 시작"),
             ("맞는 일", "발송 · 배포처럼 시점을 사람이 정할 일")]), T),
         pick("Skill과 command의 차이", T),
@@ -114,7 +114,7 @@ def good_skill():
           "| 할 일 | 담당 | 기한 | 상태 | 근거 |\n"
           "| 보안팀 미팅 잡기 | 이준호 | 기한 미정 | - | 「준호님이 보안팀 미팅 잡기로」 |")
     return [
-        light("좋은 Skill의 네 요소", viz2.tiles([
+        light("좋은 Skill의 요소", viz2.tiles([
             ("① 언제 쓰는지", "description · 요청 예문"), ("② 단계별 절차", "번호 · 한 줄에 한 동작"),
             ("③ 산출물 형식", "표 머리 · 저장 위치"), ("④ 예시", "잘 된 결과 한 줄")], 4)
               + viz2.maprows([
@@ -134,7 +134,7 @@ def good_skill():
         light("④ 예시", side("SKILL.md 에 붙이는 예시", ex, [
             ("원본에서 고름", "11/10 회의록 · 기한이 없던 할 일"), ("형식을 보여 줌", "근거는 원문 그대로"),
             ("한두 줄", "많으면 예시를 베끼려 함")]), T),
-        ba("흐린 절차와 구체적 절차", T,
+        ba("모호한 절차와 구체적 절차", T,
            "1. 회의록을 잘 정리한다\n2. 중요한 것 위주로\n3. 깔끔한 형식으로\n\n→ 「잘 · 중요 · 깔끔」은 매번 다르게 해석",
            "2. 결정 · 할 일 · 열린 질문으로 나눈다\n3. 할 일마다 담당 · 기한 · 근거\n   기한이 없으면 「기한 미정」\n\n→ 누가 해도 같은 결과"),
     ]

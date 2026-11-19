@@ -224,7 +224,7 @@ def slides():
               + note("메시지", "무엇을 바꿨는지 한 줄 · 되돌릴 시점을 찾는 이름표"), T),
         light("커밋 기록 쌓기", stack()
               + src(("참고 · 혼잡스 「바이브코딩 한 장 지도」", "https://www.youtube.com/watch?v=HNtS6WGGhNU")), T),
-        light("되돌리기 두 가지", viz2.pair(
+        light("되돌리기 방법", viz2.pair(
             "아직 커밋 전", [("restore", "마지막 커밋 상태로 파일을 되돌림"), ("쓰는 때", "방금 고친 것이 마음에 안 들 때")],
             "이미 커밋한 뒤", [("revert", "그 커밋을 되돌리는 새 커밋을 만듦"), ("기록", "지우지 않고 「되돌림」도 남김")], hl="r")
               + code("터미널 · git revert 뒤 git log --oneline", esc(

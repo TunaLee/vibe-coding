@@ -309,12 +309,12 @@ def slides():
               + src(("GitHub · 2021-06-29", "https://github.blog/2021-06-29-introducing-github-copilot-ai-pair-programmer/"),
                     ("OpenAI · 2022-11-30", "https://openai.com/index/chatgpt/"),
                     ("Anthropic · 2025-05-22", "https://www.anthropic.com/news/claude-4")), T),
-        light("자동완성 방식 예", '<div class="v1mode"><div>' + autocomplete_anim()
+        light("자동완성 방식", '<div class="v1mode"><div>' + autocomplete_anim()
               + '</div><div>' + viz2.tiles([("사람", "파일 · 위치 · 첫 줄 직접 입력"), ("AI", "회색 글자로 다음 줄 제안 · Tab 으로 수락"),
                                             ("AI가 파악", "앞뒤 코드")], 1) + '</div></div>'
               + src(("GitHub Copilot 문서 · inline suggestions", "https://docs.github.com/en/copilot/using-github-copilot/getting-code-suggestions-in-your-ide-with-github-copilot")), T),
-        light("대화형 방식 예", chat_anim("chat"), T),
-        light("위임형 방식 예", chat_anim("agent")
+        light("대화형 방식", chat_anim("chat"), T),
+        light("위임형 방식", chat_anim("agent")
               + src(("Claude Code 문서 · How Claude Code works", "https://code.claude.com/docs/en/how-claude-code-works")), T),
         light("AI 코딩 도구 사용 현황", big([("73", "%", "AI 사용자 중 코딩 도우미 · 에이전트 매일 사용"),
                                            ("26", "%", "에이전트 · 자동 작업 흐름 사용"),
@@ -355,7 +355,7 @@ def slides():
             ("다 됐으면 보고", "도구 호출 없음 → 답", "루프 끝")], "인턴", "에이전트")), T),
         light("에이전트 루프", anim.agent_loop()
               + src(("Claude Code 문서 · How Claude Code works", "https://code.claude.com/docs/en/how-claude-code-works")), T),
-        light("용어의 유래", quote(
+        light("바이브코딩의 유래", quote(
             "내가 <mark>「바이브코딩」</mark>이라고 부르는 새로운 코딩 방식이 있다. 느낌(vibe)에 완전히 몸을 맡기고, "
             "AI의 빠른 발전을 받아들이고, 코드가 있다는 사실조차 잊는 방식이다.",
             "Andrej Karpathy · X · 2025-02-02 · 원문 「There's a new kind of coding I call “vibe coding”…」")
@@ -365,7 +365,7 @@ def slides():
               + src(("Karpathy · 2023-01-24", "https://x.com/karpathy/status/1617979122625712128"),
                     ("Karpathy · 2025-02-02", "https://x.com/karpathy/status/1886192184808149383"),
                     ("Collins · 2025-11-06", "https://blog.collinsdictionary.com/language-lovers/collins-word-of-the-year-2025-ai-meets-authenticity-as-society-shifts/")), T),
-        light("AI가 혼자 끝내는 작업 길이", '<div class="mwrap">' + metr_chart() + '<div class="mcards">'
+        light("AI가 맡을 수 있는 작업 길이", '<div class="mwrap">' + metr_chart() + '<div class="mcards">'
               + '<div class="bn hl"><div class="bv">105<small>일</small></div><div class="bl">작업 길이 2배 주기 (2024년 이후)</div></div>'
               + '<div class="bn"><div class="bv">작업 길이</div><div class="bl">사람이 하면 걸리는 시간 기준</div></div>'
               + '</div></div>' + src(METR_TH), T),
@@ -377,12 +377,12 @@ def slides():
               + note("배포", "공개 · 운영은 만들기와 별도 과정 (1-7)")
               + src(("levelsio · X", "https://x.com/levelsio/status/1899596115210891751"),
                     ("Karpathy · MenuGen", "https://karpathy.bearblog.dev/vibe-coding-menugen/")), T),
-        light("가능성과 한계", viz2.fit(
+        light("바이브코딩의 가능성과 한계", viz2.fit(
             [("화면 1~3개 웹 페이지", "예약 · 투표 · 체크리스트"), ("업무 보조 도구", "계산기 · 자료 정리"), ("시제품", "아이디어 시연용 화면")],
             [("돈 · 개인정보 처리 서비스", "전문 보안 점검 필요"), ("동시 사용자가 많은 서비스", "서버 · DB 설계 필요"),
              ("코드 확인 없는 운영", "장애 원인 추적 어려움")],
             gt="지금 만들기 좋은 앱", bt="아직 어려운 앱"), T),
-        light("요청과 결과", '<div class="v1core">'
+        light("요청한 대로 결과를 얻는 과정", '<div class="v1core">'
               '<div class="bx me"><span>내 요청</span><b>「로그인 화면 만들어 줘」</b></div><i>→</i>'
               '<div class="bx ai"><span>AI 작업</span><b>읽기 · 작성 · 실행 · 확인</b></div><i>→</i>'
               '<div class="bx out"><span>결과</span><b>로그인 화면</b></div>'
@@ -390,7 +390,7 @@ def slides():
               + flow([("기획서", "무엇을 · 누구를 (1-3)"), ("PRD", "기능 · 완료 기준 (1-4)"), ("Git", "되돌릴 저장 시점 (1-5)"),
                       ("작게 요청 · 확인", "기능 하나씩 (1-6)"), ("공개 전 점검", "키 · 개인정보 (1-7)")], hl=-1)
               + note("1부", "요청에 맞는 결과를 얻는 과정 · 기획서 → PRD → Git → 요청 · 확인 → 배포"), T),
-        light("1부 완성 화면", shot("room_main.webp", "회의실 예약 · 1부 공통 예제 완성본", [
+        light("1부 결과물", shot("room_main.webp", "회의실 예약 · 1부 공통 예제 완성본", [
             ("하루 시간표", "회의실 3곳 · 30분 단위"), ("예약", "빈 칸 클릭 · 이미 찬 시간은 예약 불가"),
             ("공유", "배포 주소 (1-7)"), ("내 앱", "같은 순서로 하나 더")]), T),
     ]

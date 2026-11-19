@@ -978,7 +978,7 @@ def ch5():
         stat("여러 말, 한 마차", "Ch6",
              '<div class="phwide">' + photo("horse_team.jpg", "여러 말을 한 마차에", "마구로 묶여야 한 방향으로 끈다 = 멀티에이전트") + "</div>",
              PH_TEAM),
-        light("단일 Agent의 한계와 해소", viz2.single_to_multi(), "Ch6"),
+        light("단일 Agent의 한계", viz2.single_to_multi(), "Ch6"),
         light("IT 팀에 비유한 멀티에이전트", flow([
             ("기획자", "사용자 · 완료 기준"), ("개발팀장", "메인 Agent · 나누고 합침"),
             ("개발팀원 여럿", "Sub Agent · 각자 책상"), ("QA", "검증 Agent · 판정만"), ("팀장 보고", "결과 하나로")], hl=1)

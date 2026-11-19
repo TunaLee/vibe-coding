@@ -50,7 +50,7 @@ def cc_lanes():
 def slides():
     return [
         # ── 도구 네 개
-        light("1부의 도구 네 개", flow([("Claude", "대화형 AI · 기획서 · PRD (1-3 · 1-4)"), ("Claude Code", "위임형 AI · 앱 코드 (1-6)"),
+        light("1부 실습 도구", flow([("Claude", "대화형 AI · 기획서 · PRD (1-3 · 1-4)"), ("Claude Code", "위임형 AI · 앱 코드 (1-6)"),
                                       ("GitHub", "코드 · 변경 기록 보관 (1-5 · 1-7)"), ("Vercel", "배포 · 공개 주소 (1-7)")]), T),
         # ── Claude
         light("Claude", '<div class="twocol"><div>'
@@ -66,7 +66,7 @@ def slides():
         # ── Claude Code
         light("Claude와 Claude Code", cc_lanes()
               + note("차이", "내 컴퓨터 파일에 AI 손이 닿는가 · Claude 는 글로 답함 · Claude Code 는 파일을 직접 만들고 고침"), T),
-        light("Claude Code를 쓰는 곳", viz2.tiles([
+        light("Claude Code 사용 환경", viz2.tiles([
             ("터미널", "명령어 창 · 기능이 가장 많음"), ("VS Code", "확장 프로그램 · 파일을 보며"),
             ("JetBrains", "플러그인"), ("데스크톱 앱", "macOS · Windows"), ("웹", "claude.ai/code · 클라우드")], 5)
               + note("공통", "어디서 쓰든 같은 엔진 · 같은 설정 · 같은 CLAUDE.md")
@@ -131,15 +131,15 @@ def slides():
               ["폴더 열기", "로그인", "첫 요청"],
               ["Claude Code 가 폴더 내용을 답함", "파일이 새로 생기지 않음"],
               "로그인 창이 안 뜨면 VS Code 재시작", folder="바탕화면/내 프로젝트 폴더"),
-        light("첫 요청 결과 예", '<div class="twocol"><div>'
+        light("첫 요청 결과", '<div class="twocol"><div>'
               + chat([("me", "이 폴더에 지금 뭐가 있는지 알려 줘. 아직 파일은 만들지 마"),
-                      ("ai", "이 폴더는 비어 있다.\n파일 · 하위 폴더가 없다.\n만들 앱을 알려 주면 구조를 제안한다.")], "Claude Code 대화 예")
+                      ("ai", "이 폴더는 비어 있다.\n파일 · 하위 폴더가 없다.\n만들 앱을 알려 주면 구조를 제안한다.")], "Claude Code 대화")
               + "</div><div>"
               + viz2.tiles([("계정", "Claude Pro 이상 로그인"), ("설치", "claude --version 이 버전 번호 표시"),
                             ("폴더", "새 파일 없음")], 1)
               + "</div></div>", T),
         # ── 실습 ③ 위임형 첫 작업
-        light("delegate_todo 시작 상태", shot("v1_u2_todo_start.webp", "delegate_todo · index.html 을 브라우저로 연 화면", [
+        light("delegate_todo 초기 화면", shot("v1_u2_todo_start.webp", "delegate_todo · index.html 을 브라우저로 연 화면", [
             ("보이는 것", "할 일 두 개 · 입력칸 · 추가 버튼"), ("동작 안 함", "추가 버튼 · 체크 줄 긋기 · 남은 개수"),
             ("파일", "index.html · style.css · app.js")]), T),
         brief("1-2 ③", T, ["delegate_todo 폴더를 VS Code 로 열기", "index.html 을 브라우저로 열어 추가 버튼 눌러 보기",
@@ -149,7 +149,7 @@ def slides():
               ["목표 한 줄", "브라우저 확인", "하나씩"],
               ["추가한 할 일이 목록에 생김", "체크하면 줄이 그어짐", "「남은 할 일: N」 표시"],
               "버튼이 그대로면 브라우저 새로고침 · 증상 그대로 전달", folder="delegate_todo", example=""),
-        light("위임형 진행 화면 예", '<div class="twocol"><div>'
+        light("Claude Code 작업 화면", '<div class="twocol"><div>'
               + chat([("me", "추가 버튼을 누르면 입력한 할 일이 목록에 생기게 해 줘"),
                       ("ai", "① index.html · app.js 를 읽었다.\n② app.js 에 추가 버튼 처리 코드를 넣었다.\n③ 입력칸이 비면 추가하지 않게 했다.\n브라우저를 새로고침해 확인해 줘.")], "Claude Code 화면 예")
               + "</div><div>"

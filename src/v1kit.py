@@ -47,7 +47,7 @@ def roadmap(u):
     for i, (c, t, m, out) in enumerate(UNITS):
         cls = "on" if i == cur else ("done" if i < cur else "")
         cells.append(f'<a class="v1u {cls}" href="{file_of(c)}"><span class="c">{c}</span><b>{t}</b><small>{out}</small></a>')
-    return light("1부 지도", f'<div class="v1map">{"".join(cells)}</div>'
+    return light("1부 커리큘럼", f'<div class="v1map">{"".join(cells)}</div>'
                  + note("공통 예제", "회의실 예약 페이지 · 같은 순서로 내 아이디어를 만든다"), u)
 
 

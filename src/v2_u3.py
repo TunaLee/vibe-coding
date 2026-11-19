@@ -96,7 +96,7 @@ def slides():
         light("API 요청과 응답", exchange()
               + note("형식", "메뉴판에 없는 주문 · 양식이 틀린 주문은 오류 응답")
               + src(API_DOC), T),
-        light("요청과 응답의 뜻", codemap([
+        light("요청과 응답 읽기", codemap([
             ("getRestDeInfo", "공휴일 정보 조회 · 메뉴 이름"),
             ("solYear=2026  solMonth=12", "2026년 12월"),
             ("ServiceKey=내 서비스 키", "공공데이터포털에서 받은 키"),
@@ -105,7 +105,7 @@ def slides():
             ('isHoliday: "Y"', "쉬는 날 · 예약 막기")], ask="「2026년 12월 공휴일 알려 줘」", title="요청 · 응답")
               + src(API_DOC), T),
         # ── MCP
-        light("Claude Code와 Supabase 사이", relay()
+        light("Claude Code와 Supabase 연결", relay()
               + note("MCP 연결 뒤", "Claude Code 가 Supabase 에 직접 실행 · 결과까지 확인"), T),
         light("USB-C 포트", phmap("usbc_port.webp", "노트북의 USB-C 포트", "사진 · Logant547 · CC BY 4.0",
                                     "https://commons.wikimedia.org/wiki/File:USB-C_connector_on_a_laptop.jpg", viz2.maprows([

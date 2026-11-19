@@ -29,7 +29,7 @@ def slides():
             ("API 키", "서비스가 호출한 사람을 알아보는 비밀 문자열"), ("노출되면", "남이 내 이름으로 호출 · 한도 소진 · 요금"),
             ("보관", ".env 파일 · 서버에서만 읽기")], 3)
               + code("모양 · 예 (가짜 값)", esc("HOLIDAY_API_KEY=a1b2c3d4e5f6...")), T),
-        light("출입증", shot("v2_u6_key.webp", "출입증 · 잠긴 서랍에 보관", [
+        light("출입증 비유", shot("v2_u6_key.webp", "출입증 · 잠긴 서랍에 보관", [
             ("출입증", "API 키"), ("출입문", "외부 서비스"), ("잠긴 서랍", ".env · 서버"), ("게시판에 붙인 출입증", "코드 · GitHub 에 적은 키")])
               + src(GEN), T),
         light("키를 두는 곳", viz2.pair(
@@ -77,7 +77,7 @@ def slides():
                          ("export function GET(request)", "주소로 요청이 오면 실행"),
                          ("process.env.HOLIDAY_API_KEY", "키는 서버 안에서만 읽기")])
               + src(FUNC), T),
-        light("공휴일 차단 대화 예", chat([
+        light("공휴일 차단 대화 예시", chat([
             ("me", "공휴일에는 예약을 막아 줘. 공휴일은 공공데이터포털 특일 정보 API 에서 받고, 키는 서버 함수에서만 읽게 해 줘"),
             ("ai", "계획 · api/holidays.js 생성 → 시간표에서 호출. 공휴일 띠 문구는 「공휴일 · 기독탄신일」 형식으로 할까요?"),
             ("me", "응"),

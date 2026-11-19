@@ -36,7 +36,7 @@ def slides():
                   ("연결 ① Claude Code → GitHub", "gh 로 저장소 생성 · 업로드 · 요청 한 줄"),
                   ("연결 ② GitHub → Vercel", "한 번 연결해 두면 이후 자동")], 2), T),
         # ── GitHub 에 올리기
-        light("GitHub 명령 도구 gh", viz2.tiles([
+        light("GitHub CLI (gh)", viz2.tiles([
             ("gh", "GitHub 공식 명령 도구 · 저장소 만들기 · 올리기"), ("Claude Code가 실행", "명령 암기 불필요"),
             ("한 번만", "설치 · 로그인 연결")], 3)
               + '<div class="twocol"><div>' + code("macOS", esc("brew install gh")) + "</div><div>"
@@ -53,7 +53,7 @@ def slides():
             ("me", "이 폴더를 GitHub 비공개 저장소 room-booking 으로 올려 줘"),
             ("ai", "gh repo create room-booking --private --source=. --push 를 실행해도 될까요?"),
             ("me", "응"),
-            ("ai", "완료 · https://github.com/내계정/room-booking")], "Claude Code 대화 예")
+            ("ai", "완료 · https://github.com/내계정/room-booking")], "Claude Code 대화")
               + note("Claude가 쓰는 명령", "gh repo create — 원격 저장소 만들기 + 지금까지의 커밋 올리기")
               + src(("gh repo create", "https://cli.github.com/manual/gh_repo_create")), T),
         light("공개 · 비공개 저장소", viz2.pair(
@@ -61,7 +61,7 @@ def slides():
             "비공개 (private)", [("누가 보나", "나와 초대한 사람만"), ("맞는 경우", "회사 업무 · 이 실습")], hl="r")
               + note("GitHub Free", "비공개 저장소도 개수 제한 없음 · 일부 기능만 유료")
               + src(("GitHub plans", "https://docs.github.com/en/get-started/learning-about-github/githubs-plans")), T),
-        light("올라간 저장소 확인", '<div class="twocol"><div>'
+        light("업로드한 저장소 확인", '<div class="twocol"><div>'
               + code("github.com/내계정/room-booking · 예", esc(
                   "room-booking/\n├── index.html\n├── style.css\n├── app.js\n├── 기획서.md     1-3\n└── PRD.md        1-4"))
               + "</div><div>" + viz2.tiles([
@@ -86,14 +86,14 @@ def slides():
               + chat([("me", "예약 칸 색을 연한 초록으로 바꿔 줘"),
                       ("ai", "style.css 의 .cell.busy 색 변경 완료"),
                       ("me", "커밋하고 GitHub에 올려 줘"),
-                      ("ai", "커밋 「예약 칸 색 변경」 → push 완료 · Vercel 새 배포 시작")], "Claude Code 대화 예")
+                      ("ai", "커밋 「예약 칸 색 변경」 → push 완료 · Vercel 새 배포 시작")], "Claude Code 대화")
               + "</div><div>"
               + viz2.tiles([("① 수정 요청", "Claude Code"), ("② localhost 확인", "1-6 과 같음"), ("③ 커밋 · push", "업로드 요청"),
                             ("④ Vercel 자동 배포", "push 감지 · 1~2분"), ("⑤ 같은 주소에 반영", "새 링크 없음")], 1)
               + "</div></div>"
               + src(("Vercel · Git", "https://vercel.com/docs/git")), T),
         # ── 공개 전 확인
-        light("공개 전 확인", viz2.tiles([
+        light("배포 전 점검", viz2.tiles([
             ("키 · 비밀번호", "코드 · 파일에 들어 있지 않은가"), ("개인정보", "실제 이름 · 연락처 대신 예시 값"),
             ("배포 주소는 공개", "주소를 아는 누구나 열 수 있음"), ("Hobby 는 개인 · 비상업", "회사 서비스는 Pro 이상")], 2)
               + note("점검 요청 예", "「올리기 전에 키 · 개인정보가 들어간 파일이 있는지 찾아 줘」")

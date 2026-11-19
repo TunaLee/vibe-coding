@@ -12,7 +12,7 @@ FOLDER = "labs/room_booking_v2"
 
 # (단원, 제목, 분 — 화면에 쓰지 않음, 이 단원에서 남는 것)
 UNITS = [
-    ("2-1", "미리보기", 5, "2부 지도"),
+    ("2-1", "미리보기", 5, "2부 커리큘럼"),
     ("2-2", "데이터베이스", 15, "표 · 행 · 열 · Supabase"),
     ("2-3", "API · MCP", 20, "API 와 MCP 차이"),
     ("2-4", "기획 · 요구사항", 25, "기획서 · PRD v2"),
@@ -48,7 +48,7 @@ def roadmap(u):
     for i, (c, t, _, out) in enumerate(UNITS):
         cls = "on" if i == cur else ("done" if i < cur else "")
         cells.append(f'<a class="v1u {cls}" href="{file_of(c)}"><span class="c">{c}</span><b>{t}</b><small>{out}</small></a>')
-    return light("2부 지도", f'<div class="v1map v2map">{"".join(cells)}</div>'
+    return light("2부 커리큘럼", f'<div class="v1map v2map">{"".join(cells)}</div>'
                  + note("공통 예제", "1부 회의실 예약 + DB · 로그인 · 외부 API · MCP"), u)
 
 

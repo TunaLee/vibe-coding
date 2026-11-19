@@ -41,7 +41,7 @@ def slides():
               + "</div>"
               + src(("Supabase · Project Pausing", "https://supabase.com/docs/guides/platform/free-project-pausing"),
                     ("Vercel · Instant Rollback", "https://vercel.com/docs/instant-rollback")), T),
-        light("내 회고 기록", table(["질문", "내 답"], [
+        light("회고 기록", table(["질문", "내 답"], [
             ["테스트 통과", "  개 중   개"], ["데이터 구조에서 바뀐 것", ""], ["테스트 · 점검이 잡아낸 버그", ""],
             ["배포 뒤 로그에서 본 에러", ""], ["3부에서 맡기고 싶은 반복 업무", ""]])
               + note("기록", "PRD.md v2 맨 아래 「회고」 칸 · 3부 업무 분석의 입력"), T),

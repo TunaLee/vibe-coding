@@ -52,7 +52,7 @@ def _tables():
 def slides():
     return [
         # ── 데이터 구조
-        light("회의실 예약의 표 두 개", _tables()
+        light("회의실 예약 데이터 구조", _tables()
               + note("행 하나", "회의실 하나 · 예약 하나"), T),
         light("표를 나누는 이유", viz2.pair(
             "표 하나", [("예약마다", "회의실 이름 · 정원 반복 저장"), ("이름 변경", "「대회의실」 → 「큰 회의실」 · 예약 수백 줄 수정"),
@@ -88,7 +88,7 @@ def slides():
             ('supabase.from("bookings").delete().eq("id", 7)', "7번 예약 삭제")],
             ask="localStorage 대신 Supabase bookings 표에 저장 · 조회하게 바꿔 줘", title="Claude Code가 쓴 코드 · 예")
               + note("확인", "Supabase 대시보드 Table Editor · 행이 늘고 줄어드는지"), T),
-        light("저장 위치 전후", '<div class="v2u5lb">1부 · localStorage</div>'
+        light("저장 위치 변경 전후", '<div class="v2u5lb">1부 · localStorage</div>'
               + lane([("내 노트북", "예약 입력"), ("내 브라우저", "localStorage"), ("팀원 휴대폰", "시간표")],
                      [(0, 1, "대회의실 · 주간 회의", .4, True)], [(2, "빈 시간표", "no", 1.8)], h=190)
               + '<div class="v2u5lb"><b>2부 · Supabase</b></div>'
@@ -101,13 +101,13 @@ def slides():
               + viz2.tiles([("계정 목록", "대시보드 Authentication › Users"), ("예약자 이름", "입력 칸 대신 로그인 계정")], 2)
               + src(("Supabase · Auth", "https://supabase.com/docs/guides/auth")), T),
         # ── 권한 RLS
-        light("로그인만 붙인 경우", viz2.pair(
+        light("로그인만으로는 부족한 이유", viz2.pair(
             "RLS 꺼짐", [("publishable 키를 가진 누구나", "모든 예약 읽기 · 수정 · 삭제"), ("남의 예약 취소", "가능"),
                        ("화면에서 버튼 숨기기", "개발자 도구로 우회")],
             "RLS 켜짐", [("규칙", "DB 가 행마다 확인"), ("남의 예약 취소", "DB 에서 거절"), ("화면 우회", "소용없음")])
               + note("RLS", "Row Level Security · 행 단위 권한 · 표마다 켜기")
               + src(RLS), T),
-        light("팀 게시판", shot("v2_u5_board.webp", "팀 게시판 · 내 쪽지만 떼기", [
+        light("팀 게시판 비유", shot("v2_u5_board.webp", "팀 게시판 · 내 쪽지만 떼기", [
             ("게시판 보기", "모두 읽기 · 로그인 전에도"), ("쪽지 붙이기", "로그인한 팀원"), ("쪽지 떼기", "내 이름표가 붙은 쪽지만")])
               + src(GEN), T),
         light("RLS 정책 코드 뜻", codemap([
