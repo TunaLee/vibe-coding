@@ -101,7 +101,7 @@ def chat_anim(mode):
         rows = ""
         for i, (h, sub) in enumerate(steps):
             t = t_send + .9 + i * 1.4
-            rows += (f'<div class="v1st" style="animation-delay:{t:.1f}s"><span class="v1ic"><span class="v1run" style="animation-delay:{t:.1f}s, {t + 1.0:.1f}s">●</span>'
+            rows += (f'<div class="v1ust" style="animation-delay:{t:.1f}s"><span class="v1ic"><span class="v1run" style="animation-delay:{t:.1f}s, {t + 1.0:.1f}s">●</span>'
                      f'<span class="v1ok" style="animation-delay:{t + 1.0:.1f}s">✓</span></span><b>{h}</b><small>{sub}</small></div>')
         t_end = t_send + .9 + 3 * 1.4
         left = (f'<div class="v1cw cc"><div class="v1hd">Claude Code 화면 예</div>'
@@ -409,16 +409,16 @@ CSS = """
   .v1cw .v1ai .v1ln{margin:0 0 8px; opacity:0; animation:v1cutIn .4s ease-out forwards; font-size:17px; color:#16233A;}
   .v1cw.cc .v1ai .v1ln, .v1cw .v1ai pre.v1ln{color:#E6EDF7;}
   .v1cw .v1ai pre{background:#1E2433; color:#E6EDF7; padding:10px 14px; border-radius:10px; font-family:var(--mono); font-size:15px; white-space:pre; font-variant-ligatures:none;}
-  .v1st{display:grid; grid-template-columns:26px 130px 1fr; gap:8px; align-items:baseline; opacity:0; animation:v1cutIn .35s ease-out forwards; color:#E6EDF7; font-size:16px;}
-  .v1st small{color:#98A3B6; font-size:14.5px;} .v1st .v1ic{position:relative; display:inline-block; width:18px; height:18px;}
-  .v1st .v1run, .v1st .v1ok{position:absolute; left:0; top:0; font-weight:800; line-height:18px; background:none; border:0; padding:0;}
-  .v1st .v1run{color:#F28C28; opacity:0; animation:v1ghIn .2s forwards, v1out .2s forwards;} .v1st .v1ok{color:#3FB950; opacity:0; animation:v1ghIn .2s forwards;}
+  .v1ust{display:grid; grid-template-columns:26px 130px 1fr; gap:8px; align-items:baseline; opacity:0; animation:v1cutIn .35s ease-out forwards; color:#E6EDF7; font-size:16px;}
+  .v1ust small{color:#98A3B6; font-size:14.5px;} .v1ust .v1ic{position:relative; display:inline-block; width:18px; height:18px;}
+  .v1ust .v1run, .v1ust .v1ok{position:absolute; left:0; top:0; font-weight:800; line-height:18px; background:none; border:0; padding:0;}
+  .v1ust .v1run{color:#F28C28; opacity:0; animation:v1ghIn .2s forwards, v1out .2s forwards;} .v1ust .v1ok{color:#3FB950; opacity:0; animation:v1ghIn .2s forwards;}
   .v1side2 .v1hh{font-size:15px; font-weight:800; color:#6B7785; margin:4px 0 10px;}
   .v1td{display:flex; gap:12px; align-items:center; padding:12px 14px; margin-bottom:8px; border-radius:12px; background:#fff; border:1.5px solid #D9DDE3; opacity:0; animation:v1cutIn .4s ease-out forwards;}
   .v1td i{width:26px; height:26px; border-radius:50%; background:#1F3A5F; color:#fff; font-style:normal; font-weight:800; font-size:14px; display:grid; place-items:center; flex:none;}
   .v1td span{font-size:18px; color:#16233A; font-weight:600;} .v1td.me2{border-color:#F28C28; background:#FFF8F0;} .v1td.me2 i{background:#F28C28;}
   .v1side2 .v1gr{margin-top:12px; font-size:15px; color:#6B7785; opacity:0; animation:v1ghIn .4s forwards;} .v1side2 .v1gr b{color:#E07A12; font-size:17px;}
-  @media print{.v1cw .v1k,.v1cw .v1ai .v1ln,.v1st,.v1st .v1ok,.v1td,.v1side2 .v1gr{opacity:1; animation:none} .v1cw .v1dots,.v1st .v1run{display:none}}
+  @media print{.v1cw .v1k,.v1cw .v1ai .v1ln,.v1ust,.v1ust .v1ok,.v1td,.v1side2 .v1gr{opacity:1; animation:none} .v1cw .v1dots,.v1ust .v1run{display:none}}
   /* 1부의 핵심 */
   .v1core{position:relative; display:grid; grid-template-columns:1fr 44px 1fr 44px 1fr; align-items:center; margin:6px 0 34px; padding:26px 24px 46px; border-radius:18px; background:#FFF8F0; border:2px solid #F28C28;}
   .v1core .bx{background:#fff; border:2px solid #D9DDE3; border-radius:14px; padding:16px 18px; text-align:center;}

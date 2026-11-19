@@ -28,12 +28,12 @@ SLUG = {"1-1": "vibe-coding", "1-2": "setup", "1-3": "planning", "1-4": "prd", "
 
 
 def file_of(u):
-    return f"{u}-{SLUG[u]}.html"
+    return f"#u-{u}"
 
 
 def cover(u):
     _, title, mins, _ = BY[u]
-    return f'''<section class="slide dk cover-dk active" data-title="표지">
+    return f'''<section id="u-{u}" class="slide dk cover-dk" data-title="{u} {title}">
   <div class="glow"></div>
   <div class="kick">바이브코딩 · {u}</div>
   <h1>{title}</h1>

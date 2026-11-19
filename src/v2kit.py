@@ -29,12 +29,12 @@ SLUG = {"2-1": "preview", "2-2": "database", "2-3": "api-mcp", "2-4": "planning"
 
 
 def file_of(u):
-    return f"{u}-{SLUG[u]}.html"
+    return f"#u-{u}"
 
 
 def cover(u):
     _, title, _, _ = BY[u]
-    return f'''<section class="slide dk cover-dk active" data-title="표지">
+    return f'''<section id="u-{u}" class="slide dk cover-dk" data-title="{u} {title}">
   <div class="glow"></div>
   <div class="kick">바이브코딩 · {u}</div>
   <h1>{title}</h1>
@@ -59,7 +59,7 @@ def nextup(u):
         c, t, _, nout = UNITS[i + 1]
         nxt = f'<a class="v1next" href="{file_of(c)}"><span>{c}</span><b>{t}</b><small>→ {nout}</small></a>'
     else:
-        nxt = '<a class="v1next" href="3-1-harness.html"><span>3부</span><b>하네스 엔지니어링</b><small>→ 내 업무 에이전트</small></a>'
+        nxt = '<a class="v1next" href="#u-3-1"><span>3부</span><b>하네스 엔지니어링</b><small>→ 내 업무 에이전트</small></a>'
     return f'''<section class="slide dk" data-title="다음 단원">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="v1end"><div class="v1got"><span>{u} 산출물</span><b>{out}</b></div>{nxt}</div>

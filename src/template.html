@@ -485,6 +485,11 @@
     if (e.key === '-'){ userZoom = Math.max(0.5, userZoom - 0.15); applyScale(); }
   });
 
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a[href^="#"]'); if (!a) return;
+    const t = document.getElementById(a.getAttribute('href').slice(1)); if (!t) return;
+    e.preventDefault(); go(slides.indexOf(t));
+  });
   applyScale(); go(0);
 </script>
 <script>
