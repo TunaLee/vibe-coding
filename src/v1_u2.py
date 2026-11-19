@@ -50,11 +50,11 @@ def cc_lanes():
 def slides():
     return [
         # ── 도구 네 개
-        light("1부 실습 도구", flow([("Claude", "대화형 AI · 기획서 · PRD (1-3 · 1-4)"), ("Claude Code", "위임형 AI · 앱 코드 (1-6)"),
+        light("1부 실습 도구", flow([("Claude", "대화형 AI · 아이디어 고르기 (1-3)"), ("Claude Code", "위임형 AI · 기획서 · PRD · 앱 코드 (1-3 ~ 1-6)"),
                                       ("GitHub", "코드 · 변경 기록 보관 (1-5 · 1-7)"), ("Vercel", "배포 · 공개 주소 (1-7)")]), T),
         # ── Claude
         light("Claude", '<div class="twocol"><div>'
-              + viz2.tiles([("대화형 AI", "claude.ai · 웹 · 데스크톱 · 휴대폰 앱"), ("1부에서 맡는 일", "아이디어 → 기획서 → PRD"),
+              + viz2.tiles([("대화형 AI", "claude.ai · 웹 · 데스크톱 · 휴대폰 앱"), ("1부에서 맡는 일", "아이디어 고르기 · 질문 정리"),
                             ("못 하는 일", "내 컴퓨터 파일 직접 수정 · 명령 실행")], 1)
               + "</div><div>"
               + chat([("me", "할 일 목록 앱을 만들려고 해. 소크라테스식 대화로 진행해 줘"),
@@ -62,7 +62,7 @@ def slides():
                       ("me", "나 혼자 써. 주로 휴대폰에서 볼 거야"),
                       ("ai", "끝낸 일은 지우나요, 남겨 두나요?")], "Claude 대화 예")
               + "</div></div>"
-              + note("소크라테스식 대화", "답 대신 질문을 하나씩 · 내 답으로 다음 질문 (1-3)"), T),
+              + note("소크라테스식 대화", "답 대신 질문을 하나씩 · 내 답으로 다음 질문"), T),
         # ── Claude Code
         light("Claude와 Claude Code", cc_lanes()
               + note("차이", "내 컴퓨터 파일에 AI 손이 닿는가 · Claude 는 글로 답함 · Claude Code 는 파일을 직접 만들고 고침"), T),
