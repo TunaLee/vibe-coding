@@ -144,11 +144,11 @@ def _fbox(x, y, w, t, d, cls="", r=None, h=50):
             f'{txt}</g>')
 
 
-def _fdm(x, y, w, h, t, d, r=None):
+def _fdm(x, y, w, h, t, d, r=None, cls=""):
     pts = f"M{x - w / 2} {y}L{x} {y - h / 2}L{x + w / 2} {y}L{x} {y + h / 2}z"
     txt = (f'<text class="qm" x="{x}" y="{y + 6}" style="--r:{r}s">?</text><text class="rv" x="{x}" y="{y + 6}" style="--r:{r}s">{t}</text>'
            if r else f'<text x="{x}" y="{y + 6}">{t}</text>')
-    return f'<g class="v1fw dm" style="--d:{d}s"><path d="{pts}"/>{txt}</g>'
+    return f'<g class="v1fw dm {cls}" style="--d:{d}s"><path d="{pts}"/>{txt}</g>'
 
 
 def _farr(mk, path, d, lab="", lx=0, ly=0, cls="", r=None):
@@ -212,18 +212,6 @@ def ramen_flow():
             f'<span>라면 끓이기 · 빈칸 「?」 채우기</span></div>{side}</div></div>')
 
 
-def fb_steps():
-    """알고리즘 피드백 · 예 — AI가 만든 로그인 순서 3단계 → 내 피드백 두 개 → 단계 두 개가 끼어듦."""
-    rows = [("", "① 이메일 · 비밀번호 입력", .3, ""), ("add", "회사 이메일(@company.com)만 허용", 2.6, "a"),
-            ("", "② 비밀번호 일치 확인", .7, ""), ("add", "5번 틀리면 10분 잠금", 4.4, "b"),
-            ("", "③ 로그인 완료 · 첫 화면", 1.1, "")]
-    st = "".join(f'<div class="v1fs {c}" style="--d:{d:.1f}s">{f"<i>{k}</i>" if k else ""}<b>{t}</b></div>' for c, t, d, k in rows)
-    fb = ('<div class="v1fbq" style="--d:1.8s"><span>나 · 피드백 a</span><p>사내 시스템이라 회사 이메일만 받아 줘</p></div>'
-          '<div class="v1fbq" style="--d:3.6s"><span>나 · 피드백 b</span><p>비밀번호를 계속 틀리면 잠깐 잠가 줘</p></div>')
-    return (f'<div class="v1fb"><div class="v1fbl"><div class="v1fbh">AI가 만든 로그인 순서</div>{st}</div>'
-            f'<div class="v1fbr">{fb}</div></div>')
-
-
 def comic(cuts):
     """3 · 4컷 — (그림, 말풍선, 장면, 코딩에서는). 0.8초 간격으로 한 컷씩 나타나고 멈춘다."""
     c = "".join(
@@ -241,6 +229,54 @@ def llm_rw():
     no = "".join(f'<li style="--d:{d}s">{t}</li>' for t, d in [("파일 열기 · 저장", 5.3), ("코드 실행", 5.8), ("결과 화면 확인", 6.3)])
     return (head + f'<div class="v1rwG"><div class="v1rwC ok" style="--d:2s"><b>할 수 있는 일</b><ul>{ok}</ul></div>'
             f'<div class="v1rwC no" style="--d:5s"><b>도구 없이 못 하는 일</b><ul>{no}</ul></div></div>')
+
+
+def login_flow(fixed):
+    """알고리즘 피드백 — 요청 한 줄이면 흔한 로그인(개인 메일 OK · 무한 재시도), 규칙 두 줄을 더하면 조건 두 개가 끼어든 순서도."""
+    A = lambda *x, **k: _farr("v1lgA" + ("b" if fixed else "a"), *x, **k)
+    if not fixed:
+        svg = ('<svg class="v1fwS" viewBox="0 0 860 230">' + _fmarker("v1lgAa")
+               + _fbox(45, 70, 80, "시작", .8, "ov") + A("M85 70H118", 1.0)
+               + _fbox(225, 70, 210, "이메일 · 비밀번호 입력", 1.2) + A("M330 70H378", 1.5)
+               + _fdm(450, 70, 140, 90, "일치?", 1.8) + A("M520 70H588", 2.1, "예", 552, 58)
+               + _fbox(670, 70, 160, "로그인 완료", 2.4) + A("M750 70H788", 2.6) + _fbox(820, 70, 60, "끝", 2.8, "ov")
+               + A("M450 115V185H225V97", 3.2, "아니오 · 몇 번이든 다시", 338, 212, "lp bad") + "</svg>")
+        bub = '<div class="v1mkQ" style="--d:.3s"><span>요청</span>「이메일 로그인 만들어 줘」</div>'
+        head, rows, cls = ("결과", "가장 흔한 로그인 · 회사 규칙 0개"), [
+            ("개인 메일 통과", "gmail · naver 누구나 로그인"), ("무한 대입", "비밀번호를 몇 번이든 다시 시도"),
+            ("회사 규칙 없음", "회사 사정은 AI가 모름")], "x"
+    else:
+        svg = ('<svg class="v1fwS" viewBox="0 0 860 300">' + _fmarker("v1lgAb")
+               + _fbox(45, 60, 80, "시작", .8, "ov") + A("M85 60H108", 1.0)
+               + _fbox(205, 60, 190, "이메일 · 비밀번호 입력", 1.2) + A("M300 60H313", 1.4)
+               + _fdm(400, 60, 170, 90, "회사 이메일?", 2.0, cls="add") + A("M485 60H528", 2.3, "예", 506, 48)
+               + _fdm(590, 60, 120, 80, "일치?", 2.6) + A("M650 60H673", 2.9, "예", 662, 48)
+               + _fbox(740, 60, 130, "로그인 완료", 3.1) + A("M805 60H808", 3.2) + _fbox(835, 60, 50, "끝", 3.3, "ov")
+               + A("M400 105V151", 2.2, "아니오", 430, 135) + _fbox(400, 175, 120, "거절", 2.4, "add", h=44)
+               + A("M590 100V148", 3.6, "아니오", 620, 130)
+               + _fdm(590, 190, 130, 80, "5번째?", 3.9, cls="add") + A("M655 190H693", 4.2, "예", 674, 178)
+               + _fbox(760, 190, 130, "10분 잠금", 4.4, "add", h=44)
+               + A("M590 230V270H205V87", 4.8, "아니오 · 다시", 420, 290, "lp") + "</svg>")
+        bub = ('<div class="v1mkQ" style="--d:.3s"><span>요청</span>「이메일 로그인 만들어 줘」'
+               '<em class="v1lgF">+ 회사 이메일만</em><em class="v1lgF">+ 5번 틀리면 10분 잠금</em></div>')
+        head, rows, cls = ("결과", "같은 AI · 규칙 두 줄 차이"), [
+            ("개인 메일 거절", "@company.com 만 통과"), ("대입 차단", "5번 틀리면 10분 잠금"),
+            ("알고리즘 읽기", "순서도에서 빠진 조건을 찾아 피드백")], "o"
+    side = "".join(f'<div class="v1lgC {cls}" style="--d:{5.4 + i * .8:.1f}s"><b>{h}</b><span>{x}</span></div>' for i, (h, x) in enumerate(rows))
+    return (f'<div class="v1fwW"><div class="v1mkL">{bub}<div class="v1mkR{"" if fixed else " x"}" style="--d:.8s">'
+            f'<em>AI가 만든 순서</em>{svg}</div></div>'
+            f'<div class="v1fwR"><div class="v1fwD" style="--d:5s"><b>{head[0]}</b><span>{head[1]}</span></div>{side}</div></div>')
+
+
+def split_roles():
+    """사람은 알고리즘(규칙 · 순서 읽기 · 피드백), AI는 코드(작성 · 실행 · 수정) → 다음은 AI가 코드를 만드는 방식."""
+    col = lambda c, h, items, d: (f'<div class="v1srC {c}" style="--d:{d}s"><b>{h}</b>'
+                                  + "".join(f'<span style="--d:{d + .5 + i * .4:.1f}s">{t}</span>' for i, t in enumerate(items)) + '</div>')
+    return ('<div class="v1srG">'
+            + col("me", "사람 · 알고리즘", ["규칙 정하기", "AI가 만든 순서 읽기", "빠진 조건 · 예외 피드백"], .3)
+            + '<div class="v1srM" style="--d:2.4s"><i></i><em>요청 · 피드백</em><i></i><em>코드 · 결과</em></div>'
+            + col("ai", "AI · 코드", ["코드 작성", "파일 저장 · 실행", "피드백대로 수정"], 2.8)
+            + '</div><div class="v1srN" style="--d:4.8s">AI가 코드를 만드는 방식 <i></i> LLM · 도구 · 에이전트</div>')
 
 
 def slides():
@@ -280,6 +316,14 @@ def slides():
         light("대화형 방식 예", chat_anim("chat"), T),
         light("위임형 방식 예", chat_anim("agent")
               + src(("Claude Code 문서 · How Claude Code works", "https://code.claude.com/docs/en/how-claude-code-works")), T),
+        light("AI 코딩 도구 사용 현황", big([("73", "%", "AI 사용자 중 코딩 도우미 · 에이전트 매일 사용"),
+                                           ("26", "%", "에이전트 · 자동 작업 흐름 사용"),
+                                           ("48", "%", "쉽게 검증될 때만 결과 신뢰", True)], 3)
+              + viz2.tiles([("조사", "Stack Overflow 개발자 설문 · 30,903명 · 2026.10 공개"),
+                            ("중요한 결정까지 신뢰", "6.6%"),
+                            ("검증", "출처 표시가 중요 · 93%")], 3)
+              + src(("Stack Overflow 2026 개발자 설문 · AI", "https://survey.stackoverflow.co/2026/ai"),
+                    ("Stack Overflow 블로그 · 2026-10-06", "https://stackoverflow.blog/2026/10/06/the-results-of-the-2026-developer-survey-are-here/")), T),
         light("위임의 한계", '<div class="v1shot"><figure><img src="img/v1_algo_context.webp" alt="회사 안을 들여다보는 AI"/>'
               '<figcaption>AI · 회사 밖에서 보이는 정보만</figcaption></figure><div class="v1side">'
               + "".join(f'<div class="v1sd"><b>{h}</b><span>{x}</span></div>' for h, x in [
@@ -292,16 +336,9 @@ def slides():
         light("우유 6통 사건", '<div class="v1mm"><img src="img/v1_algo_milk.webp" alt="우유 사고 아보카도 있으면 6개 사 와 · 우유 6개를 들고 온 남편"/></div>', T),
         light("알고리즘", milk_flow(), T),
         light("라면 끓이기 알고리즘", ramen_flow(), T),
-        light("알고리즘 피드백 예", fb_steps()
-              + note("요청 팁", "「순서를 단계로 보여 줘」 → 단계를 읽고 빠진 규칙 · 예외를 지적"), T),
-        light("AI 코딩 도구 사용 현황", big([("73", "%", "AI 사용자 중 코딩 도우미 · 에이전트 매일 사용"),
-                                           ("26", "%", "에이전트 · 자동 작업 흐름 사용"),
-                                           ("48", "%", "쉽게 검증될 때만 결과 신뢰", True)], 3)
-              + viz2.tiles([("조사", "Stack Overflow 개발자 설문 · 30,903명 · 2026.10 공개"),
-                            ("중요한 결정까지 신뢰", "6.6%"),
-                            ("검증", "출처 표시가 중요 · 93%")], 3)
-              + src(("Stack Overflow 2026 개발자 설문 · AI", "https://survey.stackoverflow.co/2026/ai"),
-                    ("Stack Overflow 블로그 · 2026-10-06", "https://stackoverflow.blog/2026/10/06/the-results-of-the-2026-developer-survey-are-here/")), T),
+        light("요청 한 줄의 로그인", login_flow(False), T),
+        light("규칙 두 줄 더한 로그인", login_flow(True), T),
+        light("사람은 알고리즘 · AI는 코드", split_roles(), T),
         light("LLM", llm_rw(), T),
         light("도구가 필요한 이유", viz2.calc_compare(), T),
         light("LLM과 코딩 에이전트", comic([
@@ -360,19 +397,6 @@ def slides():
 
 
 CSS = """
-  /* 1-1 · 알고리즘 피드백 */
-  .v1fb{display:grid; grid-template-columns:1.1fr 1fr; gap:28px; align-items:start; margin-top:6px;}
-  .v1fbh{font-size:13px; font-weight:800; color:#6B7785; margin-bottom:10px;}
-  .v1fs{display:flex; align-items:center; gap:10px; padding:13px 18px; margin-bottom:10px; border:1.5px solid #D9DDE3; border-left:5px solid #1F3A5F; border-radius:10px; background:#fff; opacity:0; animation:v1cutIn .4s ease-out var(--d) forwards;}
-  .v1fs b{font-size:19px; color:#16233A;}
-  .v1fs.add{border-color:#F7C99A; border-left-color:#F28C28; background:#FFF3E6; margin-left:26px; max-height:0; padding-top:0; padding-bottom:0; margin-bottom:0; overflow:hidden; animation:v1fsIn .6s ease-out var(--d) forwards;}
-  .v1fs i, .v1fbq span{font-style:normal; font-size:12px; font-weight:800; color:#fff; background:#F28C28; border-radius:10px; padding:2px 8px;}
-  @keyframes v1fsIn{to{opacity:1; max-height:70px; padding-top:13px; padding-bottom:13px; margin-bottom:10px}}
-  .v1fbr{display:flex; flex-direction:column; gap:16px; padding-top:28px;}
-  .v1fbq{opacity:0; animation:v1cutIn .4s ease-out var(--d) forwards;}
-  .v1fbq p{margin:6px 0 0; padding:12px 16px; border-radius:14px; background:#FFF3E6; border:1px solid #F7C99A; font-size:18px; color:#16233A;}
-  @media print{.v1fs,.v1fbq{opacity:1; animation:none} .v1fs.add{max-height:none; padding:13px 18px; margin-bottom:10px}}
-
   /* 1-1 · 비유 영상 */
   .v1comic{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:6px;}
   .v1cut{opacity:0; animation:v1cutIn .6s ease-out var(--d) forwards;}
@@ -493,6 +517,28 @@ CSS = """
   .v1fwk i.lp{border:none; border-top:3.5px dashed #F28C28; border-radius:0; height:0; background:none;}
   .v1fwk i.ov{border-radius:11px; background:#16233A; border-color:#16233A;}
   .v1fwk b{font-size:18px; color:#16233A;} .v1fwk span{font-size:15px; color:#3A4657;}
+  /* 1-1 · 로그인 피드백 · 역할 (v1lg · v1sr) */
+  .v1fw.add rect{fill:#FFF6EC; stroke:#F28C28; stroke-width:3;} .v1fw.dm.add path{fill:#F28C28; stroke:#E07A12;} .v1fw.dm.add text{fill:#fff;}
+  .v1fw.ar.bad path{stroke:#C0392B;} .v1fw.ar.bad .lb{fill:#C0392B;}
+  .v1lgF{display:inline-block; font-style:normal; font-size:16px; font-weight:800; color:#fff; background:#F28C28; border-radius:8px; padding:3px 10px; margin-left:8px;}
+  .v1lgC{border-radius:12px; padding:12px 16px; border-left:5px solid #C0392B; background:#FFF4F2; opacity:0; animation:v1fwIn .6s var(--d) forwards;}
+  .v1lgC.o{border-left-color:#1E7B45; background:#F1FAF4;}
+  .v1lgC b{display:block; font-size:19px; color:#A93226;} .v1lgC.o b{color:#1E7B45;} .v1lgC span{font-size:15px; color:#3A4657;}
+  .v1srG{display:grid; grid-template-columns:1fr 200px 1fr; gap:18px; align-items:center; margin-top:10px;}
+  .v1srC{border-radius:16px; padding:22px 24px; display:flex; flex-direction:column; gap:12px; opacity:0; animation:v1fwIn .6s var(--d) forwards;}
+  .v1srC.me{background:#FFF8F0; border:2px solid #F28C28;} .v1srC.ai{background:#16233A;}
+  .v1srC b{font-size:26px; color:#E07A12;} .v1srC.ai b{color:#fff;}
+  .v1srC span{font-size:21px; font-weight:700; color:#16233A; background:#fff; border-radius:10px; padding:10px 14px; opacity:0; animation:v1fwIn .5s var(--d) forwards;}
+  .v1srC.ai span{background:#2C4466; color:#fff;}
+  .v1srM{display:flex; flex-direction:column; align-items:center; gap:6px; opacity:0; animation:v1fwIn .6s var(--d) forwards;}
+  .v1srM em{font-style:normal; font-size:16px; font-weight:800; color:#3A4657;}
+  .v1srM i{width:100%; height:4px; background:#F28C28; position:relative;}
+  .v1srM i:first-child:after{content:""; position:absolute; right:-4px; top:-6px; border:8px solid transparent; border-left:10px solid #F28C28; border-right:0;}
+  .v1srM i:nth-of-type(2){background:#1F3A5F;}
+  .v1srM i:nth-of-type(2):after{content:""; position:absolute; left:-4px; top:-6px; border:8px solid transparent; border-right:10px solid #1F3A5F; border-left:0;}
+  .v1srN{margin-top:26px; display:flex; align-items:center; gap:14px; font-size:20px; font-weight:800; color:#16233A; background:#F4F6F9; border-radius:12px; padding:14px 22px; opacity:0; animation:v1fwIn .6s var(--d) forwards;}
+  .v1srN i{width:40px; height:3px; background:#8A94A3;}
+  @media print{.v1lgC,.v1srC,.v1srC span,.v1srM,.v1srN{opacity:1; animation:none}}
   /* 1-1 · LLM 읽기 · 쓰기 (v1lm · v1rw) */
   .v1lmH{display:flex; align-items:center; gap:14px; background:#16233A; color:#fff; border-radius:14px; padding:18px 24px; margin-bottom:22px; opacity:0; animation:v1fwIn .6s var(--d) forwards;}
   .v1lmH span{font-size:20px; font-weight:800; background:#2C4466; border-radius:8px; padding:6px 14px;}
