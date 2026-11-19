@@ -336,9 +336,9 @@ def slides():
         light("우유 6통 사건", '<div class="v1mm"><img src="img/v1_algo_milk.webp" alt="우유 사고 아보카도 있으면 6개 사 와 · 우유 6개를 들고 온 남편"/></div>', T),
         light("알고리즘", milk_flow(), T),
         light("라면 끓이기 알고리즘", ramen_flow(), T),
-        light("요청 한 줄의 로그인", login_flow(False), T),
-        light("규칙 두 줄 더한 로그인", login_flow(True), T),
-        light("사람은 알고리즘 · AI는 코드", split_roles(), T),
+        light("로그인 순서도 · 피드백 전", login_flow(False), T),
+        light("로그인 순서도 · 피드백 후", login_flow(True), T),
+        light("사람과 AI의 역할", split_roles(), T),
         light("LLM", llm_rw(), T),
         light("도구가 필요한 이유", viz2.calc_compare(), T),
         light("LLM과 코딩 에이전트", comic([
