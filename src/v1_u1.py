@@ -134,6 +134,35 @@ def langs():
             '<div class="v1lline"><span>기계에 가까운 말</span><b></b><span>사람에 가까운 말</span></div>')
 
 
+def ramen_flow():
+    """알고리즘 · 라면 끓이기 순서도 — 처리(순서) → ◇ 조건 → 아니오면 기다렸다 되돌아감(반복) → 예면 다음 → 끝.
+    도형이 흐름 순서대로 나타나고, 반복 화살표는 두 번 깜빡인다. 오른쪽은 도형 뜻."""
+    def box(x, y, w, t, d, cls=""):
+        return (f'<g class="v1fw {cls}" style="--d:{d}s"><rect x="{x - w / 2}" y="{y - 25}" width="{w}" height="50" rx="{25 if cls == "ov" else 10}"/>'
+                f'<text x="{x}" y="{y + 6}">{t}</text></g>')
+    def arr(path, d, lab="", lx=0, ly=0, cls=""):
+        t = f'<text class="lb" x="{lx}" y="{ly}">{lab}</text>' if lab else ""
+        return f'<g class="v1fw ar {cls}" style="--d:{d}s"><path d="{path}" marker-end="url(#v1fwA)"/>{t}</g>'
+    svg = ('<svg class="v1fwS" viewBox="0 0 900 360"><defs><marker id="v1fwA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">'
+           '<path d="M0 0L10 5L0 10z" fill="#3A4657"/></marker></defs>'
+           + box(65, 90, 100, "시작", .3, "ov") + arr("M115 90H158", .8)
+           + box(240, 90, 160, "물 550ml 붓기", 1.1) + arr("M320 90H363", 1.6)
+           + box(435, 90, 140, "불 켜기", 1.9) + arr("M505 90H533", 2.4)
+           + '<g class="v1fw dm" style="--d:2.7s"><path d="M535 90L620 40L705 90L620 140z"/><text x="620" y="96">물이 끓었나?</text></g>'
+           + arr("M705 90H738", 3.6, "아니오", 722, 58) + box(810, 90, 140, "1분 기다리기", 3.9)
+           + arr("M810 65V18H620V38", 4.8, "반복", 715, 12, "lp")
+           + arr("M620 140V253", 6.6, "예", 636, 200)
+           + box(620, 280, 160, "면 · 스프 넣기", 7.0) + arr("M540 280H492", 7.6)
+           + box(405, 280, 170, "4분 30초 끓이기", 7.9) + arr("M320 280H272", 8.4)
+           + box(205, 280, 130, "불 끄기", 8.7) + arr("M140 280H112", 9.2)
+           + box(65, 280, 90, "끝", 9.5, "ov") + "</svg>")
+    side = "".join(f'<div class="v1fwk" style="--d:{d}s"><i class="{c}"></i><b>{h}</b><span>{x}</span></div>' for c, h, x, d in [
+        ("bx", "처리 · 순서", "정해진 차례대로 할 일", 1.1), ("dm", "조건", "예 · 아니오 갈림길", 2.7),
+        ("lp", "반복", "조건이 맞을 때까지 되돌아감", 4.8), ("ov", "시작 · 끝", "정해진 끝이 있음", 9.5)])
+    return (f'<div class="v1fwW"><div>{svg}</div><div class="v1fwR"><div class="v1fwD"><b>알고리즘</b>'
+            f'<span>문제를 푸는 순서 있는 절차 · 그림으로 그리면 순서도</span></div>{side}</div></div>')
+
+
 def flowchart():
     """순서도 · 사과 먹기 — 시작 → 과일 받기 → ◇ 사과인가 → 예: 집기 · 깨물기 · 씨 뱉기 → 끝 / 아니오: 모름 · 멈춤. 칸이 차례로 나타남."""
     def n(cls, t, d, sub=""):
@@ -224,13 +253,7 @@ def slides():
                   ("알고리즘 이해", "피드백의 기준 · 순서 · 조건 · 예외 읽기")])
               + "</div></div>"
               + src(("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")), T),
-        light("라면 끓이기 알고리즘", '<div class="v1shot"><figure><img src="img/v1_algo_ramen.webp" alt="라면 끓이기"/>'
-              '<figcaption>알고리즘 · 문제를 푸는 순서 있는 절차</figcaption></figure>'
-              + algo_list([("①", "냄비에 물 550ml", "순서"), ("②", "불 켜기", "순서"), ("③", "물이 끓었나? 아니면 기다리기", "조건"),
-                           ("④", "끓을 때까지 ③ 다시", "반복"), ("⑤", "면 · 스프 넣기", "순서"), ("⑥", "4분 30초 뒤 불 끄기", "끝")])
-              + "</div>"
-              + note("알고리즘의 세 가지", "순서 · 조건(갈림길) · 반복 · 정해진 끝")
-              + src(("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")), T),
+        light("알고리즘", ramen_flow(), T),
         light("사과 먹기 알고리즘", '<div class="v1shot"><figure><img src="img/v1_algo_steps.webp" alt="세 개의 디딤돌 · 집기 · 깨물기 · 씨 뱉기"/>'
               '<figcaption>사과 먹기 · 디딤돌 세 개</figcaption></figure>'
               + algo_list([("①", "과일이 사과인가? 아니면 멈춤", "조건"), ("②", "손으로 집기", "순서"), ("③", "한 입 깨물기", "순서"),
@@ -421,5 +444,30 @@ CSS = """
   .v1lar{font-style:normal; align-self:center; text-align:center; font-size:26px; font-weight:800; color:#F28C28;}
   .v1lline{display:flex; align-items:center; gap:12px; margin-top:16px; font-size:14px; font-weight:800; color:#6B7785;}
   .v1lline b{flex:1; height:4px; border-radius:2px; background:linear-gradient(90deg,#1F3A5F,#F28C28);}
+  /* 1-1 · 알고리즘 · 라면 순서도 (v1fw) */
+  .v1fwW{display:grid; grid-template-columns:1fr 300px; gap:22px; align-items:center;}
+  .v1fwS{width:100%; display:block; overflow:visible;}
+  .v1fwS text{font-size:19px; font-weight:700; fill:#16233A; text-anchor:middle;}
+  .v1fw{opacity:0; animation:v1fwIn .6s var(--d) forwards;}
+  .v1fw rect{fill:#fff; stroke:#1F3A5F; stroke-width:2.5;}
+  .v1fw.ov rect{fill:#16233A;} .v1fw.ov text{fill:#fff;}
+  .v1fw.dm path{fill:#FFF1E2; stroke:#F28C28; stroke-width:2.5;}
+  .v1fw.ar path{fill:none; stroke:#3A4657; stroke-width:2.5;}
+  .v1fw.ar .lb{font-size:16px; font-weight:800; fill:#E07A12;}
+  .v1fw.lp path{stroke:#F28C28; stroke-width:3.5; stroke-dasharray:8 6;}
+  .v1fw.lp{animation:v1fwIn .6s var(--d) forwards, v1fwP 1s calc(var(--d) + .8s) 2;}
+  .v1fwR{display:flex; flex-direction:column; gap:12px;}
+  .v1fwD{background:#16233A; color:#fff; border-radius:14px; padding:14px 18px;}
+  .v1fwD b{display:block; font-size:22px; margin-bottom:4px;} .v1fwD span{font-size:16px; color:#D6DEEA;}
+  .v1fwk{display:grid; grid-template-columns:34px 1fr; gap:2px 12px; align-items:center; background:#F4F6F9; border-radius:12px; padding:10px 14px;
+    opacity:0; animation:v1fwIn .6s var(--d) forwards;}
+  .v1fwk i{grid-row:1/span 2; width:30px; height:22px; border:2.5px solid #1F3A5F; border-radius:5px; background:#fff;}
+  .v1fwk i.dm{width:20px; height:20px; transform:rotate(45deg); border-color:#F28C28; background:#FFF1E2; border-radius:2px; margin-left:5px;}
+  .v1fwk i.lp{border:none; border-top:3.5px dashed #F28C28; border-radius:0; height:0; background:none;}
+  .v1fwk i.ov{border-radius:11px; background:#16233A; border-color:#16233A;}
+  .v1fwk b{font-size:18px; color:#16233A;} .v1fwk span{font-size:15px; color:#3A4657;}
+  @keyframes v1fwIn{from{opacity:0} to{opacity:1}}
+  @keyframes v1fwP{50%{opacity:.25}}
+  @media print{.v1fw,.v1fwk{opacity:1; animation:none}}
   .v1vid video{width:100%; max-height:440px; border:1.5px solid #D9DDE3; border-radius:12px; box-shadow:0 8px 22px rgba(15,27,45,.10); background:#F7EEDB; display:block;}
 """
