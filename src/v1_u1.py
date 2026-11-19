@@ -300,6 +300,7 @@ def slides():
                   ("알고리즘 이해", "피드백의 기준 · 순서 · 조건 · 예외 읽기")])
               + "</div></div>"
               + src(("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")), T),
+        light("우유와 아보카도", '<div class="v1mm"><img src="img/v1_algo_milk.webp" alt="우유 사고 아보카도 있으면 6개 사 와 · 우유 6개를 들고 온 남편"/></div>', T),
         light("알고리즘", milk_flow(), T),
         light("라면 끓이기 알고리즘", ramen_flow(), T),
         light("사과 먹기 알고리즘", '<div class="v1shot"><figure><img src="img/v1_algo_steps.webp" alt="세 개의 디딤돌 · 집기 · 깨물기 · 씨 뱉기"/>'
@@ -512,6 +513,7 @@ CSS = """
   .v1fw.bad rect{fill:#FDECEA; stroke:#C0392B; stroke-width:3;} .v1fw.bad text{fill:#A93226;}
   .v1fw.bad{animation:v1fwIn .6s var(--d) forwards, v1fwP 1s calc(var(--d) + .8s) 2;}
   .v1fwD{opacity:0; animation:v1fwIn .6s var(--d) forwards;}
+  .v1mm{display:flex; justify-content:center;} .v1mm img{height:450px; border-radius:12px; box-shadow:0 8px 22px rgba(15,27,45,.12);}
   .v1mkL{display:flex; flex-direction:column; gap:10px;}
   .v1mkQ{font-size:21px; font-weight:800; color:#16233A; background:#FFF8F0; border:2px solid #F28C28; border-radius:14px; padding:10px 16px;
     opacity:0; animation:v1fwIn .6s var(--d) forwards;}
