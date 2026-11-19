@@ -254,6 +254,30 @@ def comic(cuts):
     return f'<div class="v1comic" style="grid-template-columns:repeat({len(cuts)},1fr)">{c}</div>'
 
 
+def next_token():
+    """다음 토큰 예측 — 앞 글을 보고 후보 확률 → 가장 높은 후보 선택 → 붙이고 다시. 확률은 예시 값. 단계 간격 3초."""
+    prefix = ["버튼을", "누르면"]
+    steps = [[("배경색이", .41), ("화면이", .27), ("창이", .12)],
+             [("바뀌는", .46), ("변하는", .21), ("커지는", .12)],
+             [("코드를", .51), ("함수를", .30), ("화면을", .10)],
+             [("만든다", .57), ("작성한다", .28), ("짠다", .09)]]
+    t0, gap = 1.5, 3.0
+    chips = "".join(f'<span class="v1ntC" style="--d:.3s">{w}</span>' for w in prefix)
+    chips += "".join(f'<span class="v1ntC nw" style="--d:{t0 + i * gap + 2.0:.1f}s">{st[0][0]}</span>' for i, st in enumerate(steps))
+    panels = []
+    for i, st in enumerate(steps):
+        a = t0 + i * gap
+        last = i == len(steps) - 1
+        rows = "".join(f'<div class="v1ntR{" pk" if k == 0 else ""}" style="--p:{a + 1.2:.1f}s"><span>{w}</span>'
+                       f'<b><i style="width:{p * 100:.0f}%"></i></b><em>{p:.2f}</em></div>' for k, (w, p) in enumerate(st))
+        panels.append(f'<div class="v1ntP{" last" if last else ""}" style="--a:{a:.1f}s;--b:{a + gap:.1f}s">{rows}</div>')
+    side = "".join(f'<div class="v1fwk" style="--d:{d}s"><i class="{c}"></i><b>{h}</b><span>{x}</span></div>' for c, h, x, d in [
+        ("bx", "토큰", "단어 · 단어 조각 단위", 0.6), ("dm", "확률", "다음 토큰 후보마다 계산", 2.7), ("lp", "반복", "고른 토큰을 붙이고 다시 예측", 4.5)])
+    return (f'<div class="v1fwW"><div class="v1ntL"><div class="v1ntS">{chips}</div>'
+            f'<div class="v1ntH">다음 토큰 후보 <span>(예시 값)</span></div><div class="v1ntB">{"".join(panels)}</div></div>'
+            f'<div class="v1fwR">{side}</div></div>')
+
+
 def slides():
     return [
         # ── 코딩 = 원시인에게 사과 가르치기
@@ -313,14 +337,21 @@ def slides():
               + note("순서도", "알고리즘을 도형과 화살표로 그린 그림 · 처리 · 조건 · 순서가 한눈에"), T),
         light("알고리즘 피드백 예", fb_steps()
               + note("요청 팁", "「순서를 단계로 보여 줘」 → 단계를 읽고 빠진 규칙 · 예외를 지적"), T),
-        light("AI 코딩 도구의 속도", big([("3", "배", "체감 속도 · 중앙값"),
-                                         ("2", "배", "체감 업무 가치 · 2026.3", True),
-                                         ("1.3", "배", "체감 업무 가치 · 2025.3")], 3)
-              + viz2.tiles([("대상", "개발자 · 연구자 등 349명 · 2026.2~4 설문"),
-                            ("도구", "Claude Code 정기 사용 50% · Codex"),
-                            ("실측 실험", "AI 없이 일하길 거부하는 개발자 증가 · 실측 신뢰 낮음")], 3)
-              + src(("METR · 2026-05-11", "https://metr.org/blog/2026-05-11-ai-usage-survey/"),
-                    ("METR · 2026-02-24", "https://metr.org/blog/2026-02-24-uplift-update/")), T),
+        light("AI 코딩 도구 사용 현황", big([("73", "%", "AI 사용자 중 코딩 도우미 · 에이전트 매일 사용"),
+                                           ("26", "%", "에이전트 · 자동 작업 흐름 사용"),
+                                           ("48", "%", "쉽게 검증될 때만 결과 신뢰", True)], 3)
+              + viz2.tiles([("조사", "Stack Overflow 개발자 설문 · 30,903명 · 2026.10 공개"),
+                            ("중요한 결정까지 신뢰", "6.6%"),
+                            ("검증", "출처 표시가 중요 · 93%")], 3)
+              + src(("Stack Overflow 2026 개발자 설문 · AI", "https://survey.stackoverflow.co/2026/ai"),
+                    ("Stack Overflow 블로그 · 2026-10-06", "https://stackoverflow.blog/2026/10/06/the-results-of-the-2026-developer-survey-are-here/")), T),
+        light("LLM", viz2.tiles([("LLM", "Large Language Model · 대규모 언어 모델"),
+                                 ("사전 학습", "방대한 글 · 코드로 다음 단어 예측 학습"),
+                                 ("미세 조정", "질문 답하기 · 지시 따르기 학습"),
+                                 ("컨텍스트 창", "한 번에 보는 글의 양 · 작업 기억")], 2)
+              + src(("Claude 문서 · Glossary", "https://platform.claude.com/docs/en/about-claude/glossary")), T),
+        light("다음 토큰 예측", next_token()
+              + src(("Claude 문서 · Glossary", "https://platform.claude.com/docs/en/about-claude/glossary")), T),
         light("LLM과 코딩 에이전트", comic([
             ("v1_brain1.webp", "생각만", "LLM", "글 읽기 · 글 쓰기 · 판단"),
             ("v1_brain2.webp", "+ 도구", "LLM + 도구", "파일 읽기 · 검색 · 명령 실행"),
@@ -529,6 +560,24 @@ CSS = """
   .v1fwk i.lp{border:none; border-top:3.5px dashed #F28C28; border-radius:0; height:0; background:none;}
   .v1fwk i.ov{border-radius:11px; background:#16233A; border-color:#16233A;}
   .v1fwk b{font-size:18px; color:#16233A;} .v1fwk span{font-size:15px; color:#3A4657;}
+  /* 1-1 · 다음 토큰 예측 (v1nt) */
+  .v1ntL{display:flex; flex-direction:column; gap:14px;}
+  .v1ntS{display:flex; flex-wrap:wrap; gap:10px; min-height:120px; align-content:flex-start; background:#16233A; border-radius:14px; padding:20px;}
+  .v1ntC{font-size:26px; font-weight:800; color:#fff; background:#2C4466; border-radius:10px; padding:6px 14px; opacity:0; animation:v1fwIn .5s var(--d) forwards;}
+  .v1ntC.nw{background:#F28C28;}
+  .v1ntH{font-size:16px; font-weight:800; color:#3A4657;} .v1ntH span{color:#8A94A3; font-weight:600;}
+  .v1ntB{position:relative; height:180px;}
+  .v1ntP{position:absolute; inset:0; display:flex; flex-direction:column; gap:12px; opacity:0;
+    animation:v1fwIn .4s var(--a) forwards, v1fwOut .4s var(--b) forwards;}
+  .v1ntP.last{animation:v1fwIn .4s var(--a) forwards;}
+  .v1ntR{display:grid; grid-template-columns:150px 1fr 60px; gap:14px; align-items:center; font-size:21px; font-weight:700; color:#16233A;
+    border:2px solid transparent; border-radius:10px; padding:6px 10px;}
+  .v1ntR b{height:16px; background:#EEF1F5; border-radius:8px; overflow:hidden;} .v1ntR i{display:block; height:100%; background:#8FA3BC;}
+  .v1ntR em{font-style:normal; font-size:18px; color:#6B7785; text-align:right;}
+  .v1ntR.pk{animation:v1ntPk .5s var(--p) forwards;} .v1ntR.pk i{animation:v1ntPi .5s var(--p) forwards;}
+  @keyframes v1ntPk{to{border-color:#F28C28; background:#FFF6EC;}}
+  @keyframes v1ntPi{to{background:#F28C28;}}
+  @media print{.v1ntC,.v1ntP.last{opacity:1; animation:none} .v1ntP:not(.last){display:none} .v1ntP.last .v1ntR.pk{border-color:#F28C28; background:#FFF6EC; animation:none}}
   @keyframes v1fwIn{from{opacity:0} to{opacity:1}}
   @keyframes v1fwP{50%{opacity:.25}}
   @keyframes v1fwOut{to{opacity:0}}
