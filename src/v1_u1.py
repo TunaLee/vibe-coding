@@ -210,22 +210,6 @@ def ramen_flow():
             f'<span>라면 끓이기 · 빈칸 「?」 채우기</span></div>{side}</div></div>')
 
 
-def flowchart():
-    """순서도 · 사과 먹기 — 시작 → 과일 받기 → ◇ 사과인가 → 예: 집기 · 깨물기 · 씨 뱉기 → 끝 / 아니오: 모름 · 멈춤. 칸이 차례로 나타남."""
-    def n(cls, t, d, sub=""):
-        return f'<div class="v1fn {cls}" style="--d:{d:.1f}s"><b>{t}</b>{f"<small>{sub}</small>" if sub else ""}</div>'
-    def a(d, lab=""):
-        return f'<div class="v1fa" style="--d:{d:.1f}s">{f"<em>{lab}</em>" if lab else ""}→</div>'
-    top = (n("ov", "시작", .2) + a(.5) + n("", "과일 받기", .7) + a(1.0) + n("dm", "사과인가?", 1.2)
-           + a(1.6, "예") + n("", "① 집기", 1.8) + a(2.1) + n("", "② 깨물기", 2.3) + a(2.6) + n("", "③ 씨 뱉기", 2.8)
-           + a(3.1) + n("ov", "끝", 3.3))
-    no = (f'<div class="v1fno" style="--d:3.8s"><span>아니오 ↓</span>'
-          + n("er", "모름 · 멈춤", 4.0, "eat(pear) → ReferenceError") + '</div>')
-    legend = ('<div class="v1flg"><span><i class="ov"></i>시작 · 끝</span><span><i></i>처리</span>'
-              '<span><i class="dm"></i>조건 · 갈림길</span></div>')
-    return f'<div class="v1flow"><div class="v1frow">{top}</div>{no}</div>{legend}'
-
-
 def fb_steps():
     """알고리즘 피드백 · 예 — AI가 만든 로그인 순서 3단계 → 내 피드백 두 개 → 단계 두 개가 끼어듦."""
     rows = [("", "① 이메일 · 비밀번호 입력", .3, ""), ("add", "회사 이메일(@company.com)만 허용", 2.6, "a"),
@@ -236,13 +220,6 @@ def fb_steps():
           '<div class="v1fbq" style="--d:3.6s"><span>나 · 피드백 b</span><p>비밀번호를 계속 틀리면 잠깐 잠가 줘</p></div>')
     return (f'<div class="v1fb"><div class="v1fbl"><div class="v1fbh">AI가 만든 로그인 순서</div>{st}</div>'
             f'<div class="v1fbr">{fb}</div></div>')
-
-
-def algo_list(rows):
-    """알고리즘 단계 — (번호, 내용, 꼬리표). 꼬리표 「조건」 「반복」은 주황. 0.5초 간격으로 한 줄씩."""
-    r = "".join(f'<div class="v1al{" k" if tag in ("조건", "반복") else ""}" style="--d:{.3 + i * .5:.1f}s"><i>{n}</i><b>{t}</b>'
-                f'{f"<em>{tag}</em>" if tag else ""}</div>' for i, (n, t, tag) in enumerate(rows))
-    return f'<div class="v1alist">{r}</div>'
 
 
 def comic(cuts):
@@ -375,14 +352,6 @@ def slides():
         light("우유와 아보카도", '<div class="v1mm"><img src="img/v1_algo_milk.webp" alt="우유 사고 아보카도 있으면 6개 사 와 · 우유 6개를 들고 온 남편"/></div>', T),
         light("알고리즘", milk_flow(), T),
         light("라면 끓이기 알고리즘", ramen_flow(), T),
-        light("사과 먹기 알고리즘", '<div class="v1shot"><figure><img src="img/v1_algo_steps.webp" alt="세 개의 디딤돌 · 집기 · 깨물기 · 씨 뱉기"/>'
-              '<figcaption>사과 먹기 · 디딤돌 세 개</figcaption></figure>'
-              + algo_list([("①", "과일이 사과인가? 아니면 멈춤", "조건"), ("②", "손으로 집기", "순서"), ("③", "한 입 깨물기", "순서"),
-                           ("④", "씨 뱉기", "끝")])
-              + "</div>"
-              + src(("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")), T),
-        light("사과 먹기 순서도", flowchart()
-              + note("순서도", "알고리즘을 도형과 화살표로 그린 그림 · 처리 · 조건 · 순서가 한눈에"), T),
         light("알고리즘 피드백 예", fb_steps()
               + note("요청 팁", "「순서를 단계로 보여 줘」 → 단계를 읽고 빠진 규칙 · 예외를 지적"), T),
         light("AI 코딩 도구 사용 현황", big([("73", "%", "AI 사용자 중 코딩 도우미 · 에이전트 매일 사용"),
@@ -451,32 +420,6 @@ def slides():
 
 
 CSS = """
-  /* 1-1 · 알고리즘 단계 */
-  .v1alist{display:flex; flex-direction:column; gap:10px;}
-  .v1al{display:grid; grid-template-columns:34px 1fr auto; gap:10px; align-items:center; padding:11px 16px; border:1.5px solid #E3E6EA; border-left:5px solid #1F3A5F; border-radius:10px; background:#fff; opacity:0; animation:v1cutIn .4s ease-out var(--d) forwards;}
-  .v1al i{font-style:normal; font-weight:800; color:#1F3A5F; font-size:18px;} .v1al b{font-size:18px; color:#16233A;}
-  .v1al em{font-style:normal; font-size:12px; font-weight:800; padding:3px 9px; border-radius:10px; background:#EEF1F5; color:#3A4657;}
-  .v1al.k{border-left-color:#F28C28; background:#FFF8F0;} .v1al.k em{background:#F28C28; color:#fff;}
-  @media print{.v1al{opacity:1; animation:none}}
-
-  /* 1-1 · 순서도 */
-  .v1flow{margin:56px 0 10px;}
-  .v1frow{display:flex; align-items:center; gap:6px;}
-  .v1fn{flex:0 0 auto; padding:18px 16px; border:2px solid #1F3A5F; border-radius:8px; background:#fff; text-align:center; opacity:0; animation:v1cutIn .4s ease-out var(--d) forwards;}
-  .v1fn b{font-size:21px; color:#16233A; white-space:nowrap;} .v1fn small{display:block; font-family:var(--mono); font-size:15px; color:#C0392B; margin-top:4px;}
-  .v1fn.ov{border-radius:30px; background:#F4F6F9;}
-  .v1fn.dm{width:150px; height:150px; padding:0; display:grid; place-items:center; border:0; background:none; position:relative;}
-  .v1fn.dm::before{content:""; position:absolute; inset:22px; border:2px solid #F28C28; background:#FFF3E6; transform:rotate(45deg); border-radius:6px;}
-  .v1fn.dm b{position:relative; font-size:19px;}
-  .v1fn.er{border-color:#C0392B; background:#FDECEA;}
-  .v1fa{flex:0 0 auto; position:relative; color:#F28C28; font-weight:800; font-size:24px; opacity:0; animation:v1cutIn .3s ease-out var(--d) forwards;}
-  .v1fa em{position:absolute; top:-20px; left:-2px; font-style:normal; font-size:13px; color:#E07A12;}
-  .v1fno{display:flex; flex-direction:column; align-items:flex-start; gap:6px; margin:4px 0 0 330px; opacity:0; animation:v1cutIn .3s ease-out var(--d) forwards;}
-  .v1fno > span{font-size:14px; font-weight:800; color:#C0392B;}
-  .v1flg{display:flex; gap:22px; margin-top:40px; font-size:15px; color:#6B7785;}
-  .v1flg span{display:flex; align-items:center; gap:7px;} .v1flg i{display:inline-block; width:22px; height:14px; border:2px solid #1F3A5F; border-radius:3px;}
-  .v1flg i.ov{border-radius:10px;} .v1flg i.dm{width:12px; height:12px; border-color:#F28C28; transform:rotate(45deg);}
-  @media print{.v1fn,.v1fa,.v1fno{opacity:1; animation:none}}
   /* 1-1 · 알고리즘 피드백 */
   .v1fb{display:grid; grid-template-columns:1.1fr 1fr; gap:28px; align-items:start; margin-top:6px;}
   .v1fbh{font-size:13px; font-weight:800; color:#6B7785; margin-bottom:10px;}

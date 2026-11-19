@@ -936,32 +936,6 @@
   @keyframes v1cutIn{from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none}}
   @media print{.v1cmr{opacity:1; animation:none}}
 
-  /* 1-1 · 알고리즘 단계 */
-  .v1alist{display:flex; flex-direction:column; gap:10px;}
-  .v1al{display:grid; grid-template-columns:34px 1fr auto; gap:10px; align-items:center; padding:11px 16px; border:1.5px solid #E3E6EA; border-left:5px solid #1F3A5F; border-radius:10px; background:#fff; opacity:0; animation:v1cutIn .4s ease-out var(--d) forwards;}
-  .v1al i{font-style:normal; font-weight:800; color:#1F3A5F; font-size:18px;} .v1al b{font-size:18px; color:#16233A;}
-  .v1al em{font-style:normal; font-size:12px; font-weight:800; padding:3px 9px; border-radius:10px; background:#EEF1F5; color:#3A4657;}
-  .v1al.k{border-left-color:#F28C28; background:#FFF8F0;} .v1al.k em{background:#F28C28; color:#fff;}
-  @media print{.v1al{opacity:1; animation:none}}
-
-  /* 1-1 · 순서도 */
-  .v1flow{margin:56px 0 10px;}
-  .v1frow{display:flex; align-items:center; gap:6px;}
-  .v1fn{flex:0 0 auto; padding:18px 16px; border:2px solid #1F3A5F; border-radius:8px; background:#fff; text-align:center; opacity:0; animation:v1cutIn .4s ease-out var(--d) forwards;}
-  .v1fn b{font-size:21px; color:#16233A; white-space:nowrap;} .v1fn small{display:block; font-family:var(--mono); font-size:15px; color:#C0392B; margin-top:4px;}
-  .v1fn.ov{border-radius:30px; background:#F4F6F9;}
-  .v1fn.dm{width:150px; height:150px; padding:0; display:grid; place-items:center; border:0; background:none; position:relative;}
-  .v1fn.dm::before{content:""; position:absolute; inset:22px; border:2px solid #F28C28; background:#FFF3E6; transform:rotate(45deg); border-radius:6px;}
-  .v1fn.dm b{position:relative; font-size:19px;}
-  .v1fn.er{border-color:#C0392B; background:#FDECEA;}
-  .v1fa{flex:0 0 auto; position:relative; color:#F28C28; font-weight:800; font-size:24px; opacity:0; animation:v1cutIn .3s ease-out var(--d) forwards;}
-  .v1fa em{position:absolute; top:-20px; left:-2px; font-style:normal; font-size:13px; color:#E07A12;}
-  .v1fno{display:flex; flex-direction:column; align-items:flex-start; gap:6px; margin:4px 0 0 330px; opacity:0; animation:v1cutIn .3s ease-out var(--d) forwards;}
-  .v1fno > span{font-size:14px; font-weight:800; color:#C0392B;}
-  .v1flg{display:flex; gap:22px; margin-top:40px; font-size:15px; color:#6B7785;}
-  .v1flg span{display:flex; align-items:center; gap:7px;} .v1flg i{display:inline-block; width:22px; height:14px; border:2px solid #1F3A5F; border-radius:3px;}
-  .v1flg i.ov{border-radius:10px;} .v1flg i.dm{width:12px; height:12px; border-color:#F28C28; transform:rotate(45deg);}
-  @media print{.v1fn,.v1fa,.v1fno{opacity:1; animation:none}}
   /* 1-1 · 알고리즘 피드백 */
   .v1fb{display:grid; grid-template-columns:1.1fr 1fr; gap:28px; align-items:start; margin-top:6px;}
   .v1fbh{font-size:13px; font-weight:800; color:#6B7785; margin-bottom:10px;}
@@ -1526,22 +1500,6 @@ add eax, 4</pre><div class="v1lf">CPU 명령 하나씩</div><div class="v1lk">�
   <h2 class="s-title sm">라면 끓이기 알고리즘</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v1fwW"><div><svg class="v1fwS" viewBox="0 0 900 360"><defs><marker id="v1fwA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#3A4657"/></marker></defs><g class="v1fw ov" style="--d:0.3s"><rect x="15.0" y="65.0" width="100" height="50" rx="25.0"/><text x="65" y="96">시작</text></g><g class="v1fw ar " style="--d:0.5s"><path d="M115 90H158" marker-end="url(#v1fwA)"/></g><g class="v1fw " style="--d:0.7s"><rect x="160.0" y="65.0" width="160" height="50" rx="10"/><text class="qm" x="240" y="96" style="--r:6s">?</text><text class="rv" x="240" y="96" style="--r:6s">물 550ml 붓기</text></g><g class="v1fw ar " style="--d:0.9s"><path d="M320 90H363" marker-end="url(#v1fwA)"/></g><g class="v1fw " style="--d:1.1s"><rect x="365.0" y="65.0" width="140" height="50" rx="10"/><text class="qm" x="435" y="96" style="--r:7.2s">?</text><text class="rv" x="435" y="96" style="--r:7.2s">불 켜기</text></g><g class="v1fw ar " style="--d:1.3s"><path d="M505 90H533" marker-end="url(#v1fwA)"/></g><g class="v1fw dm" style="--d:1.5s"><path d="M535.0 90L620 40.0L705.0 90L620 140.0z"/><text class="qm" x="620" y="96" style="--r:8.4s">?</text><text class="rv" x="620" y="96" style="--r:8.4s">물이 끓었나?</text></g><g class="v1fw ar " style="--d:1.7s"><path d="M705 90H738" marker-end="url(#v1fwA)"/><text class="lb rv" x="722" y="58" style="--r:8.4s">아니오</text></g><g class="v1fw " style="--d:1.9s"><rect x="740.0" y="65.0" width="140" height="50" rx="10"/><text class="qm" x="810" y="96" style="--r:9.6s">?</text><text class="rv" x="810" y="96" style="--r:9.6s">1분 기다리기</text></g><g class="v1fw ar lp" style="--d:2.1s"><path d="M810 65V18H620V38" marker-end="url(#v1fwA)"/><text class="lb rv" x="715" y="12" style="--r:10.8s">반복</text></g><g class="v1fw ar " style="--d:2.3s"><path d="M620 140V253" marker-end="url(#v1fwA)"/><text class="lb rv" x="636" y="200" style="--r:8.4s">예</text></g><g class="v1fw " style="--d:2.5s"><rect x="540.0" y="255.0" width="160" height="50" rx="10"/><text class="qm" x="620" y="286" style="--r:12s">?</text><text class="rv" x="620" y="286" style="--r:12s">면 · 스프 넣기</text></g><g class="v1fw ar " style="--d:2.7s"><path d="M540 280H492" marker-end="url(#v1fwA)"/></g><g class="v1fw " style="--d:2.9s"><rect x="320.0" y="255.0" width="170" height="50" rx="10"/><text class="qm" x="405" y="286" style="--r:13.2s">?</text><text class="rv" x="405" y="286" style="--r:13.2s">4분 30초 끓이기</text></g><g class="v1fw ar " style="--d:3.1s"><path d="M320 280H272" marker-end="url(#v1fwA)"/></g><g class="v1fw " style="--d:3.3s"><rect x="140.0" y="255.0" width="130" height="50" rx="10"/><text class="qm" x="205" y="286" style="--r:14.4s">?</text><text class="rv" x="205" y="286" style="--r:14.4s">불 끄기</text></g><g class="v1fw ar " style="--d:3.5s"><path d="M140 280H112" marker-end="url(#v1fwA)"/></g><g class="v1fw ov" style="--d:3.7s"><rect x="20.0" y="255.0" width="90" height="50" rx="25.0"/><text x="65" y="286">끝</text></g></svg></div><div class="v1fwR"><div class="v1fwD" style="--d:3.9s"><b>생각해 보기</b><span>라면 끓이기 · 빈칸 「?」 채우기</span></div><div class="v1fwk" style="--d:4.2s"><i class="bx"></i><b>처리</b><span>무엇부터 하나</span></div><div class="v1fwk" style="--d:4.6s"><i class="dm"></i><b>조건</b><span>어디서 갈라지나</span></div><div class="v1fwk" style="--d:5.0s"><i class="lp"></i><b>반복</b><span>어디로 되돌아가나</span></div><div class="v1fwk" style="--d:5.4s"><i class="ov"></i><b>끝</b><span>언제 멈추나</span></div></div></div></div></div>
-</section>
-
-<section class="slide lt" data-title="사과 먹기 알고리즘">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">1-1</span></div>
-  <h2 class="s-title sm">사과 먹기 알고리즘</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1shot"><figure><img src="img/v1_algo_steps.webp" alt="세 개의 디딤돌 · 집기 · 깨물기 · 씨 뱉기"/><figcaption>사과 먹기 · 디딤돌 세 개</figcaption></figure><div class="v1alist"><div class="v1al k" style="--d:0.3s"><i>①</i><b>과일이 사과인가? 아니면 멈춤</b><em>조건</em></div><div class="v1al" style="--d:0.8s"><i>②</i><b>손으로 집기</b><em>순서</em></div><div class="v1al" style="--d:1.3s"><i>③</i><b>한 입 깨물기</b><em>순서</em></div><div class="v1al" style="--d:1.8s"><i>④</i><b>씨 뱉기</b><em>끝</em></div></div></div></div></div>
-</section>
-
-<section class="slide lt" data-title="사과 먹기 순서도">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">1-1</span></div>
-  <h2 class="s-title sm">사과 먹기 순서도</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1flow"><div class="v1frow"><div class="v1fn ov" style="--d:0.2s"><b>시작</b></div><div class="v1fa" style="--d:0.5s">→</div><div class="v1fn " style="--d:0.7s"><b>과일 받기</b></div><div class="v1fa" style="--d:1.0s">→</div><div class="v1fn dm" style="--d:1.2s"><b>사과인가?</b></div><div class="v1fa" style="--d:1.6s"><em>예</em>→</div><div class="v1fn " style="--d:1.8s"><b>① 집기</b></div><div class="v1fa" style="--d:2.1s">→</div><div class="v1fn " style="--d:2.3s"><b>② 깨물기</b></div><div class="v1fa" style="--d:2.6s">→</div><div class="v1fn " style="--d:2.8s"><b>③ 씨 뱉기</b></div><div class="v1fa" style="--d:3.1s">→</div><div class="v1fn ov" style="--d:3.3s"><b>끝</b></div></div><div class="v1fno" style="--d:3.8s"><span>아니오 ↓</span><div class="v1fn er" style="--d:4.0s"><b>모름 · 멈춤</b><small>eat(pear) → ReferenceError</small></div></div></div><div class="v1flg"><span><i class="ov"></i>시작 · 끝</span><span><i></i>처리</span><span><i class="dm"></i>조건 · 갈림길</span></div><div class="dbnote"><span>순서도</span> 알고리즘을 도형과 화살표로 그린 그림 · 처리 · 조건 · 순서가 한눈에</div></div></div>
 </section>
 
 <section class="slide lt" data-title="알고리즘 피드백 예">
