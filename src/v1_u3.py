@@ -53,38 +53,41 @@ def _devmap():
 
 CSS = """
   /* 1-3 · 기획서 구성 애니메이션 (v1pl) */
-  .v1plW{display:grid; grid-template-columns:330px 40px 1fr; gap:14px; align-items:center;}
-  .v1plL{display:flex; flex-direction:column; gap:9px;}
-  .v1plH{font-size:15px; font-weight:800; color:#6B7785;}
-  .v1plS{font-size:17px; font-weight:700; color:#16233A; background:#fff; border:2px solid #D9DDE3; border-radius:12px; padding:8px 12px;
+  .v1plW{display:grid; grid-template-columns:360px 44px 1fr; gap:14px; align-items:center; margin-top:4px;}
+  .v1plL{display:flex; flex-direction:column; gap:10px;}
+  .v1plH{font-size:18px; font-weight:800; color:#3A4657;}
+  .v1plS{font-size:21px; font-weight:800; color:#16233A; background:#fff; border:2px solid #D9DDE3; border-radius:12px; padding:9px 14px;
     opacity:0; animation:v1plIn .5s var(--d) forwards, v1plHi .6s var(--h) forwards;}
-  .v1plS.msg{background:#FFFBEA; border-color:#F2DE9B;} .v1plS em{display:block; font-style:normal; font-size:12px; font-weight:800; color:#8A94A3;}
-  .v1plA{font-size:34px; font-weight:900; color:#F28C28; text-align:center; opacity:0; animation:v1plIn .5s var(--d) forwards;}
-  .v1plD{background:#16233A; border-radius:16px; padding:14px 18px; opacity:0; animation:v1plIn .6s var(--d) forwards;}
-  .v1plF{font-family:var(--mono); font-size:13px; color:#8FA3BC; margin-bottom:6px;}
-  .v1plR{display:grid; grid-template-columns:150px 1fr auto; gap:12px; align-items:center; padding:9px 0; border-top:1px solid #2C4466;}
-  .v1plR b{font-family:var(--mono); font-size:16px; color:#F6B26B;}
-  .v1plT{font-size:17px; font-weight:700; color:#fff; opacity:0; animation:v1plIn .6s var(--d) forwards;}
-  .v1plR.no .v1plT{text-decoration:line-through; text-decoration-color:#F28C28; color:#C9D3E0;}
-  .v1plR i{font-style:normal; font-size:12px; font-weight:800; color:#16233A; background:#F28C28; border-radius:8px; padding:2px 8px; opacity:0; animation:v1plIn .6s var(--d) forwards;}
+  .v1plS.msg{background:#FFFBEA; border-color:#F2DE9B;} .v1plS em{display:block; font-style:normal; font-size:13px; font-weight:800; color:#8A94A3;}
+  .v1plA{font-size:40px; font-weight:900; color:#F28C28; text-align:center; opacity:0; animation:v1plIn .5s var(--d) forwards;}
+  .v1plD{background:#fff; border:3px solid #16233A; border-radius:16px; padding:12px 16px; opacity:0; animation:v1plIn .6s var(--d) forwards;}
+  .v1plF{font-family:var(--mono); font-size:15px; font-weight:700; color:#fff; background:#16233A; border-radius:8px; padding:4px 10px; display:inline-block; margin-bottom:6px;}
+  .v1plR{display:grid; grid-template-columns:140px 1fr auto; gap:14px; align-items:center; padding:11px 10px; border-top:1.5px solid #E3E6EA; border-radius:10px;
+    animation:v1plRow 1.6s var(--h) both;}
+  .v1plR b{font-size:20px; color:#E07A12;}
+  .v1plT{font-size:21px; font-weight:800; color:#16233A; opacity:0; animation:v1plIn .6s var(--d) forwards;}
+  .v1plR.no .v1plT{text-decoration:line-through; text-decoration-color:#C0392B; text-decoration-thickness:3px; color:#6B7785;}
+  .v1plR i{font-style:normal; font-size:14px; font-weight:800; color:#fff; background:#16233A; border-radius:8px; padding:3px 10px; opacity:0; animation:v1plIn .6s var(--d) forwards;}
   @keyframes v1plIn{from{opacity:0} to{opacity:1}}
-  @keyframes v1plHi{to{border-color:#F28C28; box-shadow:0 0 0 3px #FCD9B3; opacity:.55}}
-  @media print{.v1plS,.v1plA,.v1plD,.v1plT,.v1plR i{opacity:1; animation:none}}
+  @keyframes v1plHi{to{border-color:#F28C28; box-shadow:0 0 0 3px #FCD9B3; opacity:.5}}
+  @keyframes v1plRow{0%{background:transparent} 25%{background:#FFE7CC} 100%{background:transparent}}
+  @media print{.v1plS,.v1plA,.v1plD,.v1plT,.v1plR i{opacity:1; animation:none} .v1plR{animation:none}}
   /* 1-3 · 피드백 반영 애니메이션 (v1rw) */
-  .v1rwW{display:flex; flex-direction:column; gap:22px; margin-top:8px;}
-  .v1rwR{display:grid; grid-template-columns:130px 1fr 300px 1fr; gap:14px; align-items:center;}
-  .v1rwH{font-size:19px; font-weight:800; color:#16233A; opacity:0; animation:v1plIn .5s var(--d) forwards;}
-  .v1rwV{font-size:20px; font-weight:700; color:#16233A; background:#F4F6F9; border-radius:12px; padding:14px 16px;
+  .v1rwW{display:flex; flex-direction:column; gap:26px; margin-top:40px;}
+  .v1rwR{display:grid; grid-template-columns:150px 1fr 40px 1fr 40px 1.15fr; gap:12px; align-items:center;}
+  .v1rwTop span{font-size:16px; font-weight:800; color:#6B7785;}
+  .v1rwH{font-size:23px; font-weight:800; color:#16233A; opacity:0; animation:v1plIn .5s var(--d) forwards;}
+  .v1rwV{font-size:24px; font-weight:800; color:#16233A; background:#F4F6F9; border-radius:14px; padding:22px 18px;
     opacity:0; animation:v1plIn .5s var(--d) forwards, v1rwX .6s var(--x) forwards;}
-  .v1rwV u{text-decoration:none; border-radius:4px; animation:v1rwU .6s var(--u) forwards;}
-  .v1rwQ{font-size:17px; font-weight:700; color:#16233A; background:#FFF8F0; border:2px solid #F28C28; border-radius:14px; padding:10px 14px;
+  .v1rwV u{text-decoration:none; border-radius:4px; padding:0 2px; animation:v1rwU .6s var(--u) forwards;}
+  .v1rwA{font-style:normal; font-size:30px; font-weight:900; color:#F28C28; text-align:center; opacity:0; animation:v1plIn .4s var(--d) forwards;}
+  .v1rwQ{font-size:21px; font-weight:800; color:#16233A; background:#FFF8F0; border:2.5px solid #F28C28; border-radius:16px; padding:20px 16px;
     opacity:0; animation:v1plIn .5s var(--d) forwards;}
-  .v1rwQ em{display:block; font-style:normal; font-size:12px; font-weight:800; color:#E07A12;}
-  .v1rwN{font-size:20px; font-weight:800; color:#1E7B45; background:#F1FAF4; border:2px solid #9FC5A8; border-radius:12px; padding:14px 16px;
+  .v1rwN{font-size:24px; font-weight:800; color:#1E7B45; background:#F1FAF4; border:2.5px solid #6FB585; border-radius:14px; padding:22px 18px;
     opacity:0; animation:v1plIn .6s var(--d) forwards;}
   @keyframes v1rwU{to{background:#FDECEA; color:#C0392B; box-shadow:0 0 0 2px #E6B0AA;}}
-  @keyframes v1rwX{to{opacity:.45; text-decoration:line-through;}}
-  @media print{.v1rwH,.v1rwV,.v1rwQ,.v1rwN{opacity:1; animation:none}}
+  @keyframes v1rwX{to{opacity:.4; text-decoration:line-through;}}
+  @media print{.v1rwH,.v1rwV,.v1rwQ,.v1rwN,.v1rwA{opacity:1; animation:none}}
   /* 1-3 · IT 기업 개발 흐름 (v1df · v1dm) */
   .v1df{display:grid; grid-template-columns:repeat(7,1fr); gap:10px; margin-top:26px;}
   .v1dfc{position:relative; background:#fff; border:2px solid #C9D6E6; border-radius:14px; padding:16px 10px 18px; text-align:center;
@@ -126,7 +129,7 @@ def plan_build():
         d = 3.6 + i * 2.2
         left += (f'<div class="v1plS {kind}" style="--d:{.3 + i * .25:.2f}s;--h:{d:.1f}s">'
                  f'<em>{"단톡방" if kind == "msg" else "메모"}</em>{raw}</div>')
-        right += (f'<div class="v1plR{" no" if i == 5 else ""}"><b>## {h}</b><span class="v1plT" style="--d:{d + .5:.1f}s">{body}</span>'
+        right += (f'<div class="v1plR{" no" if i == 5 else ""}" style="--h:{d + .3:.1f}s"><b>{h}</b><span class="v1plT" style="--d:{d + .5:.1f}s">{body}</span>'
                   f'<i style="--d:{d + .5:.1f}s">{tag}</i></div>')
     return (f'<div class="v1plW"><div class="v1plL"><div class="v1plH">흩어진 재료</div>{left}</div>'
             f'<div class="v1plA" style="--d:2.2s">→</div>'
@@ -137,12 +140,14 @@ def fb_rewrite():
     """피드백 반영 — 흐린 문장 → 흐린 말 강조 → Claude 질문 → 구체 문장으로 바뀜. 두 줄 · 장면 간격 2초."""
     rows = [("문제점", "할 일 관리가 <u>불편하다</u>", "실제로 어떤 일이 있었나요?", "기한 지난 일을 그다음 회의에서야 안다"),
             ("목표 이용자", "<u>일하는 모든 사람</u>", "누가 · 어떤 기기로 쓰나요?", "팀원 8명 · PC 브라우저")]
-    out = ""
+    out = ('<div class="v1rwR v1rwTop"><span></span><span>흐린 문장</span><span></span><span>Claude 질문</span><span></span><span>고친 문장</span></div>')
     for i, (h, vague, q, done) in enumerate(rows):
         t = .3 + i * 6.4
         out += (f'<div class="v1rwR"><div class="v1rwH" style="--d:{t:.1f}s">{h}</div>'
                 f'<div class="v1rwV" style="--d:{t:.1f}s;--u:{t + 1.2:.1f}s;--x:{t + 4.2:.1f}s">「{vague}」</div>'
-                f'<div class="v1rwQ" style="--d:{t + 2.2:.1f}s"><em>Claude</em>{q}</div>'
+                f'<i class="v1rwA" style="--d:{t + 2.2:.1f}s">→</i>'
+                f'<div class="v1rwQ" style="--d:{t + 2.2:.1f}s">{q}</div>'
+                f'<i class="v1rwA" style="--d:{t + 4.2:.1f}s">→</i>'
                 f'<div class="v1rwN" style="--d:{t + 4.2:.1f}s">「{done}」</div></div>')
     return f'<div class="v1rwW">{out}</div>'
 
@@ -190,8 +195,7 @@ def slides():
             ("머릿속 아이디어", "설명할 때마다 내용이 바뀜"), ("기획서", "왜 · 누구에게 · 무엇을 · 어떤 화면"),
             ("기획서.md 파일", "1-4 PRD 의 입력 · Claude Code 가 읽음")])
               + src(("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")), T),
-        light("기획서 구성", plan_build()
-              + note("파일", "기획서.md · 칸마다 「## 제목」 · 「하지 않을 것」은 1-4 PRD 의 「제외」 칸"), T),
+        light("기획서 구성", plan_build(), T),
         light("기획서 예시", '<div class="twocol"><div>' + code("기획서.md · 칸 제목", esc(_heads()))
               + '</div><div>' + viz2.tiles([("한 파일", "칸마다 「## 제목」 · 3~5줄"), ("분량", "한 화면 분량"),
                                           ("다음 단원", "1-4 · Claude Code 가 이 파일을 읽음")], 1) + "</div></div>"
