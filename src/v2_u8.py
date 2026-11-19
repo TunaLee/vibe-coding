@@ -36,9 +36,9 @@ def envmove():
 
 def logstream():
     """로그가 한 줄씩 쌓이는 화면 — 500 줄은 빨강 · 4xx 는 노랑. 값은 예."""
-    rows = [("", "11:41:52", "GET", "/", "200", ""), ("", "11:41:53", "GET", "/api/bookings", "200", ""),
+    rows = [("", "11:41:52", "GET", "/", "200", ""), ("", "11:41:53", "GET", "/api/tasks", "200", ""),
             ("err", "11:42:10", "GET", "/api/holidays", "500", "Error: HOLIDAY_API_KEY is not set"),
-            ("warn", "11:42:18", "POST", "/api/bookings", "401", "로그인 없음"), ("", "11:42:31", "GET", "/", "200", "")]
+            ("warn", "11:42:18", "POST", "/api/tasks", "401", "로그인 없음"), ("", "11:42:31", "GET", "/", "200", "")]
     r = "".join(f'<div class="ln {c}" style="--d:{.4 + i * .6:.2f}s"><span>{t}</span><span>{m}</span><span>{u}</span><b>{st}</b><em>{x}</em></div>'
                 for i, (c, t, m, u, st, x) in enumerate(rows))
     return f'<div class="v2u8log"><div class="hd"><span>시간 (UTC)</span><span>방식</span><span>주소</span><b>상태</b><em>메시지</em></div>{r}</div>'
@@ -87,7 +87,7 @@ def slides():
             ("push", "자동 재배포"), ("방문 기록", "며칠 뒤 그래프")], hl=1)
               + viz2.tiles([("보이는 것", "방문자 · 페이지 뷰 · 유입 경로 · 국가 · 기기"),
                             ("Hobby 한도", "월 50,000 이벤트 · 보고 기간 1개월 · 초과 시 수집 중지"),
-                            ("팀 예약 앱 규모", "팀원 20명 · 무료 범위 안")], 3)
+                            ("팀 할 일 보드 규모", "팀원 8명 · 무료 범위 안")], 3)
               + src(("Vercel · Web Analytics quickstart", "https://vercel.com/docs/analytics/quickstart"),
                     ("Vercel · Web Analytics pricing", "https://vercel.com/docs/analytics/limits-and-pricing")), T),
         # ── 대응
@@ -106,13 +106,13 @@ def slides():
         lab("2-8", "환경변수 · 모니터링", T, "배포 주소에서 DB · 공휴일 API 가 동작하고, 로그 · 방문 기록이 보이게",
             ["Vercel 환경변수 등록", "Redeploy · 배포 주소 확인", "Logs 에서 요청 확인", "Web Analytics 켜기 · push",
              "일부러 낸 에러를 로그에서 찾기"],
-            ["배포 주소에서 예약 · 공휴일 정상", "Logs 에 200 줄", "Analytics 방문 1건 이상"], files="2-7 까지의 앱 · .env"),
+            ["배포 주소에서 할 일 추가 · 공휴일 경고 정상", "Logs 에 200 줄", "Analytics 방문 1건 이상"], files="2-7 까지의 앱 · .env"),
         brief("2-8", T,
               ["환경변수 등록 (Config · Secret)", "Redeploy", "Logs · Live 로 요청 확인", "Analytics 스크립트 요청 · push", "로그 남기기 요청"],
               [("목표", "배포 주소에서 2부 기능 전부 동작"), ("환경변수", ".env 의 키 전부 · 종류 구분"),
                ("로그", "실패 원인 기록 · 키는 기록 안 함"), ("하지 말 것", "키를 코드 · 채팅 · 로그에 쓰기")],
               ["Environment Variables", "Redeploy", "Logs", "Web Analytics"],
-              ["배포 주소에서 로그인 · 예약 · 공휴일 정상", "Logs 에 5xx 없음", "Analytics 그래프에 방문 기록"],
+              ["배포 주소에서 로그인 · 할 일 추가 · 공휴일 경고 정상", "Logs 에 5xx 없음", "Analytics 그래프에 방문 기록"],
               "배포 주소만 안 되면 「Vercel 로그를 붙일 테니 원인 찾아 줘」 · 환경변수 이름 오타 확인"),
     ]
 

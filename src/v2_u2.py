@@ -1,7 +1,7 @@
 """2-2 데이터베이스.
 
-배경(브라우저마다 따로 저장 → 한 곳에 저장) → 비유(엑셀 · 원시인 돌판 그림) → 예약 표 애니메이션(행 · 열)
-→ 엑셀과 데이터베이스(동시 쓰기 · 형식 거절 애니메이션) → 관계(rooms · bookings) → SQL 한 줄 뜻 → Supabase 구성 · 이유 → 무료 플랜.
+배경(브라우저마다 따로 저장 → 한 곳에 저장) → 비유(엑셀 · 원시인 돌판 그림) → 할 일 표 애니메이션(행 · 열)
+→ 엑셀과 데이터베이스(동시 쓰기 · 형식 거절 애니메이션) → 관계(members · tasks) → SQL 한 줄 뜻 → Supabase 구성 · 이유 → 무료 플랜.
 사실 출처
 - Supabase 무료 플랜: supabase.com/pricing (프로젝트 2개 · DB 500 MB · 월 이용자 50,000 · 1주 미사용 시 일시정지 · Pro $25/월)
 - 프로젝트마다 Postgres 전체: supabase.com/docs/guides/database/overview
@@ -24,68 +24,68 @@ def where_saved():
         return (f'<div class="v2u2dv{" hl" if hl else ""}" style="--d:{d:.2f}s"><b>{name}</b>'
                 f'<span>{n}</span></div>')
     left = ('<div class="v2u2side"><div class="v2u2h">브라우저 저장 · localStorage</div><div class="v2u2devs">'
-            + dev("내 노트북", "예약 5건", .3) + dev("팀원 노트북", "예약 0건", .6) + dev("팀원 휴대폰", "예약 0건", .9)
-            + '</div><div class="v2u2cap" style="--d:1.3s">기기마다 다른 시간표</div></div>')
+            + dev("내 노트북", "할 일 6건", .3) + dev("팀원 노트북", "할 일 0건", .6) + dev("팀원 휴대폰", "할 일 0건", .9)
+            + '</div><div class="v2u2cap" style="--d:1.3s">기기마다 다른 보드</div></div>')
     right = ('<div class="v2u2side on"><div class="v2u2h">데이터베이스 · 한 곳</div><div class="v2u2devs">'
-             + dev("내 노트북", "예약 5건", 2.0) + dev("팀원 노트북", "예약 5건", 2.2) + dev("팀원 휴대폰", "예약 5건", 2.4)
+             + dev("내 노트북", "할 일 6건", 2.0) + dev("팀원 노트북", "할 일 6건", 2.2) + dev("팀원 휴대폰", "할 일 6건", 2.4)
              + '</div><div class="v2u2pipe" style="--d:2.7s">↓ ↓ ↓</div>'
-             + '<div class="v2u2db" style="--d:3.0s"><b>데이터베이스</b><span>예약 5건 · 모두가 같은 곳을 읽고 씀</span></div></div>')
+             + '<div class="v2u2db" style="--d:3.0s"><b>데이터베이스</b><span>할 일 6건 · 모두가 같은 곳을 읽고 씀</span></div></div>')
     return f'<div class="v2u2where">{left}<i class="v2u2ar">→</i>{right}</div>'
 
 
 def sheet():
-    """예약 표 — 행이 차례로 쌓이고, 행 하나 · 열 하나가 차례로 강조됨."""
-    head = ["회의실", "날짜", "시작", "끝", "회의 이름", "예약자"]
-    rows = [["대회의실", "2026-11-20", "10:00", "11:00", "주간 회의", "김하늘"],
-            ["소회의실 A", "2026-11-20", "14:00", "15:00", "디자인 리뷰", "이도윤"],
-            ["대회의실", "2026-11-21", "09:30", "10:30", "채용 면접", "박서연"],
-            ["소회의실 B", "2026-11-21", "16:00", "17:00", "고객 통화", "최지후"]]
+    """할 일 표 — 행이 차례로 쌓이고, 행 하나 · 열 하나가 차례로 강조됨."""
+    head = ["할 일", "기한", "담당자", "상태"]
+    rows = [["주간 보고서 작성", "2026-11-27", "김하늘", "할 일"],
+            ["신규 입사자 교육 자료", "2026-11-25", "이도윤", "진행 중"],
+            ["내년 예산안 검토", "2026-11-18", "박서준", "진행 중"],
+            ["10월 실적 정리", "2026-11-14", "최유나", "완료"]]
     th = '<th class="v2u2rn"></th>' + "".join(f'<th class="{"v2u2col" if i == 1 else ""}">{h}</th>' for i, h in enumerate(head))
     tr = ""
     for r, row in enumerate(rows):
         cls = "v2u2tr v2u2row" if r == 1 else "v2u2tr"
         tds = "".join(f'<td class="{"v2u2col" if i == 1 else ""}">{c}</td>' for i, c in enumerate(row))
         tr += f'<tr class="{cls}" style="--d:{.3 + r * .4:.2f}s"><td class="v2u2rn">{r + 1}</td>{tds}</tr>'
-    tags = ('<div class="v2u2tags"><span class="v2u2tag t1">행 · 예약 한 건</span>'
-            '<span class="v2u2tag t2">열 · 항목 하나 (날짜)</span><span class="v2u2tag t3">표 · bookings</span></div>')
-    return f'<div class="v2u2sheet"><div class="v2u2tab">bookings</div><table class="v2u2t"><thead><tr>{th}</tr></thead><tbody>{tr}</tbody></table></div>{tags}'
+    tags = ('<div class="v2u2tags"><span class="v2u2tag t1">행 · 할 일 한 건</span>'
+            '<span class="v2u2tag t2">열 · 항목 하나 (기한)</span><span class="v2u2tag t3">표 · tasks</span></div>')
+    return f'<div class="v2u2sheet"><div class="v2u2tab">tasks</div><table class="v2u2t"><thead><tr>{th}</tr></thead><tbody>{tr}</tbody></table></div>{tags}'
 
 
 def relation():
-    """두 표와 관계 — bookings.room_id 칸과 같은 번호의 rooms 행이 같은 색으로 차례로 강조됨."""
-    rooms = [("1", "대회의실", "12"), ("2", "소회의실 A", "6"), ("3", "소회의실 B", "4")]
-    bk = [("1", "1", "2026-11-20", "10:00", "주간 회의"), ("2", "2", "2026-11-20", "14:00", "디자인 리뷰"),
-          ("3", "1", "2026-11-21", "09:30", "채용 면접")]
-    rt = "".join(f'<tr class="v2u2r{a}"><td>{a}</td><td>{b}</td><td>{c}</td></tr>' for a, b, c in rooms)
-    bt = "".join(f'<tr><td>{a}</td><td class="v2u2k v2u2r{b}">{b}</td><td>{c}</td><td>{d}</td><td>{e}</td></tr>' for a, b, c, d, e in bk)
+    """두 표와 관계 — tasks.owner_id 칸과 같은 번호의 members 행이 같은 색으로 차례로 강조됨."""
+    members = [("1", "김하늘", "haneul@company.com"), ("2", "이도윤", "doyun@company.com"), ("3", "박서준", "seojun@company.com")]
+    tk = [("1", "1", "주간 보고서 작성", "2026-11-27"), ("2", "2", "신규 입사자 교육 자료", "2026-11-25"),
+          ("3", "1", "고객 설문 결과 정리", "2026-11-19")]
+    mt = "".join(f'<tr class="v2u2r{a}"><td>{a}</td><td>{b}</td><td>{c}</td></tr>' for a, b, c in members)
+    bt = "".join(f'<tr><td>{a}</td><td class="v2u2k v2u2r{b}">{b}</td><td>{c}</td><td>{d}</td></tr>' for a, b, c, d in tk)
     return ('<div class="v2u2rel">'
-            f'<div><div class="v2u2tab">bookings · 예약</div><table class="v2u2t sm"><thead><tr><th>id</th><th class="v2u2kh">room_id</th>'
-            f'<th>date</th><th>start_time</th><th>title</th></tr></thead><tbody>{bt}</tbody></table></div>'
-            '<i class="v2u2link">room_id → id</i>'
-            f'<div><div class="v2u2tab">rooms · 회의실</div><table class="v2u2t sm"><thead><tr><th>id</th><th>name</th><th>capacity</th></tr></thead>'
-            f'<tbody>{rt}</tbody></table></div></div>')
+            f'<div><div class="v2u2tab">tasks · 할 일</div><table class="v2u2t sm"><thead><tr><th>id</th><th class="v2u2kh">owner_id</th>'
+            f'<th>title</th><th>due</th></tr></thead><tbody>{bt}</tbody></table></div>'
+            '<i class="v2u2link">owner_id → id</i>'
+            f'<div><div class="v2u2tab">members · 팀원</div><table class="v2u2t sm"><thead><tr><th>id</th><th>name</th><th>email</th></tr></thead>'
+            f'<tbody>{mt}</tbody></table></div></div>')
 
 
 def rules():
-    """세 사람이 동시에 예약을 보냄 → 표에 들어감 · 날짜 형식이 틀린 하나는 거절."""
-    sends = [("김하늘", "대회의실 · 2026-11-20 · 10:00", False, .3), ("이도윤", "소회의실 A · 2026-11-20 · 14:00", False, .5),
-             ("박서연", "대회의실 · 「월요일쯤」 · 09:30", True, .7)]
+    """세 사람이 동시에 할 일을 보냄 → 표에 들어감 · 기한 형식이 틀린 하나는 거절."""
+    sends = [("김하늘", "주간 보고서 작성 · 2026-11-27", False, .3), ("이도윤", "신규 입사자 교육 자료 · 2026-11-25", False, .5),
+             ("박서준", "내년 예산안 검토 · 「월말쯤」", True, .7)]
     left = "".join(f'<div class="v2u2snd{" bad" if bad else ""}" style="--d:{d:.2f}s"><b>{who}</b><span>{x}</span></div>'
                    for who, x, bad, d in sends)
-    ok = "".join(f'<tr class="v2u2tr" style="--d:{d:.2f}s"><td>{r}</td><td>{dt}</td><td>{t}</td><td>{w}</td></tr>'
-                 for r, dt, t, w, d in [("대회의실", "2026-11-20", "10:00", "김하늘", 1.7), ("소회의실 A", "2026-11-20", "14:00", "이도윤", 1.9)])
-    return ('<div class="v2u2rules"><div class="v2u2snds"><div class="v2u2h">동시에 보낸 예약</div>' + left + '</div>'
+    ok = "".join(f'<tr class="v2u2tr" style="--d:{d:.2f}s"><td>{t}</td><td>{dt}</td><td>{w}</td></tr>'
+                 for t, dt, w, d in [("주간 보고서 작성", "2026-11-27", "김하늘", 1.7), ("신규 입사자 교육 자료", "2026-11-25", "이도윤", 1.9)])
+    return ('<div class="v2u2rules"><div class="v2u2snds"><div class="v2u2h">동시에 보낸 할 일</div>' + left + '</div>'
             '<div class="v2u2go"><i style="--d:1.2s">→</i><i style="--d:1.3s">→</i><i style="--d:1.4s">→</i></div>'
-            '<div><div class="v2u2sheet"><div class="v2u2tab">bookings</div><table class="v2u2t sm"><thead><tr>'
-            '<th>회의실</th><th class="v2u2kh">날짜 · date 형식</th><th>시작</th><th>예약자</th></tr></thead>'
+            '<div><div class="v2u2sheet"><div class="v2u2tab">tasks</div><table class="v2u2t sm"><thead><tr>'
+            '<th>할 일</th><th class="v2u2kh">기한 · date 형식</th><th>담당자</th></tr></thead>'
             f'<tbody>{ok}</tbody></table></div>'
-            '<div class="v2u2rej" style="--d:2.4s">✕ 박서연 · 「월요일쯤」 · 날짜 형식 아님 → 저장 거절</div></div></div>')
+            '<div class="v2u2rej" style="--d:2.4s">✕ 박서준 · 「월말쯤」 · 날짜 형식 아님 → 저장 거절</div></div></div>')
 
 
 def result():
     """SQL 실행 결과 — 코드 줄 뒤에 나타나는 결과 표."""
-    rows = "".join(f"<tr><td>{a}</td><td>{b}</td></tr>" for a, b in [("주간 회의", "10:00"), ("디자인 리뷰", "14:00")])
-    return (f'<div class="v2u2res"><span>결과 · 2행</span><table class="v2u2t sm"><thead><tr><th>title</th><th>start_time</th></tr></thead>'
+    rows = "".join(f"<tr><td>{a}</td><td>{b}</td></tr>" for a, b in [("내년 예산안 검토", "2026-11-18"), ("신규 입사자 교육 자료", "2026-11-25")])
+    return (f'<div class="v2u2res"><span>결과 · 2행</span><table class="v2u2t sm"><thead><tr><th>title</th><th>due</th></tr></thead>'
             f'<tbody>{rows}</tbody></table></div>')
 
 
@@ -94,22 +94,22 @@ def slides():
         light("저장 위치의 한계", where_saved()
               + note("데이터베이스", "여러 사람 · 여러 기기가 같은 데이터를 읽고 쓰는 저장소"), T),
         light("엑셀 표", phmap("v2_u2_tablet.webp", "칸을 나눠 기록하는 돌판", *GEN, viz2.maprows([
-            ("엑셀 파일", "데이터베이스", "Supabase 프로젝트 하나"), ("시트", "표 (테이블)", "bookings · rooms"),
-            ("가로 한 줄", "행", "예약 한 건"), ("세로 한 칸", "열", "날짜 · 시작 · 회의 이름"),
-            ("칸 하나", "값", "2026-11-20")], "엑셀", "데이터베이스")), T),
-        light("예약 표의 행과 열", sheet()
+            ("엑셀 파일", "데이터베이스", "Supabase 프로젝트 하나"), ("시트", "표 (테이블)", "tasks · members"),
+            ("가로 한 줄", "행", "할 일 한 건"), ("세로 한 칸", "열", "할 일 · 기한 · 담당자"),
+            ("칸 하나", "값", "2026-11-27")], "엑셀", "데이터베이스")), T),
+        light("할 일 표의 행과 열", sheet()
               + note("관계형 데이터베이스", "데이터를 행 · 열로 된 표에 담는 방식 · 표끼리 서로 연결"), T),
         light("엑셀과 데이터베이스", rules()
               + note("엑셀과 차이", "엑셀 · 아무 칸에 아무 값 / 데이터베이스 · 열마다 형식 · 여러 사람이 동시에"), T),
         light("표와 표의 관계", relation()
               + viz2.pair(
-                  "한 표에 다 넣기", [("회의실 이름 변경", "예약 행마다 고치기"), ("오타", "「대회의실」 「대 회의실」 섞임")],
-                  "표 두 개 · 번호로 연결", [("회의실 이름 변경", "rooms 한 칸만 고치기"), ("오타", "번호라 섞이지 않음")]), T),
+                  "한 표에 다 넣기", [("팀원 이메일 변경", "할 일 행마다 고치기"), ("오타", "「김하늘」 「김 하늘」 섞임")],
+                  "표 두 개 · 번호로 연결", [("팀원 이메일 변경", "members 한 칸만 고치기"), ("오타", "번호라 섞이지 않음")]), T),
         light("SQL", codemap([
-            ("select title, start_time", "회의 이름 · 시작 시각 열만"),
-            ("from bookings", "bookings 표에서"),
-            ("where date = '2026-11-20'", "날짜가 11월 20일인 행만"),
-            ("order by start_time;", "시작 시각 순서")], ask="「11월 20일 예약만 보여 줘」", title="SQL")
+            ("select title, due", "할 일 · 기한 열만"),
+            ("from tasks", "tasks 표에서"),
+            ("where status = '진행 중'", "상태가 진행 중인 행만"),
+            ("order by due;", "기한이 빠른 순서")], ask="「진행 중인 할 일만 보여 줘」", title="SQL")
               + result()
               + note("SQL 작성", "Claude Code 가 씀 · 사람은 결과 표를 확인"), T),
         light("Supabase", viz2.tiles([
@@ -139,7 +139,7 @@ CSS = """
   .v2u2db{border:2px solid #F28C28; border-radius:14px; background:#FFF3E6; padding:12px 14px; text-align:center; opacity:0; animation:v2u2in .5s ease-out var(--d) forwards;}
   .v2u2db b{display:block; font-size:19px; color:#E07A12;} .v2u2db span{font-size:15px; color:#16233A;}
   .v2u2ar{font-style:normal; align-self:center; text-align:center; font-size:30px; font-weight:800; color:#F28C28;}
-  /* 2-2 · 예약 표 */
+  /* 2-2 · 할 일 표 */
   .v2u2sheet{border:1.5px solid #D9DDE3; border-radius:12px; overflow:hidden; background:#fff; margin:4px 0 12px;}
   .v2u2tab{display:inline-block; font-family:var(--mono); font-size:14px; font-weight:800; color:#fff; background:#1F3A5F; padding:5px 14px; border-radius:8px 8px 0 0;}
   .v2u2sheet .v2u2tab{border-radius:0 0 8px 0;}

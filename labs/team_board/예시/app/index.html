@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>팀 할 일 보드</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>팀 할 일 보드</h1>
+    <div class="tools">
+      <select id="who" aria-label="담당자별 보기"></select>
+      <button id="add" class="primary">+ 할 일</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="board" class="board"></div>
+  </main>
+
+  <dialog id="form">
+    <form method="dialog" id="taskForm">
+      <h2>할 일 추가</h2>
+      <label>할 일 <input name="title" placeholder="주간 보고서 작성" /></label>
+      <div class="row">
+        <label>담당자 <select name="owner"></select></label>
+        <label>기한 <input name="due" type="date" required /></label>
+      </div>
+      <p id="err" class="err"></p>
+      <div class="btns">
+        <button type="button" id="close">닫기</button>
+        <button type="submit" class="primary">저장</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="detail">
+    <h2 id="dTitle"></h2>
+    <p id="dInfo"></p>
+    <div class="btns">
+      <button type="button" id="dDel" class="danger">삭제</button>
+      <span class="gap"></span>
+      <button type="button" id="dPrev">◀ 이전 단계</button>
+      <button type="button" id="dNext" class="primary">다음 단계 ▶</button>
+    </div>
+    <div class="btns"><button type="button" id="dClose">닫기</button></div>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>

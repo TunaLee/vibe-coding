@@ -27,7 +27,7 @@ def exchange():
     req = esc("getRestDeInfo\nsolYear=2026 · solMonth=12\nServiceKey=내 서비스 키")
     res = esc('locdate: 20261225\ndateName: "기독탄신일"\nisHoliday: "Y"')
     return ('<div class="v2u3ex">'
-            '<div class="v2u3end"><b>내 앱</b><span>회의실 예약</span></div>'
+            '<div class="v2u3end"><b>내 앱</b><span>팀 할 일 보드</span></div>'
             '<div class="v2u3mid">'
             f'<div class="v2u3msg rq"><em>요청 · 주문서</em><pre>{req}</pre></div>'
             f'<div class="v2u3msg rs"><em>응답 · 받은 음식</em><pre>{res}</pre></div>'
@@ -47,7 +47,7 @@ def lanes():
             out.append(f'<div class="v2u3lb{" hl" if hl else ""}" style="--d:{d:.2f}s"><b>{b}</b><span>{s}</span></div>')
         return f'<div class="v2u3ln"><div class="v2u3lh">{head}</div>{"".join(out)}</div>'
     return ('<div class="v2u3lanes">'
-            + lane("API", [("내 앱 코드", "이용자가 예약 화면을 열 때"), ("API 형식", "서비스마다 다른 주소 · 칸", True), ("공휴일 서버", "한국천문연구원")], .3)
+            + lane("API", [("내 앱 코드", "이용자가 기한을 고를 때"), ("API 형식", "서비스마다 다른 주소 · 칸", True), ("공휴일 서버", "한국천문연구원")], .3)
             + lane("MCP", [("나", "「표 만들어 줘」"), ("Claude Code", "도구 고르기"), ("MCP", "모든 서비스에 같은 규격", True),
                            ("Supabase MCP 서버", "안에서 Supabase API 호출")], 1.6)
             + "</div>")
@@ -66,7 +66,7 @@ def relay():
     return ('<div class="v2u3relay">'
             + row("MCP 없이", [("Claude", "SQL 작성", False), ("나", "복사", True), ("Supabase 화면", "붙여 넣기 · 실행", True),
                               ("나", "오류 문구 복사", True), ("Claude", "수정 SQL", False)], .3, False)
-            + row("MCP 연결", [("나", "「bookings 표 만들어 줘」", False), ("Claude Code", "SQL 작성", False),
+            + row("MCP 연결", [("나", "「tasks 표 만들어 줘」", False), ("Claude Code", "SQL 작성", False),
                               ("Supabase", "직접 실행 · 결과", False), ("Claude Code", "오류면 다시 고침", False)], 2.3, True)
             + '<div class="v2u3cnt"><span class="c1">사람 손 3번 · 오류마다 반복</span><span class="c2">사람 손 0번 · 요청 한 줄</span></div>'
             + "</div>")
@@ -86,7 +86,7 @@ def slides():
     return [
         # ── API
         light("앱이 모르는 정보", viz2.pair(
-            "공휴일을 직접 입력", [("목록", "해마다 사람이 입력"), ("대체공휴일 · 임시공휴일", "발표 뒤 다시 수정"), ("틀리면", "공휴일에 예약 받음")],
+            "공휴일을 직접 입력", [("목록", "해마다 사람이 입력"), ("대체공휴일 · 임시공휴일", "발표 뒤 다시 수정"), ("틀리면", "공휴일이 기한으로 들어감")],
             "가진 곳에 묻기 · API", [("목록", "한국천문연구원 특일 정보"), ("갱신", "제공하는 쪽이 관리"), ("앱이 할 일", "연도 · 월을 보내고 답 받기")])
               + note("API", "다른 프로그램의 기능 · 데이터를 정해진 형식으로 요청하는 창구"), T),
         light("메뉴판과 주문서", phmap("v2_u3_menu.webp", "메뉴판을 보고 주문하는 손님", *GEN, viz2.maprows([
@@ -102,7 +102,7 @@ def slides():
             ("ServiceKey=내 서비스 키", "공공데이터포털에서 받은 키"),
             ("locdate: 20261225", "날짜 · 2026-12-25"),
             ('dateName: "기독탄신일"', "공휴일 이름"),
-            ('isHoliday: "Y"', "쉬는 날 · 예약 막기")], ask="「2026년 12월 공휴일 알려 줘」", title="요청 · 응답")
+            ('isHoliday: "Y"', "쉬는 날 · 기한으로 받지 않음")], ask="「2026년 12월 공휴일 알려 줘」", title="요청 · 응답")
               + src(API_DOC), T),
         # ── MCP
         light("Claude Code와 Supabase 연결", relay()
@@ -121,10 +121,10 @@ def slides():
               + src(("Supabase MCP", "https://supabase.com/docs/guides/getting-started/mcp"),
                     ("Playwright MCP", "https://github.com/microsoft/playwright-mcp"), MCP_DOC), T),
         light("Supabase MCP 대화 예", chat([
-            ("me", "Supabase 에 회의실 예약 표 만들어 줘. rooms 와 bookings 두 개, room_id 로 연결"),
-            ("ai", "apply_migration 으로 표 2개를 만들까요?\nrooms(id · name · capacity) · bookings(… room_id → rooms.id)"),
+            ("me", "Supabase 에 팀 할 일 표 만들어 줘. members 와 tasks 두 개, owner_id 로 연결"),
+            ("ai", "apply_migration 으로 표 2개를 만들까요?\nmembers(id · name · email) · tasks(… owner_id → members.id)"),
             ("me", "응"),
-            ("ai", "완료 · list_tables 결과 rooms · bookings")], "Claude Code 대화 예")
+            ("ai", "완료 · list_tables 결과 members · tasks")], "Claude Code 대화 예")
               + note("연결 · 권한", "등록 명령 · 로그인 · 읽기 전용 설정은 2-6"), T),
     ]
 

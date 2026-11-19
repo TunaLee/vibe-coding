@@ -2,7 +2,7 @@
 // 지금 상태: 목록을 그리는 코드만 있다. 「추가」 버튼과 「남은 할 일」 개수는 아직 동작하지 않는다.
 const todos = [
   { text: "기획서 초안 쓰기", done: false },
-  { text: "회의실 예약 아이디어 정리", done: true },
+  { text: "팀 할 일 보드 아이디어 정리", done: true },
 ];
 
 function render() {

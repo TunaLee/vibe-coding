@@ -20,14 +20,14 @@ def slides():
         # ── 배포란 · 비유
         light("배포", viz2.pair(
             "배포 전", [("주소", "localhost — 내 컴퓨터 안"), ("열 수 있는 사람", "나 혼자"), ("컴퓨터를 끄면", "앱도 꺼짐")],
-            "배포 후", [("주소", "room-booking.vercel.app 형식"), ("열 수 있는 사람", "주소를 받은 누구나"), ("컴퓨터를 끄면", "그대로 열림")])
+            "배포 후", [("주소", "team-board.vercel.app 형식"), ("열 수 있는 사람", "주소를 받은 누구나"), ("컴퓨터를 끄면", "그대로 열림")])
               + note("배포", "내 컴퓨터에서 돌던 앱을 인터넷 주소로 공개하는 일"), T),
         light("문서 파일과 공유 링크", _share(), T),
         light("localhost · 내부망 · 외부망", _net(), T),
         light("주소별 접속 범위", viz2.maprows([
             ("localhost:8000", "이 컴퓨터만", "만들며 확인 (1-6)"),
             ("192.168.0.12:8000", "같은 Wi-Fi · 회사망 기기", "내 휴대폰 화면 확인"),
-            ("room-booking.vercel.app", "인터넷의 누구나", "공유 (1-7)")], "주소", "열리는 범위")
+            ("team-board.vercel.app", "인터넷의 누구나", "공유 (1-7)")], "주소", "열리는 범위")
               + src(("RFC 1918 · 사설 주소", "https://www.rfc-editor.org/rfc/rfc1918")), T),
         light("배포 흐름", flow([
             ("내 컴퓨터", "앱 · 커밋"), ("GitHub", "코드 보관 (1-5)"), ("Vercel", "코드를 가져가 공개"),
@@ -50,10 +50,10 @@ def slides():
               + note("직접 할 것", "브라우저 승인은 사람이 · 비밀번호를 Claude에게 알려 주지 않음")
               + src(("gh auth login", "https://cli.github.com/manual/gh_auth_login")), T),
         light("GitHub 업로드 요청", chat([
-            ("me", "이 폴더를 GitHub 비공개 저장소 room-booking 으로 올려 줘"),
-            ("ai", "gh repo create room-booking --private --source=. --push 를 실행해도 될까요?"),
+            ("me", "이 폴더를 GitHub 비공개 저장소 team-board 으로 올려 줘"),
+            ("ai", "gh repo create team-board --private --source=. --push 를 실행해도 될까요?"),
             ("me", "응"),
-            ("ai", "완료 · https://github.com/내계정/room-booking")], "Claude Code 대화")
+            ("ai", "완료 · https://github.com/내계정/team-board")], "Claude Code 대화")
               + note("Claude가 쓰는 명령", "gh repo create — 원격 저장소 만들기 + 지금까지의 커밋 올리기")
               + src(("gh repo create", "https://cli.github.com/manual/gh_repo_create")), T),
         light("공개 · 비공개 저장소", viz2.pair(
@@ -62,31 +62,31 @@ def slides():
               + note("GitHub Free", "비공개 저장소도 개수 제한 없음 · 일부 기능만 유료")
               + src(("GitHub plans", "https://docs.github.com/en/get-started/learning-about-github/githubs-plans")), T),
         light("업로드한 저장소 확인", '<div class="twocol"><div>'
-              + code("github.com/내계정/room-booking · 예", esc(
-                  "room-booking/\n├── index.html\n├── style.css\n├── app.js\n├── 기획서.md     1-3\n└── PRD.md        1-4"))
+              + code("github.com/내계정/team-board · 예", esc(
+                  "team-board/\n├── index.html\n├── style.css\n├── app.js\n├── 기획서.md     1-3\n└── PRD.md        1-4"))
               + "</div><div>" + viz2.tiles([
                   ("파일 목록", "내 폴더와 동일"), ("커밋 기록", "1-5 · 1-6 커밋"), ("자물쇠 표시", "비공개 저장소")], 1)
               + "</div></div>", T),
         # ── Vercel
         light("Vercel 프로젝트 가져오기", flow([
-            ("Vercel 로그인", "GitHub 계정 (1-2)"), ("새 프로젝트", "Git 저장소 가져오기"), ("room-booking 선택", "저장소 접근 허용"),
+            ("Vercel 로그인", "GitHub 계정 (1-2)"), ("새 프로젝트", "Git 저장소 가져오기"), ("team-board 선택", "저장소 접근 허용"),
             ("Deploy", "설정은 기본값"), ("주소 발급", "1분 안팎")], hl=2)
               + note("저장소가 안 보이면", "GitHub 쪽에서 Vercel 에 그 저장소 접근을 허용")
               + note("설정", "HTML · CSS · JS 만 있는 폴더 → 빌드 설정을 바꿀 것 없음"), T),
         light("배포 주소", viz2.tiles([
             ("프로젝트 기본 주소", "프로젝트명.vercel.app"), ("배포마다 고유 주소", "버전마다 따로 생김 · 기본 공개")], 2)
-              + code("배포 완료 · 예", esc("✓ Production   https://room-booking.vercel.app\n  이번 배포     https://room-booking-a1b2c3.vercel.app"))
+              + code("배포 완료 · 예", esc("✓ Production   https://team-board.vercel.app\n  이번 배포     https://team-board-a1b2c3.vercel.app"))
               + note("공유할 주소", "프로젝트 기본 주소 · 다시 배포해도 바뀌지 않음")
               + src(("Vercel · Generated URLs", "https://vercel.com/docs/deployments/generated-urls")), T),
-        light("배포 화면", shot("room_mobile.webp", "배포 주소 · 390px 휴대폰 화면", [
+        light("배포 화면", shot("board_mobile.webp", "배포 주소 · 390px 휴대폰 화면", [
             ("localhost 와 차이", "주소만 다름 · 코드 동일"), ("PRD 완료 기준", "모바일 폭에서 가로 스크롤 없음"),
             ("확인 방법", "주소를 휴대폰으로 보내 열기"), ("깨질 때", "화면 캡처 첨부 · 수정 요청 (1-6)")]), T),
         # ── 재배포
         light("수정 → 재배포", '<div class="twocol"><div>'
-              + chat([("me", "예약 칸 색을 연한 초록으로 바꿔 줘"),
-                      ("ai", "style.css 의 .cell.busy 색 변경 완료"),
+              + chat([("me", "완료 칸 카드 색을 연한 초록으로 바꿔 줘"),
+                      ("ai", "style.css 의 완료 칸 .card 색 변경 완료"),
                       ("me", "커밋하고 GitHub에 올려 줘"),
-                      ("ai", "커밋 「예약 칸 색 변경」 → push 완료 · Vercel 새 배포 시작")], "Claude Code 대화")
+                      ("ai", "커밋 「완료 카드 색 변경」 → push 완료 · Vercel 새 배포 시작")], "Claude Code 대화")
               + "</div><div>"
               + viz2.tiles([("① 수정 요청", "Claude Code"), ("② localhost 확인", "1-6 과 같음"), ("③ 커밋 · push", "업로드 요청"),
                             ("④ Vercel 자동 배포", "push 감지 · 1~2분"), ("⑤ 같은 주소에 반영", "새 링크 없음")], 1)
@@ -135,8 +135,8 @@ def _net():
             + '</div></div>'
             '<div class="v1nwX">'
             + dev("집 · LTE 휴대폰", "192.168.0.12:8000", False, 5.8)
-            + '<div class="v1nwS" style="--d:8.2s"><div class="v1nwh">Vercel 서버</div><tt>room-booking.vercel.app</tt></div>'
-            + dev("집 · LTE 휴대폰", "room-booking.vercel.app", True, 9.6, "on")
+            + '<div class="v1nwS" style="--d:8.2s"><div class="v1nwh">Vercel 서버</div><tt>team-board.vercel.app</tt></div>'
+            + dev("집 · LTE 휴대폰", "team-board.vercel.app", True, 9.6, "on")
             + '</div></div>')
 
 
@@ -145,11 +145,11 @@ def _share():
     ppl = "".join(f'<span class="v1shp" style="--d:{2.6 + i * .5:.1f}s">{n}</span>' for i, n in enumerate(("팀장", "팀원", "휴대폰")))
     return ('<div class="v1sh">'
             '<div class="v1shc" style="--d:.3s"><div class="v1shh">내 컴퓨터의 문서 파일</div>'
-            '<div class="v1shf"><b>회의실예약.docx</b><small>내 컴퓨터 · 바탕화면</small></div>'
+            '<div class="v1shf"><b>팀할일.docx</b><small>내 컴퓨터 · 바탕화면</small></div>'
             '<div class="v1shw">열 수 있는 사람 · 나</div><div class="v1shm">= localhost</div></div>'
             '<i class="v1sha" style="--d:1.4s">→</i>'
             '<div class="v1shc on" style="--d:1.8s"><div class="v1shh">공유 링크</div>'
-            '<div class="v1shl">https://… /회의실예약</div>'
+            '<div class="v1shl">https://… /팀할일</div>'
             f'<div class="v1shps">{ppl}</div><div class="v1shm">= 배포 주소 · *.vercel.app</div></div></div>'
             '<div class="v1shu" style="--d:4.4s"><b>문서를 고치면</b><span>링크로 보는 사람에게 바로 반영</span><em>= 재배포 · push 하면 자동</em></div>')
 

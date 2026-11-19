@@ -39,28 +39,28 @@ def _sheet(name, head, rows, key=()):
 
 
 def _tables():
-    rooms = _sheet("rooms · 회의실", ["id", "name", "capacity"],
-                   [["1", "대회의실", "12"], ["2", "소회의실 A", "6"], ["3", "소회의실 B", "4"]], key=("id",))
-    bookings = _sheet("bookings · 예약", ["id", "room_id", "date", "start", "end", "title", "user_id"],
-                      [["7", "1", "12-03", "14:00", "15:00", "주간 회의", "하늘"],
-                       ["8", "2", "12-03", "10:00", "10:30", "면접", "도윤"],
-                       ["9", "1", "12-04", "09:00", "10:00", "킥오프", "하늘"]], key=("room_id",))
-    return (f'<div class="v2u5sheets">{rooms}{bookings}</div>'
-            '<div class="v2u5link"><b>room_id 1</b> → rooms 의 id 1 · 대회의실 · <b>user_id</b> → 로그인 계정 (표에는 긴 고유 번호 · 그림은 이름)</div>')
+    members = _sheet("members · 팀원", ["id", "name", "email"],
+                     [["하늘", "김하늘", "haneul@…"], ["도윤", "이도윤", "doyun@…"], ["서준", "박서준", "seojun@…"]], key=("id",))
+    tasks = _sheet("tasks · 할 일", ["id", "title", "owner_id", "due", "status"],
+                   [["7", "주간 보고서 작성", "하늘", "12-04", "할 일"],
+                    ["8", "신규 입사자 교육 자료", "도윤", "11-25", "진행 중"],
+                    ["9", "고객 설문 결과 정리", "하늘", "11-19", "완료"]], key=("owner_id",))
+    return (f'<div class="v2u5sheets">{members}{tasks}</div>'
+            '<div class="v2u5link"><b>owner_id 하늘</b> → members 의 김하늘 · <b>id</b> = 로그인 계정 (표에는 긴 고유 번호 · 그림은 이름)</div>')
 
 
 def slides():
     return [
         # ── 데이터 구조
-        light("회의실 예약 데이터 구조", _tables()
-              + note("행 하나", "회의실 하나 · 예약 하나"), T),
+        light("팀 할 일 데이터 구조", _tables()
+              + note("행 하나", "팀원 한 명 · 할 일 하나"), T),
         light("표를 나누는 이유", viz2.pair(
-            "표 하나", [("예약마다", "회의실 이름 · 정원 반복 저장"), ("이름 변경", "「대회의실」 → 「큰 회의실」 · 예약 수백 줄 수정"),
-                      ("오타", "「대회의실」 · 「대 회의실」 따로 집계")],
-            "표 두 개", [("예약마다", "room_id 숫자 하나"), ("이름 변경", "rooms 한 줄 수정"), ("오타", "고를 수 있는 회의실만")]), T),
+            "표 하나", [("할 일마다", "담당자 이름 · 이메일 반복 저장"), ("이메일 변경", "할 일 수백 줄 수정"),
+                      ("오타", "「김하늘」 · 「김 하늘」 따로 집계")],
+            "표 두 개", [("할 일마다", "owner_id 하나"), ("이메일 변경", "members 한 줄 수정"), ("오타", "고를 수 있는 팀원만")]), T),
         light("AI와 데이터 구조 설계", chat([
             ("me", "PRD 5칸 데이터 구조를 읽고 Supabase 표 설계를 제안해 줘. 만들기 전에 표 모양부터 보여 줘"),
-            ("ai", "제안 · rooms · bookings 두 표. 같은 회의실 · 같은 시간 예약을 DB 에서도 막을까요?"),
+            ("ai", "제안 · members · tasks 두 표. 상태는 할 일 · 진행 중 · 완료 셋만 받게 DB 에서도 막을까요?"),
             ("me", "응 · 화면과 DB 둘 다에서 막아 줘"),
             ("ai", "표 설계 · SQL 파일 저장 완료 · SQL Editor 에서 실행 필요")], "Claude Code 대화 예")
               + note("사람이 정할 것", "표 이름 · 열 · 지켜야 할 규칙 · SQL 은 Claude Code"), T),
@@ -76,70 +76,70 @@ def slides():
               + src(KEYS), T),
         # ── CRUD
         light("CRUD", viz2.maprows([
-            ("Create · 저장", "새 행 추가", "예약 추가"),
-            ("Read · 조회", "행 읽기", "시간표 보기"),
-            ("Update · 수정", "행 고치기", "회의 이름 바꾸기"),
-            ("Delete · 삭제", "행 지우기", "예약 취소")], "CRUD", "회의실 예약에서")
+            ("Create · 저장", "새 행 추가", "할 일 추가"),
+            ("Read · 조회", "행 읽기", "보드 보기"),
+            ("Update · 수정", "행 고치기", "상태 바꾸기"),
+            ("Delete · 삭제", "행 지우기", "할 일 삭제")], "CRUD", "팀 할 일 보드에서")
               + note("CRUD", "데이터를 다루는 네 동작 · 거의 모든 앱의 기본"), T),
         light("CRUD 코드 뜻", codemap([
-            ('supabase.from("bookings").insert({ room_id: 1, … })', "예약 표에 한 줄 저장"),
-            ('supabase.from("bookings").select("*").eq("date", day)', "그 날짜 예약 모두 조회"),
-            ('supabase.from("bookings").update({ title: "주간 회의" }).eq("id", 7)', "7번 예약 이름 수정"),
-            ('supabase.from("bookings").delete().eq("id", 7)', "7번 예약 삭제")],
-            ask="localStorage 대신 Supabase bookings 표에 저장 · 조회하게 바꿔 줘", title="Claude Code가 쓴 코드 · 예")
+            ('supabase.from("tasks").insert({ title: "주간 보고서 작성", … })', "할 일 표에 한 줄 저장"),
+            ('supabase.from("tasks").select("*").order("due")', "할 일 모두 · 기한 순서로 조회"),
+            ('supabase.from("tasks").update({ status: "완료" }).eq("id", 7)', "7번 할 일 완료로"),
+            ('supabase.from("tasks").delete().eq("id", 7)', "7번 할 일 삭제")],
+            ask="localStorage 대신 Supabase tasks 표에 저장 · 조회하게 바꿔 줘", title="Claude Code가 쓴 코드 · 예")
               + note("확인", "Supabase 대시보드 Table Editor · 행이 늘고 줄어드는지"), T),
         light("저장 위치 변경 전후", '<div class="v2u5lb">1부 · localStorage</div>'
-              + lane([("내 노트북", "예약 입력"), ("내 브라우저", "localStorage"), ("팀원 휴대폰", "시간표")],
-                     [(0, 1, "대회의실 · 주간 회의", .4, True)], [(2, "빈 시간표", "no", 1.8)], h=190)
+              + lane([("내 노트북", "할 일 추가"), ("내 브라우저", "localStorage"), ("팀원 휴대폰", "보드")],
+                     [(0, 1, "주간 보고서 작성", .4, True)], [(2, "빈 보드", "no", 1.8)], h=190)
               + '<div class="v2u5lb"><b>2부 · Supabase</b></div>'
-              + lane([("내 노트북", "예약 입력"), ("Supabase", "bookings 표"), ("팀원 휴대폰", "시간표")],
-                     [(0, 1, "대회의실 · 주간 회의", 2.8, False), (1, 2, "대회의실 · 주간 회의", 4.0, True)],
-                     [(1, "행 1개 추가", "ok", 3.9), (2, "같은 시간표", "ok", 5.2)], h=190), T),
+              + lane([("내 노트북", "할 일 추가"), ("Supabase", "tasks 표"), ("팀원 휴대폰", "보드")],
+                     [(0, 1, "주간 보고서 작성", 2.8, False), (1, 2, "주간 보고서 작성", 4.0, True)],
+                     [(1, "행 1개 추가", "ok", 3.9), (2, "같은 보드", "ok", 5.2)], h=190), T),
         # ── 로그인
         light("Supabase Auth 로그인", flow([("가입", "이메일 · 비밀번호"), ("확인 메일", "링크 클릭"), ("로그인", "signInWithPassword"),
-                                            ("예약 저장", "user_id = 로그인 계정")], hl=3)
-              + viz2.tiles([("계정 목록", "대시보드 Authentication › Users"), ("예약자 이름", "입력 칸 대신 로그인 계정")], 2)
+                                            ("할 일 저장", "created_by = 로그인 계정")], hl=3)
+              + viz2.tiles([("계정 목록", "대시보드 Authentication › Users"), ("만든 사람", "입력 칸 대신 로그인 계정")], 2)
               + src(("Supabase · Auth", "https://supabase.com/docs/guides/auth")), T),
         # ── 권한 RLS
         light("로그인만으로는 부족한 이유", viz2.pair(
-            "RLS 꺼짐", [("publishable 키를 가진 누구나", "모든 예약 읽기 · 수정 · 삭제"), ("남의 예약 취소", "가능"),
+            "RLS 꺼짐", [("publishable 키를 가진 누구나", "모든 할 일 읽기 · 수정 · 삭제"), ("남의 할 일 삭제", "가능"),
                        ("화면에서 버튼 숨기기", "개발자 도구로 우회")],
-            "RLS 켜짐", [("규칙", "DB 가 행마다 확인"), ("남의 예약 취소", "DB 에서 거절"), ("화면 우회", "소용없음")])
+            "RLS 켜짐", [("규칙", "DB 가 행마다 확인"), ("남의 할 일 삭제", "DB 에서 거절"), ("화면 우회", "소용없음")])
               + note("RLS", "Row Level Security · 행 단위 권한 · 표마다 켜기")
               + src(RLS), T),
         light("팀 게시판 비유", shot("v2_u5_board.webp", "팀 게시판 · 내 쪽지만 떼기", [
             ("게시판 보기", "모두 읽기 · 로그인 전에도"), ("쪽지 붙이기", "로그인한 팀원"), ("쪽지 떼기", "내 이름표가 붙은 쪽지만")])
               + src(GEN), T),
         light("RLS 정책 코드 뜻", codemap([
-            ("alter table bookings enable row level security;", "예약 표에 RLS 켜기"),
-            ('create policy "모두 보기" on bookings for select', "읽기 규칙 · 누구나"),
+            ("alter table tasks enable row level security;", "할 일 표에 RLS 켜기"),
+            ('create policy "모두 보기" on tasks for select', "읽기 규칙 · 누구나"),
             ("  using ( true );", "모든 행 · 조건 없음"),
-            ('create policy "내 예약만 삭제" on bookings for delete', "삭제 규칙"),
+            ('create policy "내 할 일만 삭제" on tasks for delete', "삭제 규칙"),
             ("  to authenticated", "로그인한 사람만"),
-            ("  using ( (select auth.uid()) = user_id );", "로그인 계정 = 예약자인 행만")],
-            ask="PRD 7칸 권한대로 bookings 표에 RLS 정책을 만들어 줘", title="Claude Code가 쓴 SQL · 예")
+            ("  using ( (select auth.uid()) = owner_id );", "로그인 계정 = 담당자인 행만")],
+            ask="PRD 7칸 권한대로 tasks 표에 RLS 정책을 만들어 줘", title="Claude Code가 쓴 SQL · 예")
               + src(RLS), T),
-        light("RLS 동작", lane([("팀원 브라우저", "계정 A · 계정 B"), ("Supabase", "RLS 규칙 확인"), ("bookings", "7번 · 예약자 A")],
+        light("RLS 동작", lane([("팀원 브라우저", "계정 A · 계정 B"), ("Supabase", "RLS 규칙 확인"), ("tasks", "7번 · 담당자 A")],
                                [(0, 1, "B · 7번 삭제", .4, False), (0, 1, "A · 7번 삭제", 2.8, False), (1, 2, "삭제 실행", 4.1, True)],
-                               [(1, "예약자 ≠ B · 거절", "no", 1.6), (2, "A 의 요청 · 삭제", "ok", 5.3)], h=200)
+                               [(1, "담당자 ≠ B · 거절", "no", 1.6), (2, "A 의 요청 · 삭제", "ok", 5.3)], h=200)
               + note("규칙 위치", "DB 안 · 화면 · 코드를 우회해도 같은 결과")
               + src(RLS), T),
-        light("계정 두 개로 권한 확인", flow([("계정 A 로그인", "예약 하나 추가"), ("계정 B 로그인", "다른 브라우저 · 시크릿 창"),
-                                          ("A 의 예약 열기", "취소 버튼 없음"), ("B 로 취소 시도", "DB 에서 거절"), ("A 로 취소", "성공")], hl=3)
+        light("계정 두 개로 권한 확인", flow([("계정 A 로그인", "A 담당 할 일 추가"), ("계정 B 로그인", "다른 브라우저 · 시크릿 창"),
+                                          ("A 의 할 일 열기", "삭제 버튼 없음"), ("B 로 삭제 시도", "DB 에서 거절"), ("A 로 삭제", "성공")], hl=3)
               + note("시크릿 창", "같은 컴퓨터에서 두 번째 계정 · 로그인 정보가 따로"), T),
         # ── 실습
-        lab("2-5", "Supabase 저장 · 로그인 · 권한", T, "내 앱 → 모두 같은 시간표 · 로그인 · 내 예약만 취소",
+        lab("2-5", "Supabase 저장 · 로그인 · 권한", T, "내 앱 → 모두 같은 보드 · 로그인 · 내 할 일만 수정",
             ["Supabase 새 프로젝트", "Claude Code에 표 설계 요청 · SQL 실행", "저장 위치 교체 요청", "로그인 · RLS 요청", "계정 두 개로 확인"],
-            ["다른 기기에서 같은 예약이 보임", "다른 계정의 예약은 취소 불가"],
+            ["다른 기기에서 같은 할 일이 보임", "다른 계정 담당 할 일은 삭제 불가"],
             files="예시/PRD.md 5 · 7 칸 (비교용)"),
         brief("2-5", T, ["Supabase 프로젝트 만들기", "표 설계 · SQL 실행", "저장 · 조회를 DB 로 교체", "로그인 · RLS", "두 계정 확인"],
-              [("목표", "예약 DB 저장 · 로그인 · 내 예약만 수정 · 취소"), ("입력", "PRD v2 · 5 · 7 칸"),
+              [("목표", "할 일 DB 저장 · 로그인 · 내 할 일만 수정 · 삭제"), ("입력", "PRD v2 · 5 · 7 칸"),
                ("진행 방식", "표 설계 먼저 보여 주기 · 태스크 하나씩"), ("하지 말 것", "secret 키를 앱 코드에 넣기")],
               ["Supabase", "publishable 키", "RLS", "로그인"],
-              ["Table Editor 에 예약 행이 생김", "계정 B 로 계정 A 예약 취소 불가"],
+              ["Table Editor 에 할 일 행이 생김", "계정 B 로 계정 A 할 일 삭제 불가"],
               "SQL 오류는 SQL Editor 의 빨간 문구를 그대로 Claude Code에 붙여 넣기"),
         light("실습 2-5 확인", checks([
-            ("다른 기기 · 브라우저에서 같은 예약이 보이나", "DB 저장"), ("로그인 전에 예약 창이 막히나", "추가 권한"),
-            ("다른 계정 예약을 취소할 수 없나", "RLS"), ("앱 코드에 sb_secret_ 이 없나", "키 검색")],
+            ("다른 기기 · 브라우저에서 같은 할 일이 보이나", "DB 저장"), ("로그인 전에 「+ 할 일」이 안 보이나", "추가 권한"),
+            ("다른 계정 담당 할 일을 삭제할 수 없나", "RLS"), ("앱 코드에 sb_secret_ 이 없나", "키 검색")],
             "넷 다 「예」 → 커밋 · 2-6 외부 서비스 연결"), T),
     ]

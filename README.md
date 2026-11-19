@@ -12,7 +12,9 @@
 
 ## 실습 자료
 
-- `labs/room_booking` — 1부 공통 예제(회의실 예약 페이지): 기획서 · PRD · 완성 앱
+- `labs/delegate_todo` — 1-2 첫 위임 · 개인 할 일 목록 뼈대
+- `labs/team_board` — 1부 공통 예제(팀 할 일 보드): 기획서 · PRD · 완성 앱
+- `labs/team_board_v2` — 2부 공통 예제(DB · 로그인 · 공휴일 API · MCP): 기획서 v2 · PRD v2
 - `labs/meeting_agent` — 3부 실습(회의록 에이전트)
 
 ## 빌드

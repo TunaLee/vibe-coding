@@ -1,14 +1,14 @@
 """vibe2 공통 도구 — 2부 표지 · 2부 지도 · 다음 단원. 화면 · 대화 · 실습 진행 · 코드 뜻은 v1kit 것을 그대로 쓴다.
 
 바이브코딩 온라인 강의 2부 — 심화. 단원마다 HTML 한 파일(docs/2-N-이름.html).
-공통 예제 = 1부 회의실 예약 페이지에 DB · 로그인 · 외부 API · MCP 를 붙인 「팀 회의실 예약」 (labs/room_booking_v2).
+공통 예제 = 1부 팀 할 일 보드에 DB · 로그인 · 외부 API · MCP 를 붙인 「팀 할 일 보드 v2」 (labs/team_board_v2).
 이어지는 산출물: 2-4 기획서 · PRD v2 → 2-5 Supabase 저장 · 로그인 → 2-6 API 키 · MCP → 2-7 테스트 · 리뷰 → 2-8 배포 · 로그 → 2-9 운영 체크리스트
 """
 from deck import light
 from hx import note
 from v1kit import brief as _brief, chat, codemap, shot  # noqa: F401  (단원 모듈이 v2kit 에서 가져다 쓴다)
 
-FOLDER = "labs/room_booking_v2"
+FOLDER = "labs/team_board_v2"
 
 # (단원, 제목, 분 — 화면에 쓰지 않음, 이 단원에서 남는 것)
 UNITS = [
@@ -49,7 +49,7 @@ def roadmap(u):
         cls = "on" if i == cur else ("done" if i < cur else "")
         cells.append(f'<a class="v1u {cls}" href="{file_of(c)}"><span class="c">{c}</span><b>{t}</b><small>{out}</small></a>')
     return light("2부 커리큘럼", f'<div class="v1map v2map">{"".join(cells)}</div>'
-                 + note("공통 예제", "1부 회의실 예약 + DB · 로그인 · 외부 API · MCP"), u)
+                 + note("공통 예제", "1부 팀 할 일 보드 + DB · 로그인 · 외부 API · MCP"), u)
 
 
 def nextup(u):

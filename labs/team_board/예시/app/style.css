@@ -1,0 +1,35 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; background: #f5f6f8; color: #1d2733; }
+header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding: 16px 20px; background: #fff; border-bottom: 1px solid #e3e6ea; }
+h1 { font-size: 20px; margin: 0; }
+.tools { display: flex; gap: 8px; }
+select, button { font: inherit; padding: 6px 12px; border: 1px solid #cfd5dc; border-radius: 8px; background: #fff; cursor: pointer; }
+button.primary { background: #2563eb; border-color: #2563eb; color: #fff; }
+button.danger { background: #dc2626; border-color: #dc2626; color: #fff; }
+button:disabled { opacity: .4; cursor: default; }
+main { padding: 16px; }
+
+.board { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; align-items: start; }
+.col { background: #eef1f5; border-radius: 12px; padding: 12px; min-height: 260px; }
+.col h2 { font-size: 15px; margin: 0 0 10px; }
+.col h2 span { font-size: 12px; color: #fff; background: #6b7785; border-radius: 10px; padding: 1px 8px; margin-left: 4px; }
+.card { background: #fff; border: 1px solid #dfe3e8; border-radius: 10px; padding: 10px 12px; margin-bottom: 8px; cursor: pointer; }
+.card:hover { border-color: #2563eb; }
+.card b { display: block; font-size: 14px; margin-bottom: 4px; }
+.card small { font-size: 12px; color: #6b7785; }
+.card.late { border: 2px solid #dc2626; background: #fff5f5; }
+.card em { font-style: normal; color: #fff; background: #dc2626; border-radius: 6px; padding: 1px 6px; margin-left: 4px; }
+
+dialog { border: none; border-radius: 14px; padding: 20px; width: min(380px, 92vw); box-shadow: 0 10px 40px rgba(0,0,0,.2); }
+dialog h2 { margin: 0 0 12px; font-size: 18px; }
+label { display: block; font-size: 14px; margin-bottom: 10px; }
+label input, label select { display: block; width: 100%; margin-top: 4px; font: inherit; padding: 8px; border: 1px solid #cfd5dc; border-radius: 8px; }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.err { color: #dc2626; font-size: 14px; min-height: 20px; margin: 4px 0 8px; }
+.btns { display: flex; justify-content: flex-end; gap: 8px; margin-top: 8px; }
+.btns .gap { flex: 1; }
+
+@media (max-width: 480px) {
+  .board { grid-template-columns: 1fr; }
+  .col { min-height: 0; }
+}
