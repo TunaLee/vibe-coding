@@ -37,9 +37,9 @@ def sheet():
     """할 일 표 — 행이 차례로 쌓이고, 행 하나 · 열 하나가 차례로 강조됨."""
     head = ["할 일", "기한", "담당자", "상태"]
     rows = [["주간 보고서 작성", "2026-11-27", "김하늘", "할 일"],
-            ["신규 입사자 교육 자료", "2026-11-25", "이도윤", "진행 중"],
-            ["내년 예산안 검토", "2026-11-18", "박서준", "진행 중"],
-            ["10월 실적 정리", "2026-11-14", "최유나", "완료"]]
+            ["신규 입사자 교육 자료", "2026-11-25", "이준호", "진행 중"],
+            ["내년 예산안 검토", "2026-11-18", "박서연", "진행 중"],
+            ["10월 실적 정리", "2026-11-14", "최민재", "완료"]]
     th = '<th class="v2u2rn"></th>' + "".join(f'<th class="{"v2u2col" if i == 1 else ""}">{h}</th>' for i, h in enumerate(head))
     tr = ""
     for r, row in enumerate(rows):
@@ -53,7 +53,7 @@ def sheet():
 
 def relation():
     """두 표와 관계 — tasks.owner_id 칸과 같은 번호의 members 행이 같은 색으로 차례로 강조됨."""
-    members = [("1", "김하늘", "haneul@company.com"), ("2", "이도윤", "doyun@company.com"), ("3", "박서준", "seojun@company.com")]
+    members = [("1", "김하늘", "haneul@company.com"), ("2", "이준호", "junho@company.com"), ("3", "박서연", "seoyeon@company.com")]
     tk = [("1", "1", "주간 보고서 작성", "2026-11-27"), ("2", "2", "신규 입사자 교육 자료", "2026-11-25"),
           ("3", "1", "고객 설문 결과 정리", "2026-11-19")]
     mt = "".join(f'<tr class="v2u2r{a}"><td>{a}</td><td>{b}</td><td>{c}</td></tr>' for a, b, c in members)
@@ -68,18 +68,18 @@ def relation():
 
 def rules():
     """세 사람이 동시에 할 일을 보냄 → 표에 들어감 · 기한 형식이 틀린 하나는 거절."""
-    sends = [("김하늘", "주간 보고서 작성 · 2026-11-27", False, .3), ("이도윤", "신규 입사자 교육 자료 · 2026-11-25", False, .5),
-             ("박서준", "내년 예산안 검토 · 「월말쯤」", True, .7)]
+    sends = [("김하늘", "주간 보고서 작성 · 2026-11-27", False, .3), ("이준호", "신규 입사자 교육 자료 · 2026-11-25", False, .5),
+             ("박서연", "내년 예산안 검토 · 「월말쯤」", True, .7)]
     left = "".join(f'<div class="v2u2snd{" bad" if bad else ""}" style="--d:{d:.2f}s"><b>{who}</b><span>{x}</span></div>'
                    for who, x, bad, d in sends)
     ok = "".join(f'<tr class="v2u2tr" style="--d:{d:.2f}s"><td>{t}</td><td>{dt}</td><td>{w}</td></tr>'
-                 for t, dt, w, d in [("주간 보고서 작성", "2026-11-27", "김하늘", 1.7), ("신규 입사자 교육 자료", "2026-11-25", "이도윤", 1.9)])
+                 for t, dt, w, d in [("주간 보고서 작성", "2026-11-27", "김하늘", 1.7), ("신규 입사자 교육 자료", "2026-11-25", "이준호", 1.9)])
     return ('<div class="v2u2rules"><div class="v2u2snds"><div class="v2u2h">동시에 보낸 할 일</div>' + left + '</div>'
             '<div class="v2u2go"><i style="--d:1.2s">→</i><i style="--d:1.3s">→</i><i style="--d:1.4s">→</i></div>'
             '<div><div class="v2u2sheet"><div class="v2u2tab">tasks</div><table class="v2u2t sm"><thead><tr>'
             '<th>할 일</th><th class="v2u2kh">기한 · date 형식</th><th>담당자</th></tr></thead>'
             f'<tbody>{ok}</tbody></table></div>'
-            '<div class="v2u2rej" style="--d:2.4s">✕ 박서준 · 「월말쯤」 · 날짜 형식 아님 → 저장 거절</div></div></div>')
+            '<div class="v2u2rej" style="--d:2.4s">✕ 박서연 · 「월말쯤」 · 날짜 형식 아님 → 저장 거절</div></div></div>')
 
 
 def result():

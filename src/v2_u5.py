@@ -40,10 +40,10 @@ def _sheet(name, head, rows, key=()):
 
 def _tables():
     members = _sheet("members · 팀원", ["id", "name", "email"],
-                     [["하늘", "김하늘", "haneul@…"], ["도윤", "이도윤", "doyun@…"], ["서준", "박서준", "seojun@…"]], key=("id",))
+                     [["하늘", "김하늘", "haneul@…"], ["준호", "이준호", "junho@…"], ["서연", "박서연", "seoyeon@…"]], key=("id",))
     tasks = _sheet("tasks · 할 일", ["id", "title", "owner_id", "due", "status"],
                    [["7", "주간 보고서 작성", "하늘", "12-04", "할 일"],
-                    ["8", "신규 입사자 교육 자료", "도윤", "11-25", "진행 중"],
+                    ["8", "신규 입사자 교육 자료", "준호", "11-25", "진행 중"],
                     ["9", "고객 설문 결과 정리", "하늘", "11-19", "완료"]], key=("owner_id",))
     return (f'<div class="v2u5sheets">{members}{tasks}</div>'
             '<div class="v2u5link"><b>owner_id 하늘</b> → members 의 김하늘 · <b>id</b> = 로그인 계정 (표에는 긴 고유 번호 · 그림은 이름)</div>')

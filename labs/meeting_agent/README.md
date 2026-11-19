@@ -16,8 +16,10 @@
 | 3-5 | Skill 없이 받은 결과에서 바꿀 것 3개 · 기한 없는 할 일 처리 | `.claude/skills/meeting-notes/` |
 | 3-6 | 막을 폴더 · 도구 · 막혔을 때 돌려줄 이유 | `.claude/settings.json` · `hooks/` |
 | 3-7 | 검토 기준 3개 · 검토 Agent 가 돌려줄 것 | `.claude/agents/notes-checker.md` |
+| 3-8 | 보드에 올릴 조건 · 보류할 조건 · 쓰기 전 확인 | 2부 팀 할 일 보드(Supabase tasks)에 할 일 등록 |
 
 - 결과는 `out/` 에 남는다. 원본은 고치지 않는다.
 - 11/3 원본의 「휴대촌」은 3-6 실습용으로 일부러 심은 오타다.
 - 막히면 `solution/` → `dot_claude/` 를 `.claude/` 로, `CLAUDE.md` 를 이 폴더 맨 위로 복사.
 - 회사 노션 · 슬랙이 MCP 연결을 막아 두었으면 이 폴더의 파일로 그대로 진행한다.
+- 3-8 보드 등록은 2부에서 만든 팀 할 일 보드 v2(`labs/team_board_v2`)의 Supabase 프로젝트를 쓴다. 2-6 의 read_only 연결 대신 쓰기를 열고, `execute_sql` 은 매번 확인(ask)으로 둔다.

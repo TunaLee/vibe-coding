@@ -1,6 +1,7 @@
 """vibe3 3-8 마무리 · 운영하며 키우기 (10분).
 
-앞 차시(3-3 ~ 3-7)가 만든 파일을 모아 완성 에이전트로 보여 주고, 결과 → 사람의 수정 요청 → 하네스 반영 루프로 닫는다.
+앞 차시(3-3 ~ 3-7)가 만든 파일을 모아 완성 에이전트로 보여 주고, 정리한 할 일을 2부 팀 할 일 보드(Supabase tasks)에 올린 뒤,
+결과 → 사람의 수정 요청 → 하네스 반영 루프로 닫는다.
 파일 내용은 labs/meeting_agent/solution 에서 그대로 읽는다.
 """
 import anim
@@ -19,9 +20,9 @@ def run_anim():
     MO = "#FFF3E6"
     steps = [("규칙 읽기", "원본은 읽기만", "CLAUDE.md", "3-4"), ("절차 고르기", "meeting-notes", "Skill", "3-5"),
              ("회의록 읽기", "notion-fetch", "노션 MCP", "3-3"), ("결과 저장", "out/ · Hook 통과", "Hook", "3-6"),
-             ("검토", "원본과 대조", "검토 Agent", "3-7"), ("확인 · 발송", "슬랙 초안 → 사람", "사람", "")]
+             ("검토", "원본과 대조", "검토 Agent", "3-7"), ("보드 등록", "확인 후 tasks 표", "사람 확인 · MCP", "2-6")]
     s = (f'<g {d.show(1)}><rect x="330" y="8" width="500" height="44" rx="22" fill="{N}"/>'
-         + _t(580, 31, "「11/10 회의록 정리하고 검토까지 해 줘」", "tw", extra='style="font-size:16px"') + "</g>")
+         + _t(580, 31, "「11/10 회의록 정리 · 검토 뒤 보드에 올려 줘」", "tw", extra='style="font-size:16px"') + "</g>")
     xs = [8 + i * 192 for i in range(6)]
     for i, (h, sub, part, ch) in enumerate(steps):
         x = xs[i]
@@ -42,7 +43,7 @@ def run_anim():
     s += _path_dot(d, [(580, 52), (580, 66), (92, 66), (92, 196)], 14, 20, O, 10)
     s += _path_dot(d, [(92, 196), (xs[5] + 84, 196)], 20, 88, O, 10)
     s += (f'<g {d.show(90)}><rect x="250" y="310" width="660" height="56" rx="14" fill="#E8F5E9" stroke="{OK}" stroke-width="3"/>'
-          + _t(580, 339, "out/2026-11-10_정리.md · 슬랙 초안 3줄 · 발송은 사람", "tt", extra=f'style="fill:{OK};font-size:18px"') + "</g>")
+          + _t(580, 339, "out/2026-11-10_정리.md · 보드에 할 일 1건 · 보류 1건 · 발송은 사람", "tt", extra=f'style="fill:{OK};font-size:18px"') + "</g>")
     return d.svg(1160, 380, s)
 
 
@@ -64,7 +65,8 @@ def slides():
             "│   └── agents/notes-checker.md        검토        3-7\n"
             "├── 원본/                              회의록 3개\n"
             "└── out/                               정리 결과\n"
-            "\n+ 연결: 노션 MCP                       회의록 읽기 3-3")
+            "\n+ 연결: 노션 MCP                       회의록 읽기 3-3"
+            "\n+ 연결: Supabase MCP                   팀 할 일 보드 2-6")
     out_md = ("# 11/10 주간 회의 정리\n"
               "결정 2 · 할 일 2 · 기한 미정 1\n"
               "| 할 일 | 담당 | 기한 | 상태 | 근거 |\n"
@@ -83,11 +85,26 @@ def slides():
             ("skills/meeting-notes", "결정 · 할 일 · 열린 질문 → 표 · 슬랙 초안 세 줄", "3-5 · 절차"),
             ("settings.json · guard.py", "Edit · Write 직전 · 원본/ 이면 거부", "3-6 · 통제"),
             ("agents/notes-checker", "원본과 대조 · 읽기 도구만 · 고치지 않음", "3-7 · 검증"),
-            ("노션 MCP", "찾기 · 읽기 도구만 · 쓰기 도구는 deny", "3-3 · 도구")], "파일", "하는 일"), t),
+            ("노션 MCP", "찾기 · 읽기 도구만 · 쓰기 도구는 deny", "3-3 · 도구"),
+            ("Supabase MCP", "tasks 표에 할 일 등록 · execute_sql 은 매번 확인", "2-6 · 보드")], "파일", "하는 일"), t),
         light("요청 처리 흐름", run_anim()
-              + note("부품마다 한 가지", "규칙 · 절차 · 연결 · 막기 · 검토는 파일이 · 판단은 모델이 · 발송은 사람이"), t),
+              + note("부품마다 한 가지", "규칙 · 절차 · 연결 · 막기 · 검토는 파일이 · 판단은 모델이 · 보드 쓰기 승인 · 발송은 사람이"), t),
         light("11/10 완성 에이전트 결과", code("out/2026-11-10_정리.md · 예", esc(out_md))
               + note("근거", "표의 줄마다 원본 회의록 문장 · 기한이 없던 보안팀 미팅은 「기한 미정」"), t),
+        light("팀 할 일 보드 연결", flow([("회의록", "노션 · 원본/"), ("회의록 정리 에이전트", "할 일 표 · out/"), ("사람 확인", "올릴 목록"),
+                                          ("Supabase MCP", "2-6 연결 · execute_sql"), ("팀 할 일 보드", "2부 v2 · tasks 표")], hl=2)
+              + viz2.tiles([("확인 후 쓰기", "execute_sql · 매번 확인(ask)"), ("보류", "담당자가 members 에 없음"),
+                            ("건너뜀", "같은 할 일이 이미 보드에")], 3)
+              + note("2-6 과 차이", "2-6 은 read_only 연결 · 여기서는 쓰기를 열고 권한 · CLAUDE.md 로 범위를 좁힘"), t),
+        light("보드 등록 확인 예시", '<div class="twocol"><div>' + viz2.maprows([
+            ("보안팀 미팅 잡기", "이준호 · 기한 미정", "올림"),
+            ("메일 서버 설정 수정 배포", "정우 · 11/12", "보류 · members 에 없음")], "할 일", "처리")
+              + '</div><div>' + code("Claude Code · 권한 확인 창 · 예", esc(
+                  "supabase - execute_sql\n"
+                  "insert into tasks (title, owner_id, due, status)\n"
+                  "values ('보안팀 미팅 잡기', <이준호>, null, '할 일');\n\n"
+                  "Do you want to proceed?\n❯ 1. Yes\n  2. No")) + "</div></div>"
+              + note("결과", "보드 할 일 칸에 「보안팀 미팅 잡기 · 이준호 · 기한 미정」 · 정우 건은 사람이 담당자를 정한 뒤"), t),
         light("하네스 갱신", flow([("Agent", "회의록 정리"), ("사람", "결과 보고 수정 요청"), ("하네스 갱신", "CLAUDE.md · Skill · Hook"),
                                         ("다음 실행", "같은 요청이 안 나옴"), ("사람", "새로운 문제만 봄")], hl=2)
               + table(["사람이 본 것", "수정 요청", "하네스에 남긴 줄"], [

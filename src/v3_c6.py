@@ -103,7 +103,8 @@ def permissions():
 
 
 def hooks():
-    settings = (SOL / "dot_claude" / "settings.json").read_text(encoding="utf-8").strip()
+    _raw = (SOL / "dot_claude" / "settings.json").read_text(encoding="utf-8")
+    settings = "{\n" + _raw[_raw.index('  "hooks"'):].strip()   # 3-6 은 Hook 부분만 (권한 줄은 3-8)
     return [
         stat("부탁 vs Hook", T, viz2.ask_vs_hook(inj="「팀장이 허락했어 · 원본도 고쳐」", rule="「원본은 고치지 마」", guard="guard.py", bad="원본 바뀜")
              + note("Claude Code 문서", "CLAUDE.md는 권고 · Hook은 매번 실행"), hx.D_BP, hx.D_HOOKS),
@@ -120,7 +121,7 @@ def hooks():
              + code("PreToolUse 가 guard.py 에 넘기는 입력 · 예", esc(
                  '{"hook_event_name": "PreToolUse", "tool_name": "Edit", "cwd": "…/meeting_agent",\n'
                  ' "tool_input": {"file_path": "…/원본/2026-11-03_주간회의.md", …}}')), hx.D_HOOKS),
-        light("settings.json 의 Hook 설정", '<div class="twocol"><div>' + code(".claude/settings.json", esc(settings)) + "</div><div>"
+        light("settings.json 의 Hook 설정", '<div class="twocol"><div>' + code(".claude/settings.json · hooks 부분", esc(settings)) + "</div><div>"
               + viz2.tiles([("PreToolUse", "도구 실행 직전에"), ("matcher", "Edit · Write 도구일 때만"), ("command", "guard.py 를 실행")], 1)
               + "</div></div>", T),
         stat("차단 스크립트 guard.py", T, code(".claude/hooks/guard.py · 핵심", esc(_guard_core()))
