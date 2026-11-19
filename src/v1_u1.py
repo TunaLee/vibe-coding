@@ -272,10 +272,58 @@ def next_token():
                        f'<b><i style="width:{p * 100:.0f}%"></i></b><em>{p:.2f}</em></div>' for k, (w, p) in enumerate(st))
         panels.append(f'<div class="v1ntP{" last" if last else ""}" style="--a:{a:.1f}s;--b:{a + gap:.1f}s">{rows}</div>')
     side = "".join(f'<div class="v1fwk" style="--d:{d}s"><i class="{c}"></i><b>{h}</b><span>{x}</span></div>' for c, h, x, d in [
-        ("bx", "토큰", "단어 · 단어 조각 단위", 0.6), ("dm", "확률", "다음 토큰 후보마다 계산", 2.7), ("lp", "반복", "고른 토큰을 붙이고 다시 예측", 4.5)])
+        ("bx", "토큰", "단어 · 단어 조각 단위", 0.6), ("dm", "확률", "다음 토큰 후보마다 계산", 2.7), ("lp", "반복", "고른 토큰을 붙이고 다시 예측", 4.5),
+        ("ov", "계획 없음", "문장 전체를 미리 정하지 않음 · 매번 다음 토큰만", 14.0)])
     return (f'<div class="v1fwW"><div class="v1ntL"><div class="v1ntS">{chips}</div>'
             f'<div class="v1ntH">다음 토큰 후보 <span>(예시 값)</span></div><div class="v1ntB">{"".join(panels)}</div></div>'
             f'<div class="v1fwR">{side}</div></div>')
+
+
+# ── LLM 기본 (posco day8 · day9 내용을 입문용으로) ──
+def llm_io():
+    """LLM — 앞부분 글 → 모델 → 다음 토큰마다 점수. 아래는 학습 단계 · 컨텍스트 창."""
+    row = (f'<div class="v1lxR"><div class="v1lxB" style="--d:.3s"><em>입력</em><b>앞부분 글</b><span>「버튼을 누르면」</span></div>'
+           f'<i class="v1lxA" style="--d:1.8s"></i>'
+           f'<div class="v1lxB m" style="--d:2.3s"><em>LLM</em><b>숫자 뭉치</b><span>예: Qwen2.5-1.5B · 계수 15억 개</span></div>'
+           f'<i class="v1lxA" style="--d:3.8s"></i>'
+           f'<div class="v1lxB o" style="--d:4.3s"><em>출력</em><b>다음 토큰 점수</b><span>후보 151,665개마다</span></div></div>')
+    return row + viz2.tiles([("LLM", "Large Language Model · 대규모 언어 모델"), ("사전 학습", "방대한 글 · 코드로 다음 단어 맞히기"),
+                             ("미세 조정", "질문 답하기 · 지시 따르기"), ("컨텍스트 창", "한 번에 보는 글의 양 · 작업 기억")], 4)
+
+
+def tokens():
+    """토큰 — Qwen2.5-1.5B 토크나이저 실측 분할."""
+    ex = [("Hello world", ["Hello", "␣world"]), ("버튼을 누르면", ["버", "튼", "을", "␣누", "르", "면"]),
+          ("index.html", ["index", ".html"]), ('print("hello")', ["print", '("', "hello", '")']),
+          ("1234", ["1", "2", "3", "4"])]
+    rows = "".join(f'<div class="v1tkR{" num" if w == "1234" else ""}" style="--d:{.4 + i * 2.0:.1f}s"><code>{esc(w)}</code><i></i>'
+                   f'<div>{"".join(f"<span>{esc(t)}</span>" for t in ts)}</div><b>{len(ts)}개</b></div>' for i, (w, ts) in enumerate(ex))
+    side = "".join(f'<div class="v1fwk" style="--d:{d}s"><i class="{c}"></i><b>{h}</b><span>{x}</span></div>' for c, h, x, d in [
+        ("bx", "토큰", "자주 함께 나오는 글자 뭉치", 1.0), ("bx", "토큰 번호", "모델은 글자 대신 번호를 봄 · 151,665개 중 하나", 4.4),
+        ("dm", "숫자", "한 자씩 갈림 · 1234를 한 덩이로 못 봄", 8.6)])
+    return (f'<div class="v1fwW"><div class="v1tkL"><div class="v1ntH">Qwen2.5 토크나이저 실측</div>{rows}</div>'
+            f'<div class="v1fwR">{side}</div></div>')
+
+
+def llm_limits():
+    """LLM 혼자 못 하는 것 — 토큰을 받아 토큰을 내는 모델이라 모델 밖의 일은 못 한다."""
+    head = ('<div class="v1lmH" style="--d:.3s"><span>토큰</span><b>LLM</b><span>토큰</span>'
+            '<em>글을 받아 글을 내는 모델 · 모르는 것도 그럴듯한 토큰으로 채움</em></div>')
+    cards = "".join(f'<div class="v1lmC" style="--d:{d}s"><em>{k}</em><b>{h}</b><span>{x}</span></div>' for k, h, x, d in [
+        ("계산", "1234 + 5678", "숫자가 한 자씩 토큰 · 자릿수 계산 구조 없음", 2.3),
+        ("최신", "학습이 끝난 뒤", "새 라이브러리 · 바뀐 문서 모름", 4.3),
+        ("내 파일", "내 프로젝트", "폴더 · 코드를 본 적 없음", 6.3),
+        ("행동", "글로는 안 되는 일", "파일 저장 · 명령 실행 · 화면 확인 불가", 8.3)])
+    return head + f'<div class="v1lmG">{cards}</div>'
+
+
+def llm_tools():
+    """도구로 채우는 네 가지 — 무엇을 부를지는 LLM, 실행은 도구."""
+    rows = "".join(f'<div class="v1ltR" style="--d:{d}s"><span class="x">{k}</span><i></i><b>{t}</b><em>{e}</em></div>' for k, t, e, d in [
+        ("계산", "명령 실행", "코드를 돌려 실제 값", .4), ("최신", "웹 검색 · 가져오기", "오늘의 문서", 2.4),
+        ("내 파일", "파일 읽기 · 검색", "내 프로젝트 코드", 4.4), ("행동", "파일 쓰기 · 명령 실행", "저장 · 설치 · 실행", 6.4)])
+    return (f'<div class="v1ltW"><div class="v1ltH"><span>LLM 혼자 못 하는 것</span><span></span><span>Claude Code 도구</span><span>결과</span></div>{rows}'
+            f'<div class="v1ltF" style="--d:8.6s"><b>LLM</b> 무엇을 부를지 판단 <i></i> <b>도구</b> 실행 <i></i> <b>결과</b> 다시 LLM에게</div></div>')
 
 
 def slides():
@@ -345,13 +393,15 @@ def slides():
                             ("검증", "출처 표시가 중요 · 93%")], 3)
               + src(("Stack Overflow 2026 개발자 설문 · AI", "https://survey.stackoverflow.co/2026/ai"),
                     ("Stack Overflow 블로그 · 2026-10-06", "https://stackoverflow.blog/2026/10/06/the-results-of-the-2026-developer-survey-are-here/")), T),
-        light("LLM", viz2.tiles([("LLM", "Large Language Model · 대규모 언어 모델"),
-                                 ("사전 학습", "방대한 글 · 코드로 다음 단어 예측 학습"),
-                                 ("미세 조정", "질문 답하기 · 지시 따르기 학습"),
-                                 ("컨텍스트 창", "한 번에 보는 글의 양 · 작업 기억")], 2)
+        light("LLM", llm_io()
+              + src(("Claude 문서 · Glossary", "https://platform.claude.com/docs/en/about-claude/glossary")), T),
+        light("토큰", tokens()
               + src(("Claude 문서 · Glossary", "https://platform.claude.com/docs/en/about-claude/glossary")), T),
         light("다음 토큰 예측", next_token()
               + src(("Claude 문서 · Glossary", "https://platform.claude.com/docs/en/about-claude/glossary")), T),
+        light("LLM 혼자 못 하는 것", llm_limits(), T),
+        light("도구로 채우는 네 가지", llm_tools()
+              + src(("Claude Code 문서 · How Claude Code works", "https://code.claude.com/docs/en/how-claude-code-works")), T),
         light("LLM과 코딩 에이전트", comic([
             ("v1_brain1.webp", "생각만", "LLM", "글 읽기 · 글 쓰기 · 판단"),
             ("v1_brain2.webp", "+ 도구", "LLM + 도구", "파일 읽기 · 검색 · 명령 실행"),
@@ -560,6 +610,41 @@ CSS = """
   .v1fwk i.lp{border:none; border-top:3.5px dashed #F28C28; border-radius:0; height:0; background:none;}
   .v1fwk i.ov{border-radius:11px; background:#16233A; border-color:#16233A;}
   .v1fwk b{font-size:18px; color:#16233A;} .v1fwk span{font-size:15px; color:#3A4657;}
+  /* 1-1 · LLM 기본 (v1lx · v1tk · v1lm · v1lt) */
+  .v1lxR{display:flex; align-items:stretch; gap:14px; margin-bottom:22px;}
+  .v1lxB{flex:1; border:2px solid #1F3A5F; border-radius:14px; padding:16px 18px; background:#fff; opacity:0; animation:v1fwIn .6s var(--d) forwards;}
+  .v1lxB em{display:block; font-style:normal; font-size:14px; font-weight:800; color:#6B7785;} .v1lxB b{display:block; font-size:26px; color:#16233A; margin:4px 0;}
+  .v1lxB span{font-size:17px; color:#3A4657;}
+  .v1lxB.m{background:#16233A;} .v1lxB.m em,.v1lxB.m span{color:#C9D3E0;} .v1lxB.m b{color:#fff;}
+  .v1lxB.o{border-color:#F28C28; background:#FFF8F0;}
+  .v1lxA{align-self:center; width:34px; height:4px; background:#3A4657; position:relative; opacity:0; animation:v1fwIn .4s var(--d) forwards;}
+  .v1lxA:after{content:""; position:absolute; right:-4px; top:-6px; border:8px solid transparent; border-left:10px solid #3A4657; border-right:0;}
+  .v1tkL{display:flex; flex-direction:column; gap:10px;}
+  .v1tkR{display:grid; grid-template-columns:190px 30px 1fr 54px; align-items:center; gap:10px; opacity:0; animation:v1fwIn .6s var(--d) forwards;}
+  .v1tkR code{font-size:19px; font-weight:700; color:#16233A; background:#F4F6F9; border-radius:8px; padding:6px 10px;}
+  .v1tkR > i{height:3px; background:#8A94A3;}
+  .v1tkR div{display:flex; flex-wrap:wrap; gap:5px;}
+  .v1tkR div span{font-family:ui-monospace,Menlo,monospace; font-size:18px; font-weight:700; color:#16233A; background:#E7EEF7; border:1.5px solid #9FB3CC; border-radius:6px; padding:3px 8px; white-space:pre;}
+  .v1tkR b{font-size:17px; color:#1F3A5F; text-align:right;}
+  .v1tkR.num div span{background:#FFF1E2; border-color:#F28C28;} .v1tkR.num b{color:#E07A12;}
+  .v1lmH{display:flex; align-items:center; gap:12px; background:#16233A; color:#fff; border-radius:14px; padding:14px 20px; margin-bottom:18px; opacity:0; animation:v1fwIn .6s var(--d) forwards;}
+  .v1lmH span{font-size:17px; font-weight:800; background:#2C4466; border-radius:8px; padding:5px 12px;}
+  .v1lmH b{font-size:24px; background:#F28C28; border-radius:10px; padding:6px 16px;}
+  .v1lmH em{font-style:normal; font-size:18px; color:#D6DEEA; margin-left:12px;}
+  .v1lmG{display:grid; grid-template-columns:repeat(4,1fr); gap:14px;}
+  .v1lmC{border:1.5px solid #E6B0AA; border-top:5px solid #C0392B; border-radius:12px; padding:14px 16px; background:#FFFAFA; opacity:0; animation:v1fwIn .6s var(--d) forwards;}
+  .v1lmC em{display:block; font-style:normal; font-size:14px; font-weight:800; color:#A93226;} .v1lmC b{display:block; font-size:22px; color:#16233A; margin:6px 0 8px;}
+  .v1lmC span{font-size:16px; color:#3A4657; line-height:1.45;}
+  .v1ltW{display:flex; flex-direction:column; gap:10px;}
+  .v1ltH,.v1ltR{display:grid; grid-template-columns:200px 60px 300px 1fr; align-items:center; gap:12px;}
+  .v1ltH span{font-size:14px; font-weight:800; color:#6B7785;}
+  .v1ltR{border:1.5px solid #D9DDE3; border-radius:12px; padding:10px 16px; opacity:0; animation:v1fwIn .6s var(--d) forwards;}
+  .v1ltR .x{font-size:20px; font-weight:800; color:#A93226;}
+  .v1ltR > i{height:4px; background:#F28C28; position:relative;} .v1ltR > i:after{content:""; position:absolute; right:-4px; top:-6px; border:8px solid transparent; border-left:10px solid #F28C28; border-right:0;}
+  .v1ltR b{font-size:21px; color:#16233A;} .v1ltR em{font-style:normal; font-size:17px; color:#3A4657;}
+  .v1ltF{margin-top:8px; display:flex; align-items:center; gap:10px; font-size:18px; color:#3A4657; background:#F4F6F9; border-radius:12px; padding:12px 18px; opacity:0; animation:v1fwIn .6s var(--d) forwards;}
+  .v1ltF b{color:#fff; background:#16233A; border-radius:8px; padding:3px 10px;} .v1ltF i{width:24px; height:3px; background:#8A94A3;}
+  @media print{.v1lxB,.v1lxA,.v1tkR,.v1lmH,.v1lmC,.v1ltR,.v1ltF{opacity:1; animation:none}}
   /* 1-1 · 다음 토큰 예측 (v1nt) */
   .v1ntL{display:flex; flex-direction:column; gap:14px;}
   .v1ntS{display:flex; flex-wrap:wrap; gap:10px; min-height:120px; align-content:flex-start; background:#16233A; border-radius:14px; padding:20px;}
