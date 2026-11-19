@@ -289,7 +289,7 @@ def slides():
                   ("알고리즘 이해", "피드백의 기준 · 순서 · 조건 · 예외 읽기")])
               + "</div></div>"
               + src(("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")), T),
-        light("우유와 아보카도", '<div class="v1mm"><img src="img/v1_algo_milk.webp" alt="우유 사고 아보카도 있으면 6개 사 와 · 우유 6개를 들고 온 남편"/></div>', T),
+        light("우유 6통 사건", '<div class="v1mm"><img src="img/v1_algo_milk.webp" alt="우유 사고 아보카도 있으면 6개 사 와 · 우유 6개를 들고 온 남편"/></div>', T),
         light("알고리즘", milk_flow(), T),
         light("라면 끓이기 알고리즘", ramen_flow(), T),
         light("알고리즘 피드백 예", fb_steps()
