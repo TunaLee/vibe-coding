@@ -59,7 +59,7 @@ def nextup(u):
         c, t, m, nout = UNITS[i + 1]
         nxt = f'<a class="v1next" href="{file_of(c)}"><span>{c}</span><b>{t}</b><small>→ {nout}</small></a>'
     else:
-        nxt = '<div class="v1next"><span>2부</span><b>바이브 코딩 심화</b><small>→ DB · 외부 연동 · 품질 관리</small></div>'
+        nxt = '<a class="v1next" href="part2.html#u-2-1"><span>2부</span><b>바이브 코딩 심화</b><small>→ DB · 외부 연동 · 품질 관리</small></a>'
     return f'''<section class="slide dk" data-title="다음 단원">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="v1end"><div class="v1got"><span>{u} 산출물</span><b>{out}</b></div>{nxt}</div>

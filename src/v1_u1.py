@@ -146,7 +146,7 @@ def caveman_code():
            '<div class="cl ok" style="animation-delay:1.0s">사과 깨물기</div>'
            '<div class="cl ok" style="animation-delay:1.4s">씨 뱉기</div>'
            '<div class="cl err" style="animation-delay:2.2s">✕ ReferenceError: pear is not defined</div></div>')
-    return f'<div class="v1cc"><div class="v1ed"><div class="bar"><b></b><b></b><b></b><span>caveman.js</span></div><div class="code">{code}</div></div>{out}</div>'
+    return f'<div class="v1u1cc"><div class="v1ed"><div class="bar"><b></b><b></b><b></b><span>caveman.js</span></div><div class="code">{code}</div></div>{out}</div>'
 
 
 def flowchart():
@@ -439,9 +439,9 @@ CSS = """
   .v1lline{display:flex; align-items:center; gap:12px; margin-top:16px; font-size:14px; font-weight:800; color:#6B7785;}
   .v1lline b{flex:1; height:4px; border-radius:2px; background:linear-gradient(90deg,#1F3A5F,#F28C28);}
   /* 원시인 코드 */
-  .v1cc{display:grid; grid-template-columns:1.3fr 1fr; gap:22px; align-items:start; margin-top:6px;}
-  .v1cc .v1ed .code{font-size:18px;} .v1cc .v1ed .ln{height:34px; align-items:center;} .v1cc .v1ed .ln span{color:#E6EDF7; white-space:pre;}
-  .v1cc .v1ed .cut{width:26px; font-style:normal; font-size:15px; color:#F28C28; font-weight:800; text-align:center;}
+  .v1u1cc{display:grid; grid-template-columns:1.3fr 1fr; gap:22px; align-items:start; margin-top:6px;}
+  .v1u1cc .v1ed .code{font-size:18px;} .v1u1cc .v1ed .ln{height:34px; align-items:center;} .v1u1cc .v1ed .ln span{color:#E6EDF7; white-space:pre;}
+  .v1u1cc .v1ed .cut{width:26px; font-style:normal; font-size:15px; color:#F28C28; font-weight:800; text-align:center;}
   .v1con{background:#0F131C; border-radius:14px; padding:14px 18px; min-height:200px; font-family:var(--mono); font-size:17px;}
   .v1con .v1chd{font-family:inherit; font-size:13px; font-weight:800; color:#8A94A3; margin-bottom:12px;}
   .v1con .cl{padding:8px 0; opacity:0; animation:v1cutIn .4s ease-out forwards; font-variant-ligatures:none;}

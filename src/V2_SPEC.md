@@ -19,7 +19,7 @@
 
 ## 규격
 - 모듈 src/v2_uN.py · slides() · CSS(접두어 v2uN) · from v2kit import brief, chat, shot, codemap · T = "2-N"
-- 빌드 python3 src/build.py (docs/index.html 한 파일) · lint ~/.claude/skills/lecture-deck/scripts/lint.py
+- 빌드 python3 src/build.py (docs/part2.html) · lint ~/.claude/skills/lecture-deck/scripts/lint.py
 - 그림: ~/Workspace/ai-gen/queue.tsv 에 「v2_uN_이름<TAB>프롬프트<TAB>2부-그림」 줄 추가 (genq.sh 가 순서대로 생성)
   - 고른 그림 → docs/img/v2_uN_이름.webp 800×450 q82 · 캡션 아래 출처 「AI 생성 그림 · Z-Image Turbo (Apache 2.0)」
 - 사실 · 숫자 · 명령은 공식 문서(2026) 링크를 장 아래 src(...) 로

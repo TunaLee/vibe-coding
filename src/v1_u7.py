@@ -43,7 +43,7 @@ def slides():
               + code("Windows", esc("winget install --id GitHub.cli --source winget")) + "</div></div>"
               + note("Windows", "설치 뒤 터미널 새 창에서 gh 인식")
               + src(("GitHub CLI", "https://cli.github.com/")), T),
-        light("gh 로그인 연결", flow([
+        light("gh 로그인", flow([
             ("gh auth login", "터미널에서 실행"), ("GitHub.com · HTTPS", "기본값 선택"), ("브라우저 인증", "코드 입력 · 승인"),
             ("연결 완료", "내 계정으로 명령 실행")], hl=2)
               + code("터미널 · 예", esc("$ gh auth login\n? Where do you use GitHub?  GitHub.com\n...\n✓ Logged in as 내계정"))

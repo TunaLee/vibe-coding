@@ -490,7 +490,8 @@
     const t = document.getElementById(a.getAttribute('href').slice(1)); if (!t) return;
     e.preventDefault(); go(slides.indexOf(t));
   });
-  applyScale(); go(0);
+  const start = location.hash && document.getElementById(location.hash.slice(1));
+  applyScale(); go(start ? slides.indexOf(start) : 0);
 </script>
 <script>
 // 코드 블록마다 「복사」 버튼
