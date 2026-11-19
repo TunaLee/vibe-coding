@@ -954,6 +954,29 @@
   .v1shu{display:flex; gap:16px; align-items:baseline; border:2px dashed #F28C28; border-radius:14px; padding:14px 22px; opacity:0; animation:v1shIn .6s var(--d) forwards;}
   .v1shu b{font-size:20px; color:#16233A;} .v1shu span{font-size:18px; color:#3A4657;} .v1shu em{margin-left:auto; font-style:normal; font-size:17px; font-weight:800; color:#E07A12;}
   @keyframes v1shIn{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
+  /* 1-7 · localhost · 내부망 · 외부망 (v1nw) */
+  .v1nwO{display:grid; grid-template-columns:1.6fr 1fr; gap:16px; border:2px dashed transparent; border-radius:18px; padding:34px 16px 16px; position:relative;
+    animation:v1nwB .8s var(--d) forwards;}
+  .v1nwI{display:grid; grid-template-columns:1fr 1fr; gap:14px; border:2px solid transparent; border-radius:16px; padding:34px 14px 14px; position:relative;
+    animation:v1nwB .8s var(--d) forwards;}
+  .v1nwT{position:absolute; top:7px; left:16px; font-size:18px; font-weight:800; color:#1F3A5F; opacity:0; animation:v1nwIn .6s var(--d) forwards;}
+  .v1nwO > .v1nwT{color:#5A6B80;}
+  .v1nwP,.v1nwS{border:2px solid #16233A; border-radius:14px; background:#fff; padding:12px 14px; display:flex; flex-direction:column; gap:10px;
+    opacity:0; animation:v1nwIn .6s var(--d) forwards;}
+  .v1nwS{border-color:#F28C28; background:#FFF8F0;}
+  .v1nwS tt{font-family:var(--mono); font-size:18px; font-weight:700; color:#B45F06;}
+  .v1nwh{font-size:22px; font-weight:800; color:#16233A;}
+  .v1nwG,.v1nwX{display:flex; flex-direction:column; gap:12px;}
+  .v1nwd{display:grid; grid-template-columns:1fr auto; gap:2px 10px; align-items:center; background:#fff; border:1.5px solid #C9D6E6; border-radius:12px;
+    padding:12px 14px; opacity:0; animation:v1nwIn .6s var(--d) forwards;}
+  .v1nwd b{font-size:19px; color:#16233A;}
+  .v1nwd tt{grid-column:1; font-family:var(--mono); font-size:17px; color:#3A4657;}
+  .v1nwd i{grid-row:1/span 2; grid-column:2; font-style:normal; font-size:16px; font-weight:800; border-radius:12px; padding:6px 12px;}
+  .v1nwd i.y{color:#fff; background:#2E8B57;} .v1nwd i.n{color:#fff; background:#C0392B;}
+  .v1nwd.on{border-color:#F28C28;}
+  @keyframes v1nwB{to{border-color:var(--bc); background:var(--bg)}}
+  @keyframes v1nwIn{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
+  @media print{.v1nwT,.v1nwP,.v1nwS,.v1nwd{opacity:1; animation:none} .v1nwO,.v1nwI{animation:none; border-color:var(--bc); background:var(--bg)}}
   @media print{.v1shc,.v1shp,.v1sha,.v1shu{opacity:1; animation:none}}
 </style>
 </head>
@@ -1039,12 +1062,20 @@
   <div class="body"><div class="mid"><div class="v1sh"><div class="v1shc" style="--d:.3s"><div class="v1shh">내 컴퓨터의 문서 파일</div><div class="v1shf"><b>회의실예약.docx</b><small>내 컴퓨터 · 바탕화면</small></div><div class="v1shw">열 수 있는 사람 · 나</div><div class="v1shm">= localhost</div></div><i class="v1sha" style="--d:1.4s">→</i><div class="v1shc on" style="--d:1.8s"><div class="v1shh">공유 링크</div><div class="v1shl">https://… /회의실예약</div><div class="v1shps"><span class="v1shp" style="--d:2.6s">팀장</span><span class="v1shp" style="--d:3.1s">팀원</span><span class="v1shp" style="--d:3.6s">휴대폰</span></div><div class="v1shm">= 배포 주소 · *.vercel.app</div></div></div><div class="v1shu" style="--d:4.4s"><b>문서를 고치면</b><span>링크로 보는 사람에게 바로 반영</span><em>= 재배포 · push 하면 자동</em></div></div></div>
 </section>
 
-<section class="slide lt" data-title="localhost의 범위">
+<section class="slide lt" data-title="localhost · 내부망 · 외부망">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-7</span></div>
-  <h2 class="s-title sm">localhost의 범위</h2>
+  <h2 class="s-title sm">localhost · 내부망 · 외부망</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>내 브라우저</b><span>localhost 주소로 열림</span></div><div class="v2tile" style="--d:0.08s"><b>팀원 노트북</b><span>같은 주소를 넣어도 안 열림</span></div><div class="v2tile" style="--d:0.16s"><b>내 휴대폰</b><span>안 열림 · 다른 기기</span></div></div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">1-6 에서 띄운 주소 · 예</span></div><pre><code>http://localhost:3000</code></pre></div><div class="dbnote"><span>localhost</span> 「지금 이 컴퓨터」를 가리키는 주소 · 다른 기기에서는 그 기기 자신</div></div></div>
+  <div class="body"><div class="mid"><div class="v1nwO" style="--d:5s; --bc:#8FA3BC; --bg:#F6F8FB"><div class="v1nwT" style="--d:5s">외부망 · 인터넷</div><div class="v1nwI" style="--d:2.6s; --bc:#2B579A; --bg:#EEF3FA"><div class="v1nwT" style="--d:2.6s">내부망 · 공유기 안 · 같은 Wi-Fi</div><div class="v1nwP" style="--d:.3s"><div class="v1nwh">내 컴퓨터</div><div class="v1nwd " style="--d:0.9s"><b>내 브라우저</b><tt>localhost:8000</tt><i class="y">열림</i></div></div><div class="v1nwG"><div class="v1nwd " style="--d:3.2s"><b>팀원 노트북</b><tt>192.168.0.12:8000</tt><i class="y">열림</i></div><div class="v1nwd " style="--d:3.8s"><b>내 휴대폰</b><tt>192.168.0.12:8000</tt><i class="y">열림</i></div></div></div><div class="v1nwX"><div class="v1nwd " style="--d:5.8s"><b>집 · LTE 휴대폰</b><tt>192.168.0.12:8000</tt><i class="n">안 열림</i></div><div class="v1nwS" style="--d:8.2s"><div class="v1nwh">Vercel 서버</div><tt>room-booking.vercel.app</tt></div><div class="v1nwd on" style="--d:9.6s"><b>집 · LTE 휴대폰</b><tt>room-booking.vercel.app</tt><i class="y">열림</i></div></div></div></div></div>
+</section>
+
+<section class="slide lt" data-title="주소별 접속 범위">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-7</span></div>
+  <h2 class="s-title sm">주소별 접속 범위</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v2ms"><div class="v2mh"><span>주소</span><i></i><span>열리는 범위</span></div><div class="v2m" style="--d:0.00s"><div class="a">localhost:8000</div><i>→</i><div class="b"><b>이 컴퓨터만</b><small>만들며 확인 (1-6)</small></div></div><div class="v2m" style="--d:0.12s"><div class="a">192.168.0.12:8000</div><i>→</i><div class="b"><b>같은 Wi-Fi · 회사망 기기</b><small>내 휴대폰 화면 확인</small></div></div><div class="v2m" style="--d:0.24s"><div class="a">room-booking.vercel.app</div><i>→</i><div class="b"><b>인터넷의 누구나</b><small>공유 (1-7)</small></div></div></div><div class="src">출처 · <a href="https://www.rfc-editor.org/rfc/rfc1918" target="_blank" rel="noopener">RFC 1918 · 사설 주소</a></div></div></div>
 </section>
 
 <section class="slide lt" data-title="배포 흐름">

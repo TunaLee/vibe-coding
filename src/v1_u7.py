@@ -1,6 +1,6 @@
 """1-7 배포.
 
-배포란 → 비유(내 컴퓨터의 문서 파일 → 공유 링크 · 애니메이션) → localhost 의 범위 → 흐름(GitHub → Vercel → 주소)
+배포란 → 비유(내 컴퓨터의 문서 파일 → 공유 링크 · 애니메이션) → localhost · 내부망 · 외부망(애니메이션) · 주소별 접속 범위 → 흐름(GitHub → Vercel → 주소)
 → GitHub에 올리기(gh · 말로) → Vercel 가져오기 · 주소 → push 하면 자동 재배포 · Production / Preview → 공개 전 확인 → 실습.
 사실 출처: cli.github.com (gh 설치 · gh auth login · gh repo create) · vercel.com/docs/git · vercel.com/docs/deployments/generated-urls
 · vercel.com/docs/plans/hobby · docs.github.com (plans)
@@ -23,10 +23,12 @@ def slides():
             "배포 후", [("주소", "room-booking.vercel.app 형식"), ("열 수 있는 사람", "주소를 받은 누구나"), ("컴퓨터를 끄면", "그대로 열림")])
               + note("배포", "내 컴퓨터에서 돌던 앱을 인터넷 주소로 공개하는 일"), T),
         light("문서 파일과 공유 링크", _share(), T),
-        light("localhost의 범위", viz2.tiles([
-            ("내 브라우저", "localhost 주소로 열림"), ("팀원 노트북", "같은 주소를 넣어도 안 열림"), ("내 휴대폰", "안 열림 · 다른 기기")], 3)
-              + code("1-6 에서 띄운 주소 · 예", esc("http://localhost:3000"))
-              + note("localhost", "「지금 이 컴퓨터」를 가리키는 주소 · 다른 기기에서는 그 기기 자신"), T),
+        light("localhost · 내부망 · 외부망", _net(), T),
+        light("주소별 접속 범위", viz2.maprows([
+            ("localhost:8000", "이 컴퓨터만", "만들며 확인 (1-6)"),
+            ("192.168.0.12:8000", "같은 Wi-Fi · 회사망 기기", "내 휴대폰 화면 확인"),
+            ("room-booking.vercel.app", "인터넷의 누구나", "공유 (1-7)")], "주소", "열리는 범위")
+              + src(("RFC 1918 · 사설 주소", "https://www.rfc-editor.org/rfc/rfc1918")), T),
         light("배포 흐름", flow([
             ("내 컴퓨터", "앱 · 커밋"), ("GitHub", "코드 보관 (1-5)"), ("Vercel", "코드를 가져가 공개"),
             ("주소", "*.vercel.app"), ("팀원", "링크로 접속")], hl=2)
@@ -117,6 +119,27 @@ def slides():
     ]
 
 
+def _net():
+    """내 컴퓨터(localhost) → 공유기 안 내부망(사설 주소 · 같은 Wi-Fi) → 외부망(인터넷 · 밖에서 사설 주소 X → 배포 서버 주소 O)."""
+    def dev(name, addr, ok, d, cls=""):
+        return (f'<div class="v1nwd {cls}" style="--d:{d}s"><b>{name}</b><tt>{addr}</tt>'
+                f'<i class="{"y" if ok else "n"}">{"열림" if ok else "안 열림"}</i></div>')
+    return ('<div class="v1nwO" style="--d:5s; --bc:#8FA3BC; --bg:#F6F8FB">'
+            '<div class="v1nwT" style="--d:5s">외부망 · 인터넷</div>'
+            '<div class="v1nwI" style="--d:2.6s; --bc:#2B579A; --bg:#EEF3FA">'
+            '<div class="v1nwT" style="--d:2.6s">내부망 · 공유기 안 · 같은 Wi-Fi</div>'
+            '<div class="v1nwP" style="--d:.3s"><div class="v1nwh">내 컴퓨터</div>'
+            + dev("내 브라우저", "localhost:8000", True, .9) + '</div>'
+            '<div class="v1nwG">'
+            + dev("팀원 노트북", "192.168.0.12:8000", True, 3.2) + dev("내 휴대폰", "192.168.0.12:8000", True, 3.8)
+            + '</div></div>'
+            '<div class="v1nwX">'
+            + dev("집 · LTE 휴대폰", "192.168.0.12:8000", False, 5.8)
+            + '<div class="v1nwS" style="--d:8.2s"><div class="v1nwh">Vercel 서버</div><tt>room-booking.vercel.app</tt></div>'
+            + dev("집 · LTE 휴대폰", "room-booking.vercel.app", True, 9.6, "on")
+            + '</div></div>')
+
+
 def _share():
     """비유 — 내 컴퓨터의 문서 파일(나만 열림) → 공유 링크(링크를 받은 누구나) → 문서를 고치면 링크로 보는 사람에게 바로 반영."""
     ppl = "".join(f'<span class="v1shp" style="--d:{2.6 + i * .5:.1f}s">{n}</span>' for i, n in enumerate(("팀장", "팀원", "휴대폰")))
@@ -150,5 +173,28 @@ CSS = """
   .v1shu{display:flex; gap:16px; align-items:baseline; border:2px dashed #F28C28; border-radius:14px; padding:14px 22px; opacity:0; animation:v1shIn .6s var(--d) forwards;}
   .v1shu b{font-size:20px; color:#16233A;} .v1shu span{font-size:18px; color:#3A4657;} .v1shu em{margin-left:auto; font-style:normal; font-size:17px; font-weight:800; color:#E07A12;}
   @keyframes v1shIn{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
+  /* 1-7 · localhost · 내부망 · 외부망 (v1nw) */
+  .v1nwO{display:grid; grid-template-columns:1.6fr 1fr; gap:16px; border:2px dashed transparent; border-radius:18px; padding:34px 16px 16px; position:relative;
+    animation:v1nwB .8s var(--d) forwards;}
+  .v1nwI{display:grid; grid-template-columns:1fr 1fr; gap:14px; border:2px solid transparent; border-radius:16px; padding:34px 14px 14px; position:relative;
+    animation:v1nwB .8s var(--d) forwards;}
+  .v1nwT{position:absolute; top:7px; left:16px; font-size:18px; font-weight:800; color:#1F3A5F; opacity:0; animation:v1nwIn .6s var(--d) forwards;}
+  .v1nwO > .v1nwT{color:#5A6B80;}
+  .v1nwP,.v1nwS{border:2px solid #16233A; border-radius:14px; background:#fff; padding:12px 14px; display:flex; flex-direction:column; gap:10px;
+    opacity:0; animation:v1nwIn .6s var(--d) forwards;}
+  .v1nwS{border-color:#F28C28; background:#FFF8F0;}
+  .v1nwS tt{font-family:var(--mono); font-size:18px; font-weight:700; color:#B45F06;}
+  .v1nwh{font-size:22px; font-weight:800; color:#16233A;}
+  .v1nwG,.v1nwX{display:flex; flex-direction:column; gap:12px;}
+  .v1nwd{display:grid; grid-template-columns:1fr auto; gap:2px 10px; align-items:center; background:#fff; border:1.5px solid #C9D6E6; border-radius:12px;
+    padding:12px 14px; opacity:0; animation:v1nwIn .6s var(--d) forwards;}
+  .v1nwd b{font-size:19px; color:#16233A;}
+  .v1nwd tt{grid-column:1; font-family:var(--mono); font-size:17px; color:#3A4657;}
+  .v1nwd i{grid-row:1/span 2; grid-column:2; font-style:normal; font-size:16px; font-weight:800; border-radius:12px; padding:6px 12px;}
+  .v1nwd i.y{color:#fff; background:#2E8B57;} .v1nwd i.n{color:#fff; background:#C0392B;}
+  .v1nwd.on{border-color:#F28C28;}
+  @keyframes v1nwB{to{border-color:var(--bc); background:var(--bg)}}
+  @keyframes v1nwIn{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
+  @media print{.v1nwT,.v1nwP,.v1nwS,.v1nwd{opacity:1; animation:none} .v1nwO,.v1nwI{animation:none; border-color:var(--bc); background:var(--bg)}}
   @media print{.v1shc,.v1shp,.v1sha,.v1shu{opacity:1; animation:none}}
 """
