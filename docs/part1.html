@@ -1129,6 +1129,39 @@
   .v1u2cmp img{width:150px; height:84px; object-fit:cover; border-radius:10px;}
   .v1u2cmp figcaption{font-size:16px; color:#3A4657;} .v1u2cmp figcaption b{font-size:21px; color:#16233A;}
 
+  /* 1-3 · 기획서 구성 애니메이션 (v1pl) */
+  .v1plW{display:grid; grid-template-columns:330px 40px 1fr; gap:14px; align-items:center;}
+  .v1plL{display:flex; flex-direction:column; gap:9px;}
+  .v1plH{font-size:15px; font-weight:800; color:#6B7785;}
+  .v1plS{font-size:17px; font-weight:700; color:#16233A; background:#fff; border:2px solid #D9DDE3; border-radius:12px; padding:8px 12px;
+    opacity:0; animation:v1plIn .5s var(--d) forwards, v1plHi .6s var(--h) forwards;}
+  .v1plS.msg{background:#FFFBEA; border-color:#F2DE9B;} .v1plS em{display:block; font-style:normal; font-size:12px; font-weight:800; color:#8A94A3;}
+  .v1plA{font-size:34px; font-weight:900; color:#F28C28; text-align:center; opacity:0; animation:v1plIn .5s var(--d) forwards;}
+  .v1plD{background:#16233A; border-radius:16px; padding:14px 18px; opacity:0; animation:v1plIn .6s var(--d) forwards;}
+  .v1plF{font-family:var(--mono); font-size:13px; color:#8FA3BC; margin-bottom:6px;}
+  .v1plR{display:grid; grid-template-columns:150px 1fr auto; gap:12px; align-items:center; padding:9px 0; border-top:1px solid #2C4466;}
+  .v1plR b{font-family:var(--mono); font-size:16px; color:#F6B26B;}
+  .v1plT{font-size:17px; font-weight:700; color:#fff; opacity:0; animation:v1plIn .6s var(--d) forwards;}
+  .v1plR.no .v1plT{text-decoration:line-through; text-decoration-color:#F28C28; color:#C9D3E0;}
+  .v1plR i{font-style:normal; font-size:12px; font-weight:800; color:#16233A; background:#F28C28; border-radius:8px; padding:2px 8px; opacity:0; animation:v1plIn .6s var(--d) forwards;}
+  @keyframes v1plIn{from{opacity:0} to{opacity:1}}
+  @keyframes v1plHi{to{border-color:#F28C28; box-shadow:0 0 0 3px #FCD9B3; opacity:.55}}
+  @media print{.v1plS,.v1plA,.v1plD,.v1plT,.v1plR i{opacity:1; animation:none}}
+  /* 1-3 · 피드백 반영 애니메이션 (v1rw) */
+  .v1rwW{display:flex; flex-direction:column; gap:22px; margin-top:8px;}
+  .v1rwR{display:grid; grid-template-columns:130px 1fr 300px 1fr; gap:14px; align-items:center;}
+  .v1rwH{font-size:19px; font-weight:800; color:#16233A; opacity:0; animation:v1plIn .5s var(--d) forwards;}
+  .v1rwV{font-size:20px; font-weight:700; color:#16233A; background:#F4F6F9; border-radius:12px; padding:14px 16px;
+    opacity:0; animation:v1plIn .5s var(--d) forwards, v1rwX .6s var(--x) forwards;}
+  .v1rwV u{text-decoration:none; border-radius:4px; animation:v1rwU .6s var(--u) forwards;}
+  .v1rwQ{font-size:17px; font-weight:700; color:#16233A; background:#FFF8F0; border:2px solid #F28C28; border-radius:14px; padding:10px 14px;
+    opacity:0; animation:v1plIn .5s var(--d) forwards;}
+  .v1rwQ em{display:block; font-style:normal; font-size:12px; font-weight:800; color:#E07A12;}
+  .v1rwN{font-size:20px; font-weight:800; color:#1E7B45; background:#F1FAF4; border:2px solid #9FC5A8; border-radius:12px; padding:14px 16px;
+    opacity:0; animation:v1plIn .6s var(--d) forwards;}
+  @keyframes v1rwU{to{background:#FDECEA; color:#C0392B; box-shadow:0 0 0 2px #E6B0AA;}}
+  @keyframes v1rwX{to{opacity:.45; text-decoration:line-through;}}
+  @media print{.v1rwH,.v1rwV,.v1rwQ,.v1rwN{opacity:1; animation:none}}
   /* 1-3 · IT 기업 개발 흐름 (v1df · v1dm) */
   .v1df{display:grid; grid-template-columns:repeat(7,1fr); gap:10px; margin-top:26px;}
   .v1dfc{position:relative; background:#fff; border:2px solid #C9D6E6; border-radius:14px; padding:16px 10px 18px; text-align:center;
@@ -1889,15 +1922,7 @@ claude</code></pre></div><div class="v2tiles c1"><div class="v2tile" style="--d:
   <div class="eyebrow"><span class="tag">1-3</span></div>
   <h2 class="s-title sm">기획서 구성</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="flow"><div class="fs"><b>배경</b><span>현재 방식</span></div><div class="fa">→</div><div class="fs"><b>문제점</b><span>불편한 점</span></div><div class="fa">→</div><div class="fs"><b>목표 이용자</b><span>누가 · 어떤 기기</span></div><div class="fa">→</div><div class="fs"><b>서비스 컨셉</b><span>한 문장 · 핵심 규칙</span></div><div class="fa">→</div><div class="fs"><b>화면 구성</b><span>화면 이름 · 표시 항목</span></div></div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>+ 하지 않을 것</b><span>이번에 만들지 않는 기능</span></div></div><div class="dbnote"><span>파일</span> 기획서.md · 칸마다 「## 제목」</div></div></div>
-</section>
-
-<section class="slide lt" data-title="기획서 작성 기준">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">1-3</span></div>
-  <h2 class="s-title sm">기획서 작성 기준</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>배경</b><span>현재 방식 · 회의록 · 단톡방에 할 일이 흩어짐</span></div><div class="v2tile" style="--d:0.08s"><b>문제점</b><span>실제 장면 · 기한 지난 일을 다음 회의에서야 앎</span></div><div class="v2tile" style="--d:0.16s"><b>목표 이용자</b><span>실제 사람 · 기기 · 팀원 8명 · PC 브라우저</span></div><div class="v2tile" style="--d:0.24s"><b>서비스 컨셉</b><span>한 문장 + 규칙 하나 · 기한 지나면 빨간 표시</span></div><div class="v2tile" style="--d:0.32s"><b>화면 구성</b><span>3개 이내 · 보드 · 추가 창 · 할 일 상세</span></div><div class="v2tile" style="--d:0.40s"><b>하지 않을 것</b><span>로그인 · 알림 · 첨부 · 댓글</span></div></div><div class="dbnote"><span>「하지 않을 것」</span> Claude 가 기능을 덧붙이지 않게 · 1-4 PRD 의 「제외」 칸</div></div></div>
+  <div class="body"><div class="mid"><div class="v1plW"><div class="v1plL"><div class="v1plH">흩어진 재료</div><div class="v1plS msg" style="--d:0.30s;--h:3.6s"><em>단톡방</em>「보고서는 하늘 님이 금요일까지」</div><div class="v1plS msg" style="--d:0.55s;--h:5.8s"><em>단톡방</em>「설문 정리 기한 지났는데 몰랐어요」</div><div class="v1plS memo" style="--d:0.80s;--h:8.0s"><em>메모</em>팀 8명 · 회사 PC</div><div class="v1plS memo" style="--d:1.05s;--h:10.2s"><em>메모</em>할 일을 칸별로 한눈에</div><div class="v1plS memo" style="--d:1.30s;--h:12.4s"><em>메모</em>보드 · 추가 창 · 상세</div><div class="v1plS memo" style="--d:1.55s;--h:14.6s"><em>메모</em>로그인 · 알림도?</div></div><div class="v1plA" style="--d:2.2s">→</div><div class="v1plD" style="--d:2.2s"><div class="v1plF">기획서.md</div><div class="v1plR"><b>## 배경</b><span class="v1plT" style="--d:4.1s">주간 회의 할 일이 회의록 · 단톡방에 흩어짐</span><i style="--d:4.1s">현재 방식</i></div><div class="v1plR"><b>## 문제점</b><span class="v1plT" style="--d:6.3s">기한 지난 일을 늦게 앎</span><i style="--d:6.3s">실제 장면</i></div><div class="v1plR"><b>## 목표 이용자</b><span class="v1plT" style="--d:8.5s">팀원 8명 · PC 브라우저</span><i style="--d:8.5s">사람 · 기기</i></div><div class="v1plR"><b>## 서비스 컨셉</b><span class="v1plT" style="--d:10.7s">할 일 · 진행 중 · 완료 세 칸 보드 · 기한 지나면 빨간 표시</span><i style="--d:10.7s">한 문장 + 규칙</i></div><div class="v1plR"><b>## 화면 구성</b><span class="v1plT" style="--d:12.9s">보드 · 추가 창 · 할 일 상세</span><i style="--d:12.9s">3개 이내</i></div><div class="v1plR no"><b>## 하지 않을 것</b><span class="v1plT" style="--d:15.1s">로그인 · 알림 · 첨부 · 댓글</span><i style="--d:15.1s">1부 범위 밖</i></div></div></div><div class="dbnote"><span>파일</span> 기획서.md · 칸마다 「## 제목」 · 「하지 않을 것」은 1-4 PRD 의 「제외」 칸</div></div></div>
 </section>
 
 <section class="slide lt" data-title="기획서 예시">
@@ -1935,11 +1960,7 @@ claude</code></pre></div><div class="v2tiles c1"><div class="v2tile" style="--d:
   <div class="eyebrow"><span class="tag">1-3</span></div>
   <h2 class="s-title sm">피드백 반영 전후</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="ba">
-  <div class="b"><div class="lab">Before</div><div class="q">문제점: 「할 일 관리가 불편하다」<br/>이용자: 「일하는 모든 사람」</div></div>
-  <div class="arr">→</div>
-  <div class="a"><div class="lab">After</div><div class="q">문제점: 「기한 지난 일을 다음 회의에서야 안다」<br/>이용자: 「팀원 8명 · PC 브라우저」</div></div>
-</div><div class="banote">피드백 요청 예 · 「흐린 문장을 찾아서 물어봐 줘」</div></div></div>
+  <div class="body"><div class="mid"><div class="v1rwW"><div class="v1rwR"><div class="v1rwH" style="--d:0.3s">문제점</div><div class="v1rwV" style="--d:0.3s;--u:1.5s;--x:4.5s">「할 일 관리가 <u>불편하다</u>」</div><div class="v1rwQ" style="--d:2.5s"><em>Claude</em>실제로 어떤 일이 있었나요?</div><div class="v1rwN" style="--d:4.5s">「기한 지난 일을 그다음 회의에서야 안다」</div></div><div class="v1rwR"><div class="v1rwH" style="--d:6.7s">목표 이용자</div><div class="v1rwV" style="--d:6.7s;--u:7.9s;--x:10.9s">「<u>일하는 모든 사람</u>」</div><div class="v1rwQ" style="--d:8.9s"><em>Claude</em>누가 · 어떤 기기로 쓰나요?</div><div class="v1rwN" style="--d:10.9s">「팀원 8명 · PC 브라우저」</div></div></div><div class="dbnote"><span>피드백 요청 예</span> 「흐린 문장을 찾아서 물어봐 줘」</div></div></div>
 </section>
 
 <section class="slide lt" data-title="피드백 요청 방법">
