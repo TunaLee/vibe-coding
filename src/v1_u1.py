@@ -348,11 +348,11 @@ def slides():
               + note("에이전트", "판단하는 모델 + 행동하는 도구")
               + src(("Claude Code 문서 · How Claude Code works", "https://code.claude.com/docs/en/how-claude-code-works"),
                     ("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")), T),
-        light("신입 인턴 비유", phmap("office_worker.webp", "지시를 받아 일하는 신입", "사진 · Bill Branson (NCI) · 퍼블릭 도메인",
+        light("경비 정산 비유", phmap("office_worker.webp", "사무 직원", "사진 · Bill Branson (NCI) · 퍼블릭 도메인",
               "https://commons.wikimedia.org/wiki/File:Young_woman_working.jpg", viz2.maprows([
-            ("팀장의 지시", "사용자 요청", ""), ("다음 할 일을 머리로 정함", "LLM 판단", "무엇을 볼지 · 어떤 도구를 쓸지"),
-            ("컴퓨터 · 파일로 직접 처리", "도구 실행", "찾기 · 읽기 · 저장"), ("결과를 보고 다음 할 일", "결과가 LLM에게", "다음 판단의 재료"),
-            ("다 됐으면 보고", "도구 호출 없음 → 답", "루프 끝")], "인턴", "에이전트")), T),
+            ("「이번 달 경비 합계」", "사용자 요청", ""), ("다음 영수증 · 무슨 계산", "LLM 판단", "무엇을 볼지 · 어떤 도구를 쓸지"),
+            ("계산기 두드리기", "도구 실행", "찾기 · 읽기 · 계산"), ("계산기 화면 확인", "결과가 LLM에게", "다음 판단의 재료"),
+            ("영수증이 끝나면 합계 보고", "도구 호출 없음 → 답", "루프 끝")], "정산하는 사람", "에이전트")), T),
         light("에이전트 루프", anim.agent_loop()
               + src(("Claude Code 문서 · How Claude Code works", "https://code.claude.com/docs/en/how-claude-code-works")), T),
         light("바이브코딩의 유래", quote(

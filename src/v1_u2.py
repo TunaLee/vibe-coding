@@ -115,7 +115,7 @@ def slides():
         # ── 실습
         lab("1-2", "실습 환경 준비 · 첫 위임", T, "계정 세 개 · Claude Code 설치 · 할 일 목록 기능을 목표 한 줄로 맡기기",
             ["Claude 가입 · Pro 이상 · GitHub · Vercel 가입", "VS Code · Claude Code 확장 설치",
-             "내 프로젝트 폴더에서 첫 요청", "delegate_todo 폴더를 열고 브라우저로 확인", "기능 세 개를 목표 한 줄씩 맡기기"],
+             "내 프로젝트 폴더에서 첫 요청", "할 일 목록 예제를 브라우저로 확인", "기능 세 개를 목표 한 줄씩 맡기기"],
             ["claude --version 이 버전을 보여 줌", "추가 · 체크 · 남은 개수가 브라우저에서 동작", "코드는 직접 고치지 않음"],
             files='<a class="dl" href="dl/delegate_todo.zip" download>delegate_todo.zip</a>'),
         brief("1-2 ①", T, ["claude.ai 가입 · 요금제 확인", "github.com 가입", "vercel.com → GitHub 로 계속하기",
@@ -139,9 +139,9 @@ def slides():
                             ("폴더", "새 파일 없음")], 1)
               + "</div></div>", T),
         # ── 실습 ③ 위임형 첫 작업
-        light("delegate_todo 초기 화면", shot("v1_u2_todo_start.webp", "delegate_todo · index.html 을 브라우저로 연 화면", [
-            ("보이는 것", "할 일 두 개 · 입력칸 · 추가 버튼"), ("동작 안 함", "추가 버튼 · 체크 줄 긋기 · 남은 개수"),
-            ("파일", "index.html · style.css · app.js")]), T),
+        light("할 일 목록 예제", shot("v1_u2_todo_start.webp", "index.html 을 브라우저로 연 화면", [
+            ("예제", "버튼이 동작하지 않는 미완성 할 일 목록"), ("동작 안 함", "추가 버튼 · 체크 줄 긋기 · 남은 개수"),
+            ("폴더", "delegate_todo · index.html · style.css · app.js")]), T),
         brief("1-2 ③", T, ["delegate_todo 폴더를 VS Code 로 열기", "index.html 을 브라우저로 열어 추가 버튼 눌러 보기",
                             "Claude Code 에 목표 한 줄 요청", "진행 화면에서 ① 읽기 ② 수정 ③ 확인 찾기", "새로고침 · 직접 확인 → 다음 기능"],
               [("목표", "기능 하나씩 · 추가 → 체크 → 남은 개수"), ("확인 방법", "브라우저에서 직접 누르기"),

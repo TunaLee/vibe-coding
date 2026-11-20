@@ -1564,12 +1564,12 @@ add eax, 4</pre><div class="v1lf">CPU 명령 하나씩</div><div class="v1lk">�
   <div class="body"><div class="mid"><div class="v1comic" style="grid-template-columns:repeat(3,1fr)"><div class="v1cut" style="--d:0.0s"><div class="pic"><img src="img/v1_brain1.webp" alt="LLM"/><span class="bub">생각만</span><i>1</i></div><b>LLM</b><small>글 읽기 · 글 쓰기 · 판단</small></div><div class="v1cut" style="--d:0.8s"><div class="pic"><img src="img/v1_brain2.webp" alt="LLM + 도구"/><span class="bub">+ 도구</span><i>2</i></div><b>LLM + 도구</b><small>파일 읽기 · 검색 · 명령 실행</small></div><div class="v1cut" style="--d:1.6s"><div class="pic"><img src="img/v1_brain3.webp" alt="코딩 에이전트"/><span class="bub">작업 · 확인</span><i>3</i></div><b>코딩 에이전트</b><small>도구로 작업 · 결과 확인 반복</small></div></div><div class="dbnote"><span>에이전트</span> 판단하는 모델 + 행동하는 도구</div><div class="src">출처 · <a href="https://code.claude.com/docs/en/how-claude-code-works" target="_blank" rel="noopener">Claude Code 문서 · How Claude Code works</a></div></div></div>
 </section>
 
-<section class="slide lt" data-title="신입 인턴 비유">
+<section class="slide lt" data-title="경비 정산 비유">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-1</span></div>
-  <h2 class="s-title sm">신입 인턴 비유</h2>
+  <h2 class="s-title sm">경비 정산 비유</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="phmap v3ph"><figure class="ph"><img src="img/office_worker.webp" alt="지시를 받아 일하는 신입"><figcaption><b>지시를 받아 일하는 신입</b></figcaption></figure><div class="v2ms"><div class="v2mh"><span>인턴</span><i></i><span>에이전트</span></div><div class="v2m" style="--d:0.00s"><div class="a">팀장의 지시</div><i>→</i><div class="b"><b>사용자 요청</b></div></div><div class="v2m" style="--d:0.12s"><div class="a">다음 할 일을 머리로 정함</div><i>→</i><div class="b"><b>LLM 판단</b><small>무엇을 볼지 · 어떤 도구를 쓸지</small></div></div><div class="v2m" style="--d:0.24s"><div class="a">컴퓨터 · 파일로 직접 처리</div><i>→</i><div class="b"><b>도구 실행</b><small>찾기 · 읽기 · 저장</small></div></div><div class="v2m" style="--d:0.36s"><div class="a">결과를 보고 다음 할 일</div><i>→</i><div class="b"><b>결과가 LLM에게</b><small>다음 판단의 재료</small></div></div><div class="v2m" style="--d:0.48s"><div class="a">다 됐으면 보고</div><i>→</i><div class="b"><b>도구 호출 없음 → 답</b><small>루프 끝</small></div></div></div></div></div></div>
+  <div class="body"><div class="mid"><div class="phmap v3ph"><figure class="ph"><img src="img/office_worker.webp" alt="사무 직원"><figcaption><b>사무 직원</b></figcaption></figure><div class="v2ms"><div class="v2mh"><span>정산하는 사람</span><i></i><span>에이전트</span></div><div class="v2m" style="--d:0.00s"><div class="a">「이번 달 경비 합계」</div><i>→</i><div class="b"><b>사용자 요청</b></div></div><div class="v2m" style="--d:0.12s"><div class="a">다음 영수증 · 무슨 계산</div><i>→</i><div class="b"><b>LLM 판단</b><small>무엇을 볼지 · 어떤 도구를 쓸지</small></div></div><div class="v2m" style="--d:0.24s"><div class="a">계산기 두드리기</div><i>→</i><div class="b"><b>도구 실행</b><small>찾기 · 읽기 · 계산</small></div></div><div class="v2m" style="--d:0.36s"><div class="a">계산기 화면 확인</div><i>→</i><div class="b"><b>결과가 LLM에게</b><small>다음 판단의 재료</small></div></div><div class="v2m" style="--d:0.48s"><div class="a">영수증이 끝나면 합계 보고</div><i>→</i><div class="b"><b>도구 호출 없음 → 답</b><small>루프 끝</small></div></div></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="에이전트 루프">
@@ -1743,7 +1743,7 @@ claude</code></pre></div><div class="v2tiles c1"><div class="v2tile" style="--d:
   <div class="rule"></div>
   <div class="body"><div class="labgrid">
     <div class="lc goal"><div class="lh">목표</div><p>계정 세 개 · Claude Code 설치 · 할 일 목록 기능을 목표 한 줄로 맡기기</p><div class="lf">사용 파일 · <a class="dl" href="dl/delegate_todo.zip" download>delegate_todo.zip</a></div></div>
-    <div class="lc steps"><div class="lh">단계</div><ol><li>Claude 가입 · Pro 이상 · GitHub · Vercel 가입</li><li>VS Code · Claude Code 확장 설치</li><li>내 프로젝트 폴더에서 첫 요청</li><li>delegate_todo 폴더를 열고 브라우저로 확인</li><li>기능 세 개를 목표 한 줄씩 맡기기</li></ol></div>
+    <div class="lc steps"><div class="lh">단계</div><ol><li>Claude 가입 · Pro 이상 · GitHub · Vercel 가입</li><li>VS Code · Claude Code 확장 설치</li><li>내 프로젝트 폴더에서 첫 요청</li><li>할 일 목록 예제를 브라우저로 확인</li><li>기능 세 개를 목표 한 줄씩 맡기기</li></ol></div>
     <div class="lc done"><div class="lh">완료 기준</div><ul><li>claude --version 이 버전을 보여 줌</li><li>추가 · 체크 · 남은 개수가 브라우저에서 동작</li><li>코드는 직접 고치지 않음</li></ul></div>
   </div></div>
 </section>
@@ -1786,12 +1786,12 @@ claude</code></pre></div><div class="v2tiles c1"><div class="v2tile" style="--d:
   <div class="body"><div class="mid"><div class="twocol"><div><div class="v1chat"><div class="v1ch">Claude Code 대화</div><div class="v1b me"><span>나</span><p>이 폴더에 지금 뭐가 있는지 알려 줘. 아직 파일은 만들지 마</p></div><div class="v1b ai"><span>Claude</span><p>이 폴더는 비어 있다.<br/>파일 · 하위 폴더가 없다.<br/>만들 앱을 알려 주면 구조를 제안한다.</p></div></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>계정</b><span>Claude Pro 이상 로그인</span></div><div class="v2tile" style="--d:0.08s"><b>설치</b><span>claude --version 이 버전 번호 표시</span></div><div class="v2tile" style="--d:0.16s"><b>폴더</b><span>새 파일 없음</span></div></div></div></div></div></div>
 </section>
 
-<section class="slide lt" data-title="delegate_todo 초기 화면">
+<section class="slide lt" data-title="할 일 목록 예제">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-2</span></div>
-  <h2 class="s-title sm">delegate_todo 초기 화면</h2>
+  <h2 class="s-title sm">할 일 목록 예제</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1shot"><figure><img src="img/v1_u2_todo_start.webp" alt="delegate_todo · index.html 을 브라우저로 연 화면"/><figcaption>delegate_todo · index.html 을 브라우저로 연 화면</figcaption></figure><div class=v1side><div class="v1sd"><b>보이는 것</b><span>할 일 두 개 · 입력칸 · 추가 버튼</span></div><div class="v1sd"><b>동작 안 함</b><span>추가 버튼 · 체크 줄 긋기 · 남은 개수</span></div><div class="v1sd"><b>파일</b><span>index.html · style.css · app.js</span></div></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v1shot"><figure><img src="img/v1_u2_todo_start.webp" alt="index.html 을 브라우저로 연 화면"/><figcaption>index.html 을 브라우저로 연 화면</figcaption></figure><div class=v1side><div class="v1sd"><b>예제</b><span>버튼이 동작하지 않는 미완성 할 일 목록</span></div><div class="v1sd"><b>동작 안 함</b><span>추가 버튼 · 체크 줄 긋기 · 남은 개수</span></div><div class="v1sd"><b>폴더</b><span>delegate_todo · index.html · style.css · app.js</span></div></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="실습 1-2 ③ 순서">
