@@ -115,27 +115,6 @@ def chat_anim(mode):
     return f'<div class="v1mode">{left}{right}</div>'
 
 
-LANGS = [  # (시기, 이름, 예 코드, 특징, 요리 비유)
-    ("1940년대 말 ~", "어셈블리", "mov  x1, #0\nadd  x1, x1, x2\n… 38줄", "CPU 명령 하나씩", "재료 손질부터 직접"),
-    ("1957 FORTRAN · 1991 Python", "고급 언어", "for n in range(1, 101):\n    total += n", "영어 단어 · 수식", "밀키트"),
-    ("2025 ~", "자연어", "「1부터 100까지 더해\n화면에 보여 줘」", "우리말 요청 → AI가 코드 작성", "식당에서 주문"),
-]
-
-
-def langs():
-    """어셈블리 → 고급 언어 → 자연어 — 같은 계산(1부터 100까지 합)을 세 방식으로 · 칸이 차례로 나타남."""
-    from hx import esc
-    c = ""
-    for i, (when, name, ex, feat, cook) in enumerate(LANGS):
-        c += (f'<div class="v1lang v1cut" style="--d:{i * .8:.1f}s"><div class="v1ly">{when}</div><b>{name}</b>'
-              f'<pre class="{"nl" if i == 2 else ""}">{esc(ex)}</pre><div class="v1lf">{feat}</div>'
-              f'<div class="v1lk">{cook}</div></div>')
-        if i < 2:
-            c += '<i class="v1lar">→</i>'
-    return (f'<div class="v1langs">{c}</div>'
-            '<div class="v1lline"><span>기계에 가까운 말</span><b></b><span>사람에 가까운 말</span></div>')
-
-
 def _fbox(x, y, w, t, d, cls="", r=None, h=50):
     """순서도 칸 — r 이 있으면 처음엔 「?」, r 초에 글자가 드러남."""
     txt = (f'<text class="qm" x="{x}" y="{y + 6}" style="--r:{r}s">?</text><text class="rv" x="{x}" y="{y + 6}" style="--r:{r}s">{t}</text>'
@@ -316,9 +295,6 @@ def slides():
                       ("ai", "Python 코드를 만들어 실행했다.\n결과 · 5050")], "Claude Code 대화 예")
               + '</div><div>' + viz2.tiles([("1문장", "원하는 결과만"), ("코드 작성 · 실행", "AI"),
                                           ("사람이 할 일", "결과 확인 · 5050 이 맞나")], 1) + "</div></div>", T),
-        light("프로그래밍 언어의 발전", langs()
-              + src(("IBM · FORTRAN", "https://www.ibm.com/history/fortran"), ("Python · History", "https://docs.python.org/3/license.html"),
-                    ("참고 · 알파AI스쿨 「바이브 코딩이란?」 요리 비유", "https://www.youtube.com/watch?v=cFdyp_pPgPQ")), T),
         # ── 배경 · AI 코딩 도구의 변화
         light("AI 코딩 도구의 변화", eras()
               + note("막대", "사람 몫 · AI 몫의 상대 크기 (측정값 아님)")
@@ -508,17 +484,6 @@ CSS = """
   .v1core i{font-style:normal; font-size:26px; color:#F28C28; font-weight:800; text-align:center;}
   .v1core .q{position:absolute; left:50%; bottom:-20px; transform:translateX(-50%); background:#F28C28; color:#fff; font-weight:900; font-size:22px; padding:8px 26px; border-radius:999px; box-shadow:0 6px 16px rgba(242,140,40,.3);}
   /* 언어의 발전 */
-  .v1langs{display:grid; grid-template-columns:minmax(0,1fr) 36px minmax(0,1fr) 36px minmax(0,1fr); align-items:stretch; margin-top:4px;}
-  .v1lang{border:2px solid #D9DDE3; border-radius:16px; background:#fff; padding:16px 18px; display:flex; flex-direction:column;}
-  .v1lang:last-of-type{border-color:#F28C28; background:#FFF8F0;}
-  .v1lang .v1ly{font-family:var(--mono); font-size:13.5px; font-weight:800; color:#F28C28;} .v1lang b{font-size:23px; color:#16233A; margin:2px 0 10px;}
-  .v1lang pre{margin:0; overflow:hidden; background:#1E2433; color:#E6EDF7; border-radius:10px; padding:12px 14px; font-family:var(--mono); font-size:16px; white-space:pre; min-height:62px; font-variant-ligatures:none;}
-  .v1lang pre.nl{background:#fff; color:#16233A; border:1.5px solid #F7C99A; font-family:inherit; font-weight:700; white-space:pre-wrap;}
-  .v1lang .v1lf{font-size:15.5px; color:#3A4657; margin:10px 0 8px;}
-  .v1lang .v1lk{display:block; margin-top:auto; padding:8px 12px; border-radius:10px; background:#F4F6F9; writing-mode:horizontal-tb; font-size:15.5px; color:#16233A; font-weight:700;} .v1lang .v1lk span{font-size:12.5px; font-weight:800; color:#E07A12; margin-right:8px;}
-  .v1lar{font-style:normal; align-self:center; text-align:center; font-size:26px; font-weight:800; color:#F28C28;}
-  .v1lline{display:flex; align-items:center; gap:12px; margin-top:16px; font-size:14px; font-weight:800; color:#6B7785;}
-  .v1lline b{flex:1; height:4px; border-radius:2px; background:linear-gradient(90deg,#1F3A5F,#F28C28);}
   /* 1-1 · 알고리즘 · 라면 순서도 (v1fw) */
   .v1fwW{display:grid; grid-template-columns:1fr 300px; gap:22px; align-items:center;}
   .v1fwS{width:100%; display:block; overflow:visible;}
