@@ -83,10 +83,10 @@ def slides():
             ("확인 방법", "주소를 휴대폰으로 보내 열기"), ("깨질 때", "화면 캡처 첨부 · 수정 요청 (1-6)")]), T),
         # ── 재배포
         light("수정 → 재배포", '<div class="twocol"><div>'
-              + chat([("me", "완료 칸 카드 색을 연한 초록으로 바꿔 줘"),
-                      ("ai", "style.css 의 완료 칸 .card 색 변경 완료"),
+              + chat([("me", "체크한 할 일 글자를 연한 초록으로 바꿔 줘"),
+                      ("ai", "style.css 의 체크 상자 블록 색 변경 완료"),
                       ("me", "커밋하고 GitHub에 올려 줘"),
-                      ("ai", "커밋 「완료 카드 색 변경」 → push 완료 · Vercel 새 배포 시작")], "Claude Code 대화")
+                      ("ai", "커밋 「체크한 할 일 색 변경」 → push 완료 · Vercel 새 배포 시작")], "Claude Code 대화")
               + "</div><div>"
               + viz2.tiles([("① 수정 요청", "Claude Code"), ("② localhost 확인", "1-6 과 같음"), ("③ 커밋 · push", "업로드 요청"),
                             ("④ Vercel 자동 배포", "push 감지 · 1~2분"), ("⑤ 같은 주소에 반영", "새 링크 없음")], 1)
@@ -145,11 +145,11 @@ def _share():
     ppl = "".join(f'<span class="v1shp" style="--d:{2.6 + i * .5:.1f}s">{n}</span>' for i, n in enumerate(("팀장", "팀원", "휴대폰")))
     return ('<div class="v1sh">'
             '<div class="v1shc" style="--d:.3s"><div class="v1shh">내 컴퓨터의 문서 파일</div>'
-            '<div class="v1shf"><b>팀할일.docx</b><small>내 컴퓨터 · 바탕화면</small></div>'
+            '<div class="v1shf"><b>회의록.docx</b><small>내 컴퓨터 · 바탕화면</small></div>'
             '<div class="v1shw">열 수 있는 사람 · 나</div><div class="v1shm">= localhost</div></div>'
             '<i class="v1sha" style="--d:1.4s">→</i>'
             '<div class="v1shc on" style="--d:1.8s"><div class="v1shh">공유 링크</div>'
-            '<div class="v1shl">https://… /팀할일</div>'
+            '<div class="v1shl">https://… /회의록</div>'
             f'<div class="v1shps">{ppl}</div><div class="v1shm">= 배포 주소 · *.vercel.app</div></div></div>'
             '<div class="v1shu" style="--d:4.4s"><b>문서를 고치면</b><span>링크로 보는 사람에게 바로 반영</span><em>= 재배포 · push 하면 자동</em></div>')
 
