@@ -35,6 +35,9 @@ def _write(name, tpl, title, parts):
     print(name, len(parts) - 1, "장")
 
 
+ARC = {"persona": "페르소나"}   # zip 을 풀었을 때 폴더 이름
+
+
 def make_lab_zips():
     """실습 뼈대 → docs/dl/<이름>.zip (덱에서 바로 내려받기)."""
     import zipfile
@@ -45,7 +48,7 @@ def make_lab_zips():
         with zipfile.ZipFile(dl / f"{name}.zip", "w", zipfile.ZIP_DEFLATED) as z:
             for f in sorted(src.rglob("*")):
                 if f.is_file() and f.name != ".DS_Store":
-                    z.write(f, Path(name) / f.relative_to(src))
+                    z.write(f, Path(ARC.get(name, name)) / f.relative_to(src))
 
 
 def _part_cover(n, title):
