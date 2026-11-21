@@ -252,7 +252,7 @@ def split_roles():
     col = lambda c, h, items, d: (f'<div class="v1srC {c}" style="--d:{d}s"><b>{h}</b>'
                                   + "".join(f'<span style="--d:{d + .5 + i * .4:.1f}s">{t}</span>' for i, t in enumerate(items)) + '</div>')
     return ('<div class="v1srG">'
-            + col("me", "사람 · 알고리즘", ["규칙 · 테스트 케이스 정하기", "AI가 만든 순서 읽기", "빠진 조건 · 예외 피드백"], .3)
+            + col("me", "사람 · 알고리즘", ["규칙 정하기", "AI가 만든 순서 읽기", "빠진 조건 · 예외 피드백"], .3)
             + '<div class="v1srM" style="--d:2.4s"><i></i><em>요청 · 피드백</em><i></i><em>코드 · 결과</em></div>'
             + col("ai", "AI · 코드", ["코드 작성", "파일 저장 · 실행", "피드백대로 수정"], 2.8)
             + '</div><div class="v1srN" style="--d:4.8s">AI가 코드를 만드는 방식 <i></i> LLM · 도구 · 에이전트</div>')
@@ -330,20 +330,6 @@ def slides():
         light("라면 끓이기 알고리즘", ramen_flow(), T),
         light("로그인 순서도 · 피드백 전", login_flow(False), T),
         light("로그인 순서도 · 피드백 후", login_flow(True), T),
-        # ── 바이브 디버깅
-        light("순서도와 테스트 케이스", viz2.maprows([
-            ("회사 이메일 · 비밀번호 일치", "로그인 완료", "kim@company.com · 맞는 비밀번호"),
-            ("회사 이메일 아님", "거절", "kim@gmail.com"),
-            ("비밀번호 틀림", "다시 입력", "회사 이메일 · 틀린 비밀번호 1번"),
-            ("5번째 틀림", "10분 잠금", "틀린 비밀번호 5번")], "순서도 갈래", "기대 결과 · 입력")
-              + note("테스트 케이스", "갈래 하나 = 확인 하나 · 만들기 전에 AI에게 먼저 줌"), T),
-        ba("버그 알리는 방법", T, "「로그인이 안 돼요」",
-           "「kim@gmail.com 으로 넣으면\n기대 · 거절 / 실제 · 로그인됨\n오류 메시지 원문 · 화면 캡처 첨부」",
-           "재현 순서 · 기대 결과 · 실제 결과 · 오류 원문"),
-        light("바이브 디버깅 순서", flow([
-            ("테스트 케이스", "입력 → 기대 결과"), ("증상 전달", "재현 · 기대 · 실제 · 오류 원문"),
-            ("원인 먼저", "「고치기 전에 원인부터」"), ("통과 · 저장", "테스트 통과 → 커밋"), ("두 번 실패", "되돌리고 새 대화")], hl=0)
-              + src(("Claude Code 문서 · Best practices", "https://code.claude.com/docs/en/best-practices")), T),
         light("사람과 AI의 역할", split_roles(), T),
         light("LLM", llm_rw(), T),
         light("도구가 필요한 이유", viz2.calc_compare(), T),
