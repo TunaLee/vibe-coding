@@ -201,13 +201,17 @@ def comic(cuts):
 
 
 def llm_rw():
-    """LLM — 글(토큰)을 읽고 글을 쓰기만 한다. 도구 없이는 파일 · 실행 · 확인 불가."""
-    head = ('<div class="v1lmH" style="--d:.3s"><span>글 (토큰)</span><i></i><b>LLM</b><i></i><span>글 (토큰)</span>'
-            '<em>읽고 쓰기만 하는 모델</em></div>')
-    ok = "".join(f'<li style="--d:{d}s">{t}</li>' for t, d in [("질문 읽기", 2.3), ("답 쓰기", 2.8), ("코드를 글로 쓰기", 3.3)])
-    no = "".join(f'<li style="--d:{d}s">{t}</li>' for t, d in [("파일 열기 · 저장", 5.3), ("코드 실행", 5.8), ("결과 화면 확인", 6.3)])
-    return (head + f'<div class="v1rwG"><div class="v1rwC ok" style="--d:2s"><b>할 수 있는 일</b><ul>{ok}</ul></div>'
-            f'<div class="v1rwC no" style="--d:5s"><b>도구 없이 못 하는 일</b><ul>{no}</ul></div></div>')
+    """LLM — 이름 풀이(Large · Language · Model) → 글(토큰)을 읽고 글을 쓰기만 한다 → 도구 없이는 파일 · 실행 · 확인 불가."""
+    name = "".join(f'<div class="v1lmN" style="--d:{d}s"><i>{c}</i><b>{en} · {ko}</b><small>{x}</small></div>'
+                   for c, en, ko, x, d in [("L", "Large", "큰", "인터넷 · 책 · 코드 등 아주 많은 글로 학습", .3),
+                                           ("L", "Language", "언어", "사람의 말 · 글 · 프로그래밍 언어", 1.3),
+                                           ("M", "Model", "모델", "다음에 올 글 조각(토큰)을 고르는 계산", 2.3)])
+    head = ('<div class="v1lmH" style="--d:3.8s"><span>글 (토큰)</span><i></i><b>LLM</b><i></i><span>글 (토큰)</span>'
+            '<em>읽고 쓰기만 하는 모델 · Claude · GPT · Gemini</em></div>')
+    ok = "".join(f'<li style="--d:{d}s">{t}</li>' for t, d in [("질문 읽기", 6.0), ("답 쓰기", 6.5), ("코드를 글로 쓰기", 7.0)])
+    no = "".join(f'<li style="--d:{d}s">{t}</li>' for t, d in [("파일 열기 · 저장", 9.0), ("코드 실행", 9.5), ("결과 화면 확인", 10.0)])
+    return (f'<div class="v1lmNs">{name}</div>' + head + f'<div class="v1rwG"><div class="v1rwC ok" style="--d:5.6s"><b>할 수 있는 일</b><ul>{ok}</ul></div>'
+            f'<div class="v1rwC no" style="--d:8.6s"><b>도구 없이 못 하는 일</b><ul>{no}</ul></div></div>')
 
 
 def login_flow(fixed):
@@ -526,7 +530,13 @@ CSS = """
   .v1srN i{width:40px; height:3px; background:#8A94A3;}
   @media print{.v1lgC,.v1srC,.v1srC span,.v1srM,.v1srN{opacity:1; animation:none}}
   /* 1-1 · LLM 읽기 · 쓰기 (v1lm · v1rw) */
-  .v1lmH{display:flex; align-items:center; gap:14px; background:#16233A; color:#fff; border-radius:14px; padding:18px 24px; margin-bottom:22px; opacity:0; animation:v1fwIn .6s var(--d) forwards;}
+  .v1lmNs{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:16px;}
+  .v1lmN{display:grid; grid-template-columns:auto 1fr; column-gap:12px; align-items:center; background:#fff; border:2px solid #D9DDE3; border-radius:14px; padding:10px 16px;
+    opacity:0; animation:v1fwIn .6s var(--d) forwards;}
+  .v1lmN i{grid-row:span 2; font-style:normal; font-size:34px; font-weight:900; color:#F28C28; width:34px; text-align:center;}
+  .v1lmN b{font-size:20px; color:#16233A;}
+  .v1lmN small{font-size:15px; color:#3A4657;}
+  .v1lmH{display:flex; align-items:center; gap:14px; background:#16233A; color:#fff; border-radius:14px; padding:12px 22px; margin-bottom:16px; opacity:0; animation:v1fwIn .6s var(--d) forwards;}
   .v1lmH span{font-size:20px; font-weight:800; background:#2C4466; border-radius:8px; padding:6px 14px;}
   .v1lmH b{font-size:28px; background:#F28C28; border-radius:10px; padding:6px 20px;}
   .v1lmH i{width:30px; height:3px; background:#8FA3BC;}
@@ -538,7 +548,7 @@ CSS = """
   .v1rwC ul{list-style:none; margin:12px 0 0; padding:0; display:flex; flex-direction:column; gap:10px;}
   .v1rwC li{font-size:21px; font-weight:700; color:#16233A; opacity:0; animation:v1fwIn .5s var(--d) forwards;}
   .v1rwC.ok li:before{content:"✓ "; color:#1E7B45;} .v1rwC.no li:before{content:"✕ "; color:#C0392B;}
-  @media print{.v1lmH,.v1rwC,.v1rwC li{opacity:1; animation:none}}
+  @media print{.v1lmN,.v1lmH,.v1rwC,.v1rwC li{opacity:1; animation:none}}
   @keyframes v1fwIn{from{opacity:0} to{opacity:1}}
   @keyframes v1fwP{50%{opacity:.25}}
   @keyframes v1fwOut{to{opacity:0}}

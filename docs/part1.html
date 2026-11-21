@@ -1073,7 +1073,13 @@
   .v1srN i{width:40px; height:3px; background:#8A94A3;}
   @media print{.v1lgC,.v1srC,.v1srC span,.v1srM,.v1srN{opacity:1; animation:none}}
   /* 1-1 · LLM 읽기 · 쓰기 (v1lm · v1rw) */
-  .v1lmH{display:flex; align-items:center; gap:14px; background:#16233A; color:#fff; border-radius:14px; padding:18px 24px; margin-bottom:22px; opacity:0; animation:v1fwIn .6s var(--d) forwards;}
+  .v1lmNs{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:16px;}
+  .v1lmN{display:grid; grid-template-columns:auto 1fr; column-gap:12px; align-items:center; background:#fff; border:2px solid #D9DDE3; border-radius:14px; padding:10px 16px;
+    opacity:0; animation:v1fwIn .6s var(--d) forwards;}
+  .v1lmN i{grid-row:span 2; font-style:normal; font-size:34px; font-weight:900; color:#F28C28; width:34px; text-align:center;}
+  .v1lmN b{font-size:20px; color:#16233A;}
+  .v1lmN small{font-size:15px; color:#3A4657;}
+  .v1lmH{display:flex; align-items:center; gap:14px; background:#16233A; color:#fff; border-radius:14px; padding:12px 22px; margin-bottom:16px; opacity:0; animation:v1fwIn .6s var(--d) forwards;}
   .v1lmH span{font-size:20px; font-weight:800; background:#2C4466; border-radius:8px; padding:6px 14px;}
   .v1lmH b{font-size:28px; background:#F28C28; border-radius:10px; padding:6px 20px;}
   .v1lmH i{width:30px; height:3px; background:#8FA3BC;}
@@ -1085,7 +1091,7 @@
   .v1rwC ul{list-style:none; margin:12px 0 0; padding:0; display:flex; flex-direction:column; gap:10px;}
   .v1rwC li{font-size:21px; font-weight:700; color:#16233A; opacity:0; animation:v1fwIn .5s var(--d) forwards;}
   .v1rwC.ok li:before{content:"✓ "; color:#1E7B45;} .v1rwC.no li:before{content:"✕ "; color:#C0392B;}
-  @media print{.v1lmH,.v1rwC,.v1rwC li{opacity:1; animation:none}}
+  @media print{.v1lmN,.v1lmH,.v1rwC,.v1rwC li{opacity:1; animation:none}}
   @keyframes v1fwIn{from{opacity:0} to{opacity:1}}
   @keyframes v1fwP{50%{opacity:.25}}
   @keyframes v1fwOut{to{opacity:0}}
@@ -1557,7 +1563,7 @@ print(total)</code></pre></div><div class="code sm"><div class="bar"><span class
   <div class="eyebrow"><span class="tag">1-1</span></div>
   <h2 class="s-title sm">LLM</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1lmH" style="--d:.3s"><span>글 (토큰)</span><i></i><b>LLM</b><i></i><span>글 (토큰)</span><em>읽고 쓰기만 하는 모델</em></div><div class="v1rwG"><div class="v1rwC ok" style="--d:2s"><b>할 수 있는 일</b><ul><li style="--d:2.3s">질문 읽기</li><li style="--d:2.8s">답 쓰기</li><li style="--d:3.3s">코드를 글로 쓰기</li></ul></div><div class="v1rwC no" style="--d:5s"><b>도구 없이 못 하는 일</b><ul><li style="--d:5.3s">파일 열기 · 저장</li><li style="--d:5.8s">코드 실행</li><li style="--d:6.3s">결과 화면 확인</li></ul></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v1lmNs"><div class="v1lmN" style="--d:0.3s"><i>L</i><b>Large · 큰</b><small>인터넷 · 책 · 코드 등 아주 많은 글로 학습</small></div><div class="v1lmN" style="--d:1.3s"><i>L</i><b>Language · 언어</b><small>사람의 말 · 글 · 프로그래밍 언어</small></div><div class="v1lmN" style="--d:2.3s"><i>M</i><b>Model · 모델</b><small>다음에 올 글 조각(토큰)을 고르는 계산</small></div></div><div class="v1lmH" style="--d:3.8s"><span>글 (토큰)</span><i></i><b>LLM</b><i></i><span>글 (토큰)</span><em>읽고 쓰기만 하는 모델 · Claude · GPT · Gemini</em></div><div class="v1rwG"><div class="v1rwC ok" style="--d:5.6s"><b>할 수 있는 일</b><ul><li style="--d:6.0s">질문 읽기</li><li style="--d:6.5s">답 쓰기</li><li style="--d:7.0s">코드를 글로 쓰기</li></ul></div><div class="v1rwC no" style="--d:8.6s"><b>도구 없이 못 하는 일</b><ul><li style="--d:9.0s">파일 열기 · 저장</li><li style="--d:9.5s">코드 실행</li><li style="--d:10.0s">결과 화면 확인</li></ul></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="도구가 필요한 이유">
