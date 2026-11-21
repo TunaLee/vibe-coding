@@ -1109,6 +1109,10 @@
   @media print{.v1fw,.v1fwk,.v1fwD,.v1mkQ,.v1mkR,.v1fw .rv{opacity:1; animation:none} .v1fw .qm{display:none}}
   .v1vid video{width:100%; max-height:440px; border:1.5px solid #D9DDE3; border-radius:12px; box-shadow:0 8px 22px rgba(15,27,45,.10); background:#F7EEDB; display:block;}
 
+  /* 1-2 · 도구 로고 */
+  .v1tools .fs b{display:flex; flex-direction:column; align-items:center; gap:12px;}
+  .v1tlg{height:52px; width:auto;} .v1tlg.w{height:auto; width:120px; margin:14px 0 8px;}
+  .v1clogo{height:46px; width:auto; display:block; margin:0 0 18px 4px;}
   /* 1-2 · Claude 와 Claude Code — 같은 요청 두 길 (v1cc) */
   .v1ccq{display:inline-block; background:#16233A; color:#fff; font-size:18px; font-weight:700; padding:9px 18px; border-radius:22px; margin-bottom:16px;}
   .v1ccr{display:grid; grid-template-columns:170px 1fr 120px; gap:14px; align-items:center; margin-bottom:16px;}
@@ -1625,7 +1629,7 @@ print(total)</code></pre></div><div class="code sm"><div class="bar"><span class
   <div class="eyebrow"><span class="tag">1-2</span></div>
   <h2 class="s-title sm">1부 실습 도구</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="flow"><div class="fs"><b>Claude</b><span>대화형 AI · 아이디어 고르기</span></div><div class="fa">→</div><div class="fs"><b>Claude Code</b><span>위임형 AI · 기획서 · 개발 계획 · 앱 코드</span></div><div class="fa">→</div><div class="fs"><b>GitHub</b><span>코드 · 변경 기록 보관</span></div><div class="fa">→</div><div class="fs"><b>Vercel</b><span>배포 · 공개 주소</span></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v1tools"><div class="flow"><div class="fs"><b><img class="v1tlg " src="img/claude_symbol.svg" alt=""/>Claude</b><span>대화형 AI · 아이디어 고르기</span></div><div class="fa">→</div><div class="fs"><b><img class="v1tlg " src="img/claude_symbol.svg" alt=""/>Claude Code</b><span>위임형 AI · 기획서 · 개발 계획 · 앱 코드</span></div><div class="fa">→</div><div class="fs"><b><img class="v1tlg " src="img/github_logo.svg" alt=""/>GitHub</b><span>코드 · 변경 기록 보관</span></div><div class="fa">→</div><div class="fs"><b><img class="v1tlg w" src="img/vercel_logo.svg" alt=""/>Vercel</b><span>배포 · 공개 주소</span></div></div></div><div class="src">출처 · <a href="https://commons.wikimedia.org/wiki/File:GitHub_Invertocat_Logo.svg" target="_blank" rel="noopener">GitHub 로고 · GitHub · CC BY 4.0 · Wikimedia Commons</a></div></div></div>
 </section>
 
 <section class="slide lt" data-title="Claude">
@@ -1633,7 +1637,7 @@ print(total)</code></pre></div><div class="code sm"><div class="bar"><span class
   <div class="eyebrow"><span class="tag">1-2</span></div>
   <h2 class="s-title sm">Claude</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="twocol"><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>대화형 AI</b><span>claude.ai · 웹 · 데스크톱 · 휴대폰 앱</span></div><div class="v2tile" style="--d:0.08s"><b>1부에서 맡는 일</b><span>아이디어 고르기 · 질문 정리</span></div><div class="v2tile" style="--d:0.16s"><b>못 하는 일</b><span>내 컴퓨터 파일 직접 수정 · 명령 실행</span></div></div></div><div><div class="v1chat"><div class="v1ch">Claude 대화 예</div><div class="v1b me"><span>나</span><p>할 일 목록 앱을 만들려고 해. 소크라테스식 대화로 진행해 줘</p></div><div class="v1b ai"><span>Claude</span><p>이 앱은 누가 쓰나요? 혼자인가요, 팀인가요?</p></div><div class="v1b me"><span>나</span><p>나 혼자 써. 주로 휴대폰에서 볼 거야</p></div><div class="v1b ai"><span>Claude</span><p>끝낸 일은 지우나요, 남겨 두나요?</p></div></div></div></div><div class="dbnote"><span>소크라테스식 대화</span> 답 대신 질문을 하나씩 · 내 답으로 다음 질문</div></div></div>
+  <div class="body"><div class="mid"><div class="twocol"><div><img class="v1clogo" src="img/claude_logo.svg" alt="Claude 로고"/><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>대화형 AI</b><span>claude.ai · 웹 · 데스크톱 · 휴대폰 앱</span></div><div class="v2tile" style="--d:0.08s"><b>1부에서 맡는 일</b><span>아이디어 고르기 · 질문 정리</span></div><div class="v2tile" style="--d:0.16s"><b>못 하는 일</b><span>내 컴퓨터 파일 직접 수정 · 명령 실행</span></div></div></div><div><div class="v1chat"><div class="v1ch">Claude 대화 예</div><div class="v1b me"><span>나</span><p>할 일 목록 앱을 만들려고 해. 소크라테스식 대화로 진행해 줘</p></div><div class="v1b ai"><span>Claude</span><p>이 앱은 누가 쓰나요? 혼자인가요, 팀인가요?</p></div><div class="v1b me"><span>나</span><p>나 혼자 써. 주로 휴대폰에서 볼 거야</p></div><div class="v1b ai"><span>Claude</span><p>끝낸 일은 지우나요, 남겨 두나요?</p></div></div></div></div><div class="dbnote"><span>소크라테스식 대화</span> 답 대신 질문을 하나씩 · 내 답으로 다음 질문</div></div></div>
 </section>
 
 <section class="slide lt" data-title="Claude와 Claude Code">

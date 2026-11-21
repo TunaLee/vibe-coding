@@ -47,13 +47,22 @@ def cc_lanes():
     return f'<div class="v1cc">{out}</div>'
 
 
+def _lg(img, name, cls=""):
+    """도구 이름 위 로고."""
+    return f'<img class="v1tlg {cls}" src="img/{img}.svg" alt=""/>{name}'
+
+
 def slides():
     return [
         # ── 도구 네 개
-        light("1부 실습 도구", flow([("Claude", "대화형 AI · 아이디어 고르기"), ("Claude Code", "위임형 AI · 기획서 · 개발 계획 · 앱 코드"),
-                                      ("GitHub", "코드 · 변경 기록 보관"), ("Vercel", "배포 · 공개 주소")]), T),
+        light("1부 실습 도구", '<div class="v1tools">' + flow([(_lg("claude_symbol", "Claude"), "대화형 AI · 아이디어 고르기"),
+                                      (_lg("claude_symbol", "Claude Code"), "위임형 AI · 기획서 · 개발 계획 · 앱 코드"),
+                                      (_lg("github_logo", "GitHub"), "코드 · 변경 기록 보관"), (_lg("vercel_logo", "Vercel", "w"), "배포 · 공개 주소")]) + '</div>'
+              + src(("GitHub 로고 · GitHub · CC BY 4.0 · Wikimedia Commons",
+                     "https://commons.wikimedia.org/wiki/File:GitHub_Invertocat_Logo.svg")), T),
         # ── Claude
         light("Claude", '<div class="twocol"><div>'
+              + '<img class="v1clogo" src="img/claude_logo.svg" alt="Claude 로고"/>'
               + viz2.tiles([("대화형 AI", "claude.ai · 웹 · 데스크톱 · 휴대폰 앱"), ("1부에서 맡는 일", "아이디어 고르기 · 질문 정리"),
                             ("못 하는 일", "내 컴퓨터 파일 직접 수정 · 명령 실행")], 1)
               + "</div><div>"
@@ -160,6 +169,10 @@ def slides():
 
 
 CSS = """
+  /* 1-2 · 도구 로고 */
+  .v1tools .fs b{display:flex; flex-direction:column; align-items:center; gap:12px;}
+  .v1tlg{height:52px; width:auto;} .v1tlg.w{height:auto; width:120px; margin:14px 0 8px;}
+  .v1clogo{height:46px; width:auto; display:block; margin:0 0 18px 4px;}
   /* 1-2 · Claude 와 Claude Code — 같은 요청 두 길 (v1cc) */
   .v1ccq{display:inline-block; background:#16233A; color:#fff; font-size:18px; font-weight:700; padding:9px 18px; border-radius:22px; margin-bottom:16px;}
   .v1ccr{display:grid; grid-template-columns:170px 1fr 120px; gap:14px; align-items:center; margin-bottom:16px;}
