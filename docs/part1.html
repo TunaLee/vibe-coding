@@ -1030,6 +1030,17 @@
   .v1fw.bad rect{fill:#FDECEA; stroke:#C0392B; stroke-width:3;} .v1fw.bad text{fill:#A93226;}
   .v1fw.bad{animation:v1fwIn .6s var(--d) forwards, v1fwP 1s calc(var(--d) + .8s) 2;}
   .v1fwD{opacity:0; animation:v1fwIn .6s var(--d) forwards;}
+  .v1langs{display:grid; grid-template-columns:minmax(0,1fr) 36px minmax(0,1fr) 36px minmax(0,1fr); align-items:stretch; margin-top:4px;}
+  .v1lang{border:2px solid #D9DDE3; border-radius:16px; background:#fff; padding:16px 18px; display:flex; flex-direction:column;}
+  .v1lang:last-of-type{border-color:#F28C28; background:#FFF8F0;}
+  .v1lang .v1ly{font-family:var(--mono); font-size:13.5px; font-weight:800; color:#F28C28;} .v1lang b{font-size:23px; color:#16233A; margin:2px 0 10px;}
+  .v1lang pre{margin:0; overflow:hidden; background:#1E2433; color:#E6EDF7; border-radius:10px; padding:12px 14px; font-family:var(--mono); font-size:16px; white-space:pre; min-height:62px; font-variant-ligatures:none;}
+  .v1lang pre.nl{background:#fff; color:#16233A; border:1.5px solid #F7C99A; font-family:inherit; font-weight:700; white-space:pre-wrap;}
+  .v1lang .v1lf{font-size:15.5px; color:#3A4657; margin:10px 0 8px;}
+  .v1lang .v1lk{display:block; margin-top:auto; padding:8px 12px; border-radius:10px; background:#F4F6F9; writing-mode:horizontal-tb; font-size:15.5px; color:#16233A; font-weight:700;} .v1lang .v1lk span{font-size:12.5px; font-weight:800; color:#E07A12; margin-right:8px;}
+  .v1lar{font-style:normal; align-self:center; text-align:center; font-size:26px; font-weight:800; color:#F28C28;}
+  .v1lline{display:flex; align-items:center; gap:12px; margin-top:16px; font-size:14px; font-weight:800; color:#6B7785;}
+  .v1lline b{flex:1; height:4px; border-radius:2px; background:linear-gradient(90deg,#1F3A5F,#F28C28);}
   /* 1-1 · 어셈블리어 코드 */
   .v1asW{display:grid; grid-template-columns:auto 1fr; gap:26px; align-items:start; margin-top:4px;}
   .v1asC{height:392px; border-radius:10px; box-shadow:0 8px 22px rgba(15,27,45,.18);}
@@ -1428,6 +1439,18 @@
   <h2 class="s-title sm">기존 코딩과 바이브코딩</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">기존 코딩</div><div class="v2pc" style="--d:0.00s"><b>① 언어 학습</b><span>문법 · 개발 도구 사용법</span></div><div class="v2pc" style="--d:0.08s"><b>② 직접 작성</b><span>모든 기능을 사람이 입력</span></div><div class="v2pc" style="--d:0.16s"><b>③ 오류 수정</b><span>오류 메시지로 원인 추적</span></div></div><div class="v2p on"><div class="v2ph">바이브코딩</div><div class="v2pc" style="--d:0.00s"><b>① 말로 요청</b><span>「로그인 화면 만들어 줘」</span></div><div class="v2pc" style="--d:0.08s"><b>② AI가 코드 작성</b><span>파일 생성 · 실행</span></div><div class="v2pc" style="--d:0.16s"><b>③ 수정 사항만 요청</b><span>「버튼을 크게」 「비밀번호는 8자 이상」</span></div></div></div><div class="dbnote"><span>바이브코딩</span> AI와 대화를 주고받으며 프로그램을 만드는 개발 방식</div></div></div>
+</section>
+
+<section class="slide lt" data-title="프로그래밍 언어의 발전">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-1</span></div>
+  <h2 class="s-title sm">프로그래밍 언어의 발전</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1langs"><div class="v1lang v1cut" style="--d:0.0s"><div class="v1ly">1940년대 말 ~</div><b>어셈블리</b><pre class="">mov  x1, #0
+add  x1, x1, x2
+… 38줄</pre><div class="v1lf">CPU 명령 하나씩</div><div class="v1lk">재료 손질부터 직접</div></div><i class="v1lar">→</i><div class="v1lang v1cut" style="--d:0.8s"><div class="v1ly">1957 FORTRAN · 1991 Python</div><b>고급 언어</b><pre class="">for n in range(1, 101):
+    total += n</pre><div class="v1lf">영어 단어 · 수식</div><div class="v1lk">밀키트</div></div><i class="v1lar">→</i><div class="v1lang v1cut" style="--d:1.6s"><div class="v1ly">2025 ~</div><b>자연어</b><pre class="nl">「1부터 100까지 더해
+화면에 보여 줘」</pre><div class="v1lf">우리말 요청 → AI가 코드 작성</div><div class="v1lk">식당에서 주문</div></div></div><div class="v1lline"><span>기계에 가까운 말</span><b></b><span>사람에 가까운 말</span></div><div class="src">출처 · <a href="https://www.ibm.com/history/fortran" target="_blank" rel="noopener">IBM · FORTRAN</a> · <a href="https://docs.python.org/3/license.html" target="_blank" rel="noopener">Python · History</a></div></div></div>
 </section>
 
 <section class="slide lt" data-title="어셈블리어 코드">
