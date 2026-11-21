@@ -1041,6 +1041,11 @@
   .v1fw.bad rect{fill:#FDECEA; stroke:#C0392B; stroke-width:3;} .v1fw.bad text{fill:#A93226;}
   .v1fw.bad{animation:v1fwIn .6s var(--d) forwards, v1fwP 1s calc(var(--d) + .8s) 2;}
   .v1fwD{opacity:0; animation:v1fwIn .6s var(--d) forwards;}
+  /* 1-1 · 어셈블리어 코드 */
+  .v1asW{display:grid; grid-template-columns:auto 1fr; gap:26px; align-items:start; margin-top:4px;}
+  .v1asC{height:392px; border-radius:10px; box-shadow:0 8px 22px rgba(15,27,45,.18);}
+  .v1asR figure{margin:0 0 14px;} .v1asR figure img{height:226px; border-radius:10px; display:block;}
+  .v1asR figcaption{font-size:13px; color:#6B7785; margin-top:6px;}
   .v1mm{display:flex; justify-content:center;} .v1mm img{height:450px; border-radius:12px; box-shadow:0 8px 22px rgba(15,27,45,.12);}
   .v1mkL{display:flex; flex-direction:column; gap:10px;}
   .v1mkQ{font-size:21px; font-weight:800; color:#16233A; background:#FFF8F0; border:2px solid #F28C28; border-radius:14px; padding:10px 16px;
@@ -1430,13 +1435,43 @@
   <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">기존 코딩</div><div class="v2pc" style="--d:0.00s"><b>① 언어 학습</b><span>문법 · 개발 도구 사용법</span></div><div class="v2pc" style="--d:0.08s"><b>② 직접 작성</b><span>모든 기능을 사람이 입력</span></div><div class="v2pc" style="--d:0.16s"><b>③ 오류 수정</b><span>오류 메시지로 원인 추적</span></div></div><div class="v2p on"><div class="v2ph">바이브코딩</div><div class="v2pc" style="--d:0.00s"><b>① 말로 요청</b><span>「로그인 화면 만들어 줘」</span></div><div class="v2pc" style="--d:0.08s"><b>② AI가 코드 작성</b><span>파일 생성 · 실행</span></div><div class="v2pc" style="--d:0.16s"><b>③ 수정 사항만 요청</b><span>「버튼을 크게」 「비밀번호는 8자 이상」</span></div></div></div><div class="dbnote"><span>바이브코딩</span> AI와 대화를 주고받으며 프로그램을 만드는 개발 방식</div></div></div>
 </section>
 
+<section class="slide lt" data-title="어셈블리어 코드">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-1</span></div>
+  <h2 class="s-title sm">어셈블리어 코드</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1asW"><img class="v1asC" src="img/v1_asm_sum.webp" alt="1부터 100까지 합 · arm64 어셈블리 38줄"/><div class="v1asR"><figure><img src="img/v1_syscall_h.webp" alt="macOS syscall.h · SYS_write 4"/><figcaption>macOS syscall.h · 시스템 호출 번호표</figcaption></figure><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>38줄</b><span>1부터 100까지 합 · 화면 출력</span></div><div class="v2tile" style="--d:0.08s"><b>CPU 칸 x0 ~ x16</b><span>값 넣기 · 더하기 · 비교 · 점프</span></div><div class="v2tile" style="--d:0.16s"><b>화면 출력</b><span>시스템 호출 4번 write</span></div></div></div></div></div></div>
+</section>
+
+<section class="slide lt" data-title="고급 언어 코드 · Python">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-1</span></div>
+  <h2 class="s-title sm">고급 언어 코드 · Python</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="twocol"><div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">sum.py</span></div><pre><code>total = 0
+for n in range(1, 101):
+    total += n
+print(total)</code></pre></div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">터미널 · 실행 결과</span></div><pre><code>$ python3 sum.py
+5050</code></pre></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>4줄</b><span>같은 계산 · 같은 결과 5050</span></div><div class="v2tile" style="--d:0.08s"><b>영어 단어 · 수식</b><span>for · range · print</span></div><div class="v2tile" style="--d:0.16s"><b>CPU 칸 · 시스템 호출</b><span>언어가 대신 처리</span></div></div></div></div></div></div>
+</section>
+
+<section class="slide lt" data-title="자연어 요청">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-1</span></div>
+  <h2 class="s-title sm">자연어 요청</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="twocol"><div><div class="v1chat"><div class="v1ch">Claude Code 대화 예</div><div class="v1b me"><span>나</span><p>1부터 100까지 더한 값을 화면에 보여 줘</p></div><div class="v1b ai"><span>Claude</span><p>Python 코드를 만들어 실행했다.<br/>결과 · 5050</p></div></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>1문장</b><span>원하는 결과만</span></div><div class="v2tile" style="--d:0.08s"><b>코드 작성 · 실행</b><span>AI</span></div><div class="v2tile" style="--d:0.16s"><b>사람이 할 일</b><span>결과 확인 · 5050 이 맞나</span></div></div></div></div></div></div>
+</section>
+
 <section class="slide lt" data-title="프로그래밍 언어의 발전">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-1</span></div>
   <h2 class="s-title sm">프로그래밍 언어의 발전</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1langs"><div class="v1lang v1cut" style="--d:0.0s"><div class="v1ly">1940년대 말 ~</div><b>어셈블리</b><pre class="">mov eax, 3
-add eax, 4</pre><div class="v1lf">CPU 명령 하나씩</div><div class="v1lk">재료 손질부터 직접</div></div><i class="v1lar">→</i><div class="v1lang v1cut" style="--d:0.8s"><div class="v1ly">1957 FORTRAN · 1991 Python</div><b>고급 언어</b><pre class="">print(3 + 4)</pre><div class="v1lf">영어 단어 · 수식</div><div class="v1lk">밀키트</div></div><i class="v1lar">→</i><div class="v1lang v1cut" style="--d:1.6s"><div class="v1ly">2025 ~</div><b>자연어</b><pre class="nl">「3 더하기 4를
+  <div class="body"><div class="mid"><div class="v1langs"><div class="v1lang v1cut" style="--d:0.0s"><div class="v1ly">1940년대 말 ~</div><b>어셈블리</b><pre class="">mov  x1, #0
+add  x1, x1, x2
+… 38줄</pre><div class="v1lf">CPU 명령 하나씩</div><div class="v1lk">재료 손질부터 직접</div></div><i class="v1lar">→</i><div class="v1lang v1cut" style="--d:0.8s"><div class="v1ly">1957 FORTRAN · 1991 Python</div><b>고급 언어</b><pre class="">for n in range(1, 101):
+    total += n</pre><div class="v1lf">영어 단어 · 수식</div><div class="v1lk">밀키트</div></div><i class="v1lar">→</i><div class="v1lang v1cut" style="--d:1.6s"><div class="v1ly">2025 ~</div><b>자연어</b><pre class="nl">「1부터 100까지 더해
 화면에 보여 줘」</pre><div class="v1lf">우리말 요청 → AI가 코드 작성</div><div class="v1lk">식당에서 주문</div></div></div><div class="v1lline"><span>기계에 가까운 말</span><b></b><span>사람에 가까운 말</span></div><div class="src">출처 · <a href="https://www.ibm.com/history/fortran" target="_blank" rel="noopener">IBM · FORTRAN</a> · <a href="https://docs.python.org/3/license.html" target="_blank" rel="noopener">Python · History</a></div></div></div>
 </section>
 

@@ -116,14 +116,14 @@ def chat_anim(mode):
 
 
 LANGS = [  # (시기, 이름, 예 코드, 특징, 요리 비유)
-    ("1940년대 말 ~", "어셈블리", "mov eax, 3\nadd eax, 4", "CPU 명령 하나씩", "재료 손질부터 직접"),
-    ("1957 FORTRAN · 1991 Python", "고급 언어", "print(3 + 4)", "영어 단어 · 수식", "밀키트"),
-    ("2025 ~", "자연어", "「3 더하기 4를\n화면에 보여 줘」", "우리말 요청 → AI가 코드 작성", "식당에서 주문"),
+    ("1940년대 말 ~", "어셈블리", "mov  x1, #0\nadd  x1, x1, x2\n… 38줄", "CPU 명령 하나씩", "재료 손질부터 직접"),
+    ("1957 FORTRAN · 1991 Python", "고급 언어", "for n in range(1, 101):\n    total += n", "영어 단어 · 수식", "밀키트"),
+    ("2025 ~", "자연어", "「1부터 100까지 더해\n화면에 보여 줘」", "우리말 요청 → AI가 코드 작성", "식당에서 주문"),
 ]
 
 
 def langs():
-    """어셈블리 → 고급 언어 → 자연어 — 같은 계산(3 + 4)을 세 방식으로 · 칸이 차례로 나타남."""
+    """어셈블리 → 고급 언어 → 자연어 — 같은 계산(1부터 100까지 합)을 세 방식으로 · 칸이 차례로 나타남."""
     from hx import esc
     c = ""
     for i, (when, name, ex, feat, cook) in enumerate(LANGS):
@@ -300,6 +300,22 @@ def slides():
             "기존 코딩", [("① 언어 학습", "문법 · 개발 도구 사용법"), ("② 직접 작성", "모든 기능을 사람이 입력"), ("③ 오류 수정", "오류 메시지로 원인 추적")],
             "바이브코딩", [("① 말로 요청", "「로그인 화면 만들어 줘」"), ("② AI가 코드 작성", "파일 생성 · 실행"), ("③ 수정 사항만 요청", "「버튼을 크게」 「비밀번호는 8자 이상」")], hl="r")
               + note("바이브코딩", "AI와 대화를 주고받으며 프로그램을 만드는 개발 방식"), T),
+        # ── 같은 계산 세 가지 · 1부터 100까지 합 (labs 밖 · 실제 실행 결과 5050)
+        light("어셈블리어 코드", '<div class="v1asW"><img class="v1asC" src="img/v1_asm_sum.webp" alt="1부터 100까지 합 · arm64 어셈블리 38줄"/>'
+              '<div class="v1asR"><figure><img src="img/v1_syscall_h.webp" alt="macOS syscall.h · SYS_write 4"/>'
+              '<figcaption>macOS syscall.h · 시스템 호출 번호표</figcaption></figure>'
+              + viz2.tiles([("38줄", "1부터 100까지 합 · 화면 출력"), ("CPU 칸 x0 ~ x16", "값 넣기 · 더하기 · 비교 · 점프"),
+                            ("화면 출력", "시스템 호출 4번 write")], 3) + "</div></div>", T),
+        light("고급 언어 코드 · Python", '<div class="twocol"><div>'
+              + code("sum.py", esc("total = 0\nfor n in range(1, 101):\n    total += n\nprint(total)"))
+              + code("터미널 · 실행 결과", esc("$ python3 sum.py\n5050"))
+              + '</div><div>' + viz2.tiles([("4줄", "같은 계산 · 같은 결과 5050"), ("영어 단어 · 수식", "for · range · print"),
+                                          ("CPU 칸 · 시스템 호출", "언어가 대신 처리")], 1) + "</div></div>", T),
+        light("자연어 요청", '<div class="twocol"><div>'
+              + chat([("me", "1부터 100까지 더한 값을 화면에 보여 줘"),
+                      ("ai", "Python 코드를 만들어 실행했다.\n결과 · 5050")], "Claude Code 대화 예")
+              + '</div><div>' + viz2.tiles([("1문장", "원하는 결과만"), ("코드 작성 · 실행", "AI"),
+                                          ("사람이 할 일", "결과 확인 · 5050 이 맞나")], 1) + "</div></div>", T),
         light("프로그래밍 언어의 발전", langs()
               + src(("IBM · FORTRAN", "https://www.ibm.com/history/fortran"), ("Python · History", "https://docs.python.org/3/license.html"),
                     ("참고 · 알파AI스쿨 「바이브 코딩이란?」 요리 비유", "https://www.youtube.com/watch?v=cFdyp_pPgPQ")), T),
@@ -523,6 +539,11 @@ CSS = """
   .v1fw.bad rect{fill:#FDECEA; stroke:#C0392B; stroke-width:3;} .v1fw.bad text{fill:#A93226;}
   .v1fw.bad{animation:v1fwIn .6s var(--d) forwards, v1fwP 1s calc(var(--d) + .8s) 2;}
   .v1fwD{opacity:0; animation:v1fwIn .6s var(--d) forwards;}
+  /* 1-1 · 어셈블리어 코드 */
+  .v1asW{display:grid; grid-template-columns:auto 1fr; gap:26px; align-items:start; margin-top:4px;}
+  .v1asC{height:392px; border-radius:10px; box-shadow:0 8px 22px rgba(15,27,45,.18);}
+  .v1asR figure{margin:0 0 14px;} .v1asR figure img{height:226px; border-radius:10px; display:block;}
+  .v1asR figcaption{font-size:13px; color:#6B7785; margin-top:6px;}
   .v1mm{display:flex; justify-content:center;} .v1mm img{height:450px; border-radius:12px; box-shadow:0 8px 22px rgba(15,27,45,.12);}
   .v1mkL{display:flex; flex-direction:column; gap:10px;}
   .v1mkQ{font-size:21px; font-weight:800; color:#16233A; background:#FFF8F0; border:2px solid #F28C28; border-radius:14px; padding:10px 16px;
