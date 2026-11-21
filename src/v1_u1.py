@@ -331,13 +331,6 @@ def slides():
         light("로그인 순서도 · 피드백 전", login_flow(False), T),
         light("로그인 순서도 · 피드백 후", login_flow(True), T),
         # ── 바이브 디버깅
-        light("바이브코딩과 바이브 디버깅", '<div class="v1mm"><img src="img/v1_vibe_debug.webp" alt="Vibe coding · 웃는 얼굴 / Vibe debugging · 무너진 얼굴"/></div>', T),
-        light("디버깅이 어려운 이유", viz2.tiles([
-            ("조용한 버그", "화면은 멀쩡 · 오류는 숨김"), ("찾을 곳 모름", "순서를 모르면 틀린 단계도 모름"),
-            ("고치면 또 고장", "한 곳 수정 → 다른 곳 오류")], 3)
-              + code("개발자 농담", esc("코드 속 작은 버그 99개\n하나 잡아서 고치면\n코드 속 작은 버그 127개"))
-              + note("Stack Overflow 2026", "AI 사용 개발자의 사용 용도 · 디버깅 61%")
-              + src(("Stack Overflow · 2026 Developer Survey (2026-10-06)", "https://stackoverflow.blog/2026/10/06/the-results-of-the-2026-developer-survey-are-here/")), T),
         light("순서도와 테스트 케이스", viz2.maprows([
             ("회사 이메일 · 비밀번호 일치", "로그인 완료", "kim@company.com · 맞는 비밀번호"),
             ("회사 이메일 아님", "거절", "kim@gmail.com"),
