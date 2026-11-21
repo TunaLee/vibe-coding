@@ -3,7 +3,7 @@
 비유 한 줄로 끝까지 잇는다.
   코딩 = 사과를 처음 보는 원시인(컴퓨터)에게 원시인 말로 하나하나 가르치기 · 빠뜨리면 그대로 실수(버그)
   바이브코딩 = 우리말로 말하면 통역사(AI)가 원시인 말(코드)로 풀어 쓰고 · 나는 결과를 보고 판단
-→ 말의 유래 · 흐름 · 내 일과 AI 일 · 만든 것 · 한계(통역사도 빠뜨린다) · 1부 순서 · 완성 화면.
+흐름(워밍업): 말의 유래 · 사례 → 원시인과 사과 → 언어 발전 · 같은 계산 세 가지 → 도구 변화 → 알고리즘(우유 · 라면 · 로그인) → LLM · 도구 · 에이전트 루프 → 가능성과 한계 → 요청과 결과(1-8 회고와 짝).
 사실 출처: scratchpad/v1_facts.md (Karpathy · Collins · levels.io · MenuGen · Veracode · Wiz · Replit)
 """
 import anim
@@ -285,6 +285,24 @@ def split_roles():
 
 def slides():
     return [
+        # ── 워밍업 · 바이브코딩의 유래와 사례
+        light("바이브코딩의 유래", quote(
+            "내가 <mark>「바이브코딩」</mark>이라고 부르는 새로운 코딩 방식이 있다. 느낌(vibe)에 완전히 몸을 맡기고, "
+            "AI의 빠른 발전을 받아들이고, 코드가 있다는 사실조차 잊는 방식이다.",
+            "Andrej Karpathy · X · 2025-02-02 · 원문 「There's a new kind of coding I call “vibe coding”…」")
+              + viz2.tiles([("2023-01 · Karpathy", "「가장 인기 있는 새 프로그래밍 언어는 영어」"),
+                            ("2025-02 · Karpathy", "「바이브코딩」 처음 사용"),
+                            ("2025-11 · Collins 사전", "올해의 단어 선정")], 3)
+              + src(("Karpathy · 2023-01-24", "https://x.com/karpathy/status/1617979122625712128"),
+                    ("Karpathy · 2025-02-02", "https://x.com/karpathy/status/1886192184808149383"),
+                    ("Collins · 2025-11-06", "https://blog.collinsdictionary.com/language-lovers/collins-word-of-the-year-2025-ai-meets-authenticity-as-society-shifts/")), T),
+        light("바이브코딩 사례", viz2.tiles([
+            ("브라우저 3D 비행 게임", "fly.pieter.com · 개발자 1명 + AI"),
+            ("메뉴판 사진 → 음식 그림", "MenuGen · Karpathy"),
+            ("업무 도구", "미니 노션 · 체크리스트 (1부 실습)")], 3)
+              + note("배포", "공개 · 운영은 만들기와 별도 과정 (1-7)")
+              + src(("levelsio · X", "https://x.com/levelsio/status/1899596115210891751"),
+                    ("Karpathy · MenuGen", "https://karpathy.bearblog.dev/vibe-coding-menugen/")), T),
         # ── 코딩 = 원시인에게 사과 가르치기
         light("원시인과 사과", '<div class="v1shot v1vid"><figure>'
               '<video src="img/v1_caveman.mp4" poster="img/v1_caveman.webp" autoplay muted loop playsinline></video>'
@@ -300,10 +318,6 @@ def slides():
             ("v1_cut4.webp", "?", "처음 본 배", "코드에 없는 경우 · 처리 불가")])
               + note("코딩", "컴퓨터가 실행할 명령을 프로그래밍 언어로 작성하는 일")
               + src(("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")), T),
-        light("기존 코딩과 바이브코딩", viz2.pair(
-            "기존 코딩", [("① 언어 학습", "문법 · 개발 도구 사용법"), ("② 직접 작성", "모든 기능을 사람이 입력"), ("③ 오류 수정", "오류 메시지로 원인 추적")],
-            "바이브코딩", [("① 말로 요청", "「로그인 화면 만들어 줘」"), ("② AI가 코드 작성", "파일 생성 · 실행"), ("③ 수정 사항만 요청", "「버튼을 크게」 「비밀번호는 8자 이상」")], hl="r")
-              + note("바이브코딩", "AI와 대화를 주고받으며 프로그램을 만드는 개발 방식"), T),
         light("프로그래밍 언어의 발전", langs()
               + src(("IBM · FORTRAN", "https://www.ibm.com/history/fortran"), ("Python · History", "https://docs.python.org/3/license.html"),
                     ("참고 · 알파AI스쿨 「바이브 코딩이란?」 요리 비유", "https://www.youtube.com/watch?v=cFdyp_pPgPQ")), T),
@@ -329,21 +343,6 @@ def slides():
               + src(("GitHub · 2021-06-29", "https://github.blog/2021-06-29-introducing-github-copilot-ai-pair-programmer/"),
                     ("OpenAI · 2022-11-30", "https://openai.com/index/chatgpt/"),
                     ("Anthropic · 2025-05-22", "https://www.anthropic.com/news/claude-4")), T),
-        light("자동완성 방식", '<div class="v1mode"><div>' + autocomplete_anim()
-              + '</div><div>' + viz2.tiles([("사람", "파일 · 위치 · 첫 줄 직접 입력"), ("AI", "회색 글자로 다음 줄 제안 · Tab 으로 수락"),
-                                            ("AI가 파악", "앞뒤 코드")], 1) + '</div></div>'
-              + src(("GitHub Copilot 문서 · inline suggestions", "https://docs.github.com/en/copilot/using-github-copilot/getting-code-suggestions-in-your-ide-with-github-copilot")), T),
-        light("대화형 방식", chat_anim("chat"), T),
-        light("위임형 방식", chat_anim("agent")
-              + src(("Claude Code 문서 · How Claude Code works", "https://code.claude.com/docs/en/how-claude-code-works")), T),
-        light("AI 코딩 도구 사용 현황", big([("73", "%", "AI 사용자 중 코딩 도우미 · 에이전트 매일 사용"),
-                                           ("26", "%", "에이전트 · 자동 작업 흐름 사용"),
-                                           ("48", "%", "쉽게 검증될 때만 결과 신뢰", True)], 3)
-              + viz2.tiles([("조사", "Stack Overflow 개발자 설문 · 30,903명 · 2026.10 공개"),
-                            ("중요한 결정까지 신뢰", "6.6%"),
-                            ("검증", "출처 표시가 중요 · 93%")], 3)
-              + src(("Stack Overflow 2026 개발자 설문 · AI", "https://survey.stackoverflow.co/2026/ai"),
-                    ("Stack Overflow 블로그 · 2026-10-06", "https://stackoverflow.blog/2026/10/06/the-results-of-the-2026-developer-survey-are-here/")), T),
         light("위임의 한계", '<div class="v1shot"><figure><img src="img/v1_algo_context.webp" alt="회사 안을 들여다보는 AI"/>'
               '<figcaption>AI · 회사 밖에서 보이는 정보만</figcaption></figure><div class="v1side">'
               + "".join(f'<div class="v1sd"><b>{h}</b><span>{x}</span></div>' for h, x in [
@@ -361,13 +360,6 @@ def slides():
         light("사람과 AI의 역할", split_roles(), T),
         light("LLM", llm_rw(), T),
         light("도구가 필요한 이유", viz2.calc_compare(), T),
-        light("LLM과 코딩 에이전트", comic([
-            ("v1_brain1.webp", "생각만", "LLM", "글 읽기 · 글 쓰기 · 판단"),
-            ("v1_brain2.webp", "+ 도구", "LLM + 도구", "파일 읽기 · 검색 · 명령 실행"),
-            ("v1_brain3.webp", "작업 · 확인", "코딩 에이전트", "도구로 작업 · 결과 확인 반복")])
-              + note("에이전트", "판단하는 모델 + 행동하는 도구")
-              + src(("Claude Code 문서 · How Claude Code works", "https://code.claude.com/docs/en/how-claude-code-works"),
-                    ("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")), T),
         light("경비 정산 비유", phmap("office_worker.webp", "사무 직원", "사진 · Bill Branson (NCI) · 퍼블릭 도메인",
               "https://commons.wikimedia.org/wiki/File:Young_woman_working.jpg", viz2.maprows([
             ("「이번 달 경비 합계」", "사용자 요청", ""), ("다음 영수증 · 무슨 계산", "LLM 판단", "무엇을 볼지 · 어떤 도구를 쓸지"),
@@ -375,36 +367,12 @@ def slides():
             ("영수증이 끝나면 합계 보고", "도구 호출 없음 → 답", "루프 끝")], "정산하는 사람", "에이전트")), T),
         light("에이전트 루프", anim.agent_loop()
               + src(("Claude Code 문서 · How Claude Code works", "https://code.claude.com/docs/en/how-claude-code-works")), T),
-        light("바이브코딩의 유래", quote(
-            "내가 <mark>「바이브코딩」</mark>이라고 부르는 새로운 코딩 방식이 있다. 느낌(vibe)에 완전히 몸을 맡기고, "
-            "AI의 빠른 발전을 받아들이고, 코드가 있다는 사실조차 잊는 방식이다.",
-            "Andrej Karpathy · X · 2025-02-02 · 원문 「There's a new kind of coding I call “vibe coding”…」")
-              + viz2.tiles([("2023-01 · Karpathy", "「가장 인기 있는 새 프로그래밍 언어는 영어」"),
-                            ("2025-02 · Karpathy", "「바이브코딩」 처음 사용"),
-                            ("2025-11 · Collins 사전", "올해의 단어 선정")], 3)
-              + src(("Karpathy · 2023-01-24", "https://x.com/karpathy/status/1617979122625712128"),
-                    ("Karpathy · 2025-02-02", "https://x.com/karpathy/status/1886192184808149383"),
-                    ("Collins · 2025-11-06", "https://blog.collinsdictionary.com/language-lovers/collins-word-of-the-year-2025-ai-meets-authenticity-as-society-shifts/")), T),
-        light("AI가 맡을 수 있는 작업 길이", '<div class="mwrap">' + metr_chart() + '<div class="mcards">'
-              + '<div class="bn hl"><div class="bv">105<small>일</small></div><div class="bl">작업 길이 2배 주기 (2024년 이후)</div></div>'
-              + '<div class="bn"><div class="bv">작업 길이</div><div class="bl">사람이 하면 걸리는 시간 기준</div></div>'
-              + '</div></div>' + src(METR_TH), T),
         # ── 할 수 있는 것 · 조심할 것
-        light("바이브코딩 사례", viz2.tiles([
-            ("브라우저 3D 비행 게임", "fly.pieter.com · 개발자 1명 + AI"),
-            ("메뉴판 사진 → 음식 그림", "MenuGen · Karpathy"),
-            ("업무 도구", "미니 노션 · 체크리스트 (1부 실습)")], 3)
-              + note("배포", "공개 · 운영은 만들기와 별도 과정 (1-7)")
-              + src(("levelsio · X", "https://x.com/levelsio/status/1899596115210891751"),
-                    ("Karpathy · MenuGen", "https://karpathy.bearblog.dev/vibe-coding-menugen/")), T),
         light("바이브코딩의 가능성과 한계", viz2.fit(
             [("화면 1~3개 웹 페이지", "할 일 · 투표 · 체크리스트"), ("업무 보조 도구", "계산기 · 자료 정리"), ("시제품", "아이디어 시연용 화면")],
             [("돈 · 개인정보 처리 서비스", "전문 보안 점검 필요"), ("동시 사용자가 많은 서비스", "서버 · DB 설계 필요"),
              ("코드 확인 없는 운영", "장애 원인 추적 어려움")],
             gt="지금 만들기 좋은 앱", bt="아직 어려운 앱"), T),
-        light("1부 결과물", shot("notion_main.webp", "미니 노션 · 1부 공통 예제 완성본", [
-            ("페이지 · 블록", "제목 · 글 · 체크 상자 · 구분선"), ("도전 지점", "「/」 메뉴 · 끌어 옮기기"),
-            ("공유", "배포 주소 (1-7)"), ("내 앱", "같은 순서로 하나 더")]), T),
         light("요청과 결과", '<div class="v1core">'
               '<div class="bx me"><span>내 요청</span><b>「미니 노션 만들어 줘」</b></div><i>→</i>'
               '<div class="bx ai"><span>AI 작업</span><b>읽기 · 작성 · 실행 · 확인</b></div><i>→</i>'
