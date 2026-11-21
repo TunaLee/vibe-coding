@@ -75,7 +75,7 @@ def relay():
 def hub():
     """Claude Code 에서 MCP 서버 네 개로 선이 차례로 이어짐."""
     srv = [("Supabase", "표 만들기 · SQL 실행 · 로그 보기 (2-5 · 2-6)"), ("Playwright", "브라우저 열기 · 클릭 · 화면 확인 (2-7)"),
-           ("Notion", "기획서 · PRD 페이지 읽기"), ("Figma", "디자인 파일 → 화면 코드")]
+           ("Notion", "기획서 · 개발 계획 페이지 읽기"), ("Figma", "디자인 파일 → 화면 코드")]
     rows = "".join(f'<div class="v2u3hr" style="--d:{.5 + i * .5:.2f}s"><i class="v2u3wire"></i><div class="v2u3hs"><b>{n}</b><span>{x}</span></div></div>'
                    for i, (n, x) in enumerate(srv))
     return (f'<div class="v2u3hub"><div class="v2u3core"><b>Claude Code</b><span>MCP 클라이언트</span></div>'

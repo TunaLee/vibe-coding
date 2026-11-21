@@ -59,7 +59,7 @@ def slides():
                       ("오타", "「김하늘」 · 「김 하늘」 따로 집계")],
             "표 두 개", [("할 일마다", "owner_id 하나"), ("이메일 변경", "members 한 줄 수정"), ("오타", "고를 수 있는 팀원만")]), T),
         light("AI와 데이터 구조 설계", chat([
-            ("me", "PRD 5칸 데이터 구조를 읽고 Supabase 표 설계를 제안해 줘. 만들기 전에 표 모양부터 보여 줘"),
+            ("me", "개발 계획 5칸 데이터 구조를 읽고 Supabase 표 설계를 제안해 줘. 만들기 전에 표 모양부터 보여 줘"),
             ("ai", "제안 · members · tasks 두 표. 상태는 할 일 · 진행 중 · 완료 셋만 받게 DB 에서도 막을까요?"),
             ("me", "응 · 화면과 DB 둘 다에서 막아 줘"),
             ("ai", "표 설계 · SQL 파일 저장 완료 · SQL Editor 에서 실행 필요")], "Claude Code 대화 예")
@@ -117,7 +117,7 @@ def slides():
             ('create policy "내 할 일만 삭제" on tasks for delete', "삭제 규칙"),
             ("  to authenticated", "로그인한 사람만"),
             ("  using ( (select auth.uid()) = owner_id );", "로그인 계정 = 담당자인 행만")],
-            ask="PRD 7칸 권한대로 tasks 표에 RLS 정책을 만들어 줘", title="Claude Code가 쓴 SQL · 예")
+            ask="개발 계획 7칸 권한대로 tasks 표에 RLS 정책을 만들어 줘", title="Claude Code가 쓴 SQL · 예")
               + src(RLS), T),
         light("RLS 동작", lane([("팀원 브라우저", "계정 A · 계정 B"), ("Supabase", "RLS 규칙 확인"), ("tasks", "7번 · 담당자 A")],
                                [(0, 1, "B · 7번 삭제", .4, False), (0, 1, "A · 7번 삭제", 2.8, False), (1, 2, "삭제 실행", 4.1, True)],
@@ -131,9 +131,9 @@ def slides():
         lab("2-5", "Supabase 저장 · 로그인 · 권한", T, "내 앱 → 모두 같은 보드 · 로그인 · 내 할 일만 수정",
             ["Supabase 새 프로젝트", "Claude Code에 표 설계 요청 · SQL 실행", "저장 위치 교체 요청", "로그인 · RLS 요청", "계정 두 개로 확인"],
             ["다른 기기에서 같은 할 일이 보임", "다른 계정 담당 할 일은 삭제 불가"],
-            files="예시/PRD.md 5 · 7 칸 (비교용)"),
+            files="예시/개발계획.md 5 · 7 칸 (비교용)"),
         brief("2-5", T, ["Supabase 프로젝트 만들기", "표 설계 · SQL 실행", "저장 · 조회를 DB 로 교체", "로그인 · RLS", "두 계정 확인"],
-              [("목표", "할 일 DB 저장 · 로그인 · 내 할 일만 수정 · 삭제"), ("입력", "PRD v2 · 5 · 7 칸"),
+              [("목표", "할 일 DB 저장 · 로그인 · 내 할 일만 수정 · 삭제"), ("입력", "개발 계획 v2 · 5 · 7 칸"),
                ("진행 방식", "표 설계 먼저 보여 주기 · 태스크 하나씩"), ("하지 말 것", "secret 키를 앱 코드에 넣기")],
               ["Supabase", "publishable 키", "RLS", "로그인"],
               ["Table Editor 에 할 일 행이 생김", "계정 B 로 계정 A 할 일 삭제 불가"],

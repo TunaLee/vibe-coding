@@ -1,4 +1,4 @@
-// 팀 할 일 보드 — PRD F1~F5. 할 일은 이 브라우저(localStorage)에만 저장된다.
+// 팀 할 일 보드 — 개발계획.md F1~F5. 할 일은 이 브라우저(localStorage)에만 저장된다.
 const TEAM = ["김하늘", "이준호", "박서연", "최민재"];
 const STEPS = ["할 일", "진행 중", "완료"];
 const KEY = "team-tasks";

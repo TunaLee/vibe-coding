@@ -40,7 +40,7 @@ def make_lab_zips():
     import zipfile
     dl = ROOT / "docs" / "dl"
     dl.mkdir(exist_ok=True)
-    for name in ("delegate_todo",):
+    for name in ("delegate_todo", "persona"):
         src = ROOT / "labs" / name
         with zipfile.ZipFile(dl / f"{name}.zip", "w", zipfile.ZIP_DEFLATED) as z:
             for f in sorted(src.rglob("*")):

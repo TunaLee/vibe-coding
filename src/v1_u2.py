@@ -50,7 +50,7 @@ def cc_lanes():
 def slides():
     return [
         # ── 도구 네 개
-        light("1부 실습 도구", flow([("Claude", "대화형 AI · 아이디어 고르기 (1-3)"), ("Claude Code", "위임형 AI · 기획서 · PRD · 앱 코드 (1-3 ~ 1-6)"),
+        light("1부 실습 도구", flow([("Claude", "대화형 AI · 아이디어 고르기 (1-3)"), ("Claude Code", "위임형 AI · 기획서 · 개발 계획 · 앱 코드 (1-3 ~ 1-6)"),
                                       ("GitHub", "코드 · 변경 기록 보관 (1-5 · 1-7)"), ("Vercel", "배포 · 공개 주소 (1-7)")]), T),
         # ── Claude
         light("Claude", '<div class="twocol"><div>'

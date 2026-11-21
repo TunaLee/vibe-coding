@@ -63,7 +63,7 @@ def slides():
               + src(("GitHub plans", "https://docs.github.com/en/get-started/learning-about-github/githubs-plans")), T),
         light("업로드한 저장소 확인", '<div class="twocol"><div>'
               + code("github.com/내계정/team-board · 예", esc(
-                  "team-board/\n├── index.html\n├── style.css\n├── app.js\n├── 기획서.md     1-3\n└── PRD.md        1-4"))
+                  "team-board/\n├── index.html\n├── style.css\n├── app.js\n├── 기획서.md     1-3\n└── 개발계획.md   1-4"))
               + "</div><div>" + viz2.tiles([
                   ("파일 목록", "내 폴더와 동일"), ("커밋 기록", "1-5 · 1-6 커밋"), ("자물쇠 표시", "비공개 저장소")], 1)
               + "</div></div>", T),
@@ -79,7 +79,7 @@ def slides():
               + note("공유할 주소", "프로젝트 기본 주소 · 다시 배포해도 바뀌지 않음")
               + src(("Vercel · Generated URLs", "https://vercel.com/docs/deployments/generated-urls")), T),
         light("배포 화면", shot("board_mobile.webp", "배포 주소 · 390px 휴대폰 화면", [
-            ("localhost 와 차이", "주소만 다름 · 코드 동일"), ("PRD 완료 기준", "모바일 폭에서 가로 스크롤 없음"),
+            ("localhost 와 차이", "주소만 다름 · 코드 동일"), ("개발 계획 완료 기준", "모바일 폭에서 가로 스크롤 없음"),
             ("확인 방법", "주소를 휴대폰으로 보내 열기"), ("깨질 때", "화면 캡처 첨부 · 수정 요청 (1-6)")]), T),
         # ── 재배포
         light("수정 → 재배포", '<div class="twocol"><div>'
