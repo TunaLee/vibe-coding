@@ -25,12 +25,12 @@ def slides():
         light("문서 파일과 공유 링크", _share(), T),
         light("localhost · 내부망 · 외부망", _net(), T),
         light("주소별 접속 범위", viz2.maprows([
-            ("localhost:8000", "이 컴퓨터만", "만들며 확인 (1-6)"),
+            ("localhost:8000", "이 컴퓨터만", "만들며 확인"),
             ("192.168.0.12:8000", "같은 Wi-Fi · 회사망 기기", "내 휴대폰 화면 확인"),
-            ("mini-notion.vercel.app", "인터넷의 누구나", "공유 (1-7)")], "주소", "열리는 범위")
+            ("mini-notion.vercel.app", "인터넷의 누구나", "공유")], "주소", "열리는 범위")
               + src(("RFC 1918 · 사설 주소", "https://www.rfc-editor.org/rfc/rfc1918")), T),
         light("배포 흐름", flow([
-            ("내 컴퓨터", "앱 · 커밋"), ("GitHub", "코드 보관 (1-5)"), ("Vercel", "코드를 가져가 공개"),
+            ("내 컴퓨터", "앱 · 커밋"), ("GitHub", "코드 보관"), ("Vercel", "코드를 가져가 공개"),
             ("주소", "*.vercel.app"), ("팀원", "링크로 접속")], hl=2)
               + viz2.tiles([
                   ("연결 ① Claude Code → GitHub", "gh 로 저장소 생성 · 업로드 · 요청 한 줄"),
@@ -63,13 +63,13 @@ def slides():
               + src(("GitHub plans", "https://docs.github.com/en/get-started/learning-about-github/githubs-plans")), T),
         light("업로드한 저장소 확인", '<div class="twocol"><div>'
               + code("github.com/내계정/mini-notion · 예", esc(
-                  "mini-notion/\n├── index.html\n├── style.css\n├── app.js\n├── 기획서.md     1-3\n└── 개발계획.md   1-4"))
+                  "mini-notion/\n├── index.html\n├── style.css\n├── app.js\n├── 기획서.md\n└── 개발계획.md"))
               + "</div><div>" + viz2.tiles([
-                  ("파일 목록", "내 폴더와 동일"), ("커밋 기록", "1-5 · 1-6 커밋"), ("자물쇠 표시", "비공개 저장소")], 1)
+                  ("파일 목록", "내 폴더와 동일"), ("커밋 기록", "태스크마다 남긴 커밋"), ("자물쇠 표시", "비공개 저장소")], 1)
               + "</div></div>", T),
         # ── Vercel
         light("Vercel 프로젝트 가져오기", flow([
-            ("Vercel 로그인", "GitHub 계정 (1-2)"), ("새 프로젝트", "Git 저장소 가져오기"), ("mini-notion 선택", "저장소 접근 허용"),
+            ("Vercel 로그인", "GitHub 계정"), ("새 프로젝트", "Git 저장소 가져오기"), ("mini-notion 선택", "저장소 접근 허용"),
             ("Deploy", "설정은 기본값"), ("주소 발급", "1분 안팎")], hl=2)
               + note("저장소가 안 보이면", "GitHub 쪽에서 Vercel 에 그 저장소 접근을 허용")
               + note("설정", "HTML · CSS · JS 만 있는 폴더 → 빌드 설정을 바꿀 것 없음"), T),
@@ -80,7 +80,7 @@ def slides():
               + src(("Vercel · Generated URLs", "https://vercel.com/docs/deployments/generated-urls")), T),
         light("배포 화면", shot("notion_mobile.webp", "배포 주소 · 390px 휴대폰 화면", [
             ("localhost 와 차이", "주소만 다름 · 코드 동일"), ("개발 계획 완료 기준", "모바일 폭에서 가로 스크롤 없음"),
-            ("확인 방법", "주소를 휴대폰으로 보내 열기"), ("깨질 때", "화면 캡처 첨부 · 수정 요청 (1-6)")]), T),
+            ("확인 방법", "주소를 휴대폰으로 보내 열기"), ("깨질 때", "화면 캡처 첨부 · 수정 요청")]), T),
         # ── 재배포
         light("수정 → 재배포", '<div class="twocol"><div>'
               + chat([("me", "체크한 할 일 글자를 연한 초록으로 바꿔 줘"),
@@ -88,7 +88,7 @@ def slides():
                       ("me", "커밋하고 GitHub에 올려 줘"),
                       ("ai", "커밋 「체크한 할 일 색 변경」 → push 완료 · Vercel 새 배포 시작")], "Claude Code 대화")
               + "</div><div>"
-              + viz2.tiles([("① 수정 요청", "Claude Code"), ("② localhost 확인", "1-6 과 같음"), ("③ 커밋 · push", "업로드 요청"),
+              + viz2.tiles([("① 수정 요청", "Claude Code"), ("② localhost 확인", "만들 때와 같음"), ("③ 커밋 · push", "업로드 요청"),
                             ("④ Vercel 자동 배포", "push 감지 · 1~2분"), ("⑤ 같은 주소에 반영", "새 링크 없음")], 1)
               + "</div></div>"
               + src(("Vercel · Git", "https://vercel.com/docs/git")), T),
@@ -99,11 +99,11 @@ def slides():
               + note("점검 요청 예", "「올리기 전에 키 · 개인정보가 들어간 파일이 있는지 찾아 줘」")
               + src(("Vercel Terms", "https://vercel.com/legal/terms"), ("Hobby", "https://vercel.com/docs/plans/hobby")), T),
         # ── 실습
-        lab("1-7", "내 앱 배포", T, "1-6 에서 만든 앱을 GitHub 에 올리고 Vercel 주소로 공개",
+        lab("1-7", "내 앱 배포", T, "만든 앱을 GitHub 에 올리고 Vercel 주소로 공개",
             ["gh 설치 · 로그인 연결", "Claude Code 에 저장소 생성 · 업로드 요청",
              "Vercel 에서 저장소 가져오기 · Deploy → 휴대폰으로 열기", "한 곳 고쳐 push → 같은 주소에 반영 확인"],
             ["저장소에 내 파일 · 커밋 기록", "*.vercel.app 주소로 앱이 열림", "수정 한 번이 재배포로 반영"],
-            files="1-6 의 내 앱 폴더"),
+            files="내 앱 폴더"),
         brief("1-7", T,
               ["gh auth login (브라우저 승인)", "올리기 전 키 · 개인정보 점검 요청", "저장소 만들고 올리기 요청",
                "Vercel 가져오기 · Deploy", "수정 → 커밋 · push 요청"],
@@ -111,11 +111,11 @@ def slides():
                ("하지 말 것", "기존 커밋 지우기 · 공개 저장소")],
               ["GitHub", "비공개", "gh", "push", "Vercel"],
               ["저장소 주소가 열림", "배포 주소가 열림", "수정 뒤 같은 주소에 반영"],
-              "오류 문구 그대로 전달", folder="1-6 의 내 앱 폴더"),
+              "오류 문구 그대로 전달", folder="내 앱 폴더"),
         light("실습 1-7 확인", viz2.maprows([
             ("저장소", "github.com/내계정/저장소 이름", "파일 · 커밋 · 자물쇠"), ("배포 주소", "프로젝트명.vercel.app", "PC · 휴대폰에서 열림"),
             ("재배포", "push 1~2분 뒤 새로고침", "고친 곳이 보임"), ("공개 전 점검", "키 · 개인정보 없음", "Claude Code 점검 결과")], "볼 것", "확인")
-              + note("공유", "배포 주소를 1-8 결과 공유에 사용"), T),
+              + note("공유", "배포 주소로 결과 공유"), T),
     ]
 
 

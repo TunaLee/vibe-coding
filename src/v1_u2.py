@@ -50,8 +50,8 @@ def cc_lanes():
 def slides():
     return [
         # ── 도구 네 개
-        light("1부 실습 도구", flow([("Claude", "대화형 AI · 아이디어 고르기 (1-3)"), ("Claude Code", "위임형 AI · 기획서 · 개발 계획 · 앱 코드 (1-3 ~ 1-6)"),
-                                      ("GitHub", "코드 · 변경 기록 보관 (1-5 · 1-7)"), ("Vercel", "배포 · 공개 주소 (1-7)")]), T),
+        light("1부 실습 도구", flow([("Claude", "대화형 AI · 아이디어 고르기"), ("Claude Code", "위임형 AI · 기획서 · 개발 계획 · 앱 코드"),
+                                      ("GitHub", "코드 · 변경 기록 보관"), ("Vercel", "배포 · 공개 주소")]), T),
         # ── Claude
         light("Claude", '<div class="twocol"><div>'
               + viz2.tiles([("대화형 AI", "claude.ai · 웹 · 데스크톱 · 휴대폰 앱"), ("1부에서 맡는 일", "아이디어 고르기 · 질문 정리"),
@@ -105,11 +105,11 @@ def slides():
                             ("Free 계정", "로그인 단계에서 막힘 · Pro 이상 필요")], 3), T),
         # ── GitHub · Vercel
         light("GitHub", pic("v1_u2_github.webp", "GitHub · 코드 보관함 (AI 생성 그림)", [
-            ("코드 보관함", "인터넷에 둔 내 프로젝트 폴더"), ("변경 기록", "언제 · 무엇을 바꿨는지 (1-5)"),
-            ("배포 출발점", "Vercel 이 여기서 코드를 가져감 (1-7)"), ("요금", "Free · 비공개 저장소 무제한")])
+            ("코드 보관함", "인터넷에 둔 내 프로젝트 폴더"), ("변경 기록", "언제 · 무엇을 바꿨는지"),
+            ("배포 출발점", "Vercel 이 여기서 코드를 가져감"), ("요금", "Free · 비공개 저장소 무제한")])
               + src(("GitHub plans", "https://docs.github.com/en/get-started/learning-about-github/githubs-plans")), T),
         light("Vercel", pic("v1_u2_vercel.webp", "Vercel · 공개 주소 (AI 생성 그림)", [
-            ("공개 주소", "프로젝트이름.vercel.app"), ("자동 배포", "GitHub 에 올리면 다시 배포 (1-7)"),
+            ("공개 주소", "프로젝트이름.vercel.app"), ("자동 배포", "GitHub 에 올리면 다시 배포"),
             ("가입", "GitHub 계정으로 · 비밀번호 따로 없음"), ("요금", "Hobby 무료 · 개인 · 비상업용 · 회사 업무 공개는 Pro $20")])
               + src(("Vercel pricing", "https://vercel.com/pricing"), ("Hobby plan", "https://vercel.com/docs/plans/hobby")), T),
         # ── 실습
@@ -124,7 +124,7 @@ def slides():
                ("폴더", "바탕화면에 내 아이디어 이름 폴더")],
               ["Pro", "GitHub로 계속하기", "Claude Code 확장", "claude --version"],
               ["세 사이트 모두 로그인된 상태", "VS Code 왼쪽에 Claude 아이콘"],
-              "회사 PC 에서 설치가 막히면 웹 claude.ai/code · 1-6 전까지 해결", folder="바탕화면/내 프로젝트 폴더", slot_title="준비"),
+              "회사 PC 에서 설치가 막히면 웹 claude.ai/code", folder="바탕화면/내 프로젝트 폴더", slot_title="준비"),
         brief("1-2 ②", T, ["VS Code → 폴더 열기", "Claude Code 열기 · 로그인", "폴더 신뢰 허용", "첫 요청 보내기", "답 읽기"],
               [("목표", "이 폴더의 현재 상태 듣기"), ("범위", "이 폴더 안만"),
                ("하지 말 것", "아직 파일 만들지 않기")],

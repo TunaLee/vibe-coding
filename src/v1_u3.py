@@ -51,7 +51,7 @@ def _devflow():
 def _devmap():
     head = "".join(f'<div class="v1dmh">{st}</div>' for st, *_ in DEVFLOW)
     co = "".join(f'<div class="v1dmc">{who}</div>' for _, who, *_ in DEVFLOW)
-    me = "".join(f'<div class="v1dmm" style="--d:{.4 + i * .45:.2f}s"><small>{u}</small><b>{w}</b></div>'
+    me = "".join(f'<div class="v1dmm" style="--d:{.4 + i * .45:.2f}s"><b>{w}</b></div>'
                  for i, (_, _, _, u, w) in enumerate(DEVFLOW))
     return (f'<div class="v1dm"><div class="v1dml"></div>{head}'
             f'<div class="v1dml">회사<small>역할별 담당자</small></div>{co}'
@@ -163,14 +163,14 @@ def slides():
     return [
         # ── IT 기업의 개발 흐름
         light("IT 기업의 개발 흐름", _devflow(), T),
-        light("개발 흐름과 1부 단원", _devmap(), T),
+        light("개발 흐름과 1부 산출물", _devmap(), T),
         # ── 무엇을 만들까
         light("앱 아이디어 예시", viz2.tiles([
             ("미니 노션", "페이지 목록 · 블록 편집 · 「/」 메뉴"), ("미니 Trello", "칸반 보드 · 카드 끌어 옮기기"),
             ("미니 화이트보드", "포스트잇 붙이기 · 끌어 옮기기 · 색 묶음"), ("미니 퀴즈쇼", "문제 한 장씩 · 제한 시간 · 점수판"),
             ("미니 가계부 대시보드", "지출 입력 · 분류별 원그래프 · 월별 막대"), ("미니 마크다운 노트", "미리보기 · [[제목]] 으로 노트 연결")], 3)
               + note("공통점", "이미 쓰는 서비스의 핵심 기능 하나 · 내 브라우저 저장 · 로그인 없음"), T),
-        light("공통 예제 · 미니 노션", shot("notion_main.webp", "미니 노션 · 1-6 완성 화면", [
+        light("공통 예제 · 미니 노션", shot("notion_main.webp", "미니 노션 · 완성 화면", [
             ("화면", "왼쪽 페이지 목록 · 오른쪽 편집"), ("블록", "제목 · 글 · 체크 상자 · 구분선"),
             ("도전 지점", "「/」 메뉴 · 블록 끌어 옮기기"), ("저장", "내 브라우저")]), T),
         # ── 아이디어 고르기
@@ -205,12 +205,12 @@ def slides():
                     ("참고 · 한빛미디어 「바이브 코딩 입문 1강」", "https://www.youtube.com/watch?v=n6xAUiTTrZU")), T),
         light("기획서", shot("v1_u3_plan.webp", "기획서 · 한 장의 문서", [
             ("머릿속 아이디어", "설명할 때마다 내용이 바뀜"), ("기획서", "왜 · 누구에게 · 무엇을 · 어떤 화면"),
-            ("기획서.md 파일", "1-4 개발 계획의 입력 · Claude Code 가 읽음")])
+            ("기획서.md 파일", "개발 계획의 입력 · Claude Code 가 읽음")])
               + src(("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")), T),
         light("기획서 구성", plan_build(), T),
         light("기획서 예시", '<div class="twocol"><div>' + code("기획서.md · 칸 제목", esc(_heads()))
               + '</div><div>' + viz2.tiles([("한 파일", "칸마다 「## 제목」 · 3~5줄"), ("분량", "한 화면 분량"),
-                                          ("다음 단원", "1-4 · Claude Code 가 이 파일을 읽음")], 1) + "</div></div>"
+                                          ("다음 단원", "Claude Code 가 이 파일을 읽음")], 1) + "</div></div>"
               + note("파일", "labs/mini_notion/예시/기획서.md"), T),
         # ── Claude와 만들기
         light("Plan Mode", viz2.pair(
@@ -225,7 +225,7 @@ def slides():
               + note("페르소나", "Claude에게 맡기는 역할 · 경력 · 말투 · 진행 순서를 적은 설명"), T),
         light("배우와 배역 비유", viz2.maprows([
             ("배우", "Claude", "같은 사람"), ("배역 설명서", "페르소나 파일", "기획자.md · 개발자.md"),
-            ("말투 · 행동", "질문 · 답의 방식", "배역에 따라 달라짐"), ("배역 교체", "1-4 개발자.md", "같은 Claude · 다른 질문")], "연극", "Claude Code"), T),
+            ("말투 · 행동", "질문 · 답의 방식", "배역에 따라 달라짐"), ("배역 교체", "개발자.md", "같은 Claude · 다른 질문")], "연극", "Claude Code"), T),
         light("기획자 페르소나", '<div class="twocol"><div>' + code("페르소나/기획자.md", esc(_persona("기획자")))
               + '</div><div>' + viz2.tiles([("칸", "역할 · 말투 · 진행 순서 · 하지 않을 것"), ("바꿀 곳", "경력 · 업종 · 말투"),
                                           ("효과", "질문 순서가 기획서 칸 순서와 같음")], 1) + "</div></div>", T),
@@ -262,5 +262,5 @@ def slides():
         light("실습 1-3 확인", checks([
             ("문제점이 실제 장면인가", "「불편하다」만 있으면 다시"), ("목표 이용자가 실제 사람인가", "「모두」면 다시"),
             ("화면이 3개 이내인가", "넘는 화면은 「하지 않을 것」 칸에"), ("하지 않을 것이 있는가", "로그인 · 결제 · 외부 연동")],
-            "넷 다 「예」 → 기획서.md 저장 · 1-4 개발 계획의 입력"), T),
+            "넷 다 「예」 → 기획서.md 저장"), T),
     ]

@@ -300,7 +300,7 @@ def slides():
             ("브라우저 3D 비행 게임", "fly.pieter.com · 개발자 1명 + AI"),
             ("메뉴판 사진 → 음식 그림", "MenuGen · Karpathy"),
             ("업무 도구", "미니 노션 · 체크리스트 (1부 실습)")], 3)
-              + note("배포", "공개 · 운영은 만들기와 별도 과정 (1-7)")
+              + note("배포", "공개 · 운영은 만들기와 별도 과정")
               + src(("levelsio · X", "https://x.com/levelsio/status/1899596115210891751"),
                     ("Karpathy · MenuGen", "https://karpathy.bearblog.dev/vibe-coding-menugen/")), T),
         # ── 코딩 = 원시인에게 사과 가르치기
