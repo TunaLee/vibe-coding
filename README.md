@@ -13,7 +13,8 @@
 ## 실습 자료
 
 - `labs/delegate_todo` — 1-2 첫 위임 · 개인 할 일 목록 뼈대
-- `labs/team_board` — 1부 공통 예제(팀 할 일 보드): 기획서 · 개발 계획 · 완성 앱
+- `labs/mini_notion` — 1부 공통 예제(미니 노션): 기획서 · 개발 계획 · 완성 앱
+- `labs/team_board` — 2부 공통 예제의 시작 버전(팀 할 일 보드 · 1부 방식)
 - `labs/persona` — 1-3 · 1-4 페르소나 파일(기획자.md · 개발자.md) · 덱에서 persona.zip 으로 내려받기
 - `labs/team_board_v2` — 2부 공통 예제(DB · 로그인 · 공휴일 API · MCP): 기획서 v2 · 개발 계획 v2
 - `labs/meeting_agent` — 3부 실습(회의록 에이전트)

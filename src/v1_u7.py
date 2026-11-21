@@ -20,14 +20,14 @@ def slides():
         # ── 배포란 · 비유
         light("배포", viz2.pair(
             "배포 전", [("주소", "localhost — 내 컴퓨터 안"), ("열 수 있는 사람", "나 혼자"), ("컴퓨터를 끄면", "앱도 꺼짐")],
-            "배포 후", [("주소", "team-board.vercel.app 형식"), ("열 수 있는 사람", "주소를 받은 누구나"), ("컴퓨터를 끄면", "그대로 열림")])
+            "배포 후", [("주소", "mini-notion.vercel.app 형식"), ("열 수 있는 사람", "주소를 받은 누구나"), ("컴퓨터를 끄면", "그대로 열림")])
               + note("배포", "내 컴퓨터에서 돌던 앱을 인터넷 주소로 공개하는 일"), T),
         light("문서 파일과 공유 링크", _share(), T),
         light("localhost · 내부망 · 외부망", _net(), T),
         light("주소별 접속 범위", viz2.maprows([
             ("localhost:8000", "이 컴퓨터만", "만들며 확인 (1-6)"),
             ("192.168.0.12:8000", "같은 Wi-Fi · 회사망 기기", "내 휴대폰 화면 확인"),
-            ("team-board.vercel.app", "인터넷의 누구나", "공유 (1-7)")], "주소", "열리는 범위")
+            ("mini-notion.vercel.app", "인터넷의 누구나", "공유 (1-7)")], "주소", "열리는 범위")
               + src(("RFC 1918 · 사설 주소", "https://www.rfc-editor.org/rfc/rfc1918")), T),
         light("배포 흐름", flow([
             ("내 컴퓨터", "앱 · 커밋"), ("GitHub", "코드 보관 (1-5)"), ("Vercel", "코드를 가져가 공개"),
@@ -50,10 +50,10 @@ def slides():
               + note("직접 할 것", "브라우저 승인은 사람이 · 비밀번호를 Claude에게 알려 주지 않음")
               + src(("gh auth login", "https://cli.github.com/manual/gh_auth_login")), T),
         light("GitHub 업로드 요청", chat([
-            ("me", "이 폴더를 GitHub 비공개 저장소 team-board 으로 올려 줘"),
-            ("ai", "gh repo create team-board --private --source=. --push 를 실행해도 될까요?"),
+            ("me", "이 폴더를 GitHub 비공개 저장소 mini-notion 으로 올려 줘"),
+            ("ai", "gh repo create mini-notion --private --source=. --push 를 실행해도 될까요?"),
             ("me", "응"),
-            ("ai", "완료 · https://github.com/내계정/team-board")], "Claude Code 대화")
+            ("ai", "완료 · https://github.com/내계정/mini-notion")], "Claude Code 대화")
               + note("Claude가 쓰는 명령", "gh repo create — 원격 저장소 만들기 + 지금까지의 커밋 올리기")
               + src(("gh repo create", "https://cli.github.com/manual/gh_repo_create")), T),
         light("공개 · 비공개 저장소", viz2.pair(
@@ -62,23 +62,23 @@ def slides():
               + note("GitHub Free", "비공개 저장소도 개수 제한 없음 · 일부 기능만 유료")
               + src(("GitHub plans", "https://docs.github.com/en/get-started/learning-about-github/githubs-plans")), T),
         light("업로드한 저장소 확인", '<div class="twocol"><div>'
-              + code("github.com/내계정/team-board · 예", esc(
-                  "team-board/\n├── index.html\n├── style.css\n├── app.js\n├── 기획서.md     1-3\n└── 개발계획.md   1-4"))
+              + code("github.com/내계정/mini-notion · 예", esc(
+                  "mini-notion/\n├── index.html\n├── style.css\n├── app.js\n├── 기획서.md     1-3\n└── 개발계획.md   1-4"))
               + "</div><div>" + viz2.tiles([
                   ("파일 목록", "내 폴더와 동일"), ("커밋 기록", "1-5 · 1-6 커밋"), ("자물쇠 표시", "비공개 저장소")], 1)
               + "</div></div>", T),
         # ── Vercel
         light("Vercel 프로젝트 가져오기", flow([
-            ("Vercel 로그인", "GitHub 계정 (1-2)"), ("새 프로젝트", "Git 저장소 가져오기"), ("team-board 선택", "저장소 접근 허용"),
+            ("Vercel 로그인", "GitHub 계정 (1-2)"), ("새 프로젝트", "Git 저장소 가져오기"), ("mini-notion 선택", "저장소 접근 허용"),
             ("Deploy", "설정은 기본값"), ("주소 발급", "1분 안팎")], hl=2)
               + note("저장소가 안 보이면", "GitHub 쪽에서 Vercel 에 그 저장소 접근을 허용")
               + note("설정", "HTML · CSS · JS 만 있는 폴더 → 빌드 설정을 바꿀 것 없음"), T),
         light("배포 주소", viz2.tiles([
             ("프로젝트 기본 주소", "프로젝트명.vercel.app"), ("배포마다 고유 주소", "버전마다 따로 생김 · 기본 공개")], 2)
-              + code("배포 완료 · 예", esc("✓ Production   https://team-board.vercel.app\n  이번 배포     https://team-board-a1b2c3.vercel.app"))
+              + code("배포 완료 · 예", esc("✓ Production   https://mini-notion.vercel.app\n  이번 배포     https://mini-notion-a1b2c3.vercel.app"))
               + note("공유할 주소", "프로젝트 기본 주소 · 다시 배포해도 바뀌지 않음")
               + src(("Vercel · Generated URLs", "https://vercel.com/docs/deployments/generated-urls")), T),
-        light("배포 화면", shot("board_mobile.webp", "배포 주소 · 390px 휴대폰 화면", [
+        light("배포 화면", shot("notion_mobile.webp", "배포 주소 · 390px 휴대폰 화면", [
             ("localhost 와 차이", "주소만 다름 · 코드 동일"), ("개발 계획 완료 기준", "모바일 폭에서 가로 스크롤 없음"),
             ("확인 방법", "주소를 휴대폰으로 보내 열기"), ("깨질 때", "화면 캡처 첨부 · 수정 요청 (1-6)")]), T),
         # ── 재배포
@@ -135,8 +135,8 @@ def _net():
             + '</div></div>'
             '<div class="v1nwX">'
             + dev("집 · LTE 휴대폰", "192.168.0.12:8000", False, 5.8)
-            + '<div class="v1nwS" style="--d:8.2s"><div class="v1nwh">Vercel 서버</div><tt>team-board.vercel.app</tt></div>'
-            + dev("집 · LTE 휴대폰", "team-board.vercel.app", True, 9.6, "on")
+            + '<div class="v1nwS" style="--d:8.2s"><div class="v1nwh">Vercel 서버</div><tt>mini-notion.vercel.app</tt></div>'
+            + dev("집 · LTE 휴대폰", "mini-notion.vercel.app", True, 9.6, "on")
             + '</div></div>')
 
 

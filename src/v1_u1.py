@@ -9,7 +9,7 @@
 import anim
 import viz2
 from anim import BG, G, N, O, OK, R, S, W, _D, _t
-from deck import flow, light
+from deck import ba, flow, light
 from hx import METR_TH, code, esc, metr_chart, note
 from stats_hx import big, quote, src
 from v3kit import phmap
@@ -273,7 +273,7 @@ def split_roles():
     col = lambda c, h, items, d: (f'<div class="v1srC {c}" style="--d:{d}s"><b>{h}</b>'
                                   + "".join(f'<span style="--d:{d + .5 + i * .4:.1f}s">{t}</span>' for i, t in enumerate(items)) + '</div>')
     return ('<div class="v1srG">'
-            + col("me", "사람 · 알고리즘", ["규칙 정하기", "AI가 만든 순서 읽기", "빠진 조건 · 예외 피드백"], .3)
+            + col("me", "사람 · 알고리즘", ["규칙 · 테스트 케이스 정하기", "AI가 만든 순서 읽기", "빠진 조건 · 예외 피드백"], .3)
             + '<div class="v1srM" style="--d:2.4s"><i></i><em>요청 · 피드백</em><i></i><em>코드 · 결과</em></div>'
             + col("ai", "AI · 코드", ["코드 작성", "파일 저장 · 실행", "피드백대로 수정"], 2.8)
             + '</div><div class="v1srN" style="--d:4.8s">AI가 코드를 만드는 방식 <i></i> LLM · 도구 · 에이전트</div>')
@@ -338,6 +338,27 @@ def slides():
         light("라면 끓이기 알고리즘", ramen_flow(), T),
         light("로그인 순서도 · 피드백 전", login_flow(False), T),
         light("로그인 순서도 · 피드백 후", login_flow(True), T),
+        # ── 바이브 디버깅
+        light("바이브코딩과 바이브 디버깅", '<div class="v1mm"><img src="img/v1_vibe_debug.webp" alt="Vibe coding · 웃는 얼굴 / Vibe debugging · 무너진 얼굴"/></div>', T),
+        light("디버깅이 어려운 이유", viz2.tiles([
+            ("조용한 버그", "화면은 멀쩡 · 오류는 숨김"), ("찾을 곳 모름", "순서를 모르면 틀린 단계도 모름"),
+            ("고치면 또 고장", "한 곳 수정 → 다른 곳 오류")], 3)
+              + code("개발자 농담", esc("코드 속 작은 버그 99개\n하나 잡아서 고치면\n코드 속 작은 버그 127개"))
+              + note("Stack Overflow 2026", "AI 사용 개발자의 사용 용도 · 디버깅 61%")
+              + src(("Stack Overflow · 2026 Developer Survey (2026-10-06)", "https://stackoverflow.blog/2026/10/06/the-results-of-the-2026-developer-survey-are-here/")), T),
+        light("순서도와 테스트 케이스", viz2.maprows([
+            ("회사 이메일 · 비밀번호 일치", "로그인 완료", "kim@company.com · 맞는 비밀번호"),
+            ("회사 이메일 아님", "거절", "kim@gmail.com"),
+            ("비밀번호 틀림", "다시 입력", "회사 이메일 · 틀린 비밀번호 1번"),
+            ("5번째 틀림", "10분 잠금", "틀린 비밀번호 5번")], "순서도 갈래", "기대 결과 · 입력")
+              + note("테스트 케이스", "갈래 하나 = 확인 하나 · 만들기 전에 AI에게 먼저 줌"), T),
+        ba("버그 알리는 방법", T, "「로그인이 안 돼요」",
+           "「kim@gmail.com 으로 넣으면\n기대 · 거절 / 실제 · 로그인됨\n오류 메시지 원문 · 화면 캡처 첨부」",
+           "재현 순서 · 기대 결과 · 실제 결과 · 오류 원문"),
+        light("바이브 디버깅 순서", flow([
+            ("테스트 케이스", "입력 → 기대 결과"), ("증상 전달", "재현 · 기대 · 실제 · 오류 원문"),
+            ("원인 먼저", "「고치기 전에 원인부터」"), ("통과 · 저장", "테스트 통과 → 커밋"), ("두 번 실패", "되돌리고 새 대화")], hl=0)
+              + src(("Claude Code 문서 · Best practices", "https://code.claude.com/docs/en/best-practices")), T),
         light("사람과 AI의 역할", split_roles(), T),
         light("LLM", llm_rw(), T),
         light("도구가 필요한 이유", viz2.calc_compare(), T),
@@ -373,7 +394,7 @@ def slides():
         light("바이브코딩 사례", viz2.tiles([
             ("브라우저 3D 비행 게임", "fly.pieter.com · 개발자 1명 + AI"),
             ("메뉴판 사진 → 음식 그림", "MenuGen · Karpathy"),
-            ("업무 도구", "할 일 보드 · 체크리스트 (1부 실습)")], 3)
+            ("업무 도구", "미니 노션 · 체크리스트 (1부 실습)")], 3)
               + note("배포", "공개 · 운영은 만들기와 별도 과정 (1-7)")
               + src(("levelsio · X", "https://x.com/levelsio/status/1899596115210891751"),
                     ("Karpathy · MenuGen", "https://karpathy.bearblog.dev/vibe-coding-menugen/")), T),
@@ -390,8 +411,8 @@ def slides():
               + flow([("기획서", "무엇을 · 누구를 (1-3)"), ("개발 계획", "기능 · 태스크 (1-4)"), ("Git", "되돌릴 저장 시점 (1-5)"),
                       ("작게 요청 · 확인", "기능 하나씩 (1-6)"), ("공개 전 점검", "키 · 개인정보 (1-7)")], hl=-1)
               + note("1부", "요청에 맞는 결과를 얻는 과정 · 기획서 → 개발 계획 → Git → 요청 · 확인 → 배포"), T),
-        light("1부 결과물", shot("board_main.webp", "팀 할 일 보드 · 1부 공통 예제 완성본", [
-            ("세 칸 보드", "할 일 · 진행 중 · 완료"), ("기한 지남", "빨간 테두리 · 칸 맨 위"),
+        light("1부 결과물", shot("notion_main.webp", "미니 노션 · 1부 공통 예제 완성본", [
+            ("페이지 · 블록", "제목 · 글 · 체크 상자 · 구분선"), ("도전 지점", "「/」 메뉴 · 끌어 옮기기"),
             ("공유", "배포 주소 (1-7)"), ("내 앱", "같은 순서로 하나 더")]), T),
     ]
 

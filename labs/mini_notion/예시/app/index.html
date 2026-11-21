@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>미니 노션</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <aside>
+    <div class="brand">미니 노션</div>
+    <ul id="pages"></ul>
+    <button id="newPage" class="ghost">+ 새 페이지</button>
+  </aside>
+
+  <main>
+    <div class="bar">
+      <span class="hint">「/」 를 입력하면 블록 종류를 고를 수 있다</span>
+      <button id="delPage" class="ghost danger">페이지 삭제</button>
+    </div>
+    <h1 id="title" contenteditable="true" spellcheck="false" data-ph="제목 없음"></h1>
+    <div id="blocks"></div>
+  </main>
+
+  <ul id="slash" class="slash" hidden>
+    <li data-type="h">제목<small>큰 글씨</small></li>
+    <li data-type="p">글<small>보통 문단</small></li>
+    <li data-type="todo">체크 상자<small>할 일</small></li>
+    <li data-type="hr">구분선<small>가로줄</small></li>
+  </ul>
+
+  <script src="app.js"></script>
+</body>
+</html>

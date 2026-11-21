@@ -30,7 +30,7 @@ def annot(img, alt, boxes, cap):
 
 def cc_lanes():
     """같은 요청 · 두 길 — Claude 는 사람 손이 네 번, Claude Code 는 AI 가 끝까지."""
-    req = '<div class="v1ccq">요청 · 「팀 할 일 보드 만들어 줘」</div>'
+    req = '<div class="v1ccq">요청 · 「미니 노션 만들어 줘」</div>'
     rows = [
         ("v1_brain1.webp", "Claude", "claude.ai · 대화형", 0.6, [
             ("AI", "코드를 글로 답함"), ("사람", "코드 복사"), ("사람", "파일 만들어 붙여넣기"),
