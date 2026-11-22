@@ -3,7 +3,7 @@
 비유 한 줄로 끝까지 잇는다.
   코딩 = 사과를 처음 보는 원시인(컴퓨터)에게 원시인 말로 하나하나 가르치기 · 빠뜨리면 그대로 실수(버그)
   바이브코딩 = 우리말로 말하면 통역사(AI)가 원시인 말(코드)로 풀어 쓰고 · 나는 결과를 보고 판단
-흐름(워밍업): 말의 유래 · 사례 → 원시인과 사과 → 언어 발전 · 같은 계산 세 가지 → 도구 변화 → 알고리즘(우유 · 라면 · 로그인) → LLM · 도구 · 에이전트 루프 → 가능성과 한계 → 요청과 결과(1-8 회고와 짝).
+흐름(워밍업): 말의 유래 · 사례 → 원시인과 사과 → 언어 발전 · 같은 계산 세 가지 → 도구 변화 → 알고리즘(우유 · 라면 · 로그인) → LLM · 도구 · 두뇌 3컷 · 에이전트 루프 → 가능성과 한계 → 요청과 결과(1-8 회고와 짝).
 사실 출처: scratchpad/v1_facts.md (Karpathy · Collins · levels.io · MenuGen · Veracode · Wiz · Replit)
 """
 import anim
@@ -360,6 +360,13 @@ def slides():
         light("사람과 AI의 역할", split_roles(), T),
         light("LLM", llm_rw(), T),
         light("도구가 필요한 이유", viz2.calc_compare(), T),
+        light("LLM과 코딩 에이전트", comic([
+            ("v1_brain1.webp", "생각만", "LLM", "글 읽기 · 글 쓰기 · 판단"),
+            ("v1_brain2.webp", "+ 도구", "LLM + 도구", "파일 읽기 · 검색 · 명령 실행"),
+            ("v1_brain3.webp", "작업 · 확인", "코딩 에이전트", "도구로 작업 · 결과 확인 반복")])
+              + note("에이전트", "판단하는 모델 + 행동하는 도구")
+              + src(("Claude Code 문서 · How Claude Code works", "https://code.claude.com/docs/en/how-claude-code-works"),
+                    ("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")), T),
         light("경비 정산 비유", phmap("office_worker.webp", "사무 직원", "사진 · Bill Branson (NCI) · 퍼블릭 도메인",
               "https://commons.wikimedia.org/wiki/File:Young_woman_working.jpg", viz2.maprows([
             ("「이번 달 경비 합계」", "사용자 요청", ""), ("다음 영수증 · 무슨 계산", "LLM 판단", "무엇을 볼지 · 어떤 도구를 쓸지"),
