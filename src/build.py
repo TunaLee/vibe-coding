@@ -43,7 +43,7 @@ def make_lab_zips():
     import zipfile
     dl = ROOT / "docs" / "dl"
     dl.mkdir(exist_ok=True)
-    for name in ("persona",):
+    for name in ():   # 1부 실습 파일은 수강생이 직접 만든다
         src = ROOT / "labs" / name
         with zipfile.ZipFile(dl / f"{name}.zip", "w", zipfile.ZIP_DEFLATED) as z:
             for f in sorted(src.rglob("*")):
