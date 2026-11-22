@@ -10,7 +10,7 @@ import viz2
 from deck import ba, flow, lab, light
 from hx import checks, code, esc, note
 from stats_hx import src
-from v1kit import brief, chat
+from v1kit import brief, chat, labcard
 from v3kit import phmap
 
 GEN = ("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")
@@ -144,10 +144,7 @@ def slides():
             ("빠진 상황", "마지막 페이지를 지울 때 · 빈 블록에서 지우기")], 3)
               + note("결정", "제안은 Claude Code · 채택 여부는 사람"), T),
         # ── 실습
-        lab("1-4", "기획서로 개발 계획 세우기", T, "기획서.md + 개발자 페르소나 → 개발계획.md · MVP 범위 · 완료 기준 · 태스크",
-            ["개발자.md 값 바꾸기", "plan 모드에서 개발 계획 요청 · 질문에 답하기", "계획에 피드백 한 번", "승인 → 개발계획.md 저장"],
-            ["일곱 칸 · MVP 포함 / 제외", "확인할 수 있는 완료 기준 3개 이상 · 태스크마다 F 번호"],
-            files='예시/개발계획.md (비교용) · <a class="dl" href="dl/persona.zip" download>persona.zip</a>'),
+        labcard("1-4", "기획서로 개발 계획 세우기", T, "기획서.md", "개발계획.md", ["개발자 페르소나", "Plan Mode"]),
         brief("1-4", T, ["페르소나/개발자.md 값 바꾸기", "Shift+Tab 으로 plan 모드", "개발자 페르소나로 개발 계획 요청", "빈 칸 질문에 답하기 · 피드백", "승인 → 개발계획.md 확인"],
               [("목표", "개발계획.md · 일곱 칸"), ("입력", "기획서.md · 개발자.md"), ("진행 방식", "plan 모드 · 정해지지 않은 것은 먼저 질문"),
                ("하지 말 것", "코드 작성 · 기획서에 없는 기능 추가")],

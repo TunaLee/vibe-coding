@@ -7,7 +7,7 @@ import viz2
 from deck import flow, lab, light
 from hx import code, esc, note, table
 from stats_hx import big, src
-from v1kit import brief, chat, shot
+from v1kit import brief, chat, shot, labcard
 
 T = "1-2"
 
@@ -128,11 +128,7 @@ def slides():
             ("가입", "GitHub 계정으로 · 비밀번호 따로 없음"), ("요금", "Hobby 무료 · 개인 · 비상업용 · 회사 업무 공개는 Pro $20")])
               + src(("Vercel pricing", "https://vercel.com/pricing"), ("Hobby plan", "https://vercel.com/docs/plans/hobby")), T),
         # ── 실습
-        lab("1-2", "실습 환경 준비 · 첫 위임", T, "계정 세 개 · Claude Code 설치 · 할 일 목록 기능을 목표 한 줄로 맡기기",
-            ["Claude 가입 · Pro 이상 · GitHub · Vercel 가입", "VS Code · Claude Code 확장 설치",
-             "내 프로젝트 폴더에서 첫 요청", "할 일 목록 예제를 브라우저로 확인", "기능 세 개를 목표 한 줄씩 맡기기"],
-            ["claude --version 이 버전을 보여 줌", "추가 · 체크 · 남은 개수가 브라우저에서 동작", "코드는 직접 고치지 않음"],
-            files='<a class="dl" href="dl/delegate_todo.zip" download>delegate_todo.zip</a>'),
+        labcard("1-2", "실습 환경 준비 · 첫 위임", T, "새 PC", "동작하는 할 일 목록", ["① 계정 · 설치 · 작업 폴더", "② 첫 요청", "③ 할 일 목록 위임"], files='<a class="dl" href="dl/workspace.zip" download>workspace.zip</a>'),
         brief("1-2 ①", T, ["claude.ai 가입 · 요금제 확인", "github.com 가입", "vercel.com → GitHub 로 계속하기",
                             "VS Code 설치 → 확장 「Claude Code」", "터미널에서 claude --version", "바탕화면에 workspace 폴더 만들기"],
               [("계정", "Claude (Pro 이상) · GitHub · Vercel"), ("설치", "VS Code · Claude Code 확장"),

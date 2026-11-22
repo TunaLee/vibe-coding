@@ -7,7 +7,7 @@ import viz2
 from deck import flow, lab, light
 from hx import code, esc, note
 from stats_hx import src
-from v1kit import brief, chat
+from v1kit import brief, chat, labcard
 from v3kit import phmap
 
 T = "1-5"
@@ -252,10 +252,7 @@ def slides():
               + flow([("요청", "기능 하나"), ("확인", "브라우저"), ("커밋", "세이브"), ("다음 요청", "")], hl=2)
               + note("개발할 때", "이 고리를 태스크마다 반복"), T),
         # ── 실습
-        lab(T, "첫 커밋", T, "기획서.md · 개발계획.md 가 든 내 폴더를 Git으로 기록 시작",
-            ["VS Code로 내 프로젝트 폴더 열기", "기획서.md · 개발계획.md 가 있는지 확인", "Claude Code에 Git 시작 · 첫 커밋 요청",
-             "커밋 기록 보기 요청", "개발 계획 한 줄 고친 뒤 되돌리기 요청"],
-            ["커밋 기록에 첫 커밋 1개", "되돌린 뒤 개발계획.md 가 커밋 상태와 같음"], files="기획서.md · 개발계획.md"),
+        labcard(T, "첫 커밋", T, "기획서 · 개발 계획", "첫 커밋", ["Git 시작", "기록 보기", "되돌리기"]),
         brief(T, T,
               ["폴더 열기 · Claude Code 실행", "Git 시작 + 첫 커밋 요청", "기록 보기", "개발계획.md 아무 줄 고치기", "「방금 고친 거 취소」 요청"],
               [("목표", "이 폴더를 Git으로 관리 · 첫 커밋"), ("대상", "기획서.md · 개발계획.md"), ("메시지", "무엇을 담았는지 한 줄")],

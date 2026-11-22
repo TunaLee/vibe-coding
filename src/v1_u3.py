@@ -9,7 +9,7 @@ import viz2
 from deck import ba, flow, lab, light
 from hx import checks, code, esc, note
 from stats_hx import src
-from v1kit import brief, chat, shot
+from v1kit import brief, chat, shot, labcard
 
 T = "1-3"
 EX = Path(__file__).resolve().parent.parent / "labs" / "mini_notion" / "예시"
@@ -250,10 +250,7 @@ def slides():
             ("기능 나열만", "배경 · 문제점 없이 기능 목록"), ("화면 10개", "한 번에 전부 만들려 함"),
             ("이용자 「모두」", "누구 기준인지 불명"), ("해결책만", "문제점 칸에 「앱이 없다」")], 2), T),
         # ── 실습
-        lab("1-3", "기획서 작성", T, "내 아이디어 + 기획자 페르소나 → plan 모드에서 기획서 → 승인 → 기획서.md",
-            ["아이디어 고르기 · 한 줄로", "기획자.md 값 바꾸기", "plan 모드에서 기획자에게 질문받기", "피드백 → 승인 → 기획서.md 저장"],
-            ["다섯 칸 + 하지 않을 것 · 화면 3개 이내", "로그인 · 결제 · 외부 연동은 「하지 않을 것」에"],
-            files='예시/기획서.md (비교용) · <a class="dl" href="dl/persona.zip" download>persona.zip</a>'),
+        labcard("1-3", "기획서 작성", T, "내 아이디어", "기획서.md", ["기획자 페르소나", "Plan Mode"], files='<a class="dl" href="dl/persona.zip" download>persona.zip</a>'),
         brief("1-3", T, ["persona.zip 을 프로젝트 폴더에 풀기", "기획자.md 값 바꾸기", "Shift+Tab → 기획자 페르소나로 요청", "질문에 답하기 · 초안에 피드백", "승인 → 기획서.md 저장"],
               [("목표", "기획서 초안 · 다섯 칸"), ("입력", "내 한 줄 아이디어 · 기획자.md"), ("진행 방식", "plan 모드 · 기획자 페르소나"), ("하지 말 것", "로그인 · 결제 · 외부 연동 넣기")],
               ["기획자 페르소나", "plan 모드", "문제점", "하지 않을 것"],

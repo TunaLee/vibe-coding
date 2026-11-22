@@ -10,7 +10,7 @@ import viz2
 from deck import flow, lab, light
 from hx import code, esc, note
 from stats_hx import src
-from v1kit import brief, chat, shot
+from v1kit import brief, chat, shot, labcard
 
 T = "1-7"
 
@@ -99,11 +99,7 @@ def slides():
               + note("점검 요청 예", "「올리기 전에 키 · 개인정보가 들어간 파일이 있는지 찾아 줘」")
               + src(("Vercel Terms", "https://vercel.com/legal/terms"), ("Hobby", "https://vercel.com/docs/plans/hobby")), T),
         # ── 실습
-        lab("1-7", "내 앱 배포", T, "만든 앱을 GitHub 에 올리고 Vercel 주소로 공개",
-            ["gh 설치 · 로그인 연결", "Claude Code 에 저장소 생성 · 업로드 요청",
-             "Vercel 에서 저장소 가져오기 · Deploy → 휴대폰으로 열기", "한 곳 고쳐 push → 같은 주소에 반영 확인"],
-            ["저장소에 내 파일 · 커밋 기록", "*.vercel.app 주소로 앱이 열림", "수정 한 번이 재배포로 반영"],
-            files="내 앱 폴더"),
+        labcard("1-7", "내 앱 배포", T, "내 앱 폴더", "공개 주소", ["GitHub 비공개 저장소", "Vercel 배포"]),
         brief("1-7", T,
               ["gh auth login (브라우저 승인)", "올리기 전 키 · 개인정보 점검 요청", "저장소 만들고 올리기 요청",
                "Vercel 가져오기 · Deploy", "수정 → 커밋 · push 요청"],

@@ -8,7 +8,7 @@ import viz2
 from deck import ba, flow, lab, light
 from hx import code, esc, note, table
 from stats_hx import src
-from v1kit import brief, chat, shot
+from v1kit import brief, chat, shot, labcard
 from v3kit import phmap
 
 T = "1-6"
@@ -121,9 +121,7 @@ def slides():
             ("원인 먼저", "「고치기 전에 원인부터」"), ("통과 · 저장", "테스트 통과 → 커밋"), ("두 번 실패", "되돌리고 새 대화")], hl=0)
               + src(("Claude Code 문서 · Best practices", "https://code.claude.com/docs/en/best-practices")), T),
         # ── 실습
-        lab(T, "개발 계획으로 앱 만들기", T, "개발계획.md 의 태스크를 하나씩 만들고 완료 기준을 모두 확인",
-            ["개발계획.md 의 T1 요청", "브라우저 확인 → 커밋", "다음 태스크 반복", "완료 기준 대조"],
-            ["완료 기준 전부 ✓", "태스크마다 커밋 · 기록에 여러 개"], files="개발계획.md · Git 폴더"),
+        labcard(T, "개발 계획으로 앱 만들기", T, "개발계획.md", "동작하는 앱", ["태스크 하나씩", "브라우저 확인", "커밋"]),
         brief("1-6", T,
               ["태스크 하나 요청", "서버 띄워 브라우저로 확인", "그 기능의 완료 기준 대조", "「커밋해 줘」", "다음 태스크"],
               [("태스크", "「개발 계획의 T3만」"), ("보여야 할 화면", "끝나면 무엇이 보여야 하는지"),

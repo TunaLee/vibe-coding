@@ -90,6 +90,24 @@ def brief(no, u, steps, slots, keys, checks, stuck, folder="내 프로젝트 폴
     return a + "\n" + b
 
 
+
+def labcard(no, title, u, inp, out, parts=(), files=""):
+    """실습 소개 — 입력 → 산출물 한 줄 + 구성 칩. 단계 · 확인은 다음 「순서」 장에."""
+    from deck import coord
+    ch = "".join(f'<span style="--d:{.5 + i * .2:.1f}s">{p}</span>' for i, p in enumerate(parts))
+    return f'''<section class="slide lt labs" data-title="[실습 {no}] {title}">
+  {coord()}
+  <div class="eyebrow"><span class="tag">{u}</span><span class="labtag">실습 {no}</span></div>
+  <h2 class="s-title sm">{title}</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="v1lc">
+    <div class="io"><div class="b in"><small>입력</small><b>{inp}</b></div><i>→</i><div class="b out"><small>산출물</small><b>{out}</b></div></div>
+    {f'<div class="pt">{ch}</div>' if parts else ''}
+    {f'<div class="fl">실습 파일 · {files}</div>' if files else ''}
+  </div></div>
+</section>'''
+
+
 def codemap(rows, ask="", title=""):
     """코드 줄 → 우리말 뜻 — 입문자용. rows: (코드 한 줄, 뜻). ask = 사람의 요청 한 문장(위에 표시).
     줄이 0.35초 간격으로 차례로 나타나고 멈춘다."""
@@ -102,9 +120,20 @@ def codemap(rows, ask="", title=""):
 
 
 CSS = """
+  /* 실습 소개 — 입력 → 산출물 */
+  .v1lc{display:flex; flex-direction:column; align-items:center; gap:34px; margin-top:40px;}
+  .v1lc .io{display:flex; align-items:center; gap:26px;}
+  .v1lc .b{min-width:330px; border-radius:18px; padding:26px 34px; text-align:center; background:#F4F6F9;}
+  .v1lc .b.out{background:#FFF3E6; box-shadow:inset 0 0 0 2px #F28C28;}
+  .v1lc .b small{display:block; font-size:15px; font-weight:700; color:#6B7785; margin-bottom:8px;}
+  .v1lc .b b{font-size:30px; color:#16233A;}
+  .v1lc .io i{font-style:normal; font-size:40px; color:#F28C28; font-weight:800;}
+  .v1lc .pt{display:flex; gap:14px;}
+  .v1lc .pt span{background:#16233A; color:#fff; font-size:19px; font-weight:700; padding:11px 22px; border-radius:24px; opacity:0; animation:v1stIn .4s var(--d) forwards;}
+  .v1lc .fl{font-size:16px; color:#6B7785;}
   /* 실습 순서 · 요청 칸 — 한 장에 한 가지 */
-  .v1st{list-style:none; margin:6px 0 18px; padding:0; display:flex; flex-direction:column; gap:12px;}
-  .v1st li{display:flex; align-items:center; gap:16px; background:#F4F6F9; border-radius:14px; padding:14px 20px;
+  .v1st{list-style:none; margin:4px 0 14px; padding:0; display:flex; flex-direction:column; gap:9px;}
+  .v1st li{display:flex; align-items:center; gap:16px; background:#F4F6F9; border-radius:14px; padding:11px 20px;
     opacity:0; animation:v1stIn .4s var(--d) forwards;}
   .v1st em{flex:none; width:36px; height:36px; border-radius:50%; background:#16233A; color:#fff; font-style:normal; font-weight:800;
     font-size:18px; display:flex; align-items:center; justify-content:center;}

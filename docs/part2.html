@@ -894,9 +894,20 @@
   .ha.weak ul{margin:0; padding-left:20px; font-size:17px; color:#C62828; line-height:1.7; font-weight:600;}
   .an{margin:2px 0 8px;}
 
+  /* 실습 소개 — 입력 → 산출물 */
+  .v1lc{display:flex; flex-direction:column; align-items:center; gap:34px; margin-top:40px;}
+  .v1lc .io{display:flex; align-items:center; gap:26px;}
+  .v1lc .b{min-width:330px; border-radius:18px; padding:26px 34px; text-align:center; background:#F4F6F9;}
+  .v1lc .b.out{background:#FFF3E6; box-shadow:inset 0 0 0 2px #F28C28;}
+  .v1lc .b small{display:block; font-size:15px; font-weight:700; color:#6B7785; margin-bottom:8px;}
+  .v1lc .b b{font-size:30px; color:#16233A;}
+  .v1lc .io i{font-style:normal; font-size:40px; color:#F28C28; font-weight:800;}
+  .v1lc .pt{display:flex; gap:14px;}
+  .v1lc .pt span{background:#16233A; color:#fff; font-size:19px; font-weight:700; padding:11px 22px; border-radius:24px; opacity:0; animation:v1stIn .4s var(--d) forwards;}
+  .v1lc .fl{font-size:16px; color:#6B7785;}
   /* 실습 순서 · 요청 칸 — 한 장에 한 가지 */
-  .v1st{list-style:none; margin:6px 0 18px; padding:0; display:flex; flex-direction:column; gap:12px;}
-  .v1st li{display:flex; align-items:center; gap:16px; background:#F4F6F9; border-radius:14px; padding:14px 20px;
+  .v1st{list-style:none; margin:4px 0 14px; padding:0; display:flex; flex-direction:column; gap:9px;}
+  .v1st li{display:flex; align-items:center; gap:16px; background:#F4F6F9; border-radius:14px; padding:11px 20px;
     opacity:0; animation:v1stIn .4s var(--d) forwards;}
   .v1st em{flex:none; width:36px; height:36px; border-radius:50%; background:#16233A; color:#fff; font-style:normal; font-weight:800;
     font-size:18px; display:flex; align-items:center; justify-content:center;}

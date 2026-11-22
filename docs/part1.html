@@ -894,9 +894,20 @@
   .ha.weak ul{margin:0; padding-left:20px; font-size:17px; color:#C62828; line-height:1.7; font-weight:600;}
   .an{margin:2px 0 8px;}
 
+  /* 실습 소개 — 입력 → 산출물 */
+  .v1lc{display:flex; flex-direction:column; align-items:center; gap:34px; margin-top:40px;}
+  .v1lc .io{display:flex; align-items:center; gap:26px;}
+  .v1lc .b{min-width:330px; border-radius:18px; padding:26px 34px; text-align:center; background:#F4F6F9;}
+  .v1lc .b.out{background:#FFF3E6; box-shadow:inset 0 0 0 2px #F28C28;}
+  .v1lc .b small{display:block; font-size:15px; font-weight:700; color:#6B7785; margin-bottom:8px;}
+  .v1lc .b b{font-size:30px; color:#16233A;}
+  .v1lc .io i{font-style:normal; font-size:40px; color:#F28C28; font-weight:800;}
+  .v1lc .pt{display:flex; gap:14px;}
+  .v1lc .pt span{background:#16233A; color:#fff; font-size:19px; font-weight:700; padding:11px 22px; border-radius:24px; opacity:0; animation:v1stIn .4s var(--d) forwards;}
+  .v1lc .fl{font-size:16px; color:#6B7785;}
   /* 실습 순서 · 요청 칸 — 한 장에 한 가지 */
-  .v1st{list-style:none; margin:6px 0 18px; padding:0; display:flex; flex-direction:column; gap:12px;}
-  .v1st li{display:flex; align-items:center; gap:16px; background:#F4F6F9; border-radius:14px; padding:14px 20px;
+  .v1st{list-style:none; margin:4px 0 14px; padding:0; display:flex; flex-direction:column; gap:9px;}
+  .v1st li{display:flex; align-items:center; gap:16px; background:#F4F6F9; border-radius:14px; padding:11px 20px;
     opacity:0; animation:v1stIn .4s var(--d) forwards;}
   .v1st em{flex:none; width:36px; height:36px; border-radius:50%; background:#16233A; color:#fff; font-style:normal; font-weight:800;
     font-size:18px; display:flex; align-items:center; justify-content:center;}
@@ -1732,10 +1743,10 @@ claude</code></pre></div><div class="v2tiles c1"><div class="v2tile" style="--d:
   <div class="eyebrow"><span class="tag">1-2</span><span class="labtag">실습 1-2</span></div>
   <h2 class="s-title sm">실습 환경 준비 · 첫 위임</h2>
   <div class="rule"></div>
-  <div class="body"><div class="labgrid">
-    <div class="lc goal"><div class="lh">목표</div><p>계정 세 개 · Claude Code 설치 · 할 일 목록 기능을 목표 한 줄로 맡기기</p><div class="lf">사용 파일 · <a class="dl" href="dl/delegate_todo.zip" download>delegate_todo.zip</a></div></div>
-    <div class="lc steps"><div class="lh">단계</div><ol><li>Claude 가입 · Pro 이상 · GitHub · Vercel 가입</li><li>VS Code · Claude Code 확장 설치</li><li>내 프로젝트 폴더에서 첫 요청</li><li>할 일 목록 예제를 브라우저로 확인</li><li>기능 세 개를 목표 한 줄씩 맡기기</li></ol></div>
-    <div class="lc done"><div class="lh">완료 기준</div><ul><li>claude --version 이 버전을 보여 줌</li><li>추가 · 체크 · 남은 개수가 브라우저에서 동작</li><li>코드는 직접 고치지 않음</li></ul></div>
+  <div class="body"><div class="v1lc">
+    <div class="io"><div class="b in"><small>입력</small><b>새 PC</b></div><i>→</i><div class="b out"><small>산출물</small><b>동작하는 할 일 목록</b></div></div>
+    <div class="pt"><span style="--d:0.5s">① 계정 · 설치 · 작업 폴더</span><span style="--d:0.7s">② 첫 요청</span><span style="--d:0.9s">③ 할 일 목록 위임</span></div>
+    <div class="fl">실습 파일 · <a class="dl" href="dl/workspace.zip" download>workspace.zip</a></div>
   </div></div>
 </section>
 
@@ -2172,10 +2183,10 @@ mkdir -p workspace/my-app</code></pre></div></div><div><div class="v2tiles c1"><
   <div class="eyebrow"><span class="tag">1-3</span><span class="labtag">실습 1-3</span></div>
   <h2 class="s-title sm">기획서 작성</h2>
   <div class="rule"></div>
-  <div class="body"><div class="labgrid">
-    <div class="lc goal"><div class="lh">목표</div><p>내 아이디어 + 기획자 페르소나 → plan 모드에서 기획서 → 승인 → 기획서.md</p><div class="lf">사용 파일 · 예시/기획서.md (비교용) · <a class="dl" href="dl/persona.zip" download>persona.zip</a></div></div>
-    <div class="lc steps"><div class="lh">단계</div><ol><li>아이디어 고르기 · 한 줄로</li><li>기획자.md 값 바꾸기</li><li>plan 모드에서 기획자에게 질문받기</li><li>피드백 → 승인 → 기획서.md 저장</li></ol></div>
-    <div class="lc done"><div class="lh">완료 기준</div><ul><li>다섯 칸 + 하지 않을 것 · 화면 3개 이내</li><li>로그인 · 결제 · 외부 연동은 「하지 않을 것」에</li></ul></div>
+  <div class="body"><div class="v1lc">
+    <div class="io"><div class="b in"><small>입력</small><b>내 아이디어</b></div><i>→</i><div class="b out"><small>산출물</small><b>기획서.md</b></div></div>
+    <div class="pt"><span style="--d:0.5s">기획자 페르소나</span><span style="--d:0.7s">Plan Mode</span></div>
+    <div class="fl">실습 파일 · <a class="dl" href="dl/persona.zip" download>persona.zip</a></div>
   </div></div>
 </section>
 
@@ -2393,10 +2404,10 @@ mkdir -p workspace/my-app</code></pre></div></div><div><div class="v2tiles c1"><
   <div class="eyebrow"><span class="tag">1-4</span><span class="labtag">실습 1-4</span></div>
   <h2 class="s-title sm">기획서로 개발 계획 세우기</h2>
   <div class="rule"></div>
-  <div class="body"><div class="labgrid">
-    <div class="lc goal"><div class="lh">목표</div><p>기획서.md + 개발자 페르소나 → 개발계획.md · MVP 범위 · 완료 기준 · 태스크</p><div class="lf">사용 파일 · 예시/개발계획.md (비교용) · <a class="dl" href="dl/persona.zip" download>persona.zip</a></div></div>
-    <div class="lc steps"><div class="lh">단계</div><ol><li>개발자.md 값 바꾸기</li><li>plan 모드에서 개발 계획 요청 · 질문에 답하기</li><li>계획에 피드백 한 번</li><li>승인 → 개발계획.md 저장</li></ol></div>
-    <div class="lc done"><div class="lh">완료 기준</div><ul><li>일곱 칸 · MVP 포함 / 제외</li><li>확인할 수 있는 완료 기준 3개 이상 · 태스크마다 F 번호</li></ul></div>
+  <div class="body"><div class="v1lc">
+    <div class="io"><div class="b in"><small>입력</small><b>기획서.md</b></div><i>→</i><div class="b out"><small>산출물</small><b>개발계획.md</b></div></div>
+    <div class="pt"><span style="--d:0.5s">개발자 페르소나</span><span style="--d:0.7s">Plan Mode</span></div>
+    
   </div></div>
 </section>
 
@@ -2539,10 +2550,10 @@ dfb369b 첫 화면 완성</code></pre></div></div></div></div></div>
   <div class="eyebrow"><span class="tag">1-5</span><span class="labtag">실습 1-5</span></div>
   <h2 class="s-title sm">첫 커밋</h2>
   <div class="rule"></div>
-  <div class="body"><div class="labgrid">
-    <div class="lc goal"><div class="lh">목표</div><p>기획서.md · 개발계획.md 가 든 내 폴더를 Git으로 기록 시작</p><div class="lf">사용 파일 · 기획서.md · 개발계획.md</div></div>
-    <div class="lc steps"><div class="lh">단계</div><ol><li>VS Code로 내 프로젝트 폴더 열기</li><li>기획서.md · 개발계획.md 가 있는지 확인</li><li>Claude Code에 Git 시작 · 첫 커밋 요청</li><li>커밋 기록 보기 요청</li><li>개발 계획 한 줄 고친 뒤 되돌리기 요청</li></ol></div>
-    <div class="lc done"><div class="lh">완료 기준</div><ul><li>커밋 기록에 첫 커밋 1개</li><li>되돌린 뒤 개발계획.md 가 커밋 상태와 같음</li></ul></div>
+  <div class="body"><div class="v1lc">
+    <div class="io"><div class="b in"><small>입력</small><b>기획서 · 개발 계획</b></div><i>→</i><div class="b out"><small>산출물</small><b>첫 커밋</b></div></div>
+    <div class="pt"><span style="--d:0.5s">Git 시작</span><span style="--d:0.7s">기록 보기</span><span style="--d:0.9s">되돌리기</span></div>
+    
   </div></div>
 </section>
 
@@ -2782,10 +2793,10 @@ dfb369b 첫 화면 완성</code></pre></div></div></div></div></div>
   <div class="eyebrow"><span class="tag">1-6</span><span class="labtag">실습 1-6</span></div>
   <h2 class="s-title sm">개발 계획으로 앱 만들기</h2>
   <div class="rule"></div>
-  <div class="body"><div class="labgrid">
-    <div class="lc goal"><div class="lh">목표</div><p>개발계획.md 의 태스크를 하나씩 만들고 완료 기준을 모두 확인</p><div class="lf">사용 파일 · 개발계획.md · Git 폴더</div></div>
-    <div class="lc steps"><div class="lh">단계</div><ol><li>개발계획.md 의 T1 요청</li><li>브라우저 확인 → 커밋</li><li>다음 태스크 반복</li><li>완료 기준 대조</li></ol></div>
-    <div class="lc done"><div class="lh">완료 기준</div><ul><li>완료 기준 전부 ✓</li><li>태스크마다 커밋 · 기록에 여러 개</li></ul></div>
+  <div class="body"><div class="v1lc">
+    <div class="io"><div class="b in"><small>입력</small><b>개발계획.md</b></div><i>→</i><div class="b out"><small>산출물</small><b>동작하는 앱</b></div></div>
+    <div class="pt"><span style="--d:0.5s">태스크 하나씩</span><span style="--d:0.7s">브라우저 확인</span><span style="--d:0.9s">커밋</span></div>
+    
   </div></div>
 </section>
 
@@ -2971,10 +2982,10 @@ a3b8e51  T1 화면 뼈대 · 페이지 목록
   <div class="eyebrow"><span class="tag">1-7</span><span class="labtag">실습 1-7</span></div>
   <h2 class="s-title sm">내 앱 배포</h2>
   <div class="rule"></div>
-  <div class="body"><div class="labgrid">
-    <div class="lc goal"><div class="lh">목표</div><p>만든 앱을 GitHub 에 올리고 Vercel 주소로 공개</p><div class="lf">사용 파일 · 내 앱 폴더</div></div>
-    <div class="lc steps"><div class="lh">단계</div><ol><li>gh 설치 · 로그인 연결</li><li>Claude Code 에 저장소 생성 · 업로드 요청</li><li>Vercel 에서 저장소 가져오기 · Deploy → 휴대폰으로 열기</li><li>한 곳 고쳐 push → 같은 주소에 반영 확인</li></ol></div>
-    <div class="lc done"><div class="lh">완료 기준</div><ul><li>저장소에 내 파일 · 커밋 기록</li><li>*.vercel.app 주소로 앱이 열림</li><li>수정 한 번이 재배포로 반영</li></ul></div>
+  <div class="body"><div class="v1lc">
+    <div class="io"><div class="b in"><small>입력</small><b>내 앱 폴더</b></div><i>→</i><div class="b out"><small>산출물</small><b>공개 주소</b></div></div>
+    <div class="pt"><span style="--d:0.5s">GitHub 비공개 저장소</span><span style="--d:0.7s">Vercel 배포</span></div>
+    
   </div></div>
 </section>
 
