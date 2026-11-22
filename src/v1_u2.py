@@ -1,6 +1,6 @@
 """1-2 도구 · 실습 환경.
 
-도구 네 개 → Claude · Claude Code · GitHub · Vercel 한 장씩(정의 · 요금 · 쓰는 단원) → 실습 1-2(계정 · 설치 · 첫 요청).
+도구 네 개 → Claude · Claude Code · GitHub · Vercel 한 장씩(정의 · 요금 · 쓰는 단원) → 실습 1-2(계정 · 설치 · 첫 요청) — 실습마다 단계별 화면 장(실제 캡처 · 번호 상자 · macOS / Windows 차이).
 사실 출처: scratchpad/v1_facts.md (claude.com/pricing · code.claude.com/docs setup · overview · docs.github.com · vercel.com/docs)
 """
 import viz2
@@ -50,6 +50,25 @@ def cc_lanes():
 def _lg(img, name, cls=""):
     """도구 이름 위 로고."""
     return f'<img class="v1tlg {cls}" src="img/{img}.svg" alt=""/>{name}'
+
+
+CCDOC = ("그림 · Claude Code 문서 · VS Code", "https://code.claude.com/docs/en/vs-code")
+
+
+def step(no, i, name, img, alt, boxes, rows, srcs=()):
+    """실습 단계 화면 — 왼쪽 실제 화면(번호 상자) · 오른쪽 할 일 · Mac / Windows 차이."""
+    left = annot(img, alt, boxes, "") if img else img_need(alt)
+    return light(f"실습 {no} · {i}단계 {name}", '<div class="twocol v1vsgrid v1stp"><div>' + left + "</div><div>"
+                 + viz2.tiles(rows, 1) + "</div></div>" + (src(*srcs) if srcs else ""), T)
+
+
+def img_need(what):
+    return (f'<div class="need-img"><span class="nk">캡처 필요</span><span class="nd">{what}</span>'
+            '<span class="nm2">자동 접속 차단 · 강사 화면 캡처로 교체</span></div>')
+
+
+def term(title, lines):
+    return code(title, esc(lines))
 
 
 def slides():
@@ -121,12 +140,43 @@ def slides():
               ["Pro", "GitHub로 계속하기", "Claude Code 확장", "claude --version"],
               ["세 사이트 모두 로그인된 상태", "VS Code 왼쪽에 Claude 아이콘"],
               "회사 PC 에서 설치가 막히면 웹 claude.ai/code", folder="바탕화면/내 프로젝트 폴더", slot_title="준비"),
+        *[step("1-2 ①", 1, "Claude 가입 · 요금제", "lab12_pricing.webp", "Claude 요금제 화면", [("①", "Pro", 42, 45, 32, 54)],
+               [("주소", "claude.ai → 가입"), ("요금제", "Pro 이상 · Claude Code 사용 조건"), ("Free", "Claude Code 로그인에서 막힘")],
+               (("화면 · claude.com/pricing", "https://claude.com/pricing"),)),
+          step("1-2 ①", 2, "GitHub 가입", None, "github.com/signup 가입 화면", [],
+               [("주소", "github.com → Sign up"), ("입력", "이메일 · 비밀번호 · 사용자 이름"), ("막히는 곳", "이메일 인증 코드")]),
+          step("1-2 ①", 3, "Vercel 가입", "lab12_vercel.webp", "Vercel 가입 화면", [("①", "Continue with GitHub", 21, 61, 57, 8.5)],
+               [("주소", "vercel.com/signup"), ("선택", "Continue with GitHub"), ("막히는 곳", "이메일로 가입하면 GitHub 연결이 따로 필요")],
+               (("화면 · vercel.com/signup", "https://vercel.com/signup"),)),
+          step("1-2 ①", 4, "VS Code 설치", "lab12_vscode_dl.webp", "VS Code 다운로드 화면",
+               [("①", "Windows", 25, 36, 30, 23), ("②", "macOS", 57, 36, 30, 23)],
+               [("macOS", "macOS 버튼 · .dmg"), ("Windows", "Windows 버튼 · User Installer"), ("주소", "code.visualstudio.com/download")],
+               (("화면 · code.visualstudio.com/download", "https://code.visualstudio.com/download"),)),
+          step("1-2 ①", 4, "Claude Code 확장", "lab12_market.webp", "Marketplace · Claude Code for VS Code",
+               [("①", "Install", 20, 46, 14, 13)],
+               [("확장 보기", "macOS ⇧⌘X · Windows Ctrl+Shift+X"), ("검색", "Claude Code · Anthropic"), ("설치", "Install")],
+               (("화면 · VS Marketplace · Claude Code", "https://marketplace.visualstudio.com/items?itemName=anthropic.claude-code"),)),
+          light("실습 1-2 ① · 5단계 설치 확인", '<div class="twocol"><div>'
+                + term("macOS · 터미널", "$ claude --version\n2.1.322 (Claude Code)")
+                + term("Windows · PowerShell", "> claude --version")
+                + "</div><div>" + viz2.tiles([("결과", "버전 번호 · 숫자는 설치 시점마다 다름"),
+                                             ("안 나오면", "터미널 창을 새로 열고 다시"), ("Windows", "Git for Windows 설치 권장")], 1)
+                + "</div></div>", T)],
         brief("1-2 ②", T, ["VS Code → 폴더 열기", "Claude Code 열기 · 로그인", "폴더 신뢰 허용", "첫 요청 보내기", "답 읽기"],
               [("목표", "이 폴더의 현재 상태 듣기"), ("범위", "이 폴더 안만"),
                ("하지 말 것", "아직 파일 만들지 않기")],
               ["폴더 열기", "로그인", "첫 요청"],
               ["Claude Code 가 폴더 내용을 답함", "파일이 새로 생기지 않음"],
               "로그인 창이 안 뜨면 VS Code 재시작", folder="바탕화면/내 프로젝트 폴더"),
+        *[step("1-2 ②", 1, "폴더 열기", "lab12_folder.webp", "VS Code 탐색기 · 폴더를 연 화면", [("①", "열린 폴더", 18, 15, 80, 22)],
+               [("메뉴", "File → Open Folder"), ("macOS", "⌘O"), ("Windows", "Ctrl+K → Ctrl+O"), ("폴더", "바탕화면/내 프로젝트 폴더")], (VSDOC,)),
+          step("1-2 ②", 2, "Claude Code 열기 · 로그인", "lab12_spark.webp", "편집기 오른쪽 위 Spark 아이콘", [("①", "Spark 아이콘", 87.5, 2, 5, 14)],
+               [("열기", "편집기 오른쪽 위 Spark 아이콘"), ("로그인", "Claude 계정 · 브라우저 인증"), ("계정", "Pro 이상")], (CCDOC,)),
+          step("1-2 ②", 3, "폴더 신뢰", "lab12_trust.webp", "폴더 신뢰 확인 창", [("①", "Yes, I trust the authors", 17, 80, 40, 8)],
+               [("선택", "Yes, I trust the authors"), ("뜻", "이 폴더에서 작업 허용"), ("화면", "Windows 경로 예 · macOS 도 같은 창")], (VSDOC,)),
+          step("1-2 ②", 4, "첫 요청 · 답 읽기", "lab12_prompt.webp", "Claude Code 패널 · 요청과 답",
+               [("①", "입력창", 70, 78, 28, 13), ("②", "답", 70, 30, 28, 47)],
+               [("① 입력창", "패널 아래 · Enter 로 보내기"), ("② 답", "패널 가운데"), ("확인", "폴더 내용 설명 · 새 파일 없음")], (CCDOC,))],
         light("첫 요청 결과", '<div class="twocol"><div>'
               + chat([("me", "이 폴더에 지금 뭐가 있는지 알려 줘. 아직 파일은 만들지 마"),
                       ("ai", "이 폴더는 비어 있다.\n파일 · 하위 폴더가 없다.\n만들 앱을 알려 주면 구조를 제안한다.")], "Claude Code 대화")
@@ -145,6 +195,23 @@ def slides():
               ["목표 한 줄", "브라우저 확인", "하나씩"],
               ["추가한 할 일이 목록에 생김", "체크하면 줄이 그어짐", "「남은 할 일: N」 표시"],
               "버튼이 그대로면 브라우저 새로고침 · 증상 그대로 전달", folder="delegate_todo", example=""),
+        *[light("실습 1-2 ③ · 1단계 폴더 열기", '<div class="twocol"><div>'
+                + term("delegate_todo 폴더", "delegate_todo/\n├── index.html\n├── style.css\n└── app.js")
+                + "</div><div>" + viz2.tiles([("받기", "delegate_todo.zip 압축 풀기"), ("열기", "VS Code → File → Open Folder"),
+                                             ("macOS · Windows", "⌘O · Ctrl+K → Ctrl+O")], 1) + "</div></div>", T),
+          step("1-2 ③", 2, "브라우저로 확인", "v1_u2_todo_start.webp", "index.html 을 브라우저로 연 화면", [],
+               [("열기", "index.html 더블클릭 → 브라우저"), ("눌러 보기", "추가 · 체크 · 남은 개수"), ("현재", "버튼을 눌러도 변화 없음")]),
+          light("실습 1-2 ③ · 3단계 목표 한 줄 요청", '<div class="twocol"><div>'
+                + chat([("me", "추가 버튼을 누르면 입력한 할 일이 목록에 생기게 해 줘"),
+                        ("ai", "app.js 를 고쳐서 「추가」 버튼을 누르거나 Enter 를 치면 입력한 할 일이 목록 맨 아래에 생기도록 했다.\n빈 입력은 추가되지 않는다.\n체크 줄 긋기 · 남은 개수는 요청 범위가 아니어서 건드리지 않았다.")],
+                       "Claude Code 실제 답 · 요약 (2026-11-23)")
+                + "</div><div>" + viz2.tiles([("요청", "기능 하나 · 목표 한 줄"), ("답", "바뀐 파일 · 한 일 · 안 한 일"),
+                                             ("하지 말 것", "세 기능 한 번에 요청")], 1) + "</div></div>", T),
+          step("1-2 ③", 4, "진행 화면 읽기", "lab12_edits.webp", "Claude Code 수정 승인 화면",
+               [("①", "바뀐 코드", 11, 10, 53, 26), ("②", "수정 승인", 70, 57, 28, 34)],
+               [("① 바뀐 코드", "초록 줄 = 추가 · 바뀐 부분"), ("② 수정 승인", "Yes 반영 · No 거절"), ("읽기", "패널의 Read · 파일 이름")], (CCDOC,)),
+          step("1-2 ③", 5, "새로고침 · 확인", "lab12_todo_after.webp", "추가 버튼을 누른 뒤 화면", [("①", "새 할 일", 10, 63, 81, 8)],
+               [("새로고침", "macOS ⌘R · Windows F5"), ("확인", "입력한 할 일이 목록에 추가"), ("다음", "체크 → 남은 개수 하나씩")])],
         light("Claude Code 작업 화면", '<div class="twocol"><div>'
               + chat([("me", "추가 버튼을 누르면 입력한 할 일이 목록에 생기게 해 줘"),
                       ("ai", "① index.html · app.js 를 읽었다.\n② app.js 에 추가 버튼 처리 코드를 넣었다.\n③ 입력칸이 비면 추가하지 않게 했다.\n브라우저를 새로고침해 확인해 줘.")], "Claude Code 화면 예")
@@ -178,6 +245,10 @@ CSS = """
   /* 1-2 · 공식 화면 캡처 + 번호 상자 (v1an) */
   .v1an{margin:0;} .v1anw{position:relative; border-radius:10px; overflow:hidden; box-shadow:0 8px 24px rgba(22,35,58,.18);}
   .v1anw img{display:block; width:100%;}
+  .v1stp > div:first-child{display:flex; justify-content:center;}
+  .v1stp .v1anw{width:fit-content; max-width:100%; margin:0 auto;}
+  .v1stp .v1anw img{width:auto; max-width:100%; max-height:440px;}
+  .v1stp .need-img{min-height:300px; width:100%;}
   .v1anb{position:absolute; border:3px solid #F28C28; border-radius:6px; background:rgba(242,140,40,.12); opacity:0; animation:v1anIn .5s var(--d) forwards;}
   .v1anb em{position:absolute; left:-3px; top:-3px; background:#F28C28; color:#fff; font-style:normal; font-weight:800; font-size:14px; padding:2px 7px; border-radius:5px 0 6px 0; white-space:nowrap;}
   .v1anb span{display:none;}
