@@ -269,11 +269,11 @@ def calc_compare():
     def col(cls, head, rows, d0):
         r = "".join(f'<div class="tv2r" style="--d:{d0 + i * .45:.2f}s"><b>{a}</b><span>{b}</span></div>' for i, (a, b) in enumerate(rows))
         return f'<div class="tv2c {cls}"><div class="tv2h">{head}</div>{r}</div>'
-    # 실측 2026-11-22 · Claude Haiku (claude -p --tools "" · 생각 끔) · 8번 중 1번 오답 · 가운데 한 자리 다름
-    a = col("no", "도구 없이", [("질문", "739,182,645,317,948<br>× 482,917,356,284,163"), ("LLM", "Claude Haiku · 바로 답함 · 8번 중 1번 오답"),
-                              ("답 <em class=x>✕</em>", "356,964,128,888,077,58<u class=x>4</u>,546,972,057,524")], 0)
+    # 왼쪽 답은 강의 중 직접 질문해서 보여 줌(화면엔 지어낸 오답을 넣지 않음) · 오른쪽은 실제 곱
+    a = col("no", "도구 없이", [("질문", "482,917 × 739,264"), ("LLM", "도구 없이 바로 답함"),
+                              ("답", "<span class=tv2q>?</span>")], 0)
     b = col("yes", "계산 도구가 있으면", [("LLM", "calc 도구 호출로 결정"), ("도구", "실제 곱셈 실행"),
-                                    ("답 <em class=o>✓</em>", "356,964,128,888,077,58<u class=o>5</u>,546,972,057,524")], 1.6)
+                                    ("답 <em class=o>✓</em>", "357,003,153,088")], 1.6)
     return f'<div class="tv2">{a}<div class="tv2a">→</div>{b}</div>'
 
 
@@ -463,7 +463,7 @@ CSS = """
   .tv2h{font-size:20px; font-weight:900; color:#6B7785;} .tv2c.yes .tv2h{color:#EF6C00;}
   .tv2r{background:#fff; border-radius:12px; padding:12px 16px; display:grid; grid-template-columns:56px 1fr; align-items:center; animation:v2In .5s both; animation-delay:var(--d);}
   .tv2r b{font-size:14px; color:#8A94A3;} .tv2r span{font-size:20px; font-weight:800; color:#16233A;}
-  .tv2r em{font-style:normal; margin-left:8px; font-weight:900;} .tv2r em.x{color:#C62828;} .tv2r em.o{color:#2E7D32;} .tv2r em{margin-left:4px;} .tv2r u{text-decoration:none; padding:0 3px; border-radius:4px;} .tv2r u.x{background:#FDE2E2; color:#C62828;} .tv2r u.o{background:#E3F4E5; color:#2E7D32;}
+  .tv2r em{font-style:normal; margin-left:8px; font-weight:900;} .tv2r em.x{color:#C62828;} .tv2r em.o{color:#2E7D32;} .tv2r em{margin-left:4px;} .tv2r u{text-decoration:none; padding:0 3px; border-radius:4px;} .tv2r u.x{background:#FDE2E2; color:#C62828;} .tv2r u.o{background:#E3F4E5; color:#2E7D32;} .tv2r span.tv2q{font-size:30px; color:#C62828; line-height:1;}
   .tv2a{display:flex; align-items:center; justify-content:center; font-size:30px; font-weight:900; color:#F28C28;}
   .scp{display:grid; grid-template-columns:1fr 1.15fr .9fr; gap:16px; margin:2px 0 10px;}
   .scp-c{background:#F4F6F9; border-radius:16px; padding:14px 16px; display:flex; flex-direction:column; gap:6px; animation:v2In .5s both; animation-delay:var(--d);} .scp-c.on{background:#FFF3E6;}
