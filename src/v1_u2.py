@@ -35,7 +35,7 @@ def cc_lanes():
         ("v1_brain1.webp", "Claude", "claude.ai · 대화형", 0.6, [
             ("AI", "코드를 글로 답함"), ("사람", "코드 복사"), ("사람", "파일 만들어 붙여넣기"),
             ("사람", "저장 · 브라우저로 열기"), ("사람", "오류 나면 다시 질문")], "사람 손 4번"),
-        ("v1_brain3.webp", "Claude Code", "VS Code · 터미널 · 위임형", 4.4, [
+        ("v1_brain3.webp", "Claude Code", "VS Code 확장 · 위임형", 4.4, [
             ("AI", "폴더 파일 읽기"), ("AI", "index.html 만들기"), ("AI", "실행 · 확인"),
             ("AI", "오류 직접 고침"), ("사람", "결과 확인")], "사람 손 1번")]
     out = req
@@ -106,15 +106,7 @@ def slides():
                             ("③ Install", "설치"), ("④ Spark 아이콘", "로그인")], 1)
               + "</div></div>"
               + src(("Claude Code 문서 · VS Code", "https://code.claude.com/docs/en/vs-code"), VSDOC), T),
-        light("Claude Code 설치", '<div class="twocol"><div>'
-              + code("macOS · 터미널", esc("curl -fsSL https://claude.ai/install.sh | bash"))
-              + code("Windows · PowerShell", esc("irm https://claude.ai/install.ps1 | iex"))
-              + "</div><div>"
-              + code("설치 확인 · 실행", esc("claude --version\nclaude"))
-              + viz2.tiles([("Windows", "Git for Windows 설치 권장"), ("요구 사항", "macOS 13 이상 · Windows 10 1809 이상")], 1)
-              + "</div></div>"
-              + src(("Claude Code 문서 · setup", "https://code.claude.com/docs/en/setup")), T),
-        light("첫 실행과 로그인", flow([("claude 실행", "또는 VS Code 확장"), ("로그인 방법 선택", "Claude 계정"),
+        light("첫 실행과 로그인", flow([("Spark 아이콘", "VS Code 오른쪽 위"), ("로그인 방법 선택", "Claude 계정"),
                                      ("브라우저 인증", "Pro 이상 계정"), ("폴더 신뢰", "이 폴더에서 작업 허용"), ("입력창", "첫 요청")], hl=2)
               + viz2.tiles([("로그인", "처음 한 번 · 다음부터 바로 입력창"), ("폴더 신뢰", "처음 여는 폴더마다 확인"),
                             ("Free 계정", "로그인 단계에서 막힘 · Pro 이상 필요")], 3), T),
@@ -130,10 +122,10 @@ def slides():
         # ── 실습
         labcard("1-2", "실습 환경 준비 · 첫 위임", T, "새 PC", "한 줄 요청으로 만든 앱", ["① 계정 · 설치 · 작업 폴더", "② 첫 요청", "③ 「미니 노션 만들어 줘」"]),
         brief("1-2 ①", T, ["claude.ai 가입 · 요금제 확인", "github.com 가입", "vercel.com → GitHub 로 계속하기",
-                            "VS Code 설치 → 확장 「Claude Code」", "터미널에서 claude --version", "바탕화면에 workspace 폴더 만들기"],
+                            "VS Code 설치 → 확장 「Claude Code」", "바탕화면에 workspace/mini_notion 폴더 만들기"],
               [("계정", "Claude (Pro 이상) · GitHub · Vercel"), ("설치", "VS Code · Claude Code 확장"),
                ("폴더", "바탕화면/workspace/mini_notion")],
-              ["Pro", "GitHub로 계속하기", "Claude Code 확장", "claude --version"],
+              ["Pro", "GitHub로 계속하기", "Claude Code 확장", "mini_notion"],
               ["세 사이트 모두 로그인된 상태", "VS Code 왼쪽에 Claude 아이콘"],
               "회사 PC 에서 설치가 막히면 웹 claude.ai/code", folder="바탕화면/workspace/mini_notion", slot_title="준비"),
         *[step("1-2 ①", 1, "Claude 가입 · 요금제", "lab12_pricing.webp", "Claude 요금제 화면", [("①", "Pro", 42, 45, 32, 54)],
@@ -154,36 +146,12 @@ def slides():
                [("①", "Install", 20, 46, 14, 13)],
                [("확장 보기", "macOS ⇧⌘X · Windows Ctrl+Shift+X"), ("검색", "Claude Code · Anthropic"), ("설치", "Install")],
                (("화면 · VS Marketplace · Claude Code", "https://marketplace.visualstudio.com/items?itemName=anthropic.claude-code"),)),
-          light("실습 1-2 ① · 5단계 설치 확인", '<div class="twocol"><div>'
-                + term("macOS · 터미널", "$ claude --version\n2.1.322 (Claude Code)")
-                + term("Windows · PowerShell", "> claude --version")
-                + "</div><div>" + viz2.tiles([("결과", "버전 번호 · 숫자는 설치 시점마다 다름"),
-                                             ("안 나오면", "터미널 창을 새로 열고 다시"), ("Windows", "Git for Windows 설치 권장")], 1)
-                + "</div></div>", T),
-          light("실습 1-2 ① · 6단계 작업 폴더 구조", '<div class="twocol"><div>'
-                + term("바탕화면/workspace", """바탕화면/
-└── workspace/            작업 공간
-    ├── mini_notion_v0/   실습 1-2 ③ · 한 줄 요청
-    └── mini_notion/      내 앱 · VS Code 로 여는 폴더
-        ├── 페르소나/      1-3 · 1-4
-        ├── 기획서.md      1-3
-        ├── 개발계획.md    1-4
-        └── index.html    1-6""")
-                + "</div><div>" + viz2.tiles([("workspace", "실습 폴더를 모아 두는 곳"),
-                                             ("mini_notion", "내 앱 · VS Code 로 여는 폴더 · 1부 끝에 노션 같은 앱"),
-                                             ("mini_notion_v0", "실습 1-2 ③ · 한 줄 요청으로 만든 앱"),
-                                             ("만드는 법", "다음 장 · Windows / macOS")], 1)
-                + "</div></div>", T),
-          light("실습 1-2 ① · 6단계 Windows 폴더 만들기", '<div class="twocol"><div>'
-                + viz2.tiles([("직접 만들기", "탐색기 Win+E → 바탕 화면 → 새 폴더 Ctrl+Shift+N"), ("폴더 이름", "workspace 안에 mini_notion_v0 · mini_notion")], 1)
-                + term("PowerShell · 한 번에", 'cd ([Environment]::GetFolderPath("Desktop"))\nmkdir workspace\\mini_notion_v0, workspace\\mini_notion')
-                + "</div><div>" + viz2.tiles([                                             ("OneDrive", "바탕 화면이 OneDrive 안일 수 있음 · 명령은 자동으로 찾음"),
-                                             ("VS Code 로 열기", "mini_notion 우클릭 → Code(으)로 열기 · 또는 File → Open Folder")], 1)
-                + "</div></div>", T),
-          light("실습 1-2 ① · 6단계 macOS 폴더 만들기", '<div class="twocol"><div>'
-                + viz2.tiles([("직접 만들기", "Finder ⌘N → 데스크탑 → 새 폴더 ⇧⌘N"), ("폴더 이름", "workspace 안에 mini_notion_v0 · mini_notion")], 1)
-                + term("터미널 · 한 번에", "cd ~/Desktop\nmkdir -p workspace/mini_notion_v0 workspace/mini_notion")
-                + "</div><div>" + viz2.tiles([                                             ("VS Code 로 열기", "mini_notion 을 VS Code 아이콘에 끌어 놓기 · 또는 File → Open Folder")], 1)
+          light("실습 1-2 ① · 5단계 작업 폴더 만들기", '<div class="twocol"><div>'
+                + viz2.tiles([("Windows", "탐색기 Win+E → 바탕 화면 → 새 폴더 Ctrl+Shift+N"),
+                              ("macOS", "Finder ⌘N → 데스크탑 → 새 폴더 ⇧⌘N"),
+                              ("폴더", "workspace → 그 안에 mini_notion")], 1)
+                + "</div><div>" + viz2.tiles([("Windows OneDrive", "바탕 화면이 OneDrive 안일 수 있음 · 탐색기 왼쪽 「바탕 화면」으로"),
+                                             ("VS Code 로 열기", "File → Open Folder → mini_notion")], 1)
                 + "</div></div>", T)],
         brief("1-2 ②", T, ["VS Code → 폴더 열기", "Claude Code 열기 · 로그인", "폴더 신뢰 허용", "첫 요청 보내기", "답 읽기"],
               [("목표", "이 폴더의 현재 상태 듣기"), ("범위", "이 폴더 안만"),
@@ -204,17 +172,17 @@ def slides():
               + chat([("me", "이 폴더에 지금 뭐가 있는지 알려 줘. 아직 파일은 만들지 마"),
                       ("ai", "이 폴더는 비어 있다.\n파일 · 하위 폴더가 없다.\n만들 앱을 알려 주면 구조를 제안한다.")], "Claude Code 대화")
               + "</div><div>"
-              + viz2.tiles([("계정", "Claude Pro 이상 로그인"), ("설치", "claude --version 이 버전 번호 표시"),
+              + viz2.tiles([("계정", "Claude Pro 이상 로그인"), ("설치", "VS Code 오른쪽 위 Spark 아이콘"),
                             ("폴더", "새 파일 없음")], 1)
               + "</div></div>", T),
         # ── 실습 ③ 한 줄 요청으로 만들어 보기
-        brief("1-2 ③", T, ["mini_notion_v0 폴더 열기", "「미니 노션 만들어 줘」 한 줄 요청", "파일 만들기 승인", "브라우저로 결과 보기", "내가 생각한 미니 노션과 비교"],
+        brief("1-2 ③", T, ["mini_notion 폴더 열기", "「미니 노션 만들어 줘」 한 줄 요청", "파일 만들기 승인", "브라우저로 결과 보기", "생각과 비교 → 파일 지우기"],
               [("요청", "「미니 노션 만들어 줘」 한 줄"), ("덧붙이지 않기", "기능 · 화면 · 저장 방식"), ("볼 것", "AI 가 정한 것 · 빠진 것")],
               ["한 줄 요청", "AI 가 정한 것"],
               ["브라우저에서 앱이 열림", "내 생각과 다른 곳 세 가지"],
-              "결과가 마음에 안 들어도 고치지 않음 · 1-3 부터 기획으로", folder="mini_notion_v0", example=""),
-        tstep("1-2 ③", 1, "폴더 열기", T, term=("바탕화면/workspace", "workspace/\n├── mini_notion_v0/   실습 1-2 ③ · 한 줄 요청\n└── mini_notion/      1-3 부터 · 기획해서 만들기"),
-              rows=[("열기", "File → Open Folder → mini_notion_v0"), ("상태", "빈 폴더"), ("Claude Code", "Spark 아이콘")]),
+              "결과가 마음에 안 들어도 고치지 않음 · 1-3 부터 기획으로", folder="mini_notion", example=""),
+        tstep("1-2 ③", 1, "폴더 열기", T, term=("바탕화면/workspace", "workspace/\n└── mini_notion/   빈 폴더"),
+              rows=[("열기", "File → Open Folder → mini_notion"), ("상태", "빈 폴더"), ("Claude Code", "Spark 아이콘")]),
         tstep("1-2 ③", 2, "한 줄 요청", T, "lab12_ask.webp", "「미니 노션 만들어 줘」 요청",
               rows=[("요청", "「미니 노션 만들어 줘」"), ("덧붙이지 않기", "기능 · 화면 · 저장"), ("모드", "수정마다 승인")]),
         tstep("1-2 ③", 3, "파일 만들기 승인", T, "lab12_perm.webp", "index.html 만들기 승인",
@@ -227,7 +195,7 @@ def slides():
             ("시키지 않았는데 생김", "검색 · 이모지 아이콘 · 하위 페이지 · 다크 모드 · 마크다운 단축키", "AI 가 정함"),
             ("생각했는데 빠짐", "블록 끌어 옮기기", "요청에 없음"),
             ("누가 정했나", "기능 · 화면 · 저장 방식 전부", "AI")], "결과", "내용")
-              + viz2.tiles([("1-3 · 1-4", "기획서 · 개발 계획으로 내가 정하기"), ("1-6", "mini_notion 에서 다시 만들기 → v0 과 비교")], 2), T),
+              + viz2.tiles([("1-3 · 1-4", "기획서 · 개발 계획으로 내가 정하기"), ("다음", "index.html 지우기 → 1-3 기획부터")], 2), T),
     ]
 
 

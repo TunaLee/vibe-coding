@@ -36,7 +36,7 @@ def files():
     probs = "".join(f'<div class="v1fp" style="--d:{d0 + i * .4:.2f}s"><b>{h}</b><span>{t}</span></div>' for i, (h, t) in enumerate([
         ("어느 게 최신", "날짜 · 파일을 열어 봐야 앎"), ("무엇이 바뀌었나", "두 파일을 나란히 놓고 비교"),
         ("이전 상태 복구", "사본을 지웠으면 불가")]))
-    return (f'<div class="v1fw"><div class="v1fd"><div class="v1fdh">내 문서 › 팀 발표</div>{rows}</div>'
+    return (f'<div class="v1fnw"><div class="v1fd"><div class="v1fdh">내 문서 › 팀 발표</div>{rows}</div>'
             f'<div class="v1fps">{probs}</div></div>')
 
 
@@ -175,7 +175,7 @@ CSS = """
   @keyframes v1gHi{0%,100%{background:#EAF0F7; color:#16233A} 15%,75%{background:#F28C28; color:#fff}}
   @media print{.v1gc,.v1gk,.v1gpull{opacity:1; animation:none} .v1gc.o{display:none} .v1gp tt{animation:none}}
   /* 1-5 · 파일 이름 버전 관리 (v1f) */
-  .v1fw{display:grid; grid-template-columns:1.25fr 1fr; gap:30px; align-items:center; margin-top:14px;}
+  .v1fnw{display:grid; grid-template-columns:1.25fr 1fr; gap:30px; align-items:center; margin-top:14px;}
   .v1fd{border:1.5px solid #D9DDE3; border-radius:14px; background:#fff; overflow:hidden;}
   .v1fdh{background:#F2F4F7; padding:10px 18px; font-size:15px; font-weight:800; color:#6B7785; border-bottom:1.5px solid #D9DDE3;}
   .v1fr{display:grid; grid-template-columns:34px 1fr auto; gap:12px; align-items:center; padding:11px 18px; border-bottom:1px solid #EEF0F3;
