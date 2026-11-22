@@ -55,23 +55,10 @@ def _lg(img, name, cls=""):
 def slides():
     return [
         # ── 도구 네 개
-        light("1부 실습 도구", '<div class="v1tools">' + flow([(_lg("claude_symbol", "Claude"), "대화형 AI · 아이디어 고르기"),
-                                      (_lg("claude_symbol", "Claude Code"), "위임형 AI · 기획서 · 개발 계획 · 앱 코드"),
+        light("1부 실습 도구", '<div class="v1tools">' + flow([(_lg("claude_symbol", "Claude Code"), "아이디어 · 기획서 · 개발 계획 · 앱 코드"),
                                       (_lg("github_logo", "GitHub"), "코드 · 변경 기록 보관"), (_lg("vercel_logo", "Vercel", "w"), "배포 · 공개 주소")]) + '</div>'
               + src(("GitHub 로고 · GitHub · CC BY 4.0 · Wikimedia Commons",
                      "https://commons.wikimedia.org/wiki/File:GitHub_Invertocat_Logo.svg")), T),
-        # ── Claude
-        light("Claude", '<div class="twocol"><div>'
-              + '<img class="v1clogo" src="img/claude_logo.svg" alt="Claude 로고"/>'
-              + viz2.tiles([("대화형 AI", "claude.ai · 웹 · 데스크톱 · 휴대폰 앱"), ("1부에서 맡는 일", "아이디어 고르기 · 질문 정리"),
-                            ("못 하는 일", "내 컴퓨터 파일 직접 수정 · 명령 실행")], 1)
-              + "</div><div>"
-              + chat([("me", "할 일 목록 앱을 만들려고 해. 소크라테스식 대화로 진행해 줘"),
-                      ("ai", "이 앱은 누가 쓰나요? 혼자인가요, 팀인가요?"),
-                      ("me", "나 혼자 써. 주로 휴대폰에서 볼 거야"),
-                      ("ai", "끝낸 일은 지우나요, 남겨 두나요?")], "Claude 대화 예")
-              + "</div></div>"
-              + note("소크라테스식 대화", "답 대신 질문을 하나씩 · 내 답으로 다음 질문"), T),
         # ── Claude Code
         light("Claude와 Claude Code", cc_lanes()
               + note("차이", "내 컴퓨터 파일에 AI 손이 닿는가 · Claude 는 글로 답함 · Claude Code 는 파일을 직접 만들고 고침"), T),
