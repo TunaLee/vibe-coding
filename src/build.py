@@ -49,10 +49,6 @@ def make_lab_zips():
             for f in sorted(src.rglob("*")):
                 if f.is_file() and f.name != ".DS_Store":
                     z.write(f, Path(ARC.get(name, name)) / f.relative_to(src))
-    # 작업 폴더 한 벌 — workspace/mini_notion_v0(실습 1-2 ③ 한 줄 요청) + workspace/mini_notion(1-3 부터)
-    with zipfile.ZipFile(dl / "workspace.zip", "w", zipfile.ZIP_DEFLATED) as z:
-        z.writestr("workspace/mini_notion_v0/", "")
-        z.writestr("workspace/mini_notion/", "")
 
 
 def _part_cover(n, title):

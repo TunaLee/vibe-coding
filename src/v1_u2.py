@@ -128,7 +128,7 @@ def slides():
             ("가입", "GitHub 계정으로 · 비밀번호 따로 없음"), ("요금", "Hobby 무료 · 개인 · 비상업용 · 회사 업무 공개는 Pro $20")])
               + src(("Vercel pricing", "https://vercel.com/pricing"), ("Hobby plan", "https://vercel.com/docs/plans/hobby")), T),
         # ── 실습
-        labcard("1-2", "실습 환경 준비 · 첫 위임", T, "새 PC", "한 줄 요청으로 만든 앱", ["① 계정 · 설치 · 작업 폴더", "② 첫 요청", "③ 「미니 노션 만들어 줘」"], files='<a class="dl" href="dl/workspace.zip" download>workspace.zip</a>'),
+        labcard("1-2", "실습 환경 준비 · 첫 위임", T, "새 PC", "한 줄 요청으로 만든 앱", ["① 계정 · 설치 · 작업 폴더", "② 첫 요청", "③ 「미니 노션 만들어 줘」"]),
         brief("1-2 ①", T, ["claude.ai 가입 · 요금제 확인", "github.com 가입", "vercel.com → GitHub 로 계속하기",
                             "VS Code 설치 → 확장 「Claude Code」", "터미널에서 claude --version", "바탕화면에 workspace 폴더 만들기"],
               [("계정", "Claude (Pro 이상) · GitHub · Vercel"), ("설치", "VS Code · Claude Code 확장"),
@@ -139,8 +139,10 @@ def slides():
         *[step("1-2 ①", 1, "Claude 가입 · 요금제", "lab12_pricing.webp", "Claude 요금제 화면", [("①", "Pro", 42, 45, 32, 54)],
                [("주소", "claude.ai → 가입"), ("요금제", "Pro 이상 · Claude Code 사용 조건"), ("Free", "Claude Code 로그인에서 막힘")],
                (("화면 · claude.com/pricing", "https://claude.com/pricing"),)),
-          step("1-2 ①", 2, "GitHub 가입", None, "github.com/signup 가입 화면", [],
-               [("주소", "github.com → Sign up"), ("입력", "이메일 · 비밀번호 · 사용자 이름"), ("막히는 곳", "이메일 인증 코드")]),
+          step("1-2 ①", 2, "GitHub 가입", "lab12_github.webp", "github.com Sign up 버튼과 공식 가입 단계",
+               [("①", "Sign up", 46.5, 3, 11.5, 8), ("②", "github.com/signup", 2, 29, 46, 8), ("③", "이메일 확인", 2, 64, 52, 8)],
+               [("주소", "github.com → Sign up"), ("입력", "이메일 · 비밀번호 · 사용자 이름"), ("막히는 곳", "이메일 인증 코드")],
+               (("화면 · github.com · GitHub 문서 「GitHub 계정 만들기」 CC BY 4.0", "https://docs.github.com/ko/get-started/start-your-journey/creating-an-account-on-github"),)),
           step("1-2 ①", 3, "Vercel 가입", "lab12_vercel.webp", "Vercel 가입 화면", [("①", "Continue with GitHub", 21, 61, 57, 8.5)],
                [("주소", "vercel.com/signup"), ("선택", "Continue with GitHub"), ("막히는 곳", "이메일로 가입하면 GitHub 연결이 따로 필요")],
                (("화면 · vercel.com/signup", "https://vercel.com/signup"),)),
@@ -170,20 +172,18 @@ def slides():
                 + "</div><div>" + viz2.tiles([("workspace", "실습 폴더를 모아 두는 곳"),
                                              ("mini_notion", "내 앱 · VS Code 로 여는 폴더 · 1부 끝에 노션 같은 앱"),
                                              ("mini_notion_v0", "실습 1-2 ③ · 한 줄 요청으로 만든 앱"),
-                                             ("한 번에 받기", '<a class="dl" href="dl/workspace.zip" download>workspace.zip</a> → 바탕화면에 압축 풀기')], 1)
+                                             ("만드는 법", "다음 장 · Windows / macOS")], 1)
                 + "</div></div>", T),
           light("실습 1-2 ① · 6단계 Windows 폴더 만들기", '<div class="twocol"><div>'
-                + flow([("탐색기", "Win+E"), ("바탕 화면", "왼쪽 목록"), ("새 폴더", "Ctrl+Shift+N"), ("이름", "workspace → mini_notion")])
-                + term("PowerShell · 한 번에", 'cd ([Environment]::GetFolderPath("Desktop"))\nmkdir workspace\\mini_notion')
-                + "</div><div>" + viz2.tiles([("zip 풀기", "우클릭 → 모두 압축 풀기 → 바탕 화면"),
-                                             ("OneDrive", "바탕 화면이 OneDrive 안일 수 있음 · 명령은 자동으로 찾음"),
+                + viz2.tiles([("직접 만들기", "탐색기 Win+E → 바탕 화면 → 새 폴더 Ctrl+Shift+N"), ("폴더 이름", "workspace 안에 mini_notion_v0 · mini_notion")], 1)
+                + term("PowerShell · 한 번에", 'cd ([Environment]::GetFolderPath("Desktop"))\nmkdir workspace\\mini_notion_v0, workspace\\mini_notion')
+                + "</div><div>" + viz2.tiles([                                             ("OneDrive", "바탕 화면이 OneDrive 안일 수 있음 · 명령은 자동으로 찾음"),
                                              ("VS Code 로 열기", "mini_notion 우클릭 → Code(으)로 열기 · 또는 File → Open Folder")], 1)
                 + "</div></div>", T),
           light("실습 1-2 ① · 6단계 macOS 폴더 만들기", '<div class="twocol"><div>'
-                + flow([("Finder", "⌘N"), ("데스크탑", "왼쪽 목록"), ("새 폴더", "⇧⌘N"), ("이름", "workspace → mini_notion")])
-                + term("터미널 · 한 번에", "cd ~/Desktop\nmkdir -p workspace/mini_notion")
-                + "</div><div>" + viz2.tiles([("zip 풀기", "더블클릭 → 같은 위치에 풀림"),
-                                             ("VS Code 로 열기", "mini_notion 을 VS Code 아이콘에 끌어 놓기 · 또는 File → Open Folder")], 1)
+                + viz2.tiles([("직접 만들기", "Finder ⌘N → 데스크탑 → 새 폴더 ⇧⌘N"), ("폴더 이름", "workspace 안에 mini_notion_v0 · mini_notion")], 1)
+                + term("터미널 · 한 번에", "cd ~/Desktop\nmkdir -p workspace/mini_notion_v0 workspace/mini_notion")
+                + "</div><div>" + viz2.tiles([                                             ("VS Code 로 열기", "mini_notion 을 VS Code 아이콘에 끌어 놓기 · 또는 File → Open Folder")], 1)
                 + "</div></div>", T)],
         brief("1-2 ②", T, ["VS Code → 폴더 열기", "Claude Code 열기 · 로그인", "폴더 신뢰 허용", "첫 요청 보내기", "답 읽기"],
               [("목표", "이 폴더의 현재 상태 듣기"), ("범위", "이 폴더 안만"),
