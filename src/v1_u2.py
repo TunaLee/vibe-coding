@@ -132,10 +132,10 @@ def slides():
         brief("1-2 ①", T, ["claude.ai 가입 · 요금제 확인", "github.com 가입", "vercel.com → GitHub 로 계속하기",
                             "VS Code 설치 → 확장 「Claude Code」", "터미널에서 claude --version", "바탕화면에 workspace 폴더 만들기"],
               [("계정", "Claude (Pro 이상) · GitHub · Vercel"), ("설치", "VS Code · Claude Code 확장"),
-               ("폴더", "바탕화면/workspace/my-app")],
+               ("폴더", "바탕화면/workspace/mini_notion")],
               ["Pro", "GitHub로 계속하기", "Claude Code 확장", "claude --version"],
               ["세 사이트 모두 로그인된 상태", "VS Code 왼쪽에 Claude 아이콘"],
-              "회사 PC 에서 설치가 막히면 웹 claude.ai/code", folder="바탕화면/workspace/my-app", slot_title="준비"),
+              "회사 PC 에서 설치가 막히면 웹 claude.ai/code", folder="바탕화면/workspace/mini_notion", slot_title="준비"),
         *[step("1-2 ①", 1, "Claude 가입 · 요금제", "lab12_pricing.webp", "Claude 요금제 화면", [("①", "Pro", 42, 45, 32, 54)],
                [("주소", "claude.ai → 가입"), ("요금제", "Pro 이상 · Claude Code 사용 조건"), ("Free", "Claude Code 로그인에서 막힘")],
                (("화면 · claude.com/pricing", "https://claude.com/pricing"),)),
@@ -161,39 +161,39 @@ def slides():
           light("실습 1-2 ① · 6단계 작업 폴더 구조", '<div class="twocol"><div>'
                 + term("바탕화면/workspace", """바탕화면/
 └── workspace/            작업 공간
-    ├── delegate_todo/    실습 1-2 ③
+    ├── todo_list/        실습 1-2 ③
     │   └── index.html · style.css · app.js
-    └── my-app/           내 앱 · VS Code 로 여는 폴더
+    └── mini_notion/      내 앱 · VS Code 로 여는 폴더
         ├── 페르소나/      1-3 · 1-4
         ├── 기획서.md      1-3
         ├── 개발계획.md    1-4
         └── index.html    1-6""")
                 + "</div><div>" + viz2.tiles([("workspace", "실습 폴더를 모아 두는 곳"),
-                                             ("my-app", "내 앱 · VS Code 로 여는 폴더 · 이름은 영어 소문자 · 예 mini-notion"),
-                                             ("delegate_todo", "실습 1-2 ③ 예제"),
+                                             ("mini_notion", "내 앱 · VS Code 로 여는 폴더 · 1부 끝에 노션 같은 앱"),
+                                             ("todo_list", "실습 1-2 ③ 예제"),
                                              ("한 번에 받기", '<a class="dl" href="dl/workspace.zip" download>workspace.zip</a> → 바탕화면에 압축 풀기')], 1)
                 + "</div></div>", T),
           light("실습 1-2 ① · 6단계 Windows 폴더 만들기", '<div class="twocol"><div>'
-                + flow([("탐색기", "Win+E"), ("바탕 화면", "왼쪽 목록"), ("새 폴더", "Ctrl+Shift+N"), ("이름", "workspace → my-app")])
-                + term("PowerShell · 한 번에", 'cd ([Environment]::GetFolderPath("Desktop"))\nmkdir workspace\\my-app')
+                + flow([("탐색기", "Win+E"), ("바탕 화면", "왼쪽 목록"), ("새 폴더", "Ctrl+Shift+N"), ("이름", "workspace → mini_notion")])
+                + term("PowerShell · 한 번에", 'cd ([Environment]::GetFolderPath("Desktop"))\nmkdir workspace\\mini_notion')
                 + "</div><div>" + viz2.tiles([("zip 풀기", "우클릭 → 모두 압축 풀기 → 바탕 화면"),
                                              ("OneDrive", "바탕 화면이 OneDrive 안일 수 있음 · 명령은 자동으로 찾음"),
-                                             ("VS Code 로 열기", "my-app 우클릭 → Code(으)로 열기 · 또는 File → Open Folder")], 1)
+                                             ("VS Code 로 열기", "mini_notion 우클릭 → Code(으)로 열기 · 또는 File → Open Folder")], 1)
                 + "</div></div>", T),
           light("실습 1-2 ① · 6단계 macOS 폴더 만들기", '<div class="twocol"><div>'
-                + flow([("Finder", "⌘N"), ("데스크탑", "왼쪽 목록"), ("새 폴더", "⇧⌘N"), ("이름", "workspace → my-app")])
-                + term("터미널 · 한 번에", "cd ~/Desktop\nmkdir -p workspace/my-app")
+                + flow([("Finder", "⌘N"), ("데스크탑", "왼쪽 목록"), ("새 폴더", "⇧⌘N"), ("이름", "workspace → mini_notion")])
+                + term("터미널 · 한 번에", "cd ~/Desktop\nmkdir -p workspace/mini_notion")
                 + "</div><div>" + viz2.tiles([("zip 풀기", "더블클릭 → 같은 위치에 풀림"),
-                                             ("VS Code 로 열기", "my-app 을 VS Code 아이콘에 끌어 놓기 · 또는 File → Open Folder")], 1)
+                                             ("VS Code 로 열기", "mini_notion 을 VS Code 아이콘에 끌어 놓기 · 또는 File → Open Folder")], 1)
                 + "</div></div>", T)],
         brief("1-2 ②", T, ["VS Code → 폴더 열기", "Claude Code 열기 · 로그인", "폴더 신뢰 허용", "첫 요청 보내기", "답 읽기"],
               [("목표", "이 폴더의 현재 상태 듣기"), ("범위", "이 폴더 안만"),
                ("하지 말 것", "아직 파일 만들지 않기")],
               ["폴더 열기", "로그인", "첫 요청"],
               ["Claude Code 가 폴더 내용을 답함", "파일이 새로 생기지 않음"],
-              "로그인 창이 안 뜨면 VS Code 재시작", folder="바탕화면/workspace/my-app"),
+              "로그인 창이 안 뜨면 VS Code 재시작", folder="바탕화면/workspace/mini_notion"),
         *[step("1-2 ②", 1, "폴더 열기", "lab12_folder.webp", "VS Code 탐색기 · 폴더를 연 화면", [("①", "열린 폴더", 18, 15, 80, 22)],
-               [("메뉴", "File → Open Folder"), ("macOS", "⌘O"), ("Windows", "Ctrl+K → Ctrl+O"), ("폴더", "바탕화면/workspace/my-app")], (VSDOC,)),
+               [("메뉴", "File → Open Folder"), ("macOS", "⌘O"), ("Windows", "Ctrl+K → Ctrl+O"), ("폴더", "바탕화면/workspace/mini_notion")], (VSDOC,)),
           step("1-2 ②", 2, "Claude Code 열기 · 로그인", "lab12_spark.webp", "편집기 오른쪽 위 Spark 아이콘", [("①", "Spark 아이콘", 87.5, 2, 5, 14)],
                [("열기", "편집기 오른쪽 위 Spark 아이콘"), ("로그인", "Claude 계정 · 브라우저 인증"), ("계정", "Pro 이상")], (CCDOC,)),
           step("1-2 ②", 3, "폴더 신뢰", "lab12_trust.webp", "폴더 신뢰 확인 창", [("①", "Yes, I trust the authors", 17, 80, 40, 8)],
@@ -211,17 +211,17 @@ def slides():
         # ── 실습 ③ 위임형 첫 작업
         light("할 일 목록 예제", shot("v1_u2_todo_start.webp", "index.html 을 브라우저로 연 화면", [
             ("예제", "버튼이 동작하지 않는 미완성 할 일 목록"), ("동작 안 함", "추가 버튼 · 체크 줄 긋기 · 남은 개수"),
-            ("폴더", "delegate_todo · index.html · style.css · app.js")]), T),
-        brief("1-2 ③", T, ["delegate_todo 폴더를 VS Code 로 열기", "index.html 을 브라우저로 열어 추가 버튼 눌러 보기",
+            ("폴더", "todo_list · index.html · style.css · app.js")]), T),
+        brief("1-2 ③", T, ["todo_list 폴더를 VS Code 로 열기", "index.html 을 브라우저로 열어 추가 버튼 눌러 보기",
                             "Claude Code 에 목표 한 줄 요청", "진행 화면에서 ① 읽기 ② 수정 ③ 확인 찾기", "새로고침 · 직접 확인 → 다음 기능"],
               [("목표", "기능 하나씩 · 추가 → 체크 → 남은 개수"), ("확인 방법", "브라우저에서 직접 누르기"),
                ("하지 말 것", "코드 직접 수정 · 세 기능 한 번에 요청")],
               ["목표 한 줄", "브라우저 확인", "하나씩"],
               ["추가한 할 일이 목록에 생김", "체크하면 줄이 그어짐", "「남은 할 일: N」 표시"],
-              "버튼이 그대로면 브라우저 새로고침 · 증상 그대로 전달", folder="delegate_todo", example=""),
+              "버튼이 그대로면 브라우저 새로고침 · 증상 그대로 전달", folder="todo_list", example=""),
         *[light("실습 1-2 ③ · 1단계 폴더 열기", '<div class="twocol"><div>'
-                + term("delegate_todo 폴더", "delegate_todo/\n├── index.html\n├── style.css\n└── app.js")
-                + "</div><div>" + viz2.tiles([("받기", "workspace 안에 delegate_todo · workspace.zip 에 포함"), ("열기", "VS Code → File → Open Folder → workspace/delegate_todo"),
+                + term("todo_list 폴더", "todo_list/\n├── index.html\n├── style.css\n└── app.js")
+                + "</div><div>" + viz2.tiles([("받기", "workspace 안에 todo_list · workspace.zip 에 포함"), ("열기", "VS Code → File → Open Folder → workspace/todo_list"),
                                              ("macOS · Windows", "⌘O · Ctrl+K → Ctrl+O")], 1) + "</div></div>", T),
           step("1-2 ③", 2, "브라우저로 확인", "v1_u2_todo_start.webp", "index.html 을 브라우저로 연 화면", [],
                [("열기", "index.html 더블클릭 → 브라우저"), ("눌러 보기", "추가 · 체크 · 남은 개수"), ("현재", "버튼을 눌러도 변화 없음")]),

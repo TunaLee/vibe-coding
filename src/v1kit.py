@@ -108,6 +108,22 @@ def labcard(no, title, u, inp, out, parts=(), files=""):
 </section>'''
 
 
+
+def tstep(no, i, name, u, img=None, alt="", term=None, rows=(), need=None, srcs=()):
+    """실습 단계 화면(넓게) — 위에 실제 화면 · 아래에 할 일 칩."""
+    import viz2
+    from hx import code, esc
+    from stats_hx import src
+    if img:
+        body = f'<div class="v1ts"><img src="img/{img}" alt="{alt}"/></div>'
+    elif term:
+        body = '<div class="v1tt">' + code(term[0], esc(term[1])) + "</div>"
+    else:
+        body = (f'<div class="v1ts"><div class="need-img"><span class="nk">캡처 필요</span><span class="nd">{need}</span>'
+                '<span class="nm2">강사 화면 캡처로 교체</span></div></div>')
+    return light(f"실습 {no} · {i}단계 {name}", body + viz2.tiles(list(rows), len(rows)) + (src(*srcs) if srcs else ""), u)
+
+
 def codemap(rows, ask="", title=""):
     """코드 줄 → 우리말 뜻 — 입문자용. rows: (코드 한 줄, 뜻). ask = 사람의 요청 한 문장(위에 표시).
     줄이 0.35초 간격으로 차례로 나타나고 멈춘다."""
@@ -120,6 +136,11 @@ def codemap(rows, ask="", title=""):
 
 
 CSS = """
+  /* 실습 단계 화면(넓게) */
+  .v1ts{display:flex; justify-content:center; margin:0 0 18px;}
+  .v1ts img{max-width:100%; max-height:330px; border-radius:10px; box-shadow:0 8px 24px rgba(22,35,58,.22);}
+  .v1ts .need-img{width:760px; min-height:300px;}
+  .v1tt{max-width:860px; margin:0 auto 18px;}
   /* 실습 소개 — 입력 → 산출물 */
   .v1lc{display:flex; flex-direction:column; align-items:center; gap:34px; margin-top:40px;}
   .v1lc .io{display:flex; align-items:center; gap:26px;}

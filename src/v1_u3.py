@@ -9,7 +9,7 @@ import viz2
 from deck import ba, flow, lab, light
 from hx import checks, code, esc, note
 from stats_hx import src
-from v1kit import brief, chat, shot, labcard
+from v1kit import brief, chat, shot, labcard, tstep
 
 T = "1-3"
 EX = Path(__file__).resolve().parent.parent / "labs" / "mini_notion" / "예시"
@@ -256,6 +256,20 @@ def slides():
               ["기획자 페르소나", "plan 모드", "문제점", "하지 않을 것"],
               ["다섯 칸이 모두 내 사실로 채워짐", "「하지 않을 것」 칸이 있음"],
               "아이디어가 없으면 ② 반복하는 일 · 「이번 주에 같은 일을 두 번 했나」", folder="내 프로젝트 폴더/기획서.md"),
+        tstep("1-3", 1, "persona.zip 풀기", T, term=("mini_notion 폴더", "mini_notion/\n└── 페르소나/\n    ├── 기획자.md\n    └── 개발자.md"),
+              rows=[("Windows", "우클릭 → 모두 압축 풀기 → mini_notion"), ("macOS", "더블클릭 → 페르소나 폴더를 mini_notion 으로"), ("확인", "VS Code 탐색기에 페르소나 폴더")]),
+        tstep("1-3", 2, "기획자.md 값 바꾸기", T, term=("페르소나/기획자.md", "# 기획자 페르소나\n\n## 역할\n서비스 기획 10년 차 · 팀 업무 도구 기획 경험\n\n## 말투\n쉬운 말 · 기술 용어 없이 · 질문은 한 번에 하나"),
+              rows=[("바꿀 곳", "역할 · 말투"), ("예", "업무 도구 → 사내 행사 기획"), ("저장", "macOS ⌘S · Windows Ctrl+S")]),
+        tstep("1-3", 3, "Plan Mode 요청", T, "lab13_plan.webp", "Plan Mode 에서 요청을 쓴 화면",
+              rows=[("Plan Mode", "Shift+Tab → ⏸ plan mode on"), ("요청", "기획자 페르소나로 같이 쓰기"), ("화면", "터미널 실행 · VS Code 패널도 같은 흐름")]),
+        tstep("1-3", 4, "질문에 답하기", T, "lab13_q1.webp", "기획자 페르소나의 첫 질문",
+              rows=[("질문", "한 번에 하나"), ("답", "실제 겪은 장면"), ("파일", "Plan Mode · 아직 안 씀")]),
+        tstep("1-3", 4, "초안 · 흐린 부분", T, "lab13_draft.webp", "초안 요약과 흐린 부분 질문",
+              rows=[("초안", "칸별 요약"), ("흐린 부분", "다시 묻기 → 내 답으로"), ("피드백", "빠진 칸 · 큰 기능")]),
+        tstep("1-3", 5, "계획 승인", T, "lab13_approve.webp", "계획 승인 선택지",
+              rows=[("1번", "auto mode · 바로 진행"), ("2번", "수정마다 직접 승인 · 권장"), ("3번", "고칠 점 적기")]),
+        tstep("1-3", 5, "기획서.md 저장", T, "lab13_saved.webp", "기획서.md 저장 결과",
+              rows=[("저장 승인", "Do you want to create → 1. Yes"), ("결과", "mini_notion/기획서.md"), ("확인", "VS Code 에서 열어 칸 확인")]),
         light("실습 1-3 확인", checks([
             ("문제점이 실제 장면인가", "「불편하다」만 있으면 다시"), ("목표 이용자가 실제 사람인가", "「모두」면 다시"),
             ("화면이 3개 이내인가", "넘는 화면은 「하지 않을 것」 칸에"), ("하지 않을 것이 있는가", "로그인 · 결제 · 외부 연동")],

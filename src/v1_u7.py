@@ -10,7 +10,7 @@ import viz2
 from deck import flow, lab, light
 from hx import code, esc, note
 from stats_hx import src
-from v1kit import brief, chat, shot, labcard
+from v1kit import brief, chat, shot, labcard, tstep
 
 T = "1-7"
 
@@ -108,6 +108,16 @@ def slides():
               ["GitHub", "비공개", "gh", "push", "Vercel"],
               ["저장소 주소가 열림", "배포 주소가 열림", "수정 뒤 같은 주소에 반영"],
               "오류 문구 그대로 전달", folder="내 앱 폴더"),
+        tstep("1-7", 1, "gh 로그인", T, term=("터미널", "gh auth login\ngh auth status"),
+              rows=[("명령", "gh auth login"), ("승인", "브라우저 · 화면의 코드 입력"), ("확인", "gh auth status → Logged in")]),
+        tstep("1-7", 2, "올리기 전 점검", T, "lab17_check.webp", "키 · 개인정보 점검 결과",
+              rows=[("요청", "키 · 개인정보 점검"), ("결과", "키 · 비밀번호 없음"), ("주의", "커밋 이메일 · 공개면 보임")]),
+        tstep("1-7", 3, "저장소 만들고 올리기", T, "lab17_perm.webp", "gh repo create 승인",
+              rows=[("명령", "gh repo create --private"), ("승인", "1. Yes"), ("저장소", "비공개")]),
+        tstep("1-7", 3, "올린 결과", T, "lab17_pushed.webp", "비공개 저장소에 올린 결과",
+              rows=[("주소", "github.com/내계정/저장소"), ("비공개", "PRIVATE 확인"), ("다음", "Vercel 에서 가져오기")]),
+        tstep("1-7", 4, "Vercel 가져오기 · Deploy", T, need="vercel.com/new · 저장소 Import → Deploy 화면",
+              rows=[("주소", "vercel.com/new"), ("가져오기", "저장소 옆 Import"), ("배포", "Deploy → *.vercel.app")]),
         light("실습 1-7 확인", viz2.maprows([
             ("저장소", "github.com/내계정/저장소 이름", "파일 · 커밋 · 자물쇠"), ("배포 주소", "프로젝트명.vercel.app", "PC · 휴대폰에서 열림"),
             ("재배포", "push 1~2분 뒤 새로고침", "고친 곳이 보임"), ("공개 전 점검", "키 · 개인정보 없음", "Claude Code 점검 결과")], "볼 것", "확인")

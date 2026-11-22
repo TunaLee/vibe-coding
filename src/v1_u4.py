@@ -10,7 +10,7 @@ import viz2
 from deck import ba, flow, lab, light
 from hx import checks, code, esc, note
 from stats_hx import src
-from v1kit import brief, chat, labcard
+from v1kit import brief, chat, labcard, tstep
 from v3kit import phmap
 
 GEN = ("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")
@@ -151,6 +151,14 @@ def slides():
               ["개발자 페르소나", "MVP", "완료 기준", "태스크"],
               ["개발계획.md 파일이 생김", "태스크마다 끝나면 보이는 화면이 적힘"],
               "계획이 너무 길면 「태스크를 여섯 개 안으로 줄여 줘」"),
+        tstep("1-4", 1, "개발자.md 값 바꾸기", T, term=("페르소나/개발자.md", "# 개발자 페르소나\n\n## 역할\n웹 개발 10년 차 · 작은 사내 도구 개발 경험\n\n## 말투\n기술 용어는 한 줄 풀이와 함께 · 정해지지 않은 것은 먼저 묻기"),
+              rows=[("바꿀 곳", "역할 · 말투"), ("그대로", "진행 순서 · 산출물"), ("저장", "macOS ⌘S · Windows Ctrl+S")]),
+        tstep("1-4", 3, "Plan Mode 요청 · 질문", T, "lab14_q1.webp", "개발자 페르소나의 선택 질문",
+              rows=[("Plan Mode", "Shift+Tab · 1-3 과 같음"), ("질문", "저장 방식 · 기술 · 기획서에 없던 칸"), ("1부 선택", "순수 HTML/JS · localStorage")]),
+        tstep("1-4", 4, "계획에 피드백", T, "lab14_feedback.webp", "3번 고칠 점 적기",
+              rows=[("3번", "Tell Claude what to change"), ("피드백", "정렬 순서 · 뺄 기능 · 파일 이름"), ("다시", "고친 계획 → 승인")]),
+        tstep("1-4", 5, "개발계획.md 저장", T, "lab14_saved.webp", "개발계획.md 저장 결과",
+              rows=[("결과", "개발계획.md · F 번호 · T 번호"), ("반영", "피드백 두 가지"), ("코드", "아직 없음")]),
         light("실습 1-4 확인", checks([
             ("기획서의 「하지 않을 것」이 제외 칸에 있나", "없으면 추가 요청"), ("태스크마다 F 번호가 있나", "기능 하나 = 태스크 하나"),
             ("저장 위치가 적혀 있나", "MVP 는 내 브라우저"), ("완료 기준을 눌러서 확인할 수 있나", "값 · 동작 · 결과")],

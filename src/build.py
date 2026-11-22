@@ -43,19 +43,19 @@ def make_lab_zips():
     import zipfile
     dl = ROOT / "docs" / "dl"
     dl.mkdir(exist_ok=True)
-    for name in ("delegate_todo", "persona"):
+    for name in ("todo_list", "persona"):
         src = ROOT / "labs" / name
         with zipfile.ZipFile(dl / f"{name}.zip", "w", zipfile.ZIP_DEFLATED) as z:
             for f in sorted(src.rglob("*")):
                 if f.is_file() and f.name != ".DS_Store":
                     z.write(f, Path(ARC.get(name, name)) / f.relative_to(src))
-    # 작업 폴더 한 벌 — workspace/delegate_todo(실습 1-2 ③) + workspace/my-app(내 앱 · 빈 폴더)
+    # 작업 폴더 한 벌 — workspace/todo_list(실습 1-2 ③) + workspace/mini_notion(내 앱 · 빈 폴더)
     with zipfile.ZipFile(dl / "workspace.zip", "w", zipfile.ZIP_DEFLATED) as z:
-        src = ROOT / "labs" / "delegate_todo"
+        src = ROOT / "labs" / "todo_list"
         for f in sorted(src.rglob("*")):
             if f.is_file() and f.name != ".DS_Store":
-                z.write(f, Path("workspace/delegate_todo") / f.relative_to(src))
-        z.writestr("workspace/my-app/", "")
+                z.write(f, Path("workspace/todo_list") / f.relative_to(src))
+        z.writestr("workspace/mini_notion/", "")
 
 
 def _part_cover(n, title):

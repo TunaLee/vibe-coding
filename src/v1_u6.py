@@ -8,7 +8,7 @@ import viz2
 from deck import ba, flow, lab, light
 from hx import code, esc, note, table
 from stats_hx import src
-from v1kit import brief, chat, shot, labcard
+from v1kit import brief, chat, shot, labcard, tstep
 from v3kit import phmap
 
 T = "1-6"
@@ -129,6 +129,14 @@ def slides():
               ["태스크 번호", "서버 띄워 줘", "커밋해 줘", "되돌려 줘"],
               ["태스크마다 브라우저로 직접 눌러 봄", "커밋 기록이 태스크 수만큼 쌓임"],
               "엉뚱하게 만들기 시작하면 Esc 로 멈추고 다시 요청 · 망가지면 「마지막 커밋으로 되돌려 줘」"),
+        tstep(T, 1, "태스크 하나 요청", T, "lab16_perm.webp", "파일 만들기 승인",
+              rows=[("요청", "「개발계획.md 의 T0만」"), ("승인", "파일마다 1. Yes"), ("2번", "이 대화 동안 파일 수정 자동 승인")]),
+        tstep(T, 2, "브라우저 확인", T, "lab16_app.webp", "T0 · T1 뒤 화면 · 새 페이지 두 번",
+              rows=[("열기", "서버 주소 또는 index.html"), ("눌러 보기", "새 페이지 → 목록 맨 위"), ("새로고침", "macOS ⌘R · Windows F5")]),
+        tstep(T, 3, "완료 기준 대조", T, "lab16_done.webp", "Claude Code 의 작업 보고",
+              rows=[("보고", "만든 것 · 아직 없는 것"), ("대조", "개발계획.md 완료 기준"), ("아직", "새로고침하면 사라짐 → T6")]),
+        tstep(T, 4, "커밋해 줘", T, "lab16_commit.webp", "「커밋해 줘」 결과",
+              rows=[("요청", "「커밋해 줘」"), ("커밋", "태스크마다 하나"), ("다음", "T2 → 같은 순서")]),
         light("실습 1-6 확인", code("커밋 기록 · 예", esc(
             "e41a0b2  T6 모바일 폭 정리\n"
             "c9d3f17  T5 새로고침 뒤 저장 유지\n"

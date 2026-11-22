@@ -894,6 +894,11 @@
   .ha.weak ul{margin:0; padding-left:20px; font-size:17px; color:#C62828; line-height:1.7; font-weight:600;}
   .an{margin:2px 0 8px;}
 
+  /* 실습 단계 화면(넓게) */
+  .v1ts{display:flex; justify-content:center; margin:0 0 18px;}
+  .v1ts img{max-width:100%; max-height:330px; border-radius:10px; box-shadow:0 8px 24px rgba(22,35,58,.22);}
+  .v1ts .need-img{width:760px; min-height:300px;}
+  .v1tt{max-width:860px; margin:0 auto 18px;}
   /* 실습 소개 — 입력 → 산출물 */
   .v1lc{display:flex; flex-direction:column; align-items:center; gap:34px; margin-top:40px;}
   .v1lc .io{display:flex; align-items:center; gap:26px;}
@@ -1762,7 +1767,7 @@ claude</code></pre></div><div class="v2tiles c1"><div class="v2tile" style="--d:
   <div class="eyebrow"><span class="tag">1-2</span></div>
   <h2 class="s-title sm">실습 1-2 ① 준비</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1sls"><div class="v1sl" style="--d:0.00s"><b>계정</b><span>Claude (Pro 이상) · GitHub · Vercel</span></div><div class="v1sl" style="--d:0.20s"><b>설치</b><span>VS Code · Claude Code 확장</span></div><div class="v1sl" style="--d:0.40s"><b>폴더</b><span>바탕화면/workspace/my-app</span></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v1sls"><div class="v1sl" style="--d:0.00s"><b>계정</b><span>Claude (Pro 이상) · GitHub · Vercel</span></div><div class="v1sl" style="--d:0.20s"><b>설치</b><span>VS Code · Claude Code 확장</span></div><div class="v1sl" style="--d:0.40s"><b>폴더</b><span>바탕화면/workspace/mini_notion</span></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="실습 1-2 ① · 1단계 Claude 가입 · 요금제">
@@ -1821,13 +1826,13 @@ claude</code></pre></div><div class="v2tiles c1"><div class="v2tile" style="--d:
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="twocol"><div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">바탕화면/workspace</span></div><pre><code>바탕화면/
 └── workspace/            작업 공간
-    ├── delegate_todo/    실습 1-2 ③
+    ├── todo_list/        실습 1-2 ③
     │   └── index.html · style.css · app.js
-    └── my-app/           내 앱 · VS Code 로 여는 폴더
+    └── mini_notion/      내 앱 · VS Code 로 여는 폴더
         ├── 페르소나/      1-3 · 1-4
         ├── 기획서.md      1-3
         ├── 개발계획.md    1-4
-        └── index.html    1-6</code></pre></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>workspace</b><span>실습 폴더를 모아 두는 곳</span></div><div class="v2tile" style="--d:0.08s"><b>my-app</b><span>내 앱 · VS Code 로 여는 폴더 · 이름은 영어 소문자 · 예 mini-notion</span></div><div class="v2tile" style="--d:0.16s"><b>delegate_todo</b><span>실습 1-2 ③ 예제</span></div><div class="v2tile" style="--d:0.24s"><b>한 번에 받기</b><span><a class="dl" href="dl/workspace.zip" download>workspace.zip</a> → 바탕화면에 압축 풀기</span></div></div></div></div></div></div>
+        └── index.html    1-6</code></pre></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>workspace</b><span>실습 폴더를 모아 두는 곳</span></div><div class="v2tile" style="--d:0.08s"><b>mini_notion</b><span>내 앱 · VS Code 로 여는 폴더 · 1부 끝에 노션 같은 앱</span></div><div class="v2tile" style="--d:0.16s"><b>todo_list</b><span>실습 1-2 ③ 예제</span></div><div class="v2tile" style="--d:0.24s"><b>한 번에 받기</b><span><a class="dl" href="dl/workspace.zip" download>workspace.zip</a> → 바탕화면에 압축 풀기</span></div></div></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="실습 1-2 ① · 6단계 Windows 폴더 만들기">
@@ -1835,8 +1840,8 @@ claude</code></pre></div><div class="v2tiles c1"><div class="v2tile" style="--d:
   <div class="eyebrow"><span class="tag">1-2</span></div>
   <h2 class="s-title sm">실습 1-2 ① · 6단계 Windows 폴더 만들기</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="twocol"><div><div class="flow"><div class="fs"><b>탐색기</b><span>Win+E</span></div><div class="fa">→</div><div class="fs"><b>바탕 화면</b><span>왼쪽 목록</span></div><div class="fa">→</div><div class="fs"><b>새 폴더</b><span>Ctrl+Shift+N</span></div><div class="fa">→</div><div class="fs"><b>이름</b><span>workspace → my-app</span></div></div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">PowerShell · 한 번에</span></div><pre><code>cd ([Environment]::GetFolderPath("Desktop"))
-mkdir workspace\my-app</code></pre></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>zip 풀기</b><span>우클릭 → 모두 압축 풀기 → 바탕 화면</span></div><div class="v2tile" style="--d:0.08s"><b>OneDrive</b><span>바탕 화면이 OneDrive 안일 수 있음 · 명령은 자동으로 찾음</span></div><div class="v2tile" style="--d:0.16s"><b>VS Code 로 열기</b><span>my-app 우클릭 → Code(으)로 열기 · 또는 File → Open Folder</span></div></div></div></div></div></div>
+  <div class="body"><div class="mid"><div class="twocol"><div><div class="flow"><div class="fs"><b>탐색기</b><span>Win+E</span></div><div class="fa">→</div><div class="fs"><b>바탕 화면</b><span>왼쪽 목록</span></div><div class="fa">→</div><div class="fs"><b>새 폴더</b><span>Ctrl+Shift+N</span></div><div class="fa">→</div><div class="fs"><b>이름</b><span>workspace → mini_notion</span></div></div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">PowerShell · 한 번에</span></div><pre><code>cd ([Environment]::GetFolderPath("Desktop"))
+mkdir workspace\mini_notion</code></pre></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>zip 풀기</b><span>우클릭 → 모두 압축 풀기 → 바탕 화면</span></div><div class="v2tile" style="--d:0.08s"><b>OneDrive</b><span>바탕 화면이 OneDrive 안일 수 있음 · 명령은 자동으로 찾음</span></div><div class="v2tile" style="--d:0.16s"><b>VS Code 로 열기</b><span>mini_notion 우클릭 → Code(으)로 열기 · 또는 File → Open Folder</span></div></div></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="실습 1-2 ① · 6단계 macOS 폴더 만들기">
@@ -1844,8 +1849,8 @@ mkdir workspace\my-app</code></pre></div></div><div><div class="v2tiles c1"><div
   <div class="eyebrow"><span class="tag">1-2</span></div>
   <h2 class="s-title sm">실습 1-2 ① · 6단계 macOS 폴더 만들기</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="twocol"><div><div class="flow"><div class="fs"><b>Finder</b><span>⌘N</span></div><div class="fa">→</div><div class="fs"><b>데스크탑</b><span>왼쪽 목록</span></div><div class="fa">→</div><div class="fs"><b>새 폴더</b><span>⇧⌘N</span></div><div class="fa">→</div><div class="fs"><b>이름</b><span>workspace → my-app</span></div></div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">터미널 · 한 번에</span></div><pre><code>cd ~/Desktop
-mkdir -p workspace/my-app</code></pre></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>zip 풀기</b><span>더블클릭 → 같은 위치에 풀림</span></div><div class="v2tile" style="--d:0.08s"><b>VS Code 로 열기</b><span>my-app 을 VS Code 아이콘에 끌어 놓기 · 또는 File → Open Folder</span></div></div></div></div></div></div>
+  <div class="body"><div class="mid"><div class="twocol"><div><div class="flow"><div class="fs"><b>Finder</b><span>⌘N</span></div><div class="fa">→</div><div class="fs"><b>데스크탑</b><span>왼쪽 목록</span></div><div class="fa">→</div><div class="fs"><b>새 폴더</b><span>⇧⌘N</span></div><div class="fa">→</div><div class="fs"><b>이름</b><span>workspace → mini_notion</span></div></div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">터미널 · 한 번에</span></div><pre><code>cd ~/Desktop
+mkdir -p workspace/mini_notion</code></pre></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>zip 풀기</b><span>더블클릭 → 같은 위치에 풀림</span></div><div class="v2tile" style="--d:0.08s"><b>VS Code 로 열기</b><span>mini_notion 을 VS Code 아이콘에 끌어 놓기 · 또는 File → Open Folder</span></div></div></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="실습 1-2 ② 순서">
@@ -1868,7 +1873,7 @@ mkdir -p workspace/my-app</code></pre></div></div><div><div class="v2tiles c1"><
   <div class="eyebrow"><span class="tag">1-2</span></div>
   <h2 class="s-title sm">실습 1-2 ② · 1단계 폴더 열기</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="twocol v1vsgrid v1stp"><div><figure class="v1an"><div class="v1anw"><img src="img/lab12_folder.webp" alt="VS Code 탐색기 · 폴더를 연 화면"/><div class="v1anb" style="--d:0.4s; left:18%; top:15%; width:80%; height:22%"><em>①</em><span>열린 폴더</span></div></div></figure></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>메뉴</b><span>File → Open Folder</span></div><div class="v2tile" style="--d:0.08s"><b>macOS</b><span>⌘O</span></div><div class="v2tile" style="--d:0.16s"><b>Windows</b><span>Ctrl+K → Ctrl+O</span></div><div class="v2tile" style="--d:0.24s"><b>폴더</b><span>바탕화면/workspace/my-app</span></div></div></div></div><div class="src">출처 · <a href="https://github.com/microsoft/vscode-docs" target="_blank" rel="noopener">그림 · VS Code 문서 (Microsoft) · CC BY 3.0</a></div></div></div>
+  <div class="body"><div class="mid"><div class="twocol v1vsgrid v1stp"><div><figure class="v1an"><div class="v1anw"><img src="img/lab12_folder.webp" alt="VS Code 탐색기 · 폴더를 연 화면"/><div class="v1anb" style="--d:0.4s; left:18%; top:15%; width:80%; height:22%"><em>①</em><span>열린 폴더</span></div></div></figure></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>메뉴</b><span>File → Open Folder</span></div><div class="v2tile" style="--d:0.08s"><b>macOS</b><span>⌘O</span></div><div class="v2tile" style="--d:0.16s"><b>Windows</b><span>Ctrl+K → Ctrl+O</span></div><div class="v2tile" style="--d:0.24s"><b>폴더</b><span>바탕화면/workspace/mini_notion</span></div></div></div></div><div class="src">출처 · <a href="https://github.com/microsoft/vscode-docs" target="_blank" rel="noopener">그림 · VS Code 문서 (Microsoft) · CC BY 3.0</a></div></div></div>
 </section>
 
 <section class="slide lt" data-title="실습 1-2 ② · 2단계 Claude Code 열기 · 로그인">
@@ -1908,7 +1913,7 @@ mkdir -p workspace/my-app</code></pre></div></div><div><div class="v2tiles c1"><
   <div class="eyebrow"><span class="tag">1-2</span></div>
   <h2 class="s-title sm">할 일 목록 예제</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1shot"><figure><img src="img/v1_u2_todo_start.webp" alt="index.html 을 브라우저로 연 화면"/><figcaption>index.html 을 브라우저로 연 화면</figcaption></figure><div class=v1side><div class="v1sd"><b>예제</b><span>버튼이 동작하지 않는 미완성 할 일 목록</span></div><div class="v1sd"><b>동작 안 함</b><span>추가 버튼 · 체크 줄 긋기 · 남은 개수</span></div><div class="v1sd"><b>폴더</b><span>delegate_todo · index.html · style.css · app.js</span></div></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v1shot"><figure><img src="img/v1_u2_todo_start.webp" alt="index.html 을 브라우저로 연 화면"/><figcaption>index.html 을 브라우저로 연 화면</figcaption></figure><div class=v1side><div class="v1sd"><b>예제</b><span>버튼이 동작하지 않는 미완성 할 일 목록</span></div><div class="v1sd"><b>동작 안 함</b><span>추가 버튼 · 체크 줄 긋기 · 남은 개수</span></div><div class="v1sd"><b>폴더</b><span>todo_list · index.html · style.css · app.js</span></div></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="실습 1-2 ③ 순서">
@@ -1916,7 +1921,7 @@ mkdir -p workspace/my-app</code></pre></div></div><div><div class="v2tiles c1"><
   <div class="eyebrow"><span class="tag">1-2</span></div>
   <h2 class="s-title sm">실습 1-2 ③ 순서</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><ol class="v1st"><li style="--d:0.00s"><em>1</em><span>delegate_todo 폴더를 VS Code 로 열기</span></li><li style="--d:0.25s"><em>2</em><span>index.html 을 브라우저로 열어 추가 버튼 눌러 보기</span></li><li style="--d:0.50s"><em>3</em><span>Claude Code 에 목표 한 줄 요청</span></li><li style="--d:0.75s"><em>4</em><span>진행 화면에서 ① 읽기 ② 수정 ③ 확인 찾기</span></li><li style="--d:1.00s"><em>5</em><span>새로고침 · 직접 확인 → 다음 기능</span></li></ol><div class="qk2"><b>확인</b><ul><li>추가한 할 일이 목록에 생김</li><li>체크하면 줄이 그어짐</li><li>「남은 할 일: N」 표시</li></ul></div></div></div>
+  <div class="body"><div class="mid"><ol class="v1st"><li style="--d:0.00s"><em>1</em><span>todo_list 폴더를 VS Code 로 열기</span></li><li style="--d:0.25s"><em>2</em><span>index.html 을 브라우저로 열어 추가 버튼 눌러 보기</span></li><li style="--d:0.50s"><em>3</em><span>Claude Code 에 목표 한 줄 요청</span></li><li style="--d:0.75s"><em>4</em><span>진행 화면에서 ① 읽기 ② 수정 ③ 확인 찾기</span></li><li style="--d:1.00s"><em>5</em><span>새로고침 · 직접 확인 → 다음 기능</span></li></ol><div class="qk2"><b>확인</b><ul><li>추가한 할 일이 목록에 생김</li><li>체크하면 줄이 그어짐</li><li>「남은 할 일: N」 표시</li></ul></div></div></div>
 </section>
 <section class="slide lt" data-title="실습 1-2 ③ 요청 항목">
   <div class="coord"><b></b> / <span class="tot"></span></div>
@@ -1931,10 +1936,10 @@ mkdir -p workspace/my-app</code></pre></div></div><div><div class="v2tiles c1"><
   <div class="eyebrow"><span class="tag">1-2</span></div>
   <h2 class="s-title sm">실습 1-2 ③ · 1단계 폴더 열기</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="twocol"><div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">delegate_todo 폴더</span></div><pre><code>delegate_todo/
+  <div class="body"><div class="mid"><div class="twocol"><div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">todo_list 폴더</span></div><pre><code>todo_list/
 ├── index.html
 ├── style.css
-└── app.js</code></pre></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>받기</b><span>workspace 안에 delegate_todo · workspace.zip 에 포함</span></div><div class="v2tile" style="--d:0.08s"><b>열기</b><span>VS Code → File → Open Folder → workspace/delegate_todo</span></div><div class="v2tile" style="--d:0.16s"><b>macOS · Windows</b><span>⌘O · Ctrl+K → Ctrl+O</span></div></div></div></div></div></div>
+└── app.js</code></pre></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>받기</b><span>workspace 안에 todo_list · workspace.zip 에 포함</span></div><div class="v2tile" style="--d:0.08s"><b>열기</b><span>VS Code → File → Open Folder → workspace/todo_list</span></div><div class="v2tile" style="--d:0.16s"><b>macOS · Windows</b><span>⌘O · Ctrl+K → Ctrl+O</span></div></div></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="실습 1-2 ③ · 2단계 브라우저로 확인">
@@ -2205,6 +2210,71 @@ mkdir -p workspace/my-app</code></pre></div></div><div><div class="v2tiles c1"><
   <div class="body"><div class="mid"><div class="v1sls"><div class="v1sl" style="--d:0.00s"><b>목표</b><span>기획서 초안 · 다섯 칸</span></div><div class="v1sl" style="--d:0.20s"><b>입력</b><span>내 한 줄 아이디어 · 기획자.md</span></div><div class="v1sl" style="--d:0.40s"><b>진행 방식</b><span>plan 모드 · 기획자 페르소나</span></div><div class="v1sl" style="--d:0.60s"><b>하지 말 것</b><span>로그인 · 결제 · 외부 연동 넣기</span></div></div></div></div>
 </section>
 
+<section class="slide lt" data-title="실습 1-3 · 1단계 persona.zip 풀기">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-3</span></div>
+  <h2 class="s-title sm">실습 1-3 · 1단계 persona.zip 풀기</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1tt"><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">mini_notion 폴더</span></div><pre><code>mini_notion/
+└── 페르소나/
+    ├── 기획자.md
+    └── 개발자.md</code></pre></div></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>Windows</b><span>우클릭 → 모두 압축 풀기 → mini_notion</span></div><div class="v2tile" style="--d:0.08s"><b>macOS</b><span>더블클릭 → 페르소나 폴더를 mini_notion 으로</span></div><div class="v2tile" style="--d:0.16s"><b>확인</b><span>VS Code 탐색기에 페르소나 폴더</span></div></div></div></div>
+</section>
+
+<section class="slide lt" data-title="실습 1-3 · 2단계 기획자.md 값 바꾸기">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-3</span></div>
+  <h2 class="s-title sm">실습 1-3 · 2단계 기획자.md 값 바꾸기</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1tt"><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">페르소나/기획자.md</span></div><pre><code># 기획자 페르소나
+
+## 역할
+서비스 기획 10년 차 · 팀 업무 도구 기획 경험
+
+## 말투
+쉬운 말 · 기술 용어 없이 · 질문은 한 번에 하나</code></pre></div></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>바꿀 곳</b><span>역할 · 말투</span></div><div class="v2tile" style="--d:0.08s"><b>예</b><span>업무 도구 → 사내 행사 기획</span></div><div class="v2tile" style="--d:0.16s"><b>저장</b><span>macOS ⌘S · Windows Ctrl+S</span></div></div></div></div>
+</section>
+
+<section class="slide lt" data-title="실습 1-3 · 3단계 Plan Mode 요청">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-3</span></div>
+  <h2 class="s-title sm">실습 1-3 · 3단계 Plan Mode 요청</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1ts"><img src="img/lab13_plan.webp" alt="Plan Mode 에서 요청을 쓴 화면"/></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>Plan Mode</b><span>Shift+Tab → ⏸ plan mode on</span></div><div class="v2tile" style="--d:0.08s"><b>요청</b><span>기획자 페르소나로 같이 쓰기</span></div><div class="v2tile" style="--d:0.16s"><b>화면</b><span>터미널 실행 · VS Code 패널도 같은 흐름</span></div></div></div></div>
+</section>
+
+<section class="slide lt" data-title="실습 1-3 · 4단계 질문에 답하기">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-3</span></div>
+  <h2 class="s-title sm">실습 1-3 · 4단계 질문에 답하기</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1ts"><img src="img/lab13_q1.webp" alt="기획자 페르소나의 첫 질문"/></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>질문</b><span>한 번에 하나</span></div><div class="v2tile" style="--d:0.08s"><b>답</b><span>실제 겪은 장면</span></div><div class="v2tile" style="--d:0.16s"><b>파일</b><span>Plan Mode · 아직 안 씀</span></div></div></div></div>
+</section>
+
+<section class="slide lt" data-title="실습 1-3 · 4단계 초안 · 흐린 부분">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-3</span></div>
+  <h2 class="s-title sm">실습 1-3 · 4단계 초안 · 흐린 부분</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1ts"><img src="img/lab13_draft.webp" alt="초안 요약과 흐린 부분 질문"/></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>초안</b><span>칸별 요약</span></div><div class="v2tile" style="--d:0.08s"><b>흐린 부분</b><span>다시 묻기 → 내 답으로</span></div><div class="v2tile" style="--d:0.16s"><b>피드백</b><span>빠진 칸 · 큰 기능</span></div></div></div></div>
+</section>
+
+<section class="slide lt" data-title="실습 1-3 · 5단계 계획 승인">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-3</span></div>
+  <h2 class="s-title sm">실습 1-3 · 5단계 계획 승인</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1ts"><img src="img/lab13_approve.webp" alt="계획 승인 선택지"/></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>1번</b><span>auto mode · 바로 진행</span></div><div class="v2tile" style="--d:0.08s"><b>2번</b><span>수정마다 직접 승인 · 권장</span></div><div class="v2tile" style="--d:0.16s"><b>3번</b><span>고칠 점 적기</span></div></div></div></div>
+</section>
+
+<section class="slide lt" data-title="실습 1-3 · 5단계 기획서.md 저장">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-3</span></div>
+  <h2 class="s-title sm">실습 1-3 · 5단계 기획서.md 저장</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1ts"><img src="img/lab13_saved.webp" alt="기획서.md 저장 결과"/></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>저장 승인</b><span>Do you want to create → 1. Yes</span></div><div class="v2tile" style="--d:0.08s"><b>결과</b><span>mini_notion/기획서.md</span></div><div class="v2tile" style="--d:0.16s"><b>확인</b><span>VS Code 에서 열어 칸 확인</span></div></div></div></div>
+</section>
+
 <section class="slide lt" data-title="실습 1-3 확인">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-3</span></div>
@@ -2426,6 +2496,44 @@ mkdir -p workspace/my-app</code></pre></div></div><div><div class="v2tiles c1"><
   <div class="body"><div class="mid"><div class="v1sls"><div class="v1sl" style="--d:0.00s"><b>목표</b><span>개발계획.md · 일곱 칸</span></div><div class="v1sl" style="--d:0.20s"><b>입력</b><span>기획서.md · 개발자.md</span></div><div class="v1sl" style="--d:0.40s"><b>진행 방식</b><span>plan 모드 · 정해지지 않은 것은 먼저 질문</span></div><div class="v1sl" style="--d:0.60s"><b>하지 말 것</b><span>코드 작성 · 기획서에 없는 기능 추가</span></div></div></div></div>
 </section>
 
+<section class="slide lt" data-title="실습 1-4 · 1단계 개발자.md 값 바꾸기">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-4</span></div>
+  <h2 class="s-title sm">실습 1-4 · 1단계 개발자.md 값 바꾸기</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1tt"><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">페르소나/개발자.md</span></div><pre><code># 개발자 페르소나
+
+## 역할
+웹 개발 10년 차 · 작은 사내 도구 개발 경험
+
+## 말투
+기술 용어는 한 줄 풀이와 함께 · 정해지지 않은 것은 먼저 묻기</code></pre></div></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>바꿀 곳</b><span>역할 · 말투</span></div><div class="v2tile" style="--d:0.08s"><b>그대로</b><span>진행 순서 · 산출물</span></div><div class="v2tile" style="--d:0.16s"><b>저장</b><span>macOS ⌘S · Windows Ctrl+S</span></div></div></div></div>
+</section>
+
+<section class="slide lt" data-title="실습 1-4 · 3단계 Plan Mode 요청 · 질문">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-4</span></div>
+  <h2 class="s-title sm">실습 1-4 · 3단계 Plan Mode 요청 · 질문</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1ts"><img src="img/lab14_q1.webp" alt="개발자 페르소나의 선택 질문"/></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>Plan Mode</b><span>Shift+Tab · 1-3 과 같음</span></div><div class="v2tile" style="--d:0.08s"><b>질문</b><span>저장 방식 · 기술 · 기획서에 없던 칸</span></div><div class="v2tile" style="--d:0.16s"><b>1부 선택</b><span>순수 HTML/JS · localStorage</span></div></div></div></div>
+</section>
+
+<section class="slide lt" data-title="실습 1-4 · 4단계 계획에 피드백">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-4</span></div>
+  <h2 class="s-title sm">실습 1-4 · 4단계 계획에 피드백</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1ts"><img src="img/lab14_feedback.webp" alt="3번 고칠 점 적기"/></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>3번</b><span>Tell Claude what to change</span></div><div class="v2tile" style="--d:0.08s"><b>피드백</b><span>정렬 순서 · 뺄 기능 · 파일 이름</span></div><div class="v2tile" style="--d:0.16s"><b>다시</b><span>고친 계획 → 승인</span></div></div></div></div>
+</section>
+
+<section class="slide lt" data-title="실습 1-4 · 5단계 개발계획.md 저장">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-4</span></div>
+  <h2 class="s-title sm">실습 1-4 · 5단계 개발계획.md 저장</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1ts"><img src="img/lab14_saved.webp" alt="개발계획.md 저장 결과"/></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>결과</b><span>개발계획.md · F 번호 · T 번호</span></div><div class="v2tile" style="--d:0.08s"><b>반영</b><span>피드백 두 가지</span></div><div class="v2tile" style="--d:0.16s"><b>코드</b><span>아직 없음</span></div></div></div></div>
+</section>
+
 <section class="slide lt" data-title="실습 1-4 확인">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-4</span></div>
@@ -2570,6 +2678,55 @@ dfb369b 첫 화면 완성</code></pre></div></div></div></div></div>
   <h2 class="s-title sm">실습 1-5 요청 항목</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v1sls"><div class="v1sl" style="--d:0.00s"><b>목표</b><span>이 폴더를 Git으로 관리 · 첫 커밋</span></div><div class="v1sl" style="--d:0.20s"><b>대상</b><span>기획서.md · 개발계획.md</span></div><div class="v1sl" style="--d:0.40s"><b>메시지</b><span>무엇을 담았는지 한 줄</span></div></div></div></div>
+</section>
+
+<section class="slide lt" data-title="실습 1-5 · 1단계 Claude Code 열기">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-5</span></div>
+  <h2 class="s-title sm">실습 1-5 · 1단계 Claude Code 열기</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1ts"><img src="img/lab12_spark.webp" alt="편집기 오른쪽 위 Spark 아이콘"/></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>폴더</b><span>workspace/mini_notion</span></div><div class="v2tile" style="--d:0.08s"><b>열기</b><span>Spark 아이콘 · 또는 터미널 claude</span></div><div class="v2tile" style="--d:0.16s"><b>파일</b><span>기획서.md · 개발계획.md</span></div></div><div class="src">출처 · <a href="https://code.claude.com/docs/en/vs-code" target="_blank" rel="noopener">그림 · Claude Code 문서 · VS Code</a></div></div></div>
+</section>
+
+<section class="slide lt" data-title="실습 1-5 · 2단계 Git 시작 요청">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-5</span></div>
+  <h2 class="s-title sm">실습 1-5 · 2단계 Git 시작 요청</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1ts"><img src="img/lab15_perm.webp" alt="git 명령 실행 승인"/></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>명령 승인</b><span>Bash command → 1. Yes</span></div><div class="v2tile" style="--d:0.08s"><b>2번</b><span>같은 명령은 다시 묻지 않음</span></div><div class="v2tile" style="--d:0.16s"><b>하는 일</b><span>git init · git add</span></div></div></div></div>
+</section>
+
+<section class="slide lt" data-title="실습 1-5 · 2단계 첫 커밋 결과">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-5</span></div>
+  <h2 class="s-title sm">실습 1-5 · 2단계 첫 커밋 결과</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1ts"><img src="img/lab15_commit.webp" alt="첫 커밋 결과"/></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>커밋</b><span>번호 · 메시지 한 줄</span></div><div class="v2tile" style="--d:0.08s"><b>담긴 파일</b><span>기획서.md · 개발계획.md</span></div><div class="v2tile" style="--d:0.16s"><b>빠진 것</b><span>페르소나/ · 요청 범위 밖</span></div></div></div></div>
+</section>
+
+<section class="slide lt" data-title="실습 1-5 · 3단계 기록 보기">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-5</span></div>
+  <h2 class="s-title sm">실습 1-5 · 3단계 기록 보기</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1ts"><img src="img/lab15_log.webp" alt="커밋 기록"/></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>요청</b><span>「커밋 기록 보여 줘」</span></div><div class="v2tile" style="--d:0.08s"><b>보이는 것</b><span>번호 · 작성자 · 시각 · 메시지</span></div><div class="v2tile" style="--d:0.16s"><b>개수</b><span>커밋마다 한 줄</span></div></div></div></div>
+</section>
+
+<section class="slide lt" data-title="실습 1-5 · 4단계 개발계획.md 고치기">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-5</span></div>
+  <h2 class="s-title sm">실습 1-5 · 4단계 개발계획.md 고치기</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1tt"><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">개발계획.md · 바꾼 줄</span></div><pre><code>- | F1 | 페이지 만들기 | … 목록 맨 위에 추가 |
++ | F1 | 페이지 만들기 | … 목록 맨 아래에 추가 |</code></pre></div></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>어디</b><span>VS Code 에서 아무 줄</span></div><div class="v2tile" style="--d:0.08s"><b>저장</b><span>⌘S · Ctrl+S</span></div><div class="v2tile" style="--d:0.16s"><b>표시</b><span>탐색기 파일 이름 옆 M</span></div></div></div></div>
+</section>
+
+<section class="slide lt" data-title="실습 1-5 · 5단계 방금 고친 거 취소">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-5</span></div>
+  <h2 class="s-title sm">실습 1-5 · 5단계 방금 고친 거 취소</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1ts"><img src="img/lab15_undo.webp" alt="되돌리기 결과"/></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>요청</b><span>「방금 고친 거 취소해 줘」</span></div><div class="v2tile" style="--d:0.08s"><b>명령</b><span>git restore</span></div><div class="v2tile" style="--d:0.16s"><b>결과</b><span>마지막 커밋 상태 · 되살릴 수 없음</span></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="실습 1-5 확인">
@@ -2815,6 +2972,38 @@ dfb369b 첫 화면 완성</code></pre></div></div></div></div></div>
   <div class="body"><div class="mid"><div class="v1sls"><div class="v1sl" style="--d:0.00s"><b>태스크</b><span>「개발 계획의 T3만」</span></div><div class="v1sl" style="--d:0.20s"><b>보여야 할 화면</b><span>끝나면 무엇이 보여야 하는지</span></div><div class="v1sl" style="--d:0.40s"><b>고칠 때</b><span>어디 · 지금 · 원하는 것</span></div><div class="v1sl" style="--d:0.60s"><b>확인 뒤</b><span>커밋 요청</span></div></div></div></div>
 </section>
 
+<section class="slide lt" data-title="실습 1-6 · 1단계 태스크 하나 요청">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-6</span></div>
+  <h2 class="s-title sm">실습 1-6 · 1단계 태스크 하나 요청</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1ts"><img src="img/lab16_perm.webp" alt="파일 만들기 승인"/></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>요청</b><span>「개발계획.md 의 T0만」</span></div><div class="v2tile" style="--d:0.08s"><b>승인</b><span>파일마다 1. Yes</span></div><div class="v2tile" style="--d:0.16s"><b>2번</b><span>이 대화 동안 파일 수정 자동 승인</span></div></div></div></div>
+</section>
+
+<section class="slide lt" data-title="실습 1-6 · 2단계 브라우저 확인">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-6</span></div>
+  <h2 class="s-title sm">실습 1-6 · 2단계 브라우저 확인</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1ts"><img src="img/lab16_app.webp" alt="T0 · T1 뒤 화면 · 새 페이지 두 번"/></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>열기</b><span>서버 주소 또는 index.html</span></div><div class="v2tile" style="--d:0.08s"><b>눌러 보기</b><span>새 페이지 → 목록 맨 위</span></div><div class="v2tile" style="--d:0.16s"><b>새로고침</b><span>macOS ⌘R · Windows F5</span></div></div></div></div>
+</section>
+
+<section class="slide lt" data-title="실습 1-6 · 3단계 완료 기준 대조">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-6</span></div>
+  <h2 class="s-title sm">실습 1-6 · 3단계 완료 기준 대조</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1ts"><img src="img/lab16_done.webp" alt="Claude Code 의 작업 보고"/></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>보고</b><span>만든 것 · 아직 없는 것</span></div><div class="v2tile" style="--d:0.08s"><b>대조</b><span>개발계획.md 완료 기준</span></div><div class="v2tile" style="--d:0.16s"><b>아직</b><span>새로고침하면 사라짐 → T6</span></div></div></div></div>
+</section>
+
+<section class="slide lt" data-title="실습 1-6 · 4단계 커밋해 줘">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-6</span></div>
+  <h2 class="s-title sm">실습 1-6 · 4단계 커밋해 줘</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1ts"><img src="img/lab16_commit.webp" alt="「커밋해 줘」 결과"/></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>요청</b><span>「커밋해 줘」</span></div><div class="v2tile" style="--d:0.08s"><b>커밋</b><span>태스크마다 하나</span></div><div class="v2tile" style="--d:0.16s"><b>다음</b><span>T2 → 같은 순서</span></div></div></div></div>
+</section>
+
 <section class="slide lt" data-title="실습 1-6 확인">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-6</span></div>
@@ -3002,6 +3191,47 @@ a3b8e51  T1 화면 뼈대 · 페이지 목록
   <h2 class="s-title sm">실습 1-7 요청 항목</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v1sls"><div class="v1sl" style="--d:0.00s"><b>목표</b><span>이 폴더를 GitHub 에 올리기</span></div><div class="v1sl" style="--d:0.20s"><b>저장소</b><span>이름 · 비공개</span></div><div class="v1sl" style="--d:0.40s"><b>올리기 전</b><span>키 · 개인정보 점검</span></div><div class="v1sl" style="--d:0.60s"><b>하지 말 것</b><span>기존 커밋 지우기 · 공개 저장소</span></div></div></div></div>
+</section>
+
+<section class="slide lt" data-title="실습 1-7 · 1단계 gh 로그인">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-7</span></div>
+  <h2 class="s-title sm">실습 1-7 · 1단계 gh 로그인</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1tt"><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">터미널</span></div><pre><code>gh auth login
+gh auth status</code></pre></div></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>명령</b><span>gh auth login</span></div><div class="v2tile" style="--d:0.08s"><b>승인</b><span>브라우저 · 화면의 코드 입력</span></div><div class="v2tile" style="--d:0.16s"><b>확인</b><span>gh auth status → Logged in</span></div></div></div></div>
+</section>
+
+<section class="slide lt" data-title="실습 1-7 · 2단계 올리기 전 점검">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-7</span></div>
+  <h2 class="s-title sm">실습 1-7 · 2단계 올리기 전 점검</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1ts"><img src="img/lab17_check.webp" alt="키 · 개인정보 점검 결과"/></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>요청</b><span>키 · 개인정보 점검</span></div><div class="v2tile" style="--d:0.08s"><b>결과</b><span>키 · 비밀번호 없음</span></div><div class="v2tile" style="--d:0.16s"><b>주의</b><span>커밋 이메일 · 공개면 보임</span></div></div></div></div>
+</section>
+
+<section class="slide lt" data-title="실습 1-7 · 3단계 저장소 만들고 올리기">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-7</span></div>
+  <h2 class="s-title sm">실습 1-7 · 3단계 저장소 만들고 올리기</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1ts"><img src="img/lab17_perm.webp" alt="gh repo create 승인"/></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>명령</b><span>gh repo create --private</span></div><div class="v2tile" style="--d:0.08s"><b>승인</b><span>1. Yes</span></div><div class="v2tile" style="--d:0.16s"><b>저장소</b><span>비공개</span></div></div></div></div>
+</section>
+
+<section class="slide lt" data-title="실습 1-7 · 3단계 올린 결과">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-7</span></div>
+  <h2 class="s-title sm">실습 1-7 · 3단계 올린 결과</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1ts"><img src="img/lab17_pushed.webp" alt="비공개 저장소에 올린 결과"/></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>주소</b><span>github.com/내계정/저장소</span></div><div class="v2tile" style="--d:0.08s"><b>비공개</b><span>PRIVATE 확인</span></div><div class="v2tile" style="--d:0.16s"><b>다음</b><span>Vercel 에서 가져오기</span></div></div></div></div>
+</section>
+
+<section class="slide lt" data-title="실습 1-7 · 4단계 Vercel 가져오기 · Deploy">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-7</span></div>
+  <h2 class="s-title sm">실습 1-7 · 4단계 Vercel 가져오기 · Deploy</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1ts"><div class="need-img"><span class="nk">캡처 필요</span><span class="nd">vercel.com/new · 저장소 Import → Deploy 화면</span><span class="nm2">강사 화면 캡처로 교체</span></div></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>주소</b><span>vercel.com/new</span></div><div class="v2tile" style="--d:0.08s"><b>가져오기</b><span>저장소 옆 Import</span></div><div class="v2tile" style="--d:0.16s"><b>배포</b><span>Deploy → *.vercel.app</span></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="실습 1-7 확인">

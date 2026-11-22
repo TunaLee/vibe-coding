@@ -7,7 +7,7 @@ import viz2
 from deck import flow, lab, light
 from hx import code, esc, note
 from stats_hx import src
-from v1kit import brief, chat, labcard
+from v1kit import brief, chat, labcard, tstep
 from v3kit import phmap
 
 T = "1-5"
@@ -259,6 +259,19 @@ def slides():
               ["Git 시작", "첫 커밋", "커밋 기록", "되돌리기"],
               ["기록에 내 메시지가 보임", "취소한 줄이 원래대로 돌아옴"],
               "Git 없음 → 「Git 설치 방법 알려 줘」 · 이름 · 이메일 질문 → GitHub 가입 정보 입력"),
+        tstep(T, 1, "Claude Code 열기", T, "lab12_spark.webp", "편집기 오른쪽 위 Spark 아이콘",
+              rows=[("폴더", "workspace/mini_notion"), ("열기", "Spark 아이콘 · 또는 터미널 claude"), ("파일", "기획서.md · 개발계획.md")],
+              srcs=(("그림 · Claude Code 문서 · VS Code", "https://code.claude.com/docs/en/vs-code"),)),
+        tstep(T, 2, "Git 시작 요청", T, "lab15_perm.webp", "git 명령 실행 승인",
+              rows=[("명령 승인", "Bash command → 1. Yes"), ("2번", "같은 명령은 다시 묻지 않음"), ("하는 일", "git init · git add")]),
+        tstep(T, 2, "첫 커밋 결과", T, "lab15_commit.webp", "첫 커밋 결과",
+              rows=[("커밋", "번호 · 메시지 한 줄"), ("담긴 파일", "기획서.md · 개발계획.md"), ("빠진 것", "페르소나/ · 요청 범위 밖")]),
+        tstep(T, 3, "기록 보기", T, "lab15_log.webp", "커밋 기록",
+              rows=[("요청", "「커밋 기록 보여 줘」"), ("보이는 것", "번호 · 작성자 · 시각 · 메시지"), ("개수", "커밋마다 한 줄")]),
+        tstep(T, 4, "개발계획.md 고치기", T, term=("개발계획.md · 바꾼 줄", "- | F1 | 페이지 만들기 | … 목록 맨 위에 추가 |\n+ | F1 | 페이지 만들기 | … 목록 맨 아래에 추가 |"),
+              rows=[("어디", "VS Code 에서 아무 줄"), ("저장", "⌘S · Ctrl+S"), ("표시", "탐색기 파일 이름 옆 M")]),
+        tstep(T, 5, "방금 고친 거 취소", T, "lab15_undo.webp", "되돌리기 결과",
+              rows=[("요청", "「방금 고친 거 취소해 줘」"), ("명령", "git restore"), ("결과", "마지막 커밋 상태 · 되살릴 수 없음")]),
         light("실습 1-5 확인", chat([
             ("me", "이 폴더를 Git으로 관리하고, 기획서랑 개발 계획을 첫 커밋으로 남겨 줘."),
             ("ai", "Git 저장소를 만들고 기획서.md · 개발계획.md 를 커밋했다.\n메시지: 「기획서 · 개발 계획 첫 버전」")], "첫 커밋 대화 예")
