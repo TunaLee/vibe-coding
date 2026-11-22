@@ -7,7 +7,7 @@ import viz2
 from deck import flow, lab, light
 from hx import code, esc, note, table
 from stats_hx import big, src
-from v1kit import brief, chat, shot, labcard
+from v1kit import brief, chat, shot, labcard, tstep
 
 T = "1-2"
 
@@ -128,7 +128,7 @@ def slides():
             ("가입", "GitHub 계정으로 · 비밀번호 따로 없음"), ("요금", "Hobby 무료 · 개인 · 비상업용 · 회사 업무 공개는 Pro $20")])
               + src(("Vercel pricing", "https://vercel.com/pricing"), ("Hobby plan", "https://vercel.com/docs/plans/hobby")), T),
         # ── 실습
-        labcard("1-2", "실습 환경 준비 · 첫 위임", T, "새 PC", "동작하는 할 일 목록", ["① 계정 · 설치 · 작업 폴더", "② 첫 요청", "③ 할 일 목록 위임"], files='<a class="dl" href="dl/workspace.zip" download>workspace.zip</a>'),
+        labcard("1-2", "실습 환경 준비 · 첫 위임", T, "새 PC", "한 줄 요청으로 만든 앱", ["① 계정 · 설치 · 작업 폴더", "② 첫 요청", "③ 「미니 노션 만들어 줘」"], files='<a class="dl" href="dl/workspace.zip" download>workspace.zip</a>'),
         brief("1-2 ①", T, ["claude.ai 가입 · 요금제 확인", "github.com 가입", "vercel.com → GitHub 로 계속하기",
                             "VS Code 설치 → 확장 「Claude Code」", "터미널에서 claude --version", "바탕화면에 workspace 폴더 만들기"],
               [("계정", "Claude (Pro 이상) · GitHub · Vercel"), ("설치", "VS Code · Claude Code 확장"),
@@ -161,8 +161,7 @@ def slides():
           light("실습 1-2 ① · 6단계 작업 폴더 구조", '<div class="twocol"><div>'
                 + term("바탕화면/workspace", """바탕화면/
 └── workspace/            작업 공간
-    ├── todo_list/        실습 1-2 ③
-    │   └── index.html · style.css · app.js
+    ├── mini_notion_v0/   실습 1-2 ③ · 한 줄 요청
     └── mini_notion/      내 앱 · VS Code 로 여는 폴더
         ├── 페르소나/      1-3 · 1-4
         ├── 기획서.md      1-3
@@ -170,7 +169,7 @@ def slides():
         └── index.html    1-6""")
                 + "</div><div>" + viz2.tiles([("workspace", "실습 폴더를 모아 두는 곳"),
                                              ("mini_notion", "내 앱 · VS Code 로 여는 폴더 · 1부 끝에 노션 같은 앱"),
-                                             ("todo_list", "실습 1-2 ③ 예제"),
+                                             ("mini_notion_v0", "실습 1-2 ③ · 한 줄 요청으로 만든 앱"),
                                              ("한 번에 받기", '<a class="dl" href="dl/workspace.zip" download>workspace.zip</a> → 바탕화면에 압축 풀기')], 1)
                 + "</div></div>", T),
           light("실습 1-2 ① · 6단계 Windows 폴더 만들기", '<div class="twocol"><div>'
@@ -208,41 +207,27 @@ def slides():
               + viz2.tiles([("계정", "Claude Pro 이상 로그인"), ("설치", "claude --version 이 버전 번호 표시"),
                             ("폴더", "새 파일 없음")], 1)
               + "</div></div>", T),
-        # ── 실습 ③ 위임형 첫 작업
-        light("할 일 목록 예제", shot("v1_u2_todo_start.webp", "index.html 을 브라우저로 연 화면", [
-            ("예제", "버튼이 동작하지 않는 미완성 할 일 목록"), ("동작 안 함", "추가 버튼 · 체크 줄 긋기 · 남은 개수"),
-            ("폴더", "todo_list · index.html · style.css · app.js")]), T),
-        brief("1-2 ③", T, ["todo_list 폴더를 VS Code 로 열기", "index.html 을 브라우저로 열어 추가 버튼 눌러 보기",
-                            "Claude Code 에 목표 한 줄 요청", "진행 화면에서 ① 읽기 ② 수정 ③ 확인 찾기", "새로고침 · 직접 확인 → 다음 기능"],
-              [("목표", "기능 하나씩 · 추가 → 체크 → 남은 개수"), ("확인 방법", "브라우저에서 직접 누르기"),
-               ("하지 말 것", "코드 직접 수정 · 세 기능 한 번에 요청")],
-              ["목표 한 줄", "브라우저 확인", "하나씩"],
-              ["추가한 할 일이 목록에 생김", "체크하면 줄이 그어짐", "「남은 할 일: N」 표시"],
-              "버튼이 그대로면 브라우저 새로고침 · 증상 그대로 전달", folder="todo_list", example=""),
-        *[light("실습 1-2 ③ · 1단계 폴더 열기", '<div class="twocol"><div>'
-                + term("todo_list 폴더", "todo_list/\n├── index.html\n├── style.css\n└── app.js")
-                + "</div><div>" + viz2.tiles([("받기", "workspace 안에 todo_list · workspace.zip 에 포함"), ("열기", "VS Code → File → Open Folder → workspace/todo_list"),
-                                             ("macOS · Windows", "⌘O · Ctrl+K → Ctrl+O")], 1) + "</div></div>", T),
-          step("1-2 ③", 2, "브라우저로 확인", "v1_u2_todo_start.webp", "index.html 을 브라우저로 연 화면", [],
-               [("열기", "index.html 더블클릭 → 브라우저"), ("눌러 보기", "추가 · 체크 · 남은 개수"), ("현재", "버튼을 눌러도 변화 없음")]),
-          light("실습 1-2 ③ · 3단계 목표 한 줄 요청", '<div class="twocol"><div>'
-                + chat([("me", "추가 버튼을 누르면 입력한 할 일이 목록에 생기게 해 줘"),
-                        ("ai", "app.js 를 고쳐서 「추가」 버튼을 누르거나 Enter 를 치면 입력한 할 일이 목록 맨 아래에 생기도록 했다.\n빈 입력은 추가되지 않는다.\n체크 줄 긋기 · 남은 개수는 요청 범위가 아니어서 건드리지 않았다.")],
-                       "Claude Code 실제 답 · 요약 (2026-11-23)")
-                + "</div><div>" + viz2.tiles([("요청", "기능 하나 · 목표 한 줄"), ("답", "바뀐 파일 · 한 일 · 안 한 일"),
-                                             ("하지 말 것", "세 기능 한 번에 요청")], 1) + "</div></div>", T),
-          step("1-2 ③", 4, "진행 화면 읽기", "lab12_edits.webp", "Claude Code 수정 승인 화면",
-               [("①", "바뀐 코드", 11, 10, 53, 26), ("②", "수정 승인", 70, 57, 28, 34)],
-               [("① 바뀐 코드", "초록 줄 = 추가 · 바뀐 부분"), ("② 수정 승인", "Yes 반영 · No 거절"), ("읽기", "패널의 Read · 파일 이름")], (CCDOC,)),
-          step("1-2 ③", 5, "새로고침 · 확인", "lab12_todo_after.webp", "추가 버튼을 누른 뒤 화면", [("①", "새 할 일", 10, 63, 81, 8)],
-               [("새로고침", "macOS ⌘R · Windows F5"), ("확인", "입력한 할 일이 목록에 추가"), ("다음", "체크 → 남은 개수 하나씩")])],
-        light("Claude Code 작업 화면", '<div class="twocol"><div>'
-              + chat([("me", "추가 버튼을 누르면 입력한 할 일이 목록에 생기게 해 줘"),
-                      ("ai", "① index.html · app.js 를 읽었다.\n② app.js 에 추가 버튼 처리 코드를 넣었다.\n③ 입력칸이 비면 추가하지 않게 했다.\n브라우저를 새로고침해 확인해 줘.")], "Claude Code 화면 예")
-              + "</div><div>"
-              + viz2.tiles([("① 맥락 파악", "파일 읽기"), ("② 작업", "app.js 수정"), ("③ 결과 확인", "빈 입력 처리 · 사람 확인 요청")], 1)
-              + "</div></div>"
-              + note("요청 = 결과 ?", "브라우저에서 직접 눌러 요청과 같은지 확인"), T),
+        # ── 실습 ③ 한 줄 요청으로 만들어 보기
+        brief("1-2 ③", T, ["mini_notion_v0 폴더 열기", "「미니 노션 만들어 줘」 한 줄 요청", "파일 만들기 승인", "브라우저로 결과 보기", "내가 생각한 미니 노션과 비교"],
+              [("요청", "「미니 노션 만들어 줘」 한 줄"), ("덧붙이지 않기", "기능 · 화면 · 저장 방식"), ("볼 것", "AI 가 정한 것 · 빠진 것")],
+              ["한 줄 요청", "AI 가 정한 것"],
+              ["브라우저에서 앱이 열림", "내 생각과 다른 곳 세 가지"],
+              "결과가 마음에 안 들어도 고치지 않음 · 1-3 부터 기획으로", folder="mini_notion_v0", example=""),
+        tstep("1-2 ③", 1, "폴더 열기", T, term=("바탕화면/workspace", "workspace/\n├── mini_notion_v0/   실습 1-2 ③ · 한 줄 요청\n└── mini_notion/      1-3 부터 · 기획해서 만들기"),
+              rows=[("열기", "File → Open Folder → mini_notion_v0"), ("상태", "빈 폴더"), ("Claude Code", "Spark 아이콘")]),
+        tstep("1-2 ③", 2, "한 줄 요청", T, "lab12_ask.webp", "「미니 노션 만들어 줘」 요청",
+              rows=[("요청", "「미니 노션 만들어 줘」"), ("덧붙이지 않기", "기능 · 화면 · 저장"), ("모드", "수정마다 승인")]),
+        tstep("1-2 ③", 3, "파일 만들기 승인", T, "lab12_perm.webp", "index.html 만들기 승인",
+              rows=[("파일", "index.html 한 개 · 282줄"), ("1번", "이번만 승인"), ("2번", "이 대화 동안 자동 승인")]),
+        tstep("1-2 ③", 4, "결과 보고 읽기", T, "lab12_done.webp", "Claude Code 결과 보고",
+              rows=[("보고", "AI 가 정한 기능 목록"), ("저장", "브라우저 localStorage"), ("한계", "직접 눌러 보지는 않음")]),
+        tstep("1-2 ③", 5, "브라우저로 보기", T, "lab12_v0app.webp", "한 줄 요청으로 만든 미니 노션",
+              rows=[("열기", "index.html 더블클릭"), ("눌러 보기", "새 페이지 · 「/」 · 체크"), ("새로고침", "macOS ⌘R · Windows F5")]),
+        light("한 줄 요청 결과", viz2.maprows([
+            ("시키지 않았는데 생김", "검색 · 이모지 아이콘 · 하위 페이지 · 다크 모드 · 마크다운 단축키", "AI 가 정함"),
+            ("생각했는데 빠짐", "블록 끌어 옮기기", "요청에 없음"),
+            ("누가 정했나", "기능 · 화면 · 저장 방식 전부", "AI")], "결과", "내용")
+              + viz2.tiles([("1-3 · 1-4", "기획서 · 개발 계획으로 내가 정하기"), ("1-6", "mini_notion 에서 다시 만들기 → v0 과 비교")], 2), T),
     ]
 
 

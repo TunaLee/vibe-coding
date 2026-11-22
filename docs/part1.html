@@ -896,7 +896,7 @@
 
   /* 실습 단계 화면(넓게) */
   .v1ts{display:flex; justify-content:center; margin:0 0 18px;}
-  .v1ts img{max-width:100%; max-height:330px; border-radius:10px; box-shadow:0 8px 24px rgba(22,35,58,.22);}
+  .v1ts img{max-width:100%; max-height:310px; border-radius:10px; box-shadow:0 8px 24px rgba(22,35,58,.22);}
   .v1ts .need-img{width:760px; min-height:300px;}
   .v1tt{max-width:860px; margin:0 auto 18px;}
   /* 실습 소개 — 입력 → 산출물 */
@@ -1749,8 +1749,8 @@ claude</code></pre></div><div class="v2tiles c1"><div class="v2tile" style="--d:
   <h2 class="s-title sm">실습 환경 준비 · 첫 위임</h2>
   <div class="rule"></div>
   <div class="body"><div class="v1lc">
-    <div class="io"><div class="b in"><small>입력</small><b>새 PC</b></div><i>→</i><div class="b out"><small>산출물</small><b>동작하는 할 일 목록</b></div></div>
-    <div class="pt"><span style="--d:0.5s">① 계정 · 설치 · 작업 폴더</span><span style="--d:0.7s">② 첫 요청</span><span style="--d:0.9s">③ 할 일 목록 위임</span></div>
+    <div class="io"><div class="b in"><small>입력</small><b>새 PC</b></div><i>→</i><div class="b out"><small>산출물</small><b>한 줄 요청으로 만든 앱</b></div></div>
+    <div class="pt"><span style="--d:0.5s">① 계정 · 설치 · 작업 폴더</span><span style="--d:0.7s">② 첫 요청</span><span style="--d:0.9s">③ 「미니 노션 만들어 줘」</span></div>
     <div class="fl">실습 파일 · <a class="dl" href="dl/workspace.zip" download>workspace.zip</a></div>
   </div></div>
 </section>
@@ -1826,13 +1826,12 @@ claude</code></pre></div><div class="v2tiles c1"><div class="v2tile" style="--d:
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="twocol"><div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">바탕화면/workspace</span></div><pre><code>바탕화면/
 └── workspace/            작업 공간
-    ├── todo_list/        실습 1-2 ③
-    │   └── index.html · style.css · app.js
+    ├── mini_notion_v0/   실습 1-2 ③ · 한 줄 요청
     └── mini_notion/      내 앱 · VS Code 로 여는 폴더
         ├── 페르소나/      1-3 · 1-4
         ├── 기획서.md      1-3
         ├── 개발계획.md    1-4
-        └── index.html    1-6</code></pre></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>workspace</b><span>실습 폴더를 모아 두는 곳</span></div><div class="v2tile" style="--d:0.08s"><b>mini_notion</b><span>내 앱 · VS Code 로 여는 폴더 · 1부 끝에 노션 같은 앱</span></div><div class="v2tile" style="--d:0.16s"><b>todo_list</b><span>실습 1-2 ③ 예제</span></div><div class="v2tile" style="--d:0.24s"><b>한 번에 받기</b><span><a class="dl" href="dl/workspace.zip" download>workspace.zip</a> → 바탕화면에 압축 풀기</span></div></div></div></div></div></div>
+        └── index.html    1-6</code></pre></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>workspace</b><span>실습 폴더를 모아 두는 곳</span></div><div class="v2tile" style="--d:0.08s"><b>mini_notion</b><span>내 앱 · VS Code 로 여는 폴더 · 1부 끝에 노션 같은 앱</span></div><div class="v2tile" style="--d:0.16s"><b>mini_notion_v0</b><span>실습 1-2 ③ · 한 줄 요청으로 만든 앱</span></div><div class="v2tile" style="--d:0.24s"><b>한 번에 받기</b><span><a class="dl" href="dl/workspace.zip" download>workspace.zip</a> → 바탕화면에 압축 풀기</span></div></div></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="실습 1-2 ① · 6단계 Windows 폴더 만들기">
@@ -1908,27 +1907,19 @@ mkdir -p workspace/mini_notion</code></pre></div></div><div><div class="v2tiles 
   <div class="body"><div class="mid"><div class="twocol"><div><div class="v1chat"><div class="v1ch">Claude Code 대화</div><div class="v1b me"><span>나</span><p>이 폴더에 지금 뭐가 있는지 알려 줘. 아직 파일은 만들지 마</p></div><div class="v1b ai"><span>Claude</span><p>이 폴더는 비어 있다.<br/>파일 · 하위 폴더가 없다.<br/>만들 앱을 알려 주면 구조를 제안한다.</p></div></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>계정</b><span>Claude Pro 이상 로그인</span></div><div class="v2tile" style="--d:0.08s"><b>설치</b><span>claude --version 이 버전 번호 표시</span></div><div class="v2tile" style="--d:0.16s"><b>폴더</b><span>새 파일 없음</span></div></div></div></div></div></div>
 </section>
 
-<section class="slide lt" data-title="할 일 목록 예제">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">1-2</span></div>
-  <h2 class="s-title sm">할 일 목록 예제</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1shot"><figure><img src="img/v1_u2_todo_start.webp" alt="index.html 을 브라우저로 연 화면"/><figcaption>index.html 을 브라우저로 연 화면</figcaption></figure><div class=v1side><div class="v1sd"><b>예제</b><span>버튼이 동작하지 않는 미완성 할 일 목록</span></div><div class="v1sd"><b>동작 안 함</b><span>추가 버튼 · 체크 줄 긋기 · 남은 개수</span></div><div class="v1sd"><b>폴더</b><span>todo_list · index.html · style.css · app.js</span></div></div></div></div></div>
-</section>
-
 <section class="slide lt" data-title="실습 1-2 ③ 순서">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-2</span></div>
   <h2 class="s-title sm">실습 1-2 ③ 순서</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><ol class="v1st"><li style="--d:0.00s"><em>1</em><span>todo_list 폴더를 VS Code 로 열기</span></li><li style="--d:0.25s"><em>2</em><span>index.html 을 브라우저로 열어 추가 버튼 눌러 보기</span></li><li style="--d:0.50s"><em>3</em><span>Claude Code 에 목표 한 줄 요청</span></li><li style="--d:0.75s"><em>4</em><span>진행 화면에서 ① 읽기 ② 수정 ③ 확인 찾기</span></li><li style="--d:1.00s"><em>5</em><span>새로고침 · 직접 확인 → 다음 기능</span></li></ol><div class="qk2"><b>확인</b><ul><li>추가한 할 일이 목록에 생김</li><li>체크하면 줄이 그어짐</li><li>「남은 할 일: N」 표시</li></ul></div></div></div>
+  <div class="body"><div class="mid"><ol class="v1st"><li style="--d:0.00s"><em>1</em><span>mini_notion_v0 폴더 열기</span></li><li style="--d:0.25s"><em>2</em><span>「미니 노션 만들어 줘」 한 줄 요청</span></li><li style="--d:0.50s"><em>3</em><span>파일 만들기 승인</span></li><li style="--d:0.75s"><em>4</em><span>브라우저로 결과 보기</span></li><li style="--d:1.00s"><em>5</em><span>내가 생각한 미니 노션과 비교</span></li></ol><div class="qk2"><b>확인</b><ul><li>브라우저에서 앱이 열림</li><li>내 생각과 다른 곳 세 가지</li></ul></div></div></div>
 </section>
 <section class="slide lt" data-title="실습 1-2 ③ 요청 항목">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-2</span></div>
   <h2 class="s-title sm">실습 1-2 ③ 요청 항목</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1sls"><div class="v1sl" style="--d:0.00s"><b>목표</b><span>기능 하나씩 · 추가 → 체크 → 남은 개수</span></div><div class="v1sl" style="--d:0.20s"><b>확인 방법</b><span>브라우저에서 직접 누르기</span></div><div class="v1sl" style="--d:0.40s"><b>하지 말 것</b><span>코드 직접 수정 · 세 기능 한 번에 요청</span></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v1sls"><div class="v1sl" style="--d:0.00s"><b>요청</b><span>「미니 노션 만들어 줘」 한 줄</span></div><div class="v1sl" style="--d:0.20s"><b>덧붙이지 않기</b><span>기능 · 화면 · 저장 방식</span></div><div class="v1sl" style="--d:0.40s"><b>볼 것</b><span>AI 가 정한 것 · 빠진 것</span></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="실습 1-2 ③ · 1단계 폴더 열기">
@@ -1936,50 +1927,49 @@ mkdir -p workspace/mini_notion</code></pre></div></div><div><div class="v2tiles 
   <div class="eyebrow"><span class="tag">1-2</span></div>
   <h2 class="s-title sm">실습 1-2 ③ · 1단계 폴더 열기</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="twocol"><div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">todo_list 폴더</span></div><pre><code>todo_list/
-├── index.html
-├── style.css
-└── app.js</code></pre></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>받기</b><span>workspace 안에 todo_list · workspace.zip 에 포함</span></div><div class="v2tile" style="--d:0.08s"><b>열기</b><span>VS Code → File → Open Folder → workspace/todo_list</span></div><div class="v2tile" style="--d:0.16s"><b>macOS · Windows</b><span>⌘O · Ctrl+K → Ctrl+O</span></div></div></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v1tt"><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">바탕화면/workspace</span></div><pre><code>workspace/
+├── mini_notion_v0/   실습 1-2 ③ · 한 줄 요청
+└── mini_notion/      1-3 부터 · 기획해서 만들기</code></pre></div></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>열기</b><span>File → Open Folder → mini_notion_v0</span></div><div class="v2tile" style="--d:0.08s"><b>상태</b><span>빈 폴더</span></div><div class="v2tile" style="--d:0.16s"><b>Claude Code</b><span>Spark 아이콘</span></div></div></div></div>
 </section>
 
-<section class="slide lt" data-title="실습 1-2 ③ · 2단계 브라우저로 확인">
+<section class="slide lt" data-title="실습 1-2 ③ · 2단계 한 줄 요청">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-2</span></div>
-  <h2 class="s-title sm">실습 1-2 ③ · 2단계 브라우저로 확인</h2>
+  <h2 class="s-title sm">실습 1-2 ③ · 2단계 한 줄 요청</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="twocol v1vsgrid v1stp"><div><figure class="v1an"><div class="v1anw"><img src="img/v1_u2_todo_start.webp" alt="index.html 을 브라우저로 연 화면"/></div></figure></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>열기</b><span>index.html 더블클릭 → 브라우저</span></div><div class="v2tile" style="--d:0.08s"><b>눌러 보기</b><span>추가 · 체크 · 남은 개수</span></div><div class="v2tile" style="--d:0.16s"><b>현재</b><span>버튼을 눌러도 변화 없음</span></div></div></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v1ts"><img src="img/lab12_ask.webp" alt="「미니 노션 만들어 줘」 요청"/></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>요청</b><span>「미니 노션 만들어 줘」</span></div><div class="v2tile" style="--d:0.08s"><b>덧붙이지 않기</b><span>기능 · 화면 · 저장</span></div><div class="v2tile" style="--d:0.16s"><b>모드</b><span>수정마다 승인</span></div></div></div></div>
 </section>
 
-<section class="slide lt" data-title="실습 1-2 ③ · 3단계 목표 한 줄 요청">
+<section class="slide lt" data-title="실습 1-2 ③ · 3단계 파일 만들기 승인">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-2</span></div>
-  <h2 class="s-title sm">실습 1-2 ③ · 3단계 목표 한 줄 요청</h2>
+  <h2 class="s-title sm">실습 1-2 ③ · 3단계 파일 만들기 승인</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="twocol"><div><div class="v1chat"><div class="v1ch">Claude Code 실제 답 · 요약 (2026-11-23)</div><div class="v1b me"><span>나</span><p>추가 버튼을 누르면 입력한 할 일이 목록에 생기게 해 줘</p></div><div class="v1b ai"><span>Claude</span><p>app.js 를 고쳐서 「추가」 버튼을 누르거나 Enter 를 치면 입력한 할 일이 목록 맨 아래에 생기도록 했다.<br/>빈 입력은 추가되지 않는다.<br/>체크 줄 긋기 · 남은 개수는 요청 범위가 아니어서 건드리지 않았다.</p></div></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>요청</b><span>기능 하나 · 목표 한 줄</span></div><div class="v2tile" style="--d:0.08s"><b>답</b><span>바뀐 파일 · 한 일 · 안 한 일</span></div><div class="v2tile" style="--d:0.16s"><b>하지 말 것</b><span>세 기능 한 번에 요청</span></div></div></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v1ts"><img src="img/lab12_perm.webp" alt="index.html 만들기 승인"/></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>파일</b><span>index.html 한 개 · 282줄</span></div><div class="v2tile" style="--d:0.08s"><b>1번</b><span>이번만 승인</span></div><div class="v2tile" style="--d:0.16s"><b>2번</b><span>이 대화 동안 자동 승인</span></div></div></div></div>
 </section>
 
-<section class="slide lt" data-title="실습 1-2 ③ · 4단계 진행 화면 읽기">
+<section class="slide lt" data-title="실습 1-2 ③ · 4단계 결과 보고 읽기">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-2</span></div>
-  <h2 class="s-title sm">실습 1-2 ③ · 4단계 진행 화면 읽기</h2>
+  <h2 class="s-title sm">실습 1-2 ③ · 4단계 결과 보고 읽기</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="twocol v1vsgrid v1stp"><div><figure class="v1an"><div class="v1anw"><img src="img/lab12_edits.webp" alt="Claude Code 수정 승인 화면"/><div class="v1anb" style="--d:0.4s; left:11%; top:10%; width:53%; height:26%"><em>①</em><span>바뀐 코드</span></div><div class="v1anb" style="--d:1.1s; left:70%; top:57%; width:28%; height:34%"><em>②</em><span>수정 승인</span></div></div></figure></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>① 바뀐 코드</b><span>초록 줄 = 추가 · 바뀐 부분</span></div><div class="v2tile" style="--d:0.08s"><b>② 수정 승인</b><span>Yes 반영 · No 거절</span></div><div class="v2tile" style="--d:0.16s"><b>읽기</b><span>패널의 Read · 파일 이름</span></div></div></div></div><div class="src">출처 · <a href="https://code.claude.com/docs/en/vs-code" target="_blank" rel="noopener">그림 · Claude Code 문서 · VS Code</a></div></div></div>
+  <div class="body"><div class="mid"><div class="v1ts"><img src="img/lab12_done.webp" alt="Claude Code 결과 보고"/></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>보고</b><span>AI 가 정한 기능 목록</span></div><div class="v2tile" style="--d:0.08s"><b>저장</b><span>브라우저 localStorage</span></div><div class="v2tile" style="--d:0.16s"><b>한계</b><span>직접 눌러 보지는 않음</span></div></div></div></div>
 </section>
 
-<section class="slide lt" data-title="실습 1-2 ③ · 5단계 새로고침 · 확인">
+<section class="slide lt" data-title="실습 1-2 ③ · 5단계 브라우저로 보기">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-2</span></div>
-  <h2 class="s-title sm">실습 1-2 ③ · 5단계 새로고침 · 확인</h2>
+  <h2 class="s-title sm">실습 1-2 ③ · 5단계 브라우저로 보기</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="twocol v1vsgrid v1stp"><div><figure class="v1an"><div class="v1anw"><img src="img/lab12_todo_after.webp" alt="추가 버튼을 누른 뒤 화면"/><div class="v1anb" style="--d:0.4s; left:10%; top:63%; width:81%; height:8%"><em>①</em><span>새 할 일</span></div></div></figure></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>새로고침</b><span>macOS ⌘R · Windows F5</span></div><div class="v2tile" style="--d:0.08s"><b>확인</b><span>입력한 할 일이 목록에 추가</span></div><div class="v2tile" style="--d:0.16s"><b>다음</b><span>체크 → 남은 개수 하나씩</span></div></div></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v1ts"><img src="img/lab12_v0app.webp" alt="한 줄 요청으로 만든 미니 노션"/></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>열기</b><span>index.html 더블클릭</span></div><div class="v2tile" style="--d:0.08s"><b>눌러 보기</b><span>새 페이지 · 「/」 · 체크</span></div><div class="v2tile" style="--d:0.16s"><b>새로고침</b><span>macOS ⌘R · Windows F5</span></div></div></div></div>
 </section>
 
-<section class="slide lt" data-title="Claude Code 작업 화면">
+<section class="slide lt" data-title="한 줄 요청 결과">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-2</span></div>
-  <h2 class="s-title sm">Claude Code 작업 화면</h2>
+  <h2 class="s-title sm">한 줄 요청 결과</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="twocol"><div><div class="v1chat"><div class="v1ch">Claude Code 화면 예</div><div class="v1b me"><span>나</span><p>추가 버튼을 누르면 입력한 할 일이 목록에 생기게 해 줘</p></div><div class="v1b ai"><span>Claude</span><p>① index.html · app.js 를 읽었다.<br/>② app.js 에 추가 버튼 처리 코드를 넣었다.<br/>③ 입력칸이 비면 추가하지 않게 했다.<br/>브라우저를 새로고침해 확인해 줘.</p></div></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>① 맥락 파악</b><span>파일 읽기</span></div><div class="v2tile" style="--d:0.08s"><b>② 작업</b><span>app.js 수정</span></div><div class="v2tile" style="--d:0.16s"><b>③ 결과 확인</b><span>빈 입력 처리 · 사람 확인 요청</span></div></div></div></div><div class="dbnote"><span>요청 = 결과 ?</span> 브라우저에서 직접 눌러 요청과 같은지 확인</div></div></div>
+  <div class="body"><div class="mid"><div class="v2ms"><div class="v2mh"><span>결과</span><i></i><span>내용</span></div><div class="v2m" style="--d:0.00s"><div class="a">시키지 않았는데 생김</div><i>→</i><div class="b"><b>검색 · 이모지 아이콘 · 하위 페이지 · 다크 모드 · 마크다운 단축키</b><small>AI 가 정함</small></div></div><div class="v2m" style="--d:0.12s"><div class="a">생각했는데 빠짐</div><i>→</i><div class="b"><b>블록 끌어 옮기기</b><small>요청에 없음</small></div></div><div class="v2m" style="--d:0.24s"><div class="a">누가 정했나</div><i>→</i><div class="b"><b>기능 · 화면 · 저장 방식 전부</b><small>AI</small></div></div></div><div class="v2tiles c2"><div class="v2tile" style="--d:0.00s"><b>1-3 · 1-4</b><span>기획서 · 개발 계획으로 내가 정하기</span></div><div class="v2tile" style="--d:0.08s"><b>1-6</b><span>mini_notion 에서 다시 만들기 → v0 과 비교</span></div></div></div></div>
 </section>
 
 <section class="slide dk" data-title="다음 단원">

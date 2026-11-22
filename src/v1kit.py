@@ -138,7 +138,7 @@ def codemap(rows, ask="", title=""):
 CSS = """
   /* 실습 단계 화면(넓게) */
   .v1ts{display:flex; justify-content:center; margin:0 0 18px;}
-  .v1ts img{max-width:100%; max-height:330px; border-radius:10px; box-shadow:0 8px 24px rgba(22,35,58,.22);}
+  .v1ts img{max-width:100%; max-height:310px; border-radius:10px; box-shadow:0 8px 24px rgba(22,35,58,.22);}
   .v1ts .need-img{width:760px; min-height:300px;}
   .v1tt{max-width:860px; margin:0 auto 18px;}
   /* 실습 소개 — 입력 → 산출물 */
