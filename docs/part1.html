@@ -252,6 +252,7 @@
   .controlbar.mini:hover{opacity:1;}
   .controlbar.mini > :not(.count):not(.minbtn){display:none;}
   .controlbar.mini .count{font-size:13px; min-width:0; cursor:pointer;}
+  .controlbar.mini .count .tot{display:none;}
   .controlbar.mini .minbtn{width:24px; height:26px;}
   .controlbar.mini .minbtn svg{transform:rotate(180deg); width:13px; height:13px;}
   body.barmini .hint{display:none;}
@@ -3261,7 +3262,7 @@ gh auth status</code></pre></div></div><div class="v2tiles c3"><div class="v2til
   <button class="ico" id="btnMenu" title="목차"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
   <span class="sep"></span>
   <button class="ico" id="btnPrev" title="이전"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg></button>
-  <span class="count"><b id="cur">1</b><span id="tot2" hidden>75</span></span>
+  <span class="count"><b id="cur">1</b><span class="tot"> / <span id="tot2">75</span></span></span>
   <button class="ico" id="btnNext" title="다음"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg></button>
   <span class="sep"></span>
   <button class="zoom" id="btnOut" title="축소"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14"/></svg></button>
