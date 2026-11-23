@@ -107,10 +107,6 @@ def slides():
               + "</div></div>"
               + src(("Claude Code 문서 · VS Code", "https://code.claude.com/docs/en/vs-code"), VSDOC), T),
         # ── 실습
-        labcard("1-2", "가입 · 설치 · 첫 요청", T, "", "", cards=[
-            ("가입 · 설치", "Claude · GitHub · Vercel 가입<br>VS Code · Claude Code 설치", "VS Code 에 Spark 아이콘"),
-            ("첫 요청", "빈 mini_notion 폴더에서<br>「뭐가 있는지 알려 줘」", "Claude Code 의 답"),
-            ("한 줄 요청", "「미니 노션 만들어 줘」<br>한 줄만 보내기", "AI 가 정한 미니 노션")]),
         brief("1-2 ①", T, [go("claude.ai", "https://claude.ai") + " 가입 · " + go("요금제 확인", "https://claude.com/pricing"), go("github.com", "https://github.com/signup") + " 가입",
                             go("vercel.com", "https://vercel.com/signup") + " → GitHub 로 계속하기",
                             go("VS Code 설치", "https://code.visualstudio.com/download") + " → 확장 " + go("「Claude Code」", "https://marketplace.visualstudio.com/items?itemName=anthropic.claude-code"), "바탕화면에 workspace/mini_notion 폴더 만들기"],
