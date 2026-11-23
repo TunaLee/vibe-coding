@@ -37,17 +37,16 @@ def slides():
                   ("연결 ② GitHub → Vercel", "한 번 연결해 두면 이후 자동")], 2), T),
         # ── GitHub 에 올리기
         light("GitHub CLI (gh)", viz2.tiles([
-            ("gh", "GitHub 공식 명령 도구 · 저장소 만들기 · 올리기"), ("Claude Code가 실행", "명령 암기 불필요"),
-            ("설치 안내", go("cli.github.com", "https://cli.github.com") + " · 한 번만")], 3)
-              + '<div class="twocol"><div>' + code("macOS", esc("brew install gh")) + "</div><div>"
-              + code("Windows", esc("winget install --id GitHub.cli --source winget")) + "</div></div>"
-              + note("Windows", "설치 뒤 터미널 새 창에서 gh 인식")
+            ("gh", "GitHub 공식 명령 도구 · 저장소 만들기 · 올리기"), ("설치", "Claude Code 에 「GitHub CLI 설치해 줘」"),
+            ("명령 암기", "불필요 · 실행은 Claude Code")], 3)
+              + '<div class="twocol"><div>' + code("Claude Code 가 실행 · macOS 예", esc("brew install gh")) + "</div><div>"
+              + code("Claude Code 가 실행 · Windows 예", esc("winget install --id GitHub.cli --source winget")) + "</div></div>"
+              + note("Windows", "설치 뒤 VS Code 를 다시 열면 gh 인식")
               + src(("GitHub CLI", "https://cli.github.com/")), T),
         light("gh 로그인", flow([
-            ("gh auth login", "터미널에서 실행"), ("GitHub.com · HTTPS", "기본값 선택"), ("브라우저 인증", "코드 입력 · 승인"),
-            ("연결 완료", "내 계정으로 명령 실행")], hl=2)
-              + code("터미널 · 예", esc("$ gh auth login\n? Where do you use GitHub?  GitHub.com\n...\n✓ Logged in as 내계정"))
-              + note("직접 할 것", "브라우저 승인은 사람이 · 비밀번호를 Claude에게 알려 주지 않음")
+            ("「GitHub 로그인 도와줘」", "Claude Code 에 요청"), ("로그인 명령 실행", "Claude Code · 패널에서 허용"), ("브라우저 인증", "화면의 코드 입력 · 승인"),
+            ("연결 완료", "「로그인됐는지 확인해 줘」")], hl=2)
+              + note("직접 할 것", "브라우저 승인은 사람이 · 비밀번호를 Claude에게 알려 주지 않음 · 막히면 강사와 함께")
               + src(("gh auth login", "https://cli.github.com/manual/gh_auth_login")), T),
         light("GitHub 업로드 요청", chat([
             ("me", "이 폴더를 GitHub 비공개 저장소 mini-notion 으로 올려 줘"),
@@ -108,13 +107,13 @@ def slides():
               ["GitHub", "비공개", "gh", "push", "Vercel"],
               ["저장소 주소가 열림", "배포 주소가 열림", "수정 뒤 같은 주소에 반영"],
               "오류 문구 그대로 전달", folder="내 앱 폴더"),
-        tstep("1-7", 1, "gh 로그인", T, term=("터미널", "gh auth login\ngh auth status"),
-              rows=[("명령", "gh auth login"), ("승인", "브라우저 · 화면의 코드 입력"), ("확인", "gh auth status → Logged in")]),
-        tstep("1-7", 2, "올리기 전 점검", T, "lab17_check.webp", "키 · 개인정보 점검 결과",
+        tstep("1-7", 1, "GitHub 로그인", T, need="VS Code Claude Code 패널 캡처 · 「GitHub 로그인 도와줘」 요청과 브라우저 인증 안내",
+              rows=[("요청", "「GitHub 로그인 도와줘」"), ("승인", "브라우저 · 화면의 코드 입력"), ("확인", "「로그인됐는지 확인해 줘」")]),
+        tstep("1-7", 2, "올리기 전 점검", T, need="VS Code Claude Code 패널 캡처 · 키 · 개인정보 점검 결과",
               rows=[("요청", "키 · 개인정보 점검"), ("결과", "키 · 비밀번호 없음"), ("주의", "커밋 이메일 · 공개면 보임")]),
-        tstep("1-7", 3, "저장소 만들고 올리기", T, "lab17_perm.webp", "gh repo create 승인",
-              rows=[("명령", "gh repo create --private"), ("승인", "1. Yes"), ("저장소", "비공개")]),
-        tstep("1-7", 3, "올린 결과", T, "lab17_pushed.webp", "비공개 저장소에 올린 결과",
+        tstep("1-7", 3, "저장소 만들고 올리기", T, need="VS Code Claude Code 패널 캡처 · gh repo create 승인",
+              rows=[("요청", "「비공개 저장소 만들고 올려 줘」"), ("승인", "패널에 뜬 명령 확인 → 허용"), ("저장소", "비공개")]),
+        tstep("1-7", 3, "올린 결과", T, need="VS Code Claude Code 패널 캡처 · 비공개 저장소에 올린 결과",
               rows=[("주소", "github.com/내계정/저장소"), ("비공개", "PRIVATE 확인"), ("다음", "Vercel 에서 가져오기")]),
         tstep("1-7", 4, "Vercel 가져오기 · Deploy", T, need="vercel.com/new · 저장소 Import → Deploy 화면",
               rows=[("주소", go("vercel.com/new", "https://vercel.com/new")), ("가져오기", "저장소 옆 Import"), ("배포", "Deploy → *.vercel.app")]),
