@@ -106,10 +106,6 @@ def slides():
                             ("③ Install", "설치"), ("④ Spark 아이콘", "로그인")], 1)
               + "</div></div>"
               + src(("Claude Code 문서 · VS Code", "https://code.claude.com/docs/en/vs-code"), VSDOC), T),
-        light("첫 실행과 로그인", flow([("Spark 아이콘", "VS Code 오른쪽 위"), ("로그인 방법 선택", "Claude 계정"),
-                                     ("브라우저 인증", "Pro 이상 계정"), ("폴더 신뢰", "이 폴더에서 작업 허용"), ("입력창", "첫 요청")], hl=2)
-              + viz2.tiles([("로그인", "처음 한 번 · 다음부터 바로 입력창"), ("폴더 신뢰", "처음 여는 폴더마다 확인"),
-                            ("Free 계정", "로그인 단계에서 막힘 · Pro 이상 필요")], 3), T),
         # ── GitHub · Vercel
         light("GitHub", pic("v1_u2_github.webp", "GitHub · 코드 보관함 (AI 생성 그림)", [
             ("코드 보관함", "인터넷에 둔 내 프로젝트 폴더"), ("변경 기록", "언제 · 무엇을 바꿨는지"),
@@ -162,7 +158,7 @@ def slides():
         *[step("1-2 ②", 1, "폴더 열기", "lab12_folder.webp", "VS Code 탐색기 · 폴더를 연 화면", [("①", "열린 폴더", 18, 15, 80, 22)],
                [("메뉴", "File → Open Folder"), ("macOS", "⌘O"), ("Windows", "Ctrl+K → Ctrl+O"), ("폴더", "바탕화면/workspace/mini_notion")], (VSDOC,)),
           step("1-2 ②", 2, "Claude Code 열기 · 로그인", "lab12_spark.webp", "편집기 오른쪽 위 Spark 아이콘", [("①", "Spark 아이콘", 87.5, 2, 5, 14)],
-               [("열기", "편집기 오른쪽 위 Spark 아이콘"), ("로그인", "Claude 계정 · 브라우저 인증"), ("계정", "Pro 이상")], (CCDOC,)),
+               [("열기", "편집기 오른쪽 위 Spark 아이콘"), ("로그인", "Claude 계정 · 브라우저 인증 · 처음 한 번"), ("Free 계정", "로그인에서 막힘 · Pro 이상")], (CCDOC,)),
           step("1-2 ②", 3, "폴더 신뢰", "lab12_trust.webp", "폴더 신뢰 확인 창", [("①", "Yes, I trust the authors", 17, 80, 40, 8)],
                [("선택", "Yes, I trust the authors"), ("뜻", "이 폴더에서 작업 허용"), ("화면", "Windows 경로 예 · macOS 도 같은 창")], (VSDOC,)),
           step("1-2 ②", 4, "첫 요청 · 답 읽기", "lab12_prompt.webp", "Claude Code 패널 · 요청과 답",
