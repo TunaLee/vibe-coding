@@ -1321,21 +1321,39 @@
   .v14gA{background:#FDECEA; border:2px solid #E6B0AA; border-radius:12px; padding:12px 14px; font-size:19px; font-weight:700; color:#C0392B; opacity:0; animation:v14In .4s var(--d) forwards;}
   .v14gN{margin-top:22px; display:flex; gap:12px; align-items:center; font-size:19px; font-weight:700; color:#16233A; opacity:0; animation:v14In .5s var(--d) forwards;}
   .v14gN b{background:#C0392B; color:#fff; border-radius:8px; padding:4px 10px; font-size:15px;}
-  /* 1-4 · 기획서.md → 개발계획.md (v14m) */
-  .v14m{margin-top:16px;}
-  .v14mHd,.v14mR{display:grid; grid-template-columns:260px 50px 1fr; gap:12px; align-items:center;}
-  .v14mHd span{font-size:16px; font-weight:800; color:#16233A; padding-bottom:6px; border-bottom:3px solid #16233A;}
-  .v14mHd span:last-child{color:#C76A12; border-color:#F28C28;}
-  .v14mR{margin-top:11px;}
-  .v14mF{background:#F4F6F9; border:2px solid #C9D6E6; border-radius:12px; padding:13px 16px; font-size:20px; font-weight:800; color:#16233A; opacity:0; animation:v14In .4s var(--d) forwards;}
-  .v14mF.q{background:#FFF1E2; border:2px dashed #F28C28; color:#C76A12;}
-  .v14mR i{font-style:normal; font-weight:800; font-size:22px; color:#F28C28; text-align:center; opacity:0; animation:v14In .3s var(--d) forwards;}
-  .v14mT{display:flex; gap:16px; align-items:baseline; background:#fff; border:2px solid #C9D6E6; border-radius:12px; padding:13px 16px; opacity:0; transform:translateX(-12px); animation:v14In .5s var(--d) forwards;}
-  .v14mT.q{border-color:#F28C28;}
-  .v14mT b{font-size:20px; color:#16233A; min-width:120px;} .v14mT span{font-size:17px; color:#3A4657;}
-  .v14mK{margin-top:20px; display:flex; gap:14px; opacity:0; animation:v14In .5s var(--d) forwards;}
-  .v14mK span{flex:1; border-radius:12px; padding:11px 14px; font-size:17px; font-weight:700;}
-  .v14mK .a{background:#F4F6F9; color:#16233A;} .v14mK .b{background:#FFF1E2; color:#C76A12;}
+  /* 1-4 · 화면 나누기 (v14sc · v14w) */
+  .v14sc{display:grid; grid-template-columns:300px 1fr; gap:24px; margin-top:10px; align-items:start;}
+  .v14scQ,.v14scP{background:#F4F6F9; border:2px solid #C9D6E6; border-radius:12px; padding:12px 14px; font-size:17px; font-weight:700; color:#16233A;}
+  .v14scQ small,.v14scP small{display:block; font-size:13px; color:#6B7785; margin-bottom:4px;}
+  .v14scA{text-align:center; font-size:22px; font-weight:800; color:#F28C28; margin:4px 0;}
+  .v14scP{background:#FFF8F0; border-color:#F2B880;}
+  .v14scP ul{list-style:none; margin:4px 0 0; padding:0;}
+  .v14scP li{display:flex; gap:10px; font-size:15.5px; padding:4px 0; opacity:0; animation:v14In .4s var(--d) forwards;}
+  .v14scP li b{min-width:28px; color:#C76A12;}
+  .v14w{position:relative; border:2px solid #C9D6E6; border-radius:12px; background:#fff; overflow:visible; opacity:0; animation:v14In .4s var(--d) forwards;}
+  .v14wTop{display:flex; gap:6px; align-items:center; padding:8px 12px; border-bottom:1.5px solid #E3E6EA; font-size:13px; color:#6B7785;}
+  .v14wTop i{width:9px; height:9px; border-radius:50%; background:#D9DDE3;} .v14wTop span{margin-left:8px;}
+  .v14wB{position:relative; height:340px;}
+  .v14wB > div{position:absolute; border-radius:8px; opacity:0; animation:v14Rg .5s var(--d) forwards;}
+  .v14wB > div .in{position:absolute; inset:0; padding:10px 12px; display:flex; flex-direction:column; gap:9px;}
+  .v14wB em{position:absolute; font-style:normal; white-space:nowrap; background:#F28C28; color:#fff; font-size:13.5px; font-weight:800; border-radius:6px; padding:2px 8px;
+    opacity:0; animation:v14In .3s var(--d) forwards; z-index:3;}
+  .v14w-aside{left:0; top:0; width:26%; height:100%; background:#F7F7F5; border-right:1.5px solid #EBEBEA;} .v14w-aside em{left:10px; bottom:10px;}
+  .v14w-bar{left:30%; top:4%; width:66%; height:10%;} .v14wB .v14w-bar .in{flex-direction:row; justify-content:space-between; align-items:center; padding:0 10px;} .v14w-bar em{right:-6px; top:-12px;}
+  .v14w-title{left:30%; top:17%; width:46%; height:13%;} .v14w-title em{right:-60px; top:10px;}
+  .v14w-blocks{left:30%; top:34%; width:66%; height:58%;} .v14w-blocks em{right:-6px; bottom:-12px;}
+  .v14w-handle{left:30%; top:34%; width:5%; height:58%;} .v14w-handle em{left:-46px; top:-14px;}
+  .v14w-menu{left:44%; top:52%; width:24%; height:40%; background:#fff; box-shadow:0 6px 16px rgba(0,0,0,.14); z-index:2;}
+  .v14w-menu .in{gap:2px; padding:6px;} .v14w-menu .in span{font-size:13px; padding:3px 6px; border-radius:4px; color:#37352F;} .v14w-menu .in span.on{background:#ECEBE8; font-weight:700;}
+  .v14w-menu em{right:-40px; top:-12px;}
+  .v14wB .ln{display:block; height:9px; width:90%; border-radius:4px; background:#E3E2DE;} .v14wB .ln.on{background:#D3D1CB;}
+  .v14wB .w4{width:40%} .v14wB .w5{width:50%} .v14wB .w6{width:60%} .v14wB .w7{width:70%} .v14wB .w8{width:80%}
+  .v14wB .nw{font-size:12px; color:#9B9A97;} .v14wB .del{font-size:12px; color:#C0392B;}
+  .v14wB .big{font-size:24px; font-weight:800; color:#37352F;}
+  .v14wB .rw{display:flex; align-items:center; gap:8px; height:24px;} .v14wB .rw i{width:8px; height:14px; border-left:3px dotted #C4C4C2; border-right:3px dotted #C4C4C2;}
+  .v14wB .rw b{display:block;} .v14wB .cb{width:13px; height:13px; border:1.8px solid #37352F; border-radius:3px; flex:none;}
+  .v14wSave{position:absolute; right:12px; bottom:-46px; background:#16233A; color:#fff; font-size:14px; font-weight:800; border-radius:8px; padding:6px 12px; opacity:0; animation:v14In .4s var(--d) forwards;}
+  @keyframes v14Rg{0%{opacity:0; outline:2.5px dashed #F28C28; outline-offset:4px} 60%{opacity:1; outline:2.5px dashed #F28C28; outline-offset:0} 100%{opacity:1; outline:2px dashed #F2B880; outline-offset:0}}
   /* 1-4 · 기능 하나 따라가기 (v14t) */
   .v14t{margin-top:14px;}
   .v14tTag{display:inline-block; background:#16233A; color:#fff; font-size:19px; font-weight:800; border-radius:10px; padding:8px 16px; opacity:0; animation:v14In .4s .1s forwards;}
@@ -1353,7 +1371,7 @@
   @keyframes v14In{to{opacity:1; transform:none;}}
   @keyframes v14Hi{to{background:#FDECEA; color:#C0392B; box-shadow:0 0 0 2px #E6B0AA;}}
   @keyframes v14Dn{to{top:calc(100% - 20px);}}
-  @media print{.v14gL,.v14gQ,.v14gR i,.v14gA,.v14gN,.v14mF,.v14mR i,.v14mT,.v14mK,.v14tTag,.v14tR{opacity:1; animation:none; transform:none}}
+  @media print{.v14gL,.v14gQ,.v14gR i,.v14gA,.v14gN,.v14tTag,.v14tR{opacity:1; animation:none; transform:none}}
 
   /* 1-5 · diff — 네 구역의 파일 내용과 이웃 구역 사이 차이 (v2) */
   .v2q0{display:flex; gap:10px; margin-bottom:12px;}
@@ -1439,6 +1457,30 @@
   .v1cm b{font-size:19px; color:#16233A;} .v1cm small{grid-column:3; font-size:14.5px; color:#6B7785;}
   @keyframes v1cmIn{from{opacity:0; transform:translateY(-24px)} to{opacity:1; transform:none}}
   @media print{.v1cm{opacity:1; animation:none}}
+
+  /* 1-6 · 화면 뒤의 코드 (v16c) */
+  .v16top{display:flex; gap:12px; align-items:center; font-size:16px; font-weight:800; color:#16233A; opacity:0; animation:v16In .4s var(--d) forwards;}
+  .v16top span{background:#F4F6F9; border:1.5px solid #C9D6E6; border-radius:8px; padding:5px 12px;} .v16top span.cc{background:#16233A; color:#fff; border-color:#16233A;}
+  .v16top i{font-style:normal; color:#F28C28;}
+  .v16cs{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:14px;}
+  .v16c{border:2px solid #C9D6E6; border-radius:14px; background:#fff; padding:12px 14px; opacity:0; transform:translateY(10px); animation:v16In .5s var(--d) forwards;}
+  .v16c .hd{display:flex; justify-content:space-between; align-items:baseline; border-bottom:2px solid #E3E6EA; padding-bottom:6px;}
+  .v16c .hd b{font-family:var(--mono); font-size:18px; color:#16233A;} .v16c .hd small{font-size:13px; color:#6B7785;}
+  .v16c .rl{margin:8px 0 6px;} .v16c .rl strong{font-size:20px; color:#C76A12; margin-right:8px;} .v16c .rl span{font-size:14px; color:#3A4657;}
+  .v16c ul{list-style:none; margin:0; padding:0;}
+  .v16c li{display:flex; flex-direction:column; padding:5px 0; border-top:1px dashed #E3E6EA; opacity:0; animation:v16In .3s var(--d) forwards;}
+  .v16c li code{font-size:13px; color:#6B7785;} .v16c li span{font-size:15.5px; font-weight:700; color:#16233A;}
+  .v16c .hs{margin-top:8px; display:inline-block; font-size:13px; font-weight:700; color:#6B7785; background:#F4F6F9; border-radius:6px; padding:2px 8px;}
+  .v16c.c0{border-top:5px solid #16233A;} .v16c.c1{border-top:5px solid #2383E2;} .v16c.c2{border-top:5px solid #F28C28;}
+  .v16d{display:grid; grid-template-columns:170px 1fr auto; gap:14px; align-items:center; margin-top:14px; background:#FFF8F0; border:2px dashed #F2B880; border-radius:14px; padding:10px 14px;
+    opacity:0; animation:v16In .5s var(--d) forwards;}
+  .v16d .lb{font-size:19px; font-weight:800; color:#C76A12;} .v16d .lb small{display:block; font-size:12.5px; color:#6B7785;}
+  .v16d .pg{display:flex; flex-wrap:wrap; gap:6px; align-items:center;} .v16d .pg b{font-size:16px; color:#16233A; margin-right:4px;}
+  .v16d .k{font-size:13.5px; background:#fff; border:1.5px solid #E3E6EA; border-radius:6px; padding:2px 8px; color:#3A4657;}
+  .v16d .bk{font-size:13.5px; background:#fff; border:1.5px solid #F2B880; border-radius:6px; padding:2px 8px; color:#16233A;} .v16d .bk i{font-style:normal; color:#C76A12; font-weight:700; margin-right:6px;}
+  .v16d .ls{font-family:var(--mono); font-size:14px; font-weight:700; color:#16233A;}
+  @keyframes v16In{to{opacity:1; transform:none;}}
+  @media print{.v16top,.v16c,.v16c li,.v16d{opacity:1; animation:none; transform:none}}
 
   /* 1-7 · 비유 두 컷 */
   /* 1-7 · 문서 파일과 공유 링크 (v1sh) */
@@ -2205,12 +2247,12 @@ print(total)</code></pre></div><div class="code sm"><div class="bar"><span class
   <div class="body"><div class="mid"><div class="v14b"><img src="img/v1_u4_blueprint.webp" alt="조감도와 설계 도면"/><div class="v2ms"><div class="v2mh"><span>집 짓기</span><i></i><span>앱 만들기</span></div><div class="v2m" style="--d:0.00s"><div class="a">조감도</div><i>→</i><div class="b"><b>기획서</b><small>어떤 집인지 · 왜</small></div></div><div class="v2m" style="--d:0.12s"><div class="a">설계 도면</div><i>→</i><div class="b"><b>개발 계획</b><small>기능 · 화면 · 데이터</small></div></div><div class="v2m" style="--d:0.24s"><div class="a">공정표</div><i>→</i><div class="b"><b>태스크</b><small>무엇부터 짓나</small></div></div><div class="v2m" style="--d:0.36s"><div class="a">준공 검사</div><i>→</i><div class="b"><b>완료 기준</b><small>도면대로 지었나</small></div></div></div></div></div></div>
 </section>
 
-<section class="slide lt" data-title="기획서.md → 개발계획.md">
+<section class="slide lt" data-title="화면 나누기">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-4</span></div>
-  <h2 class="s-title sm">기획서.md → 개발계획.md</h2>
+  <h2 class="s-title sm">화면 나누기</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v14m"><div class="v14mHd"><span>기획서.md</span><span></span><span>개발계획.md</span></div><div class="v14mR"><div class="v14mF" style="--d:0.6s">기능</div><i style="--d:1.0s">→</i><div class="v14mT" style="--d:1.2s"><b>1. 기능</b><span>F1~F5 · 기능 하나에 한 줄</span></div></div><div class="v14mR"><div class="v14mF" style="--d:1.9s">화면</div><i style="--d:2.3s">→</i><div class="v14mT" style="--d:2.5s"><b>2. 화면</b><span>화면마다 보이는 요소</span></div></div><div class="v14mR"><div class="v14mF q" style="--d:3.2s">? 개발자 질문</div><i style="--d:3.6s">→</i><div class="v14mT q" style="--d:3.8s"><b>3. 데이터</b><span>저장할 값 · 저장 위치</span></div></div><div class="v14mR"><div class="v14mF" style="--d:4.5s">문제점 · 이용자</div><i style="--d:4.9s">→</i><div class="v14mT" style="--d:5.1s"><b>4. 완료 기준</b><span>눌러서 확인할 문장</span></div></div><div class="v14mR"><div class="v14mF q" style="--d:5.8s">? 개발자 질문</div><i style="--d:6.2s">→</i><div class="v14mT q" style="--d:6.4s"><b>5. 태스크</b><span>만들 순서 · T1~T6</span></div></div></div><div class="v14mK" style="--d:7.4s"><span class="a">기획서에 있던 것 → 자세히 옮김</span><span class="b">없던 것 → 개발자가 묻고 내가 답함</span></div></div></div>
+  <div class="body"><div class="mid"><div class="v14sc"><div class="v14scL"><div class="v14scQ"><small>기획서 · 화면 칸</small>왼쪽 페이지 목록 · 오른쪽 블록 편집</div><div class="v14scA">↓</div><div class="v14scP"><small>개발계획 · 2. 화면</small><ul><li style="--d:1.5s"><b>F1</b>페이지 목록</li><li style="--d:2.5s"><b>—</b>안내 줄 · 페이지 삭제</li><li style="--d:3.3s"><b>—</b>큰 제목</li><li style="--d:4.1s"><b>F2</b>블록 줄</li><li style="--d:5.1s"><b>F4</b>⋮⋮ 손잡이</li><li style="--d:6.1s"><b>F3</b>「/」 메뉴</li><li style="--d:7.0s"><b>F5</b>저장 · 화면 밖 · 브라우저 안</li></ul></div></div><div class="v14w" style="--d:.3s"><div class="v14wTop"><i></i><i></i><i></i><span>미니 노션</span></div><div class="v14wB"><div class="v14w-aside" style="--d:1.2s"><div class="in"><span class="ln w7"></span><span class="ln on"></span><span class="ln"></span><span class="nw">+ 새 페이지</span></div><em style="--d:1.5s">F1 · 페이지 목록</em></div><div class="v14w-bar" style="--d:2.2s"><div class="in"><span class="nw">「/」 를 입력하면 블록 종류를 고를 수 있다</span><span class="del">페이지 삭제</span></div><em style="--d:2.5s">안내 줄 · 페이지 삭제</em></div><div class="v14w-title" style="--d:3.0s"><div class="in"><span class="big">주간 회의</span></div><em style="--d:3.3s">큰 제목</em></div><div class="v14w-blocks" style="--d:3.8s"><div class="in"><span class="rw"><i></i><b class="ln w8"></b></span><span class="rw"><i></i><b class="cb"></b><b class="ln w6"></b></span><span class="rw"><i></i><b class="ln w7"></b></span><span class="rw"><i></i><b class="ln w4"></b></span></div><em style="--d:4.1s">F2 · 블록 줄</em></div><div class="v14w-handle" style="--d:4.8s"><div class="in"></div><em style="--d:5.1s">F4 · ⋮⋮ 손잡이</em></div><div class="v14w-menu" style="--d:5.8s"><div class="in"><span>제목</span><span>글</span><span class="on">체크 상자</span><span>구분선</span></div><em style="--d:6.1s">F3 · 「/」 메뉴</em></div></div><div class="v14wSave" style="--d:7.0s">F5 · 저장 → 브라우저 안 (화면에 안 보임)</div></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="기능 하나 따라가기">
@@ -2571,6 +2613,14 @@ dfb369b 첫 화면 완성</code></pre></div></div></div></div></div>
   <h2 class="s-title sm">서버 관련 요청</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v2tiles c2"><div class="v2tile" style="--d:0.00s"><b>파일 수정 뒤</b><span>브라우저 새로고침</span></div><div class="v2tile" style="--d:0.08s"><b>주소 접속 불가</b><span>「서버 다시 띄워 줘」</span></div><div class="v2tile" style="--d:0.16s"><b>포트 충돌</b><span>「다른 포트로 띄워 줘」</span></div><div class="v2tile" style="--d:0.24s"><b>종료</b><span>「서버 꺼 줘」</span></div></div></div></div>
+</section>
+
+<section class="slide lt" data-title="화면 뒤의 코드">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-6</span></div>
+  <h2 class="s-title sm">화면 뒤의 코드</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v16top" style="--d:.2s"><span>개발계획.md</span><i>→</i><span class="cc">Claude Code</span><i>→</i><span>파일 세 개 · labs/mini_notion/예시/app</span></div><div class="v16cs"><div class="v16c c0" style="--d:0.8s"><div class="hd"><b>index.html</b><small>34줄</small></div><div class="rl"><strong>뼈대</strong><span>화면에 어떤 칸이 있나</span></div><ul><li style="--d:1.20s"><code>aside</code><span>왼쪽 · 페이지 목록</span></li><li style="--d:1.45s"><code>main</code><span>오른쪽 · 편집 화면</span></li><li style="--d:1.70s"><code>#slash</code><span>「/」 메뉴</span></li></ul><div class="hs">집 · 골조</div></div><div class="v16c c1" style="--d:2.4s"><div class="hd"><b>style.css</b><small>45줄</small></div><div class="rl"><strong>모양</strong><span>칸이 어떻게 보이나</span></div><ul><li style="--d:2.80s"><code>aside</code><span>폭 240px · 연회색 바탕</span></li><li style="--d:3.05s"><code>h1</code><span>제목 글씨 34px</span></li><li style="--d:3.30s"><code>.handle</code><span>손잡이 · 마우스 올릴 때만</span></li></ul><div class="hs">집 · 인테리어</div></div><div class="v16c c2" style="--d:4.0s"><div class="hd"><b>app.js</b><small>150줄</small></div><div class="rl"><strong>동작 · 저장</strong><span>누르면 무슨 일이 생기나</span></div><ul><li style="--d:4.40s"><code>renderPages</code><span>F1 · 목록 그리기</span></li><li style="--d:4.65s"><code>slashCheck</code><span>F3 · 「/」 보이면 메뉴</span></li><li style="--d:4.90s"><code>dragSetup</code><span>F4 · 끌어 옮기기</span></li><li style="--d:5.15s"><code>save</code><span>F5 · 브라우저에 저장</span></li></ul><div class="hs">집 · 전기 · 배관</div></div></div><div class="v16d" style="--d:6.0s"><div class="lb">데이터<small>개발계획 3칸 → app.js 가 기억</small></div><div class="pg"><b>페이지</b><span class="k">제목 · 주간 회의</span><span class="k">블록들</span><span class="bk"><i>종류 · 제목</i>주간 회의</span><span class="bk"><i>종류 · 체크 상자</i>보고서 초안 · 체크 안 함</span><span class="bk"><i>종류 · 구분선</i></span></div><div class="ls">→ localStorage</div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="T1 화면 뼈대 · 페이지 목록">

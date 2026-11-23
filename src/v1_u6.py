@@ -15,6 +15,59 @@ T = "1-6"
 
 
 
+FILES = [("index.html", "34줄", "뼈대", "화면에 어떤 칸이 있나", "집 · 골조",
+          [("aside", "왼쪽 · 페이지 목록"), ("main", "오른쪽 · 편집 화면"), ("#slash", "「/」 메뉴")]),
+         ("style.css", "45줄", "모양", "칸이 어떻게 보이나", "집 · 인테리어",
+          [("aside", "폭 240px · 연회색 바탕"), ("h1", "제목 글씨 34px"), (".handle", "손잡이 · 마우스 올릴 때만")]),
+         ("app.js", "150줄", "동작 · 저장", "누르면 무슨 일이 생기나", "집 · 전기 · 배관",
+          [("renderPages", "F1 · 목록 그리기"), ("slashCheck", "F3 · 「/」 보이면 메뉴"),
+           ("dragSetup", "F4 · 끌어 옮기기"), ("save", "F5 · 브라우저에 저장")])]
+
+
+def _code():
+    """화면 뒤의 코드 — 개발계획.md → 파일 세 개(뼈대 · 모양 · 동작)가 차례로 · 마지막에 데이터 모양. 예시 앱 실제 이름 · 줄 수."""
+    cols = ""
+    for i, (f, n, role, q, house, rows) in enumerate(FILES):
+        d = .8 + i * 1.6
+        r = "".join(f'<li style="--d:{d + .4 + j * .25:.2f}s"><code>{esc(c)}</code><span>{x}</span></li>' for j, (c, x) in enumerate(rows))
+        cols += (f'<div class="v16c c{i}" style="--d:{d:.1f}s"><div class="hd"><b>{f}</b><small>{n}</small></div>'
+                 f'<div class="rl"><strong>{role}</strong><span>{q}</span></div><ul>{r}</ul><div class="hs">{house}</div></div>')
+    data = ('<div class="v16d" style="--d:6.0s"><div class="lb">데이터<small>개발계획 3칸 → app.js 가 기억</small></div>'
+            '<div class="pg"><b>페이지</b><span class="k">제목 · 주간 회의</span><span class="k">블록들</span>'
+            '<span class="bk"><i>종류 · 제목</i>주간 회의</span><span class="bk"><i>종류 · 체크 상자</i>보고서 초안 · 체크 안 함</span>'
+            '<span class="bk"><i>종류 · 구분선</i></span></div><div class="ls">→ localStorage</div></div>')
+    return ('<div class="v16top" style="--d:.2s"><span>개발계획.md</span><i>→</i><span class="cc">Claude Code</span><i>→</i>'
+            '<span>파일 세 개 · labs/mini_notion/예시/app</span></div>'
+            f'<div class="v16cs">{cols}</div>{data}')
+
+
+CSS = """
+  /* 1-6 · 화면 뒤의 코드 (v16c) */
+  .v16top{display:flex; gap:12px; align-items:center; font-size:16px; font-weight:800; color:#16233A; opacity:0; animation:v16In .4s var(--d) forwards;}
+  .v16top span{background:#F4F6F9; border:1.5px solid #C9D6E6; border-radius:8px; padding:5px 12px;} .v16top span.cc{background:#16233A; color:#fff; border-color:#16233A;}
+  .v16top i{font-style:normal; color:#F28C28;}
+  .v16cs{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:14px;}
+  .v16c{border:2px solid #C9D6E6; border-radius:14px; background:#fff; padding:12px 14px; opacity:0; transform:translateY(10px); animation:v16In .5s var(--d) forwards;}
+  .v16c .hd{display:flex; justify-content:space-between; align-items:baseline; border-bottom:2px solid #E3E6EA; padding-bottom:6px;}
+  .v16c .hd b{font-family:var(--mono); font-size:18px; color:#16233A;} .v16c .hd small{font-size:13px; color:#6B7785;}
+  .v16c .rl{margin:8px 0 6px;} .v16c .rl strong{font-size:20px; color:#C76A12; margin-right:8px;} .v16c .rl span{font-size:14px; color:#3A4657;}
+  .v16c ul{list-style:none; margin:0; padding:0;}
+  .v16c li{display:flex; flex-direction:column; padding:5px 0; border-top:1px dashed #E3E6EA; opacity:0; animation:v16In .3s var(--d) forwards;}
+  .v16c li code{font-size:13px; color:#6B7785;} .v16c li span{font-size:15.5px; font-weight:700; color:#16233A;}
+  .v16c .hs{margin-top:8px; display:inline-block; font-size:13px; font-weight:700; color:#6B7785; background:#F4F6F9; border-radius:6px; padding:2px 8px;}
+  .v16c.c0{border-top:5px solid #16233A;} .v16c.c1{border-top:5px solid #2383E2;} .v16c.c2{border-top:5px solid #F28C28;}
+  .v16d{display:grid; grid-template-columns:170px 1fr auto; gap:14px; align-items:center; margin-top:14px; background:#FFF8F0; border:2px dashed #F2B880; border-radius:14px; padding:10px 14px;
+    opacity:0; animation:v16In .5s var(--d) forwards;}
+  .v16d .lb{font-size:19px; font-weight:800; color:#C76A12;} .v16d .lb small{display:block; font-size:12.5px; color:#6B7785;}
+  .v16d .pg{display:flex; flex-wrap:wrap; gap:6px; align-items:center;} .v16d .pg b{font-size:16px; color:#16233A; margin-right:4px;}
+  .v16d .k{font-size:13.5px; background:#fff; border:1.5px solid #E3E6EA; border-radius:6px; padding:2px 8px; color:#3A4657;}
+  .v16d .bk{font-size:13.5px; background:#fff; border:1.5px solid #F2B880; border-radius:6px; padding:2px 8px; color:#16233A;} .v16d .bk i{font-style:normal; color:#C76A12; font-weight:700; margin-right:6px;}
+  .v16d .ls{font-family:var(--mono); font-size:14px; font-weight:700; color:#16233A;}
+  @keyframes v16In{to{opacity:1; transform:none;}}
+  @media print{.v16top,.v16c,.v16c li,.v16d{opacity:1; animation:none; transform:none}}
+"""
+
+
 def slides():
     return [
         # ── 권한 모드
@@ -70,6 +123,7 @@ def slides():
             ("파일 수정 뒤", "브라우저 새로고침"), ("주소 접속 불가", "「서버 다시 띄워 줘」"),
             ("포트 충돌", "「다른 포트로 띄워 줘」"), ("종료", "「서버 꺼 줘」")], 2), T),
         # ── 태스크별 화면 (실제 캡처)
+        light("화면 뒤의 코드", _code(), T),
         light("T1 화면 뼈대 · 페이지 목록", shot("notion_empty.webp", "T1 직후 · 새 페이지를 연 화면", [
             ("F1", "왼쪽 페이지 목록 · 「+ 새 페이지」"), ("새 페이지", "「제목 없음」 · 목록에 바로 추가"), ("테스트 케이스", "새 페이지 → 목록 맨 아래에 생김")]), T),
         light("T2 블록 편집", shot("notion_main.webp", "T2 직후 · 주간 회의록 페이지", [

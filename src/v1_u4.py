@@ -60,24 +60,25 @@ def _gaps():
             '<div class="v14gN" style="--d:8.2s"><b>빈 칸</b>묻지 않고 추측으로 채움 · 대화마다 다른 결과</div>')
 
 
-# 기획서 칸 → 개발계획 칸 — (기획서에서 온 것, 새로 정하나, 개발계획 칸, 한 줄)
-MAP = [("기능", False, "1. 기능", "F1~F5 · 기능 하나에 한 줄"),
-       ("화면", False, "2. 화면", "화면마다 보이는 요소"),
-       ("개발자 질문", True, "3. 데이터", "저장할 값 · 저장 위치"),
-       ("문제점 · 이용자", False, "4. 완료 기준", "눌러서 확인할 문장"),
-       ("개발자 질문", True, "5. 태스크", "만들 순서 · T1~T6")]
-
-
-def _map():
-    """기획서.md → 개발계획.md — 다섯 칸이 한 줄씩: 기획서 칸 → 화살표 → 개발계획 칸이 채워짐. 새로 정하는 칸은 주황(질문)."""
-    r = ""
-    for i, (frm, new, to, sub) in enumerate(MAP):
-        d = .6 + i * 1.3
-        r += (f'<div class="v14mR"><div class="v14mF{" q" if new else ""}" style="--d:{d:.1f}s">{"? " if new else ""}{frm}</div>'
-              f'<i style="--d:{d + .4:.1f}s">→</i>'
-              f'<div class="v14mT{" q" if new else ""}" style="--d:{d + .6:.1f}s"><b>{to}</b><span>{sub}</span></div></div>')
-    return (f'<div class="v14m"><div class="v14mHd"><span>기획서.md</span><span></span><span>개발계획.md</span></div>{r}</div>'
-            '<div class="v14mK" style="--d:7.4s"><span class="a">기획서에 있던 것 → 자세히 옮김</span><span class="b">없던 것 → 개발자가 묻고 내가 답함</span></div>')
+def _screen():
+    """화면 나누기 — 기획서 한 줄(「왼쪽 목록 · 오른쪽 편집」)이 실제 화면 칸으로 나뉨. 칸마다 점선 → 이름표(F 번호)가 차례로 붙음."""
+    regs = [("aside", "페이지 목록", "F1", 1.2), ("bar", "안내 줄 · 페이지 삭제", "", 2.2), ("title", "큰 제목", "", 3.0),
+            ("blocks", "블록 줄", "F2", 3.8), ("handle", "⋮⋮ 손잡이", "F4", 4.8), ("menu", "「/」 메뉴", "F3", 5.8)]
+    inner = {"aside": '<span class="ln w7"></span><span class="ln on"></span><span class="ln"></span><span class="nw">+ 새 페이지</span>',
+             "bar": '<span class="nw">「/」 를 입력하면 블록 종류를 고를 수 있다</span><span class="del">페이지 삭제</span>',
+             "title": '<span class="big">주간 회의</span>',
+             "blocks": '<span class="rw"><i></i><b class="ln w8"></b></span><span class="rw"><i></i><b class="cb"></b><b class="ln w6"></b></span>'
+                       '<span class="rw"><i></i><b class="ln w7"></b></span><span class="rw"><i></i><b class="ln w4"></b></span>',
+             "handle": "", "menu": '<span>제목</span><span>글</span><span class="on">체크 상자</span><span>구분선</span>'}
+    r = "".join(f'<div class="v14w-{k}" style="--d:{d:.1f}s"><div class="in">{inner[k]}</div>'
+                f'<em style="--d:{d + .3:.1f}s">{(f + " · ") if f else ""}{n}</em></div>' for k, n, f, d in regs)
+    left = "".join(f'<li style="--d:{d + .3:.1f}s"><b>{f or "—"}</b>{n}</li>' for _, n, f, d in regs)
+    return ('<div class="v14sc"><div class="v14scL">'
+            '<div class="v14scQ"><small>기획서 · 화면 칸</small>왼쪽 페이지 목록 · 오른쪽 블록 편집</div><div class="v14scA">↓</div>'
+            f'<div class="v14scP"><small>개발계획 · 2. 화면</small><ul>{left}'
+            '<li style="--d:7.0s"><b>F5</b>저장 · 화면 밖 · 브라우저 안</li></ul></div></div>'
+            f'<div class="v14w" style="--d:.3s"><div class="v14wTop"><i></i><i></i><i></i><span>미니 노션</span></div><div class="v14wB">{r}</div>'
+            '<div class="v14wSave" style="--d:7.0s">F5 · 저장 → 브라우저 안 (화면에 안 보임)</div></div></div>')
 
 
 def _thread():
@@ -108,21 +109,39 @@ CSS = """
   .v14gA{background:#FDECEA; border:2px solid #E6B0AA; border-radius:12px; padding:12px 14px; font-size:19px; font-weight:700; color:#C0392B; opacity:0; animation:v14In .4s var(--d) forwards;}
   .v14gN{margin-top:22px; display:flex; gap:12px; align-items:center; font-size:19px; font-weight:700; color:#16233A; opacity:0; animation:v14In .5s var(--d) forwards;}
   .v14gN b{background:#C0392B; color:#fff; border-radius:8px; padding:4px 10px; font-size:15px;}
-  /* 1-4 · 기획서.md → 개발계획.md (v14m) */
-  .v14m{margin-top:16px;}
-  .v14mHd,.v14mR{display:grid; grid-template-columns:260px 50px 1fr; gap:12px; align-items:center;}
-  .v14mHd span{font-size:16px; font-weight:800; color:#16233A; padding-bottom:6px; border-bottom:3px solid #16233A;}
-  .v14mHd span:last-child{color:#C76A12; border-color:#F28C28;}
-  .v14mR{margin-top:11px;}
-  .v14mF{background:#F4F6F9; border:2px solid #C9D6E6; border-radius:12px; padding:13px 16px; font-size:20px; font-weight:800; color:#16233A; opacity:0; animation:v14In .4s var(--d) forwards;}
-  .v14mF.q{background:#FFF1E2; border:2px dashed #F28C28; color:#C76A12;}
-  .v14mR i{font-style:normal; font-weight:800; font-size:22px; color:#F28C28; text-align:center; opacity:0; animation:v14In .3s var(--d) forwards;}
-  .v14mT{display:flex; gap:16px; align-items:baseline; background:#fff; border:2px solid #C9D6E6; border-radius:12px; padding:13px 16px; opacity:0; transform:translateX(-12px); animation:v14In .5s var(--d) forwards;}
-  .v14mT.q{border-color:#F28C28;}
-  .v14mT b{font-size:20px; color:#16233A; min-width:120px;} .v14mT span{font-size:17px; color:#3A4657;}
-  .v14mK{margin-top:20px; display:flex; gap:14px; opacity:0; animation:v14In .5s var(--d) forwards;}
-  .v14mK span{flex:1; border-radius:12px; padding:11px 14px; font-size:17px; font-weight:700;}
-  .v14mK .a{background:#F4F6F9; color:#16233A;} .v14mK .b{background:#FFF1E2; color:#C76A12;}
+  /* 1-4 · 화면 나누기 (v14sc · v14w) */
+  .v14sc{display:grid; grid-template-columns:300px 1fr; gap:24px; margin-top:10px; align-items:start;}
+  .v14scQ,.v14scP{background:#F4F6F9; border:2px solid #C9D6E6; border-radius:12px; padding:12px 14px; font-size:17px; font-weight:700; color:#16233A;}
+  .v14scQ small,.v14scP small{display:block; font-size:13px; color:#6B7785; margin-bottom:4px;}
+  .v14scA{text-align:center; font-size:22px; font-weight:800; color:#F28C28; margin:4px 0;}
+  .v14scP{background:#FFF8F0; border-color:#F2B880;}
+  .v14scP ul{list-style:none; margin:4px 0 0; padding:0;}
+  .v14scP li{display:flex; gap:10px; font-size:15.5px; padding:4px 0; opacity:0; animation:v14In .4s var(--d) forwards;}
+  .v14scP li b{min-width:28px; color:#C76A12;}
+  .v14w{position:relative; border:2px solid #C9D6E6; border-radius:12px; background:#fff; overflow:visible; opacity:0; animation:v14In .4s var(--d) forwards;}
+  .v14wTop{display:flex; gap:6px; align-items:center; padding:8px 12px; border-bottom:1.5px solid #E3E6EA; font-size:13px; color:#6B7785;}
+  .v14wTop i{width:9px; height:9px; border-radius:50%; background:#D9DDE3;} .v14wTop span{margin-left:8px;}
+  .v14wB{position:relative; height:340px;}
+  .v14wB > div{position:absolute; border-radius:8px; opacity:0; animation:v14Rg .5s var(--d) forwards;}
+  .v14wB > div .in{position:absolute; inset:0; padding:10px 12px; display:flex; flex-direction:column; gap:9px;}
+  .v14wB em{position:absolute; font-style:normal; white-space:nowrap; background:#F28C28; color:#fff; font-size:13.5px; font-weight:800; border-radius:6px; padding:2px 8px;
+    opacity:0; animation:v14In .3s var(--d) forwards; z-index:3;}
+  .v14w-aside{left:0; top:0; width:26%; height:100%; background:#F7F7F5; border-right:1.5px solid #EBEBEA;} .v14w-aside em{left:10px; bottom:10px;}
+  .v14w-bar{left:30%; top:4%; width:66%; height:10%;} .v14wB .v14w-bar .in{flex-direction:row; justify-content:space-between; align-items:center; padding:0 10px;} .v14w-bar em{right:-6px; top:-12px;}
+  .v14w-title{left:30%; top:17%; width:46%; height:13%;} .v14w-title em{right:-60px; top:10px;}
+  .v14w-blocks{left:30%; top:34%; width:66%; height:58%;} .v14w-blocks em{right:-6px; bottom:-12px;}
+  .v14w-handle{left:30%; top:34%; width:5%; height:58%;} .v14w-handle em{left:-46px; top:-14px;}
+  .v14w-menu{left:44%; top:52%; width:24%; height:40%; background:#fff; box-shadow:0 6px 16px rgba(0,0,0,.14); z-index:2;}
+  .v14w-menu .in{gap:2px; padding:6px;} .v14w-menu .in span{font-size:13px; padding:3px 6px; border-radius:4px; color:#37352F;} .v14w-menu .in span.on{background:#ECEBE8; font-weight:700;}
+  .v14w-menu em{right:-40px; top:-12px;}
+  .v14wB .ln{display:block; height:9px; width:90%; border-radius:4px; background:#E3E2DE;} .v14wB .ln.on{background:#D3D1CB;}
+  .v14wB .w4{width:40%} .v14wB .w5{width:50%} .v14wB .w6{width:60%} .v14wB .w7{width:70%} .v14wB .w8{width:80%}
+  .v14wB .nw{font-size:12px; color:#9B9A97;} .v14wB .del{font-size:12px; color:#C0392B;}
+  .v14wB .big{font-size:24px; font-weight:800; color:#37352F;}
+  .v14wB .rw{display:flex; align-items:center; gap:8px; height:24px;} .v14wB .rw i{width:8px; height:14px; border-left:3px dotted #C4C4C2; border-right:3px dotted #C4C4C2;}
+  .v14wB .rw b{display:block;} .v14wB .cb{width:13px; height:13px; border:1.8px solid #37352F; border-radius:3px; flex:none;}
+  .v14wSave{position:absolute; right:12px; bottom:-46px; background:#16233A; color:#fff; font-size:14px; font-weight:800; border-radius:8px; padding:6px 12px; opacity:0; animation:v14In .4s var(--d) forwards;}
+  @keyframes v14Rg{0%{opacity:0; outline:2.5px dashed #F28C28; outline-offset:4px} 60%{opacity:1; outline:2.5px dashed #F28C28; outline-offset:0} 100%{opacity:1; outline:2px dashed #F2B880; outline-offset:0}}
   /* 1-4 · 기능 하나 따라가기 (v14t) */
   .v14t{margin-top:14px;}
   .v14tTag{display:inline-block; background:#16233A; color:#fff; font-size:19px; font-weight:800; border-radius:10px; padding:8px 16px; opacity:0; animation:v14In .4s .1s forwards;}
@@ -140,7 +159,7 @@ CSS = """
   @keyframes v14In{to{opacity:1; transform:none;}}
   @keyframes v14Hi{to{background:#FDECEA; color:#C0392B; box-shadow:0 0 0 2px #E6B0AA;}}
   @keyframes v14Dn{to{top:calc(100% - 20px);}}
-  @media print{.v14gL,.v14gQ,.v14gR i,.v14gA,.v14gN,.v14mF,.v14mR i,.v14mT,.v14mK,.v14tTag,.v14tR{opacity:1; animation:none; transform:none}}
+  @media print{.v14gL,.v14gQ,.v14gR i,.v14gA,.v14gN,.v14tTag,.v14tR{opacity:1; animation:none; transform:none}}
 """
 
 
@@ -153,7 +172,7 @@ def slides():
                   ("공정표", "태스크", "무엇부터 짓나"), ("준공 검사", "완료 기준", "도면대로 지었나")], "집 짓기", "앱 만들기") + "</div>"
               + src(GEN), T),
         # ── 개발 계획
-        light("기획서.md → 개발계획.md", _map(), T),
+        light("화면 나누기", _screen(), T),
         light("기능 하나 따라가기", _thread(), T),
         ba("확인 가능한 완료 기준", T, "「메모가 잘 저장된다」\n「블록을 쉽게 바꾼다」",
            "「주간 회의록에 체크 상자 「보고서 초안」 추가 후 새로고침해도 남아 있다」\n「빈 블록에 「/」 → 「체크 상자」 고르면 체크 상자로 바뀐다」",
