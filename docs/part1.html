@@ -1266,12 +1266,48 @@
   .v1big em{font-style:normal; color:#F28C28;}
   .v1u3im{width:100%; border-radius:14px; border:1.5px solid #D9DDE3; background:#F7EEDB; display:block;}
 
-  /* 1-4 · 개발 계획 칸별 예 */
-  .v1pxs{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:6px;}
-  .v1px{border:1.5px solid #D9DDE3; border-radius:14px; background:#fff; padding:16px 18px; display:flex; flex-direction:column; gap:8px;}
-  .v1px b{font-size:20px; color:#16233A;}
-  .v1px .v1pl{display:block; font-family:inherit; font-weight:600; font-size:15.5px; color:#1F3A5F; background:#F4F6F9; border-radius:8px; padding:9px 12px; white-space:pre-wrap; letter-spacing:0; font-variant-ligatures:none;}
-  .v1px > span:last-child{font-size:15.5px; color:#3A4657;}
+  /* 1-4 · 기획서만 넘긴 결과 (v14g) */
+  .v14g{display:grid; grid-template-columns:330px 1fr; gap:28px; margin-top:20px; align-items:start;}
+  .v14gL{background:#F4F6F9; border:2px solid #C9D6E6; border-radius:14px; padding:18px; opacity:0; animation:v14In .5s .2s forwards;}
+  .v14gH{font-size:15px; font-weight:800; color:#6B7785; margin-bottom:10px;}
+  .v14gT{font-size:21px; font-weight:700; color:#16233A; line-height:1.6; word-break:keep-all;}
+  .v14gT u{text-decoration:none; border-radius:6px; padding:0 3px; animation:v14Hi .4s var(--d) forwards;}
+  .v14gC{margin-top:16px; font-size:15px; color:#6B7785;}
+  .v14gHd,.v14gR{display:grid; grid-template-columns:220px 36px 1fr; gap:10px; align-items:center;}
+  .v14gHd span{font-size:15px; font-weight:800; color:#6B7785; padding-bottom:6px; border-bottom:2px solid #D9DDE3;}
+  .v14gR{margin-top:12px;}
+  .v14gQ{background:#fff; border:2px dashed #9AA6B4; border-radius:12px; padding:12px 14px; font-size:19px; font-weight:700; color:#16233A; opacity:0; animation:v14In .4s var(--d) forwards;}
+  .v14gR i{font-style:normal; font-weight:800; font-size:20px; color:#C0392B; opacity:0; animation:v14In .3s var(--d) forwards;}
+  .v14gA{background:#FDECEA; border:2px solid #E6B0AA; border-radius:12px; padding:12px 14px; font-size:19px; font-weight:700; color:#C0392B; opacity:0; animation:v14In .4s var(--d) forwards;}
+  .v14gN{margin-top:22px; display:flex; gap:12px; align-items:center; font-size:19px; font-weight:700; color:#16233A; opacity:0; animation:v14In .5s var(--d) forwards;}
+  .v14gN b{background:#C0392B; color:#fff; border-radius:8px; padding:4px 10px; font-size:15px;}
+  /* 1-4 · 기획서.md → 개발계획.md (v14m) */
+  .v14m{margin-top:16px;}
+  .v14mHd,.v14mR{display:grid; grid-template-columns:260px 50px 1fr; gap:12px; align-items:center;}
+  .v14mHd span{font-size:16px; font-weight:800; color:#16233A; padding-bottom:6px; border-bottom:3px solid #16233A;}
+  .v14mHd span:last-child{color:#C76A12; border-color:#F28C28;}
+  .v14mR{margin-top:11px;}
+  .v14mF{background:#F4F6F9; border:2px solid #C9D6E6; border-radius:12px; padding:13px 16px; font-size:20px; font-weight:800; color:#16233A; opacity:0; animation:v14In .4s var(--d) forwards;}
+  .v14mF.q{background:#FFF1E2; border:2px dashed #F28C28; color:#C76A12;}
+  .v14mR i{font-style:normal; font-weight:800; font-size:22px; color:#F28C28; text-align:center; opacity:0; animation:v14In .3s var(--d) forwards;}
+  .v14mT{display:flex; gap:16px; align-items:baseline; background:#fff; border:2px solid #C9D6E6; border-radius:12px; padding:13px 16px; opacity:0; transform:translateX(-12px); animation:v14In .5s var(--d) forwards;}
+  .v14mT.q{border-color:#F28C28;}
+  .v14mT b{font-size:20px; color:#16233A; min-width:120px;} .v14mT span{font-size:17px; color:#3A4657;}
+  .v14mK{margin-top:20px; display:flex; gap:14px; opacity:0; animation:v14In .5s var(--d) forwards;}
+  .v14mK span{flex:1; border-radius:12px; padding:11px 14px; font-size:17px; font-weight:700;}
+  .v14mK .a{background:#F4F6F9; color:#16233A;} .v14mK .b{background:#FFF1E2; color:#C76A12;}
+  /* 1-4 · 기능 하나 따라가기 (v14t) */
+  .v14t{margin-top:14px;}
+  .v14tTag{display:inline-block; background:#16233A; color:#fff; font-size:19px; font-weight:800; border-radius:10px; padding:8px 16px; opacity:0; animation:v14In .4s .1s forwards;}
+  .v14tL{position:relative; margin:14px 0 0 18px; padding-left:30px; border-left:3px solid #C9D6E6;}
+  .v14tDot{position:absolute; left:-10px; top:0; width:17px; height:17px; border-radius:50%; background:#F28C28; animation:v14Dn 6s .4s forwards;}
+  .v14tR{display:grid; grid-template-columns:150px 1fr; gap:16px; align-items:center; background:#fff; border:2px solid #C9D6E6; border-radius:12px;
+    padding:12px 16px; margin-bottom:11px; opacity:0; transform:translateX(-12px); animation:v14In .5s var(--d) forwards;}
+  .v14tR b{font-size:19px; color:#C76A12;} .v14tR span{font-size:17.5px; color:#16233A; font-weight:600;}
+  @keyframes v14In{to{opacity:1; transform:none;}}
+  @keyframes v14Hi{to{background:#FDECEA; color:#C0392B; box-shadow:0 0 0 2px #E6B0AA;}}
+  @keyframes v14Dn{to{top:calc(100% - 20px);}}
+  @media print{.v14gL,.v14gQ,.v14gR i,.v14gA,.v14gN,.v14mF,.v14mR i,.v14mT,.v14mK,.v14tTag,.v14tR{opacity:1; animation:none; transform:none}}
 
   /* 1-5 · diff — 네 구역의 파일 내용과 이웃 구역 사이 차이 (v2) */
   .v2q0{display:flex; gap:10px; margin-bottom:12px;}
@@ -1988,10 +2024,9 @@ print(total)</code></pre></div><div class="code sm"><div class="bar"><span class
   <h2 class="s-title sm">기획자 페르소나</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="twocol"><div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">기획자.md</span></div><pre><code># 기획자
-- 서비스 기획 10년 차
 - 질문은 한 번에 하나씩
 - 내가 답한 내용으로만 쓴다
-- 기획서.md 칸: 배경 · 문제점 · 이용자 · 기능 · 화면</code></pre></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>만들기</b><span>mini_notion 폴더에 새 파일 · 다섯 줄</span></div><div class="v2tile" style="--d:0.08s"><b>바꿔도 됨</b><span>경력 · 말투</span></div><div class="v2tile" style="--d:0.16s"><b>마지막 줄</b><span>기획서 칸 = 질문 순서</span></div></div></div></div></div></div>
+- 기획서.md 칸: 배경 · 문제점 · 이용자 · 기능 · 화면</code></pre></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>만들기</b><span>mini_notion 폴더에 새 파일 · 네 줄</span></div><div class="v2tile" style="--d:0.08s"><b>바꿔도 됨</b><span>말투 · 질문 방식</span></div><div class="v2tile" style="--d:0.16s"><b>마지막 줄</b><span>기획서 칸 = 질문 순서</span></div></div></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="기획자 페르소나 대화 예시">
@@ -2036,10 +2071,9 @@ print(total)</code></pre></div><div class="code sm"><div class="bar"><span class
   <h2 class="s-title sm">실습 1-3 · 1단계 기획자.md 만들기</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v1tt"><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">mini_notion/기획자.md</span></div><pre><code># 기획자
-- 서비스 기획 10년 차
 - 질문은 한 번에 하나씩
 - 내가 답한 내용으로만 쓴다
-- 기획서.md 칸: 배경 · 문제점 · 이용자 · 기능 · 화면</code></pre></div></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>만들기</b><span>VS Code 탐색기 → 새 파일 → 기획자.md</span></div><div class="v2tile" style="--d:0.08s"><b>쓰기</b><span>다섯 줄 · 경력 · 말투는 바꿔도 됨</span></div><div class="v2tile" style="--d:0.16s"><b>저장</b><span>macOS ⌘S · Windows Ctrl+S</span></div></div></div></div>
+- 기획서.md 칸: 배경 · 문제점 · 이용자 · 기능 · 화면</code></pre></div></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>만들기</b><span>VS Code 탐색기 → 새 파일 → 기획자.md</span></div><div class="v2tile" style="--d:0.08s"><b>쓰기</b><span>네 줄 · 말투는 바꿔도 됨</span></div><div class="v2tile" style="--d:0.16s"><b>저장</b><span>macOS ⌘S · Windows Ctrl+S</span></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="실습 1-3 · 2단계 Plan Mode 요청">
@@ -2101,20 +2135,12 @@ print(total)</code></pre></div><div class="code sm"><div class="bar"><span class
   <div class="body"><div class="mid"><div class="v1map"><a class="v1u done" href="#u-1-1"><span class="c">1-1</span><b>바이브코딩이란</b><small>바이브코딩 개념</small></a><a class="v1u done" href="#u-1-2"><span class="c">1-2</span><b>도구 · 실습 환경</b><small>계정 3개 · 설치</small></a><a class="v1u done" href="#u-1-3"><span class="c">1-3</span><b>기획서 작성</b><small>기획서.md</small></a><a class="v1u on" href="#u-1-4"><span class="c">1-4</span><b>개발 계획</b><small>개발계획.md</small></a><a class="v1u " href="#u-1-5"><span class="c">1-5</span><b>Git · GitHub 기초</b><small>첫 커밋</small></a><a class="v1u " href="#u-1-6"><span class="c">1-6</span><b>바이브코딩 실습</b><small>동작하는 앱</small></a><a class="v1u " href="#u-1-7"><span class="c">1-7</span><b>배포</b><small>공유 주소</small></a><a class="v1u " href="#u-1-8"><span class="c">1-8</span><b>마무리</b><small>회고 → 2부</small></a></div><div class="dbnote"><span>공통 예제</span> 미니 노션 · 같은 순서로 내 아이디어를 만든다</div></div></div>
 </section>
 
-<section class="slide lt" data-title="기획서만으로는 부족한 이유">
+<section class="slide lt" data-title="기획서만 넘긴 결과">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-4</span></div>
-  <h2 class="s-title sm">기획서만으로는 부족한 이유</h2>
+  <h2 class="s-title sm">기획서만 넘긴 결과</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2ms"><div class="v2mh"><span>Claude Code가 정할 것</span><i></i><span>기획서에 있는 것</span></div><div class="v2m" style="--d:0.00s"><div class="a">블록 종류</div><i>→</i><div class="b"><b>몇 가지 · 무엇</b><small>기획서에 「블록」만 한 단어</small></div></div><div class="v2m" style="--d:0.12s"><div class="a">저장 위치</div><i>→</i><div class="b"><b>서버 DB · 내 브라우저</b><small>기획서에 「저장」만 한 단어</small></div></div><div class="v2m" style="--d:0.24s"><div class="a">만들 순서</div><i>→</i><div class="b"><b>어느 화면부터</b><small>기획서에 없음</small></div></div><div class="v2m" style="--d:0.36s"><div class="a">완성 범위</div><i>→</i><div class="b"><b>어디까지 만들면 끝인지</b><small>기준 없음</small></div></div></div><div class="dbnote"><span>빈 칸</span> Claude Code가 추측으로 채움 · 대화마다 다른 결과</div></div></div>
-</section>
-
-<section class="slide lt" data-title="AI가 추측으로 채운 결과">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">1-4</span></div>
-  <h2 class="s-title sm">AI가 추측으로 채운 결과</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">기획서만 · 예</div><div class="v2pc" style="--d:0.00s"><b>블록</b><span>표 · 이미지 · 코드까지 열 가지</span></div><div class="v2pc" style="--d:0.08s"><b>「/」 메뉴</b><span>없음 · 버튼으로만 추가</span></div><div class="v2pc" style="--d:0.16s"><b>저장</b><span>서버를 새로 만들려 함</span></div></div><div class="v2p on"><div class="v2ph">개발 계획과 함께 · 예</div><div class="v2pc" style="--d:0.00s"><b>블록</b><span>제목 · 글 · 체크 상자 · 구분선</span></div><div class="v2pc" style="--d:0.08s"><b>「/」 메뉴</b><span>빈 블록에 「/」 → 메뉴</span></div><div class="v2pc" style="--d:0.16s"><b>저장</b><span>브라우저 localStorage</span></div></div></div><div class="dbnote"><span>예</span> 같은 기획서로도 결과가 달라지는 지점 · 실제 결과는 대화마다 다름</div></div></div>
+  <div class="body"><div class="mid"><div class="v14g"><div class="v14gL"><div class="v14gH">기획서.md · 기능 칸</div><div class="v14gT">페이지 · <u style="--d:1.0s">블록</u> · 「/」 메뉴 · 끌어 옮기기 · <u style="--d:2.6s">저장</u></div><div class="v14gC">Claude Code 가 읽음</div></div><div class="v14gW"><div class="v14gHd"><span>빈 칸</span><span></span><span>AI 추측 · 예</span></div><div class="v14gR"><div class="v14gQ" style="--d:1.2s">블록 종류는?</div><i style="--d:1.8s">→</i><div class="v14gA" style="--d:1.8s">표 · 이미지 · 코드까지 열 가지</div></div><div class="v14gR"><div class="v14gQ" style="--d:2.8s">어디에 저장?</div><i style="--d:3.4s">→</i><div class="v14gA" style="--d:3.4s">서버를 새로 만듦</div></div><div class="v14gR"><div class="v14gQ" style="--d:4.4s">무엇부터 만들지?</div><i style="--d:5.0s">→</i><div class="v14gA" style="--d:5.0s">AI 가 정한 순서</div></div><div class="v14gR"><div class="v14gQ" style="--d:6.0s">어디까지면 끝?</div><i style="--d:6.6s">→</i><div class="v14gA" style="--d:6.6s">기준 없음 · 대화마다 다름</div></div></div></div><div class="v14gN" style="--d:8.2s"><b>빈 칸</b>묻지 않고 추측으로 채움 · 대화마다 다른 결과</div></div></div>
 </section>
 
 <section class="slide lt" data-title="조감도와 설계 도면">
@@ -2125,44 +2151,20 @@ print(total)</code></pre></div><div class="code sm"><div class="bar"><span class
   <div class="body"><div class="mid"><div class="phmap v3ph"><figure class="ph"><img src="img/v1_u4_blueprint.webp" alt="조감도와 설계 도면"><figcaption><b>조감도와 설계 도면</b></figcaption></figure><div class="v2ms"><div class="v2mh"><span>집 짓기</span><i></i><span>앱 만들기</span></div><div class="v2m" style="--d:0.00s"><div class="a">조감도</div><i>→</i><div class="b"><b>기획서</b><small>어떤 집인지 · 왜</small></div></div><div class="v2m" style="--d:0.12s"><div class="a">설계 도면</div><i>→</i><div class="b"><b>개발 계획</b><small>기능 · 화면 · 데이터</small></div></div><div class="v2m" style="--d:0.24s"><div class="a">공정표</div><i>→</i><div class="b"><b>태스크</b><small>무엇부터 짓나</small></div></div><div class="v2m" style="--d:0.36s"><div class="a">준공 검사</div><i>→</i><div class="b"><b>완료 기준</b><small>도면대로 지었나</small></div></div></div></div></div></div>
 </section>
 
-<section class="slide lt" data-title="개발 계획">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">1-4</span></div>
-  <h2 class="s-title sm">개발 계획</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2tiles c4"><div class="v2tile" style="--d:0.00s"><b>만들 것</b><span>기능 · 화면 · 데이터</span></div><div class="v2tile" style="--d:0.08s"><b>범위</b><span>MVP 포함 · 제외</span></div><div class="v2tile" style="--d:0.16s"><b>완료 기준</b><span>확인할 수 있는 문장</span></div><div class="v2tile" style="--d:0.24s"><b>태스크</b><span>만들 순서 · 한 번에 하나</span></div></div><div class="dbnote"><span>현업 문서</span> PRD (제품 요구사항 문서) + 개발 일정 · 1부는 한 파일 개발계획.md</div></div></div>
-</section>
-
-<section class="slide lt" data-title="기획서와 개발 계획">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">1-4</span></div>
-  <h2 class="s-title sm">기획서와 개발 계획</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">기획서</div><div class="v2pc" style="--d:0.00s"><b>목적</b><span>왜 만드는지 정리</span></div><div class="v2pc" style="--d:0.08s"><b>함께 쓰는 페르소나</b><span>기획자</span></div><div class="v2pc" style="--d:0.16s"><b>내용</b><span>배경 · 문제점 · 이용자 · 기능 · 화면</span></div></div><div class="v2p on"><div class="v2ph">개발 계획</div><div class="v2pc" style="--d:0.00s"><b>목적</b><span>무엇을 · 어떤 순서로 만들지 확정</span></div><div class="v2pc" style="--d:0.08s"><b>함께 쓰는 페르소나</b><span>개발자</span></div><div class="v2pc" style="--d:0.16s"><b>내용</b><span>기능 · 화면 요소 · 데이터 · 완료 기준 · 태스크</span></div></div></div></div></div>
-</section>
-
-<section class="slide lt" data-title="개발 계획 구성">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">1-4</span></div>
-  <h2 class="s-title sm">개발 계획 구성</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="flow"><div class="fs"><b>목표</b><span>한 문장</span></div><div class="fa">→</div><div class="fs"><b>MVP 범위</b><span>포함 · 제외</span></div><div class="fa">→</div><div class="fs"><b>기능</b><span>F1 ~ F5</span></div><div class="fa">→</div><div class="fs"><b>화면</b><span>요소 · 데이터</span></div><div class="fa">→</div><div class="fs"><b>완료 기준</b><span>확인할 문장</span></div><div class="fa">→</div><div class="fs hl"><b>태스크</b><span>T1 ~ T6</span></div></div><div class="dbnote"><span>파일</span> 개발계획.md · 칸마다 「## 번호. 제목」</div></div></div>
-</section>
-
 <section class="slide lt" data-title="기획서.md → 개발계획.md">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-4</span></div>
   <h2 class="s-title sm">기획서.md → 개발계획.md</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2ms"><div class="v2mh"><span>기획서.md</span><i></i><span>개발계획.md</span></div><div class="v2m" style="--d:0.00s"><div class="a">배경 · 이용자</div><i>→</i><div class="b"><b>1. 목표</b><small>회의록을 한곳에 · 회의가 잦은 직장인 · PC</small></div></div><div class="v2m" style="--d:0.12s"><div class="a">기능</div><i>→</i><div class="b"><b>3. 기능 명세</b><small>페이지 · 블록 · 「/」 메뉴 · 끌어 옮기기 · 저장 → F1~F5</small></div></div><div class="v2m" style="--d:0.24s"><div class="a">화면</div><i>→</i><div class="b"><b>4. 화면별 요소</b><small>왼쪽 목록 · 오른쪽 편집 → 화면마다 보이는 것</small></div></div><div class="v2m" style="--d:0.36s"><div class="a">문제점</div><i>→</i><div class="b"><b>6. 완료 기준</b><small>「지난주 회의록을 못 찾음」 → 「새로고침해도 페이지가 남음」</small></div></div></div><div class="dbnote"><span>새로 정하는 것</span> 2. MVP 범위 · 5. 데이터 항목 · 저장 위치 · 7. 태스크 순서</div></div></div>
+  <div class="body"><div class="mid"><div class="v14m"><div class="v14mHd"><span>기획서.md</span><span></span><span>개발계획.md</span></div><div class="v14mR"><div class="v14mF" style="--d:0.6s">기능</div><i style="--d:1.0s">→</i><div class="v14mT" style="--d:1.2s"><b>1. 기능</b><span>F1~F5 · 기능 하나에 한 줄</span></div></div><div class="v14mR"><div class="v14mF" style="--d:1.9s">화면</div><i style="--d:2.3s">→</i><div class="v14mT" style="--d:2.5s"><b>2. 화면</b><span>화면마다 보이는 요소</span></div></div><div class="v14mR"><div class="v14mF q" style="--d:3.2s">? 개발자 질문</div><i style="--d:3.6s">→</i><div class="v14mT q" style="--d:3.8s"><b>3. 데이터</b><span>저장할 값 · 저장 위치</span></div></div><div class="v14mR"><div class="v14mF" style="--d:4.5s">문제점 · 이용자</div><i style="--d:4.9s">→</i><div class="v14mT" style="--d:5.1s"><b>4. 완료 기준</b><span>눌러서 확인할 문장</span></div></div><div class="v14mR"><div class="v14mF q" style="--d:5.8s">? 개발자 질문</div><i style="--d:6.2s">→</i><div class="v14mT q" style="--d:6.4s"><b>5. 태스크</b><span>만들 순서 · T1~T6</span></div></div></div><div class="v14mK" style="--d:7.4s"><span class="a">기획서에 있던 것 → 자세히 옮김</span><span class="b">없던 것 → 개발자가 묻고 내가 답함</span></div></div></div>
 </section>
 
-<section class="slide lt" data-title="개발 계획 작성 예시">
+<section class="slide lt" data-title="기능 하나 따라가기">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-4</span></div>
-  <h2 class="s-title sm">개발 계획 작성 예시</h2>
+  <h2 class="s-title sm">기능 하나 따라가기</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1pxs"><div class="v1px"><b>기능 명세</b><span class="v1pl">F3 「/」 메뉴: 빈 블록에 「/」 → 메뉴 · 화살표 · 엔터로 블록 종류 고르기</span><span>번호 = 태스크와 연결 · 한 줄에 기능 하나</span></div><div class="v1px"><b>데이터 항목</b><span class="v1pl">블록 종류 · 제목 · 글 · 체크 상자 · 구분선</span><span>저장할 값마다 실제 예 하나 · 저장 위치</span></div><div class="v1px"><b>완료 기준</b><span class="v1pl">빈 블록에 「/」 → 「체크 상자」를 고르면 그 블록이 체크 상자로 바뀐다</span><span>체크 상자 · 브라우저에서 직접 확인</span></div><div class="v1px"><b>태스크</b><span class="v1pl">T3 「/」 메뉴 · F3 · 「/」 → 메뉴 → 블록 종류 바뀜</span><span>끝나면 보이는 화면 · 만들 순서</span></div></div><div class="dbnote"><span>파일</span> labs/mini_notion/예시/개발계획.md</div></div></div>
+  <div class="body"><div class="mid"><div class="v14t"><div class="v14tTag">F3 「/」 메뉴</div><div class="v14tL"><i class="v14tDot"></i><div class="v14tR" style="--d:0.4s"><b>1. 기능</b><span>F3 「/」 메뉴: 빈 블록에 「/」 → 메뉴 · 화살표 · 엔터로 블록 종류 고르기</span></div><div class="v14tR" style="--d:1.6s"><b>2. 화면</b><span>편집 화면: 「/」 안내 · 「페이지 삭제」 / 큰 제목 / 블록 줄(손잡이 · 내용)</span></div><div class="v14tR" style="--d:2.8s"><b>3. 데이터</b><span>블록 종류 · 제목 · 글 · 체크 상자 · 구분선</span></div><div class="v14tR" style="--d:4.0s"><b>4. 완료 기준</b><span>빈 블록에 「/」 → 「체크 상자」를 고르면 그 블록이 체크 상자로 바뀐다</span></div><div class="v14tR" style="--d:5.2s"><b>5. 태스크</b><span>T3 「/」 메뉴 · F3 · 「/」 → 메뉴 → 블록 종류 바뀜</span></div></div></div><div class="dbnote"><span>파일</span> labs/mini_notion/예시/개발계획.md</div></div></div>
 </section>
 
 <section class="slide lt" data-title="확인 가능한 완료 기준">
@@ -2182,7 +2184,7 @@ print(total)</code></pre></div><div class="code sm"><div class="bar"><span class
   <div class="eyebrow"><span class="tag">1-4</span></div>
   <h2 class="s-title sm">태스크</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2ms"><div class="v2mh"><span>태스크</span><i></i><span>기능 하나 = 태스크 하나</span></div><div class="v2m" style="--d:0.00s"><div class="a">T1 화면 뼈대 · 페이지 목록</div><i>→</i><div class="b"><b>F1</b><small>왼쪽 목록 · 새 페이지 · 삭제</small></div></div><div class="v2m" style="--d:0.12s"><div class="a">T2 블록 편집</div><i>→</i><div class="b"><b>F2</b><small>엔터로 새 블록 · 체크 상자 체크</small></div></div><div class="v2m" style="--d:0.24s"><div class="a">T3 「/」 메뉴</div><i>→</i><div class="b"><b>F3</b><small>「/」 → 메뉴 → 블록 종류 바뀜</small></div></div><div class="v2m" style="--d:0.36s"><div class="a">T4 블록 끌어 옮기기</div><i>→</i><div class="b"><b>F4</b><small>손잡이로 순서 바뀜</small></div></div><div class="v2m" style="--d:0.48s"><div class="a">T5 저장</div><i>→</i><div class="b"><b>F5</b><small>새로고침 뒤 그대로</small></div></div><div class="v2m" style="--d:0.60s"><div class="a">T6 완료 기준 점검</div><i>→</i><div class="b"><b>6</b><small>모바일 폭 · 다섯 줄 모두 ✓</small></div></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v2ms"><div class="v2mh"><span>태스크</span><i></i><span>기능 하나 = 태스크 하나</span></div><div class="v2m" style="--d:0.00s"><div class="a">T1 화면 뼈대 · 페이지 목록</div><i>→</i><div class="b"><b>F1</b><small>왼쪽 목록 · 새 페이지 · 삭제</small></div></div><div class="v2m" style="--d:0.12s"><div class="a">T2 블록 편집</div><i>→</i><div class="b"><b>F2</b><small>엔터로 새 블록 · 체크 상자 체크</small></div></div><div class="v2m" style="--d:0.24s"><div class="a">T3 「/」 메뉴</div><i>→</i><div class="b"><b>F3</b><small>「/」 → 메뉴 → 블록 종류 바뀜</small></div></div><div class="v2m" style="--d:0.36s"><div class="a">T4 블록 끌어 옮기기</div><i>→</i><div class="b"><b>F4</b><small>손잡이로 순서 바뀜</small></div></div><div class="v2m" style="--d:0.48s"><div class="a">T5 저장</div><i>→</i><div class="b"><b>F5</b><small>새로고침 뒤 그대로</small></div></div><div class="v2m" style="--d:0.60s"><div class="a">T6 완료 기준 점검</div><i>→</i><div class="b"><b>완료 기준</b><small>모바일 폭 · 다섯 줄 모두 ✓</small></div></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="개발자 페르소나">
@@ -2191,10 +2193,9 @@ print(total)</code></pre></div><div class="code sm"><div class="bar"><span class
   <h2 class="s-title sm">개발자 페르소나</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="twocol"><div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">개발자.md</span></div><pre><code># 개발자
-- 웹 개발 10년 차
 - 정해지지 않은 것은 먼저 묻는다
 - 계획 단계에서는 코드를 쓰지 않는다
-- 개발계획.md 칸: 기능 · 화면 · 데이터 · 완료 기준 · 태스크</code></pre></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>만들기</b><span>기획자.md 옆에 새 파일 · 다섯 줄</span></div><div class="v2tile" style="--d:0.08s"><b>기획자.md 와 차이</b><span>역할 · 마지막 줄 칸</span></div><div class="v2tile" style="--d:0.16s"><b>둘째 줄</b><span>기획서에 없는 것은 먼저 질문</span></div></div></div></div></div></div>
+- 개발계획.md 칸: 기능 · 화면 · 데이터 · 완료 기준 · 태스크</code></pre></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>만들기</b><span>기획자.md 옆에 새 파일 · 네 줄</span></div><div class="v2tile" style="--d:0.08s"><b>기획자.md 와 차이</b><span>역할 · 마지막 줄 칸</span></div><div class="v2tile" style="--d:0.16s"><b>첫 줄</b><span>기획서에 없는 것은 먼저 질문</span></div></div></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="개발 계획 대화 예시">
@@ -2222,14 +2223,7 @@ print(total)</code></pre></div><div class="code sm"><div class="bar"><span class
   <div class="eyebrow"><span class="tag">1-4</span></div>
   <h2 class="s-title sm">실습 1-4 순서</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><ol class="v1st"><li style="--d:0.00s"><em>1</em><span>개발자.md 만들기</span></li><li style="--d:0.25s"><em>2</em><span>모드 표시 → Plan</span></li><li style="--d:0.50s"><em>3</em><span>「개발자.md 대로 개발 계획 세워 줘」</span></li><li style="--d:0.75s"><em>4</em><span>질문에 답하기 · 피드백</span></li><li style="--d:1.00s"><em>5</em><span>승인 → 개발계획.md</span></li></ol><div class="qk2"><b>확인</b><ul><li>개발계획.md 파일이 생김</li><li>태스크마다 끝나면 보이는 화면이 적힘</li></ul></div></div></div>
-</section>
-<section class="slide lt" data-title="실습 1-4 요청 항목">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">1-4</span></div>
-  <h2 class="s-title sm">실습 1-4 요청 항목</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1sls"><div class="v1sl" style="--d:0.00s"><b>목표</b><span>개발계획.md · 일곱 칸</span></div><div class="v1sl" style="--d:0.20s"><b>입력</b><span>기획서.md · 개발자.md</span></div><div class="v1sl" style="--d:0.40s"><b>진행 방식</b><span>Plan Mode · 질문에 답하기</span></div><div class="v1sl" style="--d:0.60s"><b>하지 말 것</b><span>코드 작성</span></div></div></div></div>
+  <div class="body"><div class="mid"><ol class="v1st"><li style="--d:0.00s"><em>1</em><span>개발자.md 만들기</span></li><li style="--d:0.25s"><em>2</em><span>모드 표시 → Plan · 「개발자.md 대로 기획서.md 를 읽고 개발 계획을 세워 줘」 · 질문에 답하기</span></li><li style="--d:0.50s"><em>3</em><span>계획에 피드백</span></li><li style="--d:0.75s"><em>4</em><span>승인 → 개발계획.md</span></li></ol><div class="qk2"><b>확인</b><ul><li>개발계획.md 다섯 칸이 생김</li><li>태스크마다 끝나면 보이는 화면이 적힘</li></ul></div></div></div>
 </section>
 
 <section class="slide lt" data-title="실습 1-4 · 1단계 개발자.md 만들기">
@@ -2238,10 +2232,9 @@ print(total)</code></pre></div><div class="code sm"><div class="bar"><span class
   <h2 class="s-title sm">실습 1-4 · 1단계 개발자.md 만들기</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v1tt"><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">mini_notion/개발자.md</span></div><pre><code># 개발자
-- 웹 개발 10년 차
 - 정해지지 않은 것은 먼저 묻는다
 - 계획 단계에서는 코드를 쓰지 않는다
-- 개발계획.md 칸: 기능 · 화면 · 데이터 · 완료 기준 · 태스크</code></pre></div></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>만들기</b><span>VS Code 탐색기 → 새 파일 → 개발자.md</span></div><div class="v2tile" style="--d:0.08s"><b>쓰기</b><span>다섯 줄 · 경력 · 말투는 바꿔도 됨</span></div><div class="v2tile" style="--d:0.16s"><b>저장</b><span>macOS ⌘S · Windows Ctrl+S</span></div></div></div></div>
+- 개발계획.md 칸: 기능 · 화면 · 데이터 · 완료 기준 · 태스크</code></pre></div></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>만들기</b><span>VS Code 탐색기 → 새 파일 → 개발자.md</span></div><div class="v2tile" style="--d:0.08s"><b>쓰기</b><span>네 줄 · 말투는 바꿔도 됨</span></div><div class="v2tile" style="--d:0.16s"><b>저장</b><span>macOS ⌘S · Windows Ctrl+S</span></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="실습 1-4 · 2단계 Plan Mode 요청 · 질문">
@@ -2273,7 +2266,7 @@ print(total)</code></pre></div><div class="code sm"><div class="bar"><span class
   <div class="eyebrow"><span class="tag">1-4</span></div>
   <h2 class="s-title sm">실습 1-4 확인</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="cks"><div class="ck" style="--d:0.00s"><span>1</span><b>기획서의 「하지 않을 것」이 제외 칸에 있나</b><em>없으면 추가 요청</em></div><div class="ck" style="--d:0.12s"><span>2</span><b>태스크마다 F 번호가 있나</b><em>기능 하나 = 태스크 하나</em></div><div class="ck" style="--d:0.24s"><span>3</span><b>저장 위치가 적혀 있나</b><em>MVP 는 내 브라우저</em></div><div class="ck" style="--d:0.36s"><span>4</span><b>완료 기준을 눌러서 확인할 수 있나</b><em>값 · 동작 · 결과</em></div></div><div class="ckr">넷 다 「예」 → 개발계획.md 저장</div></div></div>
+  <div class="body"><div class="mid"><div class="cks"><div class="ck" style="--d:0.00s"><span>1</span><b>기획서 기능이 다 들어 있나</b><em>빠졌으면 추가 요청</em></div><div class="ck" style="--d:0.12s"><span>2</span><b>태스크마다 F 번호가 있나</b><em>기능 하나 = 태스크 하나</em></div><div class="ck" style="--d:0.24s"><span>3</span><b>저장 위치가 적혀 있나</b><em>예 · 내 브라우저 localStorage</em></div><div class="ck" style="--d:0.36s"><span>4</span><b>완료 기준을 눌러서 확인할 수 있나</b><em>값 · 동작 · 결과</em></div></div><div class="ckr">「아니요」 → 그 칸만 다시 요청 · 넷 다 「예」 → 1-5</div></div></div>
 </section>
 
 <section class="slide dk" data-title="다음 단원">
@@ -3008,7 +3001,7 @@ gh auth status</code></pre></div></div><div class="v2tiles c3"><div class="v2til
   <div class="eyebrow"><span class="tag">1-8</span></div>
   <h2 class="s-title sm">결과 공유</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2tiles c4"><div class="v2tile" style="--d:0.00s"><b>배포 주소</b><span>프로젝트명.vercel.app</span></div><div class="v2tile" style="--d:0.08s"><b>한 줄 소개</b><span>기획서의 서비스 컨셉</span></div><div class="v2tile" style="--d:0.16s"><b>완료 기준</b><span>완료 기준 통과 수</span></div><div class="v2tile" style="--d:0.24s"><b>가장 오래 걸린 곳</b><span>다시 요청이 많았던 기능</span></div></div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">공유 글 · 예</span></div><pre><code>미니 노션 · https://mini-notion.vercel.app
+  <div class="body"><div class="mid"><div class="v2tiles c4"><div class="v2tile" style="--d:0.00s"><b>배포 주소</b><span>프로젝트명.vercel.app</span></div><div class="v2tile" style="--d:0.08s"><b>한 줄 소개</b><span>기획서의 배경 · 기능</span></div><div class="v2tile" style="--d:0.16s"><b>완료 기준</b><span>완료 기준 통과 수</span></div><div class="v2tile" style="--d:0.24s"><b>가장 오래 걸린 곳</b><span>다시 요청이 많았던 기능</span></div></div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">공유 글 · 예</span></div><pre><code>미니 노션 · https://mini-notion.vercel.app
 페이지마다 블록으로 쓰는 메모장 · 할 일은 체크 상자
 완료 기준 5개 중 5개 · 블록 끌어 옮기기에서 요청 3번</code></pre></div></div></div>
 </section>

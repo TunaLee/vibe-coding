@@ -1,6 +1,6 @@
 """1-3 기획서 작성.
 
-왜 기획하나(모호 vs 구체 · 개발 흐름) → 만들 것(미니 노션) → 기획서 다섯 칸 → Plan Mode → 페르소나(직접 쓰는 다섯 줄) → 대화 · 피드백 → 실습.
+왜 기획하나(모호 vs 구체 · 개발 흐름) → 만들 것(미니 노션) → 기획서 다섯 칸 → Plan Mode → 페르소나(직접 쓰는 네 줄) → 대화 · 피드백 → 실습.
 예시 문장은 labs/mini_notion/예시/기획서.md 에서 그대로 읽는다. 산출물 기획서.md 는 1-4 개발 계획의 입력.
 """
 from pathlib import Path
@@ -17,7 +17,7 @@ PERSONA = Path(__file__).resolve().parent.parent / "labs" / "persona"
 
 
 def _persona(who):
-    """페르소나 파일 전체 — 수강생이 그대로 따라 쓸 다섯 줄."""
+    """페르소나 파일 전체 — 수강생이 그대로 따라 쓸 네 줄."""
     return (PERSONA / f"{who}.md").read_text(encoding="utf-8").strip()
 
 
@@ -229,7 +229,7 @@ def slides():
             "Plan Mode 만", [("요청", "Plan → 「기획서 써 줘」"), ("Claude Code", "무엇을 · 어떤 순서로 물을지 스스로 정함"), ("빈 곳", "묻지 않은 칸은 추측으로")],
             "Plan Mode + 기획자.md", [("요청", "「기획자.md 대로 같이 쓰자」"), ("Claude Code", "기획자처럼 질문을 하나씩"), ("빈 곳", "내 답으로 채움")]), T),
         light("기획자 페르소나", '<div class="twocol"><div>' + code("기획자.md", esc(_persona("기획자")))
-              + '</div><div>' + viz2.tiles([("만들기", "mini_notion 폴더에 새 파일 · 다섯 줄"), ("바꿔도 됨", "경력 · 말투"),
+              + '</div><div>' + viz2.tiles([("만들기", "mini_notion 폴더에 새 파일 · 네 줄"), ("바꿔도 됨", "말투 · 질문 방식"),
                                           ("마지막 줄", "기획서 칸 = 질문 순서")], 1) + "</div></div>", T),
         light("기획자 페르소나 대화 예시", '<div class="twocol"><div>' + chat([
             ("me", "기획자.md 대로 미니 노션 기획서를 같이 쓰자"),
@@ -248,7 +248,7 @@ def slides():
               ["다섯 칸이 모두 내 답으로 채워짐", "원하는 기능이 빠짐없이 적힘"],
               "모르는 질문엔 「아직 안 정함」으로 답하기", folder="mini_notion/기획서.md"),
         tstep("1-3", 1, "기획자.md 만들기", T, term=("mini_notion/기획자.md", _persona("기획자")),
-              rows=[("만들기", "VS Code 탐색기 → 새 파일 → 기획자.md"), ("쓰기", "다섯 줄 · 경력 · 말투는 바꿔도 됨"), ("저장", "macOS ⌘S · Windows Ctrl+S")]),
+              rows=[("만들기", "VS Code 탐색기 → 새 파일 → 기획자.md"), ("쓰기", "네 줄 · 말투는 바꿔도 됨"), ("저장", "macOS ⌘S · Windows Ctrl+S")]),
         tstep("1-3", 2, "Plan Mode 요청", T, "lab13_plan.webp", "Plan Mode 에서 요청을 쓴 화면",
               rows=[("Plan Mode", "입력창 아래 모드 표시 → Plan"), ("요청", "기획자.md 대로 같이 쓰기"), ("파일", "아직 안 씀")]),
         tstep("1-3", 3, "질문에 답하기", T, "lab13_q1.webp", "기획자 페르소나의 첫 질문",
