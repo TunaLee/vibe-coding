@@ -1,6 +1,6 @@
 """1-4 개발 계획.
 
-기획서만 넘긴 결과(애니메이션) → 비유(조감도 · 설계 도면) → 기획서.md → 개발계획.md 다섯 칸(애니메이션) → 기능 하나 따라가기 → 완료 기준 · 태스크
+기획서만 넘긴 결과(애니메이션) → 비유(조감도 · 설계 도면) → 화면 나누기 → 쉬운 말 요약 → 검토 질문 셋 → 개발자 페르소나 · 선택지 대화 → 실습
 → 개발자 페르소나 · plan 모드로 세우기 → 실습.
 입력 = 1-3 산출물 기획서.md · 예시 문장은 labs/mini_notion/예시/개발계획.md 에서 그대로 읽는다. 산출물 개발계획.md 는 1-6 개발의 입력.
 """
@@ -46,18 +46,39 @@ def _line(no, key):
 
 
 def _gaps():
-    """기획서만 넘긴 결과 — 기획서 기능 칸의 한 단어(블록 · 저장)가 켜지고, 빈 칸 질문 → AI 추측이 차례로. 한 번 재생."""
-    rows = [("블록", "블록 종류는?", "표 · 이미지 · 코드까지 열 가지"),
-            ("저장", "어디에 저장?", "서버를 새로 만듦"),
-            ("", "무엇부터 만들지?", "AI 가 정한 순서"),
-            ("", "어디까지면 끝?", "기준 없음 · 대화마다 다름")]
-    line = '페이지 · <u style="--d:1.0s">블록</u> · 「/」 메뉴 · 끌어 옮기기 · <u style="--d:2.6s">저장</u>'
+    """기획서만 넘긴 결과 — 기획서는 내 말(장면 · 확인 문장) · 개발자가 정할 것(저장 위치 · 순서 · 기술)이 빈칸 → AI 추측. 한 번 재생."""
+    rows = [("어디에 저장?", "서버를 새로 만듦"), ("무엇부터 만들지?", "AI 가 정한 순서"),
+            ("어떤 기술 · 파일로?", "대화마다 다름"), ("한 번에 다?", "전부 한꺼번에 · 오류 위치 모름")]
+    line = ('사용 장면 · 월요일 회의 끝 → <u style="--d:1.0s">새 페이지</u><br/>'
+            '확인 문장 · 새로고침해도 <u style="--d:1.6s">그대로 있다</u>')
     r = "".join(f'<div class="v14gR"><div class="v14gQ" style="--d:{1.2 + i * 1.6:.1f}s">{q}</div><i style="--d:{1.8 + i * 1.6:.1f}s">→</i>'
-                f'<div class="v14gA" style="--d:{1.8 + i * 1.6:.1f}s">{g}</div></div>' for i, (_, q, g) in enumerate(rows))
-    return (f'<div class="v14g"><div class="v14gL"><div class="v14gH">기획서.md · 기능 칸</div><div class="v14gT">{line}</div>'
-            '<div class="v14gC">Claude Code 가 읽음</div></div>'
-            f'<div class="v14gW"><div class="v14gHd"><span>빈 칸</span><span></span><span>AI 추측 · 예</span></div>{r}</div></div>'
-            '<div class="v14gN" style="--d:8.2s"><b>빈 칸</b>묻지 않고 추측으로 채움 · 대화마다 다른 결과</div>')
+                f'<div class="v14gA" style="--d:{1.8 + i * 1.6:.1f}s">{g}</div></div>' for i, (q, g) in enumerate(rows))
+    return (f'<div class="v14g"><div class="v14gL"><div class="v14gH">기획서.md · 내 말로 쓴 것</div><div class="v14gT">{line}</div>'
+            '<div class="v14gC">있음 · 무엇을 · 왜 · 어떻게 확인<br/><b style="color:#C0392B">없음 · 어떻게 만들지</b></div></div>'
+            f'<div class="v14gW"><div class="v14gHd"><span>개발자가 정할 것</span><span></span><span>AI 추측 · 예</span></div>{r}</div></div>'
+            '<div class="v14gN" style="--d:8.2s"><b>개발 계획</b>이 빈칸을 채우는 문서 · 쓰는 건 AI 개발자 · 나는 읽고 확인</div>')
+
+
+def _easy():
+    """쉬운 말 요약 — 개발계획.md 원문(어려운 말)이 흐려지고 → 요청 한 줄 → 요약 여섯 줄이 차례로. 요약은 예시 파일에서 읽음."""
+    raw = [_line("1", "F3"), "저장: 브라우저 localStorage", _line("5", "T4")]
+    t = _prd()
+    summ = [x.strip() for x in t[t.index("## 쉬운 말 요약"):].split("\n") if x.strip()[:2] in {f"{n}." for n in range(1, 10)}]
+    left = "".join(f'<div class="v14eR">{esc(x)}</div>' for x in raw)
+    right = "".join(f'<div class="v14eS" style="--d:{3.0 + i * .6:.1f}s">{esc(x)}</div>' for i, x in enumerate(summ))
+    return ('<div class="v14e"><div class="v14eL" style="--d:.2s"><div class="v14eH">개발계획.md · 원문 일부</div>' + left + '</div>'
+            '<div class="v14eM" style="--d:1.6s">「개발 모르는 사람도<br/>알게 설명해 줘」<i>→</i></div>'
+            f'<div class="v14eRt"><div class="v14eH">쉬운 말 요약 · 화면이 바뀌는 순서</div>{right}</div></div>')
+
+
+def _review():
+    """개발 계획 검토 — 질문 세 개가 차례로 · 질문마다 예시 확인 결과."""
+    qs = [("내 사용 장면이 다 들어 있나", "「금요일에 체크」 → 2번 체크 상자 단계에 있음"),
+          ("모르는 단어가 있나", "「localStorage 가 뭐야?」 → 이 브라우저 안의 저장 공간"),
+          ("단계마다 화면에서 무엇을 보면 되나", "3번 끝 → 빈 줄에 / → 메뉴가 뜸")]
+    r = "".join(f'<div class="v14vQ" style="--d:{.4 + i * 1.6:.1f}s"><i>{i + 1}</i><b>{q}</b><span style="--d:{1.1 + i * 1.6:.1f}s">예 · {a}</span></div>'
+                for i, (q, a) in enumerate(qs))
+    return (f'<div class="v14v">{r}</div><div class="v14gN" style="--d:5.4s"><b>하나라도 「아니요」</b>그 부분만 다시 요청 · 「요약 3번을 더 쉽게」</div>')
 
 
 def _screen():
@@ -74,7 +95,7 @@ def _screen():
                 f'<em style="--d:{d + .3:.1f}s">{(f + " · ") if f else ""}{n}</em></div>' for k, n, f, d in regs)
     left = "".join(f'<li style="--d:{d + .3:.1f}s"><b>{f or "—"}</b>{n}</li>' for _, n, f, d in regs)
     return ('<div class="v14sc"><div class="v14scL">'
-            '<div class="v14scQ"><small>기획서 · 화면 칸</small>왼쪽 페이지 목록 · 오른쪽 블록 편집</div><div class="v14scA">↓</div>'
+            '<div class="v14scQ"><small>기획서 · 화면 스케치</small>왼쪽 페이지 목록 · 오른쪽 큰 제목 → 블록 · 빈 줄에 / → 메뉴</div><div class="v14scA">↓</div>'
             f'<div class="v14scP"><small>개발계획 · 2. 화면</small><ul>{left}'
             '<li style="--d:7.0s"><b>F5</b>저장 · 화면 밖 · 브라우저 안</li></ul></div></div>'
             f'<div class="v14w" style="--d:.3s"><div class="v14wTop"><i></i><i></i><i></i><span>미니 노션</span></div><div class="v14wB">{r}</div>'
@@ -98,7 +119,7 @@ CSS = """
   .v14g{display:grid; grid-template-columns:330px 1fr; gap:28px; margin-top:20px; align-items:start;}
   .v14gL{background:#F4F6F9; border:2px solid #C9D6E6; border-radius:14px; padding:18px; opacity:0; animation:v14In .5s .2s forwards;}
   .v14gH{font-size:15px; font-weight:800; color:#6B7785; margin-bottom:10px;}
-  .v14gT{font-size:21px; font-weight:700; color:#16233A; line-height:1.6; word-break:keep-all;}
+  .v14gT{font-size:18px; font-weight:700; color:#16233A; line-height:1.6; word-break:keep-all;}
   .v14gT u{text-decoration:none; border-radius:6px; padding:0 3px; animation:v14Hi .4s var(--d) forwards;}
   .v14gC{margin-top:16px; font-size:15px; color:#6B7785;}
   .v14gHd,.v14gR{display:grid; grid-template-columns:220px 36px 1fr; gap:10px; align-items:center;}
@@ -109,6 +130,24 @@ CSS = """
   .v14gA{background:#FDECEA; border:2px solid #E6B0AA; border-radius:12px; padding:12px 14px; font-size:19px; font-weight:700; color:#C0392B; opacity:0; animation:v14In .4s var(--d) forwards;}
   .v14gN{margin-top:22px; display:flex; gap:12px; align-items:center; font-size:19px; font-weight:700; color:#16233A; opacity:0; animation:v14In .5s var(--d) forwards;}
   .v14gN b{background:#C0392B; color:#fff; border-radius:8px; padding:4px 10px; font-size:15px;}
+  /* 1-4 · 쉬운 말 요약 · 검토 (v14e · v14v) */
+  .v14e{display:grid; grid-template-columns:330px 170px 1fr; gap:16px; margin-top:16px; align-items:center;}
+  .v14eH{font-size:14px; font-weight:800; color:#6B7785; margin-bottom:8px;}
+  .v14eL{background:#1E2433; border-radius:12px; padding:14px; opacity:0; animation:v14Blur 2.4s var(--d) forwards;}
+  .v14eL .v14eH{color:#9AA6B4;}
+  .v14eR{font-family:var(--mono); font-size:13px; color:#E3E6EA; line-height:1.55; padding:6px 0; border-top:1px solid #333B4D;}
+  .v14eM{background:#16233A; color:#fff; border-radius:14px 14px 4px 14px; padding:14px; font-size:16px; font-weight:800; line-height:1.5; text-align:center; position:relative;
+    opacity:0; animation:v14In .4s var(--d) forwards;}
+  .v14eM i{position:absolute; right:-18px; top:50%; transform:translateY(-50%); font-style:normal; color:#F28C28; font-size:22px;}
+  .v14eS{background:#FFF8F0; border:2px solid #F2B880; border-radius:10px; padding:9px 12px; margin-bottom:7px; font-size:16.5px; font-weight:700; color:#16233A;
+    opacity:0; transform:translateX(-10px); animation:v14In .45s var(--d) forwards;}
+  .v14v{margin-top:18px;}
+  .v14vQ{display:grid; grid-template-columns:40px 360px 1fr; gap:14px; align-items:center; background:#fff; border:2px solid #C9D6E6; border-radius:12px; padding:14px 16px; margin-bottom:12px;
+    opacity:0; transform:translateX(-10px); animation:v14In .45s var(--d) forwards;}
+  .v14vQ i{font-style:normal; width:32px; height:32px; border-radius:50%; background:#16233A; color:#fff; display:inline-flex; align-items:center; justify-content:center; font-weight:800;}
+  .v14vQ b{font-size:20px; color:#16233A;}
+  .v14vQ span{font-size:17px; font-weight:700; color:#9A4F0C; background:#FFF1E2; border-radius:8px; padding:8px 12px; opacity:0; animation:v14In .4s var(--d) forwards;}
+  @keyframes v14Blur{0%{opacity:0} 20%{opacity:1; filter:none} 100%{opacity:.55; filter:blur(.6px)}}
   /* 1-4 · 화면 나누기 (v14sc · v14w) */
   .v14sc{display:grid; grid-template-columns:300px 1fr; gap:24px; margin-top:10px; align-items:start;}
   .v14scQ,.v14scP{background:#F4F6F9; border:2px solid #C9D6E6; border-radius:12px; padding:12px 14px; font-size:17px; font-weight:700; color:#16233A;}
@@ -159,7 +198,7 @@ CSS = """
   @keyframes v14In{to{opacity:1; transform:none;}}
   @keyframes v14Hi{to{background:#FDECEA; color:#C0392B; box-shadow:0 0 0 2px #E6B0AA;}}
   @keyframes v14Dn{to{top:calc(100% - 20px);}}
-  @media print{.v14gL,.v14gQ,.v14gR i,.v14gA,.v14gN,.v14tTag,.v14tR{opacity:1; animation:none; transform:none}}
+  @media print{.v14eL,.v14eM,.v14eS,.v14vQ,.v14vQ span,.v14gL,.v14gQ,.v14gR i,.v14gA,.v14gN,.v14tTag,.v14tR{opacity:1; animation:none; transform:none}}
 """
 
 
@@ -168,47 +207,42 @@ def slides():
         # ── 배경 → 비유 → 애니메이션
         light("기획서만 넘긴 결과", _gaps(), T),
         light("조감도와 설계 도면", '<div class="v14b"><img src="img/v1_u4_blueprint.webp" alt="조감도와 설계 도면"/>' + viz2.maprows([
-                  ("조감도", "기획서", "어떤 집인지 · 왜"), ("설계 도면", "개발 계획", "기능 · 화면 · 데이터"),
-                  ("공정표", "태스크", "무엇부터 짓나"), ("준공 검사", "완료 기준", "도면대로 지었나")], "집 짓기", "앱 만들기") + "</div>"
+                  ("조감도", "기획서", "내가 씀 · 어떤 집 · 왜"), ("설계 도면", "개발 계획", "AI 개발자가 씀"),
+                  ("도면 설명", "쉬운 말 요약", "내가 읽고 확인"), ("준공 검사", "완료 기준", "기획서 확인 문장 그대로")], "집 짓기", "앱 만들기") + "</div>"
               + src(GEN), T),
         # ── 개발 계획
         light("화면 나누기", _screen(), T),
-        light("기능 하나 따라가기", _thread(), T),
-        ba("확인 가능한 완료 기준", T, "「메모가 잘 저장된다」\n「블록을 쉽게 바꾼다」",
-           "「주간 회의록에 체크 상자 「보고서 초안」 추가 후 새로고침해도 남아 있다」\n「빈 블록에 「/」 → 「체크 상자」 고르면 체크 상자로 바뀐다」",
-           "값 · 동작 · 결과가 다 들어간 문장"),
-        # ── 태스크
-        light("태스크", viz2.maprows([
-            ("T1 화면 뼈대 · 페이지 목록", "F1", "왼쪽 목록 · 새 페이지 · 삭제"), ("T2 블록 편집", "F2", "엔터로 새 블록 · 체크 상자 체크"),
-            ("T3 「/」 메뉴", "F3", "「/」 → 메뉴 → 블록 종류 바뀜"), ("T4 블록 끌어 옮기기", "F4", "손잡이로 순서 바뀜"),
-            ("T5 저장", "F5", "새로고침 뒤 그대로"), ("T6 완료 기준 점검", "완료 기준", "모바일 폭 · 다섯 줄 모두 ✓")], "태스크", "기능 하나 = 태스크 하나"), T),
+        light("쉬운 말 요약", _easy(), T),
+        light("개발 계획 검토", _review(), T),
         # ── 개발자 페르소나 · plan 모드
         light("개발자 페르소나", '<div class="twocol"><div>' + code("개발자.md", esc(_persona("개발자")))
-              + '</div><div>' + viz2.tiles([("만들기", "기획자.md 옆에 새 파일 · 네 줄"), ("기획자.md 와 차이", "역할 · 마지막 줄 칸"),
-                                          ("첫 줄", "기획서에 없는 것은 먼저 질문")], 1) + "</div></div>", T),
+              + '</div><div>' + viz2.tiles([("만들기", "기획자.md 옆에 새 파일 · 다섯 줄"), ("첫 줄", "모르는 건 선택지 · 추천으로 질문"),
+                                          ("마지막 줄", "개발 모르는 사람용 요약")], 1) + "</div></div>", T),
         light("개발 계획 대화 예시", chat([
             ("me", "개발자.md 대로 기획서.md 를 읽고 개발 계획을 세워 줘"),
-            ("ai", "블록 종류는 몇 가지로 할까요? 페이지는 어디에 저장할까요?\n저장 위치 · 서버 또는 내 브라우저 (서버는 로그인 필요)"),
-            ("me", "제목 · 글 · 체크 상자 · 구분선 네 가지 · 내 브라우저에 저장"),
-            ("ai", "계획: 기능 F1~F5 · 태스크 T1~T6 · 완료 기준 5개\n승인하면 개발계획.md 로 저장한다.")], "Plan Mode 대화 예"), T),
+            ("ai", "저장 위치를 정해야 한다.\nA 이 브라우저 · 추천 · 로그인 없음 · 다른 기기에서는 안 보임\nB 서버 · 어디서나 보임 · 로그인 · 데이터베이스 필요"),
+            ("me", "A · 그런데 localStorage 가 뭐야?"),
+            ("ai", "이 브라우저 안의 작은 저장 공간이다. 같은 컴퓨터 · 같은 브라우저에서만 보인다.\n계획 F1~F5 · T1~T6 · 끝에 쉬운 말 요약을 붙였다.")], "Plan Mode 대화 예"), T),
         # ── 실습
-        labcard("1-4", "기획서로 개발 계획 세우기", T, "기획서.md", "개발계획.md", ["개발자 페르소나", "Plan Mode"]),
-        brief("1-4", T, ["개발자.md 만들기", "모드 표시 → Plan · 「개발자.md 대로 기획서.md 를 읽고 개발 계획을 세워 줘」 · 질문에 답하기",
-                         "계획에 피드백", "승인 → 개발계획.md"],
+        labcard("1-4", "기획서로 개발 계획 세우기", T, "기획서.md", "개발계획.md", ["개발자 페르소나", "쉬운 말 요약", "검토 질문 셋"]),
+        brief("1-4", T, ["개발자.md 만들기", "Plan · 「개발자.md 대로 기획서.md 를 읽고 개발 계획 세워 줘」 · 선택지 고르기",
+                         "「개발 모르는 사람도 알게 설명해 줘」 → 검토 질문 셋", "고칠 점 피드백", "승인 → 개발계획.md"],
               [],
-              ["개발자 페르소나", "완료 기준", "태스크"],
-              ["개발계획.md 다섯 칸이 생김", "태스크마다 끝나면 보이는 화면이 적힘"],
-              "계획이 너무 길면 「태스크를 여섯 개 안으로 줄여 줘」"),
+              ["개발자 페르소나", "쉬운 말 요약", "검토"],
+              ["개발계획.md 끝에 쉬운 말 요약", "모르는 단어 없이 이해함"],
+              "어려운 말이 나오면 바로 「○○ 가 뭐야?」 · 길면 「태스크를 여섯 개 안으로 줄여 줘」"),
         tstep("1-4", 1, "개발자.md 만들기", T, term=("mini_notion/개발자.md", _persona("개발자")),
-              rows=[("만들기", "VS Code 탐색기 → 새 파일 → 개발자.md"), ("쓰기", "네 줄 · 말투는 바꿔도 됨"), ("저장", "macOS ⌘S · Windows Ctrl+S")]),
-        tstep("1-4", 2, "Plan Mode 요청 · 질문", T, "lab14_q1.webp", "개발자 페르소나의 선택 질문",
-              rows=[("Plan Mode", "모드 표시 → Plan · 1-3 과 같음"), ("질문", "저장 방식 · 기술 · 기획서에 없던 것"), ("1부 선택", "순수 HTML/JS · localStorage")]),
-        tstep("1-4", 3, "계획에 피드백", T, "lab14_feedback.webp", "3번 고칠 점 적기",
-              rows=[("3번", "Tell Claude what to change"), ("피드백", "정렬 순서 · 파일 이름"), ("다시", "고친 계획 → 승인")]),
-        tstep("1-4", 4, "개발계획.md 저장", T, "lab14_saved.webp", "개발계획.md 저장 결과",
-              rows=[("결과", "개발계획.md · F 번호 · T 번호"), ("반영", "피드백 두 가지"), ("코드", "아직 없음")]),
+              rows=[("만들기", "VS Code 탐색기 → 새 파일 → 개발자.md"), ("쓰기", "다섯 줄 · 말투는 바꿔도 됨"), ("저장", "macOS ⌘S · Windows Ctrl+S")]),
+        tstep("1-4", 2, "Plan Mode 요청 · 선택지", T, "lab14_q1.webp", "개발자 페르소나의 선택 질문",
+              rows=[("질문", "저장 방식 · 기술 · 기획서에 없던 것"), ("고르기", "추천 · 이유 읽고 고르기"), ("모를 때", "「A 와 B 차이를 쉽게 설명해 줘」")]),
+        tstep("1-4", 3, "쉬운 말 요약 검토", T, term=("쉬운 말 요약 · 예", _prd()[_prd().index("## 쉬운 말 요약"):]),
+              rows=[("요청", "「개발 모르는 사람도 알게 설명해 줘」"), ("볼 것", "내 사용 장면이 다 있나"), ("단어", "모르면 바로 질문")]),
+        tstep("1-4", 4, "계획에 피드백", T, "lab14_feedback.webp", "3번 고칠 점 적기",
+              rows=[("3번", "Tell Claude what to change"), ("피드백", "빠진 장면 · 순서 · 이름"), ("다시", "고친 계획 → 승인")]),
+        tstep("1-4", 5, "개발계획.md 저장", T, "lab14_saved.webp", "개발계획.md 저장 결과",
+              rows=[("결과", "개발계획.md · F 번호 · T 번호"), ("끝부분", "쉬운 말 요약"), ("코드", "아직 없음")]),
         light("실습 1-4 확인", checks([
-            ("기획서 기능이 다 들어 있나", "빠졌으면 추가 요청"), ("태스크마다 F 번호가 있나", "기능 하나 = 태스크 하나"),
-            ("저장 위치가 적혀 있나", "예 · 내 브라우저 localStorage"), ("완료 기준을 눌러서 확인할 수 있나", "값 · 동작 · 결과")],
-            "「아니요」 → 그 칸만 다시 요청 · 넷 다 「예」 → 1-5"), T),
+            ("내 사용 장면이 다 들어 있나", "월 · 금 장면 모두"), ("모르는 단어가 남아 있지 않나", "물어보고 이해함"),
+            ("단계마다 볼 화면이 적혀 있나", "쉬운 말 요약 1~6"), ("저장 위치를 내가 골랐나", "예 · 이 브라우저")],
+            "「아니요」 → 그 부분만 다시 요청 · 넷 다 「예」 → 1-5"), T),
     ]
