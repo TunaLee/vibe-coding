@@ -86,6 +86,8 @@ def brief(no, u, steps, slots, keys, checks, stuck, folder="내 프로젝트 폴
     ck = "".join(f"<li>{x}</li>" for x in checks)
     a = light(f"실습 {no} 순서", f'<ol class="v1st">{st}</ol><div class="qk2"><b>확인</b><ul>{ck}</ul></div>', u)
     sl = "".join(f'<div class="v1sl" style="--d:{i * .2:.2f}s"><b>{k}</b><span>{v}</span></div>' for i, (k, v) in enumerate(slots))
+    if not slots:
+        return a
     b = light(f"실습 {no} {slot_title}", f'<div class="v1sls">{sl}</div>', u)
     return a + "\n" + b
 
