@@ -1221,6 +1221,46 @@
   @keyframes v1rwU{to{background:#FDECEA; color:#C0392B; box-shadow:0 0 0 2px #E6B0AA;}}
   @keyframes v1rwX{to{opacity:.4; text-decoration:line-through;}}
   @media print{.v1rwH,.v1rwV,.v1rwQ,.v1rwN,.v1rwA{opacity:1; animation:none}}
+  /* 1-3 · 미니 노션 기능 (v13f) */
+  .v13f{display:grid; grid-template-columns:1fr 1fr; gap:12px 20px; margin-top:0;}
+  .v13fP{border:2px solid #C9D6E6; border-radius:14px; background:#F7F6F3; padding:12px 14px; opacity:.35; animation:v13On .4s var(--d) forwards;}
+  .v13fH{display:flex; gap:10px; align-items:baseline; margin-bottom:8px;}
+  .v13fH i{font-style:normal; background:#16233A; color:#fff; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; font-size:13px; font-weight:800; flex:none;}
+  .v13fH b{font-size:21px; color:#16233A;} .v13fH span{font-size:15px; color:#C76A12; font-weight:700;}
+  .v13fS{position:relative; height:186px; background:#fff; border-radius:10px; padding:10px 14px; overflow:hidden; font-family:inherit;}
+  .v13fB{display:flex; justify-content:space-between; align-items:center; height:34px; padding:0 8px; margin-bottom:5px; border-radius:6px;
+    opacity:0; animation:v13On .4s var(--d) forwards; color:#37352F;}
+  .v13fB span{font-size:16px;} .v13fB.h span{font-size:19px; font-weight:800;}
+  .v13fB em{font-style:normal; font-size:13px; font-weight:700; color:#C76A12; background:#FFF1E2; border-radius:6px; padding:2px 7px;}
+  .v13f .v13fP:first-child .v13fB{outline:1.5px dashed #F2B880;}
+  .v13fB.hr span{display:block; width:70%; height:2px; background:#C9C7C1;}
+  .v13fSl{position:relative; height:34px; padding:0 8px; display:flex; align-items:center; font-size:18px;}
+  .v13fCur{width:2px; height:20px; background:#37352F;}
+  .v13fSl b{position:absolute; left:12px; font-weight:400; opacity:0; animation:v13On .1s var(--a) forwards, v13Off .2s var(--z) forwards;}
+  .v13fNew{position:absolute; left:8px; font-size:16px; color:#37352F; opacity:0; background:#FFF1E2; border-radius:6px; padding:3px 8px; animation:v13On .4s var(--a) forwards;}
+  .v13fM{position:absolute; left:22px; top:84px; width:180px; background:#fff; border:1.5px solid #E3E2DE; border-radius:8px; box-shadow:0 6px 16px rgba(0,0,0,.12);
+    padding:4px; opacity:0; animation:v13On .2s var(--a) forwards, v13Off .2s var(--z) forwards;}
+  .v13fM div{font-size:14px; line-height:20px; padding:1px 8px; border-radius:5px;}
+  .v13fM div.on{animation:v13Sel .3s var(--d) forwards;}
+  .v13fD{position:absolute; left:14px; right:14px; height:40px; display:flex; gap:10px; align-items:center; padding:0 8px; border-radius:6px; background:#fff; font-size:16px; color:#37352F;}
+  .v13fD i{font-style:normal; color:#B0ADA6; font-weight:800; letter-spacing:-2px;}
+  .v13fD.r0{top:14px; animation:v13Dn .8s calc(var(--b) + 1s) forwards;} .v13fD.r1{top:62px; animation:v13Dn .8s calc(var(--b) + 1s) forwards;}
+  .v13fD.r2{top:110px; z-index:2; animation:v13Lift .3s calc(var(--b) + .4s) forwards, v13Up .8s calc(var(--b) + 1s) forwards;}
+  .v13fD.r2 i{animation:v13Hd .3s calc(var(--b) + .4s) forwards;}
+  .v13fBar{display:flex; gap:8px; align-items:center; font-size:14px; color:#6B7785; border-bottom:1.5px solid #E3E6EA; padding-bottom:6px; margin-bottom:10px;}
+  .v13fBar i{font-style:normal; font-size:20px; color:#16233A; display:inline-block; animation:v13Spin .8s var(--b) forwards;}
+  .v13fPg{animation:v13Fl 1s var(--b) forwards;}
+  .v13fOk{position:absolute; right:14px; bottom:14px; background:#16233A; color:#fff; font-size:15px; font-weight:800; border-radius:8px; padding:6px 12px; opacity:0; animation:v13On .4s var(--d) forwards;}
+  .v13cb{display:inline-block; width:14px; height:14px; border:1.8px solid #37352F; border-radius:3px; margin-right:8px; vertical-align:-2px; position:relative;}
+  .v13cb.on{background:#2383E2; border-color:#2383E2;} .v13cb.on::after{content:""; position:absolute; left:3px; top:0; width:4px; height:8px; border:solid #fff; border-width:0 2px 2px 0; transform:rotate(45deg);}
+  @keyframes v13On{to{opacity:1}} @keyframes v13Off{to{opacity:0}}
+  @keyframes v13Sel{to{background:#ECEBE8; font-weight:800}}
+  @keyframes v13Lift{to{box-shadow:0 8px 18px rgba(0,0,0,.18); background:#FFF8F0}}
+  @keyframes v13Hd{to{color:#F28C28}}
+  @keyframes v13Up{to{top:14px}} @keyframes v13Dn{to{transform:translateY(48px)}}
+  @keyframes v13Spin{to{transform:rotate(360deg)}}
+  @keyframes v13Fl{0%{opacity:1} 40%{opacity:.1} 100%{opacity:1}}
+  @media print{.v13fP,.v13fB,.v13fNew,.v13fOk{opacity:1; animation:none}}
   /* 1-3 · IT 기업 조직 구성 (v1org) */
   .v1org{display:flex; flex-direction:column; align-items:center; margin-top:18px;}
   .v1orgT{background:#16233A; color:#fff; border-radius:14px; padding:14px 40px; text-align:center; opacity:0; animation:v1orgIn .5s .1s forwards;}
@@ -1301,9 +1341,15 @@
   .v14tTag{display:inline-block; background:#16233A; color:#fff; font-size:19px; font-weight:800; border-radius:10px; padding:8px 16px; opacity:0; animation:v14In .4s .1s forwards;}
   .v14tL{position:relative; margin:14px 0 0 18px; padding-left:30px; border-left:3px solid #C9D6E6;}
   .v14tDot{position:absolute; left:-10px; top:0; width:17px; height:17px; border-radius:50%; background:#F28C28; animation:v14Dn 6s .4s forwards;}
-  .v14tR{display:grid; grid-template-columns:150px 1fr; gap:16px; align-items:center; background:#fff; border:2px solid #C9D6E6; border-radius:12px;
+  .v14tR{display:grid; grid-template-columns:140px 1fr; gap:16px; align-items:center; background:#fff; border:2px solid #C9D6E6; border-radius:12px;
     padding:12px 16px; margin-bottom:11px; opacity:0; transform:translateX(-12px); animation:v14In .5s var(--d) forwards;}
-  .v14tR b{font-size:19px; color:#C76A12;} .v14tR span{font-size:17.5px; color:#16233A; font-weight:600;}
+  .v14tR b{font-size:19px; color:#C76A12; display:flex; flex-direction:column;} .v14tR b small{font-size:13px; color:#6B7785; font-weight:700;}
+  .v14tR span{font-size:16.5px; color:#16233A; font-weight:600;}
+  .v14tW{display:grid; grid-template-columns:1fr 250px; gap:20px; align-items:start;}
+  .v14tF{margin:50px 0 0; text-align:center;} .v14tF img{width:100%; border-radius:12px; border:1.5px solid #D9DDE3;}
+  .v14tF figcaption{font-size:14px; color:#6B7785; margin-top:6px;}
+  .v14b{display:grid; grid-template-columns:540px 1fr; gap:28px; align-items:center; margin-top:18px;}
+  .v14b img{width:100%; height:auto; border-radius:14px; border:1.5px solid #D9DDE3;}
   @keyframes v14In{to{opacity:1; transform:none;}}
   @keyframes v14Hi{to{background:#FDECEA; color:#C0392B; box-shadow:0 0 0 2px #E6B0AA;}}
   @keyframes v14Dn{to{top:calc(100% - 20px);}}
@@ -1986,6 +2032,14 @@ print(total)</code></pre></div><div class="code sm"><div class="bar"><span class
   <div class="body"><div class="mid"><div class="v1shot"><figure><img src="img/notion_main.webp" alt="미니 노션 · 완성 화면"/><figcaption>미니 노션 · 완성 화면</figcaption></figure><div class=v1side><div class="v1sd"><b>페이지 목록</b><span>왼쪽 목록 · 새 페이지 · 삭제</span></div><div class="v1sd"><b>블록</b><span>제목 · 글 · 체크 상자 · 구분선</span></div><div class="v1sd"><b>「/」 메뉴</b><span>「/」 입력 → 블록 종류 고르기</span></div><div class="v1sd"><b>끌어 옮기기</b><span>손잡이로 블록 순서 바꾸기</span></div><div class="v1sd"><b>저장</b><span>새로고침 뒤에도 그대로</span></div><div class="v1sd"><b>더 넣고 싶은 것</b><span>기획서에 적으면 같이 개발</span></div></div></div></div></div>
 </section>
 
+<section class="slide lt" data-title="미니 노션 기능">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-3</span></div>
+  <h2 class="s-title sm">미니 노션 기능</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v13f"><div class="v13fP" style="--d:0.3s"><div class="v13fH"><i>1</i><b>블록</b><span>한 줄 = 블록 하나 · 종류 네 가지</span></div><div class="v13fS"><div class="v13fB h" style="--d:0.3s"><span>주간 회의</span><em>제목</em></div><div class="v13fB p" style="--d:0.8s"><span>다음 주까지 정리</span><em>글</em></div><div class="v13fB c" style="--d:1.3s"><span><i class="v13cb"></i>보고서 초안</span><em>체크 상자</em></div><div class="v13fB hr" style="--d:1.8s"><span></span><em>구분선</em></div></div></div><div class="v13fP" style="--d:3.2s"><div class="v13fH"><i>2</i><b>「/」 메뉴</b><span>빈 줄에 / 입력 → 블록 종류 고르기</span></div><div class="v13fS"><div class="v13fB p" style="--d:3.2s"><span>회의 내용 정리</span></div><div class="v13fSl"><span class="v13fCur"></span><b style="--a:3.8s;--z:6.2s">/</b><span class="v13fNew" style="--a:6.2s"><i class="v13cb"></i>할 일</span></div><div class="v13fM" style="--a:4.3s;--z:6.2s"><div class="" style="--d:5.0s">제목</div><div class="" style="--d:5.0s">글</div><div class="on" style="--d:5.0s">체크 상자</div><div class="" style="--d:5.0s">구분선</div></div></div></div><div class="v13fP" style="--d:7.6s"><div class="v13fH"><i>3</i><b>끌어 옮기기</b><span>⋮⋮ 손잡이를 잡고 끌면 순서가 바뀜</span></div><div class="v13fS"><div class="v13fD r0" style="--b:7.6s"><i>⋮⋮</i><span>참석자 4명</span></div><div class="v13fD r1" style="--b:7.6s"><i>⋮⋮</i><span>회의 내용</span></div><div class="v13fD r2" style="--b:7.6s"><i>⋮⋮</i><span><i class="v13cb"></i>할 일 · 보고서 초안</span></div></div></div><div class="v13fP" style="--d:10.6s"><div class="v13fH"><i>4</i><b>저장</b><span>새로고침해도 쓴 내용이 남음</span></div><div class="v13fS"><div class="v13fBar"><i style="--b:11.2s">⟳</i><span>새로고침</span></div><div class="v13fPg" style="--b:11.2s"><div class="v13fB h" style="--d:0s"><span>주간 회의</span></div><div class="v13fB c" style="--d:0s"><span><i class="v13cb on"></i>보고서 초안</span></div></div><div class="v13fOk" style="--d:12.6s">그대로 남음</div></div></div></div></div></div>
+</section>
+
 <section class="slide lt" data-title="기획서">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-3</span></div>
@@ -2148,7 +2202,7 @@ print(total)</code></pre></div><div class="code sm"><div class="bar"><span class
   <div class="eyebrow"><span class="tag">1-4</span></div>
   <h2 class="s-title sm">조감도와 설계 도면</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="phmap v3ph"><figure class="ph"><img src="img/v1_u4_blueprint.webp" alt="조감도와 설계 도면"><figcaption><b>조감도와 설계 도면</b></figcaption></figure><div class="v2ms"><div class="v2mh"><span>집 짓기</span><i></i><span>앱 만들기</span></div><div class="v2m" style="--d:0.00s"><div class="a">조감도</div><i>→</i><div class="b"><b>기획서</b><small>어떤 집인지 · 왜</small></div></div><div class="v2m" style="--d:0.12s"><div class="a">설계 도면</div><i>→</i><div class="b"><b>개발 계획</b><small>기능 · 화면 · 데이터</small></div></div><div class="v2m" style="--d:0.24s"><div class="a">공정표</div><i>→</i><div class="b"><b>태스크</b><small>무엇부터 짓나</small></div></div><div class="v2m" style="--d:0.36s"><div class="a">준공 검사</div><i>→</i><div class="b"><b>완료 기준</b><small>도면대로 지었나</small></div></div></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v14b"><img src="img/v1_u4_blueprint.webp" alt="조감도와 설계 도면"/><div class="v2ms"><div class="v2mh"><span>집 짓기</span><i></i><span>앱 만들기</span></div><div class="v2m" style="--d:0.00s"><div class="a">조감도</div><i>→</i><div class="b"><b>기획서</b><small>어떤 집인지 · 왜</small></div></div><div class="v2m" style="--d:0.12s"><div class="a">설계 도면</div><i>→</i><div class="b"><b>개발 계획</b><small>기능 · 화면 · 데이터</small></div></div><div class="v2m" style="--d:0.24s"><div class="a">공정표</div><i>→</i><div class="b"><b>태스크</b><small>무엇부터 짓나</small></div></div><div class="v2m" style="--d:0.36s"><div class="a">준공 검사</div><i>→</i><div class="b"><b>완료 기준</b><small>도면대로 지었나</small></div></div></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="기획서.md → 개발계획.md">
@@ -2164,7 +2218,7 @@ print(total)</code></pre></div><div class="code sm"><div class="bar"><span class
   <div class="eyebrow"><span class="tag">1-4</span></div>
   <h2 class="s-title sm">기능 하나 따라가기</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v14t"><div class="v14tTag">F3 「/」 메뉴</div><div class="v14tL"><i class="v14tDot"></i><div class="v14tR" style="--d:0.4s"><b>1. 기능</b><span>F3 「/」 메뉴: 빈 블록에 「/」 → 메뉴 · 화살표 · 엔터로 블록 종류 고르기</span></div><div class="v14tR" style="--d:1.6s"><b>2. 화면</b><span>편집 화면: 「/」 안내 · 「페이지 삭제」 / 큰 제목 / 블록 줄(손잡이 · 내용)</span></div><div class="v14tR" style="--d:2.8s"><b>3. 데이터</b><span>블록 종류 · 제목 · 글 · 체크 상자 · 구분선</span></div><div class="v14tR" style="--d:4.0s"><b>4. 완료 기준</b><span>빈 블록에 「/」 → 「체크 상자」를 고르면 그 블록이 체크 상자로 바뀐다</span></div><div class="v14tR" style="--d:5.2s"><b>5. 태스크</b><span>T3 「/」 메뉴 · F3 · 「/」 → 메뉴 → 블록 종류 바뀜</span></div></div></div><div class="dbnote"><span>파일</span> labs/mini_notion/예시/개발계획.md</div></div></div>
+  <div class="body"><div class="mid"><div class="v14tW"><div class="v14t"><div class="v14tTag">「/」 메뉴 하나 따라가기</div><div class="v14tL"><i class="v14tDot"></i><div class="v14tR" style="--d:0.4s"><b>1. 기능<small>무엇을 하나</small></b><span>F3 · 빈 줄에 / 를 치면 블록 종류 메뉴가 뜸</span></div><div class="v14tR" style="--d:1.6s"><b>2. 화면<small>어디에 보이나</small></b><span>편집 화면 위 안내 「/ 를 입력하면 블록 종류를 고를 수 있다」</span></div><div class="v14tR" style="--d:2.8s"><b>3. 데이터<small>무엇을 기억하나</small></b><span>줄마다 블록 종류 · 제목 · 글 · 체크 상자 · 구분선 중 하나</span></div><div class="v14tR" style="--d:4.0s"><b>4. 완료 기준<small>어떻게 확인하나</small></b><span>빈 줄에 / → 「체크 상자」 선택 → 그 줄이 체크 상자로 바뀌면 통과</span></div><div class="v14tR" style="--d:5.2s"><b>5. 태스크<small>언제 만드나</small></b><span>세 번째 작업 T3 · 끝나면 / 메뉴가 뜨는 화면</span></div></div></div><figure class="v14tF"><img src="img/notion_slash_menu.webp" alt="빈 줄에 / 를 친 화면"/><figcaption>빈 줄에 / → 블록 종류 메뉴</figcaption></figure></div></div></div>
 </section>
 
 <section class="slide lt" data-title="확인 가능한 완료 기준">

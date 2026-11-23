@@ -81,11 +81,15 @@ def _map():
 
 
 def _thread():
-    """기능 하나 따라가기 — F3 「/」 메뉴가 개발계획.md 다섯 칸에 어떻게 이어지는지 한 줄씩. 왼쪽 세로선을 점이 내려감."""
-    rows = [("1. 기능", _line("1", "F3")), ("2. 화면", _line("2", "편집 화면")), ("3. 데이터", _line("3", "블록 종류")),
-            ("4. 완료 기준", _line("4", "「/」")), ("5. 태스크", _line("5", "T3"))]
-    r = "".join(f'<div class="v14tR" style="--d:{.4 + i * 1.2:.1f}s"><b>{h}</b><span>{esc(x)}</span></div>' for i, (h, x) in enumerate(rows))
-    return f'<div class="v14t"><div class="v14tTag">F3 「/」 메뉴</div><div class="v14tL"><i class="v14tDot"></i>{r}</div></div>'
+    """기능 하나 따라가기 — 「/」 메뉴 하나가 개발계획.md 다섯 칸에 어떻게 적히는지 쉬운 말로 한 줄씩. 왼쪽 세로선을 점이 내려감."""
+    rows = [("1. 기능", "무엇을 하나", "F3 · 빈 줄에 / 를 치면 블록 종류 메뉴가 뜸"),
+            ("2. 화면", "어디에 보이나", "편집 화면 위 안내 「/ 를 입력하면 블록 종류를 고를 수 있다」"),
+            ("3. 데이터", "무엇을 기억하나", "줄마다 블록 종류 · 제목 · 글 · 체크 상자 · 구분선 중 하나"),
+            ("4. 완료 기준", "어떻게 확인하나", "빈 줄에 / → 「체크 상자」 선택 → 그 줄이 체크 상자로 바뀌면 통과"),
+            ("5. 태스크", "언제 만드나", "세 번째 작업 T3 · 끝나면 / 메뉴가 뜨는 화면")]
+    r = "".join(f'<div class="v14tR" style="--d:{.4 + i * 1.2:.1f}s"><b>{h}<small>{q}</small></b><span>{x}</span></div>' for i, (h, q, x) in enumerate(rows))
+    return ('<div class="v14tW"><div class="v14t"><div class="v14tTag">「/」 메뉴 하나 따라가기</div><div class="v14tL"><i class="v14tDot"></i>' + r + '</div></div>'
+            '<figure class="v14tF"><img src="img/notion_slash_menu.webp" alt="빈 줄에 / 를 친 화면"/><figcaption>빈 줄에 / → 블록 종류 메뉴</figcaption></figure></div>')
 
 
 CSS = """
@@ -124,9 +128,15 @@ CSS = """
   .v14tTag{display:inline-block; background:#16233A; color:#fff; font-size:19px; font-weight:800; border-radius:10px; padding:8px 16px; opacity:0; animation:v14In .4s .1s forwards;}
   .v14tL{position:relative; margin:14px 0 0 18px; padding-left:30px; border-left:3px solid #C9D6E6;}
   .v14tDot{position:absolute; left:-10px; top:0; width:17px; height:17px; border-radius:50%; background:#F28C28; animation:v14Dn 6s .4s forwards;}
-  .v14tR{display:grid; grid-template-columns:150px 1fr; gap:16px; align-items:center; background:#fff; border:2px solid #C9D6E6; border-radius:12px;
+  .v14tR{display:grid; grid-template-columns:140px 1fr; gap:16px; align-items:center; background:#fff; border:2px solid #C9D6E6; border-radius:12px;
     padding:12px 16px; margin-bottom:11px; opacity:0; transform:translateX(-12px); animation:v14In .5s var(--d) forwards;}
-  .v14tR b{font-size:19px; color:#C76A12;} .v14tR span{font-size:17.5px; color:#16233A; font-weight:600;}
+  .v14tR b{font-size:19px; color:#C76A12; display:flex; flex-direction:column;} .v14tR b small{font-size:13px; color:#6B7785; font-weight:700;}
+  .v14tR span{font-size:16.5px; color:#16233A; font-weight:600;}
+  .v14tW{display:grid; grid-template-columns:1fr 250px; gap:20px; align-items:start;}
+  .v14tF{margin:50px 0 0; text-align:center;} .v14tF img{width:100%; border-radius:12px; border:1.5px solid #D9DDE3;}
+  .v14tF figcaption{font-size:14px; color:#6B7785; margin-top:6px;}
+  .v14b{display:grid; grid-template-columns:540px 1fr; gap:28px; align-items:center; margin-top:18px;}
+  .v14b img{width:100%; height:auto; border-radius:14px; border:1.5px solid #D9DDE3;}
   @keyframes v14In{to{opacity:1; transform:none;}}
   @keyframes v14Hi{to{background:#FDECEA; color:#C0392B; box-shadow:0 0 0 2px #E6B0AA;}}
   @keyframes v14Dn{to{top:calc(100% - 20px);}}
@@ -138,12 +148,13 @@ def slides():
     return [
         # ── 배경 → 비유 → 애니메이션
         light("기획서만 넘긴 결과", _gaps(), T),
-        light("조감도와 설계 도면", phmap("v1_u4_blueprint.webp", "조감도와 설계 도면", *GEN, viz2.maprows([
+        light("조감도와 설계 도면", '<div class="v14b"><img src="img/v1_u4_blueprint.webp" alt="조감도와 설계 도면"/>' + viz2.maprows([
                   ("조감도", "기획서", "어떤 집인지 · 왜"), ("설계 도면", "개발 계획", "기능 · 화면 · 데이터"),
-                  ("공정표", "태스크", "무엇부터 짓나"), ("준공 검사", "완료 기준", "도면대로 지었나")], "집 짓기", "앱 만들기")), T),
+                  ("공정표", "태스크", "무엇부터 짓나"), ("준공 검사", "완료 기준", "도면대로 지었나")], "집 짓기", "앱 만들기") + "</div>"
+              + src(GEN), T),
         # ── 개발 계획
         light("기획서.md → 개발계획.md", _map(), T),
-        light("기능 하나 따라가기", _thread() + note("파일", "labs/mini_notion/예시/개발계획.md"), T),
+        light("기능 하나 따라가기", _thread(), T),
         ba("확인 가능한 완료 기준", T, "「메모가 잘 저장된다」\n「블록을 쉽게 바꾼다」",
            "「주간 회의록에 체크 상자 「보고서 초안」 추가 후 새로고침해도 남아 있다」\n「빈 블록에 「/」 → 「체크 상자」 고르면 체크 상자로 바뀐다」",
            "값 · 동작 · 결과가 다 들어간 문장"),

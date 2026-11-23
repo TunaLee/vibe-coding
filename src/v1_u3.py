@@ -112,6 +112,46 @@ CSS = """
   @keyframes v1rwU{to{background:#FDECEA; color:#C0392B; box-shadow:0 0 0 2px #E6B0AA;}}
   @keyframes v1rwX{to{opacity:.4; text-decoration:line-through;}}
   @media print{.v1rwH,.v1rwV,.v1rwQ,.v1rwN,.v1rwA{opacity:1; animation:none}}
+  /* 1-3 · 미니 노션 기능 (v13f) */
+  .v13f{display:grid; grid-template-columns:1fr 1fr; gap:12px 20px; margin-top:0;}
+  .v13fP{border:2px solid #C9D6E6; border-radius:14px; background:#F7F6F3; padding:12px 14px; opacity:.35; animation:v13On .4s var(--d) forwards;}
+  .v13fH{display:flex; gap:10px; align-items:baseline; margin-bottom:8px;}
+  .v13fH i{font-style:normal; background:#16233A; color:#fff; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; font-size:13px; font-weight:800; flex:none;}
+  .v13fH b{font-size:21px; color:#16233A;} .v13fH span{font-size:15px; color:#C76A12; font-weight:700;}
+  .v13fS{position:relative; height:186px; background:#fff; border-radius:10px; padding:10px 14px; overflow:hidden; font-family:inherit;}
+  .v13fB{display:flex; justify-content:space-between; align-items:center; height:34px; padding:0 8px; margin-bottom:5px; border-radius:6px;
+    opacity:0; animation:v13On .4s var(--d) forwards; color:#37352F;}
+  .v13fB span{font-size:16px;} .v13fB.h span{font-size:19px; font-weight:800;}
+  .v13fB em{font-style:normal; font-size:13px; font-weight:700; color:#C76A12; background:#FFF1E2; border-radius:6px; padding:2px 7px;}
+  .v13f .v13fP:first-child .v13fB{outline:1.5px dashed #F2B880;}
+  .v13fB.hr span{display:block; width:70%; height:2px; background:#C9C7C1;}
+  .v13fSl{position:relative; height:34px; padding:0 8px; display:flex; align-items:center; font-size:18px;}
+  .v13fCur{width:2px; height:20px; background:#37352F;}
+  .v13fSl b{position:absolute; left:12px; font-weight:400; opacity:0; animation:v13On .1s var(--a) forwards, v13Off .2s var(--z) forwards;}
+  .v13fNew{position:absolute; left:8px; font-size:16px; color:#37352F; opacity:0; background:#FFF1E2; border-radius:6px; padding:3px 8px; animation:v13On .4s var(--a) forwards;}
+  .v13fM{position:absolute; left:22px; top:84px; width:180px; background:#fff; border:1.5px solid #E3E2DE; border-radius:8px; box-shadow:0 6px 16px rgba(0,0,0,.12);
+    padding:4px; opacity:0; animation:v13On .2s var(--a) forwards, v13Off .2s var(--z) forwards;}
+  .v13fM div{font-size:14px; line-height:20px; padding:1px 8px; border-radius:5px;}
+  .v13fM div.on{animation:v13Sel .3s var(--d) forwards;}
+  .v13fD{position:absolute; left:14px; right:14px; height:40px; display:flex; gap:10px; align-items:center; padding:0 8px; border-radius:6px; background:#fff; font-size:16px; color:#37352F;}
+  .v13fD i{font-style:normal; color:#B0ADA6; font-weight:800; letter-spacing:-2px;}
+  .v13fD.r0{top:14px; animation:v13Dn .8s calc(var(--b) + 1s) forwards;} .v13fD.r1{top:62px; animation:v13Dn .8s calc(var(--b) + 1s) forwards;}
+  .v13fD.r2{top:110px; z-index:2; animation:v13Lift .3s calc(var(--b) + .4s) forwards, v13Up .8s calc(var(--b) + 1s) forwards;}
+  .v13fD.r2 i{animation:v13Hd .3s calc(var(--b) + .4s) forwards;}
+  .v13fBar{display:flex; gap:8px; align-items:center; font-size:14px; color:#6B7785; border-bottom:1.5px solid #E3E6EA; padding-bottom:6px; margin-bottom:10px;}
+  .v13fBar i{font-style:normal; font-size:20px; color:#16233A; display:inline-block; animation:v13Spin .8s var(--b) forwards;}
+  .v13fPg{animation:v13Fl 1s var(--b) forwards;}
+  .v13fOk{position:absolute; right:14px; bottom:14px; background:#16233A; color:#fff; font-size:15px; font-weight:800; border-radius:8px; padding:6px 12px; opacity:0; animation:v13On .4s var(--d) forwards;}
+  .v13cb{display:inline-block; width:14px; height:14px; border:1.8px solid #37352F; border-radius:3px; margin-right:8px; vertical-align:-2px; position:relative;}
+  .v13cb.on{background:#2383E2; border-color:#2383E2;} .v13cb.on::after{content:""; position:absolute; left:3px; top:0; width:4px; height:8px; border:solid #fff; border-width:0 2px 2px 0; transform:rotate(45deg);}
+  @keyframes v13On{to{opacity:1}} @keyframes v13Off{to{opacity:0}}
+  @keyframes v13Sel{to{background:#ECEBE8; font-weight:800}}
+  @keyframes v13Lift{to{box-shadow:0 8px 18px rgba(0,0,0,.18); background:#FFF8F0}}
+  @keyframes v13Hd{to{color:#F28C28}}
+  @keyframes v13Up{to{top:14px}} @keyframes v13Dn{to{transform:translateY(48px)}}
+  @keyframes v13Spin{to{transform:rotate(360deg)}}
+  @keyframes v13Fl{0%{opacity:1} 40%{opacity:.1} 100%{opacity:1}}
+  @media print{.v13fP,.v13fB,.v13fNew,.v13fOk{opacity:1; animation:none}}
   /* 1-3 · IT 기업 조직 구성 (v1org) */
   .v1org{display:flex; flex-direction:column; align-items:center; margin-top:18px;}
   .v1orgT{background:#16233A; color:#fff; border-radius:14px; padding:14px 40px; text-align:center; opacity:0; animation:v1orgIn .5s .1s forwards;}
@@ -195,6 +235,31 @@ def fb_rewrite():
     return f'<div class="v1rwW">{out}</div>'
 
 
+def _features():
+    """미니 노션 기능 — 네 칸이 차례로 움직임: 블록 · 「/」 메뉴 · 끌어 옮기기 · 저장. 한 번 재생 후 마지막 장면."""
+    b1, b2, b3, b4 = .3, 3.2, 7.6, 10.6
+    blocks = [("h", "주간 회의", "제목"), ("p", "다음 주까지 정리", "글"), ("c", '<i class="v13cb"></i>보고서 초안', "체크 상자"), ("hr", "", "구분선")]
+    p1 = "".join(f'<div class="v13fB {k}" style="--d:{b1 + i * .5:.1f}s"><span>{t}</span><em>{tag}</em></div>' for i, (k, t, tag) in enumerate(blocks))
+    menu = "".join(f'<div class="{"on" if n == "체크 상자" else ""}" style="--d:{b2 + 1.8:.1f}s">{n}</div>' for n in ("제목", "글", "체크 상자", "구분선"))
+    p2 = (f'<div class="v13fB p" style="--d:{b2:.1f}s"><span>회의 내용 정리</span></div>'
+          f'<div class="v13fSl"><span class="v13fCur"></span><b style="--a:{b2 + .6:.1f}s;--z:{b2 + 3:.1f}s">/</b>'
+          f'<span class="v13fNew" style="--a:{b2 + 3:.1f}s"><i class="v13cb"></i>할 일</span></div>'
+          f'<div class="v13fM" style="--a:{b2 + 1.1:.1f}s;--z:{b2 + 3:.1f}s">{menu}</div>')
+    rows = [("참석자 4명", 0), ("회의 내용", 1), ('<i class="v13cb"></i>할 일 · 보고서 초안', 2)]
+    p3 = "".join(f'<div class="v13fD r{i}" style="--b:{b3:.1f}s"><i>⋮⋮</i><span>{t}</span></div>' for t, i in rows)
+    p4 = (f'<div class="v13fBar"><i style="--b:{b4 + .6:.1f}s">⟳</i><span>새로고침</span></div>'
+          f'<div class="v13fPg" style="--b:{b4 + .6:.1f}s"><div class="v13fB h" style="--d:0s"><span>주간 회의</span></div>'
+          f'<div class="v13fB c" style="--d:0s"><span><i class="v13cb on"></i>보고서 초안</span></div></div>'
+          f'<div class="v13fOk" style="--d:{b4 + 2:.1f}s">그대로 남음</div>')
+    def panel(n, title, cap, body, d):
+        return (f'<div class="v13fP" style="--d:{d:.1f}s"><div class="v13fH"><i>{n}</i><b>{title}</b><span>{cap}</span></div>'
+                f'<div class="v13fS">{body}</div></div>')
+    return ('<div class="v13f">' + panel(1, "블록", "한 줄 = 블록 하나 · 종류 네 가지", p1, b1)
+            + panel(2, "「/」 메뉴", "빈 줄에 / 입력 → 블록 종류 고르기", p2, b2)
+            + panel(3, "끌어 옮기기", "⋮⋮ 손잡이를 잡고 끌면 순서가 바뀜", p3, b3)
+            + panel(4, "저장", "새로고침해도 쓴 내용이 남음", p4, b4) + "</div>")
+
+
 def slides():
     return [
         # ── 왜 기획하나
@@ -209,6 +274,7 @@ def slides():
             ("페이지 목록", "왼쪽 목록 · 새 페이지 · 삭제"), ("블록", "제목 · 글 · 체크 상자 · 구분선"),
             ("「/」 메뉴", "「/」 입력 → 블록 종류 고르기"), ("끌어 옮기기", "손잡이로 블록 순서 바꾸기"),
             ("저장", "새로고침 뒤에도 그대로"), ("더 넣고 싶은 것", "기획서에 적으면 같이 개발")]), T),
+        light("미니 노션 기능", _features(), T),
         # ── 기획서
         light("기획서", shot("v1_u3_plan.webp", "기획서 · 한 장의 문서", [
             ("머릿속 아이디어", "설명할 때마다 내용이 바뀜"), ("기획서", "왜 · 누가 · 무엇을 · 어떤 화면"),
