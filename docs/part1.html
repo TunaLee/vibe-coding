@@ -899,6 +899,14 @@
   .v1ts img{max-width:100%; max-height:310px; border-radius:10px; box-shadow:0 8px 24px rgba(22,35,58,.22);}
   .v1ts .need-img{width:760px; min-height:300px;}
   .v1tt{max-width:860px; margin:0 auto 18px;}
+  /* 실습 소개 — 할 일 → 결과 카드 */
+  .v1lk{display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:34px;}
+  .v1lk .c{background:#F4F6F9; border-radius:18px; padding:24px 24px 22px; display:flex; flex-direction:column; align-items:flex-start; opacity:0; animation:v1stIn .45s var(--d) forwards;}
+  .v1lk em{width:38px; height:38px; border-radius:50%; background:#16233A; color:#fff; font-style:normal; font-weight:800; font-size:19px; display:flex; align-items:center; justify-content:center; margin-bottom:14px;}
+  .v1lk b{font-size:26px; color:#16233A; margin-bottom:10px;}
+  .v1lk p{margin:0; font-size:18px; color:#4A5563; line-height:1.5; min-height:54px;}
+  .v1lk i{font-style:normal; color:#F28C28; font-size:24px; font-weight:800; margin:10px 0 6px;}
+  .v1lk span{font-size:19px; font-weight:700; color:#16233A; background:#FFF3E6; box-shadow:inset 0 0 0 2px #F28C28; border-radius:12px; padding:10px 14px; align-self:stretch;}
   /* 실습 소개 — 입력 → 산출물 */
   .v1lc{display:flex; flex-direction:column; align-items:center; gap:34px; margin-top:40px;}
   .v1lc .io{display:flex; align-items:center; gap:26px;}
@@ -1715,11 +1723,7 @@ print(total)</code></pre></div><div class="code sm"><div class="bar"><span class
   <div class="eyebrow"><span class="tag">1-2</span><span class="labtag">실습 1-2</span></div>
   <h2 class="s-title sm">가입 · 설치 · 첫 요청</h2>
   <div class="rule"></div>
-  <div class="body"><div class="v1lc">
-    <div class="io"><div class="b in"><small>입력</small><b>새 PC</b></div><i>→</i><div class="b out"><small>산출물</small><b>한 줄 요청으로 만든 앱</b></div></div>
-    <div class="pt"><span style="--d:0.5s">① 계정 · 설치 · 작업 폴더</span><span style="--d:0.7s">② 첫 요청</span><span style="--d:0.9s">③ 「미니 노션 만들어 줘」</span></div>
-    
-  </div></div>
+  <div class="body"><div class="v1lk"><div class="c" style="--d:0.3s"><em>1</em><b>가입 · 설치</b><p>Claude · GitHub · Vercel 가입<br>VS Code · Claude Code 설치</p><i>↓</i><span>VS Code 에 Spark 아이콘</span></div><div class="c" style="--d:0.7s"><em>2</em><b>첫 요청</b><p>빈 mini_notion 폴더에서<br>「뭐가 있는지 알려 줘」</p><i>↓</i><span>Claude Code 의 답</span></div><div class="c" style="--d:1.1s"><em>3</em><b>한 줄 요청</b><p>「미니 노션 만들어 줘」<br>한 줄만 보내기</p><i>↓</i><span>AI 가 정한 미니 노션</span></div></div></div>
 </section>
 
 <section class="slide lt" data-title="실습 1-2 ① 순서">

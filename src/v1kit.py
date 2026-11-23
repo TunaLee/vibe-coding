@@ -91,9 +91,19 @@ def brief(no, u, steps, slots, keys, checks, stuck, folder="내 프로젝트 폴
 
 
 
-def labcard(no, title, u, inp, out, parts=(), files=""):
-    """실습 소개 — 입력 → 산출물 한 줄 + 구성 칩. 단계 · 확인은 다음 「순서」 장에."""
+def labcard(no, title, u, inp, out, parts=(), files="", cards=()):
+    """실습 소개 — 입력 → 산출물 한 줄 + 구성 칩. cards=(이름, 할 일, 결과) 를 주면 「할 일 → 결과」 카드로. 단계 · 확인은 다음 「순서」 장에."""
     from deck import coord
+    if cards:
+        cs = "".join(f'<div class="c" style="--d:{.3 + i * .4:.1f}s"><em>{i + 1}</em><b>{n}</b><p>{d}</p><i>↓</i><span>{r}</span></div>'
+                     for i, (n, d, r) in enumerate(cards))
+        return f'''<section class="slide lt labs" data-title="[실습 {no}] {title}">
+  {coord()}
+  <div class="eyebrow"><span class="tag">{u}</span><span class="labtag">실습 {no}</span></div>
+  <h2 class="s-title sm">{title}</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="v1lk">{cs}</div></div>
+</section>'''
     ch = "".join(f'<span style="--d:{.5 + i * .2:.1f}s">{p}</span>' for i, p in enumerate(parts))
     return f'''<section class="slide lt labs" data-title="[실습 {no}] {title}">
   {coord()}
@@ -141,6 +151,14 @@ CSS = """
   .v1ts img{max-width:100%; max-height:310px; border-radius:10px; box-shadow:0 8px 24px rgba(22,35,58,.22);}
   .v1ts .need-img{width:760px; min-height:300px;}
   .v1tt{max-width:860px; margin:0 auto 18px;}
+  /* 실습 소개 — 할 일 → 결과 카드 */
+  .v1lk{display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:34px;}
+  .v1lk .c{background:#F4F6F9; border-radius:18px; padding:24px 24px 22px; display:flex; flex-direction:column; align-items:flex-start; opacity:0; animation:v1stIn .45s var(--d) forwards;}
+  .v1lk em{width:38px; height:38px; border-radius:50%; background:#16233A; color:#fff; font-style:normal; font-weight:800; font-size:19px; display:flex; align-items:center; justify-content:center; margin-bottom:14px;}
+  .v1lk b{font-size:26px; color:#16233A; margin-bottom:10px;}
+  .v1lk p{margin:0; font-size:18px; color:#4A5563; line-height:1.5; min-height:54px;}
+  .v1lk i{font-style:normal; color:#F28C28; font-size:24px; font-weight:800; margin:10px 0 6px;}
+  .v1lk span{font-size:19px; font-weight:700; color:#16233A; background:#FFF3E6; box-shadow:inset 0 0 0 2px #F28C28; border-radius:12px; padding:10px 14px; align-self:stretch;}
   /* 실습 소개 — 입력 → 산출물 */
   .v1lc{display:flex; flex-direction:column; align-items:center; gap:34px; margin-top:40px;}
   .v1lc .io{display:flex; align-items:center; gap:26px;}
