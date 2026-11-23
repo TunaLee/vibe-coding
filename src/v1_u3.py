@@ -188,7 +188,7 @@ def slides():
         # ── Claude Code 와 기획하기
         light("Plan Mode", viz2.pair(
             "바로 작성", [("요청", "「기획서 써 줘」"), ("결과", "기획서.md 가 바로 생김"), ("빈 칸", "Claude Code 추측으로 채움")],
-            "Plan Mode", [("요청", "Shift+Tab → 요청"), ("결과", "파일은 그대로 · 질문과 초안만"), ("저장", "승인한 뒤에 기획서.md")])
+            "Plan Mode", [("요청", "모드 표시 → Plan → 요청"), ("결과", "파일은 그대로 · 질문과 초안만"), ("저장", "승인한 뒤에 기획서.md")])
               + src(("Claude Code · Permission modes", "https://code.claude.com/docs/en/permission-modes")), T),
         light("페르소나", viz2.pair(
             "페르소나 없이", [("요청", "「기획서 써 줘」"), ("Claude Code", "그럴듯한 기획서를 한 번에 씀"), ("빈 곳", "배경 · 문제점을 지어냄")],
@@ -207,7 +207,7 @@ def slides():
         light("피드백 반영 전후", fb_rewrite(), T),
         # ── 실습
         labcard("1-3", "기획서 작성", T, "기획자.md", "기획서.md", ["Plan Mode", "질문에 답하기", "피드백"]),
-        brief("1-3", T, ["기획자.md 만들기", "Shift+Tab → Plan Mode", "「기획자.md 대로 미니 노션 기획서를 같이 쓰자」", "질문에 답하기 · 초안에 피드백", "승인 → 기획서.md"],
+        brief("1-3", T, ["기획자.md 만들기", "모드 표시 → Plan", "「기획자.md 대로 미니 노션 기획서를 같이 쓰자」", "질문에 답하기 · 초안에 피드백", "승인 → 기획서.md"],
               [("목표", "미니 노션 기획서 · 다섯 칸"), ("입력", "기획자.md · 내 경험"), ("진행 방식", "Plan Mode · 질문에 답하기")],
               ["기획자.md", "Plan Mode", "문제점", "기능"],
               ["다섯 칸이 모두 내 답으로 채워짐", "원하는 기능이 빠짐없이 적힘"],
@@ -215,7 +215,7 @@ def slides():
         tstep("1-3", 1, "기획자.md 만들기", T, term=("mini_notion/기획자.md", _persona("기획자")),
               rows=[("만들기", "VS Code 탐색기 → 새 파일 → 기획자.md"), ("쓰기", "다섯 줄 · 경력 · 말투는 바꿔도 됨"), ("저장", "macOS ⌘S · Windows Ctrl+S")]),
         tstep("1-3", 2, "Plan Mode 요청", T, "lab13_plan.webp", "Plan Mode 에서 요청을 쓴 화면",
-              rows=[("Plan Mode", "Shift+Tab → plan mode on"), ("요청", "기획자.md 대로 같이 쓰기"), ("파일", "아직 안 씀")]),
+              rows=[("Plan Mode", "입력창 아래 모드 표시 → Plan"), ("요청", "기획자.md 대로 같이 쓰기"), ("파일", "아직 안 씀")]),
         tstep("1-3", 3, "질문에 답하기", T, "lab13_q1.webp", "기획자 페르소나의 첫 질문",
               rows=[("질문", "한 번에 하나"), ("답", "실제 겪은 장면"), ("모를 때", "「아직 안 정함」")]),
         tstep("1-3", 4, "초안에 피드백", T, "lab13_draft.webp", "초안 요약과 흐린 부분 질문",

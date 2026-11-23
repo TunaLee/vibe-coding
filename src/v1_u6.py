@@ -26,8 +26,8 @@ def slides():
               + note("이 강의에서 쓰지 않음", "dontAsk · bypassPermissions (격리된 컨테이너 · VM 전용)")
               + src(("Claude Code · Permission modes", "https://code.claude.com/docs/en/permission-modes")), T),
         light("모드 전환", viz2.tiles([
-                  ("Shift+Tab", "누를 때마다 다음 모드"), ("/plan", "요청 앞에 붙이면 plan"),
-                  ("claude --permission-mode plan", "plan 으로 시작")], 3)
+                  ("모드 표시", "입력창 아래 · 눌러서 고르기"), ("/plan", "요청 앞에 붙이면 plan"),
+                  ("다음 대화", "고른 모드가 이어짐")], 3)
               + viz2.maprows([
             ("기획서 · 개발 계획", "plan", "파일 변경 없이 계획만"),
             ("첫 태스크 몇 개", "Manual", "수정마다 확인 · 승인"),

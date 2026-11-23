@@ -121,7 +121,7 @@ def slides():
             ("ai", "계획: 기능 F1~F5 · 태스크 T1~T6 · 완료 기준 5개\n승인하면 개발계획.md 로 저장한다.")], "Plan Mode 대화 예"), T),
         # ── 실습
         labcard("1-4", "기획서로 개발 계획 세우기", T, "기획서.md", "개발계획.md", ["개발자 페르소나", "Plan Mode"]),
-        brief("1-4", T, ["개발자.md 만들기", "Shift+Tab → Plan Mode", "「개발자.md 대로 개발 계획 세워 줘」", "질문에 답하기 · 피드백", "승인 → 개발계획.md"],
+        brief("1-4", T, ["개발자.md 만들기", "모드 표시 → Plan", "「개발자.md 대로 개발 계획 세워 줘」", "질문에 답하기 · 피드백", "승인 → 개발계획.md"],
               [("목표", "개발계획.md · 일곱 칸"), ("입력", "기획서.md · 개발자.md"), ("진행 방식", "Plan Mode · 질문에 답하기"),
                ("하지 말 것", "코드 작성")],
               ["개발자 페르소나", "MVP", "완료 기준", "태스크"],
@@ -130,7 +130,7 @@ def slides():
         tstep("1-4", 1, "개발자.md 만들기", T, term=("mini_notion/개발자.md", _persona("개발자")),
               rows=[("만들기", "VS Code 탐색기 → 새 파일 → 개발자.md"), ("쓰기", "다섯 줄 · 경력 · 말투는 바꿔도 됨"), ("저장", "macOS ⌘S · Windows Ctrl+S")]),
         tstep("1-4", 2, "Plan Mode 요청 · 질문", T, "lab14_q1.webp", "개발자 페르소나의 선택 질문",
-              rows=[("Plan Mode", "Shift+Tab · 1-3 과 같음"), ("질문", "저장 방식 · 기술 · 기획서에 없던 것"), ("1부 선택", "순수 HTML/JS · localStorage")]),
+              rows=[("Plan Mode", "모드 표시 → Plan · 1-3 과 같음"), ("질문", "저장 방식 · 기술 · 기획서에 없던 것"), ("1부 선택", "순수 HTML/JS · localStorage")]),
         tstep("1-4", 3, "계획에 피드백", T, "lab14_feedback.webp", "3번 고칠 점 적기",
               rows=[("3번", "Tell Claude what to change"), ("피드백", "정렬 순서 · 파일 이름"), ("다시", "고친 계획 → 승인")]),
         tstep("1-4", 4, "개발계획.md 저장", T, "lab14_saved.webp", "개발계획.md 저장 결과",
