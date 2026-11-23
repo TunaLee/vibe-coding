@@ -106,15 +106,6 @@ def slides():
                             ("③ Install", "설치"), ("④ Spark 아이콘", "로그인")], 1)
               + "</div></div>"
               + src(("Claude Code 문서 · VS Code", "https://code.claude.com/docs/en/vs-code"), VSDOC), T),
-        # ── GitHub · Vercel
-        light("GitHub", pic("v1_u2_github.webp", "GitHub · 코드 보관함 (AI 생성 그림)", [
-            ("코드 보관함", "인터넷에 둔 내 프로젝트 폴더"), ("변경 기록", "언제 · 무엇을 바꿨는지"),
-            ("배포 출발점", "Vercel 이 여기서 코드를 가져감"), ("요금", "Free · 비공개 저장소 무제한")])
-              + src(("GitHub plans", "https://docs.github.com/en/get-started/learning-about-github/githubs-plans")), T),
-        light("Vercel", pic("v1_u2_vercel.webp", "Vercel · 공개 주소 (AI 생성 그림)", [
-            ("공개 주소", "프로젝트이름.vercel.app"), ("자동 배포", "GitHub 에 올리면 다시 배포"),
-            ("가입", "GitHub 계정으로 · 비밀번호 따로 없음"), ("요금", "Hobby 무료 · 개인 · 비상업용 · 회사 업무 공개는 Pro $20")])
-              + src(("Vercel pricing", "https://vercel.com/pricing"), ("Hobby plan", "https://vercel.com/docs/plans/hobby")), T),
         # ── 실습
         labcard("1-2", "실습 환경 준비 · 첫 위임", T, "새 PC", "한 줄 요청으로 만든 앱", ["① 계정 · 설치 · 작업 폴더", "② 첫 요청", "③ 「미니 노션 만들어 줘」"]),
         brief("1-2 ①", T, ["claude.ai 가입 · 요금제 확인", "github.com 가입", "vercel.com → GitHub 로 계속하기",
