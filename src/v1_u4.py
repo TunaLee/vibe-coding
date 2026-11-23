@@ -111,7 +111,7 @@ def _screen():
                 f'<em style="--d:{d + .3:.1f}s">{(f + " · ") if f else ""}{n}</em></div>' for k, n, f, d in regs)
     left = "".join(f'<li style="--d:{d + .3:.1f}s"><b>{f or "—"}</b>{n}</li>' for _, n, f, d in regs)
     return ('<div class="v14sc"><div class="v14scL">'
-            '<div class="v14scQ"><small>기획서 · 화면 스케치</small>왼쪽 페이지 목록 · 오른쪽 큰 제목 → 블록 · 빈 줄에 / → 메뉴</div><div class="v14scA">↓</div>'
+            '<div class="v14scQ"><small>기획서 · 화면</small>왼쪽 페이지 목록 · 오른쪽 큰 제목 → 블록 · 빈 줄에 / → 메뉴</div><div class="v14scA">↓</div>'
             f'<div class="v14scP"><small>개발계획 · 2. 화면</small><ul>{left}'
             '<li style="--d:7.0s"><b>F5</b>저장 · 화면 밖 · 브라우저 안</li></ul></div></div>'
             f'<div class="v14w" style="--d:.3s"><div class="v14wTop"><i></i><i></i><i></i><span>미니 노션</span></div><div class="v14wB">{r}</div>'
