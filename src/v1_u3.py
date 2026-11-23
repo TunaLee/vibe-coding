@@ -41,6 +41,24 @@ DEVFLOW = [
 ]
 
 
+# IT 기업 조직 — (팀, 역할, 하는 일, 산출물)
+ORG = [
+    ("기획", "PM · 기획자", "무엇을 · 왜 만들지", "기획서 · PRD"),
+    ("디자인", "UI · UX 디자이너", "화면 · 사용 흐름", "화면 설계"),
+    ("개발", "개발 리드 · 프론트엔드 · 백엔드", "코드 작성", "코드 · 커밋"),
+    ("QA", "테스터", "버그 찾기", "버그 목록"),
+    ("운영", "DevOps · 인프라", "배포 · 서버 관리", "서비스 주소"),
+]
+
+
+def _org():
+    top = '<div class="v1orgT"><b>서비스 팀</b><span>앱 하나를 만드는 사람들</span></div><div class="v1orgL"></div>'
+    c = "".join(f'<div class="v1orgC" style="--d:{.5 + i * .35:.2f}s"><b>{t}</b><span>{r}</span><i>{w}</i><em>{o}</em></div>'
+                for i, (t, r, w, o) in enumerate(ORG))
+    me = ('<div class="v1orgM" style="--d:2.6s"><b>1부</b><span>다섯 팀의 일을 나 혼자 · Claude Code 와 함께</span></div>')
+    return f'<div class="v1org">{top}<div class="v1orgR">{c}</div>{me}</div>'
+
+
 def _devflow():
     c = "".join(f'<div class="v1dfc" style="--d:{.3 + i * .6:.1f}s"><i>{i + 1}</i><b>{st}</b>'
                 f'<span>{who}</span><em>{out}</em></div>' for i, (st, who, out, _, _) in enumerate(DEVFLOW))
@@ -94,6 +112,25 @@ CSS = """
   @keyframes v1rwU{to{background:#FDECEA; color:#C0392B; box-shadow:0 0 0 2px #E6B0AA;}}
   @keyframes v1rwX{to{opacity:.4; text-decoration:line-through;}}
   @media print{.v1rwH,.v1rwV,.v1rwQ,.v1rwN,.v1rwA{opacity:1; animation:none}}
+  /* 1-3 · IT 기업 조직 구성 (v1org) */
+  .v1org{display:flex; flex-direction:column; align-items:center; margin-top:18px;}
+  .v1orgT{background:#16233A; color:#fff; border-radius:14px; padding:14px 40px; text-align:center; opacity:0; animation:v1orgIn .5s .1s forwards;}
+  .v1orgT b{display:block; font-size:24px;} .v1orgT span{font-size:15px; color:#C9D6E6;}
+  .v1orgL{width:calc(100% - 220px); height:26px; border:3px solid #C9D6E6; border-bottom:0; border-radius:10px 10px 0 0; margin-top:16px;
+    position:relative; opacity:0; animation:v1orgIn .4s .35s forwards;}
+  .v1orgL::before{content:""; position:absolute; left:50%; top:-19px; width:3px; height:16px; background:#C9D6E6;}
+  .v1orgR{display:grid; grid-template-columns:repeat(5,1fr); gap:14px; width:100%;}
+  .v1orgC{background:#fff; border:2px solid #C9D6E6; border-radius:14px; padding:16px 10px; text-align:center; opacity:0;
+    transform:translateY(10px); animation:v1orgIn .5s var(--d) forwards;}
+  .v1orgC b{display:block; font-size:24px; color:#16233A; margin-bottom:8px;}
+  .v1orgC span{display:block; font-size:15px; font-weight:700; color:#33465E; min-height:40px;}
+  .v1orgC i{display:block; font-style:normal; font-size:15px; color:#6B7785; margin:8px 0 10px;}
+  .v1orgC em{display:inline-block; font-style:normal; font-size:15px; font-weight:700; color:#C76A12; background:#FFF1E2; border-radius:10px; padding:5px 9px;}
+  .v1orgM{margin-top:22px; width:100%; display:flex; gap:16px; align-items:center; justify-content:center; background:#FFF1E2;
+    border:2px dashed #F28C28; border-radius:14px; padding:14px; opacity:0; animation:v1orgIn .5s var(--d) forwards;}
+  .v1orgM b{font-size:20px; color:#C76A12;} .v1orgM span{font-size:19px; font-weight:700; color:#16233A;}
+  @keyframes v1orgIn{to{opacity:1; transform:none;}}
+  @media print{.v1orgT,.v1orgL,.v1orgC,.v1orgM{opacity:1; animation:none; transform:none}}
   /* 1-3 · IT 기업 개발 흐름 (v1df · v1dm) */
   .v1df{display:grid; grid-template-columns:repeat(7,1fr); gap:10px; margin-top:26px;}
   .v1dfc{position:relative; background:#fff; border:2px solid #C9D6E6; border-radius:14px; padding:16px 10px 18px; text-align:center;
@@ -165,6 +202,7 @@ def slides():
             ("모호 · 「소금 적당히」", "사람마다 다른 양"), ("구체 · 「소금 1g」", "누가 해도 같은 맛"),
             ("모호 · 「미니 노션 만들어 줘」", "AI 가 기능 · 화면을 정함"), ("구체 · 기획서", "내가 정한 대로")])
               + src(("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")), T),
+        light("IT 기업 조직 구성", _org(), T),
         light("IT 기업의 개발 흐름", _devflow(), T),
         # ── 만들 것
         light("미니 노션 완성 화면", shot("notion_main.webp", "미니 노션 · 완성 화면", [
