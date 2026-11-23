@@ -238,7 +238,7 @@ def fb_rewrite():
 def _features():
     """미니 노션 기능 — 네 칸이 차례로 움직임: 블록 · 「/」 메뉴 · 끌어 옮기기 · 저장. 한 번 재생 후 마지막 장면."""
     b1, b2, b3, b4 = .3, 3.2, 7.6, 10.6
-    blocks = [("h", "주간 회의", "제목"), ("p", "다음 주까지 정리", "글"), ("c", '<i class="v13cb"></i>보고서 초안', "체크 상자"), ("hr", "", "구분선")]
+    blocks = [("h", "주간 회의", "제목"), ("p", "결정 사항 두 가지", "글"), ("c", '<i class="v13cb"></i>보고서 초안', "체크 상자"), ("hr", "", "구분선")]
     p1 = "".join(f'<div class="v13fB {k}" style="--d:{b1 + i * .5:.1f}s"><span>{t}</span><em>{tag}</em></div>' for i, (k, t, tag) in enumerate(blocks))
     menu = "".join(f'<div class="{"on" if n == "체크 상자" else ""}" style="--d:{b2 + 1.8:.1f}s">{n}</div>' for n in ("제목", "글", "체크 상자", "구분선"))
     p2 = (f'<div class="v13fB p" style="--d:{b2:.1f}s"><span>회의 내용 정리</span></div>'

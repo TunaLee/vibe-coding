@@ -5,7 +5,7 @@
 """
 import viz2
 from deck import flow, lab, light
-from hx import code, esc, note
+from hx import checks, code, esc, note
 from stats_hx import src
 from v1kit import brief, chat, labcard, tstep
 from v3kit import phmap
@@ -214,28 +214,12 @@ def slides():
                 ("저장 목록", "기록 (log)", "언제 · 무엇을"), ("불러오기", "되돌리기", "저장 시점 복원"),
                 ("클라우드 저장", "GitHub", "다른 컴퓨터에서도")], "게임", "Git")), T),
         # ── Git · commit · 되돌리기
-        light("Git", viz2.pair(
-                  "복사본으로 관리", [("파일마다 사본", "기획서_최종_진짜.md"), ("바뀐 곳", "눈으로 비교")],
-                  "Git으로 관리", [("파일은 하나", "기획서.md 그대로"), ("바뀐 곳", "커밋마다 자동으로 남음")])
-              + note("commit", "저장소에 변경을 기록 (git 공식 문서)"), T),
         light("커밋 구성", viz2.tiles([
             ("바뀐 내용", "어느 파일의 어느 줄"), ("메시지", "「버튼 추가」"),
             ("시각 · 작성자", "언제 · 누가"), ("고유 번호", "8fcbe80 같은 해시")], 4)
               + note("메시지", "무엇을 바꿨는지 한 줄 · 되돌릴 시점을 찾는 이름표"), T),
         light("커밋 기록 쌓기", stack()
               + src(("참고 · 혼잡스 「바이브코딩 한 장 지도」", "https://www.youtube.com/watch?v=HNtS6WGGhNU")), T),
-        light("되돌리기 방법", viz2.pair(
-            "아직 커밋 전", [("restore", "마지막 커밋 상태로 파일을 되돌림"), ("쓰는 때", "방금 고친 것이 마음에 안 들 때")],
-            "이미 커밋한 뒤", [("revert", "그 커밋을 되돌리는 새 커밋을 만듦"), ("기록", "지우지 않고 「되돌림」도 남김")], hl="r")
-              + code("터미널 · git revert 뒤 git log --oneline", esc(
-                  "5b00623 Revert \"색상 수정\"\n0b491e3 색상 수정\n8fcbe80 버튼 추가"))
-              + src(("git-scm · git", "https://git-scm.com/docs/git")), T),
-        light("Git 작업 요청", viz2.maprows([
-            ("「지금 상태 커밋해 줘」", "git add · git commit", "메시지도 Claude가 씀"),
-            ("「커밋 기록 보여 줘」", "git log", "시점 · 메시지 목록"),
-            ("「방금 고친 거 취소해 줘」", "git restore", "커밋 전 수정 버림"),
-            ("「마지막 커밋 되돌려 줘」", "git revert", "되돌리는 새 커밋")], "Claude Code에 하는 말", "실행되는 명령")
-              + note("명령 실행", "Claude Code · 사람은 결과 확인"), T),
         # ── GitHub · push / pull
         light("GitHub", viz2.pair(
             "Git", [("어디에", "내 컴퓨터"), ("하는 일", "저장 시점 기록 · 되돌리기"), ("없으면", "기록이 이 컴퓨터에만")],
@@ -245,7 +229,12 @@ def slides():
         light("Git 작업 흐름", gitflow()
               + src(("Pro Git · What is Git?", "https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F"),
                     ("GitHub Docs · About Git", "https://docs.github.com/en/get-started/using-git/about-git")), T),
-        light("코드 변경과 diff", diffflow(), T),
+        light("Git 작업 요청", viz2.maprows([
+            ("「지금 상태 커밋해 줘」", "git add · git commit", "메시지도 Claude가 씀"),
+            ("「커밋 기록 보여 줘」", "git log", "시점 · 메시지 목록"),
+            ("「방금 고친 거 취소해 줘」", "git restore", "커밋 전 수정 버림"),
+            ("「마지막 커밋 되돌려 줘」", "git revert", "되돌리는 새 커밋")], "Claude Code에 하는 말", "실행되는 명령")
+              + note("명령 실행", "Claude Code · 사람은 결과 확인"), T),
         light("커밋 시점", viz2.tiles([
             ("기능 하나가 됐을 때", "「로그인 버튼 동작」"), ("크게 바꾸기 전", "디자인을 갈아엎기 전"),
             ("확인이 끝났을 때", "브라우저로 보고 이상 없음")], 3)
@@ -254,28 +243,23 @@ def slides():
         # ── 실습
         labcard(T, "첫 커밋", T, "기획서 · 개발 계획", "첫 커밋", ["Git 시작", "기록 보기", "되돌리기"]),
         brief(T, T,
-              ["폴더 열기 · Claude Code 실행", "Git 시작 + 첫 커밋 요청", "기록 보기", "개발계획.md 아무 줄 고치기", "「방금 고친 거 취소」 요청"],
-              [("목표", "이 폴더를 Git으로 관리 · 첫 커밋"), ("대상", "기획서.md · 개발계획.md"), ("메시지", "무엇을 담았는지 한 줄")],
+              ["Git 시작 + 첫 커밋 요청 · 명령 승인", "첫 커밋 결과 읽기", "기록 보기", "개발계획.md 아무 줄 고치기", "「방금 고친 거 취소」 요청"],
+              [],
               ["Git 시작", "첫 커밋", "커밋 기록", "되돌리기"],
               ["기록에 내 메시지가 보임", "취소한 줄이 원래대로 돌아옴"],
               "Git 없음 → 「Git 설치 방법 알려 줘」 · 이름 · 이메일 질문 → GitHub 가입 정보 입력"),
-        tstep(T, 1, "Claude Code 열기", T, "lab12_spark.webp", "편집기 오른쪽 위 Spark 아이콘",
-              rows=[("폴더", "workspace/mini_notion"), ("열기", "Spark 아이콘 · 또는 터미널 claude"), ("파일", "기획서.md · 개발계획.md")],
-              srcs=(("그림 · Claude Code 문서 · VS Code", "https://code.claude.com/docs/en/vs-code"),)),
-        tstep(T, 2, "Git 시작 요청", T, "lab15_perm.webp", "git 명령 실행 승인",
-              rows=[("명령 승인", "Bash command → 1. Yes"), ("2번", "같은 명령은 다시 묻지 않음"), ("하는 일", "git init · git add")]),
+        tstep(T, 1, "Git 시작 요청", T, "lab15_perm.webp", "git 명령 실행 승인",
+              rows=[("요청", "「Git 으로 관리하고 첫 커밋 남겨 줘」"), ("명령 승인", "Bash command → 1. Yes"), ("2번", "같은 명령은 다시 묻지 않음")]),
         tstep(T, 2, "첫 커밋 결과", T, "lab15_commit.webp", "첫 커밋 결과",
-              rows=[("커밋", "번호 · 메시지 한 줄"), ("담긴 파일", "기획서.md · 개발계획.md"), ("빠진 것", "페르소나/ · 요청 범위 밖")]),
+              rows=[("커밋", "번호 · 메시지 한 줄"), ("담긴 파일", "기획서.md · 개발계획.md"), ("빠진 것", "페르소나 파일 · 요청 범위 밖")]),
         tstep(T, 3, "기록 보기", T, "lab15_log.webp", "커밋 기록",
               rows=[("요청", "「커밋 기록 보여 줘」"), ("보이는 것", "번호 · 작성자 · 시각 · 메시지"), ("개수", "커밋마다 한 줄")]),
-        tstep(T, 4, "개발계획.md 고치기", T, term=("개발계획.md · 바꾼 줄", "- | F1 | 페이지 만들기 | … 목록 맨 위에 추가 |\n+ | F1 | 페이지 만들기 | … 목록 맨 아래에 추가 |"),
+        tstep(T, 4, "개발계획.md 고치기", T, term=("개발계획.md · 바꾼 줄", "고치기 전 · F5 저장: 입력할 때마다 저장\n고친 뒤 · F5 저장: 저장 버튼을 누르면 저장"),
               rows=[("어디", "VS Code 에서 아무 줄"), ("저장", "⌘S · Ctrl+S"), ("표시", "탐색기 파일 이름 옆 M")]),
         tstep(T, 5, "방금 고친 거 취소", T, "lab15_undo.webp", "되돌리기 결과",
               rows=[("요청", "「방금 고친 거 취소해 줘」"), ("명령", "git restore"), ("결과", "마지막 커밋 상태 · 되살릴 수 없음")]),
-        light("실습 1-5 확인", chat([
-            ("me", "이 폴더를 Git으로 관리하고, 기획서랑 개발 계획을 첫 커밋으로 남겨 줘."),
-            ("ai", "Git 저장소를 만들고 기획서.md · 개발계획.md 를 커밋했다.\n메시지: 「기획서 · 개발 계획 첫 버전」")], "첫 커밋 대화 예")
-              + code("터미널 · git log --oneline", esc("624e0e2 기획서 · 개발 계획 첫 버전"))
-              + viz2.tiles([
-                  ("커밋 1개", "메시지에 무엇을 담았는지"), ("되돌리기", "개발계획.md 가 커밋 상태 그대로"), ("다음 단원", "이 폴더에 앱을 만듦")], 3), T),
+        light("실습 1-5 확인", checks([
+            ("기록에 커밋이 하나 있나", "「커밋 기록 보여 줘」"), ("메시지에 담은 내용이 보이나", "예 · 기획서 · 개발 계획 첫 버전"),
+            ("개발계획.md 가 원래대로인가", "고친 줄이 돌아옴 · M 표시 사라짐")],
+            "셋 다 「예」 → 1-6 · 이 폴더에 앱 만들기"), T),
     ]
