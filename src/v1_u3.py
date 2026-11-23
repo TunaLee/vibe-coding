@@ -112,7 +112,7 @@ CSS = """
   @keyframes v1rwU{to{background:#FDECEA; color:#C0392B; box-shadow:0 0 0 2px #E6B0AA;}}
   @keyframes v1rwX{to{opacity:.4; text-decoration:line-through;}}
   @media print{.v1rwH,.v1rwV,.v1rwQ,.v1rwN,.v1rwA{opacity:1; animation:none}}
-  /* 1-3 · 기능별 다섯 질문 (v13x) */
+  /* 1-3 · 기능별 기획 항목 (v13x) */
   .v13x{display:grid; grid-template-columns:120px repeat(5,1fr); gap:5px; margin-top:12px;}
   .v13xC{position:relative; min-height:46px; background:#F4F6F9; border-radius:8px; padding:6px 8px; font-size:13px; color:#16233A; display:flex; align-items:center;}
   .v13xC.h{background:none; flex-direction:column; align-items:flex-start; justify-content:flex-end; border-bottom:2px solid #F28C28; border-radius:0; min-height:40px;}
@@ -404,7 +404,7 @@ ASK = [("문제점", "무엇이 불편한가"), ("이용자", "누가 · 어디�
 
 
 def _matrix():
-    """기능별 다섯 질문 — 기능 다섯 줄 × 질문 다섯 칸 표. 「/」 메뉴 줄이 예시 답으로 채워지고, 나머지 줄은 같은 방식으로 차례로 표시. 답은 예시 기획서.md 에서 읽음."""
+    """기능별 기획 항목 — 기능 다섯 줄 × 항목 다섯 칸 표. 「/」 메뉴 줄이 예시 답으로 채워지고, 나머지 줄은 같은 방식으로 차례로 표시. 답은 예시 기획서.md 에서 읽음."""
     t = _plan()
     def ans(feat):
         sec = t[t.index(f"## {feat}"):]
@@ -420,7 +420,7 @@ def _matrix():
             cells += (f'<div class="v13xC{" on" if on else ""}"><span class="q">?</span><span class="a" style="--d:{d:.2f}s">{esc(a) if on else "✓"}</span></div>')
         rows += f'<div class="v13xC f{" on" if on else ""}">{f}</div>' + cells
     return (f'<div class="v13x">{head}{rows}</div>'
-            '<div class="v14gN" style="--d:7.6s"><b>기능 하나씩</b>다섯 질문에 짧게 답 · 묻는 말은 기획자마다 달라도 다섯 가지는 같음</div>')
+            '<div class="v14gN" style="--d:7.6s"><b>기능 하나씩</b>항목마다 한두 문장 · 묻는 말투는 달라도 항목은 같음</div>')
 
 
 def _interview():
@@ -473,7 +473,7 @@ def slides():
             ("머릿속 아이디어", "설명할 때마다 내용이 바뀜"), ("기획서", "기능마다 · 불편 · 누가 · 장면 · 화면 · 확인"),
             ("만드는 법", "기획자가 묻고 나는 답만 · 정리는 기획자")])
               + src(("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")), T),
-        light("기능별 다섯 질문", _matrix(), T),
+        light("기능별 기획 항목", _matrix(), T),
         # ── 좋은 답 네 가지
         light("좋은 답 ① 하루 시나리오", _scene(), T),
         light("좋은 답 ② 「~하면 ~된다」 문장", _check(), T),
@@ -487,7 +487,7 @@ def slides():
               + src(("Claude Code · Permission modes", "https://code.claude.com/docs/en/permission-modes")), T),
         light("기획자 페르소나", '<div class="twocol"><div>' + code("기획자.md", esc(_persona("기획자")))
               + '</div><div>' + viz2.tiles([("첫 줄", "IT 를 몰라도 알아듣는 질문 · 기획서"), ("둘째 줄", "만들 기능 목록부터"),
-                                          ("셋째 줄", "기능마다 다섯 질문"), ("넷째 줄", "예시 답 · 흐리면 예시로 다시")], 1) + "</div></div>", T),
+                                          ("셋째 줄", "기능마다 항목 다섯 개"), ("넷째 줄", "예시 답 · 흐리면 예시로 다시")], 1) + "</div></div>", T),
         light("기획자 말투 비교", _tone13(), T),
         light("기획자 페르소나 대화 예시", '<div class="twocol"><div>' + chat([
             ("me", "기획자.md 대로 미니 노션 기획서를 같이 쓰자"),
@@ -500,7 +500,7 @@ def slides():
         light("빈칸 찾기 요청", _gapask(), T),
         # ── 실습
         labcard("1-3", "기획서 작성", T, "기획자.md", "기획서.md", ["먼저 묻기 모드", "인터뷰에 답하기", "빈칸 찾기"]),
-        brief("1-3", T, ["새 폴더 mini_notion_v2 만들어 열기 · 기획자.md 만들기", "모드 표시 → Plan · 「기획자.md 대로 미니 노션 기획서를 같이 쓰자」", "기능 목록 정하기 → 기능마다 다섯 질문에 짧게 답하기", "「추측해야 하는 곳 뽑아 줘」 → 답하기", "승인 → 정리된 기획서.md 확인"],
+        brief("1-3", T, ["새 폴더 mini_notion_v2 만들어 열기 · 기획자.md 만들기", "모드 표시 → Plan · 「기획자.md 대로 미니 노션 기획서를 같이 쓰자」", "기능 목록 정하기 → 기능마다 항목별로 짧게 답하기", "「추측해야 하는 곳 뽑아 줘」 → 답하기", "승인 → 정리된 기획서.md 확인"],
               [],
               ["기획자.md", "먼저 묻기 모드", "인터뷰", "빈칸 찾기"],
               ["기능마다 다섯 칸이 내 답으로 채워짐", "확인 문장이 「~하면 ~된다」"],
