@@ -381,7 +381,7 @@
   <button class="ico" id="btnMenu" title="목차"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
   <span class="sep"></span>
   <button class="ico" id="btnPrev" title="이전"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg></button>
-  <span class="count"><b id="cur">1</b> / <span id="tot2">75</span></span>
+  <span class="count"><b id="cur">1</b><span id="tot2" hidden>75</span></span>
   <button class="ico" id="btnNext" title="다음"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg></button>
   <span class="sep"></span>
   <button class="zoom" id="btnOut" title="축소"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14"/></svg></button>
@@ -415,7 +415,7 @@
   document.getElementById('tot2').textContent = total;
   slides.forEach((s, i) => {
     const c = s.querySelector('.coord b');     if (c) c.textContent = String(i + 1).padStart(2, '0');
-    const t = s.querySelector('.coord .tot');  if (t) t.textContent = total;
+    const k = s.querySelector('.coord');  if (k && c) k.replaceChildren(c);
   });
 
   const ovgrid = document.getElementById('ovgrid');
