@@ -1,6 +1,6 @@
 """1-3 기획서 작성.
 
-왜 기획하나(모호 vs 구체 · 개발 흐름) → 만들 것(미니 노션) → 기획서 여섯 칸 → 구체화 방법 네 가지(애니메이션) → Plan Mode → 페르소나 → 대화 → 빈칸 찾기 → 실습.
+왜 기획하나(모호 vs 구체 · 개발 흐름) → 만들 것(미니 노션) → 기획서 인터뷰(애니메이션) → 좋은 답 네 가지(애니메이션) → 먼저 묻기 모드 · 역할 메모 → 기획자.md · 말투 비교 → 대화 → 빈칸 찾기 → 실습.
 예시 문장은 labs/mini_notion/예시/기획서.md 에서 그대로 읽는다. 산출물 기획서.md 는 1-4 개발 계획의 입력.
 """
 from pathlib import Path
@@ -112,6 +112,16 @@ CSS = """
   @keyframes v1rwU{to{background:#FDECEA; color:#C0392B; box-shadow:0 0 0 2px #E6B0AA;}}
   @keyframes v1rwX{to{opacity:.4; text-decoration:line-through;}}
   @media print{.v1rwH,.v1rwV,.v1rwQ,.v1rwN,.v1rwA{opacity:1; animation:none}}
+  /* 1-3 · 기획서 인터뷰 (v13i) */
+  .v13iH,.v13iR{display:grid; grid-template-columns:1.15fr 1fr 26px 150px; gap:10px; align-items:center;}
+  .v13iH{margin-top:10px;} .v13iH span{font-size:14px; font-weight:800; color:#6B7785; padding-bottom:6px; border-bottom:2px solid #E3E6EA;}
+  .v13iH span:last-child{color:#C76A12; border-color:#F28C28;}
+  .v13iR{margin-top:9px;}
+  .v13iR .q{background:#16233A; color:#fff; border-radius:12px 12px 12px 4px; padding:9px 12px; font-size:15.5px; font-weight:700; opacity:0; animation:v13On .35s var(--d) forwards;}
+  .v13iR .a{background:#FFF8F0; border:2px solid #F2B880; border-radius:12px 12px 4px 12px; padding:8px 12px; font-size:15.5px; font-weight:700; color:#16233A; opacity:0; animation:v13On .35s var(--d) forwards;}
+  .v13iR i{font-style:normal; font-weight:800; color:#F28C28; text-align:center; opacity:0; animation:v13On .3s var(--d) forwards;}
+  .v13iR .k{background:#fff; border:2px solid #C9D6E6; border-left:6px solid #F28C28; border-radius:8px; padding:8px 12px; font-size:16px; font-weight:800; color:#16233A; opacity:0; animation:v13In .4s var(--d) forwards; transform:translateX(-8px);}
+  @media print{.v13iR .q,.v13iR .a,.v13iR i,.v13iR .k{opacity:1; animation:none; transform:none}}
   /* 1-3 · 기획 구체화 방법 (v13m · v13k · v13g) */
   .v13m{display:grid; grid-template-columns:250px 1fr; gap:26px; margin-top:12px; align-items:start;}
   .v13mV{border:2px solid #E6B0AA; background:#FDECEA; border-radius:12px; padding:14px; opacity:0; animation:v13On .4s var(--d) forwards;}
@@ -317,8 +327,8 @@ def _features():
 
 def _vague(text, d=.3, x=1.6):
     """흐린 말 카드 — 나타났다가 줄이 그어짐."""
-    return (f'<div class="v13mV" style="--d:{d:.1f}s;--x:{x:.1f}s"><small>흐린 말</small><b>「{text}」</b></div>'
-            f'<div class="v13mA" style="--d:{x + .2:.1f}s">구체적으로 ↓</div>')
+    return (f'<div class="v13mV" style="--d:{d:.1f}s;--x:{x:.1f}s"><small>흐린 답</small><b>「{text}」</b></div>'
+            f'<div class="v13mA" style="--d:{x + .2:.1f}s">좋은 답 ↓</div>')
 
 
 def _scene():
@@ -361,7 +371,7 @@ def _check():
     r = "".join(f'<div class="v13mQ"><s style="--d:{.3 + i * 1.8:.1f}s;--x:{1.1 + i * 1.8:.1f}s">「{v}」</s><i style="--d:{1.1 + i * 1.8:.1f}s">→</i>'
                 f'<b class="if" style="--d:{1.3 + i * 1.8:.1f}s">{a}</b><b class="then" style="--d:{1.8 + i * 1.8:.1f}s">{c}</b></div>'
                 for i, (v, a, c) in enumerate(rows))
-    return (f'<div class="v13mQs"><div class="v13mQh"><span>흐린 말</span><span></span><span class="if">하면</span><span class="then">된다</span></div>{r}</div>'
+    return (f'<div class="v13mQs"><div class="v13mQh"><span>흐린 답</span><span></span><span class="if">하면</span><span class="then">된다</span></div>{r}</div>'
             '<div class="v13mC wide" style="--d:6.2s"><b>쓰는 곳</b><span style="--d:6.3s">기획서 확인 문장</span>'
             '<span style="--d:6.5s">1-6 에서 눌러 볼 목록</span><span style="--d:6.7s">누가 해도 같은 판단</span></div>')
 
@@ -374,6 +384,41 @@ def _gapask():
     return ('<div class="v13g"><div class="v13gL"><div class="v13gMe" style="--d:.3s">이 기획서로 만들면<br/>네가 <u>추측해야 하는 곳</u>을<br/>다섯 개 뽑아 줘</div>'
             '<div class="v13gN" style="--d:6.6s">내가 못 찾는 빈칸<br/>→ AI 가 질문으로 · 나는 답만</div></div>'
             f'<div class="v13gR"><div class="v13gH"><span>Claude Code 가 찾은 빈칸 · 예</span><span>내 답</span></div>{r}</div></div>')
+
+
+def _interview():
+    """기획서 인터뷰 — 기획자 질문(예시 답 포함) → 내 답 → 기획서.md 칸이 한 줄씩 채워짐. 한 번 재생."""
+    rows = [("요즘 회의록 때문에 곤란했던 일 하나만?", "지난주 회의록을 못 찾아 다시 물어봤어", "문제점"),
+            ("누가 · 어디서 쓰나요?", "나 혼자 · 회사 PC", "이용자"),
+            ("회의 끝나고 어떤 순서로 쓰나요?", "새 페이지 → 할 일은 체크 상자 → 금요일에 체크", "사용 장면"),
+            ("실제로 쓴 회의록 하나 붙여 줄래요?", "회의록 복사해서 붙여 넣음", "예시 데이터"),
+            ("화면을 대충 그려서 찍어 줄래요?", "종이 그림 사진 첨부", "화면 스케치"),
+            ("다 되면 뭘 눌러 보고 됐다고 할까요?", "새로고침해도 그대로면 됨", "확인 문장")]
+    r = ""
+    for i, (q, a, k) in enumerate(rows):
+        d = .5 + i * 1.1
+        r += (f'<div class="v13iR"><div class="q" style="--d:{d:.1f}s">{q}</div><div class="a" style="--d:{d + .4:.1f}s">{a}</div>'
+              f'<i style="--d:{d + .7:.1f}s">→</i><div class="k" style="--d:{d + .8:.1f}s">{k}</div></div>')
+    return ('<div class="v13iH"><span>기획자가 묻는 것</span><span>내 답</span><span></span><span>기획서.md 칸</span></div>'
+            f'<div class="v13i">{r}</div>'
+            '<div class="v14gN" style="--d:7.4s"><b>나는 답만</b>칸 이름은 몰라도 됨 · 정리는 기획자가</div>')
+
+
+def _tone13():
+    """보통 기획 용어 → 기획자.md 말투 — 같은 질문이 일상 말 + 예시 답으로. 1-4 말투 비교(v14o)와 같은 모양."""
+    rows = [("문제", "배경과 문제점을 서술해 주세요",
+             "요즘 회의록 때문에 곤란했던 일 하나만 들려주세요 · 예: 지난주 회의록을 못 찾았다"),
+            ("장면", "주요 유저 플로우를 정의해 주세요",
+             "회의 끝나고 이 앱을 어떤 순서로 쓸지 말해 주세요 · 예: 새 페이지 → 할 일 적기 → 금요일에 체크"),
+            ("확인", "인수 조건을 작성해 주세요",
+             "다 만들면 뭘 눌러 보고 됐다고 할까요? · 예: 새로고침해도 그대로 있으면 됨")]
+    r = ""
+    for i, (k, dev, lead) in enumerate(rows):
+        d = .4 + i * 2.2
+        r += (f'<div class="v14oR"><b style="--d:{d:.1f}s">{k}</b><div class="v14oD" style="--d:{d:.1f}s;--x:{d + 1.0:.1f}s">{esc(dev)}</div>'
+              f'<i style="--d:{d + 1.0:.1f}s">→</i><div class="v14oL" style="--d:{d + 1.2:.1f}s">{esc(lead)}</div></div>')
+    return (f'<div class="v14o"><div class="v14oH"><span></span><span>기획 용어로 묻기</span><span></span><span>기획자.md 말투 · 일상 말 + 예시 답</span></div>{r}</div>'
+            '<div class="v14gN" style="--d:7.2s"><b>예시 답</b>무엇을 답할지 보이면 바로 답할 수 있음</div>')
 
 
 def slides():
@@ -394,53 +439,48 @@ def slides():
         # ── 기획서
         light("기획서", shot("v1_u3_plan.webp", "기획서 · 한 장의 문서", [
             ("머릿속 아이디어", "설명할 때마다 내용이 바뀜"), ("기획서", "무엇이 불편 · 누가 · 어떤 장면 · 어떤 화면 · 어떻게 확인"),
-            ("기획서.md", "Claude Code 가 읽는 파일")])
+            ("만드는 법", "기획자가 묻고 나는 답만 · 정리는 기획자")])
               + src(("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")), T),
-        light("기획서 구성", viz2.maprows([
-            ("문제점", "실제로 겪은 불편", "지난주 회의록을 못 찾아 다시 물어봄"),
-            ("이용자", "누가 · 어디서", "회의가 잦은 직장인 나 · PC 브라우저"),
-            ("사용 장면 · 방법 ①", "내 하루에서 어떻게 쓰나", "월요일 회의 끝 → 새 페이지 → 할 일 체크 상자"),
-            ("예시 데이터 · 방법 ②", "실제로 넣을 내용", "내가 쓴 회의록 한 장 그대로"),
-            ("화면 스케치 · 방법 ③", "어떻게 보이나", "종이에 그린 네모 · 사진"),
-            ("확인 문장 · 방법 ④", "어떻게 확인하나", "「새로고침하면 그대로 있다」")], "칸", "묻는 것"), T),
-        # ── 기획 구체화 방법
-        light("구체화 방법 ① 사용 시나리오", _scene(), T),
-        light("구체화 방법 ② 예시 데이터", _sample(), T),
-        light("구체화 방법 ③ 손그림 화면", _sketch(), T),
-        light("구체화 방법 ④ 「~하면 ~된다」 문장", _check(), T),
+        light("기획서 인터뷰", _interview(), T),
+        # ── 좋은 답 네 가지
+        light("좋은 답 ① 하루 시나리오", _scene(), T),
+        light("좋은 답 ② 실제 메모", _sample(), T),
+        light("좋은 답 ③ 손그림", _sketch(), T),
+        light("좋은 답 ④ 「~하면 ~된다」 문장", _check(), T),
         # ── Claude Code 와 기획하기
-        light("Plan Mode", viz2.pair(
-            "바로 작성", [("요청", "「기획서 써 줘」"), ("결과", "기획서.md 가 바로 생김"), ("빈 칸", "Claude Code 추측으로 채움")],
-            "Plan Mode", [("요청", "모드 표시 → Plan → 요청"), ("결과", "파일은 그대로 · 질문과 초안만"), ("저장", "승인한 뒤에 기획서.md")])
+        light("먼저 묻기 모드와 역할 메모", viz2.pair(
+            "Plan Mode · 먼저 묻기 모드", [("켜는 법", "입력창 아래 모드 표시 → Plan"), ("하는 일", "바로 만들지 않고 먼저 질문 · 초안"),
+                                       ("파일", "내가 승인한 뒤에 생김")],
+            "페르소나 · 역할 메모", [("비유", "회의 때 받는 「오늘 당신은 사회자」 카드"), ("모양", "기획자.md 파일 하나 · 몇 줄"),
+                                  ("쓰는 법", "「기획자.md 대로」 한마디")], hl="r")
+              + note("둘을 같이", "먼저 묻기 모드 + 기획자.md → 기획자가 인터뷰하고 나는 답만")
               + src(("Claude Code · Permission modes", "https://code.claude.com/docs/en/permission-modes")), T),
-        light("페르소나", viz2.pair(
-            "Plan Mode 만", [("요청", "Plan → 「기획서 써 줘」"), ("Claude Code", "무엇을 · 어떤 순서로 물을지 스스로 정함"), ("빈 곳", "묻지 않은 칸은 추측으로")],
-            "Plan Mode + 기획자.md", [("요청", "「기획자.md 대로 같이 쓰자」"), ("Claude Code", "기획자처럼 질문을 하나씩"), ("빈 곳", "내 답으로 채움")]), T),
         light("기획자 페르소나", '<div class="twocol"><div>' + code("기획자.md", esc(_persona("기획자")))
-              + '</div><div>' + viz2.tiles([("만들기", "mini_notion 폴더에 새 파일 · 다섯 줄"), ("셋째 줄", "흐린 답은 장면 · 예시로 다시 질문"),
-                                          ("마지막 줄", "기획서 칸 = 질문 순서")], 1) + "</div></div>", T),
+              + '</div><div>' + viz2.tiles([("듣는 사람", "IT 를 모르는 직장인 · 나"), ("질문", "하나씩 · 일상 말 · 예시 답"),
+                                          ("흐린 답", "실제 있었던 일로 다시"), ("마지막 줄", "기획서 칸 = 기획자의 체크리스트")], 1) + "</div></div>", T),
+        light("기획자 말투 비교", _tone13(), T),
         light("기획자 페르소나 대화 예시", '<div class="twocol"><div>' + chat([
             ("me", "기획자.md 대로 미니 노션 기획서를 같이 쓰자"),
-            ("ai", "문제점부터 묻는다. 회의록 때문에 실제로 곤란했던 일이 있나요?"),
+            ("ai", "요즘 회의록 때문에 곤란했던 일 하나만 들려주세요.\n예: 지난주 회의록을 못 찾아 다시 물어봤다"),
             ("me", "메모가 여기저기 흩어져서 불편해"),
-            ("ai", "흐린 말이라 장면으로 다시 묻는다. 최근에 실제로 있었던 일 하나만 들려 주세요."),
+            ("ai", "조금만 더 구체적으로요. 최근에 실제로 있었던 일 하나만요.\n예: 언제 · 무엇을 찾다가 · 어떻게 됐는지"),
             ("me", "지난주 회의록이 어느 파일에 있는지 몰라 다시 물어봤어")], "Plan Mode 대화 예")
               + '</div><div><img class="v1u3im" src="img/v1_u3_ask.webp" alt="질문하는 AI · 답하는 사람"/></div></div>'
               + src(("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")), T),
         light("빈칸 찾기 요청", _gapask(), T),
         # ── 실습
-        labcard("1-3", "기획서 작성", T, "기획자.md", "기획서.md", ["사용 장면 · 예시 · 스케치", "확인 문장", "빈칸 찾기"]),
-        brief("1-3", T, ["기획자.md 만들기", "모드 표시 → Plan · 「기획자.md 대로 미니 노션 기획서를 같이 쓰자」", "질문에 장면 · 예시로 답하기 · 스케치 사진 첨부", "「추측해야 하는 곳 뽑아 줘」 → 답하기", "승인 → 기획서.md"],
+        labcard("1-3", "기획서 작성", T, "기획자.md", "기획서.md", ["먼저 묻기 모드", "인터뷰에 답하기", "빈칸 찾기"]),
+        brief("1-3", T, ["기획자.md 만들기", "모드 표시 → Plan · 「기획자.md 대로 미니 노션 기획서를 같이 쓰자」", "인터뷰에 답하기 · 메모 붙여 넣기 · 그림 사진 첨부", "「추측해야 하는 곳 뽑아 줘」 → 답하기", "승인 → 정리된 기획서.md 확인"],
               [],
-              ["기획자.md", "Plan Mode", "사용 장면", "확인 문장"],
+              ["기획자.md", "먼저 묻기 모드", "인터뷰", "빈칸 찾기"],
               ["여섯 칸이 모두 내 답으로 채워짐", "확인 문장이 「~하면 ~된다」"],
               "모르는 질문엔 「아직 안 정함」으로 답하기", folder="mini_notion/기획서.md"),
         tstep("1-3", 1, "기획자.md 만들기", T, term=("mini_notion/기획자.md", _persona("기획자")),
-              rows=[("만들기", "VS Code 탐색기 → 새 파일 → 기획자.md"), ("쓰기", "다섯 줄 · 말투는 바꿔도 됨"), ("저장", "macOS ⌘S · Windows Ctrl+S")]),
+              rows=[("만들기", "VS Code 탐색기 → 새 파일 → 기획자.md"), ("쓰기", "일곱 줄 · 첫 두 줄은 꼭"), ("저장", "macOS ⌘S · Windows Ctrl+S")]),
         tstep("1-3", 2, "Plan Mode 요청", T, "lab13_plan.webp", "Plan Mode 에서 요청을 쓴 화면",
-              rows=[("Plan Mode", "입력창 아래 모드 표시 → Plan"), ("요청", "기획자.md 대로 같이 쓰기"), ("파일", "아직 안 씀")]),
-        tstep("1-3", 3, "질문에 답하기", T, "lab13_q1.webp", "기획자 페르소나의 첫 질문",
-              rows=[("답", "실제 장면 · 예시"), ("스케치", "종이 사진을 입력창에 붙여 넣기"), ("모를 때", "「아직 안 정함」")]),
+              rows=[("먼저 묻기 모드", "입력창 아래 모드 표시 → Plan"), ("요청", "「기획자.md 대로 같이 쓰자」"), ("파일", "아직 안 씀")]),
+        tstep("1-3", 3, "인터뷰에 답하기", T, "lab13_q1.webp", "기획자 페르소나의 첫 질문",
+              rows=[("답", "예시 답을 보고 내 경우로"), ("메모 · 그림", "복사해 붙여 넣기 · 사진 첨부"), ("모를 때", "「아직 안 정함」")]),
         tstep("1-3", 4, "빈칸 찾기", T, "lab13_draft.webp", "초안 요약과 흐린 부분 질문",
               rows=[("요청", "「추측해야 하는 곳 다섯 개 뽑아 줘」"), ("답", "짧게 · 하나씩"), ("피드백", "빠진 장면 · 고칠 문장")]),
         tstep("1-3", 5, "승인 · 저장", T, "lab13_saved.webp", "기획서.md 저장 결과",
