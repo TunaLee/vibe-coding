@@ -1376,6 +1376,18 @@
   .v14gA{background:#FDECEA; border:2px solid #E6B0AA; border-radius:12px; padding:12px 14px; font-size:19px; font-weight:700; color:#C0392B; opacity:0; animation:v14In .4s var(--d) forwards;}
   .v14gN{margin-top:22px; display:flex; gap:12px; align-items:center; font-size:19px; font-weight:700; color:#16233A; opacity:0; animation:v14In .5s var(--d) forwards;}
   .v14gN b{background:#C0392B; color:#fff; border-radius:8px; padding:4px 10px; font-size:15px;}
+  /* 1-4 · 개발자 말투 → 개발 리더 말투 (v14o) */
+  .v14oH,.v14oR{display:grid; grid-template-columns:70px 1fr 30px 1.35fr; gap:12px; align-items:center;}
+  .v14oH{margin-top:14px;} .v14oH span{font-size:14px; font-weight:800; color:#6B7785; padding-bottom:6px; border-bottom:2px solid #E3E6EA;}
+  .v14oH span:last-child{color:#C76A12; border-color:#F28C28;}
+  .v14oR{margin-top:14px;}
+  .v14oR b{font-size:17px; color:#16233A; opacity:0; animation:v14In .3s var(--d) forwards;}
+  .v14oD{font-family:var(--mono); font-size:14px; color:#E3E6EA; background:#1E2433; border-radius:10px; padding:12px 14px; line-height:1.5; opacity:0;
+    animation:v14In .3s var(--d) forwards, v14Fade .6s var(--x) forwards;}
+  .v14oR i{font-style:normal; font-weight:800; color:#F28C28; font-size:20px; text-align:center; opacity:0; animation:v14In .3s var(--d) forwards;}
+  .v14oL{background:#FFF8F0; border:2px solid #F2B880; border-radius:10px; padding:12px 14px; font-size:16.5px; font-weight:700; color:#16233A; line-height:1.5;
+    opacity:0; transform:translateX(-10px); animation:v14In .45s var(--d) forwards;}
+  @keyframes v14Fade{to{opacity:.45}}
   /* 1-4 · 쉬운 말 요약 · 검토 (v14e · v14v) */
   .v14e{display:grid; grid-template-columns:330px 170px 1fr; gap:16px; margin-top:16px; align-items:center;}
   .v14eH{font-size:14px; font-weight:800; color:#6B7785; margin-bottom:8px;}
@@ -1444,7 +1456,7 @@
   @keyframes v14In{to{opacity:1; transform:none;}}
   @keyframes v14Hi{to{background:#FDECEA; color:#C0392B; box-shadow:0 0 0 2px #E6B0AA;}}
   @keyframes v14Dn{to{top:calc(100% - 20px);}}
-  @media print{.v14eL,.v14eM,.v14eS,.v14vQ,.v14vQ span,.v14gL,.v14gQ,.v14gR i,.v14gA,.v14gN,.v14tTag,.v14tR{opacity:1; animation:none; transform:none}}
+  @media print{.v14oR b,.v14oD,.v14oR i,.v14oL,.v14eL,.v14eM,.v14eS,.v14vQ,.v14vQ span,.v14gL,.v14gQ,.v14gR i,.v14gA,.v14gN,.v14tTag,.v14tR{opacity:1; animation:none; transform:none}}
 
   /* 1-5 · diff — 네 구역의 파일 내용과 이웃 구역 사이 차이 (v2) */
   .v2q0{display:flex; gap:10px; margin-bottom:12px;}
@@ -2354,6 +2366,35 @@ print(total)</code></pre></div><div class="code sm"><div class="bar"><span class
   <div class="body"><div class="mid"><div class="v14b"><img src="img/v1_u4_blueprint.webp" alt="조감도와 설계 도면"/><div class="v2ms"><div class="v2mh"><span>집 짓기</span><i></i><span>앱 만들기</span></div><div class="v2m" style="--d:0.00s"><div class="a">조감도</div><i>→</i><div class="b"><b>기획서</b><small>내가 씀 · 어떤 집 · 왜</small></div></div><div class="v2m" style="--d:0.12s"><div class="a">설계 도면</div><i>→</i><div class="b"><b>개발 계획</b><small>AI 개발자가 씀</small></div></div><div class="v2m" style="--d:0.24s"><div class="a">도면 설명</div><i>→</i><div class="b"><b>쉬운 말 요약</b><small>내가 읽고 확인</small></div></div><div class="v2m" style="--d:0.36s"><div class="a">준공 검사</div><i>→</i><div class="b"><b>완료 기준</b><small>기획서 확인 문장 그대로</small></div></div></div></div></div></div>
 </section>
 
+<section class="slide lt" data-title="개발 리더 페르소나">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-4</span></div>
+  <h2 class="s-title sm">개발 리더 페르소나</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="twocol"><div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">개발리더.md</span></div><pre><code># 개발 리더
+- 듣는 사람은 개발을 모르는 기획자다
+- 질문 · 설명 · 피드백은 쉬운 말로 · 전문 용어는 쓰면 바로 풀이
+- 정해지지 않은 것은 선택지로 묻고 추천과 이유를 붙인다
+- 계획 단계에서는 코드를 쓰지 않는다
+- 개발계획.md 칸: 기능 · 화면 · 데이터 · 완료 기준 · 태스크 · 쉬운 말 요약</code></pre></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>듣는 사람</b><span>개발을 모르는 기획자 · 나</span></div><div class="v2tile" style="--d:0.08s"><b>말투</b><span>쉬운 말 · 용어는 바로 풀이</span></div><div class="v2tile" style="--d:0.16s"><b>모르는 것</b><span>선택지 · 추천 · 이유로 질문</span></div><div class="v2tile" style="--d:0.24s"><b>마지막 칸</b><span>쉬운 말 요약</span></div></div></div></div></div></div>
+</section>
+
+<section class="slide lt" data-title="개발자 말투와 개발 리더 말투">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-4</span></div>
+  <h2 class="s-title sm">개발자 말투와 개발 리더 말투</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v14o"><div class="v14oH"><span></span><span>개발자 말투</span><span></span><span>개발 리더 말투 · 개발리더.md</span></div><div class="v14oR"><b style="--d:0.4s">질문</b><div class="v14oD" style="--d:0.4s;--x:1.4s">상태는 localStorage 로 persist 할까요, 백엔드 DB 로 할까요?</div><i style="--d:1.4s">→</i><div class="v14oL" style="--d:1.6s">쓴 내용을 어디에 보관할까요? A 이 브라우저 안 · 추천 · 로그인 없음 · 다른 기기에선 안 보임 / B 인터넷 서버 · 어디서나 보임 · 로그인 필요</div></div><div class="v14oR"><b style="--d:2.6s">보고</b><div class="v14oD" style="--d:2.6s;--x:3.6s">T3 구현 중 contenteditable 의 input 이벤트와 충돌 발생</div><i style="--d:3.6s">→</i><div class="v14oL" style="--d:3.8s">「/」 메뉴를 만들다가 글자 입력과 부딪히는 곳을 찾았어요 · 메뉴가 떠 있는 동안 글자 입력을 잠깐 멈추게 할게요</div></div><div class="v14oR"><b style="--d:4.8s">피드백</b><div class="v14oD" style="--d:4.8s;--x:5.8s">DnD 핸들의 hit area 가 작음</div><i style="--d:5.8s">→</i><div class="v14oL" style="--d:6.0s">손잡이가 작아서 잡기 어려워요 · 마우스가 줄에 올라가면 손잡이가 보이게 하고 잡는 범위를 넓힐게요</div></div></div><div class="v14gN" style="--d:7.2s"><b>같은 내용</b>듣는 사람이 기획자라고 적어 두면 처음부터 쉬운 말로</div></div></div>
+</section>
+
+<section class="slide lt" data-title="개발 계획 대화 예시">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-4</span></div>
+  <h2 class="s-title sm">개발 계획 대화 예시</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1chat"><div class="v1ch">Plan Mode 대화 예</div><div class="v1b me"><span>나</span><p>개발리더.md 대로 기획서.md 를 읽고 개발 계획을 세워 줘</p></div><div class="v1b ai"><span>Claude</span><p>기획서에 없는 것 하나를 먼저 묻는다. 쓴 내용을 어디에 보관할까요?<br/>A 이 브라우저 안 · 추천 · 로그인 없음 · 다른 기기에서는 안 보임<br/>B 인터넷 서버 · 어디서나 보임 · 로그인 필요</p></div><div class="v1b me"><span>나</span><p>A</p></div><div class="v1b ai"><span>Claude</span><p>A 로 정했다. 계획은 여섯 단계 · 단계마다 끝나면 화면에서 볼 것을 적었다.<br/>맨 끝 「쉬운 말 요약」부터 읽어 보면 된다.</p></div></div></div></div>
+</section>
+
 <section class="slide lt" data-title="화면 나누기">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-4</span></div>
@@ -2367,7 +2408,7 @@ print(total)</code></pre></div><div class="code sm"><div class="bar"><span class
   <div class="eyebrow"><span class="tag">1-4</span></div>
   <h2 class="s-title sm">쉬운 말 요약</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v14e"><div class="v14eL" style="--d:.2s"><div class="v14eH">개발계획.md · 원문 일부</div><div class="v14eR">F3 「/」 메뉴: 빈 블록에 「/」 → 메뉴 · 화살표 · 엔터로 블록 종류 고르기</div><div class="v14eR">저장: 브라우저 localStorage</div><div class="v14eR">T4 블록 끌어 옮기기 · F4 · 손잡이로 순서 바뀜</div></div><div class="v14eM" style="--d:1.6s">「개발 모르는 사람도<br/>알게 설명해 줘」<i>→</i></div><div class="v14eRt"><div class="v14eH">쉬운 말 요약 · 화면이 바뀌는 순서</div><div class="v14eS" style="--d:3.0s">1. 왼쪽에 페이지 목록이 생기고 「+ 새 페이지」로 페이지를 만든다 (T1)</div><div class="v14eS" style="--d:3.6s">2. 오른쪽에 제목 · 글 · 체크 상자 · 구분선을 쓴다 (T2)</div><div class="v14eS" style="--d:4.2s">3. 빈 줄에 「/」 를 치면 블록 종류 메뉴가 뜬다 (T3)</div><div class="v14eS" style="--d:4.8s">4. 줄 왼쪽 손잡이를 끌어 순서를 바꾼다 (T4)</div><div class="v14eS" style="--d:5.4s">5. 새로고침해도 쓴 내용이 남는다 · 이 브라우저 안에 저장 (T5)</div><div class="v14eS" style="--d:6.0s">6. 휴대폰 폭에서도 잘 보이는지 확인한다 (T6)</div></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v14e"><div class="v14eL" style="--d:.2s"><div class="v14eH">개발계획.md · 원문 일부</div><div class="v14eR">F3 「/」 메뉴: 빈 블록에 「/」 → 메뉴 · 화살표 · 엔터로 블록 종류 고르기</div><div class="v14eR">저장: 브라우저 localStorage</div><div class="v14eR">T4 블록 끌어 옮기기 · F4 · 손잡이로 순서 바뀜</div></div><div class="v14eM" style="--d:1.6s">개발 리더가<br/>계획 끝에 붙임<i>→</i></div><div class="v14eRt"><div class="v14eH">쉬운 말 요약 · 화면이 바뀌는 순서</div><div class="v14eS" style="--d:3.0s">1. 왼쪽에 페이지 목록이 생기고 「+ 새 페이지」로 페이지를 만든다 (T1)</div><div class="v14eS" style="--d:3.6s">2. 오른쪽에 제목 · 글 · 체크 상자 · 구분선을 쓴다 (T2)</div><div class="v14eS" style="--d:4.2s">3. 빈 줄에 「/」 를 치면 블록 종류 메뉴가 뜬다 (T3)</div><div class="v14eS" style="--d:4.8s">4. 줄 왼쪽 손잡이를 끌어 순서를 바꾼다 (T4)</div><div class="v14eS" style="--d:5.4s">5. 새로고침해도 쓴 내용이 남는다 · 이 브라우저 안에 저장 (T5)</div><div class="v14eS" style="--d:6.0s">6. 휴대폰 폭에서도 잘 보이는지 확인한다 (T6)</div></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="개발 계획 검토">
@@ -2378,26 +2419,6 @@ print(total)</code></pre></div><div class="code sm"><div class="bar"><span class
   <div class="body"><div class="mid"><div class="v14v"><div class="v14vQ" style="--d:0.4s"><i>1</i><b>내 사용 장면이 다 들어 있나</b><span style="--d:1.1s">예 · 「금요일에 체크」 → 2번 체크 상자 단계에 있음</span></div><div class="v14vQ" style="--d:2.0s"><i>2</i><b>모르는 단어가 있나</b><span style="--d:2.7s">예 · 「localStorage 가 뭐야?」 → 이 브라우저 안의 저장 공간</span></div><div class="v14vQ" style="--d:3.6s"><i>3</i><b>단계마다 화면에서 무엇을 보면 되나</b><span style="--d:4.3s">예 · 3번 끝 → 빈 줄에 / → 메뉴가 뜸</span></div></div><div class="v14gN" style="--d:5.4s"><b>하나라도 「아니요」</b>그 부분만 다시 요청 · 「요약 3번을 더 쉽게」</div></div></div>
 </section>
 
-<section class="slide lt" data-title="개발자 페르소나">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">1-4</span></div>
-  <h2 class="s-title sm">개발자 페르소나</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="twocol"><div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">개발자.md</span></div><pre><code># 개발자
-- 정해지지 않은 것은 선택지로 묻고 추천을 붙인다
-- 계획 단계에서는 코드를 쓰지 않는다
-- 개발계획.md 칸: 기능 · 화면 · 데이터 · 완료 기준 · 태스크
-- 계획 끝에 개발 모르는 사람용 요약을 붙인다</code></pre></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>만들기</b><span>기획자.md 옆에 새 파일 · 다섯 줄</span></div><div class="v2tile" style="--d:0.08s"><b>첫 줄</b><span>모르는 건 선택지 · 추천으로 질문</span></div><div class="v2tile" style="--d:0.16s"><b>마지막 줄</b><span>개발 모르는 사람용 요약</span></div></div></div></div></div></div>
-</section>
-
-<section class="slide lt" data-title="개발 계획 대화 예시">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">1-4</span></div>
-  <h2 class="s-title sm">개발 계획 대화 예시</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1chat"><div class="v1ch">Plan Mode 대화 예</div><div class="v1b me"><span>나</span><p>개발자.md 대로 기획서.md 를 읽고 개발 계획을 세워 줘</p></div><div class="v1b ai"><span>Claude</span><p>저장 위치를 정해야 한다.<br/>A 이 브라우저 · 추천 · 로그인 없음 · 다른 기기에서는 안 보임<br/>B 서버 · 어디서나 보임 · 로그인 · 데이터베이스 필요</p></div><div class="v1b me"><span>나</span><p>A · 그런데 localStorage 가 뭐야?</p></div><div class="v1b ai"><span>Claude</span><p>이 브라우저 안의 작은 저장 공간이다. 같은 컴퓨터 · 같은 브라우저에서만 보인다.<br/>계획 F1~F5 · T1~T6 · 끝에 쉬운 말 요약을 붙였다.</p></div></div></div></div>
-</section>
-
 <section class="slide lt labs" data-title="[실습 1-4] 기획서로 개발 계획 세우기">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-4</span><span class="labtag">실습 1-4</span></div>
@@ -2405,7 +2426,7 @@ print(total)</code></pre></div><div class="code sm"><div class="bar"><span class
   <div class="rule"></div>
   <div class="body"><div class="v1lc">
     <div class="io"><div class="b in"><small>입력</small><b>기획서.md</b></div><i>→</i><div class="b out"><small>산출물</small><b>개발계획.md</b></div></div>
-    <div class="pt"><span style="--d:0.5s">개발자 페르소나</span><span style="--d:0.7s">쉬운 말 요약</span><span style="--d:0.9s">검토 질문 셋</span></div>
+    <div class="pt"><span style="--d:0.5s">개발 리더 페르소나</span><span style="--d:0.7s">선택지 고르기</span><span style="--d:0.9s">검토 질문 셋</span></div>
     
   </div></div>
 </section>
@@ -2415,19 +2436,20 @@ print(total)</code></pre></div><div class="code sm"><div class="bar"><span class
   <div class="eyebrow"><span class="tag">1-4</span></div>
   <h2 class="s-title sm">실습 1-4 순서</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><ol class="v1st"><li style="--d:0.00s"><em>1</em><span>개발자.md 만들기</span></li><li style="--d:0.25s"><em>2</em><span>Plan · 「개발자.md 대로 기획서.md 를 읽고 개발 계획 세워 줘」 · 선택지 고르기</span></li><li style="--d:0.50s"><em>3</em><span>「개발 모르는 사람도 알게 설명해 줘」 → 검토 질문 셋</span></li><li style="--d:0.75s"><em>4</em><span>고칠 점 피드백</span></li><li style="--d:1.00s"><em>5</em><span>승인 → 개발계획.md</span></li></ol><div class="qk2"><b>확인</b><ul><li>개발계획.md 끝에 쉬운 말 요약</li><li>모르는 단어 없이 이해함</li></ul></div></div></div>
+  <div class="body"><div class="mid"><ol class="v1st"><li style="--d:0.00s"><em>1</em><span>개발리더.md 만들기</span></li><li style="--d:0.25s"><em>2</em><span>Plan · 「개발리더.md 대로 기획서.md 를 읽고 개발 계획 세워 줘」</span></li><li style="--d:0.50s"><em>3</em><span>선택지 고르기 · 모르면 「쉽게 다시 설명해 줘」</span></li><li style="--d:0.75s"><em>4</em><span>쉬운 말 요약 → 검토 질문 셋 → 피드백</span></li><li style="--d:1.00s"><em>5</em><span>승인 → 개발계획.md</span></li></ol><div class="qk2"><b>확인</b><ul><li>질문 · 설명이 다 알아들을 수 있는 말</li><li>개발계획.md 끝에 쉬운 말 요약</li></ul></div></div></div>
 </section>
 
-<section class="slide lt" data-title="실습 1-4 · 1단계 개발자.md 만들기">
+<section class="slide lt" data-title="실습 1-4 · 1단계 개발리더.md 만들기">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-4</span></div>
-  <h2 class="s-title sm">실습 1-4 · 1단계 개발자.md 만들기</h2>
+  <h2 class="s-title sm">실습 1-4 · 1단계 개발리더.md 만들기</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1tt"><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">mini_notion/개발자.md</span></div><pre><code># 개발자
-- 정해지지 않은 것은 선택지로 묻고 추천을 붙인다
+  <div class="body"><div class="mid"><div class="v1tt"><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">mini_notion/개발리더.md</span></div><pre><code># 개발 리더
+- 듣는 사람은 개발을 모르는 기획자다
+- 질문 · 설명 · 피드백은 쉬운 말로 · 전문 용어는 쓰면 바로 풀이
+- 정해지지 않은 것은 선택지로 묻고 추천과 이유를 붙인다
 - 계획 단계에서는 코드를 쓰지 않는다
-- 개발계획.md 칸: 기능 · 화면 · 데이터 · 완료 기준 · 태스크
-- 계획 끝에 개발 모르는 사람용 요약을 붙인다</code></pre></div></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>만들기</b><span>VS Code 탐색기 → 새 파일 → 개발자.md</span></div><div class="v2tile" style="--d:0.08s"><b>쓰기</b><span>다섯 줄 · 말투는 바꿔도 됨</span></div><div class="v2tile" style="--d:0.16s"><b>저장</b><span>macOS ⌘S · Windows Ctrl+S</span></div></div></div></div>
+- 개발계획.md 칸: 기능 · 화면 · 데이터 · 완료 기준 · 태스크 · 쉬운 말 요약</code></pre></div></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>만들기</b><span>VS Code 탐색기 → 새 파일 → 개발리더.md</span></div><div class="v2tile" style="--d:0.08s"><b>쓰기</b><span>여섯 줄 · 첫 두 줄은 꼭</span></div><div class="v2tile" style="--d:0.16s"><b>저장</b><span>macOS ⌘S · Windows Ctrl+S</span></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="실습 1-4 · 2단계 Plan Mode 요청 · 선택지">
@@ -2435,7 +2457,7 @@ print(total)</code></pre></div><div class="code sm"><div class="bar"><span class
   <div class="eyebrow"><span class="tag">1-4</span></div>
   <h2 class="s-title sm">실습 1-4 · 2단계 Plan Mode 요청 · 선택지</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1ts"><img src="img/lab14_q1.webp" alt="개발자 페르소나의 선택 질문"/></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>질문</b><span>저장 방식 · 기술 · 기획서에 없던 것</span></div><div class="v2tile" style="--d:0.08s"><b>고르기</b><span>추천 · 이유 읽고 고르기</span></div><div class="v2tile" style="--d:0.16s"><b>모를 때</b><span>「A 와 B 차이를 쉽게 설명해 줘」</span></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v1ts"><img src="img/lab14_q1.webp" alt="개발 리더 페르소나의 선택 질문"/></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>질문</b><span>저장 방식 · 기술 · 기획서에 없던 것</span></div><div class="v2tile" style="--d:0.08s"><b>고르기</b><span>추천 · 이유 읽고 고르기</span></div><div class="v2tile" style="--d:0.16s"><b>모를 때</b><span>「A 와 B 차이를 쉽게 설명해 줘」</span></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="실습 1-4 · 3단계 쉬운 말 요약 검토">
@@ -2450,7 +2472,7 @@ print(total)</code></pre></div><div class="code sm"><div class="bar"><span class
 3. 빈 줄에 「/」 를 치면 블록 종류 메뉴가 뜬다 (T3)
 4. 줄 왼쪽 손잡이를 끌어 순서를 바꾼다 (T4)
 5. 새로고침해도 쓴 내용이 남는다 · 이 브라우저 안에 저장 (T5)
-6. 휴대폰 폭에서도 잘 보이는지 확인한다 (T6)</code></pre></div></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>요청</b><span>「개발 모르는 사람도 알게 설명해 줘」</span></div><div class="v2tile" style="--d:0.08s"><b>볼 것</b><span>내 사용 장면이 다 있나</span></div><div class="v2tile" style="--d:0.16s"><b>단어</b><span>모르면 바로 질문</span></div></div></div></div>
+6. 휴대폰 폭에서도 잘 보이는지 확인한다 (T6)</code></pre></div></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>요약</b><span>계획 끝에 자동 첨부</span></div><div class="v2tile" style="--d:0.08s"><b>볼 것</b><span>내 사용 장면이 다 있나</span></div><div class="v2tile" style="--d:0.16s"><b>단어</b><span>모르면 바로 질문</span></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="실습 1-4 · 4단계 계획에 피드백">
@@ -2474,7 +2496,7 @@ print(total)</code></pre></div><div class="code sm"><div class="bar"><span class
   <div class="eyebrow"><span class="tag">1-4</span></div>
   <h2 class="s-title sm">실습 1-4 확인</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="cks"><div class="ck" style="--d:0.00s"><span>1</span><b>내 사용 장면이 다 들어 있나</b><em>월 · 금 장면 모두</em></div><div class="ck" style="--d:0.12s"><span>2</span><b>모르는 단어가 남아 있지 않나</b><em>물어보고 이해함</em></div><div class="ck" style="--d:0.24s"><span>3</span><b>단계마다 볼 화면이 적혀 있나</b><em>쉬운 말 요약 1~6</em></div><div class="ck" style="--d:0.36s"><span>4</span><b>저장 위치를 내가 골랐나</b><em>예 · 이 브라우저</em></div></div><div class="ckr">「아니요」 → 그 부분만 다시 요청 · 넷 다 「예」 → 1-5</div></div></div>
+  <div class="body"><div class="mid"><div class="cks"><div class="ck" style="--d:0.00s"><span>1</span><b>내 사용 장면이 다 들어 있나</b><em>월 · 금 장면 모두</em></div><div class="ck" style="--d:0.12s"><span>2</span><b>질문 · 설명을 다 알아들었나</b><em>모르면 물어보고 이해함</em></div><div class="ck" style="--d:0.24s"><span>3</span><b>단계마다 볼 화면이 적혀 있나</b><em>쉬운 말 요약 1~6</em></div><div class="ck" style="--d:0.36s"><span>4</span><b>저장 위치를 내가 골랐나</b><em>예 · 이 브라우저</em></div></div><div class="ckr">「아니요」 → 그 부분만 다시 요청 · 넷 다 「예」 → 1-5</div></div></div>
 </section>
 
 <section class="slide dk" data-title="다음 단원">
