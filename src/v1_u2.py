@@ -107,7 +107,7 @@ def slides():
               + "</div></div>"
               + src(("Claude Code 문서 · VS Code", "https://code.claude.com/docs/en/vs-code"), VSDOC), T),
         # ── 실습
-        labcard("1-2", "실습 환경 준비 · 첫 위임", T, "새 PC", "한 줄 요청으로 만든 앱", ["① 계정 · 설치 · 작업 폴더", "② 첫 요청", "③ 「미니 노션 만들어 줘」"]),
+        labcard("1-2", "가입 · 설치 · 첫 요청", T, "새 PC", "한 줄 요청으로 만든 앱", ["① 계정 · 설치 · 작업 폴더", "② 첫 요청", "③ 「미니 노션 만들어 줘」"]),
         brief("1-2 ①", T, ["claude.ai 가입 · 요금제 확인", "github.com 가입", "vercel.com → GitHub 로 계속하기",
                             "VS Code 설치 → 확장 「Claude Code」", "바탕화면에 workspace/mini_notion 폴더 만들기"],
               [("계정", "Claude (Pro 이상) · GitHub · Vercel"), ("설치", "VS Code · Claude Code 확장"),
