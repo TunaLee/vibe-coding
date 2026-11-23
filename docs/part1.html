@@ -1222,6 +1222,37 @@
   @keyframes v1rwU{to{background:#FDECEA; color:#C0392B; box-shadow:0 0 0 2px #E6B0AA;}}
   @keyframes v1rwX{to{opacity:.4; text-decoration:line-through;}}
   @media print{.v1rwH,.v1rwV,.v1rwQ,.v1rwN,.v1rwA{opacity:1; animation:none}}
+  /* 1-3 · 선택지와 화면 (v13p) */
+  .v13p{display:grid; grid-template-columns:390px 40px 1fr; gap:10px; align-items:center; margin-top:10px;}
+  .v13p .ar{font-size:28px; font-weight:800; color:#F28C28; text-align:center;}
+  .v13pQ{background:#1E1E1E; border-radius:12px; padding:12px 14px;}
+  .v13pQ .h{font-size:14.5px; font-weight:700; color:#EDEDED; margin-bottom:8px;}
+  .v13pO{display:flex; gap:10px; align-items:center; padding:6px 4px;}
+  .v13pO i{width:20px; height:20px; border-radius:5px; border:2px solid #777; flex:none; animation:v13Chk .25s var(--d) forwards; position:relative;}
+  .v13pO b{display:block; font-size:15px; color:#EDEDED;} .v13pO small{font-size:12px; color:#9B9B9B;}
+  .v13pQ .ot{margin-top:6px; font-size:12.5px; color:#9B9B9B; border-top:1px solid #333; padding-top:7px;}
+  .v13pA{border:2px solid #C9D6E6; border-radius:12px; background:#fff; overflow:hidden;}
+  .v13pA .top{display:flex; gap:6px; align-items:center; padding:7px 12px; border-bottom:1.5px solid #E3E6EA; font-size:13px; color:#6B7785;}
+  .v13pA .top i{width:9px; height:9px; border-radius:50%; background:#D9DDE3;} .v13pA .top span{margin-left:8px;}
+  .v13pA .bd{position:relative; display:grid; grid-template-columns:150px 1fr; height:300px;}
+  .v13pA .pg{background:#F7F7F5; border-right:1.5px solid #EBEBEA; padding:14px 12px; display:flex; flex-direction:column; gap:10px; opacity:0; animation:v13Rg .5s var(--d) forwards;}
+  .v13pA .ln{display:block; height:9px; width:90%; border-radius:4px; background:#E3E2DE;} .v13pA .ln.on{background:#D3D1CB;}
+  .v13pA .w5{width:50%} .v13pA .w7{width:70%}
+  .v13pA .nw{font-size:12px; color:#9B9A97;}
+  .v13pA .ed{position:relative; padding:16px 18px;}
+  .v13pA .tt{font-size:22px; font-weight:800; color:#37352F; margin-bottom:10px; opacity:0; animation:v13Rg .5s var(--d) forwards;}
+  .v13pA .rw{display:flex; gap:8px; align-items:center; height:30px; opacity:0; animation:v13Rg .5s var(--d) forwards;}
+  .v13pA .rw .ln{flex:none;} .v13pA .rw .v13cb{margin:0;}
+  .v13pA .hd{font-size:13px; color:transparent; letter-spacing:-2px; width:14px; animation:v13Hd2 .4s var(--d) forwards;}
+  .v13pA .sl{font-size:18px; color:#37352F;}
+  .v13pA .mn{position:absolute; left:58px; top:150px; width:150px; background:#fff; border:1.5px solid #E3E2DE; border-radius:8px; box-shadow:0 6px 16px rgba(0,0,0,.12); padding:4px;
+    opacity:0; animation:v13Rg .5s var(--d) forwards;}
+  .v13pA .mn span{display:block; font-size:13px; padding:3px 8px; border-radius:5px; color:#37352F;} .v13pA .mn span.on{background:#ECEBE8; font-weight:700;}
+  .v13pA .sv{position:absolute; right:12px; bottom:12px; background:#16233A; color:#fff; font-size:13px; font-weight:800; border-radius:8px; padding:5px 10px; opacity:0; animation:v13Rg .5s var(--d) forwards;}
+  @keyframes v13Chk{to{background:#2F6FDE; border-color:#2F6FDE;}}
+  @keyframes v13Hd2{to{color:#F28C28;}}
+  @keyframes v13Rg{0%{opacity:0; outline:2.5px dashed #F28C28; outline-offset:4px} 60%{opacity:1; outline:2.5px dashed #F28C28; outline-offset:0} 100%{opacity:1; outline:2px dashed transparent}}
+  @media print{.v13pA .pg,.v13pA .tt,.v13pA .rw,.v13pA .mn,.v13pA .sv{opacity:1; animation:none}}
   /* 1-3 · 기획자 질문 화면 (v13qs) */
   .v13qs{display:grid; grid-template-columns:1fr 250px; gap:20px; align-items:center; margin-top:4px;}
   .v13qs .im{display:flex; flex-direction:column; gap:4px;} .v13qs figcaption{margin-top:2px !important;}
@@ -2196,10 +2227,10 @@ print(total)</code></pre></div><div class="code sm"><div class="bar"><span class
   <div class="body"><div class="mid"><div class="v1df"><div class="v1dfc" style="--d:0.3s"><i>1</i><b>기획</b><span>기획자 · PM</span><em>기획서</em></div><div class="v1dfc" style="--d:0.9s"><i>2</i><b>요구사항 정의</b><span>PM · 개발 리드</span><em>PRD</em></div><div class="v1dfc" style="--d:1.5s"><i>3</i><b>설계</b><span>디자이너 · 개발자</span><em>화면 · 구조 설계</em></div><div class="v1dfc" style="--d:2.1s"><i>4</i><b>개발 계획</b><span>개발 리드</span><em>태스크 · 일정</em></div><div class="v1dfc" style="--d:2.7s"><i>5</i><b>개발</b><span>개발자</span><em>코드 · 커밋</em></div><div class="v1dfc" style="--d:3.3s"><i>6</i><b>테스트</b><span>QA</span><em>버그 목록</em></div><div class="v1dfc" style="--d:3.9s"><i>7</i><b>배포 · 회고</b><span>개발 · 운영</span><em>서비스 주소</em></div></div></div></div>
 </section>
 
-<section class="slide lt" data-title="만들 기능">
+<section class="slide lt" data-title="미니 노션 주요 기능">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-3</span></div>
-  <h2 class="s-title sm">만들 기능</h2>
+  <h2 class="s-title sm">미니 노션 주요 기능</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v13f"><div class="v13fP" style="--d:0.3s"><div class="v13fH"><i>1</i><b>블록</b><span>한 줄 = 블록 하나 · 종류 네 가지</span></div><div class="v13fS"><div class="v13fB h" style="--d:0.3s"><span>주간 회의</span><em>제목</em></div><div class="v13fB p" style="--d:0.8s"><span>결정 사항 두 가지</span><em>글</em></div><div class="v13fB c" style="--d:1.3s"><span><i class="v13cb"></i>보고서 초안</span><em>체크 상자</em></div><div class="v13fB hr" style="--d:1.8s"><span></span><em>구분선</em></div></div></div><div class="v13fP" style="--d:3.2s"><div class="v13fH"><i>2</i><b>「/」 메뉴</b><span>빈 줄에 / 입력 → 블록 종류 고르기</span></div><div class="v13fS"><div class="v13fB p" style="--d:3.2s"><span>회의 내용 정리</span></div><div class="v13fSl"><span class="v13fCur"></span><b style="--a:3.8s;--z:6.2s">/</b><span class="v13fNew" style="--a:6.2s"><i class="v13cb"></i>할 일</span></div><div class="v13fM" style="--a:4.3s;--z:6.2s"><div class="" style="--d:5.0s">제목</div><div class="" style="--d:5.0s">글</div><div class="on" style="--d:5.0s">체크 상자</div><div class="" style="--d:5.0s">구분선</div></div></div></div><div class="v13fP" style="--d:7.6s"><div class="v13fH"><i>3</i><b>끌어 옮기기</b><span>⋮⋮ 손잡이를 잡고 끌면 순서가 바뀜</span></div><div class="v13fS"><div class="v13fD r0" style="--b:7.6s"><i>⋮⋮</i><span>참석자 4명</span></div><div class="v13fD r1" style="--b:7.6s"><i>⋮⋮</i><span>회의 내용</span></div><div class="v13fD r2" style="--b:7.6s"><i>⋮⋮</i><span><i class="v13cb"></i>할 일 · 보고서 초안</span></div></div></div><div class="v13fP" style="--d:10.6s"><div class="v13fH"><i>4</i><b>저장</b><span>새로고침해도 쓴 내용이 남음</span></div><div class="v13fS"><div class="v13fBar"><i style="--b:11.2s">⟳</i><span>새로고침</span></div><div class="v13fPg" style="--b:11.2s"><div class="v13fB h" style="--d:0s"><span>주간 회의</span></div><div class="v13fB c" style="--d:0s"><span><i class="v13cb on"></i>보고서 초안</span></div></div><div class="v13fOk" style="--d:12.6s">그대로 남음</div></div></div></div></div></div>
 </section>
@@ -2212,20 +2243,12 @@ print(total)</code></pre></div><div class="code sm"><div class="bar"><span class
   <div class="body"><div class="mid"><div class="v1shot"><figure><img src="img/v1_u3_plan.webp" alt="기획서 · 한 장의 문서"/><figcaption>기획서 · 한 장의 문서</figcaption></figure><div class=v1side><div class="v1sd"><b>머릿속 아이디어</b><span>설명할 때마다 내용이 바뀜</span></div><div class="v1sd"><b>기획서</b><span>문제점 · 이용자 · 기능 · 화면 · 확인 문장</span></div><div class="v1sd"><b>만드는 법</b><span>기획자가 선택지로 묻고 나는 고르기 · 정리는 기획자</span></div></div></div></div></div>
 </section>
 
-<section class="slide lt" data-title="칸별 선택지 질문">
+<section class="slide lt" data-title="선택지와 화면">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-3</span></div>
-  <h2 class="s-title sm">칸별 선택지 질문</h2>
+  <h2 class="s-title sm">선택지와 화면</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v13cH"><span>기획자 질문 · 고르거나 직접 적기</span><span></span><span>기획서.md</span></div><div class="v13c"><div class="v13cR"><div class="q" style="--d:0.5s"><em>문제점</em><b>지금 가장 불편한 점은?</b><div class="o"><span class="on" style="--d:1.00s">흩어져 있음</span><span class="" style="--d:1.12s">도구가 무거움</span><span class="" style="--d:1.24s">구조 잡기 어려움</span></div></div><i style="--d:1.5s">→</i><div class="l" style="--d:1.6s"><em>문제점</em>메모가 흩어져 찾기 어렵다</div></div><div class="v13cR"><div class="q" style="--d:1.8s"><em>이용자</em><b>주로 쓸 사람은?</b><div class="o"><span class="on" style="--d:2.30s">나 혼자</span><span class="" style="--d:2.42s">학생</span><span class="" style="--d:2.54s">소규모 팀</span></div></div><i style="--d:2.8s">→</i><div class="l" style="--d:2.9s"><em>이용자</em>나 혼자 · 회사 PC</div></div><div class="v13cR"><div class="q" style="--d:3.1s"><em>기능</em><b>꼭 들어갈 기능은? · 여러 개</b><div class="o"><span class="on m" style="--d:3.60s">페이지 목록</span><span class="on m" style="--d:3.72s">블록</span><span class="on m" style="--d:3.84s">「/」 메뉴</span><span class="on m" style="--d:3.96s">끌어 옮기기</span><span class="on m" style="--d:4.08s">저장</span></div></div><i style="--d:4.1s">→</i><div class="l" style="--d:4.2s"><em>기능</em>페이지 목록 · 블록 · 「/」 메뉴 · 끌어 옮기기 · 저장</div></div><div class="v13cR"><div class="q" style="--d:4.4s"><em>화면</em><b>필요한 화면은? · 여러 개</b><div class="o"><span class="on m" style="--d:4.90s">메인 · 목록 + 편집</span><span class="on m" style="--d:5.02s">빈 상태</span><span class=" m" style="--d:5.14s">로그인</span></div></div><i style="--d:5.4s">→</i><div class="l" style="--d:5.5s"><em>화면</em>메인 · 빈 상태</div></div><div class="v13cR"><div class="q" style="--d:5.7s"><em>확인 문장</em><b>다 되면 무엇으로 확인? · 여러 개</b><div class="o"><span class="on m" style="--d:6.20s">새로고침해도 그대로</span><span class="on m" style="--d:6.32s">/ → 체크 상자</span><span class="on m" style="--d:6.44s">끌면 순서 바뀜</span></div></div><i style="--d:6.7s">→</i><div class="l" style="--d:6.8s"><em>확인 문장</em>새로고침해도 그대로 외 둘</div></div></div><div class="v14gN" style="--d:7.4s"><b>선택지</b>고르기만 해도 수강생마다 비슷한 기획서 · 없으면 Other 에 직접 적기</div></div></div>
-</section>
-
-<section class="slide lt" data-title="확인 문장">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">1-3</span></div>
-  <h2 class="s-title sm">확인 문장</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v13mQs"><div class="v13mQh"><span>흐린 답</span><span></span><span class="if">하면</span><span class="then">된다</span></div><div class="v13mQ"><s style="--d:0.3s;--x:1.1s">「저장이 잘 된다」</s><i style="--d:1.1s">→</i><b class="if" style="--d:1.3s">새로고침하면</b><b class="then" style="--d:1.8s">쓴 내용이 그대로 있다</b></div><div class="v13mQ"><s style="--d:2.1s;--x:2.9s">「메뉴가 편하다」</s><i style="--d:2.9s">→</i><b class="if" style="--d:3.1s">빈 줄에 / → 「체크 상자」를 고르면</b><b class="then" style="--d:3.6s">그 줄이 체크 상자가 된다</b></div><div class="v13mQ"><s style="--d:3.9s;--x:4.7s">「순서를 쉽게 바꾼다」</s><i style="--d:4.7s">→</i><b class="if" style="--d:4.9s">할 일을 끌어 맨 위에 놓으면</b><b class="then" style="--d:5.4s">순서가 바뀐다</b></div></div><div class="v13mC wide" style="--d:6.2s"><b>쓰는 곳</b><span style="--d:6.3s">기획서 확인 문장</span><span style="--d:6.5s">1-6 에서 눌러 볼 목록</span><span style="--d:6.7s">누가 해도 같은 판단</span></div></div></div>
+  <div class="body"><div class="mid"><div class="v13p"><div class="v13pQ"><div class="h">[기능] 꼭 들어갈 기능을 모두 골라 주세요</div><div class="v13pO" style="--d:1.0s"><i></i><div><b>페이지 목록</b><small>왼쪽 목록 · 새 페이지</small></div></div><div class="v13pO" style="--d:2.3s"><i></i><div><b>블록</b><small>제목 · 글 · 체크 상자 · 구분선</small></div></div><div class="v13pO" style="--d:3.6s"><i></i><div><b>「/」 메뉴</b><small>빈 줄에 / → 종류 고르기</small></div></div><div class="v13pO" style="--d:4.9s"><i></i><div><b>끌어 옮기기</b><small>손잡이로 순서 바꾸기</small></div></div><div class="v13pO" style="--d:6.2s"><i></i><div><b>저장</b><small>새로고침해도 그대로</small></div></div><div class="ot">Other · 원하는 기능 직접 적기</div></div><div class="ar">→</div><div class="v13pA"><div class="top"><i></i><i></i><i></i><span>미니 노션</span></div><div class="bd"><div class="pg" style="--d:1.0s"><span class="ln on"></span><span class="ln"></span><span class="ln"></span><span class="nw">+ 새 페이지</span></div><div class="ed"><div class="tt" style="--d:2.3s">주간 회의</div><div class="rw" style="--d:2.3s"><b class="hd" style="--d:4.9s">⋮⋮</b><span class="ln w7"></span></div><div class="rw" style="--d:2.3s"><b class="hd" style="--d:4.9s">⋮⋮</b><i class="v13cb"></i><span class="ln w5"></span></div><div class="rw" style="--d:2.3s"><b class="hd" style="--d:4.9s">⋮⋮</b><span class="sl">/</span></div><div class="mn" style="--d:3.6s"><span>제목</span><span>글</span><span class="on">체크 상자</span><span>구분선</span></div></div><div class="sv" style="--d:6.2s">⟳ 새로고침해도 그대로</div></div></div></div><div class="v14gN" style="--d:7.8s"><b>고른 만큼 화면에</b>기획서 기능 칸 = 앱에 생길 부분 · 문제점 · 이용자 · 화면 · 확인 문장도 같은 방식으로 고르기</div></div></div>
 </section>
 
 <section class="slide lt" data-title="먼저 묻기 모드와 역할 메모">
@@ -2233,7 +2256,7 @@ print(total)</code></pre></div><div class="code sm"><div class="bar"><span class
   <div class="eyebrow"><span class="tag">1-3</span></div>
   <h2 class="s-title sm">먼저 묻기 모드와 역할 메모</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">Plan Mode · 먼저 묻기 모드</div><div class="v2pc" style="--d:0.00s"><b>켜는 법</b><span>입력창 아래 모드 표시 → Plan</span></div><div class="v2pc" style="--d:0.08s"><b>하는 일</b><span>바로 만들지 않고 먼저 질문 · 초안</span></div><div class="v2pc" style="--d:0.16s"><b>파일</b><span>내가 승인한 뒤에 생김</span></div></div><div class="v2p on"><div class="v2ph">페르소나 · 역할 메모</div><div class="v2pc" style="--d:0.00s"><b>비유</b><span>회의 때 받는 「오늘 당신은 사회자」 카드</span></div><div class="v2pc" style="--d:0.08s"><b>모양</b><span>기획자.md 파일 하나 · 몇 줄</span></div><div class="v2pc" style="--d:0.16s"><b>쓰는 법</b><span>「기획자.md 대로」 한마디</span></div></div></div><div class="dbnote"><span>둘을 같이</span> 먼저 묻기 모드 + 기획자.md → 기획자가 인터뷰하고 나는 답만</div><div class="src">출처 · <a href="https://code.claude.com/docs/en/permission-modes" target="_blank" rel="noopener">Claude Code · Permission modes</a></div></div></div>
+  <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">Plan Mode · 먼저 묻기 모드</div><div class="v2pc" style="--d:0.00s"><b>켜는 법</b><span>입력창 아래 모드 표시 → Plan</span></div><div class="v2pc" style="--d:0.08s"><b>하는 일</b><span>바로 만들지 않고 먼저 질문 · 초안</span></div><div class="v2pc" style="--d:0.16s"><b>파일</b><span>내가 승인한 뒤에 생김</span></div></div><div class="v2p on"><div class="v2ph">페르소나 · 역할 메모</div><div class="v2pc" style="--d:0.00s"><b>비유</b><span>회의 때 받는 「오늘 당신은 사회자」 카드</span></div><div class="v2pc" style="--d:0.08s"><b>모양</b><span>기획자.md 파일 하나 · 몇 줄</span></div><div class="v2pc" style="--d:0.16s"><b>쓰는 법</b><span>「기획자.md 대로」 한마디</span></div></div></div><div class="dbnote"><span>둘을 같이</span> 먼저 묻기 모드 + 기획자.md → 기획자가 선택지로 묻고 나는 고르기</div><div class="src">출처 · <a href="https://code.claude.com/docs/en/permission-modes" target="_blank" rel="noopener">Claude Code · Permission modes</a></div></div></div>
 </section>
 
 <section class="slide lt" data-title="기획자 페르소나">
@@ -2249,30 +2272,6 @@ print(total)</code></pre></div><div class="code sm"><div class="bar"><span class
 - 기획서.md 칸: 문제점 · 이용자 · 기능 · 화면 · 확인 문장</code></pre></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>첫 줄</b><span>IT 를 몰라도 알아듣는 질문 · 기획서</span></div><div class="v2tile" style="--d:0.08s"><b>둘째 줄</b><span>칸마다 선택지 · 고르거나 직접 적기</span></div><div class="v2tile" style="--d:0.16s"><b>셋째 줄</b><span>선택지마다 한 줄 설명</span></div><div class="v2tile" style="--d:0.24s"><b>마지막 줄</b><span>기획서 칸 다섯 개</span></div></div></div></div></div></div>
 </section>
 
-<section class="slide lt" data-title="기획자 말투 비교">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">1-3</span></div>
-  <h2 class="s-title sm">기획자 말투 비교</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v14o"><div class="v14oH"><span></span><span>기획 용어로 열린 질문</span><span></span><span>기획자.md 말투 · 선택지</span></div><div class="v14oR"><b style="--d:0.4s">문제점</b><div class="v14oD" style="--d:0.4s;--x:1.4s">배경과 문제점을 서술해 주세요</div><i style="--d:1.4s">→</i><div class="v14oL" style="--d:1.6s">지금 가장 불편한 점은? · 하나 → 흩어져 있음 / 도구가 무거움 / 구조 잡기 어려움 · 없으면 직접 적기</div></div><div class="v14oR"><b style="--d:2.6s">기능</b><div class="v14oD" style="--d:2.6s;--x:3.6s">MVP 기능 범위를 정의해 주세요</div><i style="--d:3.6s">→</i><div class="v14oL" style="--d:3.8s">꼭 들어갈 기능을 모두 골라 주세요 · 여러 개 → 페이지 목록 / 블록 / 「/」 메뉴 / 끌어 옮기기 / 저장</div></div><div class="v14oR"><b style="--d:4.8s">확인</b><div class="v14oD" style="--d:4.8s;--x:5.8s">인수 조건을 작성해 주세요</div><i style="--d:5.8s">→</i><div class="v14oL" style="--d:6.0s">다 되면 무엇으로 확인할까요? · 여러 개 → 새로고침해도 그대로 / 「/」 → 체크 상자 / 끌면 순서 바뀜</div></div></div><div class="v14gN" style="--d:7.2s"><b>선택지</b>무엇을 답할지 보이면 바로 고를 수 있음</div></div></div>
-</section>
-
-<section class="slide lt" data-title="기획자 질문 화면">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">1-3</span></div>
-  <h2 class="s-title sm">기획자 질문 화면</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v13qs"><div class="im"><figure><img src="img/lab13_q_problem.webp" alt="문제점 선택지 질문"/><figcaption>문제점 · 하나 고르기</figcaption></figure><figure><img src="img/lab13_q_feature.webp" alt="기능 선택지 질문"/><figcaption>기능 · 여러 개 고르기</figcaption></figure></div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>고르기</b><span>설명 한 줄 읽고 클릭</span></div><div class="v2tile" style="--d:0.08s"><b>없을 때</b><span>Other 에 직접 적기</span></div><div class="v2tile" style="--d:0.16s"><b>결과</b><span>칸마다 한 줄씩 기획서에</span></div></div></div></div></div>
-</section>
-
-<section class="slide lt" data-title="빈칸 찾기 요청">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">1-3</span></div>
-  <h2 class="s-title sm">빈칸 찾기 요청</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v13g"><div class="v13gL"><div class="v13gMe" style="--d:.3s">이 기획서로 만들면<br/>네가 <u>추측해야 하는 곳</u>을<br/>다섯 개 뽑아 줘</div><div class="v13gN" style="--d:6.6s">내가 못 찾는 빈칸<br/>→ AI 가 질문으로 · 나는 답만</div></div><div class="v13gR"><div class="v13gH"><span>Claude Code 가 찾은 빈칸 · 예</span><span>내 답</span></div><div class="v13gQ" style="--d:1.6s"><span>페이지를 지우면 되살릴 수 있나요?</span><b style="--d:2.0s">아니, 확인 창만</b></div><div class="v13gQ" style="--d:2.5s"><span>할 일을 다 하면 줄을 긋나요?</span><b style="--d:2.9s">응, 회색 줄</b></div><div class="v13gQ" style="--d:3.4s"><span>휴대폰에서도 쓰나요?</span><b style="--d:3.8s">가끔 · 보이기만 하면 됨</b></div><div class="v13gQ" style="--d:4.3s"><span>새 페이지는 목록 어디에?</span><b style="--d:4.7s">맨 아래</b></div><div class="v13gQ" style="--d:5.2s"><span>글자 · 색은 어떤 느낌?</span><b style="--d:5.6s">노션처럼 흰 바탕</b></div></div></div></div></div>
-</section>
-
 <section class="slide lt labs" data-title="[실습 1-3] 기획서 작성">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-3</span><span class="labtag">실습 1-3</span></div>
@@ -2280,7 +2279,7 @@ print(total)</code></pre></div><div class="code sm"><div class="bar"><span class
   <div class="rule"></div>
   <div class="body"><div class="v1lc">
     <div class="io"><div class="b in"><small>입력</small><b>기획자.md</b></div><i>→</i><div class="b out"><small>산출물</small><b>기획서.md</b></div></div>
-    <div class="pt"><span style="--d:0.5s">먼저 묻기 모드</span><span style="--d:0.7s">인터뷰에 답하기</span><span style="--d:0.9s">빈칸 찾기</span></div>
+    <div class="pt"><span style="--d:0.5s">먼저 묻기 모드</span><span style="--d:0.7s">선택지 고르기</span></div>
     
   </div></div>
 </section>
@@ -2290,7 +2289,7 @@ print(total)</code></pre></div><div class="code sm"><div class="bar"><span class
   <div class="eyebrow"><span class="tag">1-3</span></div>
   <h2 class="s-title sm">실습 1-3 순서</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><ol class="v1st"><li style="--d:0.00s"><em>1</em><span>새 폴더 mini_notion_v2 만들어 열기 · 기획자.md 만들기</span></li><li style="--d:0.25s"><em>2</em><span>모드 표시 → Plan · 「기획자.md 대로 미니 노션 기획서를 같이 쓰자」</span></li><li style="--d:0.50s"><em>3</em><span>칸마다 선택지 고르기 · 없으면 직접 적기</span></li><li style="--d:0.75s"><em>4</em><span>「추측해야 하는 곳 뽑아 줘」 → 답하기</span></li><li style="--d:1.00s"><em>5</em><span>승인 → 정리된 기획서.md 확인</span></li></ol><div class="qk2"><b>확인</b><ul><li>다섯 칸이 모두 채워짐</li><li>확인 문장이 「~하면 ~된다」</li></ul></div></div></div>
+  <div class="body"><div class="mid"><ol class="v1st"><li style="--d:0.00s"><em>1</em><span>새 폴더 mini_notion_v2 만들어 열기 · 기획자.md 만들기</span></li><li style="--d:0.25s"><em>2</em><span>모드 표시 → Plan · 「기획자.md 대로 미니 노션 기획서를 같이 쓰자」</span></li><li style="--d:0.50s"><em>3</em><span>칸마다 선택지 고르기 · 없으면 직접 적기</span></li><li style="--d:0.75s"><em>4</em><span>승인 → 정리된 기획서.md 확인</span></li></ol><div class="qk2"><b>확인</b><ul><li>다섯 칸이 모두 채워짐</li><li>기능 · 화면이 고른 대로</li></ul></div></div></div>
 </section>
 
 <section class="slide lt" data-title="실습 1-3 · 1단계 새 폴더 · 기획자.md">
@@ -2322,18 +2321,10 @@ print(total)</code></pre></div><div class="code sm"><div class="bar"><span class
   <div class="body"><div class="mid"><div class="v1ts"><img src="img/lab13_q_screen.webp" alt="화면 선택지 질문 · 여러 개 고르기"/></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>하나 · 여러 개</b><span>질문에 적힌 대로 고르기</span></div><div class="v2tile" style="--d:0.08s"><b>없을 때</b><span>Other 에 직접 적기</span></div><div class="v2tile" style="--d:0.16s"><b>모를 때</b><span>첫 번째 선택지 · 추천</span></div></div></div></div>
 </section>
 
-<section class="slide lt" data-title="실습 1-3 · 4단계 빈칸 찾기">
+<section class="slide lt" data-title="실습 1-3 · 4단계 승인 · 저장">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-3</span></div>
-  <h2 class="s-title sm">실습 1-3 · 4단계 빈칸 찾기</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1ts"><img src="img/lab13_draft.webp" alt="초안 요약과 흐린 부분 질문"/></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>요청</b><span>「추측해야 하는 곳 다섯 개 뽑아 줘」</span></div><div class="v2tile" style="--d:0.08s"><b>답</b><span>짧게 · 하나씩</span></div><div class="v2tile" style="--d:0.16s"><b>피드백</b><span>빠진 장면 · 고칠 문장</span></div></div></div></div>
-</section>
-
-<section class="slide lt" data-title="실습 1-3 · 5단계 승인 · 저장">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">1-3</span></div>
-  <h2 class="s-title sm">실습 1-3 · 5단계 승인 · 저장</h2>
+  <h2 class="s-title sm">실습 1-3 · 4단계 승인 · 저장</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v1ts"><img src="img/lab13_saved.webp" alt="기획서.md 저장 결과"/></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>승인</b><span>2번 · 수정마다 직접 승인</span></div><div class="v2tile" style="--d:0.08s"><b>저장</b><span>Do you want to create → 1. Yes</span></div><div class="v2tile" style="--d:0.16s"><b>결과</b><span>mini_notion_v2/기획서.md</span></div></div></div></div>
 </section>
@@ -2343,7 +2334,7 @@ print(total)</code></pre></div><div class="code sm"><div class="bar"><span class
   <div class="eyebrow"><span class="tag">1-3</span></div>
   <h2 class="s-title sm">실습 1-3 확인</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="cks"><div class="ck" style="--d:0.00s"><span>1</span><b>다섯 칸이 다 있나</b><em>문제점 · 이용자 · 기능 · 화면 · 확인 문장</em></div><div class="ck" style="--d:0.12s"><span>2</span><b>기능 · 화면이 내가 고른 대로인가</b><em>안 고른 게 끼어 있으면 지우기</em></div><div class="ck" style="--d:0.24s"><span>3</span><b>확인 문장이 「~하면 ~된다」인가</b><em>「잘 된다」면 다시</em></div></div><div class="ckr">「아니요」 → 그 칸만 다시 요청 · 셋 다 「예」 → 1-4</div></div></div>
+  <div class="body"><div class="mid"><div class="cks"><div class="ck" style="--d:0.00s"><span>1</span><b>다섯 칸이 다 있나</b><em>문제점 · 이용자 · 기능 · 화면 · 확인 문장</em></div><div class="ck" style="--d:0.12s"><span>2</span><b>기능 · 화면이 내가 고른 대로인가</b><em>안 고른 게 끼어 있으면 지우기</em></div><div class="ck" style="--d:0.24s"><span>3</span><b>확인 문장이 눌러서 확인할 수 있는 말인가</b><em>예 · 새로고침해도 그대로 있다</em></div></div><div class="ckr">「아니요」 → 그 칸만 다시 요청 · 셋 다 「예」 → 1-4</div></div></div>
 </section>
 
 <section class="slide dk" data-title="다음 단원">

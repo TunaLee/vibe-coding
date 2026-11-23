@@ -1,6 +1,6 @@
 """1-3 기획서 작성.
 
-왜 기획하나(모호 vs 구체 · 개발 흐름) → 만들 것(미니 노션) → 기획서 인터뷰(애니메이션) → 좋은 답 두 가지(애니메이션) → 먼저 묻기 모드 · 역할 메모 → 기획자.md · 말투 비교 → 대화 → 빈칸 찾기 → 실습.
+왜 기획하나(모호 vs 구체 · 개발 흐름) → 미니 노션 주요 기능 → 기획서 → 선택지와 화면(애니메이션) → 먼저 묻기 모드 · 역할 메모 → 기획자.md → 실습.
 예시 문장은 labs/mini_notion/예시/기획서.md 에서 그대로 읽는다. 산출물 기획서.md 는 1-4 개발 계획의 입력.
 """
 from pathlib import Path
@@ -112,6 +112,37 @@ CSS = """
   @keyframes v1rwU{to{background:#FDECEA; color:#C0392B; box-shadow:0 0 0 2px #E6B0AA;}}
   @keyframes v1rwX{to{opacity:.4; text-decoration:line-through;}}
   @media print{.v1rwH,.v1rwV,.v1rwQ,.v1rwN,.v1rwA{opacity:1; animation:none}}
+  /* 1-3 · 선택지와 화면 (v13p) */
+  .v13p{display:grid; grid-template-columns:390px 40px 1fr; gap:10px; align-items:center; margin-top:10px;}
+  .v13p .ar{font-size:28px; font-weight:800; color:#F28C28; text-align:center;}
+  .v13pQ{background:#1E1E1E; border-radius:12px; padding:12px 14px;}
+  .v13pQ .h{font-size:14.5px; font-weight:700; color:#EDEDED; margin-bottom:8px;}
+  .v13pO{display:flex; gap:10px; align-items:center; padding:6px 4px;}
+  .v13pO i{width:20px; height:20px; border-radius:5px; border:2px solid #777; flex:none; animation:v13Chk .25s var(--d) forwards; position:relative;}
+  .v13pO b{display:block; font-size:15px; color:#EDEDED;} .v13pO small{font-size:12px; color:#9B9B9B;}
+  .v13pQ .ot{margin-top:6px; font-size:12.5px; color:#9B9B9B; border-top:1px solid #333; padding-top:7px;}
+  .v13pA{border:2px solid #C9D6E6; border-radius:12px; background:#fff; overflow:hidden;}
+  .v13pA .top{display:flex; gap:6px; align-items:center; padding:7px 12px; border-bottom:1.5px solid #E3E6EA; font-size:13px; color:#6B7785;}
+  .v13pA .top i{width:9px; height:9px; border-radius:50%; background:#D9DDE3;} .v13pA .top span{margin-left:8px;}
+  .v13pA .bd{position:relative; display:grid; grid-template-columns:150px 1fr; height:300px;}
+  .v13pA .pg{background:#F7F7F5; border-right:1.5px solid #EBEBEA; padding:14px 12px; display:flex; flex-direction:column; gap:10px; opacity:0; animation:v13Rg .5s var(--d) forwards;}
+  .v13pA .ln{display:block; height:9px; width:90%; border-radius:4px; background:#E3E2DE;} .v13pA .ln.on{background:#D3D1CB;}
+  .v13pA .w5{width:50%} .v13pA .w7{width:70%}
+  .v13pA .nw{font-size:12px; color:#9B9A97;}
+  .v13pA .ed{position:relative; padding:16px 18px;}
+  .v13pA .tt{font-size:22px; font-weight:800; color:#37352F; margin-bottom:10px; opacity:0; animation:v13Rg .5s var(--d) forwards;}
+  .v13pA .rw{display:flex; gap:8px; align-items:center; height:30px; opacity:0; animation:v13Rg .5s var(--d) forwards;}
+  .v13pA .rw .ln{flex:none;} .v13pA .rw .v13cb{margin:0;}
+  .v13pA .hd{font-size:13px; color:transparent; letter-spacing:-2px; width:14px; animation:v13Hd2 .4s var(--d) forwards;}
+  .v13pA .sl{font-size:18px; color:#37352F;}
+  .v13pA .mn{position:absolute; left:58px; top:150px; width:150px; background:#fff; border:1.5px solid #E3E2DE; border-radius:8px; box-shadow:0 6px 16px rgba(0,0,0,.12); padding:4px;
+    opacity:0; animation:v13Rg .5s var(--d) forwards;}
+  .v13pA .mn span{display:block; font-size:13px; padding:3px 8px; border-radius:5px; color:#37352F;} .v13pA .mn span.on{background:#ECEBE8; font-weight:700;}
+  .v13pA .sv{position:absolute; right:12px; bottom:12px; background:#16233A; color:#fff; font-size:13px; font-weight:800; border-radius:8px; padding:5px 10px; opacity:0; animation:v13Rg .5s var(--d) forwards;}
+  @keyframes v13Chk{to{background:#2F6FDE; border-color:#2F6FDE;}}
+  @keyframes v13Hd2{to{color:#F28C28;}}
+  @keyframes v13Rg{0%{opacity:0; outline:2.5px dashed #F28C28; outline-offset:4px} 60%{opacity:1; outline:2.5px dashed #F28C28; outline-offset:0} 100%{opacity:1; outline:2px dashed transparent}}
+  @media print{.v13pA .pg,.v13pA .tt,.v13pA .rw,.v13pA .mn,.v13pA .sv{opacity:1; animation:none}}
   /* 1-3 · 기획자 질문 화면 (v13qs) */
   .v13qs{display:grid; grid-template-columns:1fr 250px; gap:20px; align-items:center; margin-top:4px;}
   .v13qs .im{display:flex; flex-direction:column; gap:4px;} .v13qs figcaption{margin-top:2px !important;}
@@ -499,6 +530,26 @@ def _tone13():
             '<div class="v14gN" style="--d:7.2s"><b>선택지</b>무엇을 답할지 보이면 바로 고를 수 있음</div>')
 
 
+def _pick():
+    """선택지와 화면 — 기능 질문 카드에서 하나씩 체크할 때마다 오른쪽 앱 화면에 그 부분이 생김. 마지막에 기획서 기능 칸 한 줄."""
+    opts = [("페이지 목록", "왼쪽 목록 · 새 페이지", "pg"), ("블록", "제목 · 글 · 체크 상자 · 구분선", "bk"),
+            ("「/」 메뉴", "빈 줄에 / → 종류 고르기", "sl"), ("끌어 옮기기", "손잡이로 순서 바꾸기", "dr"), ("저장", "새로고침해도 그대로", "sv")]
+    t = {k: 1.0 + i * 1.3 for i, (_, _, k) in enumerate(opts)}
+    o = "".join(f'<div class="v13pO" style="--d:{t[k]:.1f}s"><i></i><div><b>{n}</b><small>{x}</small></div></div>' for n, x, k in opts)
+    card = ('<div class="v13pQ"><div class="h">[기능] 꼭 들어갈 기능을 모두 골라 주세요</div>' + o
+            + '<div class="ot">Other · 원하는 기능 직접 적기</div></div>')
+    app = (f'<div class="v13pA"><div class="top"><i></i><i></i><i></i><span>미니 노션</span></div><div class="bd">'
+           f'<div class="pg" style="--d:{t["pg"]:.1f}s"><span class="ln on"></span><span class="ln"></span><span class="ln"></span><span class="nw">+ 새 페이지</span></div>'
+           f'<div class="ed"><div class="tt" style="--d:{t["bk"]:.1f}s">주간 회의</div>'
+           f'<div class="rw" style="--d:{t["bk"]:.1f}s"><b class="hd" style="--d:{t["dr"]:.1f}s">⋮⋮</b><span class="ln w7"></span></div>'
+           f'<div class="rw" style="--d:{t["bk"]:.1f}s"><b class="hd" style="--d:{t["dr"]:.1f}s">⋮⋮</b><i class="v13cb"></i><span class="ln w5"></span></div>'
+           f'<div class="rw" style="--d:{t["bk"]:.1f}s"><b class="hd" style="--d:{t["dr"]:.1f}s">⋮⋮</b><span class="sl">/</span></div>'
+           f'<div class="mn" style="--d:{t["sl"]:.1f}s"><span>제목</span><span>글</span><span class="on">체크 상자</span><span>구분선</span></div></div>'
+           f'<div class="sv" style="--d:{t["sv"]:.1f}s">⟳ 새로고침해도 그대로</div></div></div>')
+    return (f'<div class="v13p">{card}<div class="ar">→</div>{app}</div>'
+            '<div class="v14gN" style="--d:7.8s"><b>고른 만큼 화면에</b>기획서 기능 칸 = 앱에 생길 부분 · 문제점 · 이용자 · 화면 · 확인 문장도 같은 방식으로 고르기</div>')
+
+
 def slides():
     return [
         # ── 왜 기획하나
@@ -509,36 +560,30 @@ def slides():
         light("IT 기업 조직 구성", _org(), T),
         light("IT 기업의 개발 흐름", _devflow(), T),
         # ── 만들 것
-        light("만들 기능", _features(), T),
+        light("미니 노션 주요 기능", _features(), T),
         # ── 기획서
         light("기획서", shot("v1_u3_plan.webp", "기획서 · 한 장의 문서", [
             ("머릿속 아이디어", "설명할 때마다 내용이 바뀜"), ("기획서", "문제점 · 이용자 · 기능 · 화면 · 확인 문장"),
             ("만드는 법", "기획자가 선택지로 묻고 나는 고르기 · 정리는 기획자")])
               + src(("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")), T),
-        light("칸별 선택지 질문", _choices(), T),
-        light("확인 문장", _check(), T),
+        light("선택지와 화면", _pick(), T),
         # ── Claude Code 와 기획하기
         light("먼저 묻기 모드와 역할 메모", viz2.pair(
             "Plan Mode · 먼저 묻기 모드", [("켜는 법", "입력창 아래 모드 표시 → Plan"), ("하는 일", "바로 만들지 않고 먼저 질문 · 초안"),
                                        ("파일", "내가 승인한 뒤에 생김")],
             "페르소나 · 역할 메모", [("비유", "회의 때 받는 「오늘 당신은 사회자」 카드"), ("모양", "기획자.md 파일 하나 · 몇 줄"),
                                   ("쓰는 법", "「기획자.md 대로」 한마디")], hl="r")
-              + note("둘을 같이", "먼저 묻기 모드 + 기획자.md → 기획자가 인터뷰하고 나는 답만")
+              + note("둘을 같이", "먼저 묻기 모드 + 기획자.md → 기획자가 선택지로 묻고 나는 고르기")
               + src(("Claude Code · Permission modes", "https://code.claude.com/docs/en/permission-modes")), T),
         light("기획자 페르소나", '<div class="twocol"><div>' + code("기획자.md", esc(_persona("기획자")))
               + '</div><div>' + viz2.tiles([("첫 줄", "IT 를 몰라도 알아듣는 질문 · 기획서"), ("둘째 줄", "칸마다 선택지 · 고르거나 직접 적기"),
                                           ("셋째 줄", "선택지마다 한 줄 설명"), ("마지막 줄", "기획서 칸 다섯 개")], 1) + "</div></div>", T),
-        light("기획자 말투 비교", _tone13(), T),
-        light("기획자 질문 화면", '<div class="v13qs"><div class="im"><figure><img src="img/lab13_q_problem.webp" alt="문제점 선택지 질문"/><figcaption>문제점 · 하나 고르기</figcaption></figure>'
-              '<figure><img src="img/lab13_q_feature.webp" alt="기능 선택지 질문"/><figcaption>기능 · 여러 개 고르기</figcaption></figure></div>'
-              + viz2.tiles([("고르기", "설명 한 줄 읽고 클릭"), ("없을 때", "Other 에 직접 적기"), ("결과", "칸마다 한 줄씩 기획서에")], 1) + '</div>', T),
-        light("빈칸 찾기 요청", _gapask(), T),
         # ── 실습
-        labcard("1-3", "기획서 작성", T, "기획자.md", "기획서.md", ["먼저 묻기 모드", "인터뷰에 답하기", "빈칸 찾기"]),
-        brief("1-3", T, ["새 폴더 mini_notion_v2 만들어 열기 · 기획자.md 만들기", "모드 표시 → Plan · 「기획자.md 대로 미니 노션 기획서를 같이 쓰자」", "칸마다 선택지 고르기 · 없으면 직접 적기", "「추측해야 하는 곳 뽑아 줘」 → 답하기", "승인 → 정리된 기획서.md 확인"],
+        labcard("1-3", "기획서 작성", T, "기획자.md", "기획서.md", ["먼저 묻기 모드", "선택지 고르기"]),
+        brief("1-3", T, ["새 폴더 mini_notion_v2 만들어 열기 · 기획자.md 만들기", "모드 표시 → Plan · 「기획자.md 대로 미니 노션 기획서를 같이 쓰자」", "칸마다 선택지 고르기 · 없으면 직접 적기", "승인 → 정리된 기획서.md 확인"],
               [],
-              ["기획자.md", "먼저 묻기 모드", "인터뷰", "빈칸 찾기"],
-              ["다섯 칸이 모두 채워짐", "확인 문장이 「~하면 ~된다」"],
+              ["기획자.md", "먼저 묻기 모드", "선택지"],
+              ["다섯 칸이 모두 채워짐", "기능 · 화면이 고른 대로"],
               "모르는 질문엔 「아직 안 정함」으로 답하기", folder="workspace/mini_notion_v2/기획서.md"),
         tstep("1-3", 1, "새 폴더 · 기획자.md", T, term=("workspace/mini_notion_v2/기획자.md", _persona("기획자")),
               rows=[("새 폴더", "workspace 안에 mini_notion_v2 → VS Code 로 열기"), ("만들기", "탐색기 → 새 파일 → 기획자.md · 여섯 줄"), ("저장", "macOS ⌘S · Windows Ctrl+S")]),
@@ -546,12 +591,10 @@ def slides():
               rows=[("먼저 묻기 모드", "입력창 아래 모드 표시 → Plan"), ("요청", "「기획자.md 대로 같이 쓰자」"), ("파일", "아직 안 씀")]),
         tstep("1-3", 3, "선택지 고르기", T, "lab13_q_screen.webp", "화면 선택지 질문 · 여러 개 고르기",
               rows=[("하나 · 여러 개", "질문에 적힌 대로 고르기"), ("없을 때", "Other 에 직접 적기"), ("모를 때", "첫 번째 선택지 · 추천")]),
-        tstep("1-3", 4, "빈칸 찾기", T, "lab13_draft.webp", "초안 요약과 흐린 부분 질문",
-              rows=[("요청", "「추측해야 하는 곳 다섯 개 뽑아 줘」"), ("답", "짧게 · 하나씩"), ("피드백", "빠진 장면 · 고칠 문장")]),
-        tstep("1-3", 5, "승인 · 저장", T, "lab13_saved.webp", "기획서.md 저장 결과",
+        tstep("1-3", 4, "승인 · 저장", T, "lab13_saved.webp", "기획서.md 저장 결과",
               rows=[("승인", "2번 · 수정마다 직접 승인"), ("저장", "Do you want to create → 1. Yes"), ("결과", "mini_notion_v2/기획서.md")]),
         light("실습 1-3 확인", checks([
             ("다섯 칸이 다 있나", "문제점 · 이용자 · 기능 · 화면 · 확인 문장"), ("기능 · 화면이 내가 고른 대로인가", "안 고른 게 끼어 있으면 지우기"),
-            ("확인 문장이 「~하면 ~된다」인가", "「잘 된다」면 다시")],
+            ("확인 문장이 눌러서 확인할 수 있는 말인가", "예 · 새로고침해도 그대로 있다")],
             "「아니요」 → 그 칸만 다시 요청 · 셋 다 「예」 → 1-4"), T),
     ]
