@@ -91,6 +91,12 @@ def brief(no, u, steps, slots, keys, checks, stuck, folder="내 프로젝트 폴
 
 
 
+
+def go(text, url):
+    """수강생이 눌러서 들어갈 주소 — 새 탭으로 연다."""
+    return f'<a class="go" href="{url}" target="_blank" rel="noopener">{text}</a>'
+
+
 def labcard(no, title, u, inp, out, parts=(), files="", cards=()):
     """실습 소개 — 입력 → 산출물 한 줄 + 구성 칩. cards=(이름, 할 일, 결과) 를 주면 「할 일 → 결과」 카드로. 단계 · 확인은 다음 「순서」 장에."""
     from deck import coord
@@ -146,6 +152,9 @@ def codemap(rows, ask="", title=""):
 
 
 CSS = """
+  /* 눌러서 들어갈 주소 */
+  a.go{color:#1F6FEB; font-weight:700; text-decoration:underline; text-underline-offset:3px;}
+  a.go:hover{color:#F28C28;}
   /* 실습 단계 화면(넓게) */
   .v1ts{display:flex; justify-content:center; margin:0 0 18px;}
   .v1ts img{max-width:100%; max-height:310px; border-radius:10px; box-shadow:0 8px 24px rgba(22,35,58,.22);}

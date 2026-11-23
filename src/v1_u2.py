@@ -7,7 +7,7 @@ import viz2
 from deck import flow, lab, light
 from hx import code, esc, note, table
 from stats_hx import big, src
-from v1kit import brief, chat, shot, labcard, tstep
+from v1kit import brief, chat, shot, labcard, tstep, go
 
 T = "1-2"
 
@@ -83,7 +83,7 @@ def slides():
               + note("차이", "내 컴퓨터 파일에 AI 손이 닿는가 · Claude 는 글로 답함 · Claude Code 는 파일을 직접 만들고 고침"), T),
         light("Claude Code 사용 환경", viz2.tiles([
             ("터미널", "명령어 창 · 기능이 가장 많음"), ("VS Code", "확장 프로그램 · 파일을 보며"),
-            ("JetBrains", "플러그인"), ("데스크톱 앱", "macOS · Windows"), ("웹", "claude.ai/code · 클라우드")], 5)
+            ("JetBrains", "플러그인"), ("데스크톱 앱", "macOS · Windows"), ("웹", go("claude.ai/code", "https://claude.ai/code") + " · 클라우드")], 5)
               + note("공통", "어디서 쓰든 같은 엔진 · 같은 설정 · 같은 CLAUDE.md")
               + src(("Claude Code 문서 · platforms", "https://code.claude.com/docs/en/platforms")), T),
         light("VS Code", '<div class="twocol v1vsgrid"><div>' + annot("vscode_overview.webp", "VS Code 화면", [
@@ -111,30 +111,31 @@ def slides():
             ("가입 · 설치", "Claude · GitHub · Vercel 가입<br>VS Code · Claude Code 설치", "VS Code 에 Spark 아이콘"),
             ("첫 요청", "빈 mini_notion 폴더에서<br>「뭐가 있는지 알려 줘」", "Claude Code 의 답"),
             ("한 줄 요청", "「미니 노션 만들어 줘」<br>한 줄만 보내기", "AI 가 정한 미니 노션")]),
-        brief("1-2 ①", T, ["claude.ai 가입 · 요금제 확인", "github.com 가입", "vercel.com → GitHub 로 계속하기",
-                            "VS Code 설치 → 확장 「Claude Code」", "바탕화면에 workspace/mini_notion 폴더 만들기"],
+        brief("1-2 ①", T, [go("claude.ai", "https://claude.ai") + " 가입 · " + go("요금제 확인", "https://claude.com/pricing"), go("github.com", "https://github.com/signup") + " 가입",
+                            go("vercel.com", "https://vercel.com/signup") + " → GitHub 로 계속하기",
+                            go("VS Code 설치", "https://code.visualstudio.com/download") + " → 확장 " + go("「Claude Code」", "https://marketplace.visualstudio.com/items?itemName=anthropic.claude-code"), "바탕화면에 workspace/mini_notion 폴더 만들기"],
               [("계정", "Claude (Pro 이상) · GitHub · Vercel"), ("설치", "VS Code · Claude Code 확장"),
                ("폴더", "바탕화면/workspace/mini_notion")],
               ["Pro", "GitHub로 계속하기", "Claude Code 확장", "mini_notion"],
-              ["세 사이트 모두 로그인된 상태", "VS Code 왼쪽에 Claude 아이콘"],
+              ["세 사이트 모두 로그인된 상태", "VS Code 오른쪽 위 Spark 아이콘"],
               "회사 PC 에서 설치가 막히면 웹 claude.ai/code", folder="바탕화면/workspace/mini_notion", slot_title="준비"),
         *[step("1-2 ①", 1, "Claude 가입 · 요금제", "lab12_pricing.webp", "Claude 요금제 화면", [("①", "Pro", 42, 45, 32, 54)],
-               [("주소", "claude.ai → 가입"), ("요금제", "Pro 이상 · Claude Code 사용 조건"), ("Free", "Claude Code 로그인에서 막힘")],
+               [("주소", go("claude.ai", "https://claude.ai") + " → 가입"), ("요금제", go("Pro 이상", "https://claude.com/pricing") + " · Claude Code 사용 조건"), ("Free", "Claude Code 로그인에서 막힘")],
                (("화면 · claude.com/pricing", "https://claude.com/pricing"),)),
           step("1-2 ①", 2, "GitHub 가입", "lab12_github.webp", "github.com Sign up 버튼과 공식 가입 단계",
                [("①", "Sign up", 46.5, 3, 11.5, 8), ("②", "github.com/signup", 2, 29, 46, 8), ("③", "이메일 확인", 2, 64, 52, 8)],
-               [("주소", "github.com → Sign up"), ("입력", "이메일 · 비밀번호 · 사용자 이름"), ("막히는 곳", "이메일 인증 코드")],
+               [("주소", go("github.com/signup", "https://github.com/signup")), ("입력", "이메일 · 비밀번호 · 사용자 이름"), ("막히는 곳", "이메일 인증 코드")],
                (("화면 · github.com · GitHub 문서 「GitHub 계정 만들기」 CC BY 4.0", "https://docs.github.com/ko/get-started/start-your-journey/creating-an-account-on-github"),)),
           step("1-2 ①", 3, "Vercel 가입", "lab12_vercel.webp", "Vercel 가입 화면", [("①", "Continue with GitHub", 21, 61, 57, 8.5)],
-               [("주소", "vercel.com/signup"), ("선택", "Continue with GitHub"), ("막히는 곳", "이메일로 가입하면 GitHub 연결이 따로 필요")],
+               [("주소", go("vercel.com/signup", "https://vercel.com/signup")), ("선택", "Continue with GitHub"), ("막히는 곳", "이메일로 가입하면 GitHub 연결이 따로 필요")],
                (("화면 · vercel.com/signup", "https://vercel.com/signup"),)),
           step("1-2 ①", 4, "VS Code 설치", "lab12_vscode_dl.webp", "VS Code 다운로드 화면",
                [("①", "Windows", 25, 36, 30, 23), ("②", "macOS", 57, 36, 30, 23)],
-               [("macOS", "macOS 버튼 · .dmg"), ("Windows", "Windows 버튼 · User Installer"), ("주소", "code.visualstudio.com/download")],
+               [("macOS", "macOS 버튼 · .dmg"), ("Windows", "Windows 버튼 · User Installer"), ("주소", go("code.visualstudio.com/download", "https://code.visualstudio.com/download"))],
                (("화면 · code.visualstudio.com/download", "https://code.visualstudio.com/download"),)),
           step("1-2 ①", 4, "Claude Code 확장", "lab12_market.webp", "Marketplace · Claude Code for VS Code",
                [("①", "Install", 20, 46, 14, 13)],
-               [("확장 보기", "macOS ⇧⌘X · Windows Ctrl+Shift+X"), ("검색", "Claude Code · Anthropic"), ("설치", "Install")],
+               [("확장 보기", "macOS ⇧⌘X · Windows Ctrl+Shift+X"), ("검색", go("Claude Code · Anthropic", "https://marketplace.visualstudio.com/items?itemName=anthropic.claude-code")), ("설치", "Install")],
                (("화면 · VS Marketplace · Claude Code", "https://marketplace.visualstudio.com/items?itemName=anthropic.claude-code"),)),
           light("실습 1-2 ① · 5단계 작업 폴더 만들기", '<div class="twocol"><div>'
                 + viz2.tiles([("Windows", "탐색기 Win+E → 바탕 화면 → 새 폴더 Ctrl+Shift+N"),

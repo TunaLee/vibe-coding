@@ -10,7 +10,7 @@ import viz2
 from deck import flow, lab, light
 from hx import code, esc, note
 from stats_hx import src
-from v1kit import brief, chat, shot, labcard, tstep
+from v1kit import brief, chat, shot, labcard, tstep, go
 
 T = "1-7"
 
@@ -38,7 +38,7 @@ def slides():
         # ── GitHub 에 올리기
         light("GitHub CLI (gh)", viz2.tiles([
             ("gh", "GitHub 공식 명령 도구 · 저장소 만들기 · 올리기"), ("Claude Code가 실행", "명령 암기 불필요"),
-            ("한 번만", "설치 · 로그인 연결")], 3)
+            ("설치 안내", go("cli.github.com", "https://cli.github.com") + " · 한 번만")], 3)
               + '<div class="twocol"><div>' + code("macOS", esc("brew install gh")) + "</div><div>"
               + code("Windows", esc("winget install --id GitHub.cli --source winget")) + "</div></div>"
               + note("Windows", "설치 뒤 터미널 새 창에서 gh 인식")
@@ -117,7 +117,7 @@ def slides():
         tstep("1-7", 3, "올린 결과", T, "lab17_pushed.webp", "비공개 저장소에 올린 결과",
               rows=[("주소", "github.com/내계정/저장소"), ("비공개", "PRIVATE 확인"), ("다음", "Vercel 에서 가져오기")]),
         tstep("1-7", 4, "Vercel 가져오기 · Deploy", T, need="vercel.com/new · 저장소 Import → Deploy 화면",
-              rows=[("주소", "vercel.com/new"), ("가져오기", "저장소 옆 Import"), ("배포", "Deploy → *.vercel.app")]),
+              rows=[("주소", go("vercel.com/new", "https://vercel.com/new")), ("가져오기", "저장소 옆 Import"), ("배포", "Deploy → *.vercel.app")]),
         light("실습 1-7 확인", viz2.maprows([
             ("저장소", "github.com/내계정/저장소 이름", "파일 · 커밋 · 자물쇠"), ("배포 주소", "프로젝트명.vercel.app", "PC · 휴대폰에서 열림"),
             ("재배포", "push 1~2분 뒤 새로고침", "고친 곳이 보임"), ("공개 전 점검", "키 · 개인정보 없음", "Claude Code 점검 결과")], "볼 것", "확인")
