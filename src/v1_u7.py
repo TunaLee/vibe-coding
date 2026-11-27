@@ -1,7 +1,7 @@
 """1-7 배포.
 
 배포란 → 비유(내 컴퓨터의 문서 파일 → 공유 링크 · 애니메이션) → localhost · 내부망 · 외부망(애니메이션) · 주소별 접속 범위 → 흐름(GitHub → Vercel → 주소)
-→ GitHub에서 저장소 만들기(github.com/new) → 공개 · 비공개 → 올리기(말로) → Vercel 가져오기 · 주소 → push 하면 자동 재배포 · Production / Preview → 공개 전 확인 → 실습.
+→ GitHub에서 저장소 만들기(github.com/new) → 공개 · 비공개(배포 · 공유 → 공개) → 올리기 전 점검 → 올리기(말로) → Vercel 가져오기 · 주소 → push 하면 자동 재배포 → 실습.
 사실 출처: docs.github.com (Creating a new repository · Adding locally hosted code to GitHub) · cli.github.com (gh auth login) · vercel.com/docs/git · vercel.com/docs/deployments/generated-urls
 · vercel.com/docs/plans/hobby · docs.github.com (plans)
 Git 개념(commit · push)은 1-5 에서 설명 — 여기서는 다시 설명하지 않는다.
@@ -39,10 +39,16 @@ def slides():
         light("GitHub 저장소 만들기", _ghnew()
               + src(("GitHub Docs · Creating a new repository", "https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository")), T),
         light("공개 · 비공개 저장소", viz2.pair(
-            "공개 (public)", [("누가 보나", "인터넷의 누구나 코드를 봄"), ("맞는 경우", "공개해도 되는 연습 코드")],
-            "비공개 (private)", [("누가 보나", "나와 초대한 사람만"), ("맞는 경우", "회사 업무 · 이 실습")], hl="r")
-              + note("GitHub Free", "비공개 저장소도 개수 제한 없음 · 일부 기능만 유료")
-              + src(("GitHub plans", "https://docs.github.com/en/get-started/learning-about-github/githubs-plans")), T),
+            "공개 (public)", [("누가 보나", "인터넷의 누구나 · 코드 · 커밋 기록까지"), ("맞는 경우", "배포 · 공유하는 앱 · 이 실습")],
+            "비공개 (private)", [("누가 보나", "나와 초대한 사람만"), ("맞는 경우", "회사 업무 코드")], hl="l")
+              + note("공개 저장소", "올린 파일 · 커밋 기록 전부 공개 → 올리기 전 점검 필수")
+              + src(("GitHub Docs · About repositories", "https://docs.github.com/en/repositories/creating-and-managing-repositories/about-repositories")), T),
+        light("올리기 전 점검", viz2.tiles([
+            ("키 · 비밀번호", "코드 · 파일에 들어 있지 않은가"), ("개인정보", "기획서 · 예시 페이지에 실제 이름 · 연락처 없음"),
+            ("커밋 이메일", "공개 저장소면 누구나 봄 · GitHub noreply 이메일"), ("Hobby 는 개인 · 비상업", "회사 서비스는 Pro 이상")], 2)
+              + note("점검 요청 예", "「올리기 전에 키 · 개인정보가 들어간 파일이 있는지 찾아 줘」")
+              + src(("GitHub Docs · commit email", "https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-email-preferences/setting-your-commit-email-address"),
+                    ("Vercel Terms", "https://vercel.com/legal/terms"), ("Hobby", "https://vercel.com/docs/plans/hobby")), T),
         light("GitHub 업로드 요청", chat([
             ("me", "이 폴더를 GitHub 저장소 https://github.com/내계정/mini-notion 에 올려 줘"),
             ("ai", "git remote add origin … 과 git push -u origin main 을 실행해도 될까요?"),
@@ -54,7 +60,7 @@ def slides():
               + code("github.com/내계정/mini-notion · 예", esc(
                   "mini-notion/\n├── index.html\n├── style.css\n├── app.js\n├── 기획서.md\n└── 개발계획.md"))
               + "</div><div>" + viz2.tiles([
-                  ("파일 목록", "내 폴더와 동일"), ("커밋 기록", "태스크마다 남긴 커밋"), ("자물쇠 표시", "비공개 저장소")], 1)
+                  ("파일 목록", "내 폴더와 동일"), ("커밋 기록", "태스크마다 남긴 커밋"), ("Public 표시", "저장소 이름 옆")], 1)
               + "</div></div>", T),
         # ── Vercel
         light("Vercel 프로젝트 가져오기", flow([
@@ -81,45 +87,39 @@ def slides():
                             ("④ Vercel 자동 배포", "push 감지 · 1~2분"), ("⑤ 같은 주소에 반영", "새 링크 없음")], 1)
               + "</div></div>"
               + src(("Vercel · Git", "https://vercel.com/docs/git")), T),
-        # ── 공개 전 확인
-        light("배포 전 점검", viz2.tiles([
-            ("키 · 비밀번호", "코드 · 파일에 들어 있지 않은가"), ("개인정보", "실제 이름 · 연락처 대신 예시 값"),
-            ("배포 주소는 공개", "주소를 아는 누구나 열 수 있음"), ("Hobby 는 개인 · 비상업", "회사 서비스는 Pro 이상")], 2)
-              + note("점검 요청 예", "「올리기 전에 키 · 개인정보가 들어간 파일이 있는지 찾아 줘」")
-              + src(("Vercel Terms", "https://vercel.com/legal/terms"), ("Hobby", "https://vercel.com/docs/plans/hobby")), T),
         # ── 실습
-        labcard("1-7", "내 앱 배포", T, "내 앱 폴더", "공개 주소", ["GitHub 비공개 저장소", "Vercel 배포"]),
+        labcard("1-7", "내 앱 배포", T, "내 앱 폴더", "공개 주소", ["GitHub 공개 저장소", "Vercel 배포"]),
         brief("1-7", T,
-              ["올리기 전 키 · 개인정보 점검 요청", "github.com 에서 비공개 저장소 만들기", "올리기 요청",
+              ["올리기 전 키 · 개인정보 점검 요청", "github.com 에서 공개 저장소 만들기", "올리기 요청",
                "Vercel 가져오기 · Deploy", "수정 → 커밋 · push 요청"],
-              [("목표", "이 폴더를 GitHub 에 올리기"), ("저장소", "이름 · 비공개"), ("올리기 전", "키 · 개인정보 점검"),
-               ("하지 말 것", "기존 커밋 지우기 · 공개 저장소")],
-              ["GitHub", "비공개", "push", "Vercel"],
+              [("목표", "이 폴더를 GitHub 에 올리기"), ("저장소", "이름 · 공개"), ("올리기 전", "키 · 개인정보 점검"),
+               ("하지 말 것", "기존 커밋 지우기 · 키 · 개인정보 올리기")],
+              ["GitHub", "공개", "push", "Vercel"],
               ["저장소 주소가 열림", "배포 주소가 열림", "수정 뒤 같은 주소에 반영"],
               "오류 문구 그대로 전달", folder="내 앱 폴더"),
         tstep("1-7", 3, "올리기", T, ask=("Claude Code 입력창", "이 폴더를 GitHub 저장소\nhttps://github.com/내계정/mini-notion 에 올려 줘"),
               rows=[("주소", "2단계에서 복사한 주소"), ("승인", "패널에 뜬 명령 확인 → 허용"), ("다음", "올린 결과 확인")]),
         light("실습 1-7 확인", viz2.maprows([
-            ("저장소", "github.com/내계정/저장소 이름", "파일 · 커밋 · 자물쇠"), ("배포 주소", "프로젝트명.vercel.app", "PC · 휴대폰에서 열림"),
-            ("재배포", "push 1~2분 뒤 새로고침", "고친 곳이 보임"), ("공개 전 점검", "키 · 개인정보 없음", "Claude Code 점검 결과")], "볼 것", "확인")
+            ("저장소", "github.com/내계정/저장소 이름", "파일 · 커밋 · Public"), ("배포 주소", "프로젝트명.vercel.app", "PC · 휴대폰에서 열림"),
+            ("재배포", "push 1~2분 뒤 새로고침", "고친 곳이 보임"), ("올리기 전 점검", "키 · 개인정보 없음", "Claude Code 점검 결과")], "볼 것", "확인")
               + note("공유", "배포 주소로 결과 공유"), T),
     ]
 
 
 def _ghnew():
-    """github.com/new 화면 모형 — 이름 · Private · README 끔 → Create repository → 빈 저장소 주소."""
+    """github.com/new 화면 모형 — 이름 · Public · README 끔 → Create repository → 빈 저장소 주소."""
     def row(n, k, v, d):
         return f'<div class="v17gR" style="--d:{d}s"><i>{n}</i><b>{k}</b>{v}</div>'
     form = ('<div class="v17gW"><div class="v17gU">github.com/new</div><div class="v17gF">'
             '<div class="v17gH">Create a new repository</div>'
             + row("①", "Repository name", '<span class="v17gI">mini-notion</span>', .4)
-            + row("②", "Visibility", '<span class="v17gI">Private</span>', 1.2)
+            + row("②", "Visibility", '<span class="v17gI">Public</span>', 1.2)
             + row("③", "Add README", '<span class="v17gO">Off</span>', 2.0)
             + row("④", "", '<span class="v17gB">Create repository</span>', 2.8)
             + '</div></div>')
     side = ('<div class="v17gS">'
             '<p style="--d:.4s"><i>①</i><b>이름</b><span>mini-notion · 영문 · 하이픈</span></p>'
-            '<p style="--d:1.2s"><i>②</i><b>Private</b><span>나와 초대한 사람만</span></p>'
+            '<p style="--d:1.2s"><i>②</i><b>Public</b><span>누구나 열람 · 배포 · 공유용</span></p>'
             '<p style="--d:2.0s"><i>③</i><b>README · .gitignore · 라이선스 없이</b><span>빈 저장소 · 내 커밋과 충돌 없음</span></p>'
             '<p style="--d:2.8s"><i>④</i><b>Create repository</b><span>빈 저장소 생성</span></p></div>')
     res = ('<div class="v17gX" style="--d:3.8s"><b>만든 뒤 화면</b><span>빈 저장소 · Quick setup</span>'
