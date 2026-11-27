@@ -43,7 +43,7 @@ def reqres(write=False, mode=None):
                 rows += (f'<div class="rw on gone" {_at(T[8])}><b>{t}</b><span>{dt(d)}</span><em>{st}</em>'
                          f'<u class="bt2 dl" {_at(T[1] - .3)}>삭제</u></div>')
             else:
-                rows += f'<div class="rw on"><b>{t}</b><span>{dt(d)}</span><em>{st}</em></div>'
+                rows += f'<div class="rw on"><b>{t}</b><span>{dt(d)}</span><em>{st}</em>{"<u></u>" if mode in ("update", "delete") else ""}</div>'
         if mode == "create":
             rows += f'<div class="rw nw" {_at(T[8])}><b>{NEW[0]}</b><span>{dt(NEW[1])}</span><em>{NEW[2]}</em></div>'
             top = (f'<div class="add"><span class="in">{NEW[0]}</span><span class="bt" {_at(T[1] - .3)}>+ 새 페이지</span></div>')
@@ -64,7 +64,7 @@ def reqres(write=False, mode=None):
            f'<span class="st"><i class="pd" {_at(T[7])}>(pending)</i><b class="ok" {_at(T[7])}>{code_} {codet}</b></span></div>'
            f'<pre class="pv" {_at(T[7])}><em>Response</em>{esc(js)}</pre></div>')
     browser = (f'<div class="v2sBr"><div class="bar"><i></i><i></i><i></i><span>mini-notion.vercel.app</span></div>'
-               f'<div class="app"><div class="ah">미니 노션 · 페이지 목록</div>{top}<div class="ls">{skel}{rows}</div></div>{net}</div>')
+               f'<div class="app"><div class="ah">미니 노션 · 페이지 목록</div>{top}<div class="ls{" x4" if mode in ("update", "delete") else ""}">{skel}{rows}</div></div>{net}</div>')
     server = ('<div class="v2sBx srv"><div class="bh"><b>서버</b><small>Next.js · Vercel</small></div>'
               + "".join(f'<div class="cl" {_at(d)}>{esc(x)}</div>' for x, d in zip(sl, (T[2], T[2] + .3, T[6]))) + '</div>')
     dr = ""
@@ -185,7 +185,8 @@ def tools(names, pick, d_list, d_pick):
 CSS += """
   /* 수정 · 삭제 장면 */
   .v2sBr .rw{position:relative;}
-  .v2sBr .rw .bt2{position:absolute; right:-6px; top:-9px; text-decoration:none; font-size:11.5px; font-weight:800; color:#fff; background:#1F3A5F; border-radius:6px; padding:1px 7px;
+  .v2sBr .ls.x4 .rw{grid-template-columns:1fr 50px 56px 46px;}
+  .v2sBr .rw .bt2{justify-self:end; text-decoration:none; font-size:12px; font-weight:800; color:#fff; background:#1F3A5F; border-radius:6px; padding:2px 8px;
     animation:v2sPress .35s var(--d) both;}
   .v2sBr .rw .bt2.dl{background:#C0392B;}
   .v2sBr .rw em{position:relative;} .v2sBr .rw em i,.v2sBx.db td i{font-style:normal;}
