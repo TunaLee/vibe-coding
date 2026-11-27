@@ -24,20 +24,52 @@ FILES = [("index.html", "34줄", "뼈대", "화면에 어떤 칸이 있나", "�
            ("dragSetup", "F4 · 끌어 옮기기"), ("save", "F5 · 브라우저에 저장")])]
 
 
+_WEB3_JS = """<script>
+(function () {
+  document.querySelectorAll('.v16wc').forEach(function (card) {
+    var btn = card.querySelector('.v16wBtn'), tag = card.querySelector('.v16wE');
+    if (!btn) return;
+    var js = card.dataset.js === '1', n = 0, t;
+    var ul = card.querySelector('.v16wS ul'), h1 = card.querySelector('.v16wS h1');
+    var bks = card.querySelectorAll('.v16wS .bk'), lines = card.querySelectorAll('.v16wL');
+    function flash() {
+      tag.classList.remove('on'); void tag.offsetWidth; tag.classList.add('on');
+      clearTimeout(t); t = setTimeout(function () { tag.classList.remove('on'); }, 1800);
+    }
+    function pick(li) {
+      ul.querySelectorAll('li').forEach(function (x) { x.classList.remove('on'); });
+      li.classList.add('on'); h1.textContent = li.textContent;
+      bks.forEach(function (b) { b.style.visibility = li.dataset.new ? 'hidden' : ''; });
+    }
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation(); flash();
+      if (!js) { btn.classList.remove('no'); void btn.offsetWidth; btn.classList.add('no'); return; }
+      lines.forEach(function (l) { l.classList.remove('hl'); });
+      [0, 1, 2, 3].forEach(function (j) { setTimeout(function () { lines[j].classList.add('hl'); }, j * 160); });
+      setTimeout(function () {
+        n += 1;
+        var news = ul.querySelectorAll('li[data-new]');
+        if (news.length >= 2) news[0].remove();
+        var li = document.createElement('li'); li.dataset.new = '1';
+        li.textContent = '제목 없음' + (n > 1 ? ' ' + n : ''); ul.appendChild(li); pick(li);
+      }, 640);
+    });
+    if (js) ul.addEventListener('click', function (e) { var li = e.target.closest('li'); if (li) pick(li); });
+  });
+})();
+</script>"""
+
+
 def _web3():
     """웹의 3요소 — 같은 미니 노션 화면이 HTML만 → + CSS → + JS 로 바뀜. JS 칸에서 「+ 새 페이지」를 누르면 목록에 「제목 없음」이 생김.
     코드 조각은 예시 앱(labs/mini_notion/예시/app) 의 실제 줄을 줄여 옮김. 평택대 덱 p3._web3 구조."""
     raw = ('<div class="v16wR"><p>미니 노션</p><ul><li>시작하기</li><li>주간 회의록</li></ul><button>+ 새 페이지</button>'
            '<h1>시작하기</h1><p>「/」 를 입력하면 블록 종류를 고를 수 있다</p></div>')
 
-    def page(js):
-        new = '<li class="nw">제목 없음</li>' if js else ""
-        on0 = ' class="on0"' if js else ' class="on"'
-        btn = '<b class="bt">+ 새 페이지</b>'
-        g = " g" if js else ""
-        return (f'<div class="v16wS"><div class="sd"><i>미니 노션</i><ul><li{on0}>시작하기</li><li>주간 회의록</li>{new}</ul>{btn}</div>'
-                f'<div class="mn"><h1>{"<span class=t0>시작하기</span><span class=t1>제목 없음</span>" if js else "시작하기"}</h1>'
-                f'<div class="bk{g}"><u></u>보고서 초안</div><div class="bk{g}">회의 메모</div></div></div>')
+    def page():
+        return ('<div class="v16wS"><div class="sd"><i>미니 노션</i><ul><li class="on">시작하기</li><li>주간 회의록</li></ul>'
+                '<button type="button" class="bt v16wBtn">+ 새 페이지</button></div>'
+                '<div class="mn"><h1>시작하기</h1><div class="bk"><u></u>보고서 초안</div><div class="bk">회의 메모</div></div></div>')
     code_h = """<aside>
   <ul id="pages"></ul>
   <button id="newPage">
@@ -53,22 +85,20 @@ h1 { font-size: 34px; }"""
   save();     // 브라우저에 저장
   render();   // 목록 다시 그리기
 };"""
-    cols = [("HTML만", "뼈대 · 내용", "index.html", raw, code_h), ("+ CSS", "모양 · 배치 · 색", "style.css", page(False), code_c),
-            ("+ JS", "누르면 동작 · 저장", "app.js", page(True), code_j)]
-    # JS 칸 — 마우스가 「+ 새 페이지」를 클릭 → click 이벤트 → 코드 줄이 차례로 켜짐 → 목록에 「제목 없음」.
-    ev = ('<i class="v16wM"></i><b class="v16wP"></b>'
-          '<em class="v16wE">click 이벤트 → onclick 실행</em>')
+    raw = raw.replace("<button>", '<button type="button" class="v16wBtn">')
+    cols = [("HTML만", "뼈대 · 내용", "index.html", raw, code_h), ("+ CSS", "모양 · 배치 · 색", "style.css", page(), code_c),
+            ("+ JS", "누르면 동작 · 저장", "app.js", page(), code_j)]
 
     def body(i, code):
         if i != 2:
             return esc(code)
-        return "".join(f'<span class="v16wL{" h" if j < 4 else ""}" style="--h:{1.3 + j * .2:.1f}s">{esc(ln)}</span>'
-                       for j, ln in enumerate(code.split("\n")))
+        return "".join(f'<span class="v16wL">{esc(ln)}</span>' for ln in code.split("\n"))
+    msg = ["반응 없음 · JS 없음", "반응 없음 · JS 없음", "click 이벤트 → onclick 실행"]
     return '<div class="v16w">' + "".join(
-        f'<div class="v16wc{" on" if i == 2 else ""}" style="--d:{.3 + i * 2:.1f}s"><div class="v16wh"><b>{h}</b><span>{sub}</span></div>'
-        f'<div class="v16wb"><div class="br"><i></i><i></i><i></i><span>미니 노션</span></div>{pg}{ev if i == 2 else ""}</div>'
+        f'<div class="v16wc{" on" if i == 2 else ""}" data-js="{1 if i == 2 else 0}" style="--d:{.3 + i * 2:.1f}s"><div class="v16wh"><b>{h}</b><span>{sub}</span></div>'
+        f'<div class="v16wb"><div class="br"><i></i><i></i><i></i><span>미니 노션</span></div>{pg}<em class="v16wE">{msg[i]}</em></div>'
         f'<pre class="v16wk"><em>{f}</em>\n{body(i, code)}</pre></div>'
-        for i, (h, sub, f, pg, code) in enumerate(cols)) + "</div>"
+        for i, (h, sub, f, pg, code) in enumerate(cols)) + '</div><p class="v16wT">「+ 새 페이지」 직접 클릭 · 세 칸 비교</p>' + _WEB3_JS
 
 
 def _page():
@@ -298,7 +328,6 @@ CSS = """
   .v16wS li.on0{animation:v16wOff .3s calc(var(--d) + 2.1s) forwards;}
   .v16wS li.nw{opacity:0; background:#E3E2DF; font-weight:600; animation:v16wNew .4s calc(var(--d) + 2.1s) forwards;}
   .v16wS .bt{display:block; font-weight:400; color:#6B6B6B; padding:4px 6px; margin-top:4px; border-radius:5px;}
-  .v16wc.on .v16wS .bt{animation:v16wClk .3s calc(var(--d) + 1.2s) 2 alternate;}
   .v16wS .mn{padding:12px 12px;} .v16wS h1{font-size:20px; margin:0 0 10px; position:relative; height:26px;}
   .v16wS h1 span{position:absolute; left:0; top:0; white-space:nowrap;} .v16wS h1 .t1{opacity:0; color:#C4C4C2; animation:v16wNew .3s calc(var(--d) + 2.1s) forwards;}
   .v16wS h1 .t0{animation:v16wGone .3s calc(var(--d) + 2.1s) forwards;}
@@ -308,18 +337,20 @@ CSS = """
   @keyframes v16wNew{to{opacity:1}} @keyframes v16wGone{to{opacity:0}} @keyframes v16wOff{to{background:transparent; font-weight:400}}
   .v16wk{margin:0; background:#1E1E2E; color:#E6E6E6; border-radius:10px; padding:10px 14px; font-family:var(--mono); font-size:12.5px; line-height:1.55; white-space:pre; overflow:hidden;}
   .v16wc.on .v16wb{position:relative;}
-  .v16wM{position:absolute; left:0; top:0; width:22px; height:22px; z-index:3; opacity:0; pointer-events:none;
-    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 2l7 19 2.6-7.6L20 11z' fill='%2316233A' stroke='white' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat;
-    transform:translate(260px,200px); animation:v16wMv 1s calc(var(--d) + .2s) ease-in-out forwards, v16wTap .2s calc(var(--d) + 1.2s) 2 alternate;}
-  @keyframes v16wMv{0%{opacity:0; transform:translate(260px,200px)} 20%{opacity:1} 100%{opacity:1; transform:translate(40px,136px)}}
-  @keyframes v16wTap{to{opacity:1; transform:translate(40px,136px) scale(.8)}}
-  .v16wP{position:absolute; left:43px; top:139px; width:10px; height:10px; margin:-5px 0 0 -5px; border-radius:50%; border:2.5px solid #F28C28; opacity:0; z-index:2; animation:v16wRp .6s calc(var(--d) + 1.2s) forwards;}
-  @keyframes v16wRp{0%{opacity:1; transform:scale(.5)} 100%{opacity:0; transform:scale(4)}}
-  .v16wE{position:absolute; right:8px; bottom:8px; font-style:normal; font-size:12px; font-weight:800; color:#fff; background:#F28C28; padding:3px 9px; border-radius:6px; opacity:0; z-index:3; animation:v16wIn .3s calc(var(--d) + 1.2s) forwards;}
-  .v16wL{display:block; border-radius:4px;} .v16wL.h{animation:v16wLn .3s calc(var(--d) + var(--h)) forwards;}
-  @keyframes v16wLn{to{background:rgba(242,140,40,.32); color:#fff;}}
+  .v16wBtn{font:inherit; border:0; background:none; text-align:left; cursor:pointer;}
+  .v16wS .v16wBtn{width:100%;} .v16wS .v16wBtn:hover, .v16wR .v16wBtn:hover{background:#F6C99A; color:#16233A;}
+  .v16wR .v16wBtn{border:1px solid #767676; background:#EFEFEF; padding:1px 6px; border-radius:2px;}
+  .v16wBtn.no{animation:v16wNo .35s;}
+  @keyframes v16wNo{25%{transform:translateX(-4px)} 75%{transform:translateX(4px)}}
+  .v16wb{position:relative;}
+  .v16wE{position:absolute; right:8px; bottom:8px; font-style:normal; font-size:12px; font-weight:800; color:#fff; background:#8A94A3; padding:3px 9px; border-radius:6px; opacity:0; transition:opacity .2s; pointer-events:none;}
+  .v16wc.on .v16wE{background:#F28C28;} .v16wE.on{opacity:1;}
+  .v16wS li{cursor:default;} .v16wc.on .v16wS li{cursor:pointer;}
+  .v16wS ul{max-height:128px; overflow:hidden;}
+  .v16wL{display:block; border-radius:4px; transition:background .15s;} .v16wL.hl{background:rgba(242,140,40,.32); color:#fff;}
+  .v16wT{margin:14px 0 0; font-size:15px; color:#6B7785; text-align:right; opacity:0; animation:v16wIn .4s 5s forwards;}
   .v16wk em{font-style:normal; color:#F2B880; font-weight:700;}
-  @media print{.v16wM,.v16wP,.v16wE{display:none} .v16wc{animation:none; opacity:1} .v16wS li.nw, .v16wS h1 .t1{animation:none; opacity:1} .v16wS h1 .t0, .v16wS .bk.g{animation:none; opacity:0}
+  @media print{.v16wE{display:none} .v16wc{animation:none; opacity:1} .v16wS li.nw, .v16wS h1 .t1{animation:none; opacity:1} .v16wS h1 .t0, .v16wS .bk.g{animation:none; opacity:0}
     .v16wS li.on0{animation:none; background:transparent; font-weight:400}}
   /* 1-6 · 화면 뒤의 코드 (v16c) */
   .v16top{display:flex; gap:12px; align-items:center; font-size:16px; font-weight:800; color:#16233A; opacity:0; animation:v16In .4s var(--d) forwards;}
