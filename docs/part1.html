@@ -1638,6 +1638,81 @@
   .v1cm b{font-size:19px; color:#16233A;} .v1cm small{grid-column:3; font-size:14.5px; color:#6B7785;}
   @keyframes v1cmIn{from{opacity:0; transform:translateY(-24px)} to{opacity:1; transform:none}}
   @media print{.v1cm{opacity:1; animation:none}}
+  /* 1-5 · 화면 썸네일 (v15th) */
+  .v15th{width:200px; border:1.5px solid #C9CFD8; border-radius:8px; overflow:hidden; background:#fff;}
+  .v15th .br{display:flex; gap:4px; height:16px; align-items:center; padding:0 7px; background:#EEF1F4; border-bottom:1px solid #D9DDE3;}
+  .v15th .br i{width:6px; height:6px; border-radius:50%; background:#C9CFD8;}
+  .v15th .bd{height:104px; padding:10px 12px; display:flex; flex-direction:column; gap:7px; box-sizing:border-box;}
+  .v15th .bd p{margin:0; font-size:13px; font-weight:800; color:#16233A;}
+  .v15th .bd u{display:block; height:6px; border-radius:3px; background:#E3E7EC; width:85%;} .v15th .bd u.s{width:60%;}
+  .v15th .v15bt{align-self:flex-start; font-size:11.5px; color:#fff; background:#16233A; padding:4px 12px; border-radius:6px;}
+  .v15th .v15bt.o{background:#E07A12;}
+  .v15th.bad{border-color:#D64545;} .v15th .v15er{font-size:11.5px; color:#D64545;}
+  .v15th.bad .bd u{background:#F3D3D3; width:40%;}
+  /* 1-5 · 커밋 한 개 (v15c) */
+  .v15c{display:grid; grid-template-columns:auto 70px 1fr; align-items:center; gap:0; margin-top:10px;}
+  .v15c .v15cs{display:flex; flex-direction:column; gap:8px; align-items:center; border:0; padding:0; background:none;} .v15c .v15cs .v15th{transform:scale(1.35); transform-origin:top center; margin-bottom:46px;}
+  .v15c .cap{font-size:16px; font-weight:700; color:#6B7785;}
+  .v15c .ar{height:3px; background:#9AA6B5; position:relative; margin:0 12px;}
+  .v15c .ar::after{content:""; position:absolute; right:-8px; top:-7px; border:8px solid transparent; border-left-color:#9AA6B5;}
+  .v15c .cd{border:2px solid #16233A; border-radius:16px; padding:18px 22px; display:flex; flex-direction:column; gap:10px;}
+  .v15c .hd{font-size:15px; font-weight:800; color:#16233A; letter-spacing:.02em;}
+  .v15c .rw{display:grid; grid-template-columns:140px 1fr 250px; align-items:center; gap:14px; padding:10px 14px; border-radius:10px; background:#F4F6F8;
+    opacity:.25; animation:v15On .4s var(--d) forwards;}
+  @keyframes v15On{to{opacity:1; background:#FFF6EC;}}
+  .v15c .k{font-size:18px; font-weight:800; color:#E07A12;} .v15c .v{font-size:20px; color:#16233A;}
+  .v15c .v tt{font-family:ui-monospace,Menlo,monospace; font-size:19px; background:#16233A; color:#F6B26B; padding:2px 10px; border-radius:6px;}
+  .v15c .v pre{margin:0; font-family:ui-monospace,Menlo,monospace; font-size:15px; line-height:1.5; white-space:pre;}
+  .v15c .v pre span{color:#6B7785;} .v15c .v pre em{font-style:normal; color:#1F8A3A; background:#E6F4EA; padding:0 6px; border-radius:4px;}
+  .v15c small{font-size:15px; color:#6B7785;}
+  /* 1-5 · 커밋으로 되돌리기 (v15t) */
+  .v15t{position:relative; margin-top:20px;}
+  .v15t .ln{position:absolute; left:40px; right:40px; top:200px; height:3px; background:#C9CFD8;}
+  .v15t .row{display:grid; grid-template-columns:repeat(4,1fr); gap:20px; position:relative;}
+  .v15t .pt{display:flex; flex-direction:column; align-items:center; gap:10px; opacity:0; animation:v15In .5s var(--d) forwards;}
+  @keyframes v15In{from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none}}
+  .v15t .v{font-size:20px; font-weight:800; color:#16233A;} .v15t .pt > b{font-size:17px; color:#37414F; order:5; margin-top:10px;}
+  .v15t .dot{width:18px; height:18px; border-radius:50%; background:#16233A; border:3px solid #fff; box-shadow:0 0 0 2px #16233A; order:4;}
+  .v15t .x .v{color:#D64545;} .v15t .x .dot{background:#fff; box-shadow:0 0 0 2px #D64545; border-style:dashed;}
+  .v15t .x{animation:v15In .5s var(--d) forwards, v15Fade .5s 5.2s forwards;}
+  @keyframes v15Fade{to{opacity:.3; filter:grayscale(1);}}
+  .v15t .pt:nth-child(3) .v15th{animation:v15Now .5s 5.2s forwards;}
+  @keyframes v15Now{to{box-shadow:0 0 0 4px #E07A12; border-color:#E07A12;}}
+  .v15t .back{display:flex; justify-content:flex-end; margin:14px 80px 0 0; opacity:0; animation:v15In .5s 4.4s forwards;}
+  .v15t .back span{position:relative; font-size:19px; font-weight:800; color:#E07A12; padding:8px 18px 8px 40px; border:2px solid #E07A12; border-radius:999px; background:#FFF6EC;}
+  .v15t .back span::before{content:"←"; position:absolute; left:14px; top:6px;}
+  .v15t .now{display:flex; gap:16px; align-items:center; margin-top:22px; padding:14px 20px; border-radius:12px; background:#F4F6F8; opacity:0; animation:v15In .5s 5.6s forwards;}
+  .v15t .now b{font-size:19px; color:#16233A;} .v15t .now span{font-size:18px; color:#37414F;}
+  /* 1-5 · Git 과 GitHub (v15h) */
+  .v15h .grid{display:grid; grid-template-columns:300px 190px 300px 1fr; align-items:center; gap:0; margin-top:6px;}
+  .v15h .bx{border-radius:16px; padding:16px 18px; display:flex; flex-direction:column; gap:10px;}
+  .v15h .pc{border:2px dashed #9AA6B5;} .v15h .gh{background:#16233A; color:#fff;}
+  .v15h .hd b{display:block; font-size:22px;} .v15h .hd small{font-size:14px; color:#6B7785;} .v15h .gh .hd small{color:#C9D2DE;}
+  .v15h .fd{font-size:15px; font-weight:700; color:#37414F; padding:8px 12px; border-radius:8px; background:#F4F6F8;}
+  .v15h .st{display:flex; flex-direction:column; gap:6px;}
+  .v15h .cm{font-size:16px; font-weight:700; padding:8px 12px; border-radius:8px; background:#fff; border:1.5px solid #C9CFD8; color:#16233A;}
+  .v15h .gh .cm{background:#24344F; border-color:#3B4E6E; color:#fff;}
+  .v15h .cm.n{opacity:0; border-color:#E07A12; background:#FFF1E2; color:#B65A00; animation:v15In .4s var(--d) forwards;}
+  .v15h .gh .cm.n{background:#E07A12; border-color:#E07A12; color:#fff;}
+  .v15h .mid{display:flex; flex-direction:column; gap:34px; padding:0 14px;}
+  .v15h .lane{position:relative;}
+  .v15h .lb{display:block; text-align:center; font-size:15px; font-weight:800; color:#6B7785; margin:4px 0;}
+  .v15h .lb.up{animation:v15Lb .3s 2.0s forwards;} @keyframes v15Lb{to{color:#E07A12;}}
+  .v15h .ar{height:3px; background:#9AA6B5; position:relative; margin:6px 0;}
+  .v15h .ar.r::after, .v15h .ar.l::before{content:""; position:absolute; top:-7px; border:8px solid transparent;}
+  .v15h .ar.r::after{right:-8px; border-left-color:#9AA6B5;} .v15h .ar.l::before{left:-8px; border-right-color:#9AA6B5;}
+  .v15h .tk{position:absolute; top:26px; font-style:normal; font-size:12px; font-weight:800; color:#fff; background:#E07A12; border-radius:6px; padding:2px 8px; opacity:0;
+    animation:v15Tk 1.2s 2.0s forwards;}
+  @keyframes v15Tk{0%{opacity:1; left:0} 90%{opacity:1; left:calc(100% - 34px)} 100%{opacity:0; left:calc(100% - 34px)}}
+  .v15h .out{display:flex; flex-direction:column; gap:22px; padding-left:20px;}
+  .v15h .o{position:relative; padding:12px 14px 12px 16px; border-radius:12px; border:1.5px solid #C9CFD8; background:#fff; opacity:0;}
+  .v15h .o1{animation:v15In .4s 3.8s forwards;} .v15h .o2{animation:v15In .4s 4.4s forwards;}
+  .v15h .o i{position:absolute; left:-22px; top:50%; width:20px; height:3px; background:#9AA6B5;}
+  .v15h .o b{display:block; font-size:18px; color:#16233A;} .v15h .o span{font-size:14.5px; color:#6B7785;}
+  .v15h .an{display:grid; grid-template-columns:auto repeat(4,1fr); gap:10px; align-items:center; margin-top:20px; opacity:0; animation:v15In .5s 5.2s forwards;}
+  .v15h .an .t{font-size:15px; font-weight:800; color:#fff; background:#E07A12; padding:4px 12px; border-radius:6px;}
+  .v15h .an p{margin:0; padding:10px 14px; border-radius:10px; background:#F4F6F8; font-size:17px; color:#E07A12; font-weight:800;}
+  .v15h .an p b{color:#16233A; margin-right:10px;}
 
   /* 1-6 · 웹의 3요소 (v16w) — 평택대 p3w 구조 */
   .v16w{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; align-items:start;}
@@ -2629,7 +2704,8 @@ print(total)</code></pre></div><div class="code sm"><div class="bar"><span class
   <div class="eyebrow"><span class="tag">1-5</span></div>
   <h2 class="s-title sm">커밋 구성</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2tiles c4"><div class="v2tile" style="--d:0.00s"><b>바뀐 내용</b><span>어느 파일의 어느 줄</span></div><div class="v2tile" style="--d:0.08s"><b>메시지</b><span>「버튼 추가」</span></div><div class="v2tile" style="--d:0.16s"><b>시각 · 작성자</b><span>언제 · 누가</span></div><div class="v2tile" style="--d:0.24s"><b>고유 번호</b><span>8fcbe80 같은 해시</span></div></div><div class="dbnote"><span>메시지</span> 무엇을 바꿨는지 한 줄 · 되돌릴 시점을 찾는 이름표</div></div></div>
+  <div class="body"><div class="mid"><div class="v15c"><div class="v15cs"><span class="cap">이 커밋 시점의 화면</span><div class="v15th"><div class="br"><i></i><i></i><i></i></div><div class="bd"><p>미니 노션</p><u></u><u class="s"></u><b class="v15bt">로그인</b></div></div></div><div class="ar"></div><div class="cd"><div class="hd">커밋 한 개</div><div class="rw" style="--d:0.8s"><span class="k">고유 번호</span><div class="v"><tt>8fcbe80</tt></div><small>커밋마다 다른 번호 · 해시</small></div><div class="rw" style="--d:1.5s"><span class="k">메시지</span><div class="v"><b>버튼 추가</b></div><small>되돌릴 시점을 찾는 이름표</small></div><div class="rw" style="--d:2.2s"><span class="k">시각 · 작성자</span><div class="v">11월 28일 오후 · kim</div><small>언제 · 누가 (1-5 작성자 등록)</small></div><div class="rw" style="--d:2.9s"><span class="k">바뀐 내용</span><div class="v"><pre><span>index.html</span>
+<em>+ &lt;button&gt;로그인&lt;/button&gt;</em></pre></div><small>어느 파일의 어느 줄</small></div></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="커밋 기록 쌓기">
@@ -2642,12 +2718,20 @@ print(total)</code></pre></div><div class="code sm"><div class="bar"><span class
 dfb369b 첫 화면 완성</code></pre></div></div></div></div></div>
 </section>
 
-<section class="slide lt" data-title="GitHub">
+<section class="slide lt" data-title="커밋으로 되돌리기">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-5</span></div>
-  <h2 class="s-title sm">GitHub</h2>
+  <h2 class="s-title sm">커밋으로 되돌리기</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">Git</div><div class="v2pc" style="--d:0.00s"><b>어디에</b><span>내 컴퓨터</span></div><div class="v2pc" style="--d:0.08s"><b>하는 일</b><span>저장 시점 기록 · 되돌리기</span></div><div class="v2pc" style="--d:0.16s"><b>없으면</b><span>기록이 이 컴퓨터에만</span></div></div><div class="v2p on"><div class="v2ph">GitHub</div><div class="v2pc" style="--d:0.00s"><b>어디에</b><span>인터넷 (원격 저장소)</span></div><div class="v2pc" style="--d:0.08s"><b>하는 일</b><span>기록 보관 · 공유 · 다른 컴퓨터에서 받기</span></div><div class="v2pc" style="--d:0.16s"><b>배포</b><span>Vercel 과 연결</span></div></div></div><div class="dbnote"><span>원격 저장소</span> 내 컴퓨터 밖에 둔 같은 기록 · Free 요금제도 비공개 저장소 무제한</div><div class="src">출처 · <a href="https://docs.github.com/en/get-started/learning-about-github/githubs-plans" target="_blank" rel="noopener">GitHub plans</a></div></div></div>
+  <div class="body"><div class="mid"><div class="v15t"><div class="ln"></div><div class="row"><div class="pt" style="--d:0.4s"><span class="v">v1</span><div class="v15th"><div class="br"><i></i><i></i><i></i></div><div class="bd"><p>미니 노션</p><u></u><u class="s"></u></div></div><b>첫 화면 완성</b><i class="dot"></i></div><div class="pt" style="--d:1.3s"><span class="v">v2</span><div class="v15th"><div class="br"><i></i><i></i><i></i></div><div class="bd"><p>미니 노션</p><u></u><u class="s"></u><b class="v15bt">로그인</b></div></div><b>버튼 추가</b><i class="dot"></i></div><div class="pt" style="--d:2.2s"><span class="v">v3</span><div class="v15th"><div class="br"><i></i><i></i><i></i></div><div class="bd"><p>미니 노션</p><u></u><u class="s"></u><b class="v15bt o">로그인</b></div></div><b>색상 수정</b><i class="dot"></i></div><div class="pt x" style="--d:3.4s"><span class="v">커밋 전</span><div class="v15th bad"><div class="br"><i></i><i></i><i></i></div><div class="bd"><p>미니 노션</p><u></u><u class="s"></u><b class="v15er">오류 · 화면 깨짐</b></div></div><b>실수한 수정</b><i class="dot"></i></div></div><div class="back"><span>「마지막 커밋으로 되돌려 줘」</span></div><div class="now"><b>지금 화면</b><span>v3 「색상 수정」 상태로 돌아옴 · 커밋 전 수정만 사라짐</span></div></div></div></div>
+</section>
+
+<section class="slide lt" data-title="Git과 GitHub">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-5</span></div>
+  <h2 class="s-title sm">Git과 GitHub</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v15h"><div class="grid"><div class="bx pc"><div class="hd"><b>내 컴퓨터</b><small>Git · 기록을 만드는 프로그램</small></div><div class="fd">미니 노션 폴더</div><div class="st "><div class="cm n" style="--d:1.0s">v3 · 색상 수정</div><div class="cm">v2 · 버튼 추가</div><div class="cm">v1 · 첫 화면 완성</div></div></div><div class="mid"><div class="lane"><span class="lb up">git push · 올리기</span><div class="ar r"></div><em class="tk">v3</em></div><div class="lane"><div class="ar l"></div><span class="lb">git pull · 받아 오기</span></div></div><div class="bx gh"><div class="hd"><b>GitHub</b><small>인터넷 · 기록을 보관하는 서비스</small></div><div class="st r"><div class="cm n" style="--d:3.2s">v3 · 색상 수정</div><div class="cm">v2 · 버튼 추가</div><div class="cm">v1 · 첫 화면 완성</div></div></div><div class="out"><div class="o o1"><i></i><b>다른 컴퓨터</b><span>같은 기록을 받아 이어서 작업</span></div><div class="o o2"><i></i><b>Vercel</b><span>GitHub 기록으로 배포 · 1-7</span></div></div></div><div class="an"><span class="t">비유</span><p><b>휴대폰 사진첩</b>Git</p><p><b>클라우드 백업</b>GitHub</p><p><b>백업 올리기</b>push</p><p><b>다른 기기에서 받기</b>pull</p></div></div><div class="dbnote"><span>원격 저장소</span> 내 컴퓨터 밖에 둔 같은 기록 · Free 요금제도 비공개 저장소 무제한</div><div class="src">출처 · <a href="https://docs.github.com/en/get-started/learning-about-github/githubs-plans" target="_blank" rel="noopener">GitHub plans</a></div></div></div>
 </section>
 
 <section class="slide lt" data-title="Git 작업 흐름">

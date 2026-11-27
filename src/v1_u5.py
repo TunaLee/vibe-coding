@@ -199,7 +199,131 @@ CSS = """
   .v1cm b{font-size:19px; color:#16233A;} .v1cm small{grid-column:3; font-size:14.5px; color:#6B7785;}
   @keyframes v1cmIn{from{opacity:0; transform:translateY(-24px)} to{opacity:1; transform:none}}
   @media print{.v1cm{opacity:1; animation:none}}
+  /* 1-5 · 화면 썸네일 (v15th) */
+  .v15th{width:200px; border:1.5px solid #C9CFD8; border-radius:8px; overflow:hidden; background:#fff;}
+  .v15th .br{display:flex; gap:4px; height:16px; align-items:center; padding:0 7px; background:#EEF1F4; border-bottom:1px solid #D9DDE3;}
+  .v15th .br i{width:6px; height:6px; border-radius:50%; background:#C9CFD8;}
+  .v15th .bd{height:104px; padding:10px 12px; display:flex; flex-direction:column; gap:7px; box-sizing:border-box;}
+  .v15th .bd p{margin:0; font-size:13px; font-weight:800; color:#16233A;}
+  .v15th .bd u{display:block; height:6px; border-radius:3px; background:#E3E7EC; width:85%;} .v15th .bd u.s{width:60%;}
+  .v15th .v15bt{align-self:flex-start; font-size:11.5px; color:#fff; background:#16233A; padding:4px 12px; border-radius:6px;}
+  .v15th .v15bt.o{background:#E07A12;}
+  .v15th.bad{border-color:#D64545;} .v15th .v15er{font-size:11.5px; color:#D64545;}
+  .v15th.bad .bd u{background:#F3D3D3; width:40%;}
+  /* 1-5 · 커밋 한 개 (v15c) */
+  .v15c{display:grid; grid-template-columns:auto 70px 1fr; align-items:center; gap:0; margin-top:10px;}
+  .v15c .v15cs{display:flex; flex-direction:column; gap:8px; align-items:center; border:0; padding:0; background:none;} .v15c .v15cs .v15th{transform:scale(1.35); transform-origin:top center; margin-bottom:46px;}
+  .v15c .cap{font-size:16px; font-weight:700; color:#6B7785;}
+  .v15c .ar{height:3px; background:#9AA6B5; position:relative; margin:0 12px;}
+  .v15c .ar::after{content:""; position:absolute; right:-8px; top:-7px; border:8px solid transparent; border-left-color:#9AA6B5;}
+  .v15c .cd{border:2px solid #16233A; border-radius:16px; padding:18px 22px; display:flex; flex-direction:column; gap:10px;}
+  .v15c .hd{font-size:15px; font-weight:800; color:#16233A; letter-spacing:.02em;}
+  .v15c .rw{display:grid; grid-template-columns:140px 1fr 250px; align-items:center; gap:14px; padding:10px 14px; border-radius:10px; background:#F4F6F8;
+    opacity:.25; animation:v15On .4s var(--d) forwards;}
+  @keyframes v15On{to{opacity:1; background:#FFF6EC;}}
+  .v15c .k{font-size:18px; font-weight:800; color:#E07A12;} .v15c .v{font-size:20px; color:#16233A;}
+  .v15c .v tt{font-family:ui-monospace,Menlo,monospace; font-size:19px; background:#16233A; color:#F6B26B; padding:2px 10px; border-radius:6px;}
+  .v15c .v pre{margin:0; font-family:ui-monospace,Menlo,monospace; font-size:15px; line-height:1.5; white-space:pre;}
+  .v15c .v pre span{color:#6B7785;} .v15c .v pre em{font-style:normal; color:#1F8A3A; background:#E6F4EA; padding:0 6px; border-radius:4px;}
+  .v15c small{font-size:15px; color:#6B7785;}
+  /* 1-5 · 커밋으로 되돌리기 (v15t) */
+  .v15t{position:relative; margin-top:20px;}
+  .v15t .ln{position:absolute; left:40px; right:40px; top:200px; height:3px; background:#C9CFD8;}
+  .v15t .row{display:grid; grid-template-columns:repeat(4,1fr); gap:20px; position:relative;}
+  .v15t .pt{display:flex; flex-direction:column; align-items:center; gap:10px; opacity:0; animation:v15In .5s var(--d) forwards;}
+  @keyframes v15In{from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none}}
+  .v15t .v{font-size:20px; font-weight:800; color:#16233A;} .v15t .pt > b{font-size:17px; color:#37414F; order:5; margin-top:10px;}
+  .v15t .dot{width:18px; height:18px; border-radius:50%; background:#16233A; border:3px solid #fff; box-shadow:0 0 0 2px #16233A; order:4;}
+  .v15t .x .v{color:#D64545;} .v15t .x .dot{background:#fff; box-shadow:0 0 0 2px #D64545; border-style:dashed;}
+  .v15t .x{animation:v15In .5s var(--d) forwards, v15Fade .5s 5.2s forwards;}
+  @keyframes v15Fade{to{opacity:.3; filter:grayscale(1);}}
+  .v15t .pt:nth-child(3) .v15th{animation:v15Now .5s 5.2s forwards;}
+  @keyframes v15Now{to{box-shadow:0 0 0 4px #E07A12; border-color:#E07A12;}}
+  .v15t .back{display:flex; justify-content:flex-end; margin:14px 80px 0 0; opacity:0; animation:v15In .5s 4.4s forwards;}
+  .v15t .back span{position:relative; font-size:19px; font-weight:800; color:#E07A12; padding:8px 18px 8px 40px; border:2px solid #E07A12; border-radius:999px; background:#FFF6EC;}
+  .v15t .back span::before{content:"←"; position:absolute; left:14px; top:6px;}
+  .v15t .now{display:flex; gap:16px; align-items:center; margin-top:22px; padding:14px 20px; border-radius:12px; background:#F4F6F8; opacity:0; animation:v15In .5s 5.6s forwards;}
+  .v15t .now b{font-size:19px; color:#16233A;} .v15t .now span{font-size:18px; color:#37414F;}
+  /* 1-5 · Git 과 GitHub (v15h) */
+  .v15h .grid{display:grid; grid-template-columns:300px 190px 300px 1fr; align-items:center; gap:0; margin-top:6px;}
+  .v15h .bx{border-radius:16px; padding:16px 18px; display:flex; flex-direction:column; gap:10px;}
+  .v15h .pc{border:2px dashed #9AA6B5;} .v15h .gh{background:#16233A; color:#fff;}
+  .v15h .hd b{display:block; font-size:22px;} .v15h .hd small{font-size:14px; color:#6B7785;} .v15h .gh .hd small{color:#C9D2DE;}
+  .v15h .fd{font-size:15px; font-weight:700; color:#37414F; padding:8px 12px; border-radius:8px; background:#F4F6F8;}
+  .v15h .st{display:flex; flex-direction:column; gap:6px;}
+  .v15h .cm{font-size:16px; font-weight:700; padding:8px 12px; border-radius:8px; background:#fff; border:1.5px solid #C9CFD8; color:#16233A;}
+  .v15h .gh .cm{background:#24344F; border-color:#3B4E6E; color:#fff;}
+  .v15h .cm.n{opacity:0; border-color:#E07A12; background:#FFF1E2; color:#B65A00; animation:v15In .4s var(--d) forwards;}
+  .v15h .gh .cm.n{background:#E07A12; border-color:#E07A12; color:#fff;}
+  .v15h .mid{display:flex; flex-direction:column; gap:34px; padding:0 14px;}
+  .v15h .lane{position:relative;}
+  .v15h .lb{display:block; text-align:center; font-size:15px; font-weight:800; color:#6B7785; margin:4px 0;}
+  .v15h .lb.up{animation:v15Lb .3s 2.0s forwards;} @keyframes v15Lb{to{color:#E07A12;}}
+  .v15h .ar{height:3px; background:#9AA6B5; position:relative; margin:6px 0;}
+  .v15h .ar.r::after, .v15h .ar.l::before{content:""; position:absolute; top:-7px; border:8px solid transparent;}
+  .v15h .ar.r::after{right:-8px; border-left-color:#9AA6B5;} .v15h .ar.l::before{left:-8px; border-right-color:#9AA6B5;}
+  .v15h .tk{position:absolute; top:26px; font-style:normal; font-size:12px; font-weight:800; color:#fff; background:#E07A12; border-radius:6px; padding:2px 8px; opacity:0;
+    animation:v15Tk 1.2s 2.0s forwards;}
+  @keyframes v15Tk{0%{opacity:1; left:0} 90%{opacity:1; left:calc(100% - 34px)} 100%{opacity:0; left:calc(100% - 34px)}}
+  .v15h .out{display:flex; flex-direction:column; gap:22px; padding-left:20px;}
+  .v15h .o{position:relative; padding:12px 14px 12px 16px; border-radius:12px; border:1.5px solid #C9CFD8; background:#fff; opacity:0;}
+  .v15h .o1{animation:v15In .4s 3.8s forwards;} .v15h .o2{animation:v15In .4s 4.4s forwards;}
+  .v15h .o i{position:absolute; left:-22px; top:50%; width:20px; height:3px; background:#9AA6B5;}
+  .v15h .o b{display:block; font-size:18px; color:#16233A;} .v15h .o span{font-size:14.5px; color:#6B7785;}
+  .v15h .an{display:grid; grid-template-columns:auto repeat(4,1fr); gap:10px; align-items:center; margin-top:20px; opacity:0; animation:v15In .5s 5.2s forwards;}
+  .v15h .an .t{font-size:15px; font-weight:800; color:#fff; background:#E07A12; padding:4px 12px; border-radius:6px;}
+  .v15h .an p{margin:0; padding:10px 14px; border-radius:10px; background:#F4F6F8; font-size:17px; color:#E07A12; font-weight:800;}
+  .v15h .an p b{color:#16233A; margin-right:10px;}
 """
+
+
+def _thumb(kind):
+    """작은 화면 썸네일 — 0 첫 화면 · 1 버튼(남색) · 2 버튼(주황) · 3 망가짐."""
+    btn = {1: '<b class="v15bt">로그인</b>', 2: '<b class="v15bt o">로그인</b>', 3: '<b class="v15er">오류 · 화면 깨짐</b>'}.get(kind, "")
+    return (f'<div class="v15th{" bad" if kind == 3 else ""}"><div class="br"><i></i><i></i><i></i></div>'
+            f'<div class="bd"><p>미니 노션</p><u></u><u class="s"></u>{btn}</div></div>')
+
+
+def commit_card():
+    """커밋 하나 뜯어 보기 — 왼쪽 그 시점의 화면, 오른쪽 커밋 카드의 네 칸이 차례로 켜짐."""
+    rows = [("고유 번호", "<tt>8fcbe80</tt>", "커밋마다 다른 번호 · 해시"),
+            ("메시지", "<b>버튼 추가</b>", "되돌릴 시점을 찾는 이름표"),
+            ("시각 · 작성자", "11월 28일 오후 · kim", "언제 · 누가 (1-5 작성자 등록)"),
+            ("바뀐 내용", '<pre><span>index.html</span>\n<em>+ &lt;button&gt;로그인&lt;/button&gt;</em></pre>', "어느 파일의 어느 줄")]
+    rs = "".join(f'<div class="rw" style="--d:{.8 + i * .7:.1f}s"><span class="k">{k}</span><div class="v">{v}</div><small>{n}</small></div>'
+                 for i, (k, v, n) in enumerate(rows))
+    return (f'<div class="v15c"><div class="v15cs"><span class="cap">이 커밋 시점의 화면</span>{_thumb(1)}</div>'
+            f'<div class="ar"></div><div class="cd"><div class="hd">커밋 한 개</div>{rs}</div></div>')
+
+
+def timeline():
+    """커밋으로 되돌리기 — v1 → v2 → v3 이 차례로 찍히고, 커밋 전 수정으로 화면이 망가짐 → 「마지막 커밋으로 되돌려 줘」 → v3 화면으로 복귀."""
+    pts = [("v1", "첫 화면 완성", 0), ("v2", "버튼 추가", 1), ("v3", "색상 수정", 2)]
+    cs = "".join(f'<div class="pt" style="--d:{.4 + i * .9:.1f}s"><span class="v">{v}</span>{_thumb(k)}<b>{m}</b><i class="dot"></i></div>'
+                 for i, (v, m, k) in enumerate(pts))
+    bad = (f'<div class="pt x" style="--d:3.4s"><span class="v">커밋 전</span>{_thumb(3)}<b>실수한 수정</b><i class="dot"></i></div>')
+    return (f'<div class="v15t"><div class="ln"></div><div class="row">{cs}{bad}</div>'
+            '<div class="back"><span>「마지막 커밋으로 되돌려 줘」</span></div>'
+            '<div class="now"><b>지금 화면</b><span>v3 「색상 수정」 상태로 돌아옴 · 커밋 전 수정만 사라짐</span></div></div>')
+
+
+def git_github():
+    """Git 과 GitHub — 내 컴퓨터의 기록(v1~v3) 중 새 커밋 v3 이 push 로 GitHub 에 복사 → 다른 컴퓨터 · Vercel 이 GitHub 에서 가져감.
+    아래 줄에 휴대폰 사진첩 · 클라우드 백업 대응."""
+    def stk(v3d, cls=""):
+        return (f'<div class="st {cls}"><div class="cm n" style="--d:{v3d}s">v3 · 색상 수정</div>'
+                '<div class="cm">v2 · 버튼 추가</div><div class="cm">v1 · 첫 화면 완성</div></div>')
+    return ('<div class="v15h"><div class="grid">'
+            f'<div class="bx pc"><div class="hd"><b>내 컴퓨터</b><small>Git · 기록을 만드는 프로그램</small></div>'
+            f'<div class="fd">미니 노션 폴더</div>{stk(1.0)}</div>'
+            '<div class="mid"><div class="lane"><span class="lb up">git push · 올리기</span><div class="ar r"></div><em class="tk">v3</em></div>'
+            '<div class="lane"><div class="ar l"></div><span class="lb">git pull · 받아 오기</span></div></div>'
+            f'<div class="bx gh"><div class="hd"><b>GitHub</b><small>인터넷 · 기록을 보관하는 서비스</small></div>{stk(3.2, "r")}</div>'
+            '<div class="out"><div class="o o1"><i></i><b>다른 컴퓨터</b><span>같은 기록을 받아 이어서 작업</span></div>'
+            '<div class="o o2"><i></i><b>Vercel</b><span>GitHub 기록으로 배포 · 1-7</span></div></div>'
+            '</div>'
+            '<div class="an"><span class="t">비유</span><p><b>휴대폰 사진첩</b>Git</p><p><b>클라우드 백업</b>GitHub</p>'
+            '<p><b>백업 올리기</b>push</p><p><b>다른 기기에서 받기</b>pull</p></div></div>')
 
 
 def slides():
@@ -214,16 +338,12 @@ def slides():
                 ("저장 목록", "기록 (log)", "언제 · 무엇을"), ("불러오기", "되돌리기", "저장 시점 복원"),
                 ("클라우드 저장", "GitHub", "다른 컴퓨터에서도")], "게임", "Git")), T),
         # ── Git · commit · 되돌리기
-        light("커밋 구성", viz2.tiles([
-            ("바뀐 내용", "어느 파일의 어느 줄"), ("메시지", "「버튼 추가」"),
-            ("시각 · 작성자", "언제 · 누가"), ("고유 번호", "8fcbe80 같은 해시")], 4)
-              + note("메시지", "무엇을 바꿨는지 한 줄 · 되돌릴 시점을 찾는 이름표"), T),
+        light("커밋 구성", commit_card(), T),
         light("커밋 기록 쌓기", stack()
               + src(("참고 · 혼잡스 「바이브코딩 한 장 지도」", "https://www.youtube.com/watch?v=HNtS6WGGhNU")), T),
         # ── GitHub · push / pull
-        light("GitHub", viz2.pair(
-            "Git", [("어디에", "내 컴퓨터"), ("하는 일", "저장 시점 기록 · 되돌리기"), ("없으면", "기록이 이 컴퓨터에만")],
-            "GitHub", [("어디에", "인터넷 (원격 저장소)"), ("하는 일", "기록 보관 · 공유 · 다른 컴퓨터에서 받기"), ("배포", "Vercel 과 연결")])
+        light("커밋으로 되돌리기", timeline(), T),
+        light("Git과 GitHub", git_github()
               + note("원격 저장소", "내 컴퓨터 밖에 둔 같은 기록 · Free 요금제도 비공개 저장소 무제한")
               + src(("GitHub plans", "https://docs.github.com/en/get-started/learning-about-github/githubs-plans")), T),
         light("Git 작업 흐름", gitflow()
