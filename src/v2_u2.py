@@ -113,9 +113,9 @@ def history():
     ]
     c = ""
     for i, (name, pic, rec, keep, how, bar) in enumerate(st):
-        d = .3 + i * 2.2
+        d = .3 + i * 1.0
         if i:
-            c += f'<i class="v2hA" style="--d:{d - .3:.1f}s">→</i>'
+            c += f'<i class="v2hA" style="--d:{d - .2:.1f}s">→</i>'
         c += (f'<div class="v2hK{" on" if i == 3 else ""}" style="--d:{d:.1f}s"><b class="n">{name}</b><div class="pic">{pic}</div>'
               f'<dl><dt>기록</dt><dd>{rec}</dd><dt>보관</dt><dd>{keep}</dd><dt>쌓이는 방식</dt><dd>{how}</dd></dl>'
               f'<div class="bar"><span>쌓이는 양</span><i style="--w:{bar}%; --d:{d + .6:.1f}s"></i></div></div>')
@@ -137,9 +137,9 @@ def sql_change():
           ("MCP 연결", "Claude Code · 2-6", "요청 · 결과 확인", "SQL 작성 · 실행 · 보고")]
     c = ""
     for i, (name, who, me, ai) in enumerate(st):
-        d = .3 + i * 2.2
+        d = .3 + i * 1.0
         if i:
-            c += f'<i class="v2hA" style="--d:{d - .3:.1f}s">→</i>'
+            c += f'<i class="v2hA" style="--d:{d - .2:.1f}s">→</i>'
         c += (f'<div class="v2hK{" on" if i == 3 else ""}" style="--d:{d:.1f}s"><b class="n">{name}</b><small class="w">{who}</small>'
               f'<div class="pic">{pic[i]}</div>'
               f'<dl><dt>사람이 하는 일</dt><dd>{me}</dd><dt>AI 가 하는 일</dt><dd>{ai}</dd></dl></div>')
