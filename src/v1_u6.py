@@ -1,6 +1,6 @@
 """1-6 바이브코딩 실습 (40분).
 
-권한 모드 → 개발계획.md(1-4)의 태스크 단위 진행 → 서버(비유: 식당 주방) → 태스크별 화면 → 수정 · 되돌리기 → 실습.
+권한 모드 → 개발계획.md(1-4)의 태스크 단위 진행 → 서버(비유: 식당 주방) → 웹의 3요소 → 수정 · 되돌리기 → 실습.
 공통 예제: labs/mini_notion/예시 (개발계획.md F1~F5 · T1~T6 · 완성본 app/). Git 개념은 1-5 에서 · 여기서는 「커밋해 줘 · 되돌려 줘」로만.
 사실 출처: code.claude.com/docs/en/permission-modes · code.claude.com/docs/en/checkpointing
 """
@@ -24,6 +24,44 @@ FILES = [("index.html", "34줄", "뼈대", "화면에 어떤 칸이 있나", "�
            ("dragSetup", "F4 · 끌어 옮기기"), ("save", "F5 · 브라우저에 저장")])]
 
 
+def _web3():
+    """웹의 3요소 — 같은 미니 노션 화면이 HTML만 → + CSS → + JS 로 바뀜. JS 칸에서 「+ 새 페이지」를 누르면 목록에 「제목 없음」이 생김.
+    코드 조각은 예시 앱(labs/mini_notion/예시/app) 의 실제 줄을 줄여 옮김. 평택대 덱 p3._web3 구조."""
+    raw = ('<div class="v16wR"><p>미니 노션</p><ul><li>시작하기</li><li>주간 회의록</li></ul><button>+ 새 페이지</button>'
+           '<h1>시작하기</h1><p>「/」 를 입력하면 블록 종류를 고를 수 있다</p></div>')
+
+    def page(js):
+        new = '<li class="nw">제목 없음</li>' if js else ""
+        on0 = ' class="on0"' if js else ' class="on"'
+        btn = '<b class="bt">+ 새 페이지</b>'
+        g = " g" if js else ""
+        return (f'<div class="v16wS"><div class="sd"><i>미니 노션</i><ul><li{on0}>시작하기</li><li>주간 회의록</li>{new}</ul>{btn}</div>'
+                f'<div class="mn"><h1>{"<span class=t0>시작하기</span><span class=t1>제목 없음</span>" if js else "시작하기"}</h1>'
+                f'<div class="bk{g}"><u></u>보고서 초안</div><div class="bk{g}">회의 메모</div></div></div>')
+    code_h = """<aside>
+  <ul id="pages"></ul>
+  <button id="newPage">
+    + 새 페이지</button>
+</aside>
+<main><h1 id="title"></h1></main>"""
+    code_c = """body { display: grid;
+  grid-template-columns: 240px 1fr; }
+aside { background: #f7f7f5; }
+h1 { font-size: 34px; }"""
+    code_j = """newPage.onclick = () => {
+  state.pages.push(새 페이지);
+  save();     // 브라우저에 저장
+  render();   // 목록 다시 그리기
+};"""
+    cols = [("HTML만", "뼈대 · 내용", "index.html", raw, code_h), ("+ CSS", "모양 · 배치 · 색", "style.css", page(False), code_c),
+            ("+ JS", "누르면 동작 · 저장", "app.js", page(True), code_j)]
+    return '<div class="v16w">' + "".join(
+        f'<div class="v16wc{" on" if i == 2 else ""}" style="--d:{.3 + i * 2:.1f}s"><div class="v16wh"><b>{h}</b><span>{sub}</span></div>'
+        f'<div class="v16wb"><div class="br"><i></i><i></i><i></i><span>미니 노션</span></div>{pg}</div>'
+        f'<pre class="v16wk"><em>{f}</em>\n{esc(code)}</pre></div>'
+        for i, (h, sub, f, pg, code) in enumerate(cols)) + "</div>"
+
+
 def _code():
     """화면 뒤의 코드 — 개발계획.md → 파일 세 개(뼈대 · 모양 · 동작)가 차례로 · 마지막에 데이터 모양. 예시 앱 실제 이름 · 줄 수."""
     cols = ""
@@ -42,6 +80,40 @@ def _code():
 
 
 CSS = """
+  /* 1-6 · 웹의 3요소 (v16w) — 평택대 p3w 구조 */
+  .v16w{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; align-items:start;}
+  .v16wc{display:flex; flex-direction:column; gap:10px; opacity:0; animation:v16wIn .5s var(--d) forwards;}
+  @keyframes v16wIn{from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none}}
+  .v16wh{display:flex; align-items:baseline; gap:10px;} .v16wh b{font-size:21px; color:#16233A;} .v16wh span{font-size:14px; color:#6B7785;}
+  .v16wc.on .v16wh b{color:#E07A12;}
+  .v16wb{border:1.5px solid #C9CFD8; border-radius:10px; overflow:hidden; background:#fff; height:250px; box-shadow:0 2px 8px rgba(0,0,0,.06);}
+  .v16wb .br{display:flex; align-items:center; gap:5px; height:26px; padding:0 10px; background:#EEF1F4; border-bottom:1px solid #D9DDE3;}
+  .v16wb .br i{width:9px; height:9px; border-radius:50%; background:#C9CFD8;}
+  .v16wb .br span{margin-left:8px; font-size:11.5px; color:#6B7785;}
+  .v16wR{font-family:"Times New Roman",Times,serif; color:#000; padding:8px 12px; font-size:14px; line-height:1.35;}
+  .v16wR p{margin:0 0 4px;} .v16wR ul{margin:0 0 4px; padding-left:20px;} .v16wR button{font:inherit; font-size:13px; margin:2px 0 6px;}
+  .v16wR h1{font-size:24px; margin:4px 0 6px; font-family:inherit;}
+  .v16wS{display:grid; grid-template-columns:42% 1fr; height:224px; font-size:12.5px; color:#37352F;}
+  .v16wS .sd{background:#F7F7F5; border-right:1px solid #EBEBEA; padding:10px 8px;}
+  .v16wS .sd > i{display:block; font-style:normal; font-weight:700; font-size:12.5px; padding:0 6px 8px;}
+  .v16wS ul{list-style:none; margin:0; padding:0;}
+  .v16wS li{padding:4px 6px; border-radius:5px; white-space:nowrap;}
+  .v16wS li.on, .v16wS li.on0{background:#E3E2DF; font-weight:600;}
+  .v16wS li.on0{animation:v16wOff .3s calc(var(--d) + 1.4s) forwards;}
+  .v16wS li.nw{opacity:0; background:#E3E2DF; font-weight:600; animation:v16wNew .4s calc(var(--d) + 1.4s) forwards;}
+  .v16wS .bt{display:block; font-weight:400; color:#6B6B6B; padding:4px 6px; margin-top:4px; border-radius:5px;}
+  .v16wc.on .v16wS .bt{animation:v16wClk .5s calc(var(--d) + .8s) 2 alternate;}
+  .v16wS .mn{padding:12px 12px;} .v16wS h1{font-size:20px; margin:0 0 10px; position:relative; height:26px;}
+  .v16wS h1 span{position:absolute; left:0; top:0; white-space:nowrap;} .v16wS h1 .t1{opacity:0; color:#C4C4C2; animation:v16wNew .3s calc(var(--d) + 1.4s) forwards;}
+  .v16wS h1 .t0{animation:v16wGone .3s calc(var(--d) + 1.4s) forwards;}
+  .v16wS .bk{padding:3px 0; font-size:12px;} .v16wS .bk.g{animation:v16wGone .3s calc(var(--d) + 1.4s) forwards;}
+  .v16wS .bk u{display:inline-block; width:10px; height:10px; border:1.5px solid #9B9A97; border-radius:2px; margin-right:6px; vertical-align:-1px;}
+  @keyframes v16wClk{to{background:#F6C99A; color:#16233A}}
+  @keyframes v16wNew{to{opacity:1}} @keyframes v16wGone{to{opacity:0}} @keyframes v16wOff{to{background:transparent; font-weight:400}}
+  .v16wk{margin:0; background:#1E1E2E; color:#E6E6E6; border-radius:10px; padding:10px 14px; font-family:var(--mono); font-size:12.5px; line-height:1.55; white-space:pre; overflow:hidden;}
+  .v16wk em{font-style:normal; color:#F2B880; font-weight:700;}
+  @media print{.v16wc{animation:none; opacity:1} .v16wS li.nw, .v16wS h1 .t1{animation:none; opacity:1} .v16wS h1 .t0, .v16wS .bk.g{animation:none; opacity:0}
+    .v16wS li.on0{animation:none; background:transparent; font-weight:400}}
   /* 1-6 · 화면 뒤의 코드 (v16c) */
   .v16top{display:flex; gap:12px; align-items:center; font-size:16px; font-weight:800; color:#16233A; opacity:0; animation:v16In .4s var(--d) forwards;}
   .v16top span{background:#F4F6F9; border:1.5px solid #C9D6E6; border-radius:8px; padding:5px 12px;} .v16top span.cc{background:#16233A; color:#fff; border-color:#16233A;}
@@ -122,28 +194,8 @@ def slides():
         light("서버 관련 요청", viz2.tiles([
             ("파일 수정 뒤", "브라우저 새로고침"), ("주소 접속 불가", "「서버 다시 띄워 줘」"),
             ("포트 충돌", "「다른 포트로 띄워 줘」"), ("종료", "「서버 꺼 줘」")], 2), T),
-        # ── 태스크별 화면 (실제 캡처)
-        light("화면 뒤의 코드", _code(), T),
-        light("T1 화면 뼈대 · 페이지 목록", shot("notion_empty.webp", "T1 직후 · 새 페이지를 연 화면", [
-            ("F1", "왼쪽 페이지 목록 · 「+ 새 페이지」"), ("새 페이지", "「제목 없음」 · 목록에 바로 추가"), ("테스트 케이스", "새 페이지 → 목록 맨 아래에 생김")]), T),
-        light("T2 블록 편집", shot("notion_main.webp", "T2 직후 · 주간 회의록 페이지", [
-            ("F2", "제목 · 글 · 체크 상자 · 구분선"), ("엔터", "아래에 새 블록 · 체크 상자 다음은 체크 상자"), ("테스트 케이스", "체크하면 줄이 그어지고 회색")]), T),
-        light("T3 「/」 메뉴", shot("notion_slash.webp", "T3 직후 · 빈 블록에 「/」 입력", [
-            ("F3", "빈 블록에 「/」 → 메뉴"), ("고르기", "화살표 · 엔터 · 마우스 클릭"), ("테스트 케이스", "「체크 상자」 → 그 블록이 체크 상자로")]), T),
-        light("T4 블록 끌어 옮기기", viz2.tiles([
-            ("손잡이", "블록 왼쪽 「⋮⋮」 · 마우스를 올리면 보임"), ("끌어 놓기", "놓을 자리 위에 파란 줄"), ("새로고침", "바뀐 순서 그대로")], 3)
-              + flow([("손잡이 잡기", "「발표 자료 검토」"), ("할 일 맨 위로 끌기", "파란 줄 확인"), ("놓기", ""), ("새로고침", "첫 번째 할 일 그대로")], hl=2), T),
-        light("T5 저장", viz2.tiles([
-            ("F5", "입력할 때마다 저장"), ("저장 위치", "이 브라우저 · localStorage"), ("테스트 케이스", "새로고침해도 쓴 내용 그대로")], 3)
-              + flow([("체크 상자 추가", "「주간 회의록」 · 「보고서 초안」"), ("새로고침", "⌘R · F5"), ("다시 보기", "「보고서 초안」 그대로"),
-                      ("다른 브라우저", "보이지 않음 · 정상")], hl=2), T),
-        light("T6 완료 기준 점검 · 모바일 화면", shot("notion_mobile.webp", "폭 390px · 페이지 목록이 위로", [
-            ("완료 기준", "390px 에서 가로 스크롤 없음"), ("확인 방법", "브라우저 창을 좁히기"), ("수정 요청 예", "「폭 390px 에서 가로 스크롤이 생겨」")]), T),
-        light("완료 기준 확인", table(["개발 계획 완료 기준", "확인 방법", "결과"], [
-            ["페이지 목록 · 「시작하기」가 첫 화면", "주소 열기", "✓"], ["체크 상자 추가 후 새로고침해도 남음", "「주간 회의록」에 「보고서 초안」 → 새로고침", "✓"],
-            ["「/」 → 체크 상자로 바뀜", "빈 블록에 「/」 → 체크 상자", "✓"], ["끌어 옮긴 순서 유지", "세 번째 블록 → 맨 위 → 새로고침", "✓"],
-            ["390px 에서 가로 스크롤 없음", "창 좁히기", "✓"]])
-              + note("확인 방식", "완료 기준 다섯 줄 하나씩 대조"), T),
+        # ── 웹의 3요소
+        light("웹의 3요소", _web3(), T),
         # ── 마음에 안 들 때
         light("오류 해결 과정 비교", viz2.pair(
             "검색으로 해결", [("① 오류 메시지 복사", "빨간 글씨 그대로"), ("② 검색", "구글 · Stack Overflow"), ("③ 비슷한 질문 찾기", "영어 답변 해석"),
@@ -166,7 +218,7 @@ def slides():
         light("Git으로 되돌리기", flow([
             ("수정 요청", "디자인 변경"), ("확인", "전보다 나빠짐"), ("「마지막 커밋 상태로 되돌려 줘」", ""), ("다시 요청", "수정 요청 세 칸 형식")], hl=2)
               + chat([("me", "방금 바꾼 디자인이 전보다 별로야. 마지막 커밋 상태로 되돌려 줘."),
-                      ("ai", "마지막 커밋(T5 저장) 뒤에 고친 style.css 를 되돌렸다.")], "되돌리기 대화 예")
+                      ("ai", "마지막 커밋 뒤에 고친 style.css 를 되돌렸다.")], "되돌리기 대화 예")
               + note("커밋", "태스크마다 남긴 커밋이 돌아갈 세이브 포인트"), T),
         light("체크포인트와 Git", viz2.pair(
             "체크포인트 (/rewind · Esc 두 번)", [("남는 때", "요청마다 자동"), ("되감기", "코드 · 대화 · 둘 다"),
@@ -193,7 +245,7 @@ def slides():
         tstep(T, 3, "완료 기준 대조", T, need="VS Code Claude Code 패널 캡처 · 첫 태스크 작업 보고 (만든 것 · 아직 없는 것)",
               rows=[("보고", "만든 것 · 아직 없는 것"), ("대조", "개발계획.md 완료 기준"), ("아직", "저장 전 · 새로고침하면 사라짐 → T5")]),
         tstep(T, 4, "커밋해 줘", T, ask=("Claude Code 입력창", "커밋해 줘"),
-              rows=[("메시지", "Claude Code 가 작성"), ("커밋", "태스크마다 하나"), ("다음", "T2 → 같은 순서 · T6 까지")]),
+              rows=[("메시지", "Claude Code 가 작성"), ("커밋", "태스크마다 하나"), ("다음", "T2 → 같은 순서 · 마지막 태스크까지")]),
         light("실습 1-6 확인", code("커밋 기록 · 예", esc(
             "e41a0b2  T6 모바일 폭 정리\n"
             "c9d3f17  T5 새로고침 뒤 저장 유지\n"
