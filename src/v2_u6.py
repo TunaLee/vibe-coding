@@ -1,158 +1,298 @@
-"""2-6 외부 API · 키.
+"""2-6 MCP.
 
-API 키(무엇 · 비유 출입증 · 보관 위치 · .env · .gitignore) → 공공데이터포털 특일 정보 발급 → 요청 · 응답
-→ 서버 함수(키 숨기기 · 장면) → 요청 예 → 실습.
-요청 · 응답 · API 개념은 2-2 · MCP 는 2-7.
-사실 출처: data.go.kr/data/15012690/openapi.do · vercel.com/docs/functions · supabase.com/docs/guides/getting-started/mcp
-· code.claude.com/docs/en/mcp
+배경(AI 는 대화창 안 · 사람이 복사 · 붙여넣기) → 등장 계기(회사마다 따로 만든 연결 · 연결 수가 곱으로 늘어남 → 2024-11 MCP 공개 → 확산)
+→ 비유(USB-C · 공식 문서) → 구조(호스트 · 클라이언트 · 서버 · 도구 · 리소스 · 프롬프트) → 동작(도구 목록 읽기 → 고르기 → 실행)
+→ API 와 MCP → 쓸 만한 MCP → 연결 방법 · 안전 설정 → 캘린더 일정 → 할 일 → 실습.
+사실 출처
+- anthropic.com/news/model-context-protocol (2024-11-25 · 「Every new data source requires its own custom implementation」)
+- openai.com/index/chatgpt-plugins (2023-03-23) · openai.com/index/function-calling-and-other-api-updates (2023-06-13) · claude.com/blog/tool-use-ga (2024-05-30)
+- openai.com/index/new-tools-and-features-in-the-responses-api (2025-05-21 원격 MCP) · blogs.microsoft.com 2025-05-19 (Steering Committee)
+- modelcontextprotocol.io/registry/about (2025-09-08 preview) · anthropic.com/news/donating-the-model-context-protocol… (2025-12-09 AAIF)
+- modelcontextprotocol.io/docs/getting-started/intro (USB-C) · /docs/learn/architecture (Host · Client · Server · Tools · Resources · Prompts)
+- code.claude.com/docs/en/mcp (claude mcp add --transport http · scope · claude.ai 커넥터 자동 표시)
+- claude.com/docs/connectors/google/calendar (읽기 전용) · supabase.com/docs/guides/getting-started/mcp · github.com/microsoft/playwright-mcp
+- github.com/upstash/context7 · developers.figma.com/docs/figma-mcp-server · developers.notion.com/docs/mcp · github.com/github/github-mcp-server
 """
 import viz2
-from deck import ba, flow, lab, light
+from deck import flow, lab, light
 from hx import checks, code, esc, note
 from stats_hx import src
 import v2scene
-from v2kit import brief, chat, codemap, shot
+from v2scene import agent, tools
+from v2kit import brief
+from v3kit import phmap
 
 T = "2-6"
-GEN = ("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")
-HOLI = ("공공데이터포털 · 한국천문연구원 특일 정보", "https://www.data.go.kr/data/15012690/openapi.do")
-FUNC = ("Vercel · Functions", "https://vercel.com/docs/functions")
-CSS = """
-  /* 2-6 · push 와 .env (v26p) */
-  .v26p{display:grid; grid-template-columns:1fr 220px 1fr; gap:22px; align-items:center; margin:6px 0 14px;}
-  .v26p .pn{border:1.5px solid #C9CFD8; border-radius:12px; background:#fff; padding:10px 14px; display:flex; flex-direction:column; gap:7px; min-height:230px;}
-  .v26p .pn .h{font-size:17px; font-weight:800; color:#16233A; margin-bottom:4px;}
-  .v26p .f{display:flex; align-items:center; gap:10px; border:1px solid #E3E7EC; border-radius:8px; padding:7px 12px; background:#F6F8FA;}
-  .v26p .f b{font-family:var(--mono); font-size:15px; color:#1F3A5F;} .v26p .f em{margin-left:auto; font-style:normal; font-size:12.5px; font-weight:800; border-radius:8px; padding:2px 8px;}
-  .v26p .f.key em{color:#B85A00; background:#FFE3C4;}
-  .v26p .f.nw{opacity:0; animation:v26in .35s var(--d) forwards;}
-  .v26p .f.no{opacity:0; border-style:dashed; background:#FDECEA; animation:v26in .35s var(--d) forwards;} .v26p .f.no b{text-decoration:line-through; color:#C0392B;} .v26p .f.no em{color:#C0392B;}
-  .v26p .mid{display:flex; flex-direction:column; gap:16px; align-items:stretch;}
-  .v26p .gi{border:2px solid #F28C28; background:#FFF8F0; border-radius:10px; padding:8px 12px; opacity:0; animation:v26in .35s var(--d) forwards;}
-  .v26p .gi span{display:block; font-size:13px; font-weight:800; color:#E07A12;} .v26p .gi code{font-size:17px; font-weight:700;}
-  .v26p .cmd{text-align:center; font-family:var(--mono); font-size:16px; font-weight:700; color:#fff; background:#1F3A5F; border-radius:10px; padding:8px; opacity:0; animation:v26in .35s var(--d) forwards;}
-  .v26p .gh{border-color:#1F3A5F;}
-  /* 2-6 · 서버 함수의 키 보호 (v26k) */
-  .v26k{grid-template-columns:400px 1fr 260px 1fr 220px;}
-  .v26k .warn{margin-top:8px; font-size:14px; font-weight:800; color:#C0392B; background:#FDECEA; border-radius:8px; padding:6px 10px; opacity:0; animation:v26in .35s var(--d) forwards;}
-  .v26k .nk{margin-top:6px; font-size:12.5px; font-weight:800; color:#1E7B45; opacity:0; animation:v26in .35s var(--d) forwards;}
-  .v26k .cl.ky{font-size:11.5px;}
-  .v26k .v2sBx.db .cl{opacity:.25; animation:v2sLit .35s var(--d) forwards;}
-  @keyframes v26in{from{opacity:0} to{opacity:1}}
-  @media print{.v26p .f.nw,.v26p .f.no,.v26p .gi,.v26p .cmd,.v26k .warn,.v26k .nk{opacity:1; animation:none}}
-"""
+ANN = ("Anthropic · Introducing the Model Context Protocol", "https://www.anthropic.com/news/model-context-protocol")
+AAIF = ("Anthropic · Donating MCP · Agentic AI Foundation", "https://www.anthropic.com/news/donating-the-model-context-protocol-and-establishing-of-the-agentic-ai-foundation")
+INTRO = ("modelcontextprotocol.io · What is MCP", "https://modelcontextprotocol.io/docs/getting-started/intro")
+ARCH = ("modelcontextprotocol.io · Architecture", "https://modelcontextprotocol.io/docs/learn/architecture")
+CC = ("Claude Code · MCP", "https://code.claude.com/docs/en/mcp")
 SMCP = ("Supabase · MCP", "https://supabase.com/docs/guides/getting-started/mcp")
+GCAL = ("Claude · Google Calendar connector", "https://claude.com/docs/connectors/google/calendar")
+
+def relay():
+    """MCP 없이 — 사람이 복사 · 붙여 넣기를 오가는 줄 / MCP — 한 번 요청 · 직접 실행. 줄 안 칸이 차례로 나타남."""
+    def row(head, steps, d0, hl):
+        out = []
+        for i, (who, x, hand) in enumerate(steps):
+            d = d0 + i * .35
+            if i:
+                out.append(f'<i class="v2u3ra" style="--d:{d - .12:.2f}s">→</i>')
+            out.append(f'<div class="v2u3rs{" hand" if hand else ""}" style="--d:{d:.2f}s"><b>{who}</b><span>{x}</span></div>')
+        return f'<div class="v2u3rr{" on" if hl else ""}"><div class="v2u3rh">{head}</div><div class="v2u3rw">{"".join(out)}</div></div>'
+    return ('<div class="v2u3relay">'
+            + row("MCP 없이", [("Claude", "SQL 작성", False), ("나", "복사", True), ("Supabase 화면", "붙여 넣기 · 실행", True),
+                              ("나", "오류 문구 복사", True), ("Claude", "수정 SQL", False)], .3, False)
+            + row("MCP 연결", [("나", "「tasks 표 만들어 줘」", False), ("Claude Code", "SQL 작성", False),
+                              ("Supabase", "직접 실행 · 결과", False), ("Claude Code", "오류면 다시 고침", False)], 2.3, True)
+            + '<div class="v2u3cnt"><span class="c1">사람 손 3번 · 오류마다 반복</span><span class="c2">사람 손 0번 · 요청 한 줄</span></div>'
+            + "</div>")
 
 
-def push_scene():
-    """push 와 .env — 내 폴더 파일 4개 · .gitignore · GitHub 저장소. 저장소에 파일이 하나씩 생기고 .env 자리는 「없음」."""
-    loc = [("app.js", ""), ("api/holidays.js", ""), (".gitignore", ""), (".env", "key")]
-    lf = "".join(f'<div class="f {k}"><b>{n}</b>{"<em>키</em>" if k else ""}</div>' for n, k in loc)
-    gh = [("app.js", 1.6), ("api/holidays.js", 1.9), (".gitignore", 2.2)]
-    rf = "".join(f'<div class="f nw" style="--d:{d}s"><b>{n}</b></div>' for n, d in gh)
-    rf += '<div class="f no" style="--d:2.8s"><b>.env</b><em>없음 · 제외됨</em></div>'
-    return ('<div class="v26p"><div class="pn"><div class="h">내 컴퓨터 · 프로젝트 폴더</div>' + lf + '</div>'
-            '<div class="mid"><div class="gi" style="--d:.6s"><span>.gitignore</span><code>.env</code></div>'
-            '<div class="cmd" style="--d:1.2s">git push</div></div>'
-            '<div class="pn gh"><div class="h">GitHub 저장소</div>' + rf + '</div></div>')
+def cal_to_tasks():
+    """Google 캘린더 일정 → Claude Code(MCP 두 개) → 팀 할 일 보드. 칸은 제자리 · 읽힌 일정과 추가된 행이 같은 색으로 켜짐."""
+    days = [("월", "11/30"), ("화", "12/1"), ("수", "12/2"), ("목", "12/3"), ("금", "12/4")]
+    ev = {0: ("주간 회의", "c1", 1.7), 2: ("고객사 미팅", "c2", 1.9), 4: ("보고서 마감", "c3", 2.1)}
+    cols = ""
+    for i, (w, dt) in enumerate(days):
+        e = ev.get(i)
+        blk = f'<div class="ev {e[1]}" style="--d:{e[2]}s">{e[0]}</div>' if e else ""
+        cols += f'<div class="v2cD"><span>{w}</span><b>{dt}</b>{blk}</div>'
+    cal = ('<div class="v2cW"><div class="v2cH"><i class="g"></i>Google 캘린더 · 이번 주</div>'
+           f'<div class="v2cWk">{cols}</div></div>')
+    def msg(cls, html_, d):
+        return f'<div class="m {cls}" style="--d:{d}s">{html_}</div>'
+    cc = ('<div class="v2cW"><div class="v2cH"><i class="o"></i>Claude Code</div><div class="v2cChat">'
+          + msg("me", "이번 주 캘린더 일정을 팀 보드 할 일에 넣어 줘", .6)
+          + msg("tool l", "<em>Google Calendar MCP</em> 이번 주 일정 조회", 1.3)
+          + msg("ai", "일정 3건 · 날짜를 기한으로 할 일 3건 추가할까요?", 2.6)
+          + msg("me", "응", 3.3)
+          + msg("tool r", "<em>Supabase MCP</em> tasks 에 3행 추가", 3.8)
+          + msg("ai", "완료 · 할 일 3건 추가", 5.2) + '</div></div>')
+    rows = [("주간 보고서 작성", "11/27", "진행 중", "", 0), ("교육 자료 준비", "11/25", "할 일", "", 0),
+            ("주간 회의", "11/30", "할 일", "c1", 4.2), ("고객사 미팅", "12/2", "할 일", "c2", 4.5), ("보고서 마감", "12/4", "할 일", "c3", 4.8)]
+    tr = "".join(f'<tr class="{"nw " + c if c else ""}" style="--d:{d}s"><td>{t}{"<small>캘린더</small>" if c else ""}</td><td>{du}</td><td>{st}</td></tr>'
+                 for t, du, st, c, d in rows)
+    board = ('<div class="v2cW"><div class="v2cH"><i class="b"></i>팀 할 일 보드 · tasks</div>'
+             f'<table class="v2cT"><thead><tr><th>할 일</th><th>기한</th><th>상태</th></tr></thead><tbody>{tr}</tbody></table></div>')
+    plug = lambda side, name, d: f'<div class="v2cP {side}" style="--d:{d}s"><b>MCP</b><span>{name}</span></div>'
+    return ('<div class="v2c">' + cal + plug("l", "읽기", 1.3) + cc + plug("r", "쓰기", 3.8) + board + '</div>')
 
 
-def key_scene():
-    """서버 함수의 키 보호 — 브라우저(키 없는 요청) · 서버 함수(키를 붙여 요청) · 공공데이터포털. 칸은 제자리."""
-    br = ('<div class="v2sBr"><div class="bar"><i></i><i></i><i></i><span>team-board.vercel.app</span></div>'
-          '<div class="app"><div class="ah">할 일 추가</div><div class="add"><span class="in">기한 · 2026-12-25</span><span class="bt" style="--d:.5s">저장</span></div>'
-          '<div class="warn" style="--d:5.0s">공휴일 · 기독탄신일 · 저장 안 됨</div></div>'
-          '<div class="net"><div class="nh"><b>Network</b><span>Name</span><span>Method</span><span>Status</span></div>'
-          '<div class="nr" style="--d:.9s"><span class="fn">holidays?year=2026&amp;month=12</span><span>GET</span>'
-          '<span class="st"><i class="pd" style="--d:4.3s">(pending)</i><b class="ok" style="--d:4.3s">200 OK</b></span></div>'
-          '<div class="nk" style="--d:4.6s">요청 · 응답 어디에도 키 없음</div></div></div>')
-    fn = ('<div class="v2sBx srv"><div class="bh"><b>서버 함수</b><small>api/holidays.js · Vercel</small></div>'
-          '<div class="cl" style="--d:1.6s">GET /api/holidays</div>'
-          '<div class="cl ky" style="--d:2.1s">ServiceKey = process.env.HOLIDAY_API_KEY</div>'
-          '<div class="cl" style="--d:3.8s">공휴일만 골라 전달</div></div>')
-    gov = ('<div class="v2sBx db"><div class="bh"><b>공공데이터포털</b><small>특일 정보</small></div>'
-           '<div class="cl" style="--d:2.6s">getRestDeInfo · 2026 · 12</div>'
-           '<div class="cl" style="--d:3.1s">20261225 · 기독탄신일 · Y</div></div>')
-    return ('<div class="v2s v26k">' + br + v2scene.wire("① 연 · 월만", "④ 공휴일 목록", .9, 3.8) + fn
-            + v2scene.wire("② 연 · 월 + 키", "③ 응답", 2.1, 3.1) + gov + '</div>')
+def timeline():
+    """연결 방식의 변화 — 점이 왼쪽부터 차례로 켜짐 · 2024-11 MCP 공개가 주황."""
+    ev = [("2023-03", "ChatGPT Plugins", "ChatGPT 전용 추가 기능", ""), ("2023-06", "Function calling", "OpenAI API 형식", ""),
+          ("2024-05", "Claude tool use", "Anthropic API 형식", ""), ("2024-11", "MCP 공개", "Anthropic · 오픈 표준", "on"),
+          ("2025-05", "OpenAI · Microsoft", "원격 MCP 지원 · 운영 위원회", ""), ("2025-12", "Linux Foundation", "Agentic AI Foundation 에 기증", "")]
+    c = "".join(f'<div class="e {k}" style="--d:{.3 + i * .5:.1f}s"><i></i><span class="y">{y}</span><b>{n}</b><small>{x}</small></div>'
+                for i, (y, n, x, k) in enumerate(ev))
+    return (f'<div class="v27tl"><div class="ax"></div>{c}</div>'
+            '<div class="v27grp"><span style="--d:.3s">회사마다 따로 만든 연결</span><span class="on" style="--d:1.8s">하나의 공개 규격</span></div>')
+
+
+def wires():
+    """AI 앱 3 × 서비스 4 — 따로 연결하면 선 12개(회색이 하나씩 그어짐) → MCP 를 사이에 두면 선 7개(주황)."""
+    apps, svcs = ["Claude", "ChatGPT", "사내 챗봇"], ["Google 캘린더", "Supabase", "GitHub", "Notion"]
+    W, H = 1120, 300
+    ax, sx = 150, 970
+    ay = [70 + i * 80 for i in range(3)]
+    sy = [40 + i * 74 for i in range(4)]
+    s = ""
+    for side, xs, ys, names in (("l", ax, ay, apps), ("r", sx, sy, svcs)):
+        for y, n in zip(ys, names):
+            x0 = xs - 130 if side == "l" else xs
+            s += (f'<rect x="{x0}" y="{y - 22}" width="130" height="44" rx="10" fill="#fff" stroke="#1F3A5F" stroke-width="2"/>'
+                  f'<text x="{x0 + 65}" y="{y + 6}" text-anchor="middle" class="v27t">{n}</text>')
+    k = 0
+    for i, y1 in enumerate(ay):
+        for j, y2 in enumerate(sy):
+            s += (f'<line class="v27a" x1="{ax}" y1="{y1}" x2="{sx}" y2="{y2}" style="--d:{.3 + k * .12:.2f}s"/>')
+            k += 1
+    mx = (ax + sx) / 2
+    s += (f'<g class="v27m" style="--d:3.4s"><rect x="{mx - 70}" y="20" width="140" height="260" rx="16" fill="#FFF3E0" stroke="#F28C28" stroke-width="3"/>'
+          f'<text x="{mx}" y="150" text-anchor="middle" class="v27mt">MCP</text><text x="{mx}" y="176" text-anchor="middle" class="v27ms">하나의 규격</text></g>')
+    for i, y in enumerate(ay):
+        s += f'<line class="v27b" x1="{ax}" y1="{y}" x2="{mx - 70}" y2="{y + 0}" style="--d:{3.8 + i * .15:.2f}s"/>'
+    for j, y in enumerate(sy):
+        s += f'<line class="v27b" x1="{mx + 70}" y1="{y}" x2="{sx}" y2="{y}" style="--d:{4.3 + j * .15:.2f}s"/>'
+    cnt = ('<div class="v27cnt"><span class="a" style="--d:2s">따로 연결 · 3 × 4 = <b>12개</b></span>'
+           '<span class="b" style="--d:5s">MCP · 3 + 4 = <b>7개</b></span></div>')
+    return f'<svg class="v27w" viewBox="0 0 {W} {H}">{s}</svg>{cnt}'
+
+
+def arch():
+    """구조 — 호스트(Claude Code) 안 클라이언트 3개 · 서버 3개 · 서버가 내놓는 것 세 가지."""
+    rows = [("Supabase MCP 서버", "표 만들기 · SQL 실행"), ("Playwright MCP 서버", "브라우저 열기 · 클릭"), ("Google Calendar 서버", "일정 읽기")]
+    cl = "".join(f'<div class="cli" style="--d:{.6 + i * .3:.1f}s">MCP 클라이언트</div>' for i in range(3))
+    sv = "".join(f'<div class="srv" style="--d:{.8 + i * .3:.1f}s"><b>{n}</b><span>{x}</span></div>' for i, (n, x) in enumerate(rows))
+    return (f'<div class="v27ar"><div class="host" style="--d:.3s"><div class="h">호스트 · Claude Code</div>{cl}</div>'
+            f'<div class="lk">{"".join("<i></i>" for _ in range(3))}</div><div class="svs">{sv}</div></div>')
 
 
 def slides():
+    supa_tools = tools([("list_tables", "표 목록 보기"), ("execute_sql", "SQL 실행"), ("apply_migration", "표 만들기 · 바꾸기")],
+                       "execute_sql", 1.3, 2.0)
     return [
-        light("앱이 모르는 정보", viz2.pair(
-            "공휴일을 직접 입력", [("목록", "해마다 사람이 입력"), ("대체공휴일 · 임시공휴일", "발표 뒤 다시 수정"), ("틀리면", "공휴일이 기한으로 들어감")],
-            "가진 곳에 묻기 · 외부 API", [("목록", "한국천문연구원 특일 정보"), ("갱신", "제공하는 쪽이 관리"), ("앱이 할 일", "연도 · 월을 보내고 답 받기")])
-              + note("외부 API", "다른 회사 · 기관 서버가 열어 둔 창구 · 요청 · 응답은 2-2 와 같음"), T),
-        # ── API 키
-        light("API 키", viz2.tiles([
-            ("API 키", "서비스가 호출한 사람을 알아보는 비밀 문자열"), ("노출되면", "남이 내 이름으로 호출 · 한도 소진 · 요금"),
-            ("보관", ".env 파일 · 서버에서만 읽기")], 3)
-              + code("모양 · 예 (가짜 값)", esc("HOLIDAY_API_KEY=a1b2c3d4e5f6...")), T),
-        light("출입증 비유", shot("v2_u6_key.webp", "출입증 · 잠긴 서랍에 보관", [
-            ("출입증", "API 키"), ("출입문", "외부 서비스"), ("잠긴 서랍", ".env · 서버"), ("게시판에 붙인 출입증", "코드 · GitHub 에 적은 키")])
-              + src(GEN), T),
-        light("키를 두는 곳", viz2.pair(
-            "코드에 직접", [("위치", "app.js 안 문자열"), ("GitHub 에 올리면", "누구나 검색 · 복사"), ("키 교체", "코드 수정 · 다시 커밋")],
-            ".env 파일", [("위치", "프로젝트 폴더의 .env"), ("GitHub 에 올리면", ".gitignore 로 제외 · 안 올라감"), ("키 교체", ".env 한 줄")])
-              + note("환경변수", "코드 밖에 둔 설정 값 · 코드는 이름으로만 읽음"), T),
-        light(".env · .gitignore", codemap([
-            (".env", "비밀 값을 적는 파일"),
-            ("HOLIDAY_API_KEY=발급받은_키", "이름 = 값 · 한 줄에 하나"),
-            (".gitignore", "Git 이 무시할 파일 목록"),
-            (".env", "이 줄 하나 · .env 는 커밋 · push 제외"),
-            ("process.env.HOLIDAY_API_KEY", "코드에서 이름으로 값 읽기")],
-            ask="공휴일 API 키를 .env 에 두고 .gitignore 에 추가해 줘", title="파일 · 코드 · 예")
-              + note("확인", "git status 에 .env 가 안 보이면 정상"), T),
-        light("push 와 .env", push_scene()
-              + note(".gitignore", "목록에 있는 파일은 커밋 · push 에서 빠짐 · 키는 내 컴퓨터에만"), T),
-        # ── 공휴일 API
-        light("공휴일 API 발급", flow([("공공데이터포털", "data.go.kr · 회원가입"), ("검색", "「한국천문연구원 특일 정보」"),
-                                     ("활용신청", "목적 한 줄 · 개발계정"), ("인증키 확인", "마이페이지 · 인증키"), (".env", "HOLIDAY_API_KEY")], hl=3)
-              + note("비용", "무료 · 인증키 반영까지 시간이 걸릴 수 있음")
-              + src(HOLI), T),
-        light("공휴일 API 요청 · 응답", codemap([
-            ("SpcdeInfoService · 공휴일 정보 조회", "한국천문연구원 특일 정보 · 공휴일"),
-            ("solYear=2026 · solMonth=12", "보낼 값 · 연 · 월"),
-            ("ServiceKey=…", "인증키 · .env 의 값"),
-            ("locdate 20261225", "받는 값 · 날짜"),
-            ("dateName 기독탄신일", "공휴일 이름"),
-            ("isHoliday Y", "공공기관 휴일 여부")],
-            title="요청 · 응답 · 예")
-              + note("쓰는 곳", "기한으로 고른 날이 공휴일이면 「공휴일 · 이름」 경고 · 저장 막기")
-              + src(HOLI), T),
-        # ── 서버 함수
-        light("키 노출 경로", viz2.pair(
-            "브라우저 → 공공데이터포털", [("키 위치", "앱 코드 · 브라우저에 내려감"), ("보이는 곳", "개발자 도구 · 네트워크 탭"),
-                                      ("결과", "누구나 키 복사")],
-            "브라우저 → 서버 함수 → 공공데이터포털", [("키 위치", "Vercel 서버 · 환경변수"), ("보이는 곳", "없음 · 결과만 내려감"),
-                                              ("결과", "키 노출 없음")]), T),
-        light("서버 함수의 키 보호", key_scene()
-              + codemap([("api/holidays.js", "Vercel 이 서버에서 실행하는 파일"),
-                         ("export function GET(request)", "주소로 요청이 오면 실행"),
-                         ("process.env.HOLIDAY_API_KEY", "키는 서버 안에서만 읽기")])
-              + src(FUNC), T),
-        light("공휴일 차단 대화 예시", chat([
-            ("me", "기한이 공휴일이면 저장을 막아 줘. 공휴일은 공공데이터포털 특일 정보 API 에서 받고, 키는 서버 함수에서만 읽게 해 줘"),
-            ("ai", "계획 · api/holidays.js 생성 → 추가 창에서 호출. 경고 문구는 「공휴일 · 기독탄신일」 형식으로 할까요?"),
-            ("me", "응"),
-            ("ai", "완료 · 기한 2026-12-25 선택 → 공휴일 경고 · 저장 막힘")], "Claude Code 대화 예")
-              + note("확인", "기한에 12월 25일 · 1월 1일 넣고 저장"), T),
-        ba("공휴일 반영 전후", T, "기한 12월 25일 → 그대로 저장\n연휴가 끝난 뒤에야 알아챔",
-           "기한 12월 25일 → 「공휴일 · 기독탄신일」\n저장 막힘 · 다른 날 고르기",
-           "기획서 v2 문제점 「공휴일이 기한으로 들어감」 해결"),
+        # ── 배경
+        light("대화창 밖의 데이터", relay()
+              + note("AI 의 한계", "캘린더 · DB · 사내 문서는 대화창 밖 · 사람이 옮겨 주는 만큼만 앎"), T),
+        light("회사마다 따로 만든 연결", timeline()
+              + src(("OpenAI · ChatGPT plugins", "https://openai.com/index/chatgpt-plugins/"),
+                    ("Claude · Tool use GA", "https://claude.com/blog/tool-use-ga"), ANN, AAIF), T),
+        light("연결 수가 늘어나는 문제", wires()
+              + note("발표문", "「새 데이터 소스마다 따로 구현이 필요하다」 · Anthropic 2024-11-25 · 앱 · 서비스 수는 예")
+              + src(ANN), T),
+        light("USB-C 포트", phmap("usbc_port.webp", "노트북의 USB-C 포트", "사진 · Logant547 · CC BY 4.0",
+                                    "https://commons.wikimedia.org/wiki/File:USB-C_connector_on_a_laptop.jpg", viz2.maprows([
+            ("노트북", "AI 앱 · 호스트", "Claude Code · Claude · ChatGPT"), ("USB-C 규격", "MCP", "연결 · 주고받는 형식"),
+            ("모니터 · 외장 디스크", "MCP 서버", "Supabase · 캘린더 · 브라우저"),
+            ("꽂으면 기능을 알림", "도구 목록", "list_tables · execute_sql …")], "USB-C", "MCP"))
+              + note("공식 소개", "「MCP 는 AI 앱을 위한 USB-C 포트」 · Think of MCP like a USB-C port for AI applications")
+              + src(INTRO), T),
+        light("MCP 구조", arch()
+              + viz2.tiles([("도구 (Tools)", "AI 가 실행하는 기능 · 할 일 추가"), ("리소스 (Resources)", "AI 가 읽는 자료 · 파일 · 표"),
+                            ("프롬프트 (Prompts)", "미리 만든 요청 틀")], 3)
+              + src(ARCH), T),
+        light("MCP 동작", agent("Claude Code", [
+            ("me", "기한 지난 할 일 몇 건이야?", .3), ("tool", "<em>supabase</em> 도구 목록 읽기", 1.3),
+            ("tool", "<em>execute_sql</em> select count(*) from tasks where due &lt; today …", 2.0),
+            ("ai", "기한 지난 할 일 2건 · 박서연 1 · 최민재 1", 4.4)],
+            ("Supabase MCP 서버", "도구 3개", supa_tools),
+            '<div class="v2sBx db"><div class="bh"><b>DB</b><small>tasks</small></div><table><tr><th>title</th><th>due</th></tr>'
+            '<tr class="hl" style="--d:2.8s"><td>예산안 검토</td><td>11/18</td></tr><tr class="hl" style="--d:2.95s"><td>설문 정리</td><td>11/19</td></tr>'
+            '<tr><td>보고서 작성</td><td>12/04</td></tr></table></div>',
+            (("도구 호출", 2.0), ("결과 · 2", 3.6), ("SQL", 2.4), ("행 2개", 3.2)))
+              + v2scene.steps([("①", "질문", .3), ("②", "도구 목록 읽기", 1.3), ("③", "도구 고르기 · 실행", 2.0),
+                               ("④", "결과 받기", 3.6), ("⑤", "답하기", 4.4)])
+              + src(ARCH, SMCP), T),
+        light("API와 MCP", viz2.pair(
+            "API", [("부르는 쪽", "내 앱 코드"), ("형식", "서비스마다 다름"), ("쓰는 때", "이용자가 앱을 쓸 때 (2-1 · 2-5)")],
+            "MCP", [("부르는 쪽", "AI · Claude Code · ChatGPT"), ("형식", "하나의 규격 · 도구 목록"), ("안에서", "MCP 서버가 각 서비스 API 호출")], hl="r"), T),
+        light("쓸 만한 MCP", viz2.maprows([
+            ("Playwright", "브라우저 열기 · 클릭 · 콘솔 확인", "화면 테스트 (2-9)"),
+            ("Supabase", "표 만들기 · 조회 · 로그", "DB 작업을 말로"),
+            ("Context7", "라이브러리 최신 문서", "버전 틀린 코드 줄이기"),
+            ("Figma · Notion", "디자인 · 기획 문서 읽기", "화면 · 요구사항 입력"),
+            ("GitHub", "이슈 · PR · Actions", "Claude Code 는 gh 로도 됨")], "MCP 서버", "하는 일")
+              + src(("Playwright MCP", "https://github.com/microsoft/playwright-mcp"), SMCP,
+                    ("Context7", "https://github.com/upstash/context7"), ("GitHub MCP", "https://github.com/github/github-mcp-server")), T),
+        light("MCP 연결 방법", code("터미널 · 원격 MCP 서버 추가", esc(
+            "claude mcp add --transport http supabase \\\n  \"https://mcp.supabase.com/mcp?project_ref=<프로젝트 ID>&read_only=true\""))
+              + viz2.tiles([("범위 (scope)", "local 나만 · project 팀 공유 .mcp.json · user 내 모든 프로젝트"),
+                            ("확인", "Claude Code 에서 /mcp · 목록 · 로그인"),
+                            ("claude.ai 커넥터", "claude.ai 에서 켠 커넥터가 Claude Code 에도 표시 · 구독 로그인일 때")], 3)
+              + note("요청", "「Supabase MCP 연결해 줘」 · 명령은 Claude Code 가 · 로그인은 사람이")
+              + src(CC, SMCP), T),
+        light("MCP 안전 설정", viz2.tiles([
+            ("project_ref", "프로젝트 하나에만 연결"), ("read_only=true", "읽기만 · 쓸 때만 잠시 해제"),
+            ("개발용 프로젝트", "실제 서비스 DB 에 연결하지 않기"), ("실행 승인", "도구 실행마다 내용 보고 허용")], 4)
+              + note("Playwright MCP", "「보안 경계가 아님」 · 공식 문서 · 믿을 수 있는 사이트만")
+              + src(SMCP, ("Playwright MCP", "https://github.com/microsoft/playwright-mcp")), T),
+        light("캘린더 일정 → 할 일", cal_to_tasks()
+              + note("준비", "claude.ai 에서 Google Calendar 커넥터 켜기 · 읽기 전용 · Supabase MCP 는 쓰기 허용 · 개발용 DB")
+              + src(GCAL, CC, SMCP), T),
         # ── 실습
-        lab("2-6", "공휴일 API · 키 보관", T, "내 앱 → 공휴일 차단 · 키는 서버에만",
-            ["공공데이터포털 인증키 발급", ".env · .gitignore 요청", "서버 함수 · 공휴일 차단 요청", "Network 탭에서 키 확인"],
-            ["기한 12월 25일 저장 막힘", "git status · GitHub 에 키 없음"],
-            files="예시/개발계획.md 6 칸 (비교용)"),
-        brief("2-6", T, ["인증키 발급", ".env · .gitignore", "서버 함수 · 공휴일 차단", "Network 탭 확인"],
-              [("목표", "기한 공휴일 차단"), ("입력", "개발 계획 v2 · 6 칸 · 인증키"),
-               ("진행 방식", "키는 서버 함수에서만 · 태스크 하나씩"), ("하지 말 것", "키를 대화창 · 코드 · 커밋에 넣기")],
-              ["환경변수", ".gitignore", "서버 함수", "Network"],
-              ["기한이 공휴일이면 경고 · 저장 막힘", ".env 가 git status 에 없음"],
-              "공휴일 응답이 비면 인증키 반영 대기 · 하루 뒤 다시"),
+        lab("2-6", "MCP 연결 · 캘린더 → 할 일", T, "Claude Code 에 MCP 를 붙여 캘린더 일정을 팀 보드 할 일로 옮긴다",
+            ["claude.ai 에서 Google Calendar 커넥터 켜기", "Supabase MCP 연결 · 로그인", "/mcp 로 두 서버 확인",
+             "이번 주 일정 → 할 일 요청", "보드 화면에서 확인"],
+            ["/mcp 에 두 서버 연결됨", "캘린더 일정 수만큼 할 일 추가", "일정 날짜 = 할 일 기한"], files="2-5 까지의 앱 · 개발용 Supabase 프로젝트"),
+        brief("2-6", T, ["Google Calendar 커넥터", "Supabase MCP 연결", "/mcp 확인", "일정 → 할 일 요청", "보드 확인"],
+              [("목표", "이번 주 캘린더 일정을 할 일로"), ("규칙", "일정 날짜 = 기한 · 담당자는 나"),
+               ("승인", "추가 전에 목록 먼저 보여 주기"), ("하지 말 것", "실제 서비스 DB · 일정 수정")],
+              ["MCP", "커넥터", "/mcp", "read_only"],
+              ["보드에 캘린더 일정 수만큼 새 할 일", "기한이 일정 날짜와 같음"],
+              "도구가 안 보이면 /mcp 에서 로그인 상태 확인 · 다시 연결"),
         light("실습 2-6 확인", checks([
-            (".env 가 .gitignore 에 있나", "git status 에 안 보임"), ("브라우저 개발자 도구에 키가 안 보이나", "서버 함수 경유"),
-            ("기한이 공휴일이면 저장이 막히나", "12월 25일 · 1월 1일"), ("Network 탭 요청에 키가 없나", "holidays 요청 · 응답")],
-            "넷 다 「예」 → 커밋 · 2-7 MCP"), T),
+            ("/mcp 에 두 서버가 연결됐나", "Google Calendar · Supabase"), ("추가 전에 목록을 먼저 보여 줬나", "승인 단계"),
+            ("보드에 일정 수만큼 할 일이 생겼나", "기한 = 일정 날짜"), ("끝난 뒤 read_only 로 되돌렸나", "쓰기 차단")],
+            "넷 다 「예」 → 2-7 내 MCP 서버 만들기"), T),
     ]
+
+
+CSS = """
+  .v2u3msg.rq{border-color:#9DB7DA; background:#F2F7FF; animation:v2u3right 1.2s ease-out .4s forwards;} .v2u3msg.rq em{color:#1F4E8C;}
+  @keyframes v2u3right{0%{opacity:0; transform:translateX(-90px)} 30%{opacity:1} 100%{opacity:1; transform:none}}
+  /* 2-2 · 사람 손 vs MCP */
+  .v2u3relay{display:flex; flex-direction:column; gap:14px; margin:4px 0 14px;}
+  .v2u3rr{display:grid; grid-template-columns:96px 1fr; gap:12px; align-items:center; padding:12px 14px; border:1.5px solid #E1E5EB; border-radius:14px; background:#fff;}
+  .v2u3rr.on{border-color:#F28C28; background:#FFF8F0;}
+  .v2u3rh{font-size:18px; font-weight:800; color:#16233A;} .v2u3rr.on .v2u3rh{color:#E07A12;}
+  .v2u3rw{display:flex; align-items:center; gap:8px;}
+  .v2u3rs{flex:1; border:1.5px solid #D9DDE3; border-radius:10px; padding:8px 10px; background:#fff; opacity:0; animation:v2u3in .4s ease-out var(--d) forwards;}
+  .v2u3rs b{display:block; font-size:16px; color:#16233A;} .v2u3rs span{font-size:13.5px; color:#3A4657;}
+  .v2u3rs.hand{border-color:#E8A39B; background:#FDECEA;} .v2u3rs.hand b{color:#C0392B;}
+  .v2u3ra{font-style:normal; font-size:18px; font-weight:800; color:#F28C28; opacity:0; animation:v2u3in .3s ease-out var(--d) forwards;}
+  .v2u3cnt{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  .v2u3cnt span{text-align:center; font-size:17px; font-weight:800; padding:8px; border-radius:10px; opacity:0;}
+  .v2u3cnt .c1{background:#FDECEA; color:#C0392B; animation:v2u3in .4s ease-out 2.0s forwards;}
+  .v2u3cnt .c2{background:#FFE3C4; color:#B85A00; animation:v2u3in .4s ease-out 3.8s forwards;}
+  @media print{.v2u3wire{transform:none; animation:none} .v2u3rs,.v2u3ra,.v2u3cnt span,.v2u3hs,.v2u3msg,.v2u3lb,.v2u3la{opacity:1; animation:none}}
+  @keyframes v2u3in{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
+  @media print{.v2u3rs,.v2u3ra,.v2u3cnt span{opacity:1; animation:none}}
+  /* 2-5 · 캘린더 일정 → 할 일 (v2c) */
+  .v2c{display:grid; grid-template-columns:310px 52px 1fr 52px 330px; align-items:stretch; margin:0 0 12px;}
+  .v2cW{border:1.5px solid #D0D7DE; border-radius:12px; background:#fff; overflow:hidden; display:flex; flex-direction:column;}
+  .v2cH{display:flex; align-items:center; gap:8px; padding:10px 12px; background:#F6F8FA; border-bottom:1px solid #D0D7DE; font-size:16.5px; font-weight:800; color:#16233A;}
+  .v2cH i{width:12px; height:12px; border-radius:3px;} .v2cH i.g{background:#1A73E8;} .v2cH i.o{background:#D97757;} .v2cH i.b{background:#3ECF8E;}
+  .v2cWk{display:grid; grid-template-columns:repeat(5,1fr); flex:1;}
+  .v2cD{border-right:1px solid #E3E7EC; padding:8px 4px; display:flex; flex-direction:column; align-items:center; gap:2px; min-height:270px;}
+  .v2cD:last-child{border-right:0;} .v2cD span{font-size:13px; color:#6B7785;} .v2cD b{font-size:15.5px; color:#16233A; margin-bottom:10px;}
+  .v2cD .ev{width:100%; box-sizing:border-box; font-size:13.5px; font-weight:700; color:#fff; background:#1A73E8; border-radius:6px; padding:10px 3px; text-align:center; word-break:keep-all; line-height:1.3;
+    outline:3px solid transparent; outline-offset:2px; animation:v2cRead .4s var(--d) forwards;}
+  .v2cD .ev.c1{--c:#F28C28;} .v2cD .ev.c2{--c:#8E44AD;} .v2cD .ev.c3{--c:#2E8B57;}
+  .v2cChat{padding:10px 12px; display:flex; flex-direction:column; gap:8px;}
+  .v2cChat .m{font-size:15.5px; border-radius:10px; padding:7px 11px; opacity:0; animation:v2cIn .35s var(--d) forwards;}
+  .v2cChat .me{align-self:flex-end; background:#FFF1E0; color:#16233A; font-weight:600;}
+  .v2cChat .ai{background:#EEF3FA; border:1px solid #C9D6E6; color:#16233A;}
+  .v2cChat .tool{font-family:var(--mono); font-size:13.5px; color:#3A4657; background:#F4F6F9; border:1px dashed #9AA5B1;}
+  .v2cChat .tool em{font-style:normal; font-weight:800; margin-right:6px;} .v2cChat .tool.l em{color:#1A73E8;} .v2cChat .tool.r em{color:#1F9D63;}
+  .v2cP{align-self:center; justify-self:center; display:flex; flex-direction:column; align-items:center; gap:2px; border:2px solid #C9CFD8; border-radius:10px;
+    padding:6px 4px; width:46px; background:#fff; color:#9AA5B1; animation:v2cPlug .5s var(--d) forwards;}
+  .v2cP b{font-size:12px;} .v2cP span{font-size:11.5px;}
+  .v2cP.l{--pc:#1A73E8;} .v2cP.r{--pc:#1F9D63;}
+  .v2cT{width:100%; border-collapse:collapse; font-size:15.5px;}
+  .v2cT th{text-align:left; font-size:12.5px; color:#6B7785; font-weight:700; padding:7px 10px; border-bottom:1px solid #E3E7EC;}
+  .v2cT td{padding:9px 10px; border-bottom:1px solid #EEF1F4; color:#16233A;}
+  .v2cT td small{margin-left:6px; font-size:11px; font-weight:800; color:#1A73E8; background:#E8F0FE; border-radius:8px; padding:1px 6px;}
+  .v2cT tr.nw{opacity:0; animation:v2cRow .5s var(--d) forwards;}
+  .v2cT tr.c1{--c:#F28C28;} .v2cT tr.c2{--c:#8E44AD;} .v2cT tr.c3{--c:#2E8B57;}
+  @keyframes v2cIn{from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:none}}
+  @keyframes v2cRead{to{outline-color:var(--c)}}
+  @keyframes v2cPlug{to{border-color:var(--pc); color:var(--pc); background:#fff; box-shadow:0 0 0 4px rgba(0,0,0,.04)}}
+  @keyframes v2cRow{0%{opacity:0; background:transparent} 30%{opacity:1; background:#FFF8E6} 100%{opacity:1; background:transparent; box-shadow:inset 4px 0 0 var(--c)}}
+  @media print{.v2cChat .m,.v2cT tr.nw{opacity:1; animation:none}}
+  /* 2-6 · 연결 방식의 변화 (v27tl) */
+  .v27tl{position:relative; display:grid; grid-template-columns:repeat(6,1fr); gap:8px; margin:26px 0 10px; padding-top:22px;}
+  .v27tl .ax{position:absolute; left:0; right:0; top:29px; height:3px; background:#D9DDE3;}
+  .v27tl .e{position:relative; display:flex; flex-direction:column; gap:3px; opacity:0; animation:v27in .4s var(--d) forwards;}
+  .v27tl .e i{position:absolute; top:-1px; left:4px; width:14px; height:14px; border-radius:50%; background:#1F3A5F; border:3px solid #fff;}
+  .v27tl .e .y{margin-top:22px; font-family:var(--mono); font-size:14px; color:#6B7785;}
+  .v27tl .e b{font-size:18px; color:#16233A;} .v27tl .e small{font-size:14px; color:#3A4657;}
+  .v27tl .e.on i{background:#F28C28; width:18px; height:18px; top:-3px;} .v27tl .e.on b{color:#E07A12;}
+  .v27grp{display:grid; grid-template-columns:3fr 3fr; gap:8px; margin:10px 0 14px;}
+  .v27grp span{text-align:center; font-size:16px; font-weight:800; padding:8px; border-radius:10px; background:#EEF1F5; color:#3A4657; opacity:0; animation:v27in .4s var(--d) forwards;}
+  .v27grp span.on{background:#FFE3C4; color:#B85A00;}
+  /* 2-6 · 연결 수 (v27w) */
+  .v27w{width:100%; height:300px; display:block;}
+  .v27t{font-size:16px; font-weight:700; fill:#16233A;} .v27mt{font-size:26px; font-weight:800; fill:#E07A12;} .v27ms{font-size:14px; fill:#3A4657;}
+  .v27a{stroke:#9AA5B1; stroke-width:2; stroke-dasharray:900; stroke-dashoffset:900; animation:v27draw .5s var(--d) forwards, v27fade .6s 3.2s forwards;}
+  .v27b{stroke:#F28C28; stroke-width:3.5; stroke-dasharray:900; stroke-dashoffset:900; animation:v27draw .45s var(--d) forwards;}
+  .v27m{opacity:0; animation:v27in .4s var(--d) forwards;}
+  .v27cnt{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:4px 0 12px;}
+  .v27cnt span{text-align:center; font-size:18px; padding:8px; border-radius:10px; opacity:0; animation:v27in .4s var(--d) forwards;}
+  .v27cnt .a{background:#EEF1F5; color:#3A4657;} .v27cnt .b{background:#FFE3C4; color:#B85A00;}
+  /* 2-6 · 구조 (v27ar) */
+  .v27ar{display:grid; grid-template-columns:300px 80px 1fr; align-items:center; margin:0 0 14px;}
+  .v27ar .host{border:2.5px solid #F28C28; background:#FFF8F0; border-radius:16px; padding:12px; display:flex; flex-direction:column; gap:10px; opacity:0; animation:v27in .4s var(--d) forwards;}
+  .v27ar .host .h{font-size:19px; font-weight:800; color:#E07A12;}
+  .v27ar .cli{border:1.5px solid #F7C99A; background:#fff; border-radius:10px; padding:9px 12px; font-size:15px; font-weight:700; color:#16233A; opacity:0; animation:v27in .3s var(--d) forwards;}
+  .v27ar .lk{display:flex; flex-direction:column; gap:42px; padding-top:40px;} .v27ar .lk i{height:3px; background:#F28C28;}
+  .v27ar .svs{display:flex; flex-direction:column; gap:10px; padding-top:40px;}
+  .v27ar .srv{border:1.5px solid #D9DDE3; border-left:5px solid #1F3A5F; border-radius:10px; background:#fff; padding:7px 14px; opacity:0; animation:v27in .3s var(--d) forwards;}
+  .v27ar .srv b{font-size:16px; color:#16233A; margin-right:10px;} .v27ar .srv span{font-size:14px; color:#3A4657;}
+  @keyframes v27in{from{opacity:0} to{opacity:1}}
+  @keyframes v27draw{to{stroke-dashoffset:0}}
+  @keyframes v27fade{to{opacity:.15}}
+  @media print{.v27tl .e,.v27grp span,.v27m,.v27cnt span,.v27ar .host,.v27ar .cli,.v27ar .srv{opacity:1; animation:none} .v27a,.v27b{stroke-dashoffset:0; animation:none}}
+"""

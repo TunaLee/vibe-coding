@@ -1,72 +1,64 @@
-"""2-1 미리보기.
+"""2-1 웹 앱의 데이터 흐름.
 
-1부 방식 앱과 2부 앱 → 2부 완성 모습 → DB · API · MCP 의 위치(앱이 쓰는 것 · AI 가 쓰는 것) → 2부 도구 → 2부 산출물 흐름.
-2부 목차: 2-1 ~ 2-11 (v2kit.UNITS).
+클라이언트 · 서버 · DB(1-6 웹 구조 복습 · 한 장)
+→ 요청과 응답(장면: 로딩 → GET → SQL → 행 → JSON → 화면) → 요청 · 응답 읽기 → 쓰기 요청(POST → insert → 201 → 목록 추가)
+→ 상태 코드 → API(서버가 열어 둔 창구 · 메뉴판 비유).
+외부 API(공휴일)는 2-5 · MCP 는 2-6.
+사실 출처: supabase.com/docs/guides/api (REST · /rest/v1/표이름) · developer.mozilla.org HTTP 메서드 · 상태 코드
+· developer.chrome.com/docs/devtools/network
 """
 import viz2
-from deck import flow, light
+from deck import light
 from hx import note
+from stats_hx import src
+from v2kit import codemap
+from v3kit import phmap
+import v2scene
+from v2scene import reqres, steps
 
 T = "2-1"
+GEN = ("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")
+SB_API = ("Supabase · REST API", "https://supabase.com/docs/guides/api")
+MDN_M = ("MDN · HTTP 요청 메서드", "https://developer.mozilla.org/ko/docs/Web/HTTP/Reference/Methods")
+MDN_S = ("MDN · HTTP 상태 코드", "https://developer.mozilla.org/ko/docs/Web/HTTP/Reference/Status")
+NETP = ("Chrome DevTools · Network", "https://developer.chrome.com/docs/devtools/network")
 
-
-def _lane(head, sub, boxes, d0):
-    """한 줄 — 머리 칸 + 상자 → 상자 … · 상자가 차례로 나타남."""
-    out = []
-    for i, (b, s, hl) in enumerate(boxes):
-        d = d0 + i * .45
-        if i:
-            out.append(f'<i class="v2u1ar" style="--d:{d - .2:.2f}s">→</i>')
-        out.append(f'<div class="v2u1bx{" hl" if hl else ""}" style="--d:{d:.2f}s"><b>{b}</b><span>{s}</span></div>')
-    return f'<div class="v2u1ln"><div class="v2u1hd"><b>{head}</b><span>{sub}</span></div><div class="v2u1row">{"".join(out)}</div></div>'
-
-
-def where():
-    return ('<div class="v2u1map">'
-            + _lane("앱이 쓰는 것", "배포한 뒤 · 이용자가 쓸 때", [
-                ("이용자 브라우저", "보드 화면", False), ("내 앱", "Vercel", False),
-                ("데이터베이스", "Supabase · 할 일 저장", True), ("외부 API", "공휴일 정보", True)], .3)
-            + _lane("AI 가 쓰는 것", "개발 중 · 업무 중", [
-                ("나", "말로 요청", False), ("Claude Code · Claude · ChatGPT", "AI 앱", False),
-                ("MCP", "연결 규격", True), ("Supabase · 캘린더 · 내 MCP 서버", "표 만들기 · 일정 읽기 · 할 일 등록", False)], 2.3)
-            + "</div>")
+CSS = ""
 
 
 def slides():
     return [
-        light("1부 방식 앱과 2부 앱", viz2.pair(
-            "시작 버전 · 팀 할 일 보드", [("저장 위치", "내 브라우저 안 · localStorage"), ("이용자", "누구나 · 담당자 아무나 선택"),
-                               ("기한 공휴일", "직접 달력 확인"), ("업무 등록", "보드 화면에서만")],
-            "2부 · 팀 할 일 보드 v2", [("저장 위치", "데이터베이스 · 팀 전체가 같은 곳"), ("이용자", "로그인 · 내 할 일만 수정"),
-                                 ("기한 공휴일", "외부 API · 자동 경고"), ("업무 등록", "Claude · ChatGPT 대화로 · 내 MCP 서버")])
-              + note("시작 버전", "labs/team_board · 1부와 같은 순서로 만든 앱 · localStorage"), T),
-        light("DB · API · MCP의 역할", where()
-              + note("구분", "DB · API 는 앱이 쓰는 부품 · MCP 는 AI 앱이 쓰는 연결 통로"), T),
-        light("2부 도구", viz2.tiles([
-            ("Supabase", "데이터베이스 · 로그인 (2-3 · 2-5)"), ("공공데이터포털", "공휴일 API · 서비스 키 (2-6)"),
-            ("MCP", "Supabase · 캘린더 · 브라우저 연결 (2-7) · 내 MCP 서버 (2-8 · 2-9)"), ("GitHub · Vercel", "1부 연결 그대로 · MCP 서버 배포 · 로그 (2-8 · 2-10)")], 2), T),
-        light("2부 완성 모습", viz2.tiles([
-            ("같은 보드", "팀원 모두 · PC · 휴대폰"), ("로그인 · 권한", "내 할 일만 수정"),
-            ("공휴일 차단", "기한이 공휴일이면 저장 막힘"), ("대화로 업무 등록", "Claude · ChatGPT → 내 MCP 서버 → 보드")], 4)
-              + note("2부 마지막 장면", "「12월 4일까지 제안서 작성 할 일로 등록해 줘」 → 보드에 새 할 일 (2-9)"), T),
-        light("2부 산출물", flow([
-            ("개발 계획 v2", "데이터 · 연동 · 권한 (2-4)"), ("DB 저장 · 로그인", "Supabase (2-5)"), ("공휴일 API", "키 보관 (2-6)"),
-            ("MCP 서버", "도구 4개 · 배포 (2-8)"), ("AI 앱 등록", "Claude · ChatGPT (2-9)")], hl=3)
-              + note("기본 흐름", "기획서 → 개발 계획 → 개발 → 배포 · 1부와 같은 순서"), T),
+        light("클라이언트 · 서버 · DB", viz2.maprows([
+            ("클라이언트", "브라우저 · 화면", "요청을 보내고 받은 데이터로 화면을 그림"),
+            ("서버", "요청을 받는 프로그램", "누가 무엇을 원하는지 확인 · DB 에 묻기"),
+            ("DB", "데이터 저장소", "표에 행으로 보관 · 서버만 직접 접근")], "칸", "하는 일")
+              + note("1-6 웹 구조", "같은 세 칸 · 2부는 서버 · DB 를 Supabase 가 맡음"), T),
+        light("요청과 응답", reqres()
+              + steps([("①", "화면이 데이터 요청", 1.0), ("②", "서버가 SQL 로 DB 조회", 2.1), ("③", "DB 가 행 3개 돌려줌", 2.6),
+                       ("④", "서버가 JSON 으로 응답", 4.5), ("⑤", "받은 데이터로 화면 그림", 5.8)])
+              + src(SB_API, NETP), T),
+        light("요청과 응답 읽기", codemap([
+            ("GET", "방식 · 가져오기"),
+            ("/rest/v1/tasks?select=*", "주소 · tasks 표의 모든 열"),
+            ("200 OK", "상태 · 성공"),
+            ('[{ "id": 41, "title": "주간 보고서 작성", … }]', "내용 · JSON · 할 일 한 건이 { } 하나"),
+        ], title="Network 탭의 요청 한 줄")
+              + note("직접 보기", "F12 → Network → 새로고침 · 요청 줄을 눌러 Response")
+              + src(MDN_M, NETP), T),
+        light("쓰기 요청", reqres(write=True)
+              + steps([("①", "「추가」 클릭 · POST", 1.0), ("②", "서버가 insert", 2.1), ("③", "DB 에 새 행", 2.6),
+                       ("④", "201 · 만든 행 응답", 4.5), ("⑤", "목록에 한 줄 추가", 5.8)])
+              + src(SB_API, MDN_M), T),
+        light("요청 방식과 상태 코드", viz2.pair(
+            "방식", [("GET", "가져오기 · 보드 보기"), ("POST", "새로 만들기 · 할 일 추가"),
+                    ("PATCH", "고치기 · 상태 변경"), ("DELETE", "지우기 · 할 일 삭제")],
+            "상태 코드", [("200 · 201", "성공 · 만듦"), ("401 · 403", "로그인 필요 · 권한 없음"),
+                       ("404", "주소 · 행 없음"), ("500", "서버 안의 오류")], hl="")
+              + note("에러를 전할 때", "방식 · 주소 · 상태 코드 세 가지를 같이")
+              + src(MDN_M, MDN_S), T),
+        light("API", phmap("v2_u3_menu.webp", "메뉴판을 보고 주문하는 손님", *GEN, viz2.maprows([
+            ("주방", "서버", "요청을 처리"), ("메뉴판", "API 목록", "받는 요청 · 주소 · 형식"),
+            ("주문서", "요청", "GET /rest/v1/tasks"), ("나온 음식", "응답", "200 · JSON"),
+            ("다른 가게 메뉴판", "외부 API", "공휴일 · 날씨 (2-5)")], "식당", "API"))
+              + note("API", "서버가 정해 둔 요청 창구 · 형식대로 요청하면 응답"), T),
     ]
-
-
-CSS = """
-  /* 2-1 · DB · API · MCP 위치 */
-  .v2u1map{display:flex; flex-direction:column; gap:22px; margin:6px 0 18px;}
-  .v2u1ln{display:grid; grid-template-columns:170px 1fr; gap:18px; align-items:center;}
-  .v2u1hd b{display:block; font-size:21px; color:#16233A;} .v2u1hd span{font-size:14px; color:#6B7785;}
-  .v2u1row{display:flex; align-items:center; gap:10px;}
-  .v2u1bx{flex:1; border:2px solid #D9DDE3; border-radius:14px; background:#fff; padding:14px 14px; min-height:92px;
-    opacity:0; animation:v2u1in .5s ease-out var(--d) forwards;}
-  .v2u1bx b{display:block; font-size:19px; color:#16233A;} .v2u1bx span{font-size:14.5px; color:#3A4657; line-height:1.4;}
-  .v2u1bx.hl{border-color:#F28C28; background:#FFF3E6;} .v2u1bx.hl b{color:#E07A12;}
-  .v2u1ar{font-style:normal; font-size:24px; font-weight:800; color:#F28C28; opacity:0; animation:v2u1in .3s ease-out var(--d) forwards;}
-  @keyframes v2u1in{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
-  @media print{.v2u1bx,.v2u1ar{opacity:1; animation:none}}
-"""
