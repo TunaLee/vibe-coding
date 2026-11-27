@@ -1696,65 +1696,35 @@
   .v16d .ls{font-family:var(--mono); font-size:14px; font-weight:700; color:#16233A;}
   @keyframes v16In{to{opacity:1; transform:none;}}
   @media print{.v16top,.v16c,.v16c li,.v16d{opacity:1; animation:none; transform:none}}
-  /* 1-6 · 서버와 브라우저 (v16s) */
-  .v16s .pc{position:relative; display:grid; grid-template-columns:190px 110px 190px 230px 360px; align-items:center; gap:0;
-    border:2px dashed #9AA6B5; border-radius:18px; padding:42px 22px 26px; margin-top:6px;}
+  /* 1-6 · 브라우저로 열기 (v16s) */
+  .v16s .pc{position:relative; display:grid; grid-template-columns:230px 1fr 440px; align-items:center;
+    border:2px dashed #9AA6B5; border-radius:18px; padding:42px 26px 26px; margin-top:6px;}
   .v16s .pcl{position:absolute; top:-15px; left:22px; background:#fff; padding:0 10px; font-size:17px; font-weight:800; color:#16233A;}
-  .v16s .fd{display:flex; flex-direction:column; gap:8px; padding:16px; border:1.5px solid #C9CFD8; border-radius:12px; background:#F7F8FA;}
-  .v16s .fd b{font-size:18px; color:#16233A; margin-bottom:2px;}
-  .v16s .fd i{font-style:normal; font-family:ui-monospace,Menlo,monospace; font-size:15.5px; padding:7px 10px; border-radius:7px; background:#fff; border:1.5px solid #D9DDE3;}
-  .v16s .fd .f1{animation:v16sHi .4s 3.0s forwards;} .v16s .fd .f2{animation:v16sHi .4s 3.2s forwards;} .v16s .fd .f3{animation:v16sHi .4s 3.4s forwards;}
+  .v16s .fd{display:flex; flex-direction:column; gap:10px; padding:18px; border:1.5px solid #C9CFD8; border-radius:12px; background:#F7F8FA;}
+  .v16s .fd b{font-size:19px; color:#16233A; margin-bottom:2px;}
+  .v16s .fd i{font-style:normal; font-family:ui-monospace,Menlo,monospace; font-size:17px; padding:8px 12px; border-radius:7px; background:#fff; border:1.5px solid #D9DDE3;}
+  .v16s .fd .f1{animation:v16sHi .4s 1.0s forwards;} .v16s .fd .f2{animation:v16sHi .4s 2.0s forwards;} .v16s .fd .f3{animation:v16sHi .4s 2.2s forwards;}
   @keyframes v16sHi{to{background:#FFF1E2; border-color:#E07A12; color:#B65A00;}}
-  .v16s .sv{display:flex; flex-direction:column; align-items:center; gap:6px; padding:22px 12px; border-radius:14px; background:#16233A; color:#fff; text-align:center;
-    animation:v16sPulse .6s 2.0s 2 alternate;}
-  .v16s .sv b{font-size:30px;} .v16s .sv span{font-family:ui-monospace,Menlo,monospace; font-size:17px; color:#F6B26B;} .v16s .sv small{font-size:14.5px; color:#C9D2DE;}
-  @keyframes v16sPulse{to{box-shadow:0 0 0 8px rgba(224,122,18,.35);}}
-  .v16s .ln{position:relative; height:120px; display:flex; flex-direction:column; justify-content:center; padding:0 8px;}
-  .v16s .l2{gap:34px;} .v16s .rq, .v16s .rs, .v16s .l1{position:relative;}
-  .v16s .lb{display:block; font-size:16px; font-weight:800; color:#37414F; text-align:center; margin:4px 0;}
-  .v16s .ar{height:2px; background:#9AA6B5; position:relative; margin:6px 0;}
-  .v16s .ar.lt::before, .v16s .ar.rt::after{content:""; position:absolute; top:-6px; border:7px solid transparent;}
-  .v16s .ar.lt::before{left:-6px; border-right-color:#9AA6B5;} .v16s .ar.rt::after{right:-6px; border-left-color:#9AA6B5;}
-  .v16s .tk{position:absolute; top:50%; width:16px; height:16px; margin-top:-8px; border-radius:50%; background:#E07A12; opacity:0;}
-  .v16s .rq .tk{top:auto; bottom:-1px; animation:v16sL 1s 1.0s forwards;}
-  .v16s .l1 .tk{top:auto; bottom:44px; animation:v16sL .8s 2.2s forwards;}
-  .v16s .rs .tk{top:-4px; width:auto; height:auto; border-radius:6px; background:none; display:flex; gap:3px; animation:v16sR 1s 3.8s forwards;}
-  .v16s .rs .tk u{text-decoration:none; font-size:11px; font-weight:800; color:#fff; background:#E07A12; border-radius:5px; padding:2px 5px;}
-  .v16s .rq .lb{animation:v16sLb .3s 1.0s forwards;} .v16s .l1 .lb{animation:v16sLb .3s 2.2s forwards;} .v16s .rs .lb{animation:v16sLb .3s 3.8s forwards;}
+  .v16s .ln{position:relative; padding:0 26px;}
+  .v16s .lb{display:block; font-size:18px; font-weight:800; color:#9AA6B5; text-align:center; margin:8px 0;}
+  .v16s .ln .lb:first-child{animation:v16sLb .3s 1.0s forwards;} .v16s .ln .lb:last-child{animation:v16sLb .3s 2.0s forwards;}
   @keyframes v16sLb{to{color:#E07A12;}}
-  @keyframes v16sL{0%{opacity:1; left:calc(100% - 16px)} 90%{opacity:1; left:0} 100%{opacity:0; left:0}}
-  @keyframes v16sR{0%{opacity:1; left:0} 90%{opacity:1; left:calc(100% - 70px)} 100%{opacity:0; left:calc(100% - 70px)}}
+  .v16s .ar{height:3px; background:#9AA6B5; position:relative; margin:14px 0;}
+  .v16s .ar.rt::after{content:""; position:absolute; right:-8px; top:-7px; border:8px solid transparent; border-left-color:#9AA6B5;}
+  .v16s .tk{position:absolute; top:50%; margin-top:-12px; display:flex; gap:4px; opacity:0; animation:v16sR 1.2s 2.2s forwards;}
+  .v16s .tk u{text-decoration:none; font-size:13px; font-weight:800; color:#fff; background:#E07A12; border-radius:5px; padding:3px 7px;}
+  @keyframes v16sR{0%{opacity:1; left:26px} 90%{opacity:1; left:calc(100% - 110px)} 100%{opacity:0; left:calc(100% - 110px)}}
   .v16s .bwW{position:relative; display:flex; flex-direction:column; gap:6px;}
-  .v16s .bwl, .v16r .hd span{font-size:16px; font-weight:700; color:#6B7785;}
-  .v16s .lb4{font-size:16px; font-weight:800; color:#37414F; text-align:center; animation:v16sLb .3s 4.9s forwards;}
-  .v16s .v16wb, .v16r .v16wb{position:relative; height:240px;}
-  .v16s .v16wb .ad, .v16r .v16wb .ad{flex:1; margin-left:10px; padding:2px 10px; border-radius:6px; background:#fff; font-family:ui-monospace,Menlo,monospace; font-size:12px; color:#16233A;}
-  .v16s .pg{opacity:0; animation:v16wIn .5s 4.9s forwards;}
-  .v16s .emp, .v16r .emp{position:absolute; inset:26px 0 0; display:flex; align-items:center; justify-content:center; font-size:14px; color:#9AA6B5; animation:v16sOut .2s 4.9s forwards;}
+  .v16s .bwl{font-size:16px; font-weight:700; color:#6B7785;}
+  .v16s .lb4{font-size:18px; font-weight:800; color:#9AA6B5; text-align:center; animation:v16sLb .3s 3.5s forwards;}
+  .v16s .v16wb{position:relative; height:250px;}
+  .v16s .v16wb .ad{flex:1; margin-left:10px; padding:2px 10px; border-radius:6px; background:#fff; font-family:ui-monospace,Menlo,monospace; font-size:12.5px; color:#16233A;}
+  .v16s .pg{opacity:0; animation:v16wIn .5s 3.5s forwards;}
+  .v16s .emp{position:absolute; inset:26px 0 0; display:flex; align-items:center; justify-content:center; font-size:15px; color:#9AA6B5; animation:v16sOut .2s 3.5s forwards;}
   @keyframes v16sOut{to{opacity:0;}}
-  .v16s .lg{display:grid; grid-template-columns:1fr 1fr 1.4fr; gap:14px; margin-top:22px; opacity:0; animation:v16wIn .5s 5.6s forwards;}
-  .v16s .lg p{margin:0; font-size:18px; color:#37414F; padding:12px 16px; border-radius:10px; background:#F4F6F8;}
+  .v16s .lg{display:grid; grid-template-columns:1fr 1.3fr 1.3fr; gap:14px; margin-top:22px; opacity:0; animation:v16wIn .5s 4.2s forwards;}
+  .v16s .lg p{margin:0; font-size:18px; color:#37414F; padding:14px 18px; border-radius:10px; background:#F4F6F8;}
   .v16s .lg b{color:#16233A; margin-right:10px; font-size:19px;}
-  /* 1-6 · 로컬 서버 실행 (v16r) */
-  .v16r .row{display:grid; grid-template-columns:1fr 46px 1fr 46px 1.15fr; align-items:start; margin-top:8px;}
-  .v16r .cl{display:flex; flex-direction:column; gap:10px; opacity:0; animation:v16wIn .5s var(--d) forwards;}
-  .v16r .hd{display:flex; align-items:baseline; gap:10px;} .v16r .hd b{font-size:24px; color:#16233A;}
-  .v16r .ar2{align-self:center; margin-top:40px; margin-left:6px; margin-right:10px; height:3px; background:#E07A12; position:relative; opacity:0; animation:v16wIn .4s var(--d) forwards;}
-  .v16r .ar2::after{content:""; position:absolute; right:-8px; top:-7px; border:8px solid transparent; border-left-color:#E07A12;}
-  .v16r .cc{height:240px; border:1.5px solid #C9CFD8; border-radius:10px; background:#F7F8FA; padding:16px; display:flex; flex-direction:column; gap:12px; box-sizing:border-box;}
-  .v16r .cc .b{max-width:90%; padding:12px 16px; border-radius:12px; font-size:19px; line-height:1.45;}
-  .v16r .cc .me{align-self:flex-end; background:#16233A; color:#fff; font-weight:700;}
-  .v16r .cc .ai{align-self:flex-start; background:#fff; border:1.5px solid #D9DDE3; color:#37414F; opacity:0; animation:v16wIn .4s 2.6s forwards;}
-  .v16r .cc .ai a{font-family:ui-monospace,Menlo,monospace; font-size:16px; color:#E07A12; font-weight:700;}
-  .v16r .tm{height:240px; margin:0; box-sizing:border-box; border-radius:10px; background:#1E2633; color:#E6EAF0; padding:18px 16px; font-size:16px; line-height:1.9; white-space:pre-wrap;
-    font-family:ui-monospace,Menlo,monospace;}
-  .v16r .tm .c2{color:#8FD18F; opacity:0; animation:v16wIn .3s 2.4s forwards;} .v16r .tm .c3{color:#8C97A8; opacity:0; animation:v16wIn .3s 2.8s forwards;}
-  .v16r .pg{opacity:0; animation:v16wIn .5s 4.0s forwards;} .v16r .emp{animation:v16sOut .2s 4.0s forwards;}
-  .v16r .rch{display:grid; grid-template-columns:1fr 2fr; gap:14px; margin-top:26px; opacity:0; animation:v16wIn .5s 4.8s forwards;}
-  .v16r .rch p{margin:0; padding:16px 20px; border-radius:12px; font-size:19px; color:#37414F; display:flex; align-items:center; gap:14px;}
-  .v16r .rch b{font-size:19px; color:#16233A;} .v16r .rch .ok{color:#2E7D3B; font-weight:800;} .v16r .rch .no{color:#B3261E; font-weight:700;}
-  .v16r .rch .ok{background:#EAF6EC; border:1.5px solid #6DBB7A;} .v16r .rch .ok b::after, .v16r .rch .no b::after{content:" →"; color:#9AA6B5;}
-  .v16r .rch .no{background:#F4F6F8; border:1.5px solid #C9CFD8;}
 
   /* 1-7 · 비유 두 컷 */
   /* 1-7 · 문서 파일과 공유 링크 (v1sh) */
@@ -2831,30 +2801,12 @@ newPage.onclick = () =&gt; {
 };</pre></div></div></div></div>
 </section>
 
-<section class="slide lt" data-title="서버와 브라우저">
+<section class="slide lt" data-title="브라우저로 열기">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-6</span></div>
-  <h2 class="s-title sm">서버와 브라우저</h2>
+  <h2 class="s-title sm">브라우저로 열기</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v16s"><div class="pc"><span class="pcl">내 컴퓨터</span><div class="fd"><b>미니 노션 폴더</b><i class="f1">index.html</i><i class="f2">style.css</i><i class="f3">app.js</i></div><div class="ln l1"><span class="lb">② 파일 찾기</span><div class="ar lt"></div><em class="tk"></em></div><div class="sv"><b>서버</b><span>localhost:8000</span><small>요청을 받아 파일을 보냄</small></div><div class="ln l2"><div class="rq"><span class="lb">① 요청 · 「첫 화면 주세요」</span><div class="ar lt"></div><em class="tk"></em></div><div class="rs"><div class="ar rt"></div><em class="tk"><u>html</u><u>css</u><u>js</u></em><span class="lb">③ 응답 · 파일 세 개</span></div></div><div class="bwW"><span class="bwl">브라우저</span><div class="v16wb "><div class="br"><i></i><i></i><i></i><span class="ad">localhost:8000</span></div><div class="pg"><div class="v16wS"><div class="sd"><i>미니 노션</i><ul><li class="on">시작하기</li><li>주간 회의록</li></ul><b class="bt">+ 새 페이지</b></div><div class="mn"><h1>시작하기</h1><div class="bk"><u></u>보고서 초안</div><div class="bk">회의 메모</div></div></div></div><div class="emp">요청 중…</div></div><span class="lb4">④ 파일을 읽어 화면을 그림</span></div></div><div class="lg"><p><b>서버</b>파일을 보내는 프로그램</p><p><b>브라우저</b>받은 파일로 화면을 그림</p><p><b>localhost</b>「이 컴퓨터 자신」 · 내 컴퓨터에서만 열림</p></div></div></div></div>
-</section>
-
-<section class="slide lt" data-title="로컬 서버 실행">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">1-6</span></div>
-  <h2 class="s-title sm">로컬 서버 실행</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v16r"><div class="row"><div class="cl" style="--d:0.3s"><div class="hd"><b>① 요청</b><span>Claude Code 입력창</span></div><div class="cc"><div class="b me">서버 띄워 줘</div><div class="b ai">서버를 띄웠다<br/><a>http://localhost:8000</a></div></div></div><div class="ar2" style="--d:1.7s"></div><div class="cl" style="--d:1.9s"><div class="hd"><b>② 실행 명령</b><span>터미널 · Claude 가 고름 · 예</span></div><pre class="tm"><span class="c1">$ python3 -m http.server 8000</span>
-<span class="c2">Serving HTTP … port 8000</span>
-<span class="c3"># 켜진 채로 요청을 기다림</span></pre></div><div class="ar2" style="--d:3.3s"></div><div class="cl" style="--d:3.5s"><div class="hd"><b>③ 주소로 열기</b><span>브라우저</span></div><div class="v16wb rb"><div class="br"><i></i><i></i><i></i><span class="ad">localhost:8000</span></div><div class="pg"><div class="v16wS"><div class="sd"><i>미니 노션</i><ul><li class="on">시작하기</li><li>주간 회의록</li></ul><b class="bt">+ 새 페이지</b></div><div class="mn"><h1>시작하기</h1><div class="bk"><u></u>보고서 초안</div><div class="bk">회의 메모</div></div></div></div><div class="emp">요청 중…</div></div></div></div><div class="rch"><p class="ok"><b>내 컴퓨터 브라우저</b>열림</p><p class="no"><b>옆자리 동료 브라우저</b>안 열림 · 다른 사람에게 보이게 하는 일은 1-7 배포</p></div></div></div></div>
-</section>
-
-<section class="slide lt" data-title="서버 관련 요청">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">1-6</span></div>
-  <h2 class="s-title sm">서버 관련 요청</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2tiles c2"><div class="v2tile" style="--d:0.00s"><b>파일 수정 뒤</b><span>브라우저 새로고침</span></div><div class="v2tile" style="--d:0.08s"><b>주소 접속 불가</b><span>「서버 다시 띄워 줘」</span></div><div class="v2tile" style="--d:0.16s"><b>포트 충돌</b><span>「다른 포트로 띄워 줘」</span></div><div class="v2tile" style="--d:0.24s"><b>종료</b><span>「서버 꺼 줘」</span></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v16s"><div class="pc"><span class="pcl">내 컴퓨터</span><div class="fd"><b>미니 노션 폴더</b><i class="f1">index.html</i><i class="f2">style.css</i><i class="f3">app.js</i></div><div class="ln"><span class="lb">① index.html 더블클릭</span><div class="ar rt"></div><em class="tk"><u>html</u><u>css</u><u>js</u></em><span class="lb">② 브라우저가 파일 세 개를 읽음</span></div><div class="bwW"><span class="bwl">브라우저</span><div class="v16wb"><div class="br"><i></i><i></i><i></i><span class="ad">file:///…/mini-notion/index.html</span></div><div class="pg"><div class="v16wS"><div class="sd"><i>미니 노션</i><ul><li class="on">시작하기</li><li>주간 회의록</li></ul><b class="bt">+ 새 페이지</b></div><div class="mn"><h1>시작하기</h1><div class="bk"><u></u>보고서 초안</div><div class="bk">회의 메모</div></div></div></div><div class="emp">여는 중…</div></div><span class="lb4">③ 화면을 그림</span></div></div><div class="lg"><p><b>열기</b>index.html 더블클릭</p><p><b>고친 뒤</b>새로고침 · macOS ⌘R · Windows F5</p><p><b>주소</b>file:// 로 시작 · 내 컴퓨터에서만 열림</p></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="권한 모드">
@@ -3006,7 +2958,7 @@ newPage.onclick = () =&gt; {
   <div class="eyebrow"><span class="tag">1-6</span></div>
   <h2 class="s-title sm">실습 1-6 · 2단계 브라우저 확인</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2tiles c2"><div class="v2tile" style="--d:0.00s"><b>열기</b><span>서버 주소 또는 index.html</span></div><div class="v2tile" style="--d:0.08s"><b>눌러 보기</b><span>방금 만든 기능 · 테스트 케이스대로</span></div><div class="v2tile" style="--d:0.16s"><b>새로고침</b><span>macOS ⌘R · Windows F5</span></div><div class="v2tile" style="--d:0.24s"><b>다르면</b><span>기대 · 실제 · 오류 원문으로 수정 요청</span></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v2tiles c2"><div class="v2tile" style="--d:0.00s"><b>열기</b><span>index.html 더블클릭</span></div><div class="v2tile" style="--d:0.08s"><b>눌러 보기</b><span>방금 만든 기능 · 테스트 케이스대로</span></div><div class="v2tile" style="--d:0.16s"><b>새로고침</b><span>macOS ⌘R · Windows F5</span></div><div class="v2tile" style="--d:0.24s"><b>다르면</b><span>기대 · 실제 · 오류 원문으로 수정 요청</span></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="실습 1-6 · 3단계 완료 기준 대조">
@@ -3073,7 +3025,7 @@ newPage.onclick = () =&gt; {
   <div class="eyebrow"><span class="tag">1-7</span></div>
   <h2 class="s-title sm">배포</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">배포 전</div><div class="v2pc" style="--d:0.00s"><b>주소</b><span>localhost — 내 컴퓨터 안</span></div><div class="v2pc" style="--d:0.08s"><b>열 수 있는 사람</b><span>나 혼자</span></div><div class="v2pc" style="--d:0.16s"><b>컴퓨터를 끄면</b><span>앱도 꺼짐</span></div></div><div class="v2p on"><div class="v2ph">배포 후</div><div class="v2pc" style="--d:0.00s"><b>주소</b><span>mini-notion.vercel.app 형식</span></div><div class="v2pc" style="--d:0.08s"><b>열 수 있는 사람</b><span>주소를 받은 누구나</span></div><div class="v2pc" style="--d:0.16s"><b>컴퓨터를 끄면</b><span>그대로 열림</span></div></div></div><div class="dbnote"><span>배포</span> 내 컴퓨터에서 돌던 앱을 인터넷 주소로 공개하는 일</div></div></div>
+  <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">배포 전</div><div class="v2pc" style="--d:0.00s"><b>주소</b><span>file:// · localhost — 내 컴퓨터 안</span></div><div class="v2pc" style="--d:0.08s"><b>열 수 있는 사람</b><span>나 혼자</span></div><div class="v2pc" style="--d:0.16s"><b>컴퓨터를 끄면</b><span>앱도 꺼짐</span></div></div><div class="v2p on"><div class="v2ph">배포 후</div><div class="v2pc" style="--d:0.00s"><b>주소</b><span>mini-notion.vercel.app 형식</span></div><div class="v2pc" style="--d:0.08s"><b>열 수 있는 사람</b><span>주소를 받은 누구나</span></div><div class="v2pc" style="--d:0.16s"><b>컴퓨터를 끄면</b><span>그대로 열림</span></div></div></div><div class="dbnote"><span>배포</span> 내 컴퓨터에서 돌던 앱을 인터넷 주소로 공개하는 일</div></div></div>
 </section>
 
 <section class="slide lt" data-title="문서 파일과 공유 링크">
@@ -3097,7 +3049,7 @@ newPage.onclick = () =&gt; {
   <div class="eyebrow"><span class="tag">1-7</span></div>
   <h2 class="s-title sm">주소별 접속 범위</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2ms"><div class="v2mh"><span>주소</span><i></i><span>열리는 범위</span></div><div class="v2m" style="--d:0.00s"><div class="a">localhost:8000</div><i>→</i><div class="b"><b>이 컴퓨터만</b><small>만들며 확인</small></div></div><div class="v2m" style="--d:0.12s"><div class="a">192.168.0.12:8000</div><i>→</i><div class="b"><b>같은 Wi-Fi · 회사망 기기</b><small>내 휴대폰 화면 확인</small></div></div><div class="v2m" style="--d:0.24s"><div class="a">mini-notion.vercel.app</div><i>→</i><div class="b"><b>인터넷의 누구나</b><small>공유</small></div></div></div><div class="src">출처 · <a href="https://www.rfc-editor.org/rfc/rfc1918" target="_blank" rel="noopener">RFC 1918 · 사설 주소</a></div></div></div>
+  <div class="body"><div class="mid"><div class="v2ms"><div class="v2mh"><span>주소</span><i></i><span>열리는 범위</span></div><div class="v2m" style="--d:0.00s"><div class="a">file:// · localhost</div><i>→</i><div class="b"><b>이 컴퓨터만</b><small>만들며 확인</small></div></div><div class="v2m" style="--d:0.12s"><div class="a">192.168.0.12:8000</div><i>→</i><div class="b"><b>같은 Wi-Fi · 회사망 기기</b><small>내 휴대폰 화면 확인</small></div></div><div class="v2m" style="--d:0.24s"><div class="a">mini-notion.vercel.app</div><i>→</i><div class="b"><b>인터넷의 누구나</b><small>공유</small></div></div></div><div class="src">출처 · <a href="https://www.rfc-editor.org/rfc/rfc1918" target="_blank" rel="noopener">RFC 1918 · 사설 주소</a></div></div></div>
 </section>
 
 <section class="slide lt" data-title="배포 흐름">
@@ -3159,7 +3111,7 @@ newPage.onclick = () =&gt; {
   <div class="eyebrow"><span class="tag">1-7</span></div>
   <h2 class="s-title sm">배포 화면</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1shot"><figure><img src="img/notion_mobile.webp" alt="배포 주소 · 390px 휴대폰 화면"/><figcaption>배포 주소 · 390px 휴대폰 화면</figcaption></figure><div class=v1side><div class="v1sd"><b>localhost 와 차이</b><span>주소만 다름 · 코드 동일</span></div><div class="v1sd"><b>개발 계획 완료 기준</b><span>모바일 폭에서 가로 스크롤 없음</span></div><div class="v1sd"><b>확인 방법</b><span>주소를 휴대폰으로 보내 열기</span></div><div class="v1sd"><b>깨질 때</b><span>화면 캡처 첨부 · 수정 요청</span></div></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v1shot"><figure><img src="img/notion_mobile.webp" alt="배포 주소 · 390px 휴대폰 화면"/><figcaption>배포 주소 · 390px 휴대폰 화면</figcaption></figure><div class=v1side><div class="v1sd"><b>내 컴퓨터와 차이</b><span>주소만 다름 · 코드 동일</span></div><div class="v1sd"><b>개발 계획 완료 기준</b><span>모바일 폭에서 가로 스크롤 없음</span></div><div class="v1sd"><b>확인 방법</b><span>주소를 휴대폰으로 보내 열기</span></div><div class="v1sd"><b>깨질 때</b><span>화면 캡처 첨부 · 수정 요청</span></div></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="수정 → 재배포">
@@ -3167,7 +3119,7 @@ newPage.onclick = () =&gt; {
   <div class="eyebrow"><span class="tag">1-7</span></div>
   <h2 class="s-title sm">수정 → 재배포</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="twocol"><div><div class="v1chat"><div class="v1ch">Claude Code 대화</div><div class="v1b me"><span>나</span><p>체크한 할 일 글자를 연한 초록으로 바꿔 줘</p></div><div class="v1b ai"><span>Claude</span><p>style.css 의 체크 상자 블록 색 변경 완료</p></div><div class="v1b me"><span>나</span><p>커밋하고 GitHub에 올려 줘</p></div><div class="v1b ai"><span>Claude</span><p>커밋 「체크한 할 일 색 변경」 → push 완료 · Vercel 새 배포 시작</p></div></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>① 수정 요청</b><span>Claude Code</span></div><div class="v2tile" style="--d:0.08s"><b>② localhost 확인</b><span>만들 때와 같음</span></div><div class="v2tile" style="--d:0.16s"><b>③ 커밋 · push</b><span>업로드 요청</span></div><div class="v2tile" style="--d:0.24s"><b>④ Vercel 자동 배포</b><span>push 감지 · 1~2분</span></div><div class="v2tile" style="--d:0.32s"><b>⑤ 같은 주소에 반영</b><span>새 링크 없음</span></div></div></div></div><div class="src">출처 · <a href="https://vercel.com/docs/git" target="_blank" rel="noopener">Vercel · Git</a></div></div></div>
+  <div class="body"><div class="mid"><div class="twocol"><div><div class="v1chat"><div class="v1ch">Claude Code 대화</div><div class="v1b me"><span>나</span><p>체크한 할 일 글자를 연한 초록으로 바꿔 줘</p></div><div class="v1b ai"><span>Claude</span><p>style.css 의 체크 상자 블록 색 변경 완료</p></div><div class="v1b me"><span>나</span><p>커밋하고 GitHub에 올려 줘</p></div><div class="v1b ai"><span>Claude</span><p>커밋 「체크한 할 일 색 변경」 → push 완료 · Vercel 새 배포 시작</p></div></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>① 수정 요청</b><span>Claude Code</span></div><div class="v2tile" style="--d:0.08s"><b>② 내 컴퓨터에서 확인</b><span>만들 때와 같음</span></div><div class="v2tile" style="--d:0.16s"><b>③ 커밋 · push</b><span>업로드 요청</span></div><div class="v2tile" style="--d:0.24s"><b>④ Vercel 자동 배포</b><span>push 감지 · 1~2분</span></div><div class="v2tile" style="--d:0.32s"><b>⑤ 같은 주소에 반영</b><span>새 링크 없음</span></div></div></div></div><div class="src">출처 · <a href="https://vercel.com/docs/git" target="_blank" rel="noopener">Vercel · Git</a></div></div></div>
 </section>
 
 <section class="slide lt" data-title="배포 전 점검">

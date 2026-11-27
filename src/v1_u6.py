@@ -1,6 +1,6 @@
 """1-6 바이브코딩 실습 (40분).
 
-웹의 3요소 → 서버와 브라우저 → 권한 모드 → 개발계획.md(1-4)의 태스크 단위 진행 → 수정 · 되돌리기 → 실습.
+웹의 3요소 → 브라우저로 열기 → 권한 모드 → 개발계획.md(1-4)의 태스크 단위 진행 → 수정 · 되돌리기 → 실습.
 공통 예제: labs/mini_notion/예시 (완성본 app/). 태스크 번호 · 이름은 사람마다 달라 장에 박지 않는다. Git 개념은 1-5 에서 · 여기서는 「커밋해 줘 · 되돌려 줘」로만.
 사실 출처: code.claude.com/docs/en/permission-modes · code.claude.com/docs/en/checkpointing
 """
@@ -69,43 +69,21 @@ def _page():
             '<div class="bk"><u></u>보고서 초안</div><div class="bk">회의 메모</div></div></div>')
 
 
-def _bw(cls=""):
-    return (f'<div class="v16wb {cls}"><div class="br"><i></i><i></i><i></i><span class="ad">localhost:8000</span></div>'
-            f'<div class="pg">{_page()}</div><div class="emp">요청 중…</div></div>')
+def _bw(addr):
+    return (f'<div class="v16wb"><div class="br"><i></i><i></i><i></i><span class="ad">{addr}</span></div>'
+            f'<div class="pg">{_page()}</div><div class="emp">여는 중…</div></div>')
 
 
-def _srv():
-    """서버와 브라우저 — 내 컴퓨터 안: 폴더 · 서버 · 브라우저. ① 요청(브라우저 → 서버) ② 파일 찾기(서버 → 폴더)
-    ③ 응답(파일 세 개, 서버 → 브라우저) ④ 화면. 한 번 재생 후 정지."""
+def _open():
+    """브라우저로 열기 — 서버 없이 index.html 을 더블클릭 → 브라우저가 폴더의 파일 세 개를 직접 읽어 화면을 그림. 한 번 재생 후 정지."""
     return ('<div class="v16s"><div class="pc"><span class="pcl">내 컴퓨터</span>'
             '<div class="fd"><b>미니 노션 폴더</b><i class="f1">index.html</i><i class="f2">style.css</i><i class="f3">app.js</i></div>'
-            '<div class="ln l1"><span class="lb">② 파일 찾기</span><div class="ar lt"></div><em class="tk"></em></div>'
-            '<div class="sv"><b>서버</b><span>localhost:8000</span><small>요청을 받아 파일을 보냄</small></div>'
-            '<div class="ln l2"><div class="rq"><span class="lb">① 요청 · 「첫 화면 주세요」</span><div class="ar lt"></div><em class="tk"></em></div>'
-            '<div class="rs"><div class="ar rt"></div><em class="tk"><u>html</u><u>css</u><u>js</u></em><span class="lb">③ 응답 · 파일 세 개</span></div></div>'
-            f'<div class="bwW"><span class="bwl">브라우저</span>{_bw()}<span class="lb4">④ 파일을 읽어 화면을 그림</span></div>'
+            '<div class="ln"><span class="lb">① index.html 더블클릭</span><div class="ar rt"></div><em class="tk"><u>html</u><u>css</u><u>js</u></em>'
+            '<span class="lb">② 브라우저가 파일 세 개를 읽음</span></div>'
+            f'<div class="bwW"><span class="bwl">브라우저</span>{_bw("file:///…/mini-notion/index.html")}<span class="lb4">③ 화면을 그림</span></div>'
             '</div>'
-            '<div class="lg"><p><b>서버</b>파일을 보내는 프로그램</p><p><b>브라우저</b>받은 파일로 화면을 그림</p>'
-            '<p><b>localhost</b>「이 컴퓨터 자신」 · 내 컴퓨터에서만 열림</p></div></div>')
-
-
-def _run():
-    """로컬 서버 실행 — ① Claude Code 에 「서버 띄워 줘」 ② Claude 가 실행 명령을 돌림(터미널) ③ 주소를 브라우저로 열기.
-    마지막에 「내 컴퓨터 → 열림 · 동료 컴퓨터 → 안 열림(1-7 배포)」."""
-    p1 = ('<div class="cc"><div class="b me">서버 띄워 줘</div>'
-          '<div class="b ai">서버를 띄웠다<br/><a>http://localhost:8000</a></div></div>')
-    p2 = ('<pre class="tm"><span class="c1">$ python3 -m http.server 8000</span>\n'
-          '<span class="c2">Serving HTTP … port 8000</span>\n<span class="c3"># 켜진 채로 요청을 기다림</span></pre>')
-    cols = [("① 요청", "Claude Code 입력창", p1), ("② 실행 명령", "터미널 · Claude 가 고름 · 예", p2), ("③ 주소로 열기", "브라우저", _bw("rb"))]
-    body = ""
-    for i, (h, sub, x) in enumerate(cols):
-        if i:
-            body += f'<div class="ar2" style="--d:{.1 + i * 1.6:.1f}s"></div>'
-        body += f'<div class="cl" style="--d:{.3 + i * 1.6:.1f}s"><div class="hd"><b>{h}</b><span>{sub}</span></div>{x}</div>'
-    return (f'<div class="v16r"><div class="row">{body}</div>'
-            '<div class="rch"><p class="ok"><b>내 컴퓨터 브라우저</b>열림</p>'
-            '<p class="no"><b>옆자리 동료 브라우저</b>안 열림 · 다른 사람에게 보이게 하는 일은 1-7 배포</p></div></div>')
-
+            '<div class="lg"><p><b>열기</b>index.html 더블클릭</p><p><b>고친 뒤</b>새로고침 · macOS ⌘R · Windows F5</p>'
+            '<p><b>주소</b>file:// 로 시작 · 내 컴퓨터에서만 열림</p></div></div>')
 
 def _code():
     """화면 뒤의 코드 — 개발계획.md → 파일 세 개(뼈대 · 모양 · 동작)가 차례로 · 마지막에 데이터 모양. 예시 앱 실제 이름 · 줄 수."""
@@ -182,65 +160,35 @@ CSS = """
   .v16d .ls{font-family:var(--mono); font-size:14px; font-weight:700; color:#16233A;}
   @keyframes v16In{to{opacity:1; transform:none;}}
   @media print{.v16top,.v16c,.v16c li,.v16d{opacity:1; animation:none; transform:none}}
-  /* 1-6 · 서버와 브라우저 (v16s) */
-  .v16s .pc{position:relative; display:grid; grid-template-columns:190px 110px 190px 230px 360px; align-items:center; gap:0;
-    border:2px dashed #9AA6B5; border-radius:18px; padding:42px 22px 26px; margin-top:6px;}
+  /* 1-6 · 브라우저로 열기 (v16s) */
+  .v16s .pc{position:relative; display:grid; grid-template-columns:230px 1fr 440px; align-items:center;
+    border:2px dashed #9AA6B5; border-radius:18px; padding:42px 26px 26px; margin-top:6px;}
   .v16s .pcl{position:absolute; top:-15px; left:22px; background:#fff; padding:0 10px; font-size:17px; font-weight:800; color:#16233A;}
-  .v16s .fd{display:flex; flex-direction:column; gap:8px; padding:16px; border:1.5px solid #C9CFD8; border-radius:12px; background:#F7F8FA;}
-  .v16s .fd b{font-size:18px; color:#16233A; margin-bottom:2px;}
-  .v16s .fd i{font-style:normal; font-family:ui-monospace,Menlo,monospace; font-size:15.5px; padding:7px 10px; border-radius:7px; background:#fff; border:1.5px solid #D9DDE3;}
-  .v16s .fd .f1{animation:v16sHi .4s 3.0s forwards;} .v16s .fd .f2{animation:v16sHi .4s 3.2s forwards;} .v16s .fd .f3{animation:v16sHi .4s 3.4s forwards;}
+  .v16s .fd{display:flex; flex-direction:column; gap:10px; padding:18px; border:1.5px solid #C9CFD8; border-radius:12px; background:#F7F8FA;}
+  .v16s .fd b{font-size:19px; color:#16233A; margin-bottom:2px;}
+  .v16s .fd i{font-style:normal; font-family:ui-monospace,Menlo,monospace; font-size:17px; padding:8px 12px; border-radius:7px; background:#fff; border:1.5px solid #D9DDE3;}
+  .v16s .fd .f1{animation:v16sHi .4s 1.0s forwards;} .v16s .fd .f2{animation:v16sHi .4s 2.0s forwards;} .v16s .fd .f3{animation:v16sHi .4s 2.2s forwards;}
   @keyframes v16sHi{to{background:#FFF1E2; border-color:#E07A12; color:#B65A00;}}
-  .v16s .sv{display:flex; flex-direction:column; align-items:center; gap:6px; padding:22px 12px; border-radius:14px; background:#16233A; color:#fff; text-align:center;
-    animation:v16sPulse .6s 2.0s 2 alternate;}
-  .v16s .sv b{font-size:30px;} .v16s .sv span{font-family:ui-monospace,Menlo,monospace; font-size:17px; color:#F6B26B;} .v16s .sv small{font-size:14.5px; color:#C9D2DE;}
-  @keyframes v16sPulse{to{box-shadow:0 0 0 8px rgba(224,122,18,.35);}}
-  .v16s .ln{position:relative; height:120px; display:flex; flex-direction:column; justify-content:center; padding:0 8px;}
-  .v16s .l2{gap:34px;} .v16s .rq, .v16s .rs, .v16s .l1{position:relative;}
-  .v16s .lb{display:block; font-size:16px; font-weight:800; color:#37414F; text-align:center; margin:4px 0;}
-  .v16s .ar{height:2px; background:#9AA6B5; position:relative; margin:6px 0;}
-  .v16s .ar.lt::before, .v16s .ar.rt::after{content:""; position:absolute; top:-6px; border:7px solid transparent;}
-  .v16s .ar.lt::before{left:-6px; border-right-color:#9AA6B5;} .v16s .ar.rt::after{right:-6px; border-left-color:#9AA6B5;}
-  .v16s .tk{position:absolute; top:50%; width:16px; height:16px; margin-top:-8px; border-radius:50%; background:#E07A12; opacity:0;}
-  .v16s .rq .tk{top:auto; bottom:-1px; animation:v16sL 1s 1.0s forwards;}
-  .v16s .l1 .tk{top:auto; bottom:44px; animation:v16sL .8s 2.2s forwards;}
-  .v16s .rs .tk{top:-4px; width:auto; height:auto; border-radius:6px; background:none; display:flex; gap:3px; animation:v16sR 1s 3.8s forwards;}
-  .v16s .rs .tk u{text-decoration:none; font-size:11px; font-weight:800; color:#fff; background:#E07A12; border-radius:5px; padding:2px 5px;}
-  .v16s .rq .lb{animation:v16sLb .3s 1.0s forwards;} .v16s .l1 .lb{animation:v16sLb .3s 2.2s forwards;} .v16s .rs .lb{animation:v16sLb .3s 3.8s forwards;}
+  .v16s .ln{position:relative; padding:0 26px;}
+  .v16s .lb{display:block; font-size:18px; font-weight:800; color:#9AA6B5; text-align:center; margin:8px 0;}
+  .v16s .ln .lb:first-child{animation:v16sLb .3s 1.0s forwards;} .v16s .ln .lb:last-child{animation:v16sLb .3s 2.0s forwards;}
   @keyframes v16sLb{to{color:#E07A12;}}
-  @keyframes v16sL{0%{opacity:1; left:calc(100% - 16px)} 90%{opacity:1; left:0} 100%{opacity:0; left:0}}
-  @keyframes v16sR{0%{opacity:1; left:0} 90%{opacity:1; left:calc(100% - 70px)} 100%{opacity:0; left:calc(100% - 70px)}}
+  .v16s .ar{height:3px; background:#9AA6B5; position:relative; margin:14px 0;}
+  .v16s .ar.rt::after{content:""; position:absolute; right:-8px; top:-7px; border:8px solid transparent; border-left-color:#9AA6B5;}
+  .v16s .tk{position:absolute; top:50%; margin-top:-12px; display:flex; gap:4px; opacity:0; animation:v16sR 1.2s 2.2s forwards;}
+  .v16s .tk u{text-decoration:none; font-size:13px; font-weight:800; color:#fff; background:#E07A12; border-radius:5px; padding:3px 7px;}
+  @keyframes v16sR{0%{opacity:1; left:26px} 90%{opacity:1; left:calc(100% - 110px)} 100%{opacity:0; left:calc(100% - 110px)}}
   .v16s .bwW{position:relative; display:flex; flex-direction:column; gap:6px;}
-  .v16s .bwl, .v16r .hd span{font-size:16px; font-weight:700; color:#6B7785;}
-  .v16s .lb4{font-size:16px; font-weight:800; color:#37414F; text-align:center; animation:v16sLb .3s 4.9s forwards;}
-  .v16s .v16wb, .v16r .v16wb{position:relative; height:240px;}
-  .v16s .v16wb .ad, .v16r .v16wb .ad{flex:1; margin-left:10px; padding:2px 10px; border-radius:6px; background:#fff; font-family:ui-monospace,Menlo,monospace; font-size:12px; color:#16233A;}
-  .v16s .pg{opacity:0; animation:v16wIn .5s 4.9s forwards;}
-  .v16s .emp, .v16r .emp{position:absolute; inset:26px 0 0; display:flex; align-items:center; justify-content:center; font-size:14px; color:#9AA6B5; animation:v16sOut .2s 4.9s forwards;}
+  .v16s .bwl{font-size:16px; font-weight:700; color:#6B7785;}
+  .v16s .lb4{font-size:18px; font-weight:800; color:#9AA6B5; text-align:center; animation:v16sLb .3s 3.5s forwards;}
+  .v16s .v16wb{position:relative; height:250px;}
+  .v16s .v16wb .ad{flex:1; margin-left:10px; padding:2px 10px; border-radius:6px; background:#fff; font-family:ui-monospace,Menlo,monospace; font-size:12.5px; color:#16233A;}
+  .v16s .pg{opacity:0; animation:v16wIn .5s 3.5s forwards;}
+  .v16s .emp{position:absolute; inset:26px 0 0; display:flex; align-items:center; justify-content:center; font-size:15px; color:#9AA6B5; animation:v16sOut .2s 3.5s forwards;}
   @keyframes v16sOut{to{opacity:0;}}
-  .v16s .lg{display:grid; grid-template-columns:1fr 1fr 1.4fr; gap:14px; margin-top:22px; opacity:0; animation:v16wIn .5s 5.6s forwards;}
-  .v16s .lg p{margin:0; font-size:18px; color:#37414F; padding:12px 16px; border-radius:10px; background:#F4F6F8;}
+  .v16s .lg{display:grid; grid-template-columns:1fr 1.3fr 1.3fr; gap:14px; margin-top:22px; opacity:0; animation:v16wIn .5s 4.2s forwards;}
+  .v16s .lg p{margin:0; font-size:18px; color:#37414F; padding:14px 18px; border-radius:10px; background:#F4F6F8;}
   .v16s .lg b{color:#16233A; margin-right:10px; font-size:19px;}
-  /* 1-6 · 로컬 서버 실행 (v16r) */
-  .v16r .row{display:grid; grid-template-columns:1fr 46px 1fr 46px 1.15fr; align-items:start; margin-top:8px;}
-  .v16r .cl{display:flex; flex-direction:column; gap:10px; opacity:0; animation:v16wIn .5s var(--d) forwards;}
-  .v16r .hd{display:flex; align-items:baseline; gap:10px;} .v16r .hd b{font-size:24px; color:#16233A;}
-  .v16r .ar2{align-self:center; margin-top:40px; margin-left:6px; margin-right:10px; height:3px; background:#E07A12; position:relative; opacity:0; animation:v16wIn .4s var(--d) forwards;}
-  .v16r .ar2::after{content:""; position:absolute; right:-8px; top:-7px; border:8px solid transparent; border-left-color:#E07A12;}
-  .v16r .cc{height:240px; border:1.5px solid #C9CFD8; border-radius:10px; background:#F7F8FA; padding:16px; display:flex; flex-direction:column; gap:12px; box-sizing:border-box;}
-  .v16r .cc .b{max-width:90%; padding:12px 16px; border-radius:12px; font-size:19px; line-height:1.45;}
-  .v16r .cc .me{align-self:flex-end; background:#16233A; color:#fff; font-weight:700;}
-  .v16r .cc .ai{align-self:flex-start; background:#fff; border:1.5px solid #D9DDE3; color:#37414F; opacity:0; animation:v16wIn .4s 2.6s forwards;}
-  .v16r .cc .ai a{font-family:ui-monospace,Menlo,monospace; font-size:16px; color:#E07A12; font-weight:700;}
-  .v16r .tm{height:240px; margin:0; box-sizing:border-box; border-radius:10px; background:#1E2633; color:#E6EAF0; padding:18px 16px; font-size:16px; line-height:1.9; white-space:pre-wrap;
-    font-family:ui-monospace,Menlo,monospace;}
-  .v16r .tm .c2{color:#8FD18F; opacity:0; animation:v16wIn .3s 2.4s forwards;} .v16r .tm .c3{color:#8C97A8; opacity:0; animation:v16wIn .3s 2.8s forwards;}
-  .v16r .pg{opacity:0; animation:v16wIn .5s 4.0s forwards;} .v16r .emp{animation:v16sOut .2s 4.0s forwards;}
-  .v16r .rch{display:grid; grid-template-columns:1fr 2fr; gap:14px; margin-top:26px; opacity:0; animation:v16wIn .5s 4.8s forwards;}
-  .v16r .rch p{margin:0; padding:16px 20px; border-radius:12px; font-size:19px; color:#37414F; display:flex; align-items:center; gap:14px;}
-  .v16r .rch b{font-size:19px; color:#16233A;} .v16r .rch .ok{color:#2E7D3B; font-weight:800;} .v16r .rch .no{color:#B3261E; font-weight:700;}
-  .v16r .rch .ok{background:#EAF6EC; border:1.5px solid #6DBB7A;} .v16r .rch .ok b::after, .v16r .rch .no b::after{content:" →"; color:#9AA6B5;}
-  .v16r .rch .no{background:#F4F6F8; border:1.5px solid #C9CFD8;}
 """
 
 
@@ -249,12 +197,7 @@ def slides():
         # ── 웹의 3요소
         light("웹의 3요소", _web3(), T),
         # ── 서버
-        light("서버와 브라우저", _srv(), T),
-        light("로컬 서버 실행", _run(), T),
-        light("서버 관련 요청", viz2.tiles([
-            ("파일 수정 뒤", "브라우저 새로고침"), ("주소 접속 불가", "「서버 다시 띄워 줘」"),
-            ("포트 충돌", "「다른 포트로 띄워 줘」"), ("종료", "「서버 꺼 줘」")], 2), T),
-        # ── 권한 모드
+        light("브라우저로 열기", _open(), T),
         light("권한 모드", viz2.maprows([
             ("Manual (default)", "읽기만 자동", "파일 수정 · 명령마다 물어봄"),
             ("acceptEdits", "파일 수정까지 자동", "흔한 파일 명령도 자동"),
@@ -338,7 +281,7 @@ def slides():
               "엉뚱하게 만들기 시작하면 Esc 로 멈추고 다시 요청 · 망가지면 「마지막 커밋으로 되돌려 줘」"),
         tstep(T, 1, "태스크 하나 요청", T, ask=("Claude Code 입력창", "개발계획.md 의 첫 태스크만 만들어 줘"),
               rows=[("한 번에", "태스크 하나만"), ("승인", "파일마다 패널에서 승인"), ("자동 승인", "이 대화 동안 · 익숙해진 뒤")]),
-        light("실습 1-6 · 2단계 브라우저 확인", viz2.tiles([("열기", "서버 주소 또는 index.html"), ("눌러 보기", "방금 만든 기능 · 테스트 케이스대로"),
+        light("실습 1-6 · 2단계 브라우저 확인", viz2.tiles([("열기", "index.html 더블클릭"), ("눌러 보기", "방금 만든 기능 · 테스트 케이스대로"),
                                               ("새로고침", "macOS ⌘R · Windows F5"), ("다르면", "기대 · 실제 · 오류 원문으로 수정 요청")], 2), T),
         light("실습 1-6 · 3단계 완료 기준 대조", viz2.tiles([("보고", "Claude Code 작업 보고 · 만든 것 · 아직 없는 것"), ("대조", "개발계획.md 의 그 태스크 완료 기준"),
                                                 ("아직 없는 것", "다음 태스크에서 만들 것인지 확인"), ("빠진 것", "그 태스크 안에서 다시 요청")], 2), T),

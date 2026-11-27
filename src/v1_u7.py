@@ -19,13 +19,13 @@ def slides():
     return [
         # ── 배포란 · 비유
         light("배포", viz2.pair(
-            "배포 전", [("주소", "localhost — 내 컴퓨터 안"), ("열 수 있는 사람", "나 혼자"), ("컴퓨터를 끄면", "앱도 꺼짐")],
+            "배포 전", [("주소", "file:// · localhost — 내 컴퓨터 안"), ("열 수 있는 사람", "나 혼자"), ("컴퓨터를 끄면", "앱도 꺼짐")],
             "배포 후", [("주소", "mini-notion.vercel.app 형식"), ("열 수 있는 사람", "주소를 받은 누구나"), ("컴퓨터를 끄면", "그대로 열림")])
               + note("배포", "내 컴퓨터에서 돌던 앱을 인터넷 주소로 공개하는 일"), T),
         light("문서 파일과 공유 링크", _share(), T),
         light("localhost · 내부망 · 외부망", _net(), T),
         light("주소별 접속 범위", viz2.maprows([
-            ("localhost:8000", "이 컴퓨터만", "만들며 확인"),
+            ("file:// · localhost", "이 컴퓨터만", "만들며 확인"),
             ("192.168.0.12:8000", "같은 Wi-Fi · 회사망 기기", "내 휴대폰 화면 확인"),
             ("mini-notion.vercel.app", "인터넷의 누구나", "공유")], "주소", "열리는 범위")
               + src(("RFC 1918 · 사설 주소", "https://www.rfc-editor.org/rfc/rfc1918")), T),
@@ -66,7 +66,7 @@ def slides():
               + note("공유할 주소", "프로젝트 기본 주소 · 다시 배포해도 바뀌지 않음")
               + src(("Vercel · Generated URLs", "https://vercel.com/docs/deployments/generated-urls")), T),
         light("배포 화면", shot("notion_mobile.webp", "배포 주소 · 390px 휴대폰 화면", [
-            ("localhost 와 차이", "주소만 다름 · 코드 동일"), ("개발 계획 완료 기준", "모바일 폭에서 가로 스크롤 없음"),
+            ("내 컴퓨터와 차이", "주소만 다름 · 코드 동일"), ("개발 계획 완료 기준", "모바일 폭에서 가로 스크롤 없음"),
             ("확인 방법", "주소를 휴대폰으로 보내 열기"), ("깨질 때", "화면 캡처 첨부 · 수정 요청")]), T),
         # ── 재배포
         light("수정 → 재배포", '<div class="twocol"><div>'
@@ -75,7 +75,7 @@ def slides():
                       ("me", "커밋하고 GitHub에 올려 줘"),
                       ("ai", "커밋 「체크한 할 일 색 변경」 → push 완료 · Vercel 새 배포 시작")], "Claude Code 대화")
               + "</div><div>"
-              + viz2.tiles([("① 수정 요청", "Claude Code"), ("② localhost 확인", "만들 때와 같음"), ("③ 커밋 · push", "업로드 요청"),
+              + viz2.tiles([("① 수정 요청", "Claude Code"), ("② 내 컴퓨터에서 확인", "만들 때와 같음"), ("③ 커밋 · push", "업로드 요청"),
                             ("④ Vercel 자동 배포", "push 감지 · 1~2분"), ("⑤ 같은 주소에 반영", "새 링크 없음")], 1)
               + "</div></div>"
               + src(("Vercel · Git", "https://vercel.com/docs/git")), T),
