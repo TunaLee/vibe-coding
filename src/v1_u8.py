@@ -28,9 +28,6 @@ def slides():
             ("되돌린 적", "커밋으로 돌아간 순간"), ("다음에 붙일 것", "쓰다 보니 아쉬운 기능")], 2)
               + note("기록", "개발계획.md 맨 아래 「회고」 칸 · 2부 기획의 입력"), T),
         # ── 한계 → 2부
-        light("데이터 저장 위치 · localStorage", '<div class="v1u8s">' + shot("notion_fresh.webp", "같은 주소 · 팀원 브라우저에서 연 화면 — 「주간 회의록」 없음", [
-            ("저장 위치", "localStorage · 각 브라우저 안"), ("내 노트북", "주간 회의록 · 아이디어 메모"), ("팀원 휴대폰", "「시작하기」 한 장")]) + "</div>"
-              + note("필요한 것", "모두가 같은 곳에 쓰고 읽는 저장소 = 데이터베이스"), T),
         light("1부의 한계와 2부", viz2.maprows([
             ("페이지 공유 불가 · 브라우저마다 따로 저장", "데이터베이스 (Supabase)", ""),
             ("다른 서비스와 따로 · 날짜 · 캘린더 정보 직접 확인", "외부 API · MCP", ""),
@@ -48,8 +45,6 @@ def slides():
 
 
 CSS = """
-  /* v1 · 1-8 화면 캡처 높이 (메모가 내비 바에 걸리지 않게) */
-  .v1u8s .v1shot img{max-height:340px;}
   /* 1-8 · 요청 = 결과 ? */
   .v1u8q{display:flex; justify-content:center; align-items:center; gap:18px; margin:0 0 22px; padding:18px; border-radius:16px; background:#FFF8F0; border:2px solid #F28C28;}
   .v1u8q span{font-size:26px; font-weight:800; color:#16233A; padding:8px 22px; border-radius:12px; background:#fff; border:2px solid #D9DDE3;}
