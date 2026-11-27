@@ -99,6 +99,25 @@ def _node():
             '<p><b>열린 일</b>JS 로 서버까지 작성</p></div></div>')
 
 
+def _bug():
+    """버그 알리기 예 — 왼쪽: 「/」 를 쳐도 메뉴가 안 뜨는 화면 + 브라우저 콘솔의 빨간 오류 줄.
+    오른쪽: Claude Code 입력창에 실제로 적는 버그 보고(① 순서 ② 기대 ③ 실제 ④ 오류 원문 + 캡처)가 한 줄씩 채워짐."""
+    rows = [("① 순서", "새 페이지 → 빈 블록 클릭 → 「/」 입력"),
+            ("② 기대", "블록 종류 메뉴가 열림"),
+            ("③ 실제", "아무 반응 없음 · 새로고침해도 같음"),
+            ("④ 오류 원문", "Uncaught TypeError: Cannot read properties of null (reading 'classList') at app.js:87"),
+            ("⑤ 캡처", "[화면 캡처 붙임]")]
+    r = "".join(f'<li class="k{i}" style="--d:{1.6 + i * .6:.1f}s"><b>{h}</b><span>{esc(t)}</span></li>' for i, (h, t) in enumerate(rows))
+    return ('<div class="v16b"><div class="bad"><s>「「/」 메뉴가 안 돼요」</s><span>어디서 · 무엇을 했는지 없음 → AI 가 짐작으로 고침</span></div>'
+            '<div class="row"><div class="lt">'
+            '<div class="bw"><div class="bar"><i></i><i></i><i></i><span>미니 노션</span></div>'
+            '<div class="pg"><h4>주간 회의</h4><p>보고서 초안</p><p class="cur">/<u></u></p><div class="no">메뉴가 안 열림</div></div>'
+            '<div class="con"><em>Console</em><p>Uncaught TypeError: Cannot read properties of null (reading \'classList\')<small>app.js:87</small></p></div></div>'
+            '<div class="tip"><b>오류 원문 찾기</b>Chrome F12 · macOS ⌥⌘J → Console 의 빨간 줄 복사</div></div>'
+            '<div class="in"><div class="ih">Claude Code 입력창 · 예</div><p class="h">빈 블록에 「/」 를 입력해도 메뉴가 안 떠.</p>'
+            f'<ul>{r}</ul></div></div></div>')
+
+
 def _next():
     """Next.js — 한 프로젝트 안에 화면(page.tsx)과 서버(api/login/route.ts). 「실행해 줘」 → npm run dev → Node.js 가 localhost:3000 을 엶.
     로그인 요청이 브라우저 → 서버 코드로 갔다가 「통과」로 돌아옴. 비밀번호 확인은 서버 쪽에만 있음. 한 번 재생 후 정지."""
@@ -156,6 +175,33 @@ CSS = """
   .v16n .lg,.v16x .lg{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:24px; opacity:0; animation:v16wIn .5s 4.4s forwards;}
   .v16n .lg p,.v16x .lg p{margin:0; font-size:18px; color:#37414F; padding:13px 18px; border-radius:10px; background:#F4F6F8;}
   .v16n .lg b,.v16x .lg b{color:#16233A; margin-right:10px; font-size:19px;}
+  /* 1-6 · 버그 알리기 (v16b) */
+  .v16b .bad{display:flex; align-items:center; gap:16px; margin-bottom:16px; font-size:17px; color:#6B7785;}
+  .v16b .bad s{font-size:19px; color:#B4232A; background:#FDECEC; padding:5px 12px; border-radius:8px;}
+  .v16b .row{display:grid; grid-template-columns:470px 1fr; gap:24px; align-items:start;}
+  .v16b .bw{border:1.5px solid #D9DDE3; border-radius:12px; overflow:hidden; background:#fff;}
+  .v16b .bar{display:flex; align-items:center; gap:5px; padding:6px 10px; background:#E9ECF0;}
+  .v16b .bar i{width:9px; height:9px; border-radius:50%; background:#C3C9D1;} .v16b .bar span{margin-left:8px; font-size:13px; color:#37414F;}
+  .v16b .pg{position:relative; padding:14px 22px 16px; min-height:150px;}
+  .v16b .pg h4{margin:0 0 8px; font-size:22px; color:#16233A;} .v16b .pg p{margin:4px 0; font-size:16px; color:#37414F;}
+  .v16b .cur{display:flex; align-items:center;} .v16b .cur u{display:inline-block; width:2px; height:18px; background:#16233A; margin-left:2px; animation:v16bBl 1s steps(1) infinite;}
+  @keyframes v16bBl{50%{opacity:0}}
+  .v16b .no{position:absolute; left:60px; top:96px; border:2px dashed #B4232A; color:#B4232A; font-size:14px; font-weight:800; padding:6px 12px; border-radius:8px; opacity:0; animation:v16wIn .4s .6s forwards;}
+  .v16b .con{background:#1E1E1E; padding:8px 14px 10px; opacity:0; animation:v16wIn .4s 1s forwards;}
+  .v16b .con em{font-style:normal; font-size:12px; color:#9AA6B5;}
+  .v16b .con p{margin:4px 0 0; font-family:ui-monospace,Menlo,monospace; font-size:12.5px; line-height:1.45; color:#FF8A80; background:rgba(255,80,80,.12); padding:6px 8px; border-radius:4px;}
+  .v16b .con small{display:block; text-align:right; color:#9AA6B5;}
+  .v16b .tip{margin-top:12px; font-size:15px; color:#37414F; background:#F4F6F8; border-radius:10px; padding:10px 14px;}
+  .v16b .tip b{color:#16233A; margin-right:10px;}
+  .v16b .in{border:2px solid #16233A; border-radius:14px; background:#fff; padding:14px 18px;}
+  .v16b .ih{font-size:13px; font-weight:800; color:#6B7785;}
+  .v16b .h{margin:6px 0 10px; font-size:20px; font-weight:800; color:#16233A;}
+  .v16b ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px;}
+  .v16b li{display:grid; grid-template-columns:108px 1fr; gap:10px; align-items:baseline; opacity:0; animation:v16wIn .4s var(--d) forwards;}
+  .v16b li b{font-size:15px; color:#fff; background:#F28C28; border-radius:6px; padding:2px 8px; text-align:center;}
+  .v16b li span{font-size:17px; color:#16233A; line-height:1.45;}
+  .v16b li.k3 span{font-family:ui-monospace,Menlo,monospace; font-size:13.5px; color:#B4232A;}
+  .v16b li.k4 b{background:#16233A;}
   /* 1-6 · Next.js (v16x) */
   .v16x .row{display:grid; grid-template-columns:390px 170px 1fr; align-items:center; gap:14px;}
   .v16x .pj{position:relative; border:2px dashed #16233A; border-radius:16px; padding:34px 16px 16px; display:flex; flex-direction:column; gap:10px;}
@@ -332,9 +378,7 @@ def slides():
             "바이브코딩", [("① 증상 · 오류 화면 전달", "「버튼을 눌러도 반응 없음」 + 화면 캡처"), ("② AI가 원인 파악 · 수정", "파일 읽기 · 고치기"),
                        ("③ 실행해 확인", "브라우저에서 다시 눌러 보기"), ("④ 안 되면 증상 다시 전달", "달라진 점 그대로")], hl="r")
               + src(("참고 · 이동훈의 루트AI 「바이브코딩 15분」", "https://www.youtube.com/watch?v=TImjZnT87ys")), T),
-        ba("버그 알리는 방법", T, "「로그인이 안 돼요」",
-           "「kim@gmail.com 으로 넣으면\n기대 · 거절 / 실제 · 로그인됨\n오류 메시지 원문 · 화면 캡처 첨부」",
-           "재현 순서 · 기대 결과 · 실제 결과 · 오류 원문"),
+        light("버그 알리는 방법", _bug(), T),
         ba("구체적 수정 요청", T, "「더 예쁘게 해 줘」",
            "「왼쪽 목록에서 긴 페이지 제목이 잘려.\n목록 폭은 그대로, 제목은 두 줄까지 보이게」",
            "세 칸 · 어디 · 지금 상태 · 원하는 결과 · 한 번에 하나"),
