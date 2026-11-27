@@ -1854,6 +1854,50 @@ order by date;</pre></div><dl><dt>사람이 하는 일</dt><dd>문법 학습 · 
   <div class="body"><div class="mid"><div class="bns c4"><div class="bn" style="--d:0.00s"><div class="bv">2<small>개</small></div><div class="bl">프로젝트</div></div><div class="bn" style="--d:0.12s"><div class="bv">500<small>MB</small></div><div class="bl">데이터베이스 용량</div></div><div class="bn hl" style="--d:0.24s"><div class="bv">5만<small>명</small></div><div class="bl">월 로그인 이용자</div></div><div class="bn" style="--d:0.36s"><div class="bv">1<small>주</small></div><div class="bl">미사용 시 일시정지</div></div></div><div class="dbnote"><span>유료</span> Pro 월 $25부터 · 2부 실습은 무료 플랜으로 충분</div><div class="src">출처 · <a href="https://supabase.com/pricing" target="_blank" rel="noopener">supabase.com/pricing · 2026-11</a></div></div></div>
 </section>
 
+<section class="slide lt labs" data-title="[실습 2-2] Supabase 가입 · 첫 표">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">2-2</span><span class="labtag">실습 2-2</span></div>
+  <h2 class="s-title sm">Supabase 가입 · 첫 표</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="labgrid">
+    <div class="lc goal"><div class="lh">목표</div><p>Supabase 프로젝트를 만들고 pages 표에 행을 직접 넣어 본다</p></div>
+    <div class="lc steps"><div class="lh">단계</div><ol><li>supabase.com 가입 · GitHub 계정</li><li>새 프로젝트 · 이름 · DB 비밀번호 · 지역</li><li>Table Editor 에서 pages 표 만들기</li><li>행 2개 직접 넣기</li><li>date 칸에 「월말쯤」 넣어 보기</li></ol></div>
+    <div class="lc done"><div class="lh">완료 기준</div><ul><li>대시보드에 mini-notion 프로젝트</li><li>pages 표에 행 2개</li><li>날짜 칸이 형식 안 맞는 값을 거절</li></ul></div>
+  </div></div>
+</section>
+
+<section class="slide lt" data-title="실습 2-2 · 1단계 가입">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">2-2</span></div>
+  <h2 class="s-title sm">실습 2-2 · 1단계 가입</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>주소</b><span><a class="go" href="https://supabase.com/dashboard/sign-up" target="_blank" rel="noopener">supabase.com/dashboard/sign-up</a></span></div><div class="v2tile" style="--d:0.08s"><b>방법</b><span>Continue with GitHub · 1-2 에서 만든 계정</span></div><div class="v2tile" style="--d:0.16s"><b>요금</b><span>Free 플랜 · 카드 등록 없음</span></div></div><div class="src">출처 · <a href="https://supabase.com/pricing" target="_blank" rel="noopener">Supabase · Pricing</a></div></div></div>
+</section>
+
+<section class="slide lt" data-title="실습 2-2 · 2단계 새 프로젝트">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">2-2</span></div>
+  <h2 class="s-title sm">실습 2-2 · 2단계 새 프로젝트</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v2tiles c4"><div class="v2tile" style="--d:0.00s"><b>이름</b><span>mini-notion</span></div><div class="v2tile" style="--d:0.08s"><b>DB 비밀번호</b><span>Generate · 따로 보관 · 대화창 · 코드에 붙이지 않기</span></div><div class="v2tile" style="--d:0.16s"><b>지역</b><span>Northeast Asia (Seoul)</span></div><div class="v2tile" style="--d:0.24s"><b>기다리기</b><span>준비 끝나면 대시보드 열림</span></div></div><div class="dbnote"><span>한 프로젝트 = DB 하나</span> Postgres 전체 · 로그인 · 저장소가 같이 생김</div></div></div>
+</section>
+
+<section class="slide lt" data-title="실습 2-2 · 3단계 pages 표">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">2-2</span></div>
+  <h2 class="s-title sm">실습 2-2 · 3단계 pages 표</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v2tiles c4"><div class="v2tile" style="--d:0.00s"><b>위치</b><span>왼쪽 Table Editor → New table</span></div><div class="v2tile" style="--d:0.08s"><b>이름</b><span>pages</span></div><div class="v2tile" style="--d:0.16s"><b>열 추가</b><span>title · text / date · date / status · text</span></div><div class="v2tile" style="--d:0.24s"><b>RLS</b><span>체크된 그대로 · 규칙은 2-4</span></div></div><div class="dbnote"><span>기본 열</span> id · created_at 은 자동으로 들어 있음</div></div></div>
+</section>
+
+<section class="slide lt" data-title="실습 2-2 · 4단계 행 넣기">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">2-2</span></div>
+  <h2 class="s-title sm">실습 2-2 · 4단계 행 넣기</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v2tiles c4"><div class="v2tile" style="--d:0.00s"><b>Insert row</b><span>주간 회의록 · 2026-11-27 · 작성 중</span></div><div class="v2tile" style="--d:0.08s"><b>한 줄 더</b><span>교육 자료 정리 · 2026-11-25 · 초안</span></div><div class="v2tile" style="--d:0.16s"><b>형식 시험</b><span>date 칸에 「월말쯤」 → 저장 거절</span></div><div class="v2tile" style="--d:0.24s"><b>확인</b><span>표에 행 2개 · id 1 · 2 자동</span></div></div><div class="dbnote"><span>엑셀과 차이</span> 열마다 정한 형식(스키마)에 맞지 않으면 저장 안 됨</div></div></div>
+</section>
+
 <section class="slide dk" data-title="다음 단원">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="v1end"><div class="v1got"><span>2-2 산출물</span><b>표 · 행 · 열 · Supabase</b></div><a class="v1next" href="#u-2-3"><span>2-3</span><b>기획 · 요구사항</b><small>→ 기획서 · 개발 계획 v2</small></a></div>
@@ -2024,7 +2068,7 @@ order by date;</pre></div><dl><dt>사람이 하는 일</dt><dd>문법 학습 · 
   <div class="eyebrow"><span class="tag">2-4</span></div>
   <h2 class="s-title sm">Supabase 연결 순서</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="flow"><div class="fs"><b>새 프로젝트</b><span>supabase.com · 무료</span></div><div class="fa">→</div><div class="fs"><b>표 만들기</b><span>SQL Editor · 실행</span></div><div class="fa">→</div><div class="fs"><b>URL · 키 확인</b><span>Settings › API Keys</span></div><div class="fa">→</div><div class="fs hl"><b>앱에 연결</b><span>Claude Code</span></div><div class="fa">→</div><div class="fs"><b>확인</b><span>Table Editor</span></div></div><div class="v2tiles c2"><div class="v2tile" style="--d:0.00s"><b>무료 플랜</b><span>프로젝트 2개 · DB 500MB</span></div><div class="v2tile" style="--d:0.08s"><b>일시 정지</b><span>1주일 사용 없으면 · 대시보드에서 다시 켜기</span></div></div><div class="src">출처 · <a href="https://supabase.com/pricing" target="_blank" rel="noopener">Supabase · Pricing</a> · <a href="https://supabase.com/docs/guides/api/api-keys" target="_blank" rel="noopener">Supabase · API keys</a></div></div></div>
+  <div class="body"><div class="mid"><div class="flow"><div class="fs"><b>프로젝트</b><span>2-2 실습에서 만든 것</span></div><div class="fa">→</div><div class="fs"><b>표 만들기</b><span>SQL Editor · 실행</span></div><div class="fa">→</div><div class="fs"><b>URL · 키 확인</b><span>Settings › API Keys</span></div><div class="fa">→</div><div class="fs hl"><b>앱에 연결</b><span>Claude Code</span></div><div class="fa">→</div><div class="fs"><b>확인</b><span>Table Editor</span></div></div><div class="v2tiles c2"><div class="v2tile" style="--d:0.00s"><b>무료 플랜</b><span>프로젝트 2개 · DB 500MB</span></div><div class="v2tile" style="--d:0.08s"><b>일시 정지</b><span>1주일 사용 없으면 · 대시보드에서 다시 켜기</span></div></div><div class="src">출처 · <a href="https://supabase.com/pricing" target="_blank" rel="noopener">Supabase · Pricing</a> · <a href="https://supabase.com/docs/guides/api/api-keys" target="_blank" rel="noopener">Supabase · API keys</a></div></div></div>
 </section>
 
 <section class="slide lt" data-title="Supabase 키 두 종류">
@@ -2082,7 +2126,7 @@ order by date;</pre></div><dl><dt>사람이 하는 일</dt><dd>문법 학습 · 
   <div class="rule"></div>
   <div class="body"><div class="labgrid">
     <div class="lc goal"><div class="lh">목표</div><p>내 앱 → 모두 같은 페이지 목록 · 로그인 · 내 페이지만 수정</p><div class="lf">사용 파일 · 예시/개발계획.md 5 · 7 칸 (비교용)</div></div>
-    <div class="lc steps"><div class="lh">단계</div><ol><li>Supabase 새 프로젝트</li><li>Claude Code에 표 설계 요청 · SQL 실행</li><li>저장 위치 교체 요청</li><li>로그인 · RLS 요청</li><li>계정 두 개로 확인</li></ol></div>
+    <div class="lc steps"><div class="lh">단계</div><ol><li>2-2 의 Supabase 프로젝트 열기</li><li>Claude Code에 표 설계 요청 · SQL 실행</li><li>저장 위치 교체 요청</li><li>로그인 · RLS 요청</li><li>계정 두 개로 확인</li></ol></div>
     <div class="lc done"><div class="lh">완료 기준</div><ul><li>다른 기기에서 같은 페이지가 보임</li><li>다른 계정 작성 페이지는 삭제 불가</li></ul></div>
   </div></div>
 </section>

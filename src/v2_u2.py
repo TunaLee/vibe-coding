@@ -8,8 +8,9 @@
 - Supabase MCP: supabase.com/docs/guides/getting-started/mcp
 """
 import viz2
+from v1kit import go
 from hx import note, table
-from deck import light
+from deck import lab, light
 from stats_hx import big, src
 from v2kit import codemap
 from v3kit import phmap
@@ -204,6 +205,27 @@ def slides():
             ("2", "개", "프로젝트"), ("500", "MB", "데이터베이스 용량"), ("5만", "명", "월 로그인 이용자", True), ("1", "주", "미사용 시 일시정지")])
               + note("유료", "Pro 월 $25부터 · 2부 실습은 무료 플랜으로 충분")
               + src(("supabase.com/pricing · 2026-11", "https://supabase.com/pricing")), T),
+        # ── 실습
+        lab("2-2", "Supabase 가입 · 첫 표", T, "Supabase 프로젝트를 만들고 pages 표에 행을 직접 넣어 본다",
+            ["supabase.com 가입 · GitHub 계정", "새 프로젝트 · 이름 · DB 비밀번호 · 지역", "Table Editor 에서 pages 표 만들기",
+             "행 2개 직접 넣기", "date 칸에 「월말쯤」 넣어 보기"],
+            ["대시보드에 mini-notion 프로젝트", "pages 표에 행 2개", "날짜 칸이 형식 안 맞는 값을 거절"]),
+        light("실습 2-2 · 1단계 가입", viz2.tiles([
+            ("주소", go("supabase.com/dashboard/sign-up", "https://supabase.com/dashboard/sign-up")),
+            ("방법", "Continue with GitHub · 1-2 에서 만든 계정"), ("요금", "Free 플랜 · 카드 등록 없음")], 3)
+              + src(("Supabase · Pricing", "https://supabase.com/pricing")), T),
+        light("실습 2-2 · 2단계 새 프로젝트", viz2.tiles([
+            ("이름", "mini-notion"), ("DB 비밀번호", "Generate · 따로 보관 · 대화창 · 코드에 붙이지 않기"),
+            ("지역", "Northeast Asia (Seoul)"), ("기다리기", "준비 끝나면 대시보드 열림")], 4)
+              + note("한 프로젝트 = DB 하나", "Postgres 전체 · 로그인 · 저장소가 같이 생김"), T),
+        light("실습 2-2 · 3단계 pages 표", viz2.tiles([
+            ("위치", "왼쪽 Table Editor → New table"), ("이름", "pages"),
+            ("열 추가", "title · text / date · date / status · text"), ("RLS", "체크된 그대로 · 규칙은 2-4")], 4)
+              + note("기본 열", "id · created_at 은 자동으로 들어 있음"), T),
+        light("실습 2-2 · 4단계 행 넣기", viz2.tiles([
+            ("Insert row", "주간 회의록 · 2026-11-27 · 작성 중"), ("한 줄 더", "교육 자료 정리 · 2026-11-25 · 초안"),
+            ("형식 시험", "date 칸에 「월말쯤」 → 저장 거절"), ("확인", "표에 행 2개 · id 1 · 2 자동")], 4)
+              + note("엑셀과 차이", "열마다 정한 형식(스키마)에 맞지 않으면 저장 안 됨"), T),
     ]
 
 

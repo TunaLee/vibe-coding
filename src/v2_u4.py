@@ -89,7 +89,7 @@ def slides():
             ("ai", "표 설계 · SQL 파일 저장 완료 · SQL Editor 에서 실행 필요")], "Claude Code 대화 예")
               + note("사람이 정할 것", "표 이름 · 열 · 지켜야 할 규칙 · SQL 은 Claude Code"), T),
         # ── Supabase 연결
-        light("Supabase 연결 순서", flow([("새 프로젝트", "supabase.com · 무료"), ("표 만들기", "SQL Editor · 실행"),
+        light("Supabase 연결 순서", flow([("프로젝트", "2-2 실습에서 만든 것"), ("표 만들기", "SQL Editor · 실행"),
                                        ("URL · 키 확인", "Settings › API Keys"), ("앱에 연결", "Claude Code"), ("확인", "Table Editor")], hl=3)
               + viz2.tiles([("무료 플랜", "프로젝트 2개 · DB 500MB"), ("일시 정지", "1주일 사용 없으면 · 대시보드에서 다시 켜기")], 2)
               + src(("Supabase · Pricing", "https://supabase.com/pricing"), KEYS), T),
@@ -120,7 +120,7 @@ def slides():
               + note("시크릿 창", "같은 컴퓨터에서 두 번째 계정 · 로그인 정보가 따로"), T),
         # ── 실습
         lab("2-4", "Supabase 저장 · 로그인 · 권한", T, "내 앱 → 모두 같은 페이지 목록 · 로그인 · 내 페이지만 수정",
-            ["Supabase 새 프로젝트", "Claude Code에 표 설계 요청 · SQL 실행", "저장 위치 교체 요청", "로그인 · RLS 요청", "계정 두 개로 확인"],
+            ["2-2 의 Supabase 프로젝트 열기", "Claude Code에 표 설계 요청 · SQL 실행", "저장 위치 교체 요청", "로그인 · RLS 요청", "계정 두 개로 확인"],
             ["다른 기기에서 같은 페이지가 보임", "다른 계정 작성 페이지는 삭제 불가"],
             files="예시/개발계획.md 5 · 7 칸 (비교용)"),
         brief("2-4", T, ["Supabase 프로젝트 만들기", "표 설계 · SQL 실행", "저장 · 조회를 DB 로 교체", "로그인 · RLS", "두 계정 확인"],
