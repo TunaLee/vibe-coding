@@ -1,6 +1,6 @@
 """2-2 데이터베이스.
 
-배경(브라우저마다 따로 저장 → 한 곳에 저장) → 비유(엑셀 · 원시인 돌판 그림) → 할 일 표 애니메이션(행 · 열)
+배경(브라우저마다 따로 저장 → 한 곳에 저장) → 데이터 기록의 변화(종이 → 엑셀 → DB → 클라우드 DB) → 비유(엑셀 · 원시인 돌판 그림) → 할 일 표 애니메이션(행 · 열)
 → 엑셀과 데이터베이스(동시 쓰기 · 형식 거절 애니메이션) → 관계(members · tasks) → SQL 한 줄 뜻 → Supabase 구성 · 이유 → 무료 플랜.
 사실 출처
 - Supabase 무료 플랜: supabase.com/pricing (프로젝트 2개 · DB 500 MB · 월 이용자 50,000 · 1주 미사용 시 일시정지 · Pro $25/월)
@@ -89,10 +89,45 @@ def result():
             f'<tbody>{rows}</tbody></table></div>')
 
 
+def history():
+    """데이터 기록의 변화 — 종이 장부 → 엑셀 파일 → 데이터베이스 → 클라우드 DB.
+    같은 할 일 한 건이 단계마다 어떤 모양으로 남는지 + 쌓이는 방식 · 쌓이는 양 막대. 평택대 교안 「데이터 관리의 변화」 구조."""
+    R = ("주간 보고서 작성", "11/27", "김하늘")
+    paper = (f'<div class="v2hP"><p>{R[1]} {R[0]} — {R[2]}</p><p>11/25 신규 입사자 교육 — 이준호</p>'
+             '<p class="x">11/18 예산안 검토 — 박서연</p></div>')
+    def grid(rows, head, idcol=False):
+        th = "".join(f"<th>{h}</th>" for h in head)
+        tr = "".join("<tr>" + "".join(f"<td>{c}</td>" for c in r) + "</tr>" for r in rows)
+        return f'<table class="v2hT{" db" if idcol else ""}"><thead><tr>{th}</tr></thead><tbody>{tr}</tbody></table>'
+    xl = ('<div class="v2hX"><div class="f">할일_최종_v3.xlsx</div>'
+          + grid([(R[0], R[1], R[2]), ("교육 자료", "11/25", "이준호")], ["A 할 일", "B 기한", "C 담당"]) + '</div>')
+    db = grid([("41", R[0], "2026-11-27", "1"), ("42", "교육 자료", "2026-11-25", "2"), ("43", "<em>새 행</em>", "…", "…")],
+              ["id", "title", "due", "owner_id"], True)
+    cl = ('<div class="v2hC">' + grid([("41", R[0], "2026-11-27"), ("42", "교육 자료", "2026-11-25")], ["id", "title", "due"], True)
+          + '<div class="v2hDv"><span>노트북</span><span>휴대폰</span><span>Vercel 앱</span></div></div>')
+    st = [  # (이름, 그림, 기록, 보관, 쌓이는 방식, 막대 %)
+        ("종이 장부", paper, "사람이 손으로 적음", "장부 · 화이트보드", "페이지가 늘어남 · 찾기 어려움", 8),
+        ("엑셀 파일", xl, "사람이 PC 에 입력", "파일 · 메일로 사본 전달", "사본마다 내용이 갈림", 30),
+        ("데이터베이스", db, "앱이 서버로 보냄", "회사 서버 한 곳", "한 표에 행이 추가 · 형식 검사", 65),
+        ("클라우드 DB", cl, "앱이 인터넷으로 보냄", "Supabase 같은 서비스", "설치 없이 · 어디서나 같은 표", 100),
+    ]
+    c = ""
+    for i, (name, pic, rec, keep, how, bar) in enumerate(st):
+        d = .3 + i * 2.2
+        if i:
+            c += f'<i class="v2hA" style="--d:{d - .3:.1f}s">→</i>'
+        c += (f'<div class="v2hK{" on" if i == 3 else ""}" style="--d:{d:.1f}s"><b class="n">{name}</b><div class="pic">{pic}</div>'
+              f'<dl><dt>기록</dt><dd>{rec}</dd><dt>보관</dt><dd>{keep}</dd><dt>쌓이는 방식</dt><dd>{how}</dd></dl>'
+              f'<div class="bar"><span>쌓이는 양</span><i style="--w:{bar}%; --d:{d + .6:.1f}s"></i></div></div>')
+    return (f'<div class="v2hTop"><span>예전</span><i></i><span>지금 · 2부</span></div><div class="v2h">{c}</div>')
+
+
 def slides():
     return [
         light("저장 위치의 한계", where_saved()
               + note("데이터베이스", "여러 사람 · 여러 기기가 같은 데이터를 읽고 쓰는 저장소"), T),
+        light("데이터 기록의 변화", history()
+              + note("2부", "Supabase · 클라우드 DB 한 곳에 할 일 기록"), T),
         light("엑셀 표", phmap("v2_u2_tablet.webp", "칸을 나눠 기록하는 돌판", *GEN, viz2.maprows([
             ("엑셀 파일", "데이터베이스", "Supabase 프로젝트 하나"), ("시트", "표 (테이블)", "tasks · members"),
             ("가로 한 줄", "행", "할 일 한 건"), ("세로 한 칸", "열", "할 일 · 기한 · 담당자"),
@@ -126,6 +161,36 @@ def slides():
 
 
 CSS = """
+  /* 2-2 · 데이터 기록의 변화 (v2h) */
+  .v2hTop{display:flex; align-items:center; gap:12px; margin:0 0 10px; font-size:15px; font-weight:700; color:#5A6B80;}
+  .v2hTop i{flex:1; height:2px; background:#1F3A5F; position:relative;}
+  .v2hTop i:after{content:""; position:absolute; right:-2px; top:-5px; border:6px solid transparent; border-left:10px solid #1F3A5F;}
+  .v2h{display:grid; grid-template-columns:1fr 26px 1fr 26px 1fr 26px 1fr; align-items:stretch;}
+  .v2hK{border:2px solid #D9DDE3; border-radius:14px; background:#fff; padding:12px 14px; display:flex; flex-direction:column; gap:8px;
+    opacity:0; animation:v2hIn .6s var(--d) forwards;}
+  .v2hK.on{border-color:#F28C28; background:#FFF8F0;} .v2hK.on .n{color:#E07A12;}
+  .v2hK .n{font-size:21px; color:#16233A;}
+  .v2hK .pic{height:112px; display:flex; align-items:center; justify-content:center;}
+  .v2hK dl{margin:0; display:grid; gap:1px;} .v2hK dt{font-size:12.5px; color:#6B7785; margin-top:4px;} .v2hK dd{margin:0; font-size:15px; font-weight:600; color:#16233A;}
+  .v2hK .bar{margin-top:auto; padding-top:6px;} .v2hK .bar span{font-size:12.5px; color:#6B7785;}
+  .v2hK .bar i{display:block; height:11px; border-radius:6px; background:#1F3A5F; margin-top:3px; width:0; animation:v2hW .9s var(--d) ease-out forwards;}
+  .v2hK.on .bar i{background:#F28C28;}
+  .v2hA{font-style:normal; align-self:center; text-align:center; font-size:24px; font-weight:800; color:#F28C28; opacity:0; animation:v2hIn .4s var(--d) forwards;}
+  .v2hP{width:100%; background:#FFFBF0; border:1.5px solid #CDBF9C; border-radius:4px; padding:8px 10px; transform:rotate(-1.2deg);
+    background-image:repeating-linear-gradient(#FFFBF0 0 25px, #E6DCC2 25px 26px);}
+  .v2hP p{margin:0; font-size:13.5px; line-height:26px; color:#3A3A5A; font-style:italic; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .v2hP p.x{text-decoration:line-through; color:#8A8AA0;}
+  .v2hX{width:100%;} .v2hX .f{font-size:12px; color:#1D6F42; font-weight:700; margin-bottom:3px;}
+  .v2hT{width:100%; border-collapse:collapse; font-size:12.5px;}
+  .v2hT th{background:#1D6F42; color:#fff; font-weight:600; padding:3px 5px; text-align:left;}
+  .v2hT td{border:1px solid #C9CFD8; padding:3px 5px; color:#16233A; white-space:nowrap; overflow:hidden; max-width:110px; text-overflow:ellipsis;}
+  .v2hT.db th{background:#1F3A5F; font-family:var(--mono);} .v2hT.db td{font-family:var(--mono); font-size:12px;}
+  .v2hT em{font-style:normal; color:#E07A12; font-weight:700;}
+  .v2hC{width:100%;} .v2hC .v2hT.db th{background:#3ECF8E; color:#0F2A1D;}
+  .v2hDv{display:flex; gap:5px; margin-top:6px;} .v2hDv span{font-size:11.5px; font-weight:700; color:#fff; background:#1F3A5F; border-radius:10px; padding:2px 8px;}
+  @keyframes v2hIn{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
+  @keyframes v2hW{to{width:var(--w)}}
+  @media print{.v2hK,.v2hA{opacity:1; animation:none} .v2hK .bar i{width:var(--w); animation:none}}
   /* 2-2 · 저장 위치 */
   .v2u2where{display:grid; grid-template-columns:1fr 50px 1fr; gap:10px; align-items:start; margin:4px 0 16px;}
   .v2u2side{border:2px solid #D9DDE3; border-radius:16px; padding:16px 18px; background:#fff;}

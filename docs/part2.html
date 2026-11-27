@@ -998,6 +998,36 @@
   @keyframes v2u1in{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
   @media print{.v2u1bx,.v2u1ar{opacity:1; animation:none}}
 
+  /* 2-2 · 데이터 기록의 변화 (v2h) */
+  .v2hTop{display:flex; align-items:center; gap:12px; margin:0 0 10px; font-size:15px; font-weight:700; color:#5A6B80;}
+  .v2hTop i{flex:1; height:2px; background:#1F3A5F; position:relative;}
+  .v2hTop i:after{content:""; position:absolute; right:-2px; top:-5px; border:6px solid transparent; border-left:10px solid #1F3A5F;}
+  .v2h{display:grid; grid-template-columns:1fr 26px 1fr 26px 1fr 26px 1fr; align-items:stretch;}
+  .v2hK{border:2px solid #D9DDE3; border-radius:14px; background:#fff; padding:12px 14px; display:flex; flex-direction:column; gap:8px;
+    opacity:0; animation:v2hIn .6s var(--d) forwards;}
+  .v2hK.on{border-color:#F28C28; background:#FFF8F0;} .v2hK.on .n{color:#E07A12;}
+  .v2hK .n{font-size:21px; color:#16233A;}
+  .v2hK .pic{height:112px; display:flex; align-items:center; justify-content:center;}
+  .v2hK dl{margin:0; display:grid; gap:1px;} .v2hK dt{font-size:12.5px; color:#6B7785; margin-top:4px;} .v2hK dd{margin:0; font-size:15px; font-weight:600; color:#16233A;}
+  .v2hK .bar{margin-top:auto; padding-top:6px;} .v2hK .bar span{font-size:12.5px; color:#6B7785;}
+  .v2hK .bar i{display:block; height:11px; border-radius:6px; background:#1F3A5F; margin-top:3px; width:0; animation:v2hW .9s var(--d) ease-out forwards;}
+  .v2hK.on .bar i{background:#F28C28;}
+  .v2hA{font-style:normal; align-self:center; text-align:center; font-size:24px; font-weight:800; color:#F28C28; opacity:0; animation:v2hIn .4s var(--d) forwards;}
+  .v2hP{width:100%; background:#FFFBF0; border:1.5px solid #CDBF9C; border-radius:4px; padding:8px 10px; transform:rotate(-1.2deg);
+    background-image:repeating-linear-gradient(#FFFBF0 0 25px, #E6DCC2 25px 26px);}
+  .v2hP p{margin:0; font-size:13.5px; line-height:26px; color:#3A3A5A; font-style:italic; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .v2hP p.x{text-decoration:line-through; color:#8A8AA0;}
+  .v2hX{width:100%;} .v2hX .f{font-size:12px; color:#1D6F42; font-weight:700; margin-bottom:3px;}
+  .v2hT{width:100%; border-collapse:collapse; font-size:12.5px;}
+  .v2hT th{background:#1D6F42; color:#fff; font-weight:600; padding:3px 5px; text-align:left;}
+  .v2hT td{border:1px solid #C9CFD8; padding:3px 5px; color:#16233A; white-space:nowrap; overflow:hidden; max-width:110px; text-overflow:ellipsis;}
+  .v2hT.db th{background:#1F3A5F; font-family:var(--mono);} .v2hT.db td{font-family:var(--mono); font-size:12px;}
+  .v2hT em{font-style:normal; color:#E07A12; font-weight:700;}
+  .v2hC{width:100%;} .v2hC .v2hT.db th{background:#3ECF8E; color:#0F2A1D;}
+  .v2hDv{display:flex; gap:5px; margin-top:6px;} .v2hDv span{font-size:11.5px; font-weight:700; color:#fff; background:#1F3A5F; border-radius:10px; padding:2px 8px;}
+  @keyframes v2hIn{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
+  @keyframes v2hW{to{width:var(--w)}}
+  @media print{.v2hK,.v2hA{opacity:1; animation:none} .v2hK .bar i{width:var(--w); animation:none}}
   /* 2-2 · 저장 위치 */
   .v2u2where{display:grid; grid-template-columns:1fr 50px 1fr; gap:10px; align-items:start; margin:4px 0 16px;}
   .v2u2side{border:2px solid #D9DDE3; border-radius:16px; padding:16px 18px; background:#fff;}
@@ -1382,6 +1412,14 @@
   <h2 class="s-title sm">저장 위치의 한계</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v2u2where"><div class="v2u2side"><div class="v2u2h">브라우저 저장 · localStorage</div><div class="v2u2devs"><div class="v2u2dv" style="--d:0.30s"><b>내 노트북</b><span>할 일 6건</span></div><div class="v2u2dv" style="--d:0.60s"><b>팀원 노트북</b><span>할 일 0건</span></div><div class="v2u2dv" style="--d:0.90s"><b>팀원 휴대폰</b><span>할 일 0건</span></div></div><div class="v2u2cap" style="--d:1.3s">기기마다 다른 보드</div></div><i class="v2u2ar">→</i><div class="v2u2side on"><div class="v2u2h">데이터베이스 · 한 곳</div><div class="v2u2devs"><div class="v2u2dv" style="--d:2.00s"><b>내 노트북</b><span>할 일 6건</span></div><div class="v2u2dv" style="--d:2.20s"><b>팀원 노트북</b><span>할 일 6건</span></div><div class="v2u2dv" style="--d:2.40s"><b>팀원 휴대폰</b><span>할 일 6건</span></div></div><div class="v2u2pipe" style="--d:2.7s">↓ ↓ ↓</div><div class="v2u2db" style="--d:3.0s"><b>데이터베이스</b><span>할 일 6건 · 모두가 같은 곳을 읽고 씀</span></div></div></div><div class="dbnote"><span>데이터베이스</span> 여러 사람 · 여러 기기가 같은 데이터를 읽고 쓰는 저장소</div></div></div>
+</section>
+
+<section class="slide lt" data-title="데이터 기록의 변화">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">2-2</span></div>
+  <h2 class="s-title sm">데이터 기록의 변화</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v2hTop"><span>예전</span><i></i><span>지금 · 2부</span></div><div class="v2h"><div class="v2hK" style="--d:0.3s"><b class="n">종이 장부</b><div class="pic"><div class="v2hP"><p>11/27 주간 보고서 작성 — 김하늘</p><p>11/25 신규 입사자 교육 — 이준호</p><p class="x">11/18 예산안 검토 — 박서연</p></div></div><dl><dt>기록</dt><dd>사람이 손으로 적음</dd><dt>보관</dt><dd>장부 · 화이트보드</dd><dt>쌓이는 방식</dt><dd>페이지가 늘어남 · 찾기 어려움</dd></dl><div class="bar"><span>쌓이는 양</span><i style="--w:8%; --d:0.9s"></i></div></div><i class="v2hA" style="--d:2.2s">→</i><div class="v2hK" style="--d:2.5s"><b class="n">엑셀 파일</b><div class="pic"><div class="v2hX"><div class="f">할일_최종_v3.xlsx</div><table class="v2hT"><thead><tr><th>A 할 일</th><th>B 기한</th><th>C 담당</th></tr></thead><tbody><tr><td>주간 보고서 작성</td><td>11/27</td><td>김하늘</td></tr><tr><td>교육 자료</td><td>11/25</td><td>이준호</td></tr></tbody></table></div></div><dl><dt>기록</dt><dd>사람이 PC 에 입력</dd><dt>보관</dt><dd>파일 · 메일로 사본 전달</dd><dt>쌓이는 방식</dt><dd>사본마다 내용이 갈림</dd></dl><div class="bar"><span>쌓이는 양</span><i style="--w:30%; --d:3.1s"></i></div></div><i class="v2hA" style="--d:4.4s">→</i><div class="v2hK" style="--d:4.7s"><b class="n">데이터베이스</b><div class="pic"><table class="v2hT db"><thead><tr><th>id</th><th>title</th><th>due</th><th>owner_id</th></tr></thead><tbody><tr><td>41</td><td>주간 보고서 작성</td><td>2026-11-27</td><td>1</td></tr><tr><td>42</td><td>교육 자료</td><td>2026-11-25</td><td>2</td></tr><tr><td>43</td><td><em>새 행</em></td><td>…</td><td>…</td></tr></tbody></table></div><dl><dt>기록</dt><dd>앱이 서버로 보냄</dd><dt>보관</dt><dd>회사 서버 한 곳</dd><dt>쌓이는 방식</dt><dd>한 표에 행이 추가 · 형식 검사</dd></dl><div class="bar"><span>쌓이는 양</span><i style="--w:65%; --d:5.3s"></i></div></div><i class="v2hA" style="--d:6.6s">→</i><div class="v2hK on" style="--d:6.9s"><b class="n">클라우드 DB</b><div class="pic"><div class="v2hC"><table class="v2hT db"><thead><tr><th>id</th><th>title</th><th>due</th></tr></thead><tbody><tr><td>41</td><td>주간 보고서 작성</td><td>2026-11-27</td></tr><tr><td>42</td><td>교육 자료</td><td>2026-11-25</td></tr></tbody></table><div class="v2hDv"><span>노트북</span><span>휴대폰</span><span>Vercel 앱</span></div></div></div><dl><dt>기록</dt><dd>앱이 인터넷으로 보냄</dd><dt>보관</dt><dd>Supabase 같은 서비스</dd><dt>쌓이는 방식</dt><dd>설치 없이 · 어디서나 같은 표</dd></dl><div class="bar"><span>쌓이는 양</span><i style="--w:100%; --d:7.5s"></i></div></div></div><div class="dbnote"><span>2부</span> Supabase · 클라우드 DB 한 곳에 할 일 기록</div></div></div>
 </section>
 
 <section class="slide lt" data-title="엑셀 표">
