@@ -1,6 +1,6 @@
 """2-3 기획 · 요구사항.
 
-기본 흐름 복습(1부와 같음 · DB · MCP 는 양념) → DB · 외부 연동 주제 예 → 실습 주제(미니 노션 v2)
+기본 흐름 복습(1부와 같음) → DB · 외부 연동 주제 예 → 실습 주제(미니 노션 v2)
 → 기획서 v2(기획자 페르소나) → 개발 계획 v2 에 늘어나는 세 칸(데이터 구조 · 연동 대상 · 권한) → 완료 기준 → 실습.
 예시 문장은 labs/mini_notion_v2/예시/ 의 기획서.md · 개발계획.md 에서 그대로 읽는다. 산출물 개발 계획 v2 는 2-4 · 2-5 구현의 입력.
 """
@@ -38,7 +38,7 @@ CSS = """
   .v2u4prd div.new span{color:#E07A12; font-weight:700;}
   @keyframes v2u4pop{from{opacity:0; transform:translateY(14px) scale(.96)} to{opacity:1; transform:none}}
   /* 2-3 · 새 세 칸 예 */
-  .v2u4three{display:grid; grid-template-columns:1.25fr 1.25fr 1fr; gap:14px; align-items:start;}
+  .v2u4three{display:grid; grid-template-columns:1.1fr 1.45fr .9fr; gap:14px; align-items:start;}
   .v2u4c{border:1.5px solid #F7C99A; border-radius:14px; background:#fff; overflow:hidden; opacity:0; animation:v2u4pop .55s ease-out var(--d) forwards;}
   .v2u4c .h{background:#FFF3E6; padding:10px 14px; display:flex; gap:8px; align-items:baseline; flex-wrap:wrap;}
   .v2u4c .h span{font-family:var(--mono); font-weight:800; color:#E07A12;} .v2u4c .h b{font-size:19px; color:#16233A;}
@@ -80,10 +80,6 @@ def slides():
                                 ("배포", "GitHub → Vercel")])
               + viz2.pair("1부", [("흐름", "기획서 → 개발 계획 → 개발 → 배포"), ("저장", "내 브라우저")],
                           "2부", [("흐름", "같음"), ("추가", "DB · 로그인 · 외부 API · MCP")]), T),
-        light("요리 순서와 양념 비유", shot("v2_u4_spice.webp", "같은 냄비 · 양념 두 병", [
-            ("요리 순서", "기획서 → 개발 계획 → 개발 → 배포 · 그대로"), ("양념", "DB · 외부 API · MCP"),
-            ("레시피에 추가", "개발 계획에 세 칸 · 데이터 구조 · 연동 대상 · 권한")])
-              + src(GEN), T),
         # ── 주제
         light("2부 주제 예시", viz2.maprows([
             ("미니 노션", "페이지 · 로그인", "공휴일 API"),
