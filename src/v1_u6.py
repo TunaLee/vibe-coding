@@ -364,10 +364,10 @@ def slides():
             ("프로그래밍 언어", "조건 · 반복 · 계산으로 동작을 정함"),
             ("웹에서 동작 담당", "JS(JavaScript)")]), T),
         light("웹의 3요소", _web3(), T),
+        light("브라우저로 열기", _open(), T),
         light("Node.js", _node(), T),
         light("웹 구조 · Next.js", _next(), T),
         # ── 서버
-        light("브라우저로 열기", _open(), T),
         light("권한 모드", viz2.maprows([
             ("Manual (default)", "읽기만 자동", "파일 수정 · 명령마다 물어봄"),
             ("acceptEdits", "파일 수정까지 자동", "흔한 파일 명령도 자동"),
