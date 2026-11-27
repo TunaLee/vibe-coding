@@ -4,8 +4,8 @@ CSS 접두어 v2s. 단원 모듈은 CSS 에 v2scene.CSS 를 더한다.
 """
 from hx import esc
 
-TASKS = [("주간 보고서 작성", "2026-11-27", "진행 중"), ("교육 자료 준비", "2026-11-25", "할 일"), ("예산안 검토", "2026-11-18", "진행 중")]
-NEW = ("고객사 미팅", "2026-12-02", "할 일")
+TASKS = [("주간 회의록", "2026-11-27", "페이지"), ("교육 자료 정리", "2026-11-25", "페이지"), ("예산안 메모", "2026-11-18", "페이지")]
+NEW = ("고객사 미팅 회의록", "2026-12-02", "페이지")
 
 
 def _at(d):
@@ -29,36 +29,36 @@ def reqres(write=False):
     if write:
         rows = "".join(f'<div class="rw on"><b>{t}</b><span>{d[5:].replace("-", "/")}</span><em>{s}</em></div>' for t, d, s in TASKS)
         rows += f'<div class="rw nw" {_at(T[8])}><b>{NEW[0]}</b><span>{NEW[1][5:].replace("-", "/")}</span><em>{NEW[2]}</em></div>'
-        top = (f'<div class="add"><span class="in">{NEW[0]} · 12/02</span><span class="bt" {_at(T[1] - .3)}>추가</span></div>')
+        top = (f'<div class="add"><span class="in">{NEW[0]}</span><span class="bt" {_at(T[1] - .3)}>+ 새 페이지</span></div>')
         skel = ""
     else:
         top = ""
         skel = f'<div class="sk" {_at(T[8])}><i></i><i></i><i></i></div>'
-    meth, path, code_, codet = ("POST", "/rest/v1/tasks", "201", "Created") if write else ("GET", "/rest/v1/tasks?select=*", "200", "OK")
+    meth, path, code_, codet = ("POST", "/rest/v1/pages", "201", "Created") if write else ("GET", "/rest/v1/pages?select=*", "200", "OK")
     if write:
-        js = '[{ "id": 44, "title": "고객사 미팅", "due": "2026-12-02", … }]'
+        js = '[{ "id": 44, "title": "고객사 미팅 회의록", … }]'
     else:
-        js = ('[{ "id": 41, "title": "주간 보고서 작성", … },\n'
-              ' { "id": 42, "title": "교육 자료 준비", … },\n'
-              ' { "id": 43, "title": "예산안 검토", … }]')
+        js = ('[{ "id": 41, "title": "주간 회의록", … },\n'
+              ' { "id": 42, "title": "교육 자료 정리", … },\n'
+              ' { "id": 43, "title": "예산안 메모", … }]')
     net = (f'<div class="net"><div class="nh"><b>Network</b><span>Name</span><span>Method</span><span>Status</span></div>'
-           f'<div class="nr" {_at(T[1])}><span class="fn">tasks</span><span>{meth}</span>'
+           f'<div class="nr" {_at(T[1])}><span class="fn">pages</span><span>{meth}</span>'
            f'<span class="st"><i class="pd" {_at(T[7])}>(pending)</i><b class="ok" {_at(T[7])}>{code_} {codet}</b></span></div>'
            f'<pre class="pv" {_at(T[7])}><em>Response</em>{esc(js)}</pre></div>')
-    browser = (f'<div class="v2sBr"><div class="bar"><i></i><i></i><i></i><span>team-board.vercel.app</span></div>'
-               f'<div class="app"><div class="ah">팀 할 일 보드</div>{top}<div class="ls">{skel}{rows}</div></div>{net}</div>')
+    browser = (f'<div class="v2sBr"><div class="bar"><i></i><i></i><i></i><span>mini-notion.vercel.app</span></div>'
+               f'<div class="app"><div class="ah">미니 노션 · 페이지 목록</div>{top}<div class="ls">{skel}{rows}</div></div>{net}</div>')
     # ── 서버
     if write:
-        sl = [(f"POST {path}", T[2]), ("insert into tasks …", T[2] + .3), ("새 행 → JSON", T[6])]
+        sl = [(f"POST {path}", T[2]), ("insert into pages …", T[2] + .3), ("새 행 → JSON", T[6])]
     else:
-        sl = [(f"GET {path}", T[2]), ("select * from tasks", T[2] + .3), ("행 3개 → JSON", T[6])]
+        sl = [(f"GET {path}", T[2]), ("select * from pages", T[2] + .3), ("행 3개 → JSON", T[6])]
     server = ('<div class="v2sBx srv"><div class="bh"><b>서버</b><small>Supabase API</small></div>'
               + "".join(f'<div class="cl" {_at(d)}>{esc(x)}</div>' for x, d in sl) + '</div>')
     # ── DB
     dr = "".join(f'<tr class="{"hl" if not write else ""}" {_at(T[3] + i * .15)}><td>{41 + i}</td><td>{t}</td></tr>' for i, (t, _, _) in enumerate(TASKS))
     if write:
         dr += f'<tr class="nw" {_at(T[3])}><td>44</td><td>{NEW[0]}</td></tr>'
-    db = (f'<div class="v2sBx db"><div class="bh"><b>DB</b><small>Postgres · tasks</small></div>'
+    db = (f'<div class="v2sBx db"><div class="bh"><b>DB</b><small>Postgres · pages</small></div>'
           f'<table><tr><th>id</th><th>title</th></tr>{dr}</table></div>')
     req = "① 요청 · " + meth
     return ('<div class="v2s">' + browser
