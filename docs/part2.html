@@ -1325,6 +1325,32 @@
   @keyframes v22a{to{background:#FFE3C4}} @keyframes v22b{to{background:#D9E3FF}} @keyframes v22c{to{background:#CDEBD9}}
   @keyframes v22in{to{opacity:1}}
   @media print{.v22blog .lk span{opacity:1; animation:none}}
+  /* 2-2 · 한 표에 모두 넣으면 (v22one) */
+  .v22one .v2u2t td,.v22one .v2u2t th{font-size:14px; padding:7px 9px; position:relative;}
+  .v22one .v2u2t th{animation:v22gh .5s 5.4s forwards;}
+  .v22one td.rp{animation:v22rp .4s 1.0s forwards;}
+  .v22one td.bad{animation:v22rp .4s 1.0s forwards, v22bad .4s 2.6s forwards;}
+  .v22one td.ch .o{animation:v22o .3s 2.4s forwards;} .v22one td.ch .n{position:absolute; left:9px; opacity:0; font-style:normal; font-weight:800; color:#1E7B45; animation:v22in .3s 2.4s forwards;}
+  .v22one td.ch i{font-style:normal;}
+  .v22one td.em{animation:v22em .4s 4.0s forwards;}
+  .v22one th.gu{--gc:#D9E3FF;} .v22one th.gp{--gc:#FFE3C4;} .v22one th.gc{--gc:#CDEBD9;}
+  .v22one td.gu{--gc:#EEF2FF;} .v22one td.gp{--gc:#FFF6EC;} .v22one td.gc{--gc:#EDF8F1;}
+  .v22one td{animation-fill-mode:forwards;}
+  .v22one tr td:not(.rp):not(.em){animation:v22g .5s 5.4s forwards;}
+  .v22one .pb{display:grid; grid-template-columns:1fr 1fr; gap:6px 12px; margin:12px 0 8px;}
+  .v22one .pb span{font-size:15px; font-weight:700; border-left:5px solid; padding:5px 12px; border-radius:4px; opacity:0;}
+  .v22one .pb .p1{border-color:#E0B000; background:#FFF6CC; color:#7A5C00; animation:v22in .4s 1.0s forwards;}
+  .v22one .pb .p2{border-color:#C0392B; background:#FDECEA; color:#C0392B; animation:v22in .4s 2.6s forwards;}
+  .v22one .pb .p3{border-color:#9AA5B1; background:#F1F3F6; color:#3A4657; animation:v22in .4s 4.0s forwards;}
+  .v22one .pb .p4{border-color:#1F3A5F; background:#EEF2FF; color:#1F3A5F; animation:v22in .4s 5.4s forwards;}
+  @keyframes v22rp{to{background:#FFF0A8}}
+  @keyframes v22bad{to{background:#F9C9C3; color:#C0392B; font-weight:800}}
+  @keyframes v22o{to{opacity:0}}
+  @keyframes v22em{to{background:repeating-linear-gradient(45deg,#E3E7EC 0 6px,#F4F6F9 6px 12px)}}
+  @keyframes v22gh{to{background:var(--gc)}}
+  @keyframes v22g{to{background:var(--gc)}}
+  @media print{.v22one .pb span{opacity:1; animation:none}}
+  .v22blog .tb:nth-child(1) .v2u2tab{background:#264DE4;} .v22blog .tb:nth-child(2) .v2u2tab{background:#E07A12;} .v22blog .tb:nth-child(3) .v2u2tab{background:#2E8B57;}
 
   /* 2-3 · 개발 계획 칸 지도 */
   .v2u4prd{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:8px 0 16px;}
@@ -1783,10 +1809,18 @@
   <div class="body"><div class="mid"><div class="v2u2rel"><div><div class="v2u2tab">pages · 페이지</div><table class="v2u2t sm"><thead><tr><th>id</th><th class="v2u2kh">owner_id</th><th>title</th><th>date</th></tr></thead><tbody><tr><td>1</td><td class="v2u2k v2u2r1">1</td><td>주간 회의록</td><td>2026-11-27</td></tr><tr><td>2</td><td class="v2u2k v2u2r2">2</td><td>신규 입사자 교육 자료</td><td>2026-11-25</td></tr><tr><td>3</td><td class="v2u2k v2u2r1">1</td><td>고객 설문 결과</td><td>2026-11-19</td></tr></tbody></table></div><i class="v2u2link">owner_id → id</i><div><div class="v2u2tab">members · 팀원</div><table class="v2u2t sm"><thead><tr><th>id</th><th>name</th><th>email</th></tr></thead><tbody><tr class="v2u2r1"><td>1</td><td>김하늘</td><td>haneul@company.com</td></tr><tr class="v2u2r2"><td>2</td><td>이준호</td><td>junho@company.com</td></tr><tr class="v2u2r3"><td>3</td><td>박서연</td><td>seoyeon@company.com</td></tr></tbody></table></div></div><div class="v2pair"><div class="v2p"><div class="v2ph">한 표에 다 넣기</div><div class="v2pc" style="--d:0.00s"><b>팀원 이메일 변경</b><span>페이지 행마다 고치기</span></div><div class="v2pc" style="--d:0.08s"><b>오타</b><span>「김하늘」 「김 하늘」 섞임</span></div></div><div class="v2p on"><div class="v2ph">표 두 개 · 번호로 연결</div><div class="v2pc" style="--d:0.00s"><b>팀원 이메일 변경</b><span>members 한 칸만 고치기</span></div><div class="v2pc" style="--d:0.08s"><b>오타</b><span>번호라 섞이지 않음</span></div></div></div></div></div>
 </section>
 
-<section class="slide lt" data-title="블로그의 표 관계">
+<section class="slide lt" data-title="한 표 저장의 문제">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">2-2</span></div>
-  <h2 class="s-title sm">블로그의 표 관계</h2>
+  <h2 class="s-title sm">한 표 저장의 문제</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v22one"><div class="v2u2tab">blog · 한 표에 모두</div><table class="v2u2t sm"><tr><th class="gp">글 제목</th><th class="gu">글쓴이</th><th class="gu">글쓴이 이메일</th><th class="gc">댓글</th><th class="gu">댓글 쓴 사람</th><th class="gu">댓글 쓴 사람 이메일</th></tr><tr><td class="gp rp">첫 바이브코딩 후기</td><td class="gu rp">김하늘</td><td class="gu rp ch"><i class="o">haneul@a.com</i><i class="n">haneul@new.com</i></td><td class="gc ">잘 읽었어요</td><td class="gu ">이준호</td><td class="gu ">junho@a.com</td></tr><tr><td class="gp rp">첫 바이브코딩 후기</td><td class="gu rp">김하늘</td><td class="gu rp bad">haneul@a.com</td><td class="gc ">저도 해 볼게요</td><td class="gu ">박서연</td><td class="gu ">seoyeon@a.com</td></tr><tr><td class="gp ">Supabase 써 보기</td><td class="gu ">이준호</td><td class="gu ">junho@a.com</td><td class="gc ">좋은 정리</td><td class="gu rp">김하늘</td><td class="gu rp bad">haneul@a.com</td></tr><tr><td class="gp ">MCP 정리</td><td class="gu rp">김하늘</td><td class="gu rp bad">haneul@a.com</td><td class="gc em"></td><td class="gu em"></td><td class="gu em"></td></tr></table><div class="pb"><span class="p1">① 같은 내용 반복 · 글 제목 · 김하늘 · 이메일이 여러 줄</span><span class="p2">② 고칠 때 어긋남 · 이메일을 한 줄만 고침 → 나머지는 옛 주소</span><span class="p3">③ 빈칸 · 댓글 없는 글은 댓글 칸을 비워 둠</span><span class="p4">④ 칸이 세 덩어리 · 회원 · 글 · 댓글 → 세 표로 나누기</span></div></div><div class="dbnote"><span>다음 장</span> 세 덩어리를 세 표로 · 번호 칸으로 연결</div></div></div>
+</section>
+
+<section class="slide lt" data-title="표 나누고 연결하기">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">2-2</span></div>
+  <h2 class="s-title sm">표 나누고 연결하기</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v22blog"><div class="tbs"><div class="tb"><div class="v2u2tab">users · 회원</div><table class="v2u2t sm"><thead><tr><th class="">id</th><th class="">name</th></tr></thead><tbody><tr class="a"><td>1</td><td>김하늘</td></tr><tr class="c"><td>2</td><td>이준호</td></tr><tr class=""><td>3</td><td>박서연</td></tr></tbody></table></div><div class="tb"><div class="v2u2tab">posts · 글</div><table class="v2u2t sm"><thead><tr><th class="">id</th><th class="">title</th><th class="k">author_id</th></tr></thead><tbody><tr class="a b"><td>1</td><td>첫 바이브코딩 후기</td><td>1</td></tr><tr class=""><td>2</td><td>Supabase 써 보기</td><td>2</td></tr><tr class=""><td>3</td><td>MCP 정리</td><td>1</td></tr></tbody></table></div><div class="tb"><div class="v2u2tab">comments · 댓글</div><table class="v2u2t sm"><thead><tr><th class="">id</th><th class="k">post_id</th><th class="k">user_id</th><th class="">body</th></tr></thead><tbody><tr class="b c"><td>1</td><td>1</td><td>2</td><td>잘 읽었어요</td></tr><tr class="b"><td>2</td><td>1</td><td>3</td><td>저도 해 볼게요</td></tr><tr class=""><td>3</td><td>2</td><td>1</td><td>좋은 정리</td></tr></tbody></table></div></div><div class="lk"><span class="a">① 글 → 쓴 사람 · posts.author_id = users.id</span><span class="b">② 글 → 댓글 여러 개 · comments.post_id = posts.id</span><span class="c">③ 댓글 → 쓴 사람 · comments.user_id = users.id</span></div></div><div class="dbnote"><span>관계</span> 같은 내용을 두 번 적지 않고 번호로 가리킴 · 글 하나에 댓글 여러 개</div></div></div>
 </section>
@@ -2005,14 +2039,6 @@ order by date;</pre></div><dl><dt>사람이 하는 일</dt><dd>문법 학습 · 
   <h2 class="s-title sm">Supabase 키 두 종류</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v2pair"><div class="v2p on"><div class="v2ph">publishable 키</div><div class="v2pc" style="--d:0.00s"><b>모양</b><span>sb_publishable_…</span></div><div class="v2pc" style="--d:0.08s"><b>두는 곳</b><span>브라우저 · 앱 코드</span></div><div class="v2pc" style="--d:0.16s"><b>할 수 있는 일</b><span>RLS 규칙 안에서만</span></div></div><div class="v2p"><div class="v2ph">secret 키</div><div class="v2pc" style="--d:0.00s"><b>모양</b><span>sb_secret_…</span></div><div class="v2pc" style="--d:0.08s"><b>두는 곳</b><span>서버 전용 · 브라우저 · GitHub 금지</span></div><div class="v2pc" style="--d:0.16s"><b>할 수 있는 일</b><span>RLS 무시 · 모든 행</span></div></div></div><div class="dbnote"><span>이전 이름</span> anon 키 = publishable · service_role 키 = secret · 2026년 말 지원 종료</div><div class="src">출처 · <a href="https://supabase.com/docs/guides/api/api-keys" target="_blank" rel="noopener">Supabase · API keys</a></div></div></div>
-</section>
-
-<section class="slide lt" data-title="CRUD 코드 뜻">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">2-4</span></div>
-  <h2 class="s-title sm">CRUD 코드 뜻</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1cmask"><span>요청</span><b>페이지 저장 · 조회를 Next.js 서버에서 Supabase pages 표로 하게 바꿔 줘</b></div><div class="v1cmap"><div class="v1cmt"><span>app/api/pages/route.ts · Claude Code가 쓴 코드 · 예</span><span>뜻</span></div><div class="v1cmr" style="--d:0.30s"><code>supabase.from("pages").insert({ title: "주간 회의록", … })</code><i>→</i><span>페이지 표에 한 줄 저장</span></div><div class="v1cmr" style="--d:0.65s"><code>supabase.from("pages").select("*").order("date")</code><i>→</i><span>페이지 모두 · 날짜 순 조회</span></div><div class="v1cmr" style="--d:1.00s"><code>supabase.from("pages").update({ status: "완료" }).eq("id", 7)</code><i>→</i><span>7번 페이지 완료로</span></div><div class="v1cmr" style="--d:1.35s"><code>supabase.from("pages").delete().eq("id", 7)</code><i>→</i><span>7번 페이지 삭제</span></div></div><div class="dbnote"><span>CRUD (2-1)</span> insert · select · update · delete · 확인은 Supabase 대시보드 Table Editor</div></div></div>
 </section>
 
 <section class="slide lt" data-title="Supabase Auth 로그인">

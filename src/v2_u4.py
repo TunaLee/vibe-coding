@@ -99,14 +99,6 @@ def slides():
               + note("이전 이름", "anon 키 = publishable · service_role 키 = secret · 2026년 말 지원 종료")
               + src(KEYS), T),
         # ── CRUD
-        light("CRUD 코드 뜻", codemap([
-            ('supabase.from("pages").insert({ title: "주간 회의록", … })', "페이지 표에 한 줄 저장"),
-            ('supabase.from("pages").select("*").order("date")', "페이지 모두 · 날짜 순 조회"),
-            ('supabase.from("pages").update({ status: "완료" }).eq("id", 7)', "7번 페이지 완료로"),
-            ('supabase.from("pages").delete().eq("id", 7)', "7번 페이지 삭제")],
-            ask="페이지 저장 · 조회를 Next.js 서버에서 Supabase pages 표로 하게 바꿔 줘", title="app/api/pages/route.ts · Claude Code가 쓴 코드 · 예")
-              + note("CRUD (2-1)", "insert · select · update · delete · 확인은 Supabase 대시보드 Table Editor"), T),
-        # ── 로그인
         light("Supabase Auth 로그인", flow([("가입", "이메일 · 비밀번호"), ("확인 메일", "링크 클릭"), ("로그인", "signInWithPassword"),
                                             ("페이지 저장", "created_by = 로그인 계정")], hl=3)
               + viz2.tiles([("계정 목록", "대시보드 Authentication › Users"), ("만든 사람", "입력 칸 대신 로그인 계정")], 2)

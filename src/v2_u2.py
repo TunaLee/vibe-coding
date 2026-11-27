@@ -1,7 +1,7 @@
 """2-2 데이터베이스.
 
 배경 → 데이터 기록의 변화(종이 → 엑셀 → DB → 클라우드 DB) → 비유(엑셀 · 원시인 돌판 그림) → 페이지 표 애니메이션(행 · 열)
-→ 엑셀과 데이터베이스(동시 쓰기 · 형식 거절 애니메이션) → 관계(members · pages) → 블로그 예(users · posts · comments) → SQL 한 줄 뜻 → SQL 작성의 변화(손 → SQL → 말 · MCP) → Supabase 구성 · 이유 → 무료 플랜.
+→ 엑셀과 데이터베이스(동시 쓰기 · 형식 거절 애니메이션) → 관계(members · pages) → 블로그 예(한 표 문제 → 세 표 · 번호로 연결) → SQL 한 줄 뜻 → SQL 작성의 변화(손 → SQL → 말 · MCP) → Supabase 구성 · 이유 → 무료 플랜.
 사실 출처
 - Supabase 무료 플랜: supabase.com/pricing (프로젝트 2개 · DB 500 MB · 월 이용자 50,000 · 1주 미사용 시 일시정지 · Pro $25/월)
 - 프로젝트마다 Postgres 전체: supabase.com/docs/guides/database/overview
@@ -149,6 +149,33 @@ def blog():
     return f'<div class="v22blog"><div class="tbs">{users}{posts}{cmts}</div>{tags}</div>'
 
 
+def blog_one():
+    """한 표에 모두 넣은 블로그 — ① 같은 내용 반복(노랑) ② 이메일 하나만 고쳐 어긋남(빨강) ③ 댓글 없는 글은 빈칸(회색)
+    ④ 칸이 세 덩어리(회원 · 글 · 댓글)로 색이 갈림 → 다음 장에서 세 표로."""
+    head = [("글 제목", "p"), ("글쓴이", "u"), ("글쓴이 이메일", "u"), ("댓글", "c"), ("댓글 쓴 사람", "u"), ("댓글 쓴 사람 이메일", "u")]
+    R = [
+        [("첫 바이브코딩 후기", "rp"), ("김하늘", "rp"), ("haneul@a.com", "rp ch"), ("잘 읽었어요", ""), ("이준호", ""), ("junho@a.com", "")],
+        [("첫 바이브코딩 후기", "rp"), ("김하늘", "rp"), ("haneul@a.com", "rp bad"), ("저도 해 볼게요", ""), ("박서연", ""), ("seoyeon@a.com", "")],
+        [("Supabase 써 보기", ""), ("이준호", ""), ("junho@a.com", ""), ("좋은 정리", ""), ("김하늘", "rp"), ("haneul@a.com", "rp bad")],
+        [("MCP 정리", ""), ("김하늘", "rp"), ("haneul@a.com", "rp bad"), ("", "em"), ("", "em"), ("", "em")],
+    ]
+    th = "".join(f'<th class="g{g}">{h}</th>' for h, g in head)
+    tr = ""
+    for r in R:
+        tds = ""
+        for j, (v, c) in enumerate(r):
+            g = head[j][1]
+            if "ch" in c:
+                v = f'<i class="o">{v}</i><i class="n">haneul@new.com</i>'
+            tds += f'<td class="g{g} {c}">{v}</td>'
+        tr += f"<tr>{tds}</tr>"
+    probs = ('<div class="pb"><span class="p1">① 같은 내용 반복 · 글 제목 · 김하늘 · 이메일이 여러 줄</span>'
+             '<span class="p2">② 고칠 때 어긋남 · 이메일을 한 줄만 고침 → 나머지는 옛 주소</span>'
+             '<span class="p3">③ 빈칸 · 댓글 없는 글은 댓글 칸을 비워 둠</span>'
+             '<span class="p4">④ 칸이 세 덩어리 · 회원 · 글 · 댓글 → 세 표로 나누기</span></div>')
+    return f'<div class="v22one"><div class="v2u2tab">blog · 한 표에 모두</div><table class="v2u2t sm">{"<tr>" + th + "</tr>"}{tr}</table>{probs}</div>'
+
+
 def slides():
     return [
         light("데이터 기록의 변화", history()
@@ -165,7 +192,9 @@ def slides():
               + viz2.pair(
                   "한 표에 다 넣기", [("팀원 이메일 변경", "페이지 행마다 고치기"), ("오타", "「김하늘」 「김 하늘」 섞임")],
                   "표 두 개 · 번호로 연결", [("팀원 이메일 변경", "members 한 칸만 고치기"), ("오타", "번호라 섞이지 않음")]), T),
-        light("블로그의 표 관계", blog()
+        light("한 표 저장의 문제", blog_one()
+              + note("다음 장", "세 덩어리를 세 표로 · 번호 칸으로 연결"), T),
+        light("표 나누고 연결하기", blog()
               + note("관계", "같은 내용을 두 번 적지 않고 번호로 가리킴 · 글 하나에 댓글 여러 개"), T),
         light("SQL", codemap([
             ("select title, date", "제목 · 날짜 열만"),
@@ -309,4 +338,30 @@ CSS = """
   @keyframes v22a{to{background:#FFE3C4}} @keyframes v22b{to{background:#D9E3FF}} @keyframes v22c{to{background:#CDEBD9}}
   @keyframes v22in{to{opacity:1}}
   @media print{.v22blog .lk span{opacity:1; animation:none}}
+  /* 2-2 · 한 표에 모두 넣으면 (v22one) */
+  .v22one .v2u2t td,.v22one .v2u2t th{font-size:14px; padding:7px 9px; position:relative;}
+  .v22one .v2u2t th{animation:v22gh .5s 5.4s forwards;}
+  .v22one td.rp{animation:v22rp .4s 1.0s forwards;}
+  .v22one td.bad{animation:v22rp .4s 1.0s forwards, v22bad .4s 2.6s forwards;}
+  .v22one td.ch .o{animation:v22o .3s 2.4s forwards;} .v22one td.ch .n{position:absolute; left:9px; opacity:0; font-style:normal; font-weight:800; color:#1E7B45; animation:v22in .3s 2.4s forwards;}
+  .v22one td.ch i{font-style:normal;}
+  .v22one td.em{animation:v22em .4s 4.0s forwards;}
+  .v22one th.gu{--gc:#D9E3FF;} .v22one th.gp{--gc:#FFE3C4;} .v22one th.gc{--gc:#CDEBD9;}
+  .v22one td.gu{--gc:#EEF2FF;} .v22one td.gp{--gc:#FFF6EC;} .v22one td.gc{--gc:#EDF8F1;}
+  .v22one td{animation-fill-mode:forwards;}
+  .v22one tr td:not(.rp):not(.em){animation:v22g .5s 5.4s forwards;}
+  .v22one .pb{display:grid; grid-template-columns:1fr 1fr; gap:6px 12px; margin:12px 0 8px;}
+  .v22one .pb span{font-size:15px; font-weight:700; border-left:5px solid; padding:5px 12px; border-radius:4px; opacity:0;}
+  .v22one .pb .p1{border-color:#E0B000; background:#FFF6CC; color:#7A5C00; animation:v22in .4s 1.0s forwards;}
+  .v22one .pb .p2{border-color:#C0392B; background:#FDECEA; color:#C0392B; animation:v22in .4s 2.6s forwards;}
+  .v22one .pb .p3{border-color:#9AA5B1; background:#F1F3F6; color:#3A4657; animation:v22in .4s 4.0s forwards;}
+  .v22one .pb .p4{border-color:#1F3A5F; background:#EEF2FF; color:#1F3A5F; animation:v22in .4s 5.4s forwards;}
+  @keyframes v22rp{to{background:#FFF0A8}}
+  @keyframes v22bad{to{background:#F9C9C3; color:#C0392B; font-weight:800}}
+  @keyframes v22o{to{opacity:0}}
+  @keyframes v22em{to{background:repeating-linear-gradient(45deg,#E3E7EC 0 6px,#F4F6F9 6px 12px)}}
+  @keyframes v22gh{to{background:var(--gc)}}
+  @keyframes v22g{to{background:var(--gc)}}
+  @media print{.v22one .pb span{opacity:1; animation:none}}
+  .v22blog .tb:nth-child(1) .v2u2tab{background:#264DE4;} .v22blog .tb:nth-child(2) .v2u2tab{background:#E07A12;} .v22blog .tb:nth-child(3) .v2u2tab{background:#2E8B57;}
 """
