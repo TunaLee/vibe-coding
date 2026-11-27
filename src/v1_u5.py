@@ -240,24 +240,46 @@ def slides():
             ("확인이 끝났을 때", "브라우저로 보고 이상 없음")], 3)
               + flow([("요청", "기능 하나"), ("확인", "브라우저"), ("커밋", "세이브"), ("다음 요청", "")], hl=2)
               + note("개발할 때", "이 고리를 태스크마다 반복"), T),
+        # ── Git 준비
+        light("Git 준비", flow([
+            ("Git 설치", "없으면 「Git 설치해 줘」"), ("GitHub 계정", "1-2 에서 가입"), ("작성자 등록", "이 컴퓨터 · 한 번"),
+            ("GitHub 로그인", "브라우저 승인 · 한 번")], hl=2)
+              + viz2.tiles([("작성자", "커밋의 「누가」 · 이름 · 이메일"), ("로그인", "GitHub 에 올릴 때 필요 · 1-7"),
+                            ("둘 다", "처음 한 번 · 다음부터 자동")], 3), T),
+        light("Git 작성자 등록", viz2.tiles([
+            ("작성자", "커밋마다 남는 이름 · 이메일"), ("값", "GitHub 가입 때 쓴 이름 · 이메일"),
+            ("한 번만", "이 컴퓨터에 저장 · 다음 커밋부터 자동")], 3)
+              + code("Claude Code 가 실행 · 예", esc('git config --global user.name "내 이름"\ngit config --global user.email "GitHub 가입 이메일"'))
+              + note("요청", "「Git 작성자를 내 GitHub 이름 · 이메일로 등록해 줘」 · 명령은 Claude Code 가")
+              + src(("Pro Git · First-Time Git Setup", "https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup")), T),
+        light("GitHub CLI (gh)", viz2.tiles([
+            ("gh", "GitHub 공식 명령 도구 · 저장소 만들기 · 올리기"), ("설치", "Claude Code 에 「GitHub CLI 설치해 줘」"),
+            ("명령 암기", "불필요 · 실행은 Claude Code")], 3)
+              + '<div class="twocol"><div>' + code("Claude Code 가 실행 · macOS 예", esc("brew install gh")) + "</div><div>"
+              + code("Claude Code 가 실행 · Windows 예", esc("winget install --id GitHub.cli --source winget")) + "</div></div>"
+              + note("Windows", "설치 뒤 VS Code 를 다시 열면 gh 인식")
+              + src(("GitHub CLI", "https://cli.github.com/")), T),
+        light("gh 로그인", flow([
+            ("「GitHub 로그인 도와줘」", "Claude Code 에 요청"), ("로그인 명령 실행", "Claude Code · 패널에서 허용"), ("브라우저 인증", "화면의 코드 입력 · 승인"),
+            ("연결 완료", "「로그인됐는지 확인해 줘」")], hl=2)
+              + note("직접 할 것", "브라우저 승인은 사람이 · 비밀번호를 Claude에게 알려 주지 않음 · 막히면 강사와 함께")
+              + src(("gh auth login", "https://cli.github.com/manual/gh_auth_login")), T),
         # ── 실습
-        labcard(T, "첫 커밋", T, "기획서 · 개발 계획", "첫 커밋", ["Git 시작", "기록 보기", "되돌리기"]),
+        labcard(T, "첫 커밋", T, "기획서 · 개발 계획", "첫 커밋", ["작성자 등록", "GitHub 로그인", "첫 커밋"]),
         brief(T, T,
-              ["Git 시작 + 첫 커밋 요청 · 명령 승인", "기록 보기", "개발계획.md 아무 줄 고치기", "「방금 고친 거 취소」 요청"],
+              ["Git 작성자 등록 요청", "GitHub 로그인 · 브라우저 승인", "Git 시작 + 첫 커밋 · 기록 보기"],
               [],
-              ["Git 시작", "첫 커밋", "커밋 기록", "되돌리기"],
-              ["기록에 내 메시지가 보임", "취소한 줄이 원래대로 돌아옴"],
-              "Git 없음 → 「Git 설치 방법 알려 줘」 · 이름 · 이메일 질문 → GitHub 가입 정보 입력"),
-        tstep(T, 1, "Git 시작 요청", T, ask=("Claude Code 입력창", "Git 으로 관리하고 첫 커밋 남겨 줘"),
-              rows=[("모드", "Plan → 수정마다 승인"), ("명령 승인", "패널에 뜬 git 명령 확인 → 허용"), ("자동 허용", "같은 명령은 다시 묻지 않게")]),
-        tstep(T, 2, "기록 보기", T, ask=("Claude Code 입력창", "커밋 기록 보여 줘"),
-              rows=[("보이는 것", "번호 · 작성자 · 시각 · 메시지"), ("개수", "커밋마다 한 줄")]),
-        tstep(T, 3, "개발계획.md 고치기", T, term=("개발계획.md · 바꾼 줄", "고치기 전 · F5 저장: 입력할 때마다 저장\n고친 뒤 · F5 저장: 저장 버튼을 누르면 저장"),
-              rows=[("어디", "VS Code 에서 아무 줄"), ("저장", "⌘S · Ctrl+S"), ("표시", "탐색기 파일 이름 옆 M")]),
-        tstep(T, 4, "방금 고친 거 취소", T, ask=("Claude Code 입력창", "방금 고친 거 취소해 줘"),
-              rows=[("확인", "개발계획.md 바꾼 줄이 원래대로"), ("명령", "git restore"), ("결과", "마지막 커밋 상태 · 되살릴 수 없음")]),
+              ["작성자", "GitHub 로그인", "첫 커밋", "커밋 기록"],
+              ["기록에 내 메시지가 보임", "작성자가 내 이름"],
+              "Git 없음 → 「Git 설치해 줘」 · 로그인이 멈추면 강사와 함께"),
+        tstep(T, 1, "작성자 등록", T, ask=("Claude Code 입력창", "Git 작성자를 내 GitHub 이름 · 이메일로 등록해 줘"),
+              rows=[("모드", "Plan → 수정마다 승인"), ("묻는 것", "이름 · 이메일 → GitHub 가입 정보"), ("명령 승인", "패널에 뜬 git config → 허용")]),
+        tstep(T, 2, "GitHub 로그인", T, ask=("Claude Code 입력창", "GitHub 로그인 도와줘\n로그인됐는지 확인해 줘"),
+              rows=[("gh 없음", "Claude Code 가 설치부터"), ("브라우저", "화면의 코드 입력 → 승인"), ("막히면", "강사와 함께")]),
+        tstep(T, 3, "Git 시작 · 첫 커밋", T, ask=("Claude Code 입력창", "Git 으로 관리하고 첫 커밋 남겨 줘\n커밋 기록 보여 줘"),
+              rows=[("명령 승인", "패널에 뜬 git 명령 확인 → 허용"), ("기록", "번호 · 작성자 · 시각 · 메시지"), ("작성자", "등록한 내 이름")]),
         light("실습 1-5 확인", checks([
-            ("기록에 커밋이 하나 있나", "「커밋 기록 보여 줘」"), ("메시지에 담은 내용이 보이나", "예 · 기획서 · 개발 계획 첫 버전"),
-            ("개발계획.md 가 원래대로인가", "고친 줄이 돌아옴 · M 표시 사라짐")],
-            "셋 다 「예」 → 1-6 · 이 폴더에 앱 만들기"), T),
+            ("기록에 커밋이 하나 있나", "작성자가 내 이름 · 메시지 한 줄"), ("GitHub 로그인이 됐나", "「로그인됐는지 확인해 줘」 → 내 계정"),
+            ],
+            "둘 다 「예」 → 1-6 · 이 폴더에 앱 만들기"), T),
     ]

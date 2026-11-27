@@ -2611,6 +2611,39 @@ dfb369b 첫 화면 완성</code></pre></div></div></div></div></div>
   <div class="body"><div class="mid"><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>기능 하나가 됐을 때</b><span>「로그인 버튼 동작」</span></div><div class="v2tile" style="--d:0.08s"><b>크게 바꾸기 전</b><span>디자인을 갈아엎기 전</span></div><div class="v2tile" style="--d:0.16s"><b>확인이 끝났을 때</b><span>브라우저로 보고 이상 없음</span></div></div><div class="flow"><div class="fs"><b>요청</b><span>기능 하나</span></div><div class="fa">→</div><div class="fs"><b>확인</b><span>브라우저</span></div><div class="fa">→</div><div class="fs hl"><b>커밋</b><span>세이브</span></div><div class="fa">→</div><div class="fs"><b>다음 요청</b></div></div><div class="dbnote"><span>개발할 때</span> 이 고리를 태스크마다 반복</div></div></div>
 </section>
 
+<section class="slide lt" data-title="Git 준비">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-5</span></div>
+  <h2 class="s-title sm">Git 준비</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="flow"><div class="fs"><b>Git 설치</b><span>없으면 「Git 설치해 줘」</span></div><div class="fa">→</div><div class="fs"><b>GitHub 계정</b><span>1-2 에서 가입</span></div><div class="fa">→</div><div class="fs hl"><b>작성자 등록</b><span>이 컴퓨터 · 한 번</span></div><div class="fa">→</div><div class="fs"><b>GitHub 로그인</b><span>브라우저 승인 · 한 번</span></div></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>작성자</b><span>커밋의 「누가」 · 이름 · 이메일</span></div><div class="v2tile" style="--d:0.08s"><b>로그인</b><span>GitHub 에 올릴 때 필요 · 1-7</span></div><div class="v2tile" style="--d:0.16s"><b>둘 다</b><span>처음 한 번 · 다음부터 자동</span></div></div></div></div>
+</section>
+
+<section class="slide lt" data-title="Git 작성자 등록">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-5</span></div>
+  <h2 class="s-title sm">Git 작성자 등록</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>작성자</b><span>커밋마다 남는 이름 · 이메일</span></div><div class="v2tile" style="--d:0.08s"><b>값</b><span>GitHub 가입 때 쓴 이름 · 이메일</span></div><div class="v2tile" style="--d:0.16s"><b>한 번만</b><span>이 컴퓨터에 저장 · 다음 커밋부터 자동</span></div></div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">Claude Code 가 실행 · 예</span></div><pre><code>git config --global user.name "내 이름"
+git config --global user.email "GitHub 가입 이메일"</code></pre></div><div class="dbnote"><span>요청</span> 「Git 작성자를 내 GitHub 이름 · 이메일로 등록해 줘」 · 명령은 Claude Code 가</div><div class="src">출처 · <a href="https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup" target="_blank" rel="noopener">Pro Git · First-Time Git Setup</a></div></div></div>
+</section>
+
+<section class="slide lt" data-title="GitHub CLI (gh)">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-5</span></div>
+  <h2 class="s-title sm">GitHub CLI (gh)</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>gh</b><span>GitHub 공식 명령 도구 · 저장소 만들기 · 올리기</span></div><div class="v2tile" style="--d:0.08s"><b>설치</b><span>Claude Code 에 「GitHub CLI 설치해 줘」</span></div><div class="v2tile" style="--d:0.16s"><b>명령 암기</b><span>불필요 · 실행은 Claude Code</span></div></div><div class="twocol"><div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">Claude Code 가 실행 · macOS 예</span></div><pre><code>brew install gh</code></pre></div></div><div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">Claude Code 가 실행 · Windows 예</span></div><pre><code>winget install --id GitHub.cli --source winget</code></pre></div></div></div><div class="dbnote"><span>Windows</span> 설치 뒤 VS Code 를 다시 열면 gh 인식</div><div class="src">출처 · <a href="https://cli.github.com/" target="_blank" rel="noopener">GitHub CLI</a></div></div></div>
+</section>
+
+<section class="slide lt" data-title="gh 로그인">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-5</span></div>
+  <h2 class="s-title sm">gh 로그인</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="flow"><div class="fs"><b>「GitHub 로그인 도와줘」</b><span>Claude Code 에 요청</span></div><div class="fa">→</div><div class="fs"><b>로그인 명령 실행</b><span>Claude Code · 패널에서 허용</span></div><div class="fa">→</div><div class="fs hl"><b>브라우저 인증</b><span>화면의 코드 입력 · 승인</span></div><div class="fa">→</div><div class="fs"><b>연결 완료</b><span>「로그인됐는지 확인해 줘」</span></div></div><div class="dbnote"><span>직접 할 것</span> 브라우저 승인은 사람이 · 비밀번호를 Claude에게 알려 주지 않음 · 막히면 강사와 함께</div><div class="src">출처 · <a href="https://cli.github.com/manual/gh_auth_login" target="_blank" rel="noopener">gh auth login</a></div></div></div>
+</section>
+
 <section class="slide lt labs" data-title="[실습 1-5] 첫 커밋">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-5</span><span class="labtag">실습 1-5</span></div>
@@ -2618,7 +2651,7 @@ dfb369b 첫 화면 완성</code></pre></div></div></div></div></div>
   <div class="rule"></div>
   <div class="body"><div class="v1lc">
     <div class="io"><div class="b in"><small>입력</small><b>기획서 · 개발 계획</b></div><i>→</i><div class="b out"><small>산출물</small><b>첫 커밋</b></div></div>
-    <div class="pt"><span style="--d:0.5s">Git 시작</span><span style="--d:0.7s">기록 보기</span><span style="--d:0.9s">되돌리기</span></div>
+    <div class="pt"><span style="--d:0.5s">작성자 등록</span><span style="--d:0.7s">GitHub 로그인</span><span style="--d:0.9s">첫 커밋</span></div>
     
   </div></div>
 </section>
@@ -2628,40 +2661,31 @@ dfb369b 첫 화면 완성</code></pre></div></div></div></div></div>
   <div class="eyebrow"><span class="tag">1-5</span></div>
   <h2 class="s-title sm">실습 1-5 순서</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><ol class="v1st"><li style="--d:0.00s"><em>1</em><span>Git 시작 + 첫 커밋 요청 · 명령 승인</span></li><li style="--d:0.25s"><em>2</em><span>기록 보기</span></li><li style="--d:0.50s"><em>3</em><span>개발계획.md 아무 줄 고치기</span></li><li style="--d:0.75s"><em>4</em><span>「방금 고친 거 취소」 요청</span></li></ol><div class="qk2"><b>확인</b><ul><li>기록에 내 메시지가 보임</li><li>취소한 줄이 원래대로 돌아옴</li></ul></div></div></div>
+  <div class="body"><div class="mid"><ol class="v1st"><li style="--d:0.00s"><em>1</em><span>Git 작성자 등록 요청</span></li><li style="--d:0.25s"><em>2</em><span>GitHub 로그인 · 브라우저 승인</span></li><li style="--d:0.50s"><em>3</em><span>Git 시작 + 첫 커밋 · 기록 보기</span></li></ol><div class="qk2"><b>확인</b><ul><li>기록에 내 메시지가 보임</li><li>작성자가 내 이름</li></ul></div></div></div>
 </section>
 
-<section class="slide lt" data-title="실습 1-5 · 1단계 Git 시작 요청">
+<section class="slide lt" data-title="실습 1-5 · 1단계 작성자 등록">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-5</span></div>
-  <h2 class="s-title sm">실습 1-5 · 1단계 Git 시작 요청</h2>
+  <h2 class="s-title sm">실습 1-5 · 1단계 작성자 등록</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1ask"><span>Claude Code 입력창</span><p>Git 으로 관리하고 첫 커밋 남겨 줘</p></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>모드</b><span>Plan → 수정마다 승인</span></div><div class="v2tile" style="--d:0.08s"><b>명령 승인</b><span>패널에 뜬 git 명령 확인 → 허용</span></div><div class="v2tile" style="--d:0.16s"><b>자동 허용</b><span>같은 명령은 다시 묻지 않게</span></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v1ask"><span>Claude Code 입력창</span><p>Git 작성자를 내 GitHub 이름 · 이메일로 등록해 줘</p></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>모드</b><span>Plan → 수정마다 승인</span></div><div class="v2tile" style="--d:0.08s"><b>묻는 것</b><span>이름 · 이메일 → GitHub 가입 정보</span></div><div class="v2tile" style="--d:0.16s"><b>명령 승인</b><span>패널에 뜬 git config → 허용</span></div></div></div></div>
 </section>
 
-<section class="slide lt" data-title="실습 1-5 · 2단계 기록 보기">
+<section class="slide lt" data-title="실습 1-5 · 2단계 GitHub 로그인">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-5</span></div>
-  <h2 class="s-title sm">실습 1-5 · 2단계 기록 보기</h2>
+  <h2 class="s-title sm">실습 1-5 · 2단계 GitHub 로그인</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1ask"><span>Claude Code 입력창</span><p>커밋 기록 보여 줘</p></div><div class="v2tiles c2"><div class="v2tile" style="--d:0.00s"><b>보이는 것</b><span>번호 · 작성자 · 시각 · 메시지</span></div><div class="v2tile" style="--d:0.08s"><b>개수</b><span>커밋마다 한 줄</span></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v1ask"><span>Claude Code 입력창</span><p>GitHub 로그인 도와줘</p><p>로그인됐는지 확인해 줘</p></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>gh 없음</b><span>Claude Code 가 설치부터</span></div><div class="v2tile" style="--d:0.08s"><b>브라우저</b><span>화면의 코드 입력 → 승인</span></div><div class="v2tile" style="--d:0.16s"><b>막히면</b><span>강사와 함께</span></div></div></div></div>
 </section>
 
-<section class="slide lt" data-title="실습 1-5 · 3단계 개발계획.md 고치기">
+<section class="slide lt" data-title="실습 1-5 · 3단계 Git 시작 · 첫 커밋">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-5</span></div>
-  <h2 class="s-title sm">실습 1-5 · 3단계 개발계획.md 고치기</h2>
+  <h2 class="s-title sm">실습 1-5 · 3단계 Git 시작 · 첫 커밋</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1tt"><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">개발계획.md · 바꾼 줄</span></div><pre><code>고치기 전 · F5 저장: 입력할 때마다 저장
-고친 뒤 · F5 저장: 저장 버튼을 누르면 저장</code></pre></div></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>어디</b><span>VS Code 에서 아무 줄</span></div><div class="v2tile" style="--d:0.08s"><b>저장</b><span>⌘S · Ctrl+S</span></div><div class="v2tile" style="--d:0.16s"><b>표시</b><span>탐색기 파일 이름 옆 M</span></div></div></div></div>
-</section>
-
-<section class="slide lt" data-title="실습 1-5 · 4단계 방금 고친 거 취소">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">1-5</span></div>
-  <h2 class="s-title sm">실습 1-5 · 4단계 방금 고친 거 취소</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1ask"><span>Claude Code 입력창</span><p>방금 고친 거 취소해 줘</p></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>확인</b><span>개발계획.md 바꾼 줄이 원래대로</span></div><div class="v2tile" style="--d:0.08s"><b>명령</b><span>git restore</span></div><div class="v2tile" style="--d:0.16s"><b>결과</b><span>마지막 커밋 상태 · 되살릴 수 없음</span></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v1ask"><span>Claude Code 입력창</span><p>Git 으로 관리하고 첫 커밋 남겨 줘</p><p>커밋 기록 보여 줘</p></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>명령 승인</b><span>패널에 뜬 git 명령 확인 → 허용</span></div><div class="v2tile" style="--d:0.08s"><b>기록</b><span>번호 · 작성자 · 시각 · 메시지</span></div><div class="v2tile" style="--d:0.16s"><b>작성자</b><span>등록한 내 이름</span></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="실습 1-5 확인">
@@ -2669,7 +2693,7 @@ dfb369b 첫 화면 완성</code></pre></div></div></div></div></div>
   <div class="eyebrow"><span class="tag">1-5</span></div>
   <h2 class="s-title sm">실습 1-5 확인</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="cks"><div class="ck" style="--d:0.00s"><span>1</span><b>기록에 커밋이 하나 있나</b><em>「커밋 기록 보여 줘」</em></div><div class="ck" style="--d:0.12s"><span>2</span><b>메시지에 담은 내용이 보이나</b><em>예 · 기획서 · 개발 계획 첫 버전</em></div><div class="ck" style="--d:0.24s"><span>3</span><b>개발계획.md 가 원래대로인가</b><em>고친 줄이 돌아옴 · M 표시 사라짐</em></div></div><div class="ckr">셋 다 「예」 → 1-6 · 이 폴더에 앱 만들기</div></div></div>
+  <div class="body"><div class="mid"><div class="cks"><div class="ck" style="--d:0.00s"><span>1</span><b>기록에 커밋이 하나 있나</b><em>작성자가 내 이름 · 메시지 한 줄</em></div><div class="ck" style="--d:0.12s"><span>2</span><b>GitHub 로그인이 됐나</b><em>「로그인됐는지 확인해 줘」 → 내 계정</em></div></div><div class="ckr">둘 다 「예」 → 1-6 · 이 폴더에 앱 만들기</div></div></div>
 </section>
 
 <section class="slide dk" data-title="다음 단원">
@@ -3018,23 +3042,7 @@ a3b8e51  T1 화면 뼈대 · 페이지 목록
   <div class="eyebrow"><span class="tag">1-7</span></div>
   <h2 class="s-title sm">배포 흐름</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="flow"><div class="fs"><b>내 컴퓨터</b><span>앱 · 커밋</span></div><div class="fa">→</div><div class="fs"><b>GitHub</b><span>코드 보관</span></div><div class="fa">→</div><div class="fs hl"><b>Vercel</b><span>코드를 가져가 공개</span></div><div class="fa">→</div><div class="fs"><b>주소</b><span>*.vercel.app</span></div><div class="fa">→</div><div class="fs"><b>팀원</b><span>링크로 접속</span></div></div><div class="v2tiles c2"><div class="v2tile" style="--d:0.00s"><b>연결 ① Claude Code → GitHub</b><span>gh 로 저장소 생성 · 업로드 · 요청 한 줄</span></div><div class="v2tile" style="--d:0.08s"><b>연결 ② GitHub → Vercel</b><span>한 번 연결해 두면 이후 자동</span></div></div></div></div>
-</section>
-
-<section class="slide lt" data-title="GitHub CLI (gh)">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">1-7</span></div>
-  <h2 class="s-title sm">GitHub CLI (gh)</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>gh</b><span>GitHub 공식 명령 도구 · 저장소 만들기 · 올리기</span></div><div class="v2tile" style="--d:0.08s"><b>설치</b><span>Claude Code 에 「GitHub CLI 설치해 줘」</span></div><div class="v2tile" style="--d:0.16s"><b>명령 암기</b><span>불필요 · 실행은 Claude Code</span></div></div><div class="twocol"><div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">Claude Code 가 실행 · macOS 예</span></div><pre><code>brew install gh</code></pre></div></div><div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">Claude Code 가 실행 · Windows 예</span></div><pre><code>winget install --id GitHub.cli --source winget</code></pre></div></div></div><div class="dbnote"><span>Windows</span> 설치 뒤 VS Code 를 다시 열면 gh 인식</div><div class="src">출처 · <a href="https://cli.github.com/" target="_blank" rel="noopener">GitHub CLI</a></div></div></div>
-</section>
-
-<section class="slide lt" data-title="gh 로그인">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">1-7</span></div>
-  <h2 class="s-title sm">gh 로그인</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="flow"><div class="fs"><b>「GitHub 로그인 도와줘」</b><span>Claude Code 에 요청</span></div><div class="fa">→</div><div class="fs"><b>로그인 명령 실행</b><span>Claude Code · 패널에서 허용</span></div><div class="fa">→</div><div class="fs hl"><b>브라우저 인증</b><span>화면의 코드 입력 · 승인</span></div><div class="fa">→</div><div class="fs"><b>연결 완료</b><span>「로그인됐는지 확인해 줘」</span></div></div><div class="dbnote"><span>직접 할 것</span> 브라우저 승인은 사람이 · 비밀번호를 Claude에게 알려 주지 않음 · 막히면 강사와 함께</div><div class="src">출처 · <a href="https://cli.github.com/manual/gh_auth_login" target="_blank" rel="noopener">gh auth login</a></div></div></div>
+  <div class="body"><div class="mid"><div class="flow"><div class="fs"><b>내 컴퓨터</b><span>앱 · 커밋</span></div><div class="fa">→</div><div class="fs"><b>GitHub</b><span>코드 보관</span></div><div class="fa">→</div><div class="fs hl"><b>Vercel</b><span>코드를 가져가 공개</span></div><div class="fa">→</div><div class="fs"><b>주소</b><span>*.vercel.app</span></div><div class="fa">→</div><div class="fs"><b>팀원</b><span>링크로 접속</span></div></div><div class="v2tiles c2"><div class="v2tile" style="--d:0.00s"><b>연결 ① Claude Code → GitHub</b><span>1-5 에서 로그인 · gh 로 저장소 생성 · 업로드</span></div><div class="v2tile" style="--d:0.08s"><b>연결 ② GitHub → Vercel</b><span>한 번 연결해 두면 이후 자동</span></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="GitHub 업로드 요청">
@@ -3124,7 +3132,7 @@ a3b8e51  T1 화면 뼈대 · 페이지 목록
   <div class="eyebrow"><span class="tag">1-7</span></div>
   <h2 class="s-title sm">실습 1-7 순서</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><ol class="v1st"><li style="--d:0.00s"><em>1</em><span>「GitHub 로그인 도와줘」 · 브라우저 승인</span></li><li style="--d:0.25s"><em>2</em><span>올리기 전 키 · 개인정보 점검 요청</span></li><li style="--d:0.50s"><em>3</em><span>저장소 만들고 올리기 요청</span></li><li style="--d:0.75s"><em>4</em><span>Vercel 가져오기 · Deploy</span></li><li style="--d:1.00s"><em>5</em><span>수정 → 커밋 · push 요청</span></li></ol><div class="qk2"><b>확인</b><ul><li>저장소 주소가 열림</li><li>배포 주소가 열림</li><li>수정 뒤 같은 주소에 반영</li></ul></div></div></div>
+  <div class="body"><div class="mid"><ol class="v1st"><li style="--d:0.00s"><em>1</em><span>올리기 전 키 · 개인정보 점검 요청</span></li><li style="--d:0.25s"><em>2</em><span>저장소 만들고 올리기 요청</span></li><li style="--d:0.50s"><em>3</em><span>Vercel 가져오기 · Deploy</span></li><li style="--d:0.75s"><em>4</em><span>수정 → 커밋 · push 요청</span></li></ol><div class="qk2"><b>확인</b><ul><li>저장소 주소가 열림</li><li>배포 주소가 열림</li><li>수정 뒤 같은 주소에 반영</li></ul></div></div></div>
 </section>
 <section class="slide lt" data-title="실습 1-7 요청 항목">
   <div class="coord"><b></b> / <span class="tot"></span></div>
@@ -3134,42 +3142,34 @@ a3b8e51  T1 화면 뼈대 · 페이지 목록
   <div class="body"><div class="mid"><div class="v1sls"><div class="v1sl" style="--d:0.00s"><b>목표</b><span>이 폴더를 GitHub 에 올리기</span></div><div class="v1sl" style="--d:0.20s"><b>저장소</b><span>이름 · 비공개</span></div><div class="v1sl" style="--d:0.40s"><b>올리기 전</b><span>키 · 개인정보 점검</span></div><div class="v1sl" style="--d:0.60s"><b>하지 말 것</b><span>기존 커밋 지우기 · 공개 저장소</span></div></div></div></div>
 </section>
 
-<section class="slide lt" data-title="실습 1-7 · 1단계 GitHub 로그인">
+<section class="slide lt" data-title="실습 1-7 · 1단계 올리기 전 점검">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-7</span></div>
-  <h2 class="s-title sm">실습 1-7 · 1단계 GitHub 로그인</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1ask"><span>Claude Code 입력창</span><p>GitHub 로그인 도와줘</p><p>로그인됐는지 확인해 줘</p></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>명령 허용</b><span>패널에 뜬 로그인 명령 → 허용</span></div><div class="v2tile" style="--d:0.08s"><b>브라우저</b><span>화면의 코드 입력 → 승인</span></div><div class="v2tile" style="--d:0.16s"><b>막히면</b><span>강사와 함께</span></div></div></div></div>
-</section>
-
-<section class="slide lt" data-title="실습 1-7 · 2단계 올리기 전 점검">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">1-7</span></div>
-  <h2 class="s-title sm">실습 1-7 · 2단계 올리기 전 점검</h2>
+  <h2 class="s-title sm">실습 1-7 · 1단계 올리기 전 점검</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v1ts"><div class="need-img"><span class="nk">캡처 필요</span><span class="nd">VS Code Claude Code 패널 캡처 · 키 · 개인정보 점검 결과</span><span class="nm2">강사 화면 캡처로 교체</span></div></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>요청</b><span>키 · 개인정보 점검</span></div><div class="v2tile" style="--d:0.08s"><b>결과</b><span>키 · 비밀번호 없음</span></div><div class="v2tile" style="--d:0.16s"><b>주의</b><span>커밋 이메일 · 공개면 보임</span></div></div></div></div>
 </section>
 
-<section class="slide lt" data-title="실습 1-7 · 3단계 저장소 만들고 올리기">
+<section class="slide lt" data-title="실습 1-7 · 2단계 저장소 만들고 올리기">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-7</span></div>
-  <h2 class="s-title sm">실습 1-7 · 3단계 저장소 만들고 올리기</h2>
+  <h2 class="s-title sm">실습 1-7 · 2단계 저장소 만들고 올리기</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v1ask"><span>Claude Code 입력창</span><p>비공개 저장소 만들고 올려 줘</p></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>저장소</b><span>비공개</span></div><div class="v2tile" style="--d:0.08s"><b>승인</b><span>패널에 뜬 명령 확인 → 허용</span></div><div class="v2tile" style="--d:0.16s"><b>다음</b><span>올린 결과 확인</span></div></div></div></div>
 </section>
 
-<section class="slide lt" data-title="실습 1-7 · 3단계 올린 결과">
+<section class="slide lt" data-title="실습 1-7 · 2단계 올린 결과">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-7</span></div>
-  <h2 class="s-title sm">실습 1-7 · 3단계 올린 결과</h2>
+  <h2 class="s-title sm">실습 1-7 · 2단계 올린 결과</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v1ts"><div class="need-img"><span class="nk">캡처 필요</span><span class="nd">VS Code Claude Code 패널 캡처 · 비공개 저장소에 올린 결과</span><span class="nm2">강사 화면 캡처로 교체</span></div></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>주소</b><span>github.com/내계정/저장소</span></div><div class="v2tile" style="--d:0.08s"><b>비공개</b><span>PRIVATE 확인</span></div><div class="v2tile" style="--d:0.16s"><b>다음</b><span>Vercel 에서 가져오기</span></div></div></div></div>
 </section>
 
-<section class="slide lt" data-title="실습 1-7 · 4단계 Vercel 가져오기 · Deploy">
+<section class="slide lt" data-title="실습 1-7 · 3단계 Vercel 가져오기 · Deploy">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-7</span></div>
-  <h2 class="s-title sm">실습 1-7 · 4단계 Vercel 가져오기 · Deploy</h2>
+  <h2 class="s-title sm">실습 1-7 · 3단계 Vercel 가져오기 · Deploy</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v1ts"><div class="need-img"><span class="nk">캡처 필요</span><span class="nd">vercel.com/new · 저장소 Import → Deploy 화면</span><span class="nm2">강사 화면 캡처로 교체</span></div></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>주소</b><span><a class="go" href="https://vercel.com/new" target="_blank" rel="noopener">vercel.com/new</a></span></div><div class="v2tile" style="--d:0.08s"><b>가져오기</b><span>저장소 옆 Import</span></div><div class="v2tile" style="--d:0.16s"><b>배포</b><span>Deploy → *.vercel.app</span></div></div></div></div>
 </section>
