@@ -94,7 +94,7 @@ def _tone():
         r += (f'<div class="v14oR"><b style="--d:{d:.1f}s">{k}</b><div class="v14oD" style="--d:{d:.1f}s;--x:{d + 1.0:.1f}s">{esc(dev)}</div>'
               f'<i style="--d:{d + 1.0:.1f}s">→</i><div class="v14oL" style="--d:{d + 1.2:.1f}s">{esc(lead)}</div></div>')
     return (f'<div class="v14o"><div class="v14oH"><span></span><span>개발자 말투</span><span></span><span>개발 리더 말투 · 개발리더.md</span></div>{r}</div>'
-            '<div class="v14gN" style="--d:7.2s"><b>같은 내용</b>「기획자도 알아듣게」 한 줄이면 처음부터 쉬운 말로</div>')
+            '<div class="v14gN" style="--d:7.2s"><b>같은 내용</b>「IT 를 모르는 사람도 알 수 있게」 한 줄이면 처음부터 쉬운 말로</div>')
 
 
 def _screen():
@@ -241,7 +241,7 @@ def slides():
         # ── 개발 계획
         # ── 개발 리더 페르소나
         light("개발 리더 페르소나", '<div class="twocol"><div>' + code("개발리더.md", esc(_persona("개발리더")))
-              + '</div><div>' + viz2.tiles([("첫 줄", "개발을 몰라도 알아듣는 질문 · 계획"), ("둘째 줄", "전문 용어는 바로 뜻 풀이"),
+              + '</div><div>' + viz2.tiles([("첫 줄", "IT 를 몰라도 알 수 있는 쉬운 말"), ("둘째 줄", "전문 용어는 바로 뜻 풀이"),
                                           ("셋째 줄", "선택지 · 추천 · 이유로 질문"), ("마지막 줄", "칸 끝에 쉬운 말 요약")], 1) + "</div></div>", T),
         light("개발 계획 대화 예시", chat([
             ("me", "개발리더.md 대로 기획서.md 를 읽고 개발 계획을 세워 줘"),

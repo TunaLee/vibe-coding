@@ -606,8 +606,8 @@ def slides():
               + note("둘을 같이", "먼저 묻기 모드 + 기획자.md → 기획자가 선택지로 묻고 나는 고르기")
               + src(("Claude Code · Permission modes", "https://code.claude.com/docs/en/permission-modes")), T),
         light("기획자 페르소나", '<div class="twocol"><div>' + code("기획자.md", esc(_persona("기획자")))
-              + '</div><div>' + viz2.tiles([("첫 줄", "IT 를 몰라도 알아듣는 질문 · 기획서"), ("둘째 줄", "칸마다 선택지 · 고르거나 직접 적기"),
-                                          ("셋째 줄", "선택지마다 한 줄 설명"), ("마지막 줄", "기획서 칸 다섯 개")], 1) + "</div></div>", T),
+              + '</div><div>' + viz2.tiles([("첫 줄", "IT 를 몰라도 알 수 있는 쉬운 말"), ("둘째 줄", "칸마다 선택지 · 고르거나 직접 적기"),
+                                          ("셋째 줄", "선택지마다 한 줄 설명 · 추천 하나"), ("마지막 줄", "기획서 칸 다섯 개")], 1) + "</div></div>", T),
         # ── 실습
         labcard("1-3", "기획서 작성", T, "기획자.md", "기획서.md", ["먼저 묻기 모드", "선택지 고르기"]),
         light("선택지와 화면", _pick(), T),
