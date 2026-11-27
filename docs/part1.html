@@ -1906,6 +1906,29 @@
   .v16s .lg p{margin:0; font-size:18px; color:#37414F; padding:14px 18px; border-radius:10px; background:#F4F6F8;}
   .v16s .lg b{color:#16233A; margin-right:10px; font-size:19px;}
 
+  /* 1-7 · GitHub 저장소 만들기 (v17g) */
+  .v17g{display:grid; grid-template-columns:600px 1fr; gap:26px; align-items:start; margin:0 0 16px;}
+  .v17gW{border:1.5px solid #D0D7DE; border-radius:12px; background:#fff; overflow:hidden; box-shadow:0 6px 18px rgba(22,35,58,.12);}
+  .v17gU{background:#F6F8FA; border-bottom:1px solid #D0D7DE; padding:8px 14px; font-family:var(--mono); font-size:14px; color:#57606A;}
+  .v17gF{padding:16px 22px 20px; display:flex; flex-direction:column; gap:14px;}
+  .v17gH{font-size:22px; font-weight:800; color:#1F2328; padding-bottom:10px; border-bottom:1px solid #D8DEE4;}
+  .v17gR{display:grid; grid-template-columns:30px 170px 1fr; align-items:center; gap:10px; opacity:.35; animation:v17gOn .5s var(--d) forwards;}
+  .v17gR i,.v17gS i{font-style:normal; font-size:18px; font-weight:800; color:#F28C28;}
+  .v17gR b{font-size:16px; color:#1F2328;}
+  .v17gI{border:1.5px solid #D0D7DE; border-radius:6px; padding:6px 12px; font-family:var(--mono); font-size:16px; color:#1F2328; background:#F6F8FA;}
+  .v17gO{justify-self:start; border:1.5px solid #D0D7DE; border-radius:14px; padding:4px 14px; font-size:15px; font-weight:700; color:#57606A;}
+  .v17gB{grid-column:2/span 2; justify-self:start; background:#1F883D; color:#fff; font-size:16px; font-weight:700; border-radius:6px; padding:8px 18px;}
+  .v17gS{display:flex; flex-direction:column; gap:12px;}
+  .v17gS p{margin:0; display:grid; grid-template-columns:30px 1fr; gap:2px 10px; background:#fff; border:1.5px solid #C9D6E6; border-radius:12px; padding:10px 14px;
+    opacity:0; animation:v17gIn .5s var(--d) forwards;}
+  .v17gS b{font-size:18px; color:#16233A;} .v17gS span{grid-column:2; font-size:16px; color:#3A4657;}
+  .v17gX{display:flex; gap:16px; align-items:baseline; border:2px dashed #F28C28; border-radius:14px; padding:12px 20px; opacity:0; animation:v17gIn .6s var(--d) forwards;}
+  .v17gX b{font-size:19px; color:#16233A;} .v17gX span{font-size:16px; color:#3A4657;}
+  .v17gX tt{font-family:var(--mono); font-size:17px; font-weight:700; color:#1F3A5F; background:#EAF0F7; border-radius:16px; padding:5px 14px;}
+  .v17gX em{margin-left:auto; font-style:normal; font-size:16px; font-weight:800; color:#E07A12;}
+  @keyframes v17gOn{to{opacity:1}}
+  @keyframes v17gIn{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
+  @media print{.v17gR,.v17gS p,.v17gX{opacity:1; animation:none}}
   /* 1-7 · 비유 두 컷 */
   /* 1-7 · 문서 파일과 공유 링크 (v1sh) */
   .v1sh{display:grid; grid-template-columns:1fr 50px 1fr; gap:12px; align-items:stretch; margin:4px 0 16px;}
@@ -3295,15 +3318,15 @@ h1 { font-size: 34px; }</pre></div><div class="v16wc on" data-js="1" style="--d:
   <div class="eyebrow"><span class="tag">1-7</span></div>
   <h2 class="s-title sm">배포 흐름</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="flow"><div class="fs"><b>내 컴퓨터</b><span>앱 · 커밋</span></div><div class="fa">→</div><div class="fs"><b>GitHub</b><span>코드 보관</span></div><div class="fa">→</div><div class="fs hl"><b>Vercel</b><span>코드를 가져가 공개</span></div><div class="fa">→</div><div class="fs"><b>주소</b><span>*.vercel.app</span></div><div class="fa">→</div><div class="fs"><b>팀원</b><span>링크로 접속</span></div></div><div class="v2tiles c2"><div class="v2tile" style="--d:0.00s"><b>연결 ① Claude Code → GitHub</b><span>1-5 에서 로그인 · gh 로 저장소 생성 · 업로드</span></div><div class="v2tile" style="--d:0.08s"><b>연결 ② GitHub → Vercel</b><span>한 번 연결해 두면 이후 자동</span></div></div></div></div>
+  <div class="body"><div class="mid"><div class="flow"><div class="fs"><b>내 컴퓨터</b><span>앱 · 커밋</span></div><div class="fa">→</div><div class="fs"><b>GitHub</b><span>코드 보관</span></div><div class="fa">→</div><div class="fs hl"><b>Vercel</b><span>코드를 가져가 공개</span></div><div class="fa">→</div><div class="fs"><b>주소</b><span>*.vercel.app</span></div><div class="fa">→</div><div class="fs"><b>팀원</b><span>링크로 접속</span></div></div><div class="v2tiles c2"><div class="v2tile" style="--d:0.00s"><b>연결 ① 내 폴더 → GitHub</b><span>github.com 에서 빈 저장소 생성 · Claude Code 가 업로드</span></div><div class="v2tile" style="--d:0.08s"><b>연결 ② GitHub → Vercel</b><span>한 번 연결해 두면 이후 자동</span></div></div></div></div>
 </section>
 
-<section class="slide lt" data-title="GitHub 업로드 요청">
+<section class="slide lt" data-title="GitHub 저장소 만들기">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-7</span></div>
-  <h2 class="s-title sm">GitHub 업로드 요청</h2>
+  <h2 class="s-title sm">GitHub 저장소 만들기</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1chat"><div class="v1ch">Claude Code 대화</div><div class="v1b me"><span>나</span><p>이 폴더를 GitHub 비공개 저장소 mini-notion 으로 올려 줘</p></div><div class="v1b ai"><span>Claude</span><p>gh repo create mini-notion --private --source=. --push 를 실행해도 될까요?</p></div><div class="v1b me"><span>나</span><p>응</p></div><div class="v1b ai"><span>Claude</span><p>완료 · https://github.com/내계정/mini-notion</p></div></div><div class="dbnote"><span>Claude가 쓰는 명령</span> gh repo create — 원격 저장소 만들기 + 지금까지의 커밋 올리기</div><div class="src">출처 · <a href="https://cli.github.com/manual/gh_repo_create" target="_blank" rel="noopener">gh repo create</a></div></div></div>
+  <div class="body"><div class="mid"><div class="v17g"><div class="v17gW"><div class="v17gU">github.com/new</div><div class="v17gF"><div class="v17gH">Create a new repository</div><div class="v17gR" style="--d:0.4s"><i>①</i><b>Repository name</b><span class="v17gI">mini-notion</span></div><div class="v17gR" style="--d:1.2s"><i>②</i><b>Visibility</b><span class="v17gI">Private</span></div><div class="v17gR" style="--d:2.0s"><i>③</i><b>Add README</b><span class="v17gO">Off</span></div><div class="v17gR" style="--d:2.8s"><i>④</i><b></b><span class="v17gB">Create repository</span></div></div></div><div class="v17gS"><p style="--d:.4s"><i>①</i><b>이름</b><span>mini-notion · 영문 · 하이픈</span></p><p style="--d:1.2s"><i>②</i><b>Private</b><span>나와 초대한 사람만</span></p><p style="--d:2.0s"><i>③</i><b>README · .gitignore · 라이선스 없이</b><span>빈 저장소 · 내 커밋과 충돌 없음</span></p><p style="--d:2.8s"><i>④</i><b>Create repository</b><span>빈 저장소 생성</span></p></div></div><div class="v17gX" style="--d:3.8s"><b>만든 뒤 화면</b><span>빈 저장소 · Quick setup</span><tt>https://github.com/내계정/mini-notion.git</tt><em>이 주소를 Claude Code 에 전달</em></div><div class="src">출처 · <a href="https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository" target="_blank" rel="noopener">GitHub Docs · Creating a new repository</a></div></div></div>
 </section>
 
 <section class="slide lt" data-title="공개 · 비공개 저장소">
@@ -3312,6 +3335,14 @@ h1 { font-size: 34px; }</pre></div><div class="v16wc on" data-js="1" style="--d:
   <h2 class="s-title sm">공개 · 비공개 저장소</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">공개 (public)</div><div class="v2pc" style="--d:0.00s"><b>누가 보나</b><span>인터넷의 누구나 코드를 봄</span></div><div class="v2pc" style="--d:0.08s"><b>맞는 경우</b><span>공개해도 되는 연습 코드</span></div></div><div class="v2p on"><div class="v2ph">비공개 (private)</div><div class="v2pc" style="--d:0.00s"><b>누가 보나</b><span>나와 초대한 사람만</span></div><div class="v2pc" style="--d:0.08s"><b>맞는 경우</b><span>회사 업무 · 이 실습</span></div></div></div><div class="dbnote"><span>GitHub Free</span> 비공개 저장소도 개수 제한 없음 · 일부 기능만 유료</div><div class="src">출처 · <a href="https://docs.github.com/en/get-started/learning-about-github/githubs-plans" target="_blank" rel="noopener">GitHub plans</a></div></div></div>
+</section>
+
+<section class="slide lt" data-title="GitHub 업로드 요청">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-7</span></div>
+  <h2 class="s-title sm">GitHub 업로드 요청</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1chat"><div class="v1ch">Claude Code 대화</div><div class="v1b me"><span>나</span><p>이 폴더를 GitHub 저장소 https://github.com/내계정/mini-notion 에 올려 줘</p></div><div class="v1b ai"><span>Claude</span><p>git remote add origin … 과 git push -u origin main 을 실행해도 될까요?</p></div><div class="v1b me"><span>나</span><p>응</p></div><div class="v1b ai"><span>Claude</span><p>완료 · 지금까지의 커밋을 mini-notion 저장소에 올림</p></div></div><div class="dbnote"><span>Claude가 쓰는 명령</span> git remote add — 저장소 주소 등록 · git push — 지금까지의 커밋 올리기</div><div class="src">출처 · <a href="https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github" target="_blank" rel="noopener">GitHub Docs · Adding locally hosted code to GitHub</a></div></div></div>
 </section>
 
 <section class="slide lt" data-title="업로드한 저장소 확인">
@@ -3385,7 +3416,7 @@ h1 { font-size: 34px; }</pre></div><div class="v16wc on" data-js="1" style="--d:
   <div class="eyebrow"><span class="tag">1-7</span></div>
   <h2 class="s-title sm">실습 1-7 순서</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><ol class="v1st"><li style="--d:0.00s"><em>1</em><span>올리기 전 키 · 개인정보 점검 요청</span></li><li style="--d:0.25s"><em>2</em><span>저장소 만들고 올리기 요청</span></li><li style="--d:0.50s"><em>3</em><span>Vercel 가져오기 · Deploy</span></li><li style="--d:0.75s"><em>4</em><span>수정 → 커밋 · push 요청</span></li></ol><div class="qk2"><b>확인</b><ul><li>저장소 주소가 열림</li><li>배포 주소가 열림</li><li>수정 뒤 같은 주소에 반영</li></ul></div></div></div>
+  <div class="body"><div class="mid"><ol class="v1st"><li style="--d:0.00s"><em>1</em><span>올리기 전 키 · 개인정보 점검 요청</span></li><li style="--d:0.25s"><em>2</em><span>github.com 에서 비공개 저장소 만들기</span></li><li style="--d:0.50s"><em>3</em><span>올리기 요청</span></li><li style="--d:0.75s"><em>4</em><span>Vercel 가져오기 · Deploy</span></li><li style="--d:1.00s"><em>5</em><span>수정 → 커밋 · push 요청</span></li></ol><div class="qk2"><b>확인</b><ul><li>저장소 주소가 열림</li><li>배포 주소가 열림</li><li>수정 뒤 같은 주소에 반영</li></ul></div></div></div>
 </section>
 <section class="slide lt" data-title="실습 1-7 요청 항목">
   <div class="coord"><b></b> / <span class="tot"></span></div>
@@ -3403,26 +3434,34 @@ h1 { font-size: 34px; }</pre></div><div class="v16wc on" data-js="1" style="--d:
   <div class="body"><div class="mid"><div class="v1ts"><div class="need-img"><span class="nk">캡처 필요</span><span class="nd">VS Code Claude Code 패널 캡처 · 키 · 개인정보 점검 결과</span><span class="nm2">강사 화면 캡처로 교체</span></div></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>요청</b><span>키 · 개인정보 점검</span></div><div class="v2tile" style="--d:0.08s"><b>결과</b><span>키 · 비밀번호 없음</span></div><div class="v2tile" style="--d:0.16s"><b>주의</b><span>커밋 이메일 · 공개면 보임</span></div></div></div></div>
 </section>
 
-<section class="slide lt" data-title="실습 1-7 · 2단계 저장소 만들고 올리기">
+<section class="slide lt" data-title="실습 1-7 · 2단계 GitHub 저장소 만들기">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-7</span></div>
-  <h2 class="s-title sm">실습 1-7 · 2단계 저장소 만들고 올리기</h2>
+  <h2 class="s-title sm">실습 1-7 · 2단계 GitHub 저장소 만들기</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1ask"><span>Claude Code 입력창</span><p>비공개 저장소 만들고 올려 줘</p></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>저장소</b><span>비공개</span></div><div class="v2tile" style="--d:0.08s"><b>승인</b><span>패널에 뜬 명령 확인 → 허용</span></div><div class="v2tile" style="--d:0.16s"><b>다음</b><span>올린 결과 확인</span></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v1ts"><div class="need-img"><span class="nk">캡처 필요</span><span class="nd">github.com/new · 이름 mini-notion · Private · README 끔 화면</span><span class="nm2">강사 화면 캡처로 교체</span></div></div><div class="v2tiles c4"><div class="v2tile" style="--d:0.00s"><b>주소</b><span><a class="go" href="https://github.com/new" target="_blank" rel="noopener">github.com/new</a></span></div><div class="v2tile" style="--d:0.08s"><b>공개 범위</b><span>Private</span></div><div class="v2tile" style="--d:0.16s"><b>README</b><span>끔 · 빈 저장소</span></div><div class="v2tile" style="--d:0.24s"><b>다음</b><span>저장소 주소 복사</span></div></div></div></div>
 </section>
 
-<section class="slide lt" data-title="실습 1-7 · 2단계 올린 결과">
+<section class="slide lt" data-title="실습 1-7 · 3단계 올리기">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-7</span></div>
-  <h2 class="s-title sm">실습 1-7 · 2단계 올린 결과</h2>
+  <h2 class="s-title sm">실습 1-7 · 3단계 올리기</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1ask"><span>Claude Code 입력창</span><p>이 폴더를 GitHub 저장소</p><p>https://github.com/내계정/mini-notion 에 올려 줘</p></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>주소</b><span>2단계에서 복사한 주소</span></div><div class="v2tile" style="--d:0.08s"><b>승인</b><span>패널에 뜬 명령 확인 → 허용</span></div><div class="v2tile" style="--d:0.16s"><b>다음</b><span>올린 결과 확인</span></div></div></div></div>
+</section>
+
+<section class="slide lt" data-title="실습 1-7 · 3단계 올린 결과">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-7</span></div>
+  <h2 class="s-title sm">실습 1-7 · 3단계 올린 결과</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v1ts"><div class="need-img"><span class="nk">캡처 필요</span><span class="nd">VS Code Claude Code 패널 캡처 · 비공개 저장소에 올린 결과</span><span class="nm2">강사 화면 캡처로 교체</span></div></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>주소</b><span>github.com/내계정/저장소</span></div><div class="v2tile" style="--d:0.08s"><b>비공개</b><span>PRIVATE 확인</span></div><div class="v2tile" style="--d:0.16s"><b>다음</b><span>Vercel 에서 가져오기</span></div></div></div></div>
 </section>
 
-<section class="slide lt" data-title="실습 1-7 · 3단계 Vercel 가져오기 · Deploy">
+<section class="slide lt" data-title="실습 1-7 · 4단계 Vercel 가져오기 · Deploy">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-7</span></div>
-  <h2 class="s-title sm">실습 1-7 · 3단계 Vercel 가져오기 · Deploy</h2>
+  <h2 class="s-title sm">실습 1-7 · 4단계 Vercel 가져오기 · Deploy</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v1ts"><div class="need-img"><span class="nk">캡처 필요</span><span class="nd">vercel.com/new · 저장소 Import → Deploy 화면</span><span class="nm2">강사 화면 캡처로 교체</span></div></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>주소</b><span><a class="go" href="https://vercel.com/new" target="_blank" rel="noopener">vercel.com/new</a></span></div><div class="v2tile" style="--d:0.08s"><b>가져오기</b><span>저장소 옆 Import</span></div><div class="v2tile" style="--d:0.16s"><b>배포</b><span>Deploy → *.vercel.app</span></div></div></div></div>
 </section>

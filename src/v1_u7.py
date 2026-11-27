@@ -1,8 +1,8 @@
 """1-7 배포.
 
 배포란 → 비유(내 컴퓨터의 문서 파일 → 공유 링크 · 애니메이션) → localhost · 내부망 · 외부망(애니메이션) · 주소별 접속 범위 → 흐름(GitHub → Vercel → 주소)
-→ GitHub에 올리기(gh · 말로) → Vercel 가져오기 · 주소 → push 하면 자동 재배포 · Production / Preview → 공개 전 확인 → 실습.
-사실 출처: cli.github.com (gh 설치 · gh auth login · gh repo create) · vercel.com/docs/git · vercel.com/docs/deployments/generated-urls
+→ GitHub에서 저장소 만들기(github.com/new) → 공개 · 비공개 → 올리기(말로) → Vercel 가져오기 · 주소 → push 하면 자동 재배포 · Production / Preview → 공개 전 확인 → 실습.
+사실 출처: docs.github.com (Creating a new repository · Adding locally hosted code to GitHub) · cli.github.com (gh auth login) · vercel.com/docs/git · vercel.com/docs/deployments/generated-urls
 · vercel.com/docs/plans/hobby · docs.github.com (plans)
 Git 개념(commit · push)은 1-5 에서 설명 — 여기서는 다시 설명하지 않는다.
 """
@@ -33,21 +33,23 @@ def slides():
             ("내 컴퓨터", "앱 · 커밋"), ("GitHub", "코드 보관"), ("Vercel", "코드를 가져가 공개"),
             ("주소", "*.vercel.app"), ("팀원", "링크로 접속")], hl=2)
               + viz2.tiles([
-                  ("연결 ① Claude Code → GitHub", "1-5 에서 로그인 · gh 로 저장소 생성 · 업로드"),
+                  ("연결 ① 내 폴더 → GitHub", "github.com 에서 빈 저장소 생성 · Claude Code 가 업로드"),
                   ("연결 ② GitHub → Vercel", "한 번 연결해 두면 이후 자동")], 2), T),
         # ── GitHub 에 올리기
-        light("GitHub 업로드 요청", chat([
-            ("me", "이 폴더를 GitHub 비공개 저장소 mini-notion 으로 올려 줘"),
-            ("ai", "gh repo create mini-notion --private --source=. --push 를 실행해도 될까요?"),
-            ("me", "응"),
-            ("ai", "완료 · https://github.com/내계정/mini-notion")], "Claude Code 대화")
-              + note("Claude가 쓰는 명령", "gh repo create — 원격 저장소 만들기 + 지금까지의 커밋 올리기")
-              + src(("gh repo create", "https://cli.github.com/manual/gh_repo_create")), T),
+        light("GitHub 저장소 만들기", _ghnew()
+              + src(("GitHub Docs · Creating a new repository", "https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository")), T),
         light("공개 · 비공개 저장소", viz2.pair(
             "공개 (public)", [("누가 보나", "인터넷의 누구나 코드를 봄"), ("맞는 경우", "공개해도 되는 연습 코드")],
             "비공개 (private)", [("누가 보나", "나와 초대한 사람만"), ("맞는 경우", "회사 업무 · 이 실습")], hl="r")
               + note("GitHub Free", "비공개 저장소도 개수 제한 없음 · 일부 기능만 유료")
               + src(("GitHub plans", "https://docs.github.com/en/get-started/learning-about-github/githubs-plans")), T),
+        light("GitHub 업로드 요청", chat([
+            ("me", "이 폴더를 GitHub 저장소 https://github.com/내계정/mini-notion 에 올려 줘"),
+            ("ai", "git remote add origin … 과 git push -u origin main 을 실행해도 될까요?"),
+            ("me", "응"),
+            ("ai", "완료 · 지금까지의 커밋을 mini-notion 저장소에 올림")], "Claude Code 대화")
+              + note("Claude가 쓰는 명령", "git remote add — 저장소 주소 등록 · git push — 지금까지의 커밋 올리기")
+              + src(("GitHub Docs · Adding locally hosted code to GitHub", "https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github")), T),
         light("업로드한 저장소 확인", '<div class="twocol"><div>'
               + code("github.com/내계정/mini-notion · 예", esc(
                   "mini-notion/\n├── index.html\n├── style.css\n├── app.js\n├── 기획서.md\n└── 개발계획.md"))
@@ -88,26 +90,50 @@ def slides():
         # ── 실습
         labcard("1-7", "내 앱 배포", T, "내 앱 폴더", "공개 주소", ["GitHub 비공개 저장소", "Vercel 배포"]),
         brief("1-7", T,
-              ["올리기 전 키 · 개인정보 점검 요청", "저장소 만들고 올리기 요청",
+              ["올리기 전 키 · 개인정보 점검 요청", "github.com 에서 비공개 저장소 만들기", "올리기 요청",
                "Vercel 가져오기 · Deploy", "수정 → 커밋 · push 요청"],
               [("목표", "이 폴더를 GitHub 에 올리기"), ("저장소", "이름 · 비공개"), ("올리기 전", "키 · 개인정보 점검"),
                ("하지 말 것", "기존 커밋 지우기 · 공개 저장소")],
-              ["GitHub", "비공개", "gh", "push", "Vercel"],
+              ["GitHub", "비공개", "push", "Vercel"],
               ["저장소 주소가 열림", "배포 주소가 열림", "수정 뒤 같은 주소에 반영"],
               "오류 문구 그대로 전달", folder="내 앱 폴더"),
         tstep("1-7", 1, "올리기 전 점검", T, need="VS Code Claude Code 패널 캡처 · 키 · 개인정보 점검 결과",
               rows=[("요청", "키 · 개인정보 점검"), ("결과", "키 · 비밀번호 없음"), ("주의", "커밋 이메일 · 공개면 보임")]),
-        tstep("1-7", 2, "저장소 만들고 올리기", T, ask=("Claude Code 입력창", "비공개 저장소 만들고 올려 줘"),
-              rows=[("저장소", "비공개"), ("승인", "패널에 뜬 명령 확인 → 허용"), ("다음", "올린 결과 확인")]),
-        tstep("1-7", 2, "올린 결과", T, need="VS Code Claude Code 패널 캡처 · 비공개 저장소에 올린 결과",
+        tstep("1-7", 2, "GitHub 저장소 만들기", T, need="github.com/new · 이름 mini-notion · Private · README 끔 화면",
+              rows=[("주소", go("github.com/new", "https://github.com/new")), ("공개 범위", "Private"), ("README", "끔 · 빈 저장소"),
+                    ("다음", "저장소 주소 복사")]),
+        tstep("1-7", 3, "올리기", T, ask=("Claude Code 입력창", "이 폴더를 GitHub 저장소\nhttps://github.com/내계정/mini-notion 에 올려 줘"),
+              rows=[("주소", "2단계에서 복사한 주소"), ("승인", "패널에 뜬 명령 확인 → 허용"), ("다음", "올린 결과 확인")]),
+        tstep("1-7", 3, "올린 결과", T, need="VS Code Claude Code 패널 캡처 · 비공개 저장소에 올린 결과",
               rows=[("주소", "github.com/내계정/저장소"), ("비공개", "PRIVATE 확인"), ("다음", "Vercel 에서 가져오기")]),
-        tstep("1-7", 3, "Vercel 가져오기 · Deploy", T, need="vercel.com/new · 저장소 Import → Deploy 화면",
+        tstep("1-7", 4, "Vercel 가져오기 · Deploy", T, need="vercel.com/new · 저장소 Import → Deploy 화면",
               rows=[("주소", go("vercel.com/new", "https://vercel.com/new")), ("가져오기", "저장소 옆 Import"), ("배포", "Deploy → *.vercel.app")]),
         light("실습 1-7 확인", viz2.maprows([
             ("저장소", "github.com/내계정/저장소 이름", "파일 · 커밋 · 자물쇠"), ("배포 주소", "프로젝트명.vercel.app", "PC · 휴대폰에서 열림"),
             ("재배포", "push 1~2분 뒤 새로고침", "고친 곳이 보임"), ("공개 전 점검", "키 · 개인정보 없음", "Claude Code 점검 결과")], "볼 것", "확인")
               + note("공유", "배포 주소로 결과 공유"), T),
     ]
+
+
+def _ghnew():
+    """github.com/new 화면 모형 — 이름 · Private · README 끔 → Create repository → 빈 저장소 주소."""
+    def row(n, k, v, d):
+        return f'<div class="v17gR" style="--d:{d}s"><i>{n}</i><b>{k}</b>{v}</div>'
+    form = ('<div class="v17gW"><div class="v17gU">github.com/new</div><div class="v17gF">'
+            '<div class="v17gH">Create a new repository</div>'
+            + row("①", "Repository name", '<span class="v17gI">mini-notion</span>', .4)
+            + row("②", "Visibility", '<span class="v17gI">Private</span>', 1.2)
+            + row("③", "Add README", '<span class="v17gO">Off</span>', 2.0)
+            + row("④", "", '<span class="v17gB">Create repository</span>', 2.8)
+            + '</div></div>')
+    side = ('<div class="v17gS">'
+            '<p style="--d:.4s"><i>①</i><b>이름</b><span>mini-notion · 영문 · 하이픈</span></p>'
+            '<p style="--d:1.2s"><i>②</i><b>Private</b><span>나와 초대한 사람만</span></p>'
+            '<p style="--d:2.0s"><i>③</i><b>README · .gitignore · 라이선스 없이</b><span>빈 저장소 · 내 커밋과 충돌 없음</span></p>'
+            '<p style="--d:2.8s"><i>④</i><b>Create repository</b><span>빈 저장소 생성</span></p></div>')
+    res = ('<div class="v17gX" style="--d:3.8s"><b>만든 뒤 화면</b><span>빈 저장소 · Quick setup</span>'
+           '<tt>https://github.com/내계정/mini-notion.git</tt><em>이 주소를 Claude Code 에 전달</em></div>')
+    return f'<div class="v17g">{form}{side}</div>{res}'
 
 
 def _net():
@@ -146,6 +172,29 @@ def _share():
 
 
 CSS = """
+  /* 1-7 · GitHub 저장소 만들기 (v17g) */
+  .v17g{display:grid; grid-template-columns:600px 1fr; gap:26px; align-items:start; margin:0 0 16px;}
+  .v17gW{border:1.5px solid #D0D7DE; border-radius:12px; background:#fff; overflow:hidden; box-shadow:0 6px 18px rgba(22,35,58,.12);}
+  .v17gU{background:#F6F8FA; border-bottom:1px solid #D0D7DE; padding:8px 14px; font-family:var(--mono); font-size:14px; color:#57606A;}
+  .v17gF{padding:16px 22px 20px; display:flex; flex-direction:column; gap:14px;}
+  .v17gH{font-size:22px; font-weight:800; color:#1F2328; padding-bottom:10px; border-bottom:1px solid #D8DEE4;}
+  .v17gR{display:grid; grid-template-columns:30px 170px 1fr; align-items:center; gap:10px; opacity:.35; animation:v17gOn .5s var(--d) forwards;}
+  .v17gR i,.v17gS i{font-style:normal; font-size:18px; font-weight:800; color:#F28C28;}
+  .v17gR b{font-size:16px; color:#1F2328;}
+  .v17gI{border:1.5px solid #D0D7DE; border-radius:6px; padding:6px 12px; font-family:var(--mono); font-size:16px; color:#1F2328; background:#F6F8FA;}
+  .v17gO{justify-self:start; border:1.5px solid #D0D7DE; border-radius:14px; padding:4px 14px; font-size:15px; font-weight:700; color:#57606A;}
+  .v17gB{grid-column:2/span 2; justify-self:start; background:#1F883D; color:#fff; font-size:16px; font-weight:700; border-radius:6px; padding:8px 18px;}
+  .v17gS{display:flex; flex-direction:column; gap:12px;}
+  .v17gS p{margin:0; display:grid; grid-template-columns:30px 1fr; gap:2px 10px; background:#fff; border:1.5px solid #C9D6E6; border-radius:12px; padding:10px 14px;
+    opacity:0; animation:v17gIn .5s var(--d) forwards;}
+  .v17gS b{font-size:18px; color:#16233A;} .v17gS span{grid-column:2; font-size:16px; color:#3A4657;}
+  .v17gX{display:flex; gap:16px; align-items:baseline; border:2px dashed #F28C28; border-radius:14px; padding:12px 20px; opacity:0; animation:v17gIn .6s var(--d) forwards;}
+  .v17gX b{font-size:19px; color:#16233A;} .v17gX span{font-size:16px; color:#3A4657;}
+  .v17gX tt{font-family:var(--mono); font-size:17px; font-weight:700; color:#1F3A5F; background:#EAF0F7; border-radius:16px; padding:5px 14px;}
+  .v17gX em{margin-left:auto; font-style:normal; font-size:16px; font-weight:800; color:#E07A12;}
+  @keyframes v17gOn{to{opacity:1}}
+  @keyframes v17gIn{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
+  @media print{.v17gR,.v17gS p,.v17gX{opacity:1; animation:none}}
   /* 1-7 · 비유 두 컷 */
   /* 1-7 · 문서 파일과 공유 링크 (v1sh) */
   .v1sh{display:grid; grid-template-columns:1fr 50px 1fr; gap:12px; align-items:stretch; margin:4px 0 16px;}
