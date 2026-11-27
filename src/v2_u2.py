@@ -1,7 +1,7 @@
 """2-2 데이터베이스.
 
 배경 → 데이터 기록의 변화(종이 → 엑셀 → DB → 클라우드 DB) → 비유(엑셀 · 원시인 돌판 그림) → 페이지 표 애니메이션(행 · 열)
-→ 엑셀과 데이터베이스(동시 쓰기 · 형식 거절 애니메이션) → 관계(members · pages) → SQL 한 줄 뜻 → SQL 작성의 변화(손 → SQL → 말 → MCP) → Supabase 구성 · 이유 → 무료 플랜.
+→ 엑셀과 데이터베이스(동시 쓰기 · 형식 거절 애니메이션) → 관계(members · pages) → SQL 한 줄 뜻 → SQL 작성의 변화(손 → SQL → 말 · MCP) → Supabase 구성 · 이유 → 무료 플랜.
 사실 출처
 - Supabase 무료 플랜: supabase.com/pricing (프로젝트 2개 · DB 500 MB · 월 이용자 50,000 · 1주 미사용 시 일시정지 · Pro $25/월)
 - 프로젝트마다 Postgres 전체: supabase.com/docs/guides/database/overview
@@ -108,28 +108,27 @@ def history():
 
 
 def sql_change():
-    """SQL 작성의 변화 — 손으로 찾기 → SQL 직접 작성 → 말로 요청(Claude Code 가 SQL) → MCP 로 직접 실행.
+    """SQL 작성의 변화 — 손으로 찾기 → SQL 직접 작성 → 말로 요청(Claude Code 가 MCP 로 SQL 작성 · 실행).
     같은 질문 「작성 중인 페이지」가 단계마다 어떤 모양인지 + 사람 · AI 가 하는 일. 평택대 교안 「분석 도구의 변화」 구조."""
     pic = [
         '<div class="v2qF"><span>상태 ▾ 필터</span><p>작성 중 ✓</p><p class="x">완료</p><p class="x">초안</p></div>',
         '<pre class="v2qS">select title, date\nfrom pages\nwhere status = \'작성 중\'\norder by date;</pre>',
-        '<div class="v2qM"><p class="me">작성 중인 페이지만 보여 줘</p><pre class="v2qS sm">select title, date …</pre><small>SQL Editor 에 붙여 넣기 · 실행</small></div>',
-        '<div class="v2qM"><p class="me">작성 중인 페이지만 보여 줘</p><p class="ai">작성 중 2개 · 내년 예산안 · 신규 입사자 교육 자료</p></div>',
+        '<div class="v2qM"><p class="me">작성 중인 페이지만 보여 줘</p><small class="tl">Supabase MCP · SQL 작성 → 실행</small>'
+        '<p class="ai">작성 중 2개 · 내년 예산안 · 신규 입사자 교육 자료</p></div>',
     ]
     st = [("손으로 찾기", "엑셀 필터 · 장부", "줄마다 눈으로 찾음", "—"),
           ("SQL 직접 작성", "개발자 · 분석가", "문법 학습 · 작성 · 실행", "—"),
-          ("말로 요청", "Claude Code · 2-4", "요청 · 붙여 넣어 실행 · 결과 확인", "SQL 작성"),
-          ("MCP 연결", "Claude Code · 2-5", "요청 · 결과 확인", "SQL 작성 · 실행 · 보고")]
+          ("말로 요청 · MCP", "Claude Code + Supabase MCP · 2-6", "요청 · 결과 확인", "SQL 작성 · 실행 · 보고")]
     c = ""
     for i, (name, who, me, ai) in enumerate(st):
         d = .3 + i * 1.0
         if i:
             c += f'<i class="v2hA" style="--d:{d - .2:.1f}s">→</i>'
-        c += (f'<div class="v2hK{" on" if i == 3 else ""}" style="--d:{d:.1f}s"><b class="n">{name}</b><small class="w">{who}</small>'
+        c += (f'<div class="v2hK{" on" if i == 2 else ""}" style="--d:{d:.1f}s"><b class="n">{name}</b><small class="w">{who}</small>'
               f'<div class="pic">{pic[i]}</div>'
               f'<dl><dt>사람이 하는 일</dt><dd>{me}</dd><dt>AI 가 하는 일</dt><dd>{ai}</dd></dl></div>')
     return ('<div class="v2hTop"><span>예전</span><i></i><span>바이브코딩</span></div>'
-            f'<div class="v2hQ">「작성 중인 페이지만 보여 줘」 · 같은 질문</div><div class="v2h">{c}</div>')
+            f'<div class="v2hQ">「작성 중인 페이지만 보여 줘」 · 같은 질문</div><div class="v2h v2h3">{c}</div>')
 
 
 def slides():
@@ -184,6 +183,8 @@ CSS = """
   .v2qM p{margin:0; font-size:13px; border-radius:10px; padding:5px 9px;}
   .v2qM p.me{align-self:flex-end; background:#FFF1E0; color:#16233A; font-weight:600;}
   .v2qM p.ai{background:#EEF3FA; color:#16233A; border:1px solid #C9D6E6;}
+  .v2h.v2h3{grid-template-columns:1fr 26px 1fr 26px 1.25fr;}
+  .v2qM small.tl{color:#1F9D63; font-family:var(--mono); font-size:12px;}
   .v2qM small{font-size:12px; color:#C0392B; font-weight:700;}
   /* 2-1 · 데이터 기록의 변화 (v2h) */
   .v2hTop{display:flex; align-items:center; gap:12px; margin:0 0 10px; font-size:15px; font-weight:700; color:#5A6B80;}
