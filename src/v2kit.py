@@ -2,7 +2,7 @@
 
 바이브코딩 온라인 강의 2부 — 심화. 단원마다 HTML 한 파일(docs/2-N-이름.html).
 공통 예제 = 팀 할 일 보드 시작 버전(labs/team_board · 1부 방식)에 DB · 로그인 · 외부 API · MCP 를 붙인 「팀 할 일 보드 v2」 (labs/team_board_v2).
-이어지는 산출물: 2-4 기획서 · 개발 계획 v2 → 2-5 Supabase 저장 · 로그인 → 2-6 API 키 · MCP → 2-7 테스트 · 리뷰 → 2-8 배포 · 로그 → 2-9 운영 체크리스트
+이어지는 산출물: 2-2 요청 · 응답 → 2-3 DB → 2-4 개발 계획 v2 → 2-5 Supabase 저장 · 로그인 → 2-6 API 키 → 2-7 MCP 연결 → 2-8 내 MCP 서버 → 2-9 Claude · ChatGPT 등록 → 2-10 테스트 · 로그 → 2-11 운영 체크리스트
 """
 from deck import light
 from hx import note
@@ -13,19 +13,21 @@ FOLDER = "labs/team_board_v2"
 # (단원, 제목, 분 — 화면에 쓰지 않음, 이 단원에서 남는 것)
 UNITS = [
     ("2-1", "미리보기", 5, "2부 커리큘럼"),
-    ("2-2", "데이터베이스", 15, "표 · 행 · 열 · Supabase"),
-    ("2-3", "API · MCP", 20, "API 와 MCP 차이"),
-    ("2-4", "기획 · 요구사항", 25, "기획서 · 개발 계획 v2"),
+    ("2-2", "웹 앱의 데이터 흐름", 15, "요청 · 응답 읽기"),
+    ("2-3", "데이터베이스", 15, "표 · 행 · 열 · Supabase"),
+    ("2-4", "기획 · 요구사항", 20, "기획서 · 개발 계획 v2"),
     ("2-5", "데이터 다루기", 35, "저장 · 조회 · 로그인"),
-    ("2-6", "외부 서비스 연결", 35, "API 키 · MCP 연결"),
-    ("2-7", "품질 관리 · 테스트 · 디버깅", 35, "테스트 · 수정 기록"),
-    ("2-8", "배포 · 모니터링", 20, "환경변수 · 로그"),
-    ("2-9", "마무리", 10, "운영 체크리스트"),
+    ("2-6", "외부 API · 키", 25, "공휴일 API · 키 보관"),
+    ("2-7", "MCP", 30, "MCP 연결 · 캘린더 → 할 일"),
+    ("2-8", "MCP 서버 만들기", 35, "팀 보드 MCP 서버 배포"),
+    ("2-9", "MCP 서버 등록 · 활용", 25, "Claude · ChatGPT 에서 업무 등록"),
+    ("2-10", "품질 · 운영", 30, "테스트 · 로그"),
+    ("2-11", "마무리", 10, "운영 체크리스트"),
 ]
 BY = {u[0]: u for u in UNITS}
 
-SLUG = {"2-1": "preview", "2-2": "database", "2-3": "api-mcp", "2-4": "planning", "2-5": "data",
-        "2-6": "integrations", "2-7": "quality", "2-8": "monitoring", "2-9": "wrap-up"}
+SLUG = {"2-1": "preview", "2-2": "data-flow", "2-3": "database", "2-4": "planning", "2-5": "data", "2-6": "external-api",
+        "2-7": "mcp", "2-8": "mcp-server", "2-9": "mcp-anywhere", "2-10": "quality-ops", "2-11": "wrap-up"}
 
 
 def file_of(u):
@@ -42,7 +44,7 @@ def cover(u):
 
 
 def roadmap(u):
-    """2부 지도 — 아홉 단원 · 현재 단원 강조 · 지난 단원은 흐리게."""
+    """2부 지도 — 열한 단원 · 현재 단원 강조 · 지난 단원은 흐리게."""
     cur = [x[0] for x in UNITS].index(u)
     cells = []
     for i, (c, t, _, out) in enumerate(UNITS):
@@ -70,8 +72,10 @@ def brief(no, u, steps, slots, keys, checks, stuck, folder="내 프로젝트 폴
     return _brief(no, u, steps, slots, keys, checks, stuck, folder, example)
 
 
-CSS = """
-  /* vibe2 · 지도 (아홉 칸 · 3열) */
-  .v2map{grid-template-columns:repeat(3,1fr); gap:12px;} .v2map .v1u{min-height:96px; padding:14px 18px;}
+import v2scene  # noqa: E402
+
+CSS = v2scene.CSS + """
+  /* vibe2 · 지도 (열한 칸 · 4열) */
+  .v2map{grid-template-columns:repeat(4,1fr); gap:10px;} .v2map .v1u{min-height:84px; padding:10px 14px;}
   .v2map .v1u b{font-size:20px;} .v2map .v1u small{font-size:14px;}
 """

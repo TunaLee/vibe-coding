@@ -1,8 +1,8 @@
-"""2-6 외부 서비스 연결 (API · MCP).
+"""2-6 외부 API · 키.
 
 API 키(무엇 · 비유 출입증 · 보관 위치 · .env · .gitignore) → 공공데이터포털 특일 정보 발급 → 요청 · 응답
-→ 서버 함수(키 숨기기) → 요청 예 → MCP(Claude Code가 Supabase 직접 다루기 · 연결 · 안전 설정 · 대화 예 · 캘린더 일정 → 할 일) → 실습.
-API · MCP 개념은 2-3 에서 설명 — 여기서는 「발급 · 보관 · 붙이기」만.
+→ 서버 함수(키 숨기기 · 장면) → 요청 예 → 실습.
+요청 · 응답 · API 개념은 2-2 · MCP 는 2-7.
 사실 출처: data.go.kr/data/15012690/openapi.do · vercel.com/docs/functions · supabase.com/docs/guides/getting-started/mcp
 · code.claude.com/docs/en/mcp
 """
@@ -10,83 +10,79 @@ import viz2
 from deck import ba, flow, lab, light
 from hx import checks, code, esc, note
 from stats_hx import src
-import v2anim
-from v2anim import lane
+import v2scene
 from v2kit import brief, chat, codemap, shot
 
 T = "2-6"
 GEN = ("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")
 HOLI = ("공공데이터포털 · 한국천문연구원 특일 정보", "https://www.data.go.kr/data/15012690/openapi.do")
 FUNC = ("Vercel · Functions", "https://vercel.com/docs/functions")
-CSS = v2anim.CSS + """
-  /* 2-6 · 캘린더 일정 → 할 일 (v2c) */
-  .v2c{display:grid; grid-template-columns:310px 52px 1fr 52px 330px; align-items:stretch; margin:0 0 12px;}
-  .v2cW{border:1.5px solid #D0D7DE; border-radius:12px; background:#fff; overflow:hidden; display:flex; flex-direction:column;}
-  .v2cH{display:flex; align-items:center; gap:8px; padding:10px 12px; background:#F6F8FA; border-bottom:1px solid #D0D7DE; font-size:16.5px; font-weight:800; color:#16233A;}
-  .v2cH i{width:12px; height:12px; border-radius:3px;} .v2cH i.g{background:#1A73E8;} .v2cH i.o{background:#D97757;} .v2cH i.b{background:#3ECF8E;}
-  .v2cWk{display:grid; grid-template-columns:repeat(5,1fr); flex:1;}
-  .v2cD{border-right:1px solid #E3E7EC; padding:8px 4px; display:flex; flex-direction:column; align-items:center; gap:2px; min-height:270px;}
-  .v2cD:last-child{border-right:0;} .v2cD span{font-size:13px; color:#6B7785;} .v2cD b{font-size:15.5px; color:#16233A; margin-bottom:10px;}
-  .v2cD .ev{width:100%; box-sizing:border-box; font-size:13.5px; font-weight:700; color:#fff; background:#1A73E8; border-radius:6px; padding:10px 3px; text-align:center; word-break:keep-all; line-height:1.3;
-    outline:3px solid transparent; outline-offset:2px; animation:v2cRead .4s var(--d) forwards;}
-  .v2cD .ev.c1{--c:#F28C28;} .v2cD .ev.c2{--c:#8E44AD;} .v2cD .ev.c3{--c:#2E8B57;}
-  .v2cChat{padding:10px 12px; display:flex; flex-direction:column; gap:8px;}
-  .v2cChat .m{font-size:15.5px; border-radius:10px; padding:7px 11px; opacity:0; animation:v2cIn .35s var(--d) forwards;}
-  .v2cChat .me{align-self:flex-end; background:#FFF1E0; color:#16233A; font-weight:600;}
-  .v2cChat .ai{background:#EEF3FA; border:1px solid #C9D6E6; color:#16233A;}
-  .v2cChat .tool{font-family:var(--mono); font-size:13.5px; color:#3A4657; background:#F4F6F9; border:1px dashed #9AA5B1;}
-  .v2cChat .tool em{font-style:normal; font-weight:800; margin-right:6px;} .v2cChat .tool.l em{color:#1A73E8;} .v2cChat .tool.r em{color:#1F9D63;}
-  .v2cP{align-self:center; justify-self:center; display:flex; flex-direction:column; align-items:center; gap:2px; border:2px solid #C9CFD8; border-radius:10px;
-    padding:6px 4px; width:46px; background:#fff; color:#9AA5B1; animation:v2cPlug .5s var(--d) forwards;}
-  .v2cP b{font-size:12px;} .v2cP span{font-size:11.5px;}
-  .v2cP.l{--pc:#1A73E8;} .v2cP.r{--pc:#1F9D63;}
-  .v2cT{width:100%; border-collapse:collapse; font-size:15.5px;}
-  .v2cT th{text-align:left; font-size:12.5px; color:#6B7785; font-weight:700; padding:7px 10px; border-bottom:1px solid #E3E7EC;}
-  .v2cT td{padding:9px 10px; border-bottom:1px solid #EEF1F4; color:#16233A;}
-  .v2cT td small{margin-left:6px; font-size:11px; font-weight:800; color:#1A73E8; background:#E8F0FE; border-radius:8px; padding:1px 6px;}
-  .v2cT tr.nw{opacity:0; animation:v2cRow .5s var(--d) forwards;}
-  .v2cT tr.c1{--c:#F28C28;} .v2cT tr.c2{--c:#8E44AD;} .v2cT tr.c3{--c:#2E8B57;}
-  @keyframes v2cIn{from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:none}}
-  @keyframes v2cRead{to{outline-color:var(--c)}}
-  @keyframes v2cPlug{to{border-color:var(--pc); color:var(--pc); background:#fff; box-shadow:0 0 0 4px rgba(0,0,0,.04)}}
-  @keyframes v2cRow{0%{opacity:0; background:transparent} 30%{opacity:1; background:#FFF8E6} 100%{opacity:1; background:transparent; box-shadow:inset 4px 0 0 var(--c)}}
-  @media print{.v2cChat .m,.v2cT tr.nw{opacity:1; animation:none}}
+CSS = """
+  /* 2-6 · push 와 .env (v26p) */
+  .v26p{display:grid; grid-template-columns:1fr 220px 1fr; gap:22px; align-items:center; margin:6px 0 14px;}
+  .v26p .pn{border:1.5px solid #C9CFD8; border-radius:12px; background:#fff; padding:10px 14px; display:flex; flex-direction:column; gap:7px; min-height:230px;}
+  .v26p .pn .h{font-size:17px; font-weight:800; color:#16233A; margin-bottom:4px;}
+  .v26p .f{display:flex; align-items:center; gap:10px; border:1px solid #E3E7EC; border-radius:8px; padding:7px 12px; background:#F6F8FA;}
+  .v26p .f b{font-family:var(--mono); font-size:15px; color:#1F3A5F;} .v26p .f em{margin-left:auto; font-style:normal; font-size:12.5px; font-weight:800; border-radius:8px; padding:2px 8px;}
+  .v26p .f.key em{color:#B85A00; background:#FFE3C4;}
+  .v26p .f.nw{opacity:0; animation:v26in .35s var(--d) forwards;}
+  .v26p .f.no{opacity:0; border-style:dashed; background:#FDECEA; animation:v26in .35s var(--d) forwards;} .v26p .f.no b{text-decoration:line-through; color:#C0392B;} .v26p .f.no em{color:#C0392B;}
+  .v26p .mid{display:flex; flex-direction:column; gap:16px; align-items:stretch;}
+  .v26p .gi{border:2px solid #F28C28; background:#FFF8F0; border-radius:10px; padding:8px 12px; opacity:0; animation:v26in .35s var(--d) forwards;}
+  .v26p .gi span{display:block; font-size:13px; font-weight:800; color:#E07A12;} .v26p .gi code{font-size:17px; font-weight:700;}
+  .v26p .cmd{text-align:center; font-family:var(--mono); font-size:16px; font-weight:700; color:#fff; background:#1F3A5F; border-radius:10px; padding:8px; opacity:0; animation:v26in .35s var(--d) forwards;}
+  .v26p .gh{border-color:#1F3A5F;}
+  /* 2-6 · 서버 함수의 키 보호 (v26k) */
+  .v26k{grid-template-columns:400px 1fr 260px 1fr 220px;}
+  .v26k .warn{margin-top:8px; font-size:14px; font-weight:800; color:#C0392B; background:#FDECEA; border-radius:8px; padding:6px 10px; opacity:0; animation:v26in .35s var(--d) forwards;}
+  .v26k .nk{margin-top:6px; font-size:12.5px; font-weight:800; color:#1E7B45; opacity:0; animation:v26in .35s var(--d) forwards;}
+  .v26k .cl.ky{font-size:11.5px;}
+  .v26k .v2sBx.db .cl{opacity:.25; animation:v2sLit .35s var(--d) forwards;}
+  @keyframes v26in{from{opacity:0} to{opacity:1}}
+  @media print{.v26p .f.nw,.v26p .f.no,.v26p .gi,.v26p .cmd,.v26k .warn,.v26k .nk{opacity:1; animation:none}}
 """
 SMCP = ("Supabase · MCP", "https://supabase.com/docs/guides/getting-started/mcp")
 
 
-def cal_to_tasks():
-    """Google 캘린더 일정 → Claude Code(MCP 두 개) → 팀 할 일 보드. 칸은 제자리 · 읽힌 일정과 추가된 행이 같은 색으로 켜짐."""
-    days = [("월", "11/30"), ("화", "12/1"), ("수", "12/2"), ("목", "12/3"), ("금", "12/4")]
-    ev = {0: ("주간 회의", "c1", 1.7), 2: ("고객사 미팅", "c2", 1.9), 4: ("보고서 마감", "c3", 2.1)}
-    cols = ""
-    for i, (w, dt) in enumerate(days):
-        e = ev.get(i)
-        blk = f'<div class="ev {e[1]}" style="--d:{e[2]}s">{e[0]}</div>' if e else ""
-        cols += f'<div class="v2cD"><span>{w}</span><b>{dt}</b>{blk}</div>'
-    cal = ('<div class="v2cW"><div class="v2cH"><i class="g"></i>Google 캘린더 · 이번 주</div>'
-           f'<div class="v2cWk">{cols}</div></div>')
-    def msg(cls, html_, d):
-        return f'<div class="m {cls}" style="--d:{d}s">{html_}</div>'
-    cc = ('<div class="v2cW"><div class="v2cH"><i class="o"></i>Claude Code</div><div class="v2cChat">'
-          + msg("me", "이번 주 캘린더 일정을 우리 할 일에 넣어 줘", .6)
-          + msg("tool l", "<em>Google Calendar MCP</em> 이번 주 일정 조회", 1.3)
-          + msg("ai", "일정 3건 · 날짜를 기한으로 할 일 3건 추가할까요?", 2.6)
-          + msg("me", "응", 3.3)
-          + msg("tool r", "<em>Supabase MCP</em> tasks 에 3행 추가", 3.8)
-          + msg("ai", "완료 · 할 일 3건 추가", 5.2) + '</div></div>')
-    rows = [("주간 보고서 작성", "11/27", "진행 중", "", 0), ("교육 자료 준비", "11/25", "할 일", "", 0),
-            ("주간 회의", "11/30", "할 일", "c1", 4.2), ("고객사 미팅", "12/2", "할 일", "c2", 4.5), ("보고서 마감", "12/4", "할 일", "c3", 4.8)]
-    tr = "".join(f'<tr class="{"nw " + c if c else ""}" style="--d:{d}s"><td>{t}{"<small>캘린더</small>" if c else ""}</td><td>{du}</td><td>{st}</td></tr>'
-                 for t, du, st, c, d in rows)
-    board = ('<div class="v2cW"><div class="v2cH"><i class="b"></i>팀 할 일 보드 · tasks</div>'
-             f'<table class="v2cT"><thead><tr><th>할 일</th><th>기한</th><th>상태</th></tr></thead><tbody>{tr}</tbody></table></div>')
-    plug = lambda side, name, d: f'<div class="v2cP {side}" style="--d:{d}s"><b>MCP</b><span>{name}</span></div>'
-    return ('<div class="v2c">' + cal + plug("l", "읽기", 1.3) + cc + plug("r", "쓰기", 3.8) + board + '</div>')
+def push_scene():
+    """push 와 .env — 내 폴더 파일 4개 · .gitignore · GitHub 저장소. 저장소에 파일이 하나씩 생기고 .env 자리는 「없음」."""
+    loc = [("app.js", ""), ("api/holidays.js", ""), (".gitignore", ""), (".env", "key")]
+    lf = "".join(f'<div class="f {k}"><b>{n}</b>{"<em>키</em>" if k else ""}</div>' for n, k in loc)
+    gh = [("app.js", 1.6), ("api/holidays.js", 1.9), (".gitignore", 2.2)]
+    rf = "".join(f'<div class="f nw" style="--d:{d}s"><b>{n}</b></div>' for n, d in gh)
+    rf += '<div class="f no" style="--d:2.8s"><b>.env</b><em>없음 · 제외됨</em></div>'
+    return ('<div class="v26p"><div class="pn"><div class="h">내 컴퓨터 · 프로젝트 폴더</div>' + lf + '</div>'
+            '<div class="mid"><div class="gi" style="--d:.6s"><span>.gitignore</span><code>.env</code></div>'
+            '<div class="cmd" style="--d:1.2s">git push</div></div>'
+            '<div class="pn gh"><div class="h">GitHub 저장소</div>' + rf + '</div></div>')
+
+
+def key_scene():
+    """서버 함수의 키 보호 — 브라우저(키 없는 요청) · 서버 함수(키를 붙여 요청) · 공공데이터포털. 칸은 제자리."""
+    br = ('<div class="v2sBr"><div class="bar"><i></i><i></i><i></i><span>team-board.vercel.app</span></div>'
+          '<div class="app"><div class="ah">할 일 추가</div><div class="add"><span class="in">기한 · 2026-12-25</span><span class="bt" style="--d:.5s">저장</span></div>'
+          '<div class="warn" style="--d:5.0s">공휴일 · 기독탄신일 · 저장 안 됨</div></div>'
+          '<div class="net"><div class="nh"><b>Network</b><span>Name</span><span>Method</span><span>Status</span></div>'
+          '<div class="nr" style="--d:.9s"><span class="fn">holidays?year=2026&amp;month=12</span><span>GET</span>'
+          '<span class="st"><i class="pd" style="--d:4.3s">(pending)</i><b class="ok" style="--d:4.3s">200 OK</b></span></div>'
+          '<div class="nk" style="--d:4.6s">요청 · 응답 어디에도 키 없음</div></div></div>')
+    fn = ('<div class="v2sBx srv"><div class="bh"><b>서버 함수</b><small>api/holidays.js · Vercel</small></div>'
+          '<div class="cl" style="--d:1.6s">GET /api/holidays</div>'
+          '<div class="cl ky" style="--d:2.1s">ServiceKey = process.env.HOLIDAY_API_KEY</div>'
+          '<div class="cl" style="--d:3.8s">공휴일만 골라 전달</div></div>')
+    gov = ('<div class="v2sBx db"><div class="bh"><b>공공데이터포털</b><small>특일 정보</small></div>'
+           '<div class="cl" style="--d:2.6s">getRestDeInfo · 2026 · 12</div>'
+           '<div class="cl" style="--d:3.1s">20261225 · 기독탄신일 · Y</div></div>')
+    return ('<div class="v2s v26k">' + br + v2scene.wire("① 연 · 월만", "④ 공휴일 목록", .9, 3.8) + fn
+            + v2scene.wire("② 연 · 월 + 키", "③ 응답", 2.1, 3.1) + gov + '</div>')
 
 
 def slides():
     return [
+        light("앱이 모르는 정보", viz2.pair(
+            "공휴일을 직접 입력", [("목록", "해마다 사람이 입력"), ("대체공휴일 · 임시공휴일", "발표 뒤 다시 수정"), ("틀리면", "공휴일이 기한으로 들어감")],
+            "가진 곳에 묻기 · 외부 API", [("목록", "한국천문연구원 특일 정보"), ("갱신", "제공하는 쪽이 관리"), ("앱이 할 일", "연도 · 월을 보내고 답 받기")])
+              + note("외부 API", "다른 회사 · 기관 서버가 열어 둔 창구 · 요청 · 응답은 2-2 와 같음"), T),
         # ── API 키
         light("API 키", viz2.tiles([
             ("API 키", "서비스가 호출한 사람을 알아보는 비밀 문자열"), ("노출되면", "남이 내 이름으로 호출 · 한도 소진 · 요금"),
@@ -107,9 +103,7 @@ def slides():
             ("process.env.HOLIDAY_API_KEY", "코드에서 이름으로 값 읽기")],
             ask="공휴일 API 키를 .env 에 두고 .gitignore 에 추가해 줘", title="파일 · 코드 · 예")
               + note("확인", "git status 에 .env 가 안 보이면 정상"), T),
-        light("push 와 .env", lane([("프로젝트 폴더", "app.js · .env"), ("git commit · push", ".gitignore 확인"), ("GitHub", "공개 저장소")],
-                                     [(0, 1, "app.js", .4, False), (1, 2, "app.js", 1.6, True), (0, 1, ".env", 3.0, False)],
-                                     [(1, ".env · 제외", "no", 4.2), (2, "키 없음", "ok", 5.0)], h=200)
+        light("push 와 .env", push_scene()
               + note(".gitignore", "목록에 있는 파일은 커밋 · push 에서 빠짐 · 키는 내 컴퓨터에만"), T),
         # ── 공휴일 API
         light("공휴일 API 발급", flow([("공공데이터포털", "data.go.kr · 회원가입"), ("검색", "「한국천문연구원 특일 정보」"),
@@ -132,10 +126,7 @@ def slides():
                                       ("결과", "누구나 키 복사")],
             "브라우저 → 서버 함수 → 공공데이터포털", [("키 위치", "Vercel 서버 · 환경변수"), ("보이는 곳", "없음 · 결과만 내려감"),
                                               ("결과", "키 노출 없음")]), T),
-        light("서버 함수의 키 보호", lane([("브라우저", "추가 창"), ("서버 함수", "api/holidays · Vercel"), ("공공데이터포털", "특일 정보")],
-                                      [(0, 1, "12월 공휴일?", .4, False), (1, 2, "연 · 월 + 인증키", 1.8, False),
-                                       (2, 1, "20261225 · 기독탄신일", 3.2, False), (1, 0, "12-25 · 기독탄신일", 4.6, True)],
-                                      [(1, "인증키는 여기서만", "ok", 2.2), (0, "키 없음 · 결과만", "ok", 5.9)], h=190)
+        light("서버 함수의 키 보호", key_scene()
               + codemap([("api/holidays.js", "Vercel 이 서버에서 실행하는 파일"),
                          ("export function GET(request)", "주소로 요청이 오면 실행"),
                          ("process.env.HOLIDAY_API_KEY", "키는 서버 안에서만 읽기")])
@@ -149,45 +140,19 @@ def slides():
         ba("공휴일 반영 전후", T, "기한 12월 25일 → 그대로 저장\n연휴가 끝난 뒤에야 알아챔",
            "기한 12월 25일 → 「공휴일 · 기독탄신일」\n저장 막힘 · 다른 날 고르기",
            "기획서 v2 문제점 「공휴일이 기한으로 들어감」 해결"),
-        # ── MCP
-        light("MCP 연결 전후", viz2.pair(
-            "MCP 없이", [("표 만들기", "Claude Code가 SQL 작성 → 사람이 SQL Editor 에 붙여 넣기"),
-                        ("데이터 확인", "사람이 Table Editor 열어 보고 전달"), ("오류", "빨간 문구 복사 · 붙여넣기")],
-            "Supabase MCP 연결", [("표 만들기", "Claude Code가 직접 실행"), ("데이터 확인", "「기한 지난 할 일 몇 건?」 질문"),
-                                ("오류", "Claude Code가 직접 읽기")])
-              + note("MCP", "Claude Code가 외부 서비스를 도구로 쓰는 연결 · 개념은 2-3"), T),
-        light("Supabase MCP 추가", code("터미널 · 프로젝트 폴더에서", esc(
-            'claude mcp add --scope project --transport http supabase \\\n  "https://mcp.supabase.com/mcp?project_ref=<프로젝트 ID>&read_only=true"'))
-              + flow([("claude mcp add", "연결 추가"), ("claude /mcp", "목록에서 supabase"), ("Authenticate", "브라우저 로그인 · 조직 선택"),
-                      ("연결 완료", "Claude Code 도구에 supabase")], hl=2)
-              + note("직접 할 것", "브라우저 로그인은 사람이 · 비밀번호 · 토큰을 대화창에 붙여 넣지 않음")
-              + src(SMCP, ("Claude Code · MCP", "https://code.claude.com/docs/en/mcp")), T),
-        light("MCP 안전 설정", viz2.tiles([
-            ("project_ref", "프로젝트 하나에만 연결"), ("read_only=true", "읽기만 · 표 · 행 변경 불가"),
-            ("개발용 프로젝트", "실제 서비스 DB 에 연결하지 않기"), ("실행 승인", "도구 실행마다 내용 보고 허용")], 4)
-              + note("표를 만들 때만", "read_only 를 잠시 빼고 연결 · 끝나면 다시 읽기 전용")
-              + src(SMCP), T),
-        light("MCP 동작", lane([("나", "질문"), ("Claude Code", "도구 선택"), ("Supabase MCP", "execute_sql"), ("DB", "tasks")],
-                              [(0, 1, "기한 지난 할 일 몇 건?", .4, False), (1, 2, "조회 실행", 2.4, False), (2, 3, "SQL", 3.6, False),
-                               (3, 2, "2", 4.8, False), (2, 1, "2", 6.0, False), (1, 0, "2건 · 박서연 1 · 최민재 1", 7.2, True)],
-                              [(1, "실행 승인 · 사람", "ok", 1.8)], h=200)
-              + note("화면 확인 없이", "표 구조 · 행 수 · RLS 정책을 대화로 확인"), T),
-        light("캘린더 일정 → 할 일", cal_to_tasks()
-              + note("준비", "Claude Code 에 Google Calendar MCP 연결 · Supabase MCP 는 쓰기 허용 · 개발용 DB")
-              + src(("Claude Code · MCP", "https://code.claude.com/docs/en/mcp"), SMCP), T),
         # ── 실습
-        lab("2-6", "공휴일 API · Supabase MCP", T, "내 앱 → 공휴일 차단 · 키는 서버에만 · Claude Code에 Supabase MCP",
-            ["공공데이터포털 인증키 발급", ".env · .gitignore 요청", "서버 함수 · 공휴일 차단 요청", "Supabase MCP 연결", "MCP 로 할 일 수 조회"],
-            ["기한 12월 25일 저장 막힘", "git status · GitHub 에 키 없음", "MCP 질문에 할 일 수 답변"],
+        lab("2-6", "공휴일 API · 키 보관", T, "내 앱 → 공휴일 차단 · 키는 서버에만",
+            ["공공데이터포털 인증키 발급", ".env · .gitignore 요청", "서버 함수 · 공휴일 차단 요청", "Network 탭에서 키 확인"],
+            ["기한 12월 25일 저장 막힘", "git status · GitHub 에 키 없음"],
             files="예시/개발계획.md 6 칸 (비교용)"),
-        brief("2-6", T, ["인증키 발급", ".env · .gitignore", "서버 함수 · 공휴일 차단", "Supabase MCP 연결", "MCP 로 조회"],
-              [("목표", "기한 공휴일 차단 · Supabase MCP"), ("입력", "개발 계획 v2 · 6 칸 · 인증키"),
+        brief("2-6", T, ["인증키 발급", ".env · .gitignore", "서버 함수 · 공휴일 차단", "Network 탭 확인"],
+              [("목표", "기한 공휴일 차단"), ("입력", "개발 계획 v2 · 6 칸 · 인증키"),
                ("진행 방식", "키는 서버 함수에서만 · 태스크 하나씩"), ("하지 말 것", "키를 대화창 · 코드 · 커밋에 넣기")],
-              ["환경변수", ".gitignore", "서버 함수", "MCP"],
+              ["환경변수", ".gitignore", "서버 함수", "Network"],
               ["기한이 공휴일이면 경고 · 저장 막힘", ".env 가 git status 에 없음"],
               "공휴일 응답이 비면 인증키 반영 대기 · 하루 뒤 다시"),
         light("실습 2-6 확인", checks([
             (".env 가 .gitignore 에 있나", "git status 에 안 보임"), ("브라우저 개발자 도구에 키가 안 보이나", "서버 함수 경유"),
-            ("기한이 공휴일이면 저장이 막히나", "12월 25일 · 1월 1일"), ("MCP 가 read_only 로 연결됐나", "변경 불가 확인")],
-            "넷 다 「예」 → 커밋 · 2-7 품질 관리"), T),
+            ("기한이 공휴일이면 저장이 막히나", "12월 25일 · 1월 1일"), ("Network 탭 요청에 키가 없나", "holidays 요청 · 응답")],
+            "넷 다 「예」 → 커밋 · 2-7 MCP"), T),
     ]

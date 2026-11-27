@@ -1,187 +1,298 @@
-"""2-7 품질 관리 · 테스트 · 디버깅 (35분).
+"""2-7 MCP.
 
-SDLC 청사진(1부 · 2부 단원 위치) → 배경(직접 클릭 확인의 한계) → 비유(출고 전 검수 · 생성 그림) → 테스트 · 실행 결과(node --test 실측)
-→ AI 에게 테스트 맡기기 · 브라우저 MCP → 에러 메시지 읽기(node 실측) · 자주 보는 에러 · 디버깅 흐름 → AI 코드 리뷰 · 보안 점검 → 실습.
-공통 예제: 팀 할 일 보드 v2 (기한 지남 판정 · 공휴일 차단 · 남의 할 일 삭제 불가).
-사실 출처: code.claude.com/docs/en/commands (/code-review · /review · /security-review · /diff) · github.com/microsoft/playwright-mcp
-· nodejs.org test runner · developer.mozilla.org HTTP 상태 코드 · supabase.com RLS
-실측: 겹침 함수 테스트(node --test · 실패 1 → 「<=」를 「<」로 고친 뒤 3개 통과) · TypeError 메시지(node app.js).
+배경(AI 는 대화창 안 · 사람이 복사 · 붙여넣기) → 등장 계기(회사마다 따로 만든 연결 · 연결 수가 곱으로 늘어남 → 2024-11 MCP 공개 → 확산)
+→ 비유(USB-C · 공식 문서) → 구조(호스트 · 클라이언트 · 서버 · 도구 · 리소스 · 프롬프트) → 동작(도구 목록 읽기 → 고르기 → 실행)
+→ API 와 MCP → 쓸 만한 MCP → 연결 방법 · 안전 설정 → 캘린더 일정 → 할 일 → 실습.
+사실 출처
+- anthropic.com/news/model-context-protocol (2024-11-25 · 「Every new data source requires its own custom implementation」)
+- openai.com/index/chatgpt-plugins (2023-03-23) · openai.com/index/function-calling-and-other-api-updates (2023-06-13) · claude.com/blog/tool-use-ga (2024-05-30)
+- openai.com/index/new-tools-and-features-in-the-responses-api (2025-05-21 원격 MCP) · blogs.microsoft.com 2025-05-19 (Steering Committee)
+- modelcontextprotocol.io/registry/about (2025-09-08 preview) · anthropic.com/news/donating-the-model-context-protocol… (2025-12-09 AAIF)
+- modelcontextprotocol.io/docs/getting-started/intro (USB-C) · /docs/learn/architecture (Host · Client · Server · Tools · Resources · Prompts)
+- code.claude.com/docs/en/mcp (claude mcp add --transport http · scope · claude.ai 커넥터 자동 표시)
+- claude.com/docs/connectors/google/calendar (읽기 전용) · supabase.com/docs/guides/getting-started/mcp · github.com/microsoft/playwright-mcp
+- github.com/upstash/context7 · developers.figma.com/docs/figma-mcp-server · developers.notion.com/docs/mcp · github.com/github/github-mcp-server
 """
 import viz2
-from deck import ba, flow, lab, light
-from hx import code, esc, note
+from deck import flow, lab, light
+from hx import checks, code, esc, note
 from stats_hx import src
-from v2kit import brief, chat, codemap
+import v2scene
+from v2scene import agent, tools
+from v2kit import brief
 from v3kit import phmap
 
 T = "2-7"
-ZIMG = ("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")
+ANN = ("Anthropic · Introducing the Model Context Protocol", "https://www.anthropic.com/news/model-context-protocol")
+AAIF = ("Anthropic · Donating MCP · Agentic AI Foundation", "https://www.anthropic.com/news/donating-the-model-context-protocol-and-establishing-of-the-agentic-ai-foundation")
+INTRO = ("modelcontextprotocol.io · What is MCP", "https://modelcontextprotocol.io/docs/getting-started/intro")
+ARCH = ("modelcontextprotocol.io · Architecture", "https://modelcontextprotocol.io/docs/learn/architecture")
+CC = ("Claude Code · MCP", "https://code.claude.com/docs/en/mcp")
+SMCP = ("Supabase · MCP", "https://supabase.com/docs/guides/getting-started/mcp")
+GCAL = ("Claude · Google Calendar connector", "https://claude.com/docs/connectors/google/calendar")
+
+def relay():
+    """MCP 없이 — 사람이 복사 · 붙여 넣기를 오가는 줄 / MCP — 한 번 요청 · 직접 실행. 줄 안 칸이 차례로 나타남."""
+    def row(head, steps, d0, hl):
+        out = []
+        for i, (who, x, hand) in enumerate(steps):
+            d = d0 + i * .35
+            if i:
+                out.append(f'<i class="v2u3ra" style="--d:{d - .12:.2f}s">→</i>')
+            out.append(f'<div class="v2u3rs{" hand" if hand else ""}" style="--d:{d:.2f}s"><b>{who}</b><span>{x}</span></div>')
+        return f'<div class="v2u3rr{" on" if hl else ""}"><div class="v2u3rh">{head}</div><div class="v2u3rw">{"".join(out)}</div></div>'
+    return ('<div class="v2u3relay">'
+            + row("MCP 없이", [("Claude", "SQL 작성", False), ("나", "복사", True), ("Supabase 화면", "붙여 넣기 · 실행", True),
+                              ("나", "오류 문구 복사", True), ("Claude", "수정 SQL", False)], .3, False)
+            + row("MCP 연결", [("나", "「tasks 표 만들어 줘」", False), ("Claude Code", "SQL 작성", False),
+                              ("Supabase", "직접 실행 · 결과", False), ("Claude Code", "오류면 다시 고침", False)], 2.3, True)
+            + '<div class="v2u3cnt"><span class="c1">사람 손 3번 · 오류마다 반복</span><span class="c2">사람 손 0번 · 요청 한 줄</span></div>'
+            + "</div>")
 
 
-def sdlc():
-    """SDLC 여섯 단계 + 단계마다 1부 · 2부 단원 · 테스트 칸 강조."""
-    steps = [("기획", "1-3 · 2-4"), ("설계", "1-4 개발 계획 · 2-4"), ("구현", "1-6 · 2-5 · 2-6"),
-             ("테스트", "2-7"), ("배포", "1-7 · 2-8"), ("운영", "2-8 · 2-9")]
-    cells = "".join(f'<div class="v2u7s{" on" if i == 3 else ""}" style="--d:{i * .15:.2f}s"><b>{h}</b><span>{u}</span></div>'
-                    for i, (h, u) in enumerate(steps))
-    return (f'<div class="v2u7sd">{cells}<div class="v2u7back">운영 중 버그 → 다시 구현 · 테스트</div></div>')
+def cal_to_tasks():
+    """Google 캘린더 일정 → Claude Code(MCP 두 개) → 팀 할 일 보드. 칸은 제자리 · 읽힌 일정과 추가된 행이 같은 색으로 켜짐."""
+    days = [("월", "11/30"), ("화", "12/1"), ("수", "12/2"), ("목", "12/3"), ("금", "12/4")]
+    ev = {0: ("주간 회의", "c1", 1.7), 2: ("고객사 미팅", "c2", 1.9), 4: ("보고서 마감", "c3", 2.1)}
+    cols = ""
+    for i, (w, dt) in enumerate(days):
+        e = ev.get(i)
+        blk = f'<div class="ev {e[1]}" style="--d:{e[2]}s">{e[0]}</div>' if e else ""
+        cols += f'<div class="v2cD"><span>{w}</span><b>{dt}</b>{blk}</div>'
+    cal = ('<div class="v2cW"><div class="v2cH"><i class="g"></i>Google 캘린더 · 이번 주</div>'
+           f'<div class="v2cWk">{cols}</div></div>')
+    def msg(cls, html_, d):
+        return f'<div class="m {cls}" style="--d:{d}s">{html_}</div>'
+    cc = ('<div class="v2cW"><div class="v2cH"><i class="o"></i>Claude Code</div><div class="v2cChat">'
+          + msg("me", "이번 주 캘린더 일정을 팀 보드 할 일에 넣어 줘", .6)
+          + msg("tool l", "<em>Google Calendar MCP</em> 이번 주 일정 조회", 1.3)
+          + msg("ai", "일정 3건 · 날짜를 기한으로 할 일 3건 추가할까요?", 2.6)
+          + msg("me", "응", 3.3)
+          + msg("tool r", "<em>Supabase MCP</em> tasks 에 3행 추가", 3.8)
+          + msg("ai", "완료 · 할 일 3건 추가", 5.2) + '</div></div>')
+    rows = [("주간 보고서 작성", "11/27", "진행 중", "", 0), ("교육 자료 준비", "11/25", "할 일", "", 0),
+            ("주간 회의", "11/30", "할 일", "c1", 4.2), ("고객사 미팅", "12/2", "할 일", "c2", 4.5), ("보고서 마감", "12/4", "할 일", "c3", 4.8)]
+    tr = "".join(f'<tr class="{"nw " + c if c else ""}" style="--d:{d}s"><td>{t}{"<small>캘린더</small>" if c else ""}</td><td>{du}</td><td>{st}</td></tr>'
+                 for t, du, st, c, d in rows)
+    board = ('<div class="v2cW"><div class="v2cH"><i class="b"></i>팀 할 일 보드 · tasks</div>'
+             f'<table class="v2cT"><thead><tr><th>할 일</th><th>기한</th><th>상태</th></tr></thead><tbody>{tr}</tbody></table></div>')
+    plug = lambda side, name, d: f'<div class="v2cP {side}" style="--d:{d}s"><b>MCP</b><span>{name}</span></div>'
+    return ('<div class="v2c">' + cal + plug("l", "읽기", 1.3) + cc + plug("r", "쓰기", 3.8) + board + '</div>')
 
 
-def testrun():
-    """테스트 실행 애니메이션 — 1차 실행(ok · ok · not ok) → 수정 → 2차 실행(모두 ok). node --test TAP 실측 출력."""
-    t1 = [("ok", "ok 1 - 기한 11-19 · 할 일 → 기한 지남"), ("ok", "ok 2 - 기한 11-19 · 완료 → 기한 지남 아님"),
-          ("ng", "not ok 3 - 기한이 오늘 → 기한 지남 아님"), ("ng", "  error: 'true == false'"), ("", "# pass 2 · # fail 1")]
-    t2 = [("ok", "ok 1 - 기한 11-19 · 할 일 → 기한 지남"), ("ok", "ok 2 - 기한 11-19 · 완료 → 기한 지남 아님"),
-          ("ok", "ok 3 - 기한이 오늘 → 기한 지남 아님"), ("", "# pass 3 · # fail 0")]
-    def term(head, lines, d0):
-        r = "".join(f'<div class="l {c}" style="--d:{d0 + i * .45:.2f}s">{esc(x)}</div>' for i, (c, x) in enumerate(lines))
-        return f'<div class="v2u7term"><div class="h">{head}</div>{r}</div>'
-    return ('<div class="v2u7run">' + term("1차 실행 · node --test", t1, .3)
-            + '<div class="v2u7fix" style="--d:2.9s"><b>수정</b><span>날짜 비교 「&lt;=」 → 「&lt;」</span></div>'
-            + term("2차 실행", t2, 3.6) + '</div>')
+def timeline():
+    """연결 방식의 변화 — 점이 왼쪽부터 차례로 켜짐 · 2024-11 MCP 공개가 주황."""
+    ev = [("2023-03", "ChatGPT Plugins", "ChatGPT 전용 추가 기능", ""), ("2023-06", "Function calling", "OpenAI API 형식", ""),
+          ("2024-05", "Claude tool use", "Anthropic API 형식", ""), ("2024-11", "MCP 공개", "Anthropic · 오픈 표준", "on"),
+          ("2025-05", "OpenAI · Microsoft", "원격 MCP 지원 · 운영 위원회", ""), ("2025-12", "Linux Foundation", "Agentic AI Foundation 에 기증", "")]
+    c = "".join(f'<div class="e {k}" style="--d:{.3 + i * .5:.1f}s"><i></i><span class="y">{y}</span><b>{n}</b><small>{x}</small></div>'
+                for i, (y, n, x, k) in enumerate(ev))
+    return (f'<div class="v27tl"><div class="ax"></div>{c}</div>'
+            '<div class="v27grp"><span style="--d:.3s">회사마다 따로 만든 연결</span><span class="on" style="--d:1.8s">하나의 공개 규격</span></div>')
 
 
-def stepflow(steps, cls="v2u7sf"):
-    """단계가 차례로 켜지는 흐름 — 한 번 재생 후 마지막 단계까지 켜진 채 멈춤."""
-    c = "".join(f'<div class="st" style="--d:{.4 + i * .8:.2f}s"><b>{h}</b><span>{x}</span></div>' for i, (h, x) in enumerate(steps))
-    return f'<div class="{cls}">{c}</div>'
+def wires():
+    """AI 앱 3 × 서비스 4 — 따로 연결하면 선 12개(회색이 하나씩 그어짐) → MCP 를 사이에 두면 선 7개(주황)."""
+    apps, svcs = ["Claude", "ChatGPT", "사내 챗봇"], ["Google 캘린더", "Supabase", "GitHub", "Notion"]
+    W, H = 1120, 300
+    ax, sx = 150, 970
+    ay = [70 + i * 80 for i in range(3)]
+    sy = [40 + i * 74 for i in range(4)]
+    s = ""
+    for side, xs, ys, names in (("l", ax, ay, apps), ("r", sx, sy, svcs)):
+        for y, n in zip(ys, names):
+            x0 = xs - 130 if side == "l" else xs
+            s += (f'<rect x="{x0}" y="{y - 22}" width="130" height="44" rx="10" fill="#fff" stroke="#1F3A5F" stroke-width="2"/>'
+                  f'<text x="{x0 + 65}" y="{y + 6}" text-anchor="middle" class="v27t">{n}</text>')
+    k = 0
+    for i, y1 in enumerate(ay):
+        for j, y2 in enumerate(sy):
+            s += (f'<line class="v27a" x1="{ax}" y1="{y1}" x2="{sx}" y2="{y2}" style="--d:{.3 + k * .12:.2f}s"/>')
+            k += 1
+    mx = (ax + sx) / 2
+    s += (f'<g class="v27m" style="--d:3.4s"><rect x="{mx - 70}" y="20" width="140" height="260" rx="16" fill="#FFF3E0" stroke="#F28C28" stroke-width="3"/>'
+          f'<text x="{mx}" y="150" text-anchor="middle" class="v27mt">MCP</text><text x="{mx}" y="176" text-anchor="middle" class="v27ms">하나의 규격</text></g>')
+    for i, y in enumerate(ay):
+        s += f'<line class="v27b" x1="{ax}" y1="{y}" x2="{mx - 70}" y2="{y + 0}" style="--d:{3.8 + i * .15:.2f}s"/>'
+    for j, y in enumerate(sy):
+        s += f'<line class="v27b" x1="{mx + 70}" y1="{y}" x2="{sx}" y2="{y}" style="--d:{4.3 + j * .15:.2f}s"/>'
+    cnt = ('<div class="v27cnt"><span class="a" style="--d:2s">따로 연결 · 3 × 4 = <b>12개</b></span>'
+           '<span class="b" style="--d:5s">MCP · 3 + 4 = <b>7개</b></span></div>')
+    return f'<svg class="v27w" viewBox="0 0 {W} {H}">{s}</svg>{cnt}'
+
+
+def arch():
+    """구조 — 호스트(Claude Code) 안 클라이언트 3개 · 서버 3개 · 서버가 내놓는 것 세 가지."""
+    rows = [("Supabase MCP 서버", "표 만들기 · SQL 실행"), ("Playwright MCP 서버", "브라우저 열기 · 클릭"), ("Google Calendar 서버", "일정 읽기")]
+    cl = "".join(f'<div class="cli" style="--d:{.6 + i * .3:.1f}s">MCP 클라이언트</div>' for i in range(3))
+    sv = "".join(f'<div class="srv" style="--d:{.8 + i * .3:.1f}s"><b>{n}</b><span>{x}</span></div>' for i, (n, x) in enumerate(rows))
+    return (f'<div class="v27ar"><div class="host" style="--d:.3s"><div class="h">호스트 · Claude Code</div>{cl}</div>'
+            f'<div class="lk">{"".join("<i></i>" for _ in range(3))}</div><div class="svs">{sv}</div></div>')
 
 
 def slides():
+    supa_tools = tools([("list_tables", "표 목록 보기"), ("execute_sql", "SQL 실행"), ("apply_migration", "표 만들기 · 바꾸기")],
+                       "execute_sql", 1.3, 2.0)
     return [
-        # ── 청사진
-        light("소프트웨어 개발 생명주기 (SDLC)", sdlc()
-              + viz2.tiles([("품질 관리", "단계마다 기준을 정하고 확인"), ("테스트", "기능이 기준대로 동작하는지 검사"),
-                            ("디버깅", "버그의 원인을 찾아 고치기")], 3)
-              + src(("AWS · What is SDLC", "https://aws.amazon.com/what-is/sdlc/")), T),
-        # ── 배경 · 비유
-        light("직접 클릭 확인의 한계", viz2.pair(
-            "1부 앱", [("확인할 기능", "완료 기준 5개"), ("사용자", "나 혼자 · 브라우저 하나"), ("확인 방법", "직접 클릭 · 몇 분")],
-            "2부 앱", [("확인할 기능", "기한 지남 · 로그인 · 공휴일 · 권한 · 입력값"), ("사용자", "로그인한 팀원 여럿"),
-                     ("확인 방법", "고칠 때마다 전부 다시 · 빠뜨리기 쉬움")])
-              + note("테스트", "확인 순서를 파일로 남겨 매번 같은 검사를 자동으로"), T),
-        light("출고 전 검수 비유", phmap(
-            "v2_u7_check.webp", "출고 전 검수", *ZIMG,
-            viz2.maprows([
-                ("검수 항목표", "테스트 목록", "개발 계획 완료 기준"), ("매번 같은 검사", "자동 실행", "명령 한 줄 · 몇 초"),
-                ("불량 표시", "실패한 테스트", "어느 기능 · 어떤 입력"), ("검수 통과 → 출고", "테스트 통과 → 배포", "push 전 확인")],
-                "검수", "테스트")), T),
-        # ── 테스트
-        light("예제 앱 기준 테스트", viz2.maprows([
-            ("기한이 어제인 할 일 · 할 일 칸", "빨간 표시", "「기한 지남」 · 칸 맨 위"),
-            ("기한 2026-12-25 로 추가", "저장 막힘", "「공휴일 · 기독탄신일」"),
-            ("다른 사람이 담당인 할 일 삭제", "거부", "내가 담당인 할 일만 삭제"),
-            ("로그인 없이 추가", "로그인 화면", "「+ 할 일」 안 보임")], "입력 · 행동", "기대 결과")
-              + note("테스트 한 개", "정해 둔 입력 → 기대 결과와 비교 → 통과 · 실패"), T),
-        light("테스트 종류", viz2.pair(
-            "단위 테스트", [("검사 대상", "함수 하나 · 예: 시간 겹침 판단"), ("속도", "수백 개도 몇 초"), ("못 잡는 것", "화면 · 로그인 · DB 연결")],
-            "화면 테스트 (E2E)", [("검사 대상", "브라우저에서 클릭 · 입력 전체 흐름"), ("속도", "한 개에 수 초 ~ 수십 초"),
-                              ("잡는 것", "버튼 · 화면 문구 · 로그인 흐름")], hl="r")
-              + note("E2E", "End to End · 사용자의 처음부터 끝까지"), T),
-        light("테스트 실행 결과 예", testrun()
-              + note("읽는 법", "ok = 통과 · not ok = 실패 · 「true == false」 = 실제 true · 기대 false"), T),
-        light("AI 에게 테스트 맡기기", chat([
-            ("me", "개발 계획 완료 기준으로 테스트를 만들고 실행해 줘. 실패하면 고치기 전에 원인부터 알려 줘"),
-            ("ai", "테스트 6개 작성 · 5개 통과 · 1개 실패.\n기한이 오늘인 할 일이 「기한 지남」으로 표시됨 — 날짜 비교에 「<=」 사용. 고칠까요?"),
-            ("me", "응. 고친 뒤 테스트 전체 다시 실행해 줘"),
-            ("ai", "수정 · 테스트 6개 모두 통과")], "Claude Code 대화 예")
-              + viz2.tiles([("기대 결과", "사람 · 개발 계획 완료 기준"), ("테스트 코드 · 실행", "Claude Code"),
-                            ("금지", "통과시키려고 기대 결과 바꾸기")], 3), T),
-        light("Playwright 브라우저 MCP", viz2.tiles([
-            ("주소 열기", "localhost · 배포 주소"), ("클릭 · 입력", "「+ 할 일」 · 로그인 칸"),
-            ("화면 구조 읽기", "버튼 · 문구 확인"), ("콘솔 메시지 읽기", "브라우저 에러 확인")], 4)
-              + code("연결 명령 · 한 번만", esc("claude mcp add playwright npx @playwright/mcp@latest"))
-              + note("MCP", "Claude Code 에 브라우저 조작 도구를 붙이는 연결 (2-6)")
-              + src(("Playwright MCP · Microsoft", "https://github.com/microsoft/playwright-mcp")), T),
-        light("화면 테스트 요청 예", chat([
-            ("me", "브라우저를 열어서 개발 계획 완료 기준을 하나씩 눌러 확인해 줘"),
-            ("ai", "localhost:3000 열기 → 로그인\n주간 보고서 작성 추가 ○\n기한 어제인 할 일 → 「기한 지남」 ○\n기한 12-25 → 「공휴일」 · 저장 막힘 ○\n다른 사람 할 일 → 삭제 버튼 없음 ○\n콘솔 에러 0건")], "Claude Code · 브라우저 MCP 대화 예")
-              + note("확인 결과", "완료 기준마다 통과 · 실패 · 콘솔 에러 수"), T),
-        # ── 디버깅
-        light("에러 메시지 읽는 법", codemap([
-            ("TypeError", "종류 · 값의 종류가 맞지 않음"),
-            ("Cannot read properties of undefined", "내용 · 비어 있는 값(undefined)을 읽으려 함"),
-            ("(reading 'filter')", "읽으려던 것 · filter"),
-            ("at render (app.js:3:19)", "위치 · app.js 3번째 줄 · render 함수"),
-        ], title="에러 메시지 · node app.js 실행 결과")
-              + note("읽는 순서", "종류 → 내용 → 위치 · 첫 줄과 첫 「at」 줄이 핵심"), T),
-        light("자주 보는 에러", viz2.maprows([
-            ("404 Not Found", "주소 · 파일 경로 틀림", "요청한 것이 없음"),
-            ("401 Unauthorized", "로그인 · 키 없음", "누구인지 확인 실패"),
-            ("500 Internal Server Error", "서버 함수 안의 오류", "Vercel 로그 확인 (2-8)"),
-            ("new row violates row-level security policy", "Supabase 권한 규칙(RLS)에 막힘", "권한 설정 확인 (2-5)")], "에러 문구", "뜻")
-              + src(("MDN · HTTP 상태 코드", "https://developer.mozilla.org/ko/docs/Web/HTTP/Reference/Status"),
-                    ("Supabase · Row Level Security", "https://supabase.com/docs/guides/database/postgres/row-level-security")), T),
-        light("디버깅 흐름", stepflow([
-            ("재현", "같은 순서로 다시 · 언제 나는지"), ("에러 · 로그 전달", "원문 그대로 · 캡처"),
-            ("수정", "원인 설명 → Claude Code 수정"), ("재테스트", "같은 순서 + 테스트 전체")])
-              + viz2.tiles([("브라우저 콘솔", "F12 → Console · 화면 쪽 에러"), ("터미널", "서버 실행 창 · 테스트 결과"),
-                            ("Vercel 로그", "배포 뒤 서버 함수 에러 (2-8)")], 3)
-              + note("고친 뒤", "재현 순서를 테스트로 남기기 · 같은 버그 재발 방지"), T),
-        ba("버그 전달 방법", T, "「할 일 추가가 안 돼」",
-           "「주간 보고서 작성 · 김하늘 · 11-27 저장 → 반응 없음.\n콘솔: new row violates row-level security policy」",
-           "재현 순서 · 기대 결과 · 실제 결과 · 에러 원문"),
-        # ── 품질 관리
-        light("AI 코드 리뷰", viz2.maprows([
-            ("/diff", "바뀐 곳 보기", "Claude 가 고친 파일 · 줄"),
-            ("/code-review (별칭 /review)", "바뀐 코드의 버그 찾기", "--fix 로 찾은 문제 바로 고치기"),
-            ("/security-review", "브랜치 변경의 보안 취약점", "GitHub 저장소(origin) 필요 · 1-7 에서 연결")], "명령", "하는 일")
-              + note("시점", "push 전 · 큰 기능 하나 끝날 때마다")
-              + src(("Claude Code · Commands", "https://code.claude.com/docs/en/commands")), T),
-        light("보안 기본 점검", viz2.tiles([
-            ("키 노출", "API 키 · secret 키가 코드 · GitHub 에 없음 · .env 는 .gitignore (2-6)"),
-            ("권한", "RLS 켜짐 · 다른 사람 할 일 수정 · 삭제 불가 (2-5)"),
-            ("입력값 검증", "빈 칸 · 잘못된 날짜 · 너무 긴 글 · 스크립트 차단")], 3)
-              + note("점검 요청", "/security-review + 「키 노출 · 권한 · 입력값 세 가지 확인해 줘」"), T),
-        light("입력값 검증 예", viz2.maprows([
-            ("회의 이름 빈칸", "저장 안 됨", "「회의 이름 입력」"),
-            ("시작 14:00 · 끝 13:00", "저장 안 됨", "「끝 시간이 시작보다 빠름」"),
-            ("회의 이름에 &lt;script&gt; 태그", "글자 그대로 표시", "스크립트 실행 안 됨"),
-            ("회의 이름 2,000자", "저장 안 됨", "100자 제한")], "입력", "기대 결과")
-              + note("검증 위치", "화면 + DB 둘 다 · 화면 검사는 우회 가능"), T),
+        # ── 배경
+        light("대화창 밖의 데이터", relay()
+              + note("AI 의 한계", "캘린더 · DB · 사내 문서는 대화창 밖 · 사람이 옮겨 주는 만큼만 앎"), T),
+        light("회사마다 따로 만든 연결", timeline()
+              + src(("OpenAI · ChatGPT plugins", "https://openai.com/index/chatgpt-plugins/"),
+                    ("Claude · Tool use GA", "https://claude.com/blog/tool-use-ga"), ANN, AAIF), T),
+        light("연결 수가 늘어나는 문제", wires()
+              + note("발표문", "「새 데이터 소스마다 따로 구현이 필요하다」 · Anthropic 2024-11-25 · 앱 · 서비스 수는 예")
+              + src(ANN), T),
+        light("USB-C 포트", phmap("usbc_port.webp", "노트북의 USB-C 포트", "사진 · Logant547 · CC BY 4.0",
+                                    "https://commons.wikimedia.org/wiki/File:USB-C_connector_on_a_laptop.jpg", viz2.maprows([
+            ("노트북", "AI 앱 · 호스트", "Claude Code · Claude · ChatGPT"), ("USB-C 규격", "MCP", "연결 · 주고받는 형식"),
+            ("모니터 · 외장 디스크", "MCP 서버", "Supabase · 캘린더 · 브라우저"),
+            ("꽂으면 기능을 알림", "도구 목록", "list_tables · execute_sql …")], "USB-C", "MCP"))
+              + note("공식 소개", "「MCP 는 AI 앱을 위한 USB-C 포트」 · Think of MCP like a USB-C port for AI applications")
+              + src(INTRO), T),
+        light("MCP 구조", arch()
+              + viz2.tiles([("도구 (Tools)", "AI 가 실행하는 기능 · 할 일 추가"), ("리소스 (Resources)", "AI 가 읽는 자료 · 파일 · 표"),
+                            ("프롬프트 (Prompts)", "미리 만든 요청 틀")], 3)
+              + src(ARCH), T),
+        light("MCP 동작", agent("Claude Code", [
+            ("me", "기한 지난 할 일 몇 건이야?", .3), ("tool", "<em>supabase</em> 도구 목록 읽기", 1.3),
+            ("tool", "<em>execute_sql</em> select count(*) from tasks where due &lt; today …", 2.0),
+            ("ai", "기한 지난 할 일 2건 · 박서연 1 · 최민재 1", 4.4)],
+            ("Supabase MCP 서버", "도구 3개", supa_tools),
+            '<div class="v2sBx db"><div class="bh"><b>DB</b><small>tasks</small></div><table><tr><th>title</th><th>due</th></tr>'
+            '<tr class="hl" style="--d:2.8s"><td>예산안 검토</td><td>11/18</td></tr><tr class="hl" style="--d:2.95s"><td>설문 정리</td><td>11/19</td></tr>'
+            '<tr><td>보고서 작성</td><td>12/04</td></tr></table></div>',
+            (("도구 호출", 2.0), ("결과 · 2", 3.6), ("SQL", 2.4), ("행 2개", 3.2)))
+              + v2scene.steps([("①", "질문", .3), ("②", "도구 목록 읽기", 1.3), ("③", "도구 고르기 · 실행", 2.0),
+                               ("④", "결과 받기", 3.6), ("⑤", "답하기", 4.4)])
+              + src(ARCH, SMCP), T),
+        light("API와 MCP", viz2.pair(
+            "API", [("부르는 쪽", "내 앱 코드"), ("형식", "서비스마다 다름"), ("쓰는 때", "이용자가 앱을 쓸 때 (2-2 · 2-6)")],
+            "MCP", [("부르는 쪽", "AI · Claude Code · ChatGPT"), ("형식", "하나의 규격 · 도구 목록"), ("안에서", "MCP 서버가 각 서비스 API 호출")], hl="r"), T),
+        light("쓸 만한 MCP", viz2.maprows([
+            ("Playwright", "브라우저 열기 · 클릭 · 콘솔 확인", "화면 테스트 (2-10)"),
+            ("Supabase", "표 만들기 · 조회 · 로그", "DB 작업을 말로"),
+            ("Context7", "라이브러리 최신 문서", "버전 틀린 코드 줄이기"),
+            ("Figma · Notion", "디자인 · 기획 문서 읽기", "화면 · 요구사항 입력"),
+            ("GitHub", "이슈 · PR · Actions", "Claude Code 는 gh 로도 됨")], "MCP 서버", "하는 일")
+              + src(("Playwright MCP", "https://github.com/microsoft/playwright-mcp"), SMCP,
+                    ("Context7", "https://github.com/upstash/context7"), ("GitHub MCP", "https://github.com/github/github-mcp-server")), T),
+        light("MCP 연결 방법", code("터미널 · 원격 MCP 서버 추가", esc(
+            "claude mcp add --transport http supabase \\\n  \"https://mcp.supabase.com/mcp?project_ref=<프로젝트 ID>&read_only=true\""))
+              + viz2.tiles([("범위 (scope)", "local 나만 · project 팀 공유 .mcp.json · user 내 모든 프로젝트"),
+                            ("확인", "Claude Code 에서 /mcp · 목록 · 로그인"),
+                            ("claude.ai 커넥터", "claude.ai 에서 켠 커넥터가 Claude Code 에도 표시 · 구독 로그인일 때")], 3)
+              + note("요청", "「Supabase MCP 연결해 줘」 · 명령은 Claude Code 가 · 로그인은 사람이")
+              + src(CC, SMCP), T),
+        light("MCP 안전 설정", viz2.tiles([
+            ("project_ref", "프로젝트 하나에만 연결"), ("read_only=true", "읽기만 · 쓸 때만 잠시 해제"),
+            ("개발용 프로젝트", "실제 서비스 DB 에 연결하지 않기"), ("실행 승인", "도구 실행마다 내용 보고 허용")], 4)
+              + note("Playwright MCP", "「보안 경계가 아님」 · 공식 문서 · 믿을 수 있는 사이트만")
+              + src(SMCP, ("Playwright MCP", "https://github.com/microsoft/playwright-mcp")), T),
+        light("캘린더 일정 → 할 일", cal_to_tasks()
+              + note("준비", "claude.ai 에서 Google Calendar 커넥터 켜기 · 읽기 전용 · Supabase MCP 는 쓰기 허용 · 개발용 DB")
+              + src(GCAL, CC, SMCP), T),
         # ── 실습
-        lab("2-7", "테스트 · 디버깅 · 점검", T, "개발 계획 완료 기준을 테스트로 만들고, 실패를 고치고, 보안 세 가지를 점검",
-            ["개발 계획 완료 기준으로 테스트 요청 · 실행", "실패 원인 확인 → 수정 → 다시 실행", "브라우저 MCP 로 화면 확인",
-             "/code-review · /security-review", "통과 뒤 커밋 · push"],
-            ["테스트 전부 통과", "키 노출 · 권한 · 입력값 확인", "고친 버그마다 커밋"], files="개발계획.md v2 (2-4) · 2-6 까지의 앱"),
-        brief("2-7", T,
-              ["테스트 요청 · 실행", "실패 원인 듣고 수정 승인", "브라우저 MCP 연결 · 화면 확인", "리뷰 · 보안 점검", "커밋 · push"],
-              [("목표", "개발 계획 완료 기준을 자동 테스트로"), ("범위", "기한 지남 · 공휴일 · 권한 · 입력값"),
-               ("실패 시", "원인 설명 먼저 · 수정은 승인 뒤"), ("하지 말 것", "통과시키려고 테스트 기대 결과 바꾸기")],
-              ["테스트", "Playwright MCP", "/code-review", "/security-review"],
-              ["테스트 결과에 not ok 0개", "브라우저 콘솔 에러 0건", "/security-review 지적 사항 처리"],
-              "테스트가 계속 실패하면 「실패한 테스트 하나만 다시 실행하고 원인 설명해 줘」"),
+        lab("2-7", "MCP 연결 · 캘린더 → 할 일", T, "Claude Code 에 MCP 를 붙여 캘린더 일정을 팀 보드 할 일로 옮긴다",
+            ["claude.ai 에서 Google Calendar 커넥터 켜기", "Supabase MCP 연결 · 로그인", "/mcp 로 두 서버 확인",
+             "이번 주 일정 → 할 일 요청", "보드 화면에서 확인"],
+            ["/mcp 에 두 서버 연결됨", "캘린더 일정 수만큼 할 일 추가", "일정 날짜 = 할 일 기한"], files="2-6 까지의 앱 · 개발용 Supabase 프로젝트"),
+        brief("2-7", T, ["Google Calendar 커넥터", "Supabase MCP 연결", "/mcp 확인", "일정 → 할 일 요청", "보드 확인"],
+              [("목표", "이번 주 캘린더 일정을 할 일로"), ("규칙", "일정 날짜 = 기한 · 담당자는 나"),
+               ("승인", "추가 전에 목록 먼저 보여 주기"), ("하지 말 것", "실제 서비스 DB · 일정 수정")],
+              ["MCP", "커넥터", "/mcp", "read_only"],
+              ["보드에 캘린더 일정 수만큼 새 할 일", "기한이 일정 날짜와 같음"],
+              "도구가 안 보이면 /mcp 에서 로그인 상태 확인 · 다시 연결"),
+        light("실습 2-7 확인", checks([
+            ("/mcp 에 두 서버가 연결됐나", "Google Calendar · Supabase"), ("추가 전에 목록을 먼저 보여 줬나", "승인 단계"),
+            ("보드에 일정 수만큼 할 일이 생겼나", "기한 = 일정 날짜"), ("끝난 뒤 read_only 로 되돌렸나", "쓰기 차단")],
+            "넷 다 「예」 → 2-8 내 MCP 서버 만들기"), T),
     ]
 
 
 CSS = """
-  /* 2-7 · SDLC 청사진 */
-  .v2u7sd{position:relative; display:grid; grid-template-columns:repeat(6,1fr); gap:10px; margin:4px 0 46px;}
-  .v2u7s{position:relative; border:2px solid #D9DDE3; border-radius:14px; background:#fff; padding:16px 10px; text-align:center;
-         opacity:0; animation:v2u7in .45s ease-out var(--d) forwards;}
-  .v2u7s b{display:block; font-size:24px; color:#16233A;} .v2u7s span{display:block; margin-top:6px; font-size:14px; color:#6B7785; font-family:var(--mono);}
-  .v2u7s:not(:last-of-type)::after{content:"→"; position:absolute; right:-12px; top:50%; transform:translateY(-50%); color:#F28C28; font-weight:900; font-size:16px;}
-  .v2u7s.on{border-color:#F28C28; background:#FFF3E6; box-shadow:0 6px 18px rgba(242,140,40,.18);} .v2u7s.on span{color:#E07A12; font-weight:800;}
-  .v2u7back{position:absolute; left:50%; right:0; bottom:-36px; border:2px dashed #F7C99A; border-top:none; border-radius:0 0 14px 14px;
-            height:24px; font-size:13px; color:#E07A12; font-weight:700; text-align:center; padding-top:6px;}
-  /* 2-7 · 테스트 실행 애니메이션 */
-  .v2u7run{display:grid; grid-template-columns:1fr 150px 1fr; gap:16px; align-items:stretch;}
-  .v2u7term{background:#16233A; border-radius:14px; padding:14px 16px; min-height:250px; font-family:var(--mono); font-variant-ligatures:none; font-feature-settings:'liga' 0, 'calt' 0;}
-  .v2u7term .h{font-size:12px; color:#9AA6B5; font-weight:700; margin-bottom:10px;}
-  .v2u7term .l{font-size:13.5px; line-height:1.55; color:#C9D2DE; white-space:pre-wrap; opacity:0; animation:v2u7in .35s ease-out var(--d) forwards;}
-  .v2u7term .l.ok{color:#7FD38C;} .v2u7term .l.ng{color:#FF8A80; font-weight:700;}
-  .v2u7fix{align-self:center; text-align:center; border:2px solid #F28C28; border-radius:14px; background:#FFF3E6; padding:14px 10px;
-           opacity:0; animation:v2u7pop .5s ease-out var(--d) forwards;}
-  .v2u7fix b{display:block; font-size:20px; color:#E07A12;} .v2u7fix span{display:block; margin-top:6px; font-size:14px; color:#16233A; font-family:var(--mono); font-variant-ligatures:none; font-feature-settings:'liga' 0, 'calt' 0;}
-  /* 2-7 · 차례로 켜지는 흐름 */
-  .v2u7sf{display:grid; grid-template-columns:repeat(4,1fr); gap:28px; margin-bottom:22px;}
-  .v2u7sf .st{position:relative; border:2px solid #D9DDE3; border-radius:14px; background:#fff; padding:18px 14px; text-align:center;
-              animation:v2u7lit .5s ease-out var(--d) forwards;}
-  .v2u7sf .st:not(:last-child)::after{content:"→"; position:absolute; right:-22px; top:50%; transform:translateY(-50%); color:#F28C28; font-weight:900;}
-  .v2u7sf b{display:block; font-size:22px; color:#16233A;} .v2u7sf span{display:block; margin-top:6px; font-size:14px; color:#6B7785;}
-  @keyframes v2u7lit{to{border-color:#F28C28; background:#FFF3E6; box-shadow:0 6px 18px rgba(242,140,40,.18);}}
-  @keyframes v2u7pop{from{opacity:0; transform:scale(.8)} to{opacity:1; transform:none}}
-  @media print{.v2u7term .l,.v2u7fix{opacity:1; animation:none}}
-  @keyframes v2u7in{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
-  @media print{.v2u7s{opacity:1; animation:none}}
+  .v2u3msg.rq{border-color:#9DB7DA; background:#F2F7FF; animation:v2u3right 1.2s ease-out .4s forwards;} .v2u3msg.rq em{color:#1F4E8C;}
+  @keyframes v2u3right{0%{opacity:0; transform:translateX(-90px)} 30%{opacity:1} 100%{opacity:1; transform:none}}
+  /* 2-3 · 사람 손 vs MCP */
+  .v2u3relay{display:flex; flex-direction:column; gap:14px; margin:4px 0 14px;}
+  .v2u3rr{display:grid; grid-template-columns:96px 1fr; gap:12px; align-items:center; padding:12px 14px; border:1.5px solid #E1E5EB; border-radius:14px; background:#fff;}
+  .v2u3rr.on{border-color:#F28C28; background:#FFF8F0;}
+  .v2u3rh{font-size:18px; font-weight:800; color:#16233A;} .v2u3rr.on .v2u3rh{color:#E07A12;}
+  .v2u3rw{display:flex; align-items:center; gap:8px;}
+  .v2u3rs{flex:1; border:1.5px solid #D9DDE3; border-radius:10px; padding:8px 10px; background:#fff; opacity:0; animation:v2u3in .4s ease-out var(--d) forwards;}
+  .v2u3rs b{display:block; font-size:16px; color:#16233A;} .v2u3rs span{font-size:13.5px; color:#3A4657;}
+  .v2u3rs.hand{border-color:#E8A39B; background:#FDECEA;} .v2u3rs.hand b{color:#C0392B;}
+  .v2u3ra{font-style:normal; font-size:18px; font-weight:800; color:#F28C28; opacity:0; animation:v2u3in .3s ease-out var(--d) forwards;}
+  .v2u3cnt{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  .v2u3cnt span{text-align:center; font-size:17px; font-weight:800; padding:8px; border-radius:10px; opacity:0;}
+  .v2u3cnt .c1{background:#FDECEA; color:#C0392B; animation:v2u3in .4s ease-out 2.0s forwards;}
+  .v2u3cnt .c2{background:#FFE3C4; color:#B85A00; animation:v2u3in .4s ease-out 3.8s forwards;}
+  @media print{.v2u3wire{transform:none; animation:none} .v2u3rs,.v2u3ra,.v2u3cnt span,.v2u3hs,.v2u3msg,.v2u3lb,.v2u3la{opacity:1; animation:none}}
+  @keyframes v2u3in{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
+  @media print{.v2u3rs,.v2u3ra,.v2u3cnt span{opacity:1; animation:none}}
+  /* 2-6 · 캘린더 일정 → 할 일 (v2c) */
+  .v2c{display:grid; grid-template-columns:310px 52px 1fr 52px 330px; align-items:stretch; margin:0 0 12px;}
+  .v2cW{border:1.5px solid #D0D7DE; border-radius:12px; background:#fff; overflow:hidden; display:flex; flex-direction:column;}
+  .v2cH{display:flex; align-items:center; gap:8px; padding:10px 12px; background:#F6F8FA; border-bottom:1px solid #D0D7DE; font-size:16.5px; font-weight:800; color:#16233A;}
+  .v2cH i{width:12px; height:12px; border-radius:3px;} .v2cH i.g{background:#1A73E8;} .v2cH i.o{background:#D97757;} .v2cH i.b{background:#3ECF8E;}
+  .v2cWk{display:grid; grid-template-columns:repeat(5,1fr); flex:1;}
+  .v2cD{border-right:1px solid #E3E7EC; padding:8px 4px; display:flex; flex-direction:column; align-items:center; gap:2px; min-height:270px;}
+  .v2cD:last-child{border-right:0;} .v2cD span{font-size:13px; color:#6B7785;} .v2cD b{font-size:15.5px; color:#16233A; margin-bottom:10px;}
+  .v2cD .ev{width:100%; box-sizing:border-box; font-size:13.5px; font-weight:700; color:#fff; background:#1A73E8; border-radius:6px; padding:10px 3px; text-align:center; word-break:keep-all; line-height:1.3;
+    outline:3px solid transparent; outline-offset:2px; animation:v2cRead .4s var(--d) forwards;}
+  .v2cD .ev.c1{--c:#F28C28;} .v2cD .ev.c2{--c:#8E44AD;} .v2cD .ev.c3{--c:#2E8B57;}
+  .v2cChat{padding:10px 12px; display:flex; flex-direction:column; gap:8px;}
+  .v2cChat .m{font-size:15.5px; border-radius:10px; padding:7px 11px; opacity:0; animation:v2cIn .35s var(--d) forwards;}
+  .v2cChat .me{align-self:flex-end; background:#FFF1E0; color:#16233A; font-weight:600;}
+  .v2cChat .ai{background:#EEF3FA; border:1px solid #C9D6E6; color:#16233A;}
+  .v2cChat .tool{font-family:var(--mono); font-size:13.5px; color:#3A4657; background:#F4F6F9; border:1px dashed #9AA5B1;}
+  .v2cChat .tool em{font-style:normal; font-weight:800; margin-right:6px;} .v2cChat .tool.l em{color:#1A73E8;} .v2cChat .tool.r em{color:#1F9D63;}
+  .v2cP{align-self:center; justify-self:center; display:flex; flex-direction:column; align-items:center; gap:2px; border:2px solid #C9CFD8; border-radius:10px;
+    padding:6px 4px; width:46px; background:#fff; color:#9AA5B1; animation:v2cPlug .5s var(--d) forwards;}
+  .v2cP b{font-size:12px;} .v2cP span{font-size:11.5px;}
+  .v2cP.l{--pc:#1A73E8;} .v2cP.r{--pc:#1F9D63;}
+  .v2cT{width:100%; border-collapse:collapse; font-size:15.5px;}
+  .v2cT th{text-align:left; font-size:12.5px; color:#6B7785; font-weight:700; padding:7px 10px; border-bottom:1px solid #E3E7EC;}
+  .v2cT td{padding:9px 10px; border-bottom:1px solid #EEF1F4; color:#16233A;}
+  .v2cT td small{margin-left:6px; font-size:11px; font-weight:800; color:#1A73E8; background:#E8F0FE; border-radius:8px; padding:1px 6px;}
+  .v2cT tr.nw{opacity:0; animation:v2cRow .5s var(--d) forwards;}
+  .v2cT tr.c1{--c:#F28C28;} .v2cT tr.c2{--c:#8E44AD;} .v2cT tr.c3{--c:#2E8B57;}
+  @keyframes v2cIn{from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:none}}
+  @keyframes v2cRead{to{outline-color:var(--c)}}
+  @keyframes v2cPlug{to{border-color:var(--pc); color:var(--pc); background:#fff; box-shadow:0 0 0 4px rgba(0,0,0,.04)}}
+  @keyframes v2cRow{0%{opacity:0; background:transparent} 30%{opacity:1; background:#FFF8E6} 100%{opacity:1; background:transparent; box-shadow:inset 4px 0 0 var(--c)}}
+  @media print{.v2cChat .m,.v2cT tr.nw{opacity:1; animation:none}}
+  /* 2-7 · 연결 방식의 변화 (v27tl) */
+  .v27tl{position:relative; display:grid; grid-template-columns:repeat(6,1fr); gap:8px; margin:26px 0 10px; padding-top:22px;}
+  .v27tl .ax{position:absolute; left:0; right:0; top:29px; height:3px; background:#D9DDE3;}
+  .v27tl .e{position:relative; display:flex; flex-direction:column; gap:3px; opacity:0; animation:v27in .4s var(--d) forwards;}
+  .v27tl .e i{position:absolute; top:-1px; left:4px; width:14px; height:14px; border-radius:50%; background:#1F3A5F; border:3px solid #fff;}
+  .v27tl .e .y{margin-top:22px; font-family:var(--mono); font-size:14px; color:#6B7785;}
+  .v27tl .e b{font-size:18px; color:#16233A;} .v27tl .e small{font-size:14px; color:#3A4657;}
+  .v27tl .e.on i{background:#F28C28; width:18px; height:18px; top:-3px;} .v27tl .e.on b{color:#E07A12;}
+  .v27grp{display:grid; grid-template-columns:3fr 3fr; gap:8px; margin:10px 0 14px;}
+  .v27grp span{text-align:center; font-size:16px; font-weight:800; padding:8px; border-radius:10px; background:#EEF1F5; color:#3A4657; opacity:0; animation:v27in .4s var(--d) forwards;}
+  .v27grp span.on{background:#FFE3C4; color:#B85A00;}
+  /* 2-7 · 연결 수 (v27w) */
+  .v27w{width:100%; height:300px; display:block;}
+  .v27t{font-size:16px; font-weight:700; fill:#16233A;} .v27mt{font-size:26px; font-weight:800; fill:#E07A12;} .v27ms{font-size:14px; fill:#3A4657;}
+  .v27a{stroke:#9AA5B1; stroke-width:2; stroke-dasharray:900; stroke-dashoffset:900; animation:v27draw .5s var(--d) forwards, v27fade .6s 3.2s forwards;}
+  .v27b{stroke:#F28C28; stroke-width:3.5; stroke-dasharray:900; stroke-dashoffset:900; animation:v27draw .45s var(--d) forwards;}
+  .v27m{opacity:0; animation:v27in .4s var(--d) forwards;}
+  .v27cnt{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:4px 0 12px;}
+  .v27cnt span{text-align:center; font-size:18px; padding:8px; border-radius:10px; opacity:0; animation:v27in .4s var(--d) forwards;}
+  .v27cnt .a{background:#EEF1F5; color:#3A4657;} .v27cnt .b{background:#FFE3C4; color:#B85A00;}
+  /* 2-7 · 구조 (v27ar) */
+  .v27ar{display:grid; grid-template-columns:300px 80px 1fr; align-items:center; margin:0 0 14px;}
+  .v27ar .host{border:2.5px solid #F28C28; background:#FFF8F0; border-radius:16px; padding:12px; display:flex; flex-direction:column; gap:10px; opacity:0; animation:v27in .4s var(--d) forwards;}
+  .v27ar .host .h{font-size:19px; font-weight:800; color:#E07A12;}
+  .v27ar .cli{border:1.5px solid #F7C99A; background:#fff; border-radius:10px; padding:9px 12px; font-size:15px; font-weight:700; color:#16233A; opacity:0; animation:v27in .3s var(--d) forwards;}
+  .v27ar .lk{display:flex; flex-direction:column; gap:42px; padding-top:40px;} .v27ar .lk i{height:3px; background:#F28C28;}
+  .v27ar .svs{display:flex; flex-direction:column; gap:10px; padding-top:40px;}
+  .v27ar .srv{border:1.5px solid #D9DDE3; border-left:5px solid #1F3A5F; border-radius:10px; background:#fff; padding:7px 14px; opacity:0; animation:v27in .3s var(--d) forwards;}
+  .v27ar .srv b{font-size:16px; color:#16233A; margin-right:10px;} .v27ar .srv span{font-size:14px; color:#3A4657;}
+  @keyframes v27in{from{opacity:0} to{opacity:1}}
+  @keyframes v27draw{to{stroke-dashoffset:0}}
+  @keyframes v27fade{to{opacity:.15}}
+  @media print{.v27tl .e,.v27grp span,.v27m,.v27cnt span,.v27ar .host,.v27ar .cli,.v27ar .srv{opacity:1; animation:none} .v27a,.v27b{stroke-dashoffset:0; animation:none}}
 """

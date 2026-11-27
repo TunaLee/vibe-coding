@@ -9,8 +9,7 @@ import viz2
 from deck import ba, flow, lab, light
 from hx import checks, code, esc, note
 from stats_hx import src
-import v2anim
-from v2anim import lane
+import v2scene
 from v2kit import brief, chat, codemap, shot
 
 T = "2-5"
@@ -18,7 +17,15 @@ GEN = ("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co
 KEYS = ("Supabase · API keys", "https://supabase.com/docs/guides/api/api-keys")
 RLS = ("Supabase · Row Level Security", "https://supabase.com/docs/guides/database/postgres/row-level-security")
 
-CSS = v2anim.CSS + """
+CSS = """
+  /* 2-5 · RLS 동작 (v25r) */
+  .v25r{grid-template-columns:380px 1fr 260px 1fr 250px;}
+  .v25l{display:flex; flex-direction:column; gap:14px; justify-content:center;}
+  .v25b .net{margin-top:0;} .v25b .nr{grid-template-columns:0 1fr 60px 150px;} .v25b .nr .ok.no{color:#C0392B;}
+  .v25r .cl.bad{animation:v25bad .35s var(--d) forwards;}
+  .v25r tr.del td{animation:v25del .5s var(--d) forwards;}
+  @keyframes v25bad{to{opacity:1; background:#FDECEA; color:#C0392B}}
+  @keyframes v25del{to{text-decoration:line-through; color:#9AA5B1; background:#F4F6F9}}
   /* 2-5 · 표 그림 */
   .v2u5sheets{display:grid; grid-template-columns:.8fr 1.6fr; gap:22px; align-items:start;}
   .v2u5sh{border:1.5px solid #D9DDE3; border-radius:12px; overflow:hidden; background:#fff;}
@@ -47,6 +54,23 @@ def _tables():
                     ["9", "고객 설문 결과 정리", "하늘", "11-19", "완료"]], key=("owner_id",))
     return (f'<div class="v2u5sheets">{members}{tasks}</div>'
             '<div class="v2u5link"><b>owner_id 하늘</b> → members 의 김하늘 · <b>id</b> = 로그인 계정 (표에는 긴 고유 번호 · 그림은 이름)</div>')
+
+
+def rls_scene():
+    """RLS 동작 — 계정 B · 계정 A 브라우저가 같은 7번 삭제 요청 · Supabase 가 행마다 규칙 확인 · B 는 지운 행 0개 · A 는 1개."""
+    def br(who, d_req, d_res, res, cls):
+        return (f'<div class="v2sBr v25b"><div class="bar"><i></i><i></i><i></i><span>계정 {who} · 보드</span></div>'
+                f'<div class="net"><div class="nr" style="--d:{d_req}s"><span class="fn">tasks?id=eq.7</span><span>DELETE</span>'
+                f'<span class="st"><i class="pd" style="--d:{d_res}s">(pending)</i><b class="ok {cls}" style="--d:{d_res}s">{res}</b></span></div></div></div>')
+    left = '<div class="v25l">' + br("B", .4, 2.2, "200 · 지운 행 0개", "no") + br("A", 3.0, 4.8, "200 · 지운 행 1개", "") + '</div>'
+    mid = ('<div class="v2sBx srv"><div class="bh"><b>Supabase</b><small>RLS 규칙</small></div>'
+           '<div class="cl" style="--d:.9s">규칙 · 로그인 계정 = 담당자</div>'
+           '<div class="cl bad" style="--d:1.5s">B ≠ A → 해당 행 없음</div>'
+           '<div class="cl" style="--d:3.6s">A = A → 7번 삭제</div></div>')
+    db = ('<div class="v2sBx db"><div class="bh"><b>tasks</b><small>DB</small></div><table><tr><th>id</th><th>title · 담당</th></tr>'
+          '<tr class="del" style="--d:4.2s"><td>7</td><td>주간 보고서 작성 · A</td></tr><tr><td>8</td><td>교육 자료 준비 · B</td></tr></table></div>')
+    return ('<div class="v2s v25r">' + left + v2scene.wire("삭제 요청", "결과", .4, 2.2) + mid
+            + v2scene.wire("규칙에 맞는 행만", "", 1.0, 4.2) + db + '</div>')
 
 
 def slides():
@@ -88,13 +112,6 @@ def slides():
             ('supabase.from("tasks").delete().eq("id", 7)', "7번 할 일 삭제")],
             ask="localStorage 대신 Supabase tasks 표에 저장 · 조회하게 바꿔 줘", title="Claude Code가 쓴 코드 · 예")
               + note("확인", "Supabase 대시보드 Table Editor · 행이 늘고 줄어드는지"), T),
-        light("저장 위치 변경 전후", '<div class="v2u5lb">1부 · localStorage</div>'
-              + lane([("내 노트북", "할 일 추가"), ("내 브라우저", "localStorage"), ("팀원 휴대폰", "보드")],
-                     [(0, 1, "주간 보고서 작성", .4, True)], [(2, "빈 보드", "no", 1.8)], h=190)
-              + '<div class="v2u5lb"><b>2부 · Supabase</b></div>'
-              + lane([("내 노트북", "할 일 추가"), ("Supabase", "tasks 표"), ("팀원 휴대폰", "보드")],
-                     [(0, 1, "주간 보고서 작성", 2.8, False), (1, 2, "주간 보고서 작성", 4.0, True)],
-                     [(1, "행 1개 추가", "ok", 3.9), (2, "같은 보드", "ok", 5.2)], h=190), T),
         # ── 로그인
         light("Supabase Auth 로그인", flow([("가입", "이메일 · 비밀번호"), ("확인 메일", "링크 클릭"), ("로그인", "signInWithPassword"),
                                             ("할 일 저장", "created_by = 로그인 계정")], hl=3)
@@ -119,9 +136,7 @@ def slides():
             ("  using ( (select auth.uid()) = owner_id );", "로그인 계정 = 담당자인 행만")],
             ask="개발 계획 7칸 권한대로 tasks 표에 RLS 정책을 만들어 줘", title="Claude Code가 쓴 SQL · 예")
               + src(RLS), T),
-        light("RLS 동작", lane([("팀원 브라우저", "계정 A · 계정 B"), ("Supabase", "RLS 규칙 확인"), ("tasks", "7번 · 담당자 A")],
-                               [(0, 1, "B · 7번 삭제", .4, False), (0, 1, "A · 7번 삭제", 2.8, False), (1, 2, "삭제 실행", 4.1, True)],
-                               [(1, "담당자 ≠ B · 거절", "no", 1.6), (2, "A 의 요청 · 삭제", "ok", 5.3)], h=200)
+        light("RLS 동작", rls_scene()
               + note("규칙 위치", "DB 안 · 화면 · 코드를 우회해도 같은 결과")
               + src(RLS), T),
         light("계정 두 개로 권한 확인", flow([("계정 A 로그인", "A 담당 할 일 추가"), ("계정 B 로그인", "다른 브라우저 · 시크릿 창"),

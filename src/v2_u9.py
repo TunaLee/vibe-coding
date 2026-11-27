@@ -1,67 +1,90 @@
-"""2-9 마무리 (10분).
+"""2-9 MCP 서버 등록 · 활용.
 
-2부 회고(요청 = 결과 ? · 1-8 과 같은 구조) → 시작 버전 → 2부 앱 비교(1-8 한계가 풀린 모습) → 결과 공유 · 회고 질문
-→ 운영 체크리스트(카드 8칸) → 내 회고 기록 → 3부 연결.
-1-8 과 겹치지 않게: 1부 회고 질문 · 공유 항목을 다시 설명하지 않고 2부에서 더해진 것(데이터 · 키 · 테스트 · 로그)만.
-사실 출처: supabase.com/docs/guides/platform/free-project-pausing (무료 프로젝트 1주 비활성 시 일시 중지)
-· vercel.com/docs/instant-rollback · vercel.com/docs/logs/runtime
+등록할 곳(Claude Code · Claude 웹 · ChatGPT) → 원격 주소 조건 → Claude 에서 업무 등록(장면) → ChatGPT 에서 조회(장면)
+→ 캘린더와 함께 일정 관리 → 쓰기 확인 · 점검 → 실습.
+사실 출처
+- support.claude.com/en/articles/11175166 (custom connector · Free 1개 · Customize → Connectors → Add custom connector · 공개 HTTPS 443 · localhost 불가)
+- help.openai.com/en/articles/12584461 (Plugins → + → Add custom MCP server · Developer mode 불필요 · 전체 MCP 는 Business · Enterprise/Edu · Pro 는 읽기)
+- developers.openai.com/api/docs/guides/developer-mode (쓰기 동작 기본 확인 · readOnlyHint 없으면 쓰기)
+- code.claude.com/docs/en/mcp · claude.com/docs/connectors/google/calendar (읽기 전용)
 """
 import viz2
-from deck import flow, light
-from hx import code, esc, note, table
+from deck import lab, light
+from hx import checks, note
 from stats_hx import src
+from v2kit import brief, chat
+from v2scene import agent, board, tools, steps
 
 T = "2-9"
+CL = ("Claude · Custom connectors", "https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp")
+OA = ("ChatGPT · Custom MCP servers", "https://help.openai.com/en/articles/12584461")
+OAD = ("OpenAI · Developer mode", "https://developers.openai.com/api/docs/guides/developer-mode")
+CC = ("Claude Code · MCP", "https://code.claude.com/docs/en/mcp")
+GCAL = ("Claude · Google Calendar connector", "https://claude.com/docs/connectors/google/calendar")
+
+TOOLS = [("add_task", "할 일 추가"), ("list_tasks", "할 일 목록"), ("update_task", "상태 · 기한 바꾸기"), ("list_due", "기간 안 마감 보기")]
+BOARD = [("주간 보고서 작성", "11/27", "진행 중", None), ("회의록 정리", "11/29", "할 일", None)]
+
+CSS = ""
 
 
 def slides():
     return [
-        light("2부 회고", '<div class="v2u9q"><span>내 요청</span><i>=</i><span>결과</span><em>?</em></div>'
-              + flow([("개발 계획 v2", "2-4 · 데이터 · 권한"), ("DB · 로그인", "2-5 · Supabase"), ("API · MCP", "2-6 · 공휴일"),
-                      ("테스트 · 리뷰", "2-7 · 자동 확인"), ("환경변수 · 로그", "2-8 · 배포 뒤")], hl=-1)
-              + note("흐름", "1부와 같은 순서 · 데이터 · 외부 연결 · 검사가 더해짐"), T),
-        light("시작 버전 → 2부 앱", viz2.maprows([
-            ("할 일 저장 · 브라우저마다 따로", "Supabase 한 곳", "팀원 모두 같은 보드"),
-            ("수정 · 삭제 · 누구나", "로그인 · 내가 담당인 할 일만", "RLS 권한"),
-            ("기한 공휴일 · 달력 직접 확인", "공휴일 API", "공휴일 기한 자동 차단"),
-            ("확인 · 기능마다 직접 클릭", "자동 테스트 · 브라우저 MCP", "push 전 전체 검사"),
-            ("장애 · 사용자 제보", "로그 · Web Analytics", "에러 · 방문 기록")], "시작 버전 (1부 방식)", "2부"), T),
-        light("결과 공유", viz2.tiles([
-            ("배포 주소", "프로젝트명.vercel.app"), ("붙인 것", "DB · 로그인 · API · MCP"),
-            ("테스트", "통과 수 / 전체"), ("가장 오래 걸린 곳", "에러가 많았던 기능")], 4)
-              + code("공유 글 · 예", esc("팀 할 일 보드 v2 · https://team-board.vercel.app\n"
-                                       "로그인 · 팀원 모두 같은 보드 · 공휴일 기한 차단\n"
-                                       "테스트 8개 통과 · 가장 오래 걸린 곳: 권한(RLS) 설정")), T),
-        light("운영 체크리스트", '<div class="v2u9ck">' + "".join(
-            f'<div style="--d:{i * .07:.2f}s"><b>{h}</b><span>{x}</span></div>' for i, (h, x) in enumerate([
-                ("키", "코드 · GitHub 에 키 없음 · .env 는 .gitignore"), ("환경변수", "Vercel 에 등록 · 바꾸면 Redeploy"),
-                ("권한", "RLS 켜짐 · 남의 할 일 수정 · 삭제 불가"), ("테스트", "push 전 전체 통과"),
-                ("로그", "배포 직후 Live 확인 · Hobby 1시간 보관"), ("방문 기록", "주 1회 Analytics 확인"),
-                ("되돌리기", "Instant Rollback · 직전 배포"), ("Supabase 무료", "1주 비활성 시 일시 중지 · 대시보드에서 재시작")]))
-              + "</div>"
-              + src(("Supabase · Project Pausing", "https://supabase.com/docs/guides/platform/free-project-pausing"),
-                    ("Vercel · Instant Rollback", "https://vercel.com/docs/instant-rollback")), T),
-        light("회고 기록", table(["질문", "내 답"], [
-            ["테스트 통과", "  개 중   개"], ["데이터 구조에서 바뀐 것", ""], ["테스트 · 점검이 잡아낸 버그", ""],
-            ["배포 뒤 로그에서 본 에러", ""], ["3부에서 맡기고 싶은 반복 업무", ""]])
-              + note("기록", "개발계획.md v2 맨 아래 「회고」 칸 · 3부 업무 분석의 입력"), T),
-        light("2부 → 3부", viz2.pair(
-            "2부", [("만든 것", "팀 할 일 보드 v2 · 팀이 쓰는 웹 서비스"), ("AI 역할", "코드 작성 · 테스트 · 리뷰"), ("사람 역할", "기획 · 기준 · 확인")],
-            "3부", [("만들 것", "회의록 정리 에이전트"), ("핵심", "하네스 · 규칙 · 스킬 · 안전장치"), ("이어지는 것", "회의록에서 뽑은 할 일 → 이 보드")], hl="r"), T),
+        light("MCP 서버 등록 위치", viz2.maprows([
+            ("Claude Code", "claude mcp add --transport http …", "터미널 · 2-8 에서 연결"),
+            ("Claude 웹 · 데스크톱", "Customize → Connectors → Add custom connector", "Free 는 1개"),
+            ("ChatGPT", "Plugins → + → Add custom MCP server", "쓰기 도구는 Business · Enterprise · Edu")], "어디", "등록 경로")
+              + note("같은 주소 하나", "team-board.vercel.app/api/mcp · 등록하는 곳만 다름")
+              + src(CC, CL, OA), T),
+        light("원격 MCP 주소 조건", viz2.tiles([
+            ("공개 HTTPS", "인터넷에서 닿는 주소 · 443 포트"), ("localhost 안 됨", "Claude · ChatGPT 서버가 접속 · 내 컴퓨터는 못 찾음"),
+            ("로그인", "OAuth · 등록할 때 로그인 창"), ("쓰기 확인", "쓰기 도구는 실행 전 사용자 확인")], 4)
+              + note("등록 주소", "2-8 Vercel 배포 주소")
+              + src(CL, OAD), T),
+        light("Claude에서 업무 등록", agent("Claude", [
+            ("me", "12월 4일 금요일까지 고객 제안서 작성, 담당 나로 할 일 등록해 줘", .3),
+            ("tool", "<em>team-board</em> add_task · 고객 제안서 작성 · 2026-12-04", 1.4),
+            ("ok", "허용", 2.0), ("ai", "등록 완료 · 기한 12/4 (금)", 4.4)],
+            ("내 MCP 서버", "team-board.vercel.app", tools(TOOLS, "add_task", 1.0, 1.4)),
+            board(BOARD + [("고객 제안서 작성", "12/04", "할 일", 3.2)]),
+            (("add_task", 2.2), ("결과 · 추가됨", 3.8), ("insert", 2.6), ("새 행", 3.2)))
+              + steps([("①", "말로 요청", .3), ("②", "도구 고르기", 1.4), ("③", "쓰기 확인 · 허용", 2.0),
+                       ("④", "보드에 새 행", 3.2), ("⑤", "결과 보고", 4.4)])
+              + src(CL), T),
+        light("ChatGPT에서 조회", agent("ChatGPT", [
+            ("me", "이번 주 마감인 팀 할 일 보여 줘", .3),
+            ("tool", "<em>team-board</em> list_due · 11/30 ~ 12/04", 1.4),
+            ("ai", "이번 주 마감 1건 · 고객 제안서 작성 12/4 (금)", 4.0)],
+            ("내 MCP 서버", "team-board.vercel.app", tools(TOOLS, "list_due", 1.0, 1.4)),
+            board(BOARD + [("고객 제안서 작성", "12/04", "할 일", None)]),
+            (("list_due", 1.8), ("결과 · 1건", 3.4), ("select", 2.2), ("행 1개", 2.8)), host_cls="g")
+              + note("같은 서버", "Claude 에서 넣은 할 일을 ChatGPT 에서 조회 · 데이터는 팀 보드 DB 한 곳")
+              + src(OA), T),
+        light("캘린더와 함께 일정 관리", chat([
+            ("me", "이번 주 캘린더 일정이랑 내 할 일 마감이 겹치는 날 알려 주고, 겹치는 할 일은 다음 날로 미뤄 줘"),
+            ("ai", "Google Calendar · 12/2 (수) 고객사 미팅\nteam-board · list_due → 12/2 마감 「교육 자료 준비」\n겹치는 날 1일 · 「교육 자료 준비」 기한을 12/3 으로 바꿀까요?"),
+            ("me", "응"),
+            ("ai", "team-board · update_task → 기한 12/3 · 완료")], "Claude 대화 예")
+              + note("커넥터 둘", "Google Calendar 는 읽기 · 할 일 변경은 내 MCP 서버")
+              + src(GCAL, CL), T),
+        light("쓰기 확인 · 점검", viz2.tiles([
+            ("쓰기 확인", "추가 · 변경 도구는 실행 전 허용 버튼"), ("읽기 표시", "조회 도구는 읽기 전용으로 표시 · 없으면 쓰기로 취급"),
+            ("권한", "로그인 계정 기준 · 남의 할 일 변경 불가 (RLS)"), ("기록", "도구 호출마다 Vercel 로그 (2-10)")], 4)
+              + note("삭제 도구", "만들지 않음 · 지우기는 보드 화면에서 사람이")
+              + src(OAD, CL), T),
+        # ── 실습
+        lab("2-9", "Claude · ChatGPT 에서 업무 등록", T, "배포한 팀 보드 MCP 서버를 AI 앱에 등록해 대화로 할 일을 넣고 본다",
+            ["Claude 웹에 custom connector 추가 · 로그인", "대화로 할 일 등록", "보드에서 확인",
+             "ChatGPT 등록 (요금제가 되면)", "이번 주 마감 조회"],
+            ["대화로 넣은 할 일이 보드에 보임", "다른 AI 앱에서 같은 할 일 조회"], files="2-8 배포 주소 · /api/mcp"),
+        brief("2-9", T, ["커넥터 추가", "로그인", "할 일 등록", "보드 확인", "다른 앱에서 조회"],
+              [("주소", "team-board.vercel.app/api/mcp"), ("등록 요청", "할 일 · 기한 · 담당자"),
+               ("확인", "쓰기 전 허용 · 보드 새로고침"), ("하지 말 것", "인증 없는 주소 공유 · 개인 키 붙여 넣기")],
+              ["custom connector", "원격 MCP", "OAuth", "쓰기 확인"],
+              ["보드에 새 할 일", "다른 앱 조회 결과에 같은 할 일"],
+              "커넥터 추가가 실패하면 배포 주소를 Inspector 로 먼저 확인"),
+        light("실습 2-9 확인", checks([
+            ("커넥터 추가 때 로그인 창이 떴나", "인증"), ("대화로 넣은 할 일이 보드에 보이나", "add_task"),
+            ("추가 전에 허용을 물었나", "쓰기 확인"), ("다른 앱에서 같은 할 일이 조회되나", "같은 서버 · 같은 DB")],
+            "넷 다 「예」 → 2-10 품질 · 운영"), T),
     ]
-
-
-CSS = """
-  /* 2-9 · 요청 = 결과 ? */
-  .v2u9q{display:flex; justify-content:center; align-items:center; gap:18px; margin:0 0 22px; padding:18px; border-radius:16px; background:#FFF8F0; border:2px solid #F28C28;}
-  .v2u9q span{font-size:26px; font-weight:800; color:#16233A; padding:8px 22px; border-radius:12px; background:#fff; border:2px solid #D9DDE3;}
-  .v2u9q i, .v2u9q em{font-style:normal; font-size:30px; font-weight:900; color:#F28C28;}
-  /* 2-9 · 운영 체크리스트 카드 8칸 */
-  .v2u9ck{display:grid; grid-template-columns:repeat(4,1fr); gap:14px;}
-  .v2u9ck div{position:relative; border:2px solid #D9DDE3; border-radius:14px; background:#fff; padding:16px 16px 16px 46px; min-height:118px;
-              opacity:0; animation:v2u9in .4s ease-out var(--d) forwards;}
-  .v2u9ck div::before{content:"☐"; position:absolute; left:14px; top:13px; font-size:24px; color:#F28C28;}
-  .v2u9ck b{display:block; font-size:21px; color:#16233A;} .v2u9ck span{display:block; margin-top:6px; font-size:16px; line-height:1.45; color:#3A4657;}
-  @keyframes v2u9in{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
-  @media print{.v2u9ck div{opacity:1; animation:none}}
-"""
