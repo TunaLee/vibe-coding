@@ -21,6 +21,24 @@ def _persona(who):
     return (PERSONA / f"{who}.md").read_text(encoding="utf-8").strip()
 
 
+def _askmock(tab, q, opts):
+    """선택지 질문 창 모양(여러 개 고르기) — 실제 캡처와 같은 탭 · 체크 상자 모양. opts: (이름, 설명, 체크 여부)."""
+    tabs = "".join(f'<i class="{"on" if t == tab else ""}">{t}</i>' for t in ["문제점", "이용자", "기능", "화면"])
+    rows = "".join(f'<div class="o"><em class="{"c" if c else ""}"></em><div><b>{n}</b><span>{d}</span></div></div>' for n, d, c in opts)
+    return f'<div class="v13ask"><div class="t">{tabs}</div><p>{q}</p>{rows}<div class="o"><em></em><div><b>Other</b></div></div></div>'
+
+
+def _plan_short():
+    """기획서 예시 — 칸 제목과 첫 줄만."""
+    out, take = [], False
+    for ln in _plan().splitlines():
+        if ln.startswith("## "):
+            out.append(ln); take = True
+        elif ln.startswith("- ") and take:
+            out.append(ln); take = False
+    return "\n".join(out)
+
+
 def _plan():
     return (EX / "기획서.md").read_text(encoding="utf-8").strip()
 
@@ -76,6 +94,19 @@ def _devmap():
 
 
 CSS = """
+  /* 1-3 · 선택지 질문 창 모양 (v13ask) */
+  .v13ask{width:400px; background:#2B2B2B; border-radius:10px; padding:14px 18px 10px; color:#E6E6E6; box-shadow:0 8px 24px rgba(22,35,58,.22); text-align:left;}
+  .v13ask .t{display:flex; gap:16px; margin-bottom:10px;}
+  .v13ask .t i{font-style:normal; font-size:14px; font-weight:700; color:#BDBDBD; padding-bottom:4px;}
+  .v13ask .t i.on{color:#fff; border-bottom:2px solid #3B82F6;}
+  .v13ask p{margin:0 0 8px; font-size:14px; font-weight:700;}
+  .v13ask .o{display:flex; gap:12px; align-items:flex-start; padding:5px 4px;}
+  .v13ask .o em{flex:none; width:18px; height:18px; border:2px solid #9A9A9A; border-radius:4px; margin-top:2px;}
+  .v13ask .o em.c{background:#3B82F6; border-color:#3B82F6; position:relative;}
+  .v13ask .o em.c::after{content:""; position:absolute; left:5px; top:1px; width:5px; height:10px; border:solid #fff; border-width:0 2px 2px 0; transform:rotate(45deg);}
+  .v13ask .o b{display:block; font-size:14px;}
+  .v13ask .o span{display:block; font-size:12px; color:#A8A8A8;}
+  .v13askW{display:flex; justify-content:center; gap:24px; margin:0 0 18px; position:relative; padding-top:30px;}
   /* 1-3 · 기획서 구성 애니메이션 (v1pl) */
   .v1plW{display:grid; grid-template-columns:360px 44px 1fr; gap:14px; align-items:center; margin-top:4px;}
   .v1plL{display:flex; flex-direction:column; gap:10px;}
@@ -580,7 +611,7 @@ def slides():
         # ── 실습
         labcard("1-3", "기획서 작성", T, "기획자.md", "기획서.md", ["먼저 묻기 모드", "선택지 고르기"]),
         light("선택지와 화면", _pick(), T),
-        brief("1-3", T, ["새 폴더 mini_notion_v2 만들어 열기 · 기획자.md 만들기", "모드 표시 → Plan · 「기획자.md 대로 미니 노션 기획서를 같이 쓰자」", "칸마다 선택지 고르기 · 없으면 직접 적기", "승인 → 정리된 기획서.md 확인"],
+        brief("1-3", T, ["새 폴더 mini_notion_v2 만들어 열기 · 기획자.md 만들기", "모드 표시 → Plan · 「기획자.md 대로 미니 노션 기획서를 같이 쓰자」", "칸마다 선택지 고르기 · 없으면 직접 적기", "저장된 기획서.md 확인"],
               [],
               ["기획자.md", "먼저 묻기 모드", "선택지"],
               ["다섯 칸이 모두 채워짐", "기능 · 화면이 고른 대로"],
@@ -589,10 +620,16 @@ def slides():
               rows=[("새 폴더", "workspace 안에 mini_notion_v2 → VS Code 로 열기"), ("만들기", "탐색기 → 새 파일 → 기획자.md · 여섯 줄"), ("저장", "macOS ⌘S · Windows Ctrl+S")]),
         tstep("1-3", 2, "Plan Mode 요청", T, ask=("Claude Code 입력창 · Plan 모드", "기획자.md 대로 미니 노션 기획서를 같이 쓰자"),
               rows=[("먼저 묻기 모드", "입력창 아래 모드 표시 → Plan"), ("보내기", "Enter → 선택지 질문 시작"), ("파일", "아직 안 씀")]),
-        tstep("1-3", 3, "선택지 고르기", T, ["lab13_tab_problem.webp", "lab13_tab_user.webp"], "칸마다 탭으로 나오는 선택지 질문",
+        tstep("1-3", 3, "선택지 고르기 · 문제점 · 이용자", T, ["lab13_tab_problem.webp", "lab13_tab_user.webp"], "칸마다 탭으로 나오는 선택지 질문",
               rows=[("하나 · 여러 개", "질문에 적힌 대로 고르기"), ("없을 때", "Other 에 직접 적기"), ("모를 때", "첫 번째 선택지 · 추천")]),
-        tstep("1-3", 4, "승인 · 저장", T, need="VS Code Claude Code 패널 캡처 · 기획서.md 저장 결과",
-              rows=[("계획 승인", "패널에 뜬 정리본 확인 → 승인"), ("파일 승인", "기획서.md 만들기 → 승인"), ("결과", "mini_notion_v2/기획서.md")]),
+        light("실습 1-3 · 3단계 선택지 고르기 · 기능 · 화면", '<div class="v13askW"><span class="v1tsl">나오는 화면 · 예</span>'
+              + _askmock("기능", "기능: 꼭 들어갈 기능을 모두 골라 주세요", [("페이지 목록", "왼쪽에서 페이지를 만들고 고른다", 1), ("블록 편집", "제목 · 글 · 체크 상자를 줄마다 쓴다", 1),
+                         ("「/」 메뉴", "빈 줄에 / 를 치면 블록 종류가 뜬다", 1), ("끌어 옮기기", "줄을 끌어 순서를 바꾼다", 1), ("저장", "새로고침해도 쓴 내용이 남는다", 1)])
+              + _askmock("화면", "화면: 필요한 화면을 모두 골라 주세요", [("메인", "왼쪽 페이지 목록 + 오른쪽 편집", 1), ("빈 상태", "페이지가 없을 때 첫 페이지 안내", 1),
+                         ("설정", "글꼴 · 테마를 바꾸는 화면", 0), ("휴지통", "지운 페이지를 다시 살리는 화면", 0)]) + "</div>"
+              + viz2.tiles([("여러 개", "해당하는 것 모두 체크"), ("기능", "화면에서 누르는 것"), ("없을 때", "Other 에 직접 적기")], 3), T),
+        tstep("1-3", 4, "기획서.md 확인", T, term=("mini_notion_v2/기획서.md · 예 · 칸마다 첫 줄", _plan_short()),
+              rows=[("저장", "다 고르면 Claude Code 가 바로 저장"), ("열기", "VS Code 탐색기 → 기획서.md"), ("볼 것", "다섯 칸 · 내가 고른 대로")]),
         light("실습 1-3 확인", checks([
             ("다섯 칸이 다 있나", "문제점 · 이용자 · 기능 · 화면 · 확인 문장"), ("기능 · 화면이 내가 고른 대로인가", "안 고른 게 끼어 있으면 지우기"),
             ("확인 문장이 눌러서 확인할 수 있는 말인가", "예 · 새로고침해도 그대로 있다")],

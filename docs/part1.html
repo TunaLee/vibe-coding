@@ -1193,6 +1193,19 @@
   .v1u2cmp img{width:150px; height:84px; object-fit:cover; border-radius:10px;}
   .v1u2cmp figcaption{font-size:16px; color:#3A4657;} .v1u2cmp figcaption b{font-size:21px; color:#16233A;}
 
+  /* 1-3 · 선택지 질문 창 모양 (v13ask) */
+  .v13ask{width:400px; background:#2B2B2B; border-radius:10px; padding:14px 18px 10px; color:#E6E6E6; box-shadow:0 8px 24px rgba(22,35,58,.22); text-align:left;}
+  .v13ask .t{display:flex; gap:16px; margin-bottom:10px;}
+  .v13ask .t i{font-style:normal; font-size:14px; font-weight:700; color:#BDBDBD; padding-bottom:4px;}
+  .v13ask .t i.on{color:#fff; border-bottom:2px solid #3B82F6;}
+  .v13ask p{margin:0 0 8px; font-size:14px; font-weight:700;}
+  .v13ask .o{display:flex; gap:12px; align-items:flex-start; padding:5px 4px;}
+  .v13ask .o em{flex:none; width:18px; height:18px; border:2px solid #9A9A9A; border-radius:4px; margin-top:2px;}
+  .v13ask .o em.c{background:#3B82F6; border-color:#3B82F6; position:relative;}
+  .v13ask .o em.c::after{content:""; position:absolute; left:5px; top:1px; width:5px; height:10px; border:solid #fff; border-width:0 2px 2px 0; transform:rotate(45deg);}
+  .v13ask .o b{display:block; font-size:14px;}
+  .v13ask .o span{display:block; font-size:12px; color:#A8A8A8;}
+  .v13askW{display:flex; justify-content:center; gap:24px; margin:0 0 18px; position:relative; padding-top:30px;}
   /* 1-3 · 기획서 구성 애니메이션 (v1pl) */
   .v1plW{display:grid; grid-template-columns:360px 44px 1fr; gap:14px; align-items:center; margin-top:4px;}
   .v1plL{display:flex; flex-direction:column; gap:10px;}
@@ -2296,7 +2309,7 @@ print(total)</code></pre></div><div class="code sm"><div class="bar"><span class
   <div class="eyebrow"><span class="tag">1-3</span></div>
   <h2 class="s-title sm">실습 1-3 순서</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><ol class="v1st"><li style="--d:0.00s"><em>1</em><span>새 폴더 mini_notion_v2 만들어 열기 · 기획자.md 만들기</span></li><li style="--d:0.25s"><em>2</em><span>모드 표시 → Plan · 「기획자.md 대로 미니 노션 기획서를 같이 쓰자」</span></li><li style="--d:0.50s"><em>3</em><span>칸마다 선택지 고르기 · 없으면 직접 적기</span></li><li style="--d:0.75s"><em>4</em><span>승인 → 정리된 기획서.md 확인</span></li></ol><div class="qk2"><b>확인</b><ul><li>다섯 칸이 모두 채워짐</li><li>기능 · 화면이 고른 대로</li></ul></div></div></div>
+  <div class="body"><div class="mid"><ol class="v1st"><li style="--d:0.00s"><em>1</em><span>새 폴더 mini_notion_v2 만들어 열기 · 기획자.md 만들기</span></li><li style="--d:0.25s"><em>2</em><span>모드 표시 → Plan · 「기획자.md 대로 미니 노션 기획서를 같이 쓰자」</span></li><li style="--d:0.50s"><em>3</em><span>칸마다 선택지 고르기 · 없으면 직접 적기</span></li><li style="--d:0.75s"><em>4</em><span>저장된 기획서.md 확인</span></li></ol><div class="qk2"><b>확인</b><ul><li>다섯 칸이 모두 채워짐</li><li>기능 · 화면이 고른 대로</li></ul></div></div></div>
 </section>
 
 <section class="slide lt" data-title="실습 1-3 · 1단계 새 폴더 · 기획자.md">
@@ -2320,20 +2333,37 @@ print(total)</code></pre></div><div class="code sm"><div class="bar"><span class
   <div class="body"><div class="mid"><div class="v1ask"><span>Claude Code 입력창 · Plan 모드</span><p>기획자.md 대로 미니 노션 기획서를 같이 쓰자</p></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>먼저 묻기 모드</b><span>입력창 아래 모드 표시 → Plan</span></div><div class="v2tile" style="--d:0.08s"><b>보내기</b><span>Enter → 선택지 질문 시작</span></div><div class="v2tile" style="--d:0.16s"><b>파일</b><span>아직 안 씀</span></div></div></div></div>
 </section>
 
-<section class="slide lt" data-title="실습 1-3 · 3단계 선택지 고르기">
+<section class="slide lt" data-title="실습 1-3 · 3단계 선택지 고르기 · 문제점 · 이용자">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-3</span></div>
-  <h2 class="s-title sm">실습 1-3 · 3단계 선택지 고르기</h2>
+  <h2 class="s-title sm">실습 1-3 · 3단계 선택지 고르기 · 문제점 · 이용자</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v1ts v1ts2"><span class="v1tsl">나오는 화면 · 예</span><img src="img/lab13_tab_problem.webp" alt="칸마다 탭으로 나오는 선택지 질문"/><img src="img/lab13_tab_user.webp" alt="칸마다 탭으로 나오는 선택지 질문"/></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>하나 · 여러 개</b><span>질문에 적힌 대로 고르기</span></div><div class="v2tile" style="--d:0.08s"><b>없을 때</b><span>Other 에 직접 적기</span></div><div class="v2tile" style="--d:0.16s"><b>모를 때</b><span>첫 번째 선택지 · 추천</span></div></div></div></div>
 </section>
 
-<section class="slide lt" data-title="실습 1-3 · 4단계 승인 · 저장">
+<section class="slide lt" data-title="실습 1-3 · 3단계 선택지 고르기 · 기능 · 화면">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-3</span></div>
-  <h2 class="s-title sm">실습 1-3 · 4단계 승인 · 저장</h2>
+  <h2 class="s-title sm">실습 1-3 · 3단계 선택지 고르기 · 기능 · 화면</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1ts"><div class="need-img"><span class="nk">캡처 필요</span><span class="nd">VS Code Claude Code 패널 캡처 · 기획서.md 저장 결과</span><span class="nm2">강사 화면 캡처로 교체</span></div></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>계획 승인</b><span>패널에 뜬 정리본 확인 → 승인</span></div><div class="v2tile" style="--d:0.08s"><b>파일 승인</b><span>기획서.md 만들기 → 승인</span></div><div class="v2tile" style="--d:0.16s"><b>결과</b><span>mini_notion_v2/기획서.md</span></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v13askW"><span class="v1tsl">나오는 화면 · 예</span><div class="v13ask"><div class="t"><i class="">문제점</i><i class="">이용자</i><i class="on">기능</i><i class="">화면</i></div><p>기능: 꼭 들어갈 기능을 모두 골라 주세요</p><div class="o"><em class="c"></em><div><b>페이지 목록</b><span>왼쪽에서 페이지를 만들고 고른다</span></div></div><div class="o"><em class="c"></em><div><b>블록 편집</b><span>제목 · 글 · 체크 상자를 줄마다 쓴다</span></div></div><div class="o"><em class="c"></em><div><b>「/」 메뉴</b><span>빈 줄에 / 를 치면 블록 종류가 뜬다</span></div></div><div class="o"><em class="c"></em><div><b>끌어 옮기기</b><span>줄을 끌어 순서를 바꾼다</span></div></div><div class="o"><em class="c"></em><div><b>저장</b><span>새로고침해도 쓴 내용이 남는다</span></div></div><div class="o"><em></em><div><b>Other</b></div></div></div><div class="v13ask"><div class="t"><i class="">문제점</i><i class="">이용자</i><i class="">기능</i><i class="on">화면</i></div><p>화면: 필요한 화면을 모두 골라 주세요</p><div class="o"><em class="c"></em><div><b>메인</b><span>왼쪽 페이지 목록 + 오른쪽 편집</span></div></div><div class="o"><em class="c"></em><div><b>빈 상태</b><span>페이지가 없을 때 첫 페이지 안내</span></div></div><div class="o"><em class=""></em><div><b>설정</b><span>글꼴 · 테마를 바꾸는 화면</span></div></div><div class="o"><em class=""></em><div><b>휴지통</b><span>지운 페이지를 다시 살리는 화면</span></div></div><div class="o"><em></em><div><b>Other</b></div></div></div></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>여러 개</b><span>해당하는 것 모두 체크</span></div><div class="v2tile" style="--d:0.08s"><b>기능</b><span>화면에서 누르는 것</span></div><div class="v2tile" style="--d:0.16s"><b>없을 때</b><span>Other 에 직접 적기</span></div></div></div></div>
+</section>
+
+<section class="slide lt" data-title="실습 1-3 · 4단계 기획서.md 확인">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-3</span></div>
+  <h2 class="s-title sm">실습 1-3 · 4단계 기획서.md 확인</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1tt"><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">mini_notion_v2/기획서.md · 예 · 칸마다 첫 줄</span></div><pre><code>## 문제점
+- 메모가 여러 앱 · 파일에 흩어져 있어 찾기 어렵다
+## 이용자
+- 나 혼자 · 회사 PC 브라우저
+## 기능
+- 페이지 목록 · 블록 편집 · 「/」 메뉴 · 끌어 옮기기 · 저장
+## 화면
+- 메인 · 왼쪽 페이지 목록 + 오른쪽 편집
+## 확인 문장
+- 「+ 새 페이지」를 누르면 목록에 「제목 없음」이 생긴다</code></pre></div></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>저장</b><span>다 고르면 Claude Code 가 바로 저장</span></div><div class="v2tile" style="--d:0.08s"><b>열기</b><span>VS Code 탐색기 → 기획서.md</span></div><div class="v2tile" style="--d:0.16s"><b>볼 것</b><span>다섯 칸 · 내가 고른 대로</span></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="실습 1-3 확인">
@@ -2385,11 +2415,11 @@ print(total)</code></pre></div><div class="code sm"><div class="bar"><span class
   <h2 class="s-title sm">개발 리더 페르소나</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="twocol"><div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">개발리더.md</span></div><pre><code># 개발 리더
-- 듣는 사람은 개발을 모르는 기획자다
-- 질문 · 설명 · 피드백은 쉬운 말로 · 전문 용어는 쓰면 바로 풀이
+- 개발을 모르는 기획자도 알아듣게 묻고 계획을 쓴다
+- 전문 용어를 쓰면 바로 뜻을 풀어 준다
 - 정해지지 않은 것은 선택지로 묻고 추천과 이유를 붙인다
 - 계획 단계에서는 코드를 쓰지 않는다
-- 개발계획.md 칸: 기능 · 화면 · 데이터 · 완료 기준 · 태스크 · 쉬운 말 요약</code></pre></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>듣는 사람</b><span>개발을 모르는 기획자 · 나</span></div><div class="v2tile" style="--d:0.08s"><b>말투</b><span>쉬운 말 · 용어는 바로 풀이</span></div><div class="v2tile" style="--d:0.16s"><b>모르는 것</b><span>선택지 · 추천 · 이유로 질문</span></div><div class="v2tile" style="--d:0.24s"><b>마지막 칸</b><span>쉬운 말 요약</span></div></div></div></div></div></div>
+- 개발계획.md 칸: 기능 · 화면 · 데이터 · 완료 기준 · 태스크 · 쉬운 말 요약</code></pre></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>첫 줄</b><span>개발을 몰라도 알아듣는 질문 · 계획</span></div><div class="v2tile" style="--d:0.08s"><b>둘째 줄</b><span>전문 용어는 바로 뜻 풀이</span></div><div class="v2tile" style="--d:0.16s"><b>셋째 줄</b><span>선택지 · 추천 · 이유로 질문</span></div><div class="v2tile" style="--d:0.24s"><b>마지막 줄</b><span>칸 끝에 쉬운 말 요약</span></div></div></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="개발자 말투와 개발 리더 말투">
@@ -2397,7 +2427,7 @@ print(total)</code></pre></div><div class="code sm"><div class="bar"><span class
   <div class="eyebrow"><span class="tag">1-4</span></div>
   <h2 class="s-title sm">개발자 말투와 개발 리더 말투</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v14o"><div class="v14oH"><span></span><span>개발자 말투</span><span></span><span>개발 리더 말투 · 개발리더.md</span></div><div class="v14oR"><b style="--d:0.4s">질문</b><div class="v14oD" style="--d:0.4s;--x:1.4s">상태는 localStorage 로 persist 할까요, 백엔드 DB 로 할까요?</div><i style="--d:1.4s">→</i><div class="v14oL" style="--d:1.6s">쓴 내용을 어디에 보관할까요? A 이 브라우저 안 · 추천 · 로그인 없음 · 다른 기기에선 안 보임 / B 인터넷 서버 · 어디서나 보임 · 로그인 필요</div></div><div class="v14oR"><b style="--d:2.6s">보고</b><div class="v14oD" style="--d:2.6s;--x:3.6s">T3 구현 중 contenteditable 의 input 이벤트와 충돌 발생</div><i style="--d:3.6s">→</i><div class="v14oL" style="--d:3.8s">「/」 메뉴를 만들다가 글자 입력과 부딪히는 곳을 찾았어요 · 메뉴가 떠 있는 동안 글자 입력을 잠깐 멈추게 할게요</div></div><div class="v14oR"><b style="--d:4.8s">피드백</b><div class="v14oD" style="--d:4.8s;--x:5.8s">DnD 핸들의 hit area 가 작음</div><i style="--d:5.8s">→</i><div class="v14oL" style="--d:6.0s">손잡이가 작아서 잡기 어려워요 · 마우스가 줄에 올라가면 손잡이가 보이게 하고 잡는 범위를 넓힐게요</div></div></div><div class="v14gN" style="--d:7.2s"><b>같은 내용</b>듣는 사람이 기획자라고 적어 두면 처음부터 쉬운 말로</div></div></div>
+  <div class="body"><div class="mid"><div class="v14o"><div class="v14oH"><span></span><span>개발자 말투</span><span></span><span>개발 리더 말투 · 개발리더.md</span></div><div class="v14oR"><b style="--d:0.4s">질문</b><div class="v14oD" style="--d:0.4s;--x:1.4s">상태는 localStorage 로 persist 할까요, 백엔드 DB 로 할까요?</div><i style="--d:1.4s">→</i><div class="v14oL" style="--d:1.6s">쓴 내용을 어디에 보관할까요? A 이 브라우저 안 · 추천 · 로그인 없음 · 다른 기기에선 안 보임 / B 인터넷 서버 · 어디서나 보임 · 로그인 필요</div></div><div class="v14oR"><b style="--d:2.6s">보고</b><div class="v14oD" style="--d:2.6s;--x:3.6s">T3 구현 중 contenteditable 의 input 이벤트와 충돌 발생</div><i style="--d:3.6s">→</i><div class="v14oL" style="--d:3.8s">「/」 메뉴를 만들다가 글자 입력과 부딪히는 곳을 찾았어요 · 메뉴가 떠 있는 동안 글자 입력을 잠깐 멈추게 할게요</div></div><div class="v14oR"><b style="--d:4.8s">피드백</b><div class="v14oD" style="--d:4.8s;--x:5.8s">DnD 핸들의 hit area 가 작음</div><i style="--d:5.8s">→</i><div class="v14oL" style="--d:6.0s">손잡이가 작아서 잡기 어려워요 · 마우스가 줄에 올라가면 손잡이가 보이게 하고 잡는 범위를 넓힐게요</div></div></div><div class="v14gN" style="--d:7.2s"><b>같은 내용</b>「기획자도 알아듣게」 한 줄이면 처음부터 쉬운 말로</div></div></div>
 </section>
 
 <section class="slide lt" data-title="개발 계획 대화 예시">
@@ -2458,8 +2488,8 @@ print(total)</code></pre></div><div class="code sm"><div class="bar"><span class
   <h2 class="s-title sm">실습 1-4 · 1단계 개발리더.md 만들기</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v1tt"><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">mini_notion_v2/개발리더.md</span></div><pre><code># 개발 리더
-- 듣는 사람은 개발을 모르는 기획자다
-- 질문 · 설명 · 피드백은 쉬운 말로 · 전문 용어는 쓰면 바로 풀이
+- 개발을 모르는 기획자도 알아듣게 묻고 계획을 쓴다
+- 전문 용어를 쓰면 바로 뜻을 풀어 준다
 - 정해지지 않은 것은 선택지로 묻고 추천과 이유를 붙인다
 - 계획 단계에서는 코드를 쓰지 않는다
 - 개발계획.md 칸: 기능 · 화면 · 데이터 · 완료 기준 · 태스크 · 쉬운 말 요약</code></pre></div></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>만들기</b><span>VS Code 탐색기 → 새 파일 → 개발리더.md</span></div><div class="v2tile" style="--d:0.08s"><b>쓰기</b><span>여섯 줄 · 첫 두 줄은 꼭</span></div><div class="v2tile" style="--d:0.16s"><b>저장</b><span>macOS ⌘S · Windows Ctrl+S</span></div></div></div></div>
