@@ -109,7 +109,8 @@ def slides():
         light("공휴일 API 발급", flow([("공공데이터포털", "data.go.kr · 회원가입"), ("검색", "「한국천문연구원 특일 정보」"),
                                      ("활용신청", "목적 한 줄 · 개발계정"), ("인증키 확인", "마이페이지 · 인증키"), (".env", "HOLIDAY_API_KEY")], hl=3)
               + note("비용", "무료 · 인증키 반영까지 시간이 걸릴 수 있음")
-              + src(HOLI), T),
+              + note("키 없는 방법", "npm 패키지 @hyunbinseo/holidays-kr · 월력요항 데이터 · 임시공휴일은 패키지 업데이트 뒤 반영")
+              + src(HOLI, ("@hyunbinseo/holidays-kr", "https://github.com/hyunbinseo/holidays-kr")), T),
         light("공휴일 API 요청 · 응답", codemap([
             ("SpcdeInfoService · 공휴일 정보 조회", "한국천문연구원 특일 정보 · 공휴일"),
             ("solYear=2026 · solMonth=12", "보낼 값 · 연 · 월"),
