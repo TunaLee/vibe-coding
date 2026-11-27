@@ -2770,7 +2770,7 @@ git config --global user.email "GitHub 가입 이메일"</code></pre></div><div 
   <div class="eyebrow"><span class="tag">1-6</span></div>
   <h2 class="s-title sm">한 번에 구현할 때의 문제</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>오류 위치 파악 어려움</b><span>여러 파일이 동시에 바뀜</span></div><div class="v2tile" style="--d:0.08s"><b>연쇄 오류</b><span>「/」 메뉴 수정 → 엔터 동작 고장</span></div><div class="v2tile" style="--d:0.16s"><b>복구 지점 없음</b><span>중간 커밋 없음</span></div></div><div class="v2pair"><div class="v2p"><div class="v2ph">한 번에</div><div class="v2pc" style="--d:0.00s"><b>요청 1번</b><span>T1~T6 전부</span></div><div class="v2pc" style="--d:0.08s"><b>확인</b><span>끝나고 한꺼번에</span></div></div><div class="v2p on"><div class="v2ph">하나씩</div><div class="v2pc" style="--d:0.00s"><b>요청 6번</b><span>T1 · T2 · … · T6</span></div><div class="v2pc" style="--d:0.08s"><b>확인</b><span>태스크마다 · 문제 범위가 태스크 하나</span></div></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>오류 위치 파악 어려움</b><span>여러 파일이 동시에 바뀜</span></div><div class="v2tile" style="--d:0.08s"><b>연쇄 오류</b><span>「/」 메뉴 수정 → 엔터 동작 고장</span></div><div class="v2tile" style="--d:0.16s"><b>복구 지점 없음</b><span>중간 커밋 없음</span></div></div><div class="v2pair"><div class="v2p"><div class="v2ph">한 번에</div><div class="v2pc" style="--d:0.00s"><b>요청 1번</b><span>태스크 전부</span></div><div class="v2pc" style="--d:0.08s"><b>확인</b><span>끝나고 한꺼번에</span></div></div><div class="v2p on"><div class="v2ph">하나씩</div><div class="v2pc" style="--d:0.00s"><b>요청 = 태스크 수</b><span>하나 끝나면 다음 하나</span></div><div class="v2pc" style="--d:0.08s"><b>확인</b><span>태스크마다 · 문제 범위가 태스크 하나</span></div></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="순서도와 테스트 케이스">
@@ -2786,7 +2786,7 @@ git config --global user.email "GitHub 가입 이메일"</code></pre></div><div 
   <div class="eyebrow"><span class="tag">1-6</span></div>
   <h2 class="s-title sm">태스크 진행 순서</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="flow"><div class="fs hl"><b>테스트 케이스</b><span>입력 → 기대 결과</span></div><div class="fa">→</div><div class="fs"><b>태스크 요청</b><span>「T3만 · 이 케이스로 확인」</span></div><div class="fa">→</div><div class="fs"><b>브라우저 확인</b><span>케이스대로 직접 눌러 보기</span></div><div class="fa">→</div><div class="fs"><b>수정 요청</b><span>기대 · 실제 · 오류 원문</span></div><div class="fa">→</div><div class="fs"><b>커밋</b><span>케이스 모두 통과 뒤</span></div></div><div class="dbnote"><span>반복</span> 테스트 케이스 통과까지 확인 · 수정 반복 · 문제는 그 태스크 안에서 해결</div></div></div>
+  <div class="body"><div class="mid"><div class="flow"><div class="fs hl"><b>테스트 케이스</b><span>입력 → 기대 결과</span></div><div class="fa">→</div><div class="fs"><b>태스크 요청</b><span>「이 태스크만 · 이 케이스로 확인」</span></div><div class="fa">→</div><div class="fs"><b>브라우저 확인</b><span>케이스대로 직접 눌러 보기</span></div><div class="fa">→</div><div class="fs"><b>수정 요청</b><span>기대 · 실제 · 오류 원문</span></div><div class="fa">→</div><div class="fs"><b>커밋</b><span>케이스 모두 통과 뒤</span></div></div><div class="dbnote"><span>반복</span> 테스트 케이스 통과까지 확인 · 수정 반복 · 문제는 그 태스크 안에서 해결</div></div></div>
 </section>
 
 <section class="slide lt" data-title="태스크 요청 예시">
@@ -2797,7 +2797,7 @@ git config --global user.email "GitHub 가입 이메일"</code></pre></div><div 
   <div class="body"><div class="mid"><div class="ba">
   <div class="b"><div class="lab">Before</div><div class="q">「나머지 다 만들어 줘」</div></div>
   <div class="arr">→</div>
-  <div class="a"><div class="lab">After</div><div class="q">「개발 계획의 T3만 진행해 줘.<br/>빈 블록에 「/」 → 「체크 상자」 고르면 그 블록이 체크 상자로 · 이 케이스로 확인해 줘」</div></div>
+  <div class="a"><div class="lab">After</div><div class="q">「개발 계획에서 「/」 메뉴 태스크만 진행해 줘.<br/>빈 블록에 「/」 → 「체크 상자」 고르면 그 블록이 체크 상자로 · 이 케이스로 확인해 줘」</div></div>
 </div><div class="banote">태스크 번호 + 테스트 케이스 (입력 → 기대 결과)</div></div></div>
 </section>
 
@@ -2930,7 +2930,7 @@ newPage.onclick = () =&gt; {
   <div class="eyebrow"><span class="tag">1-6</span></div>
   <h2 class="s-title sm">실습 1-6 순서</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><ol class="v1st"><li style="--d:0.00s"><em>1</em><span>태스크 하나 요청 · 「T1만」</span></li><li style="--d:0.25s"><em>2</em><span>브라우저로 눌러 보기</span></li><li style="--d:0.50s"><em>3</em><span>완료 기준 대조</span></li><li style="--d:0.75s"><em>4</em><span>「커밋해 줘」 → 다음 태스크</span></li></ol><div class="qk2"><b>확인</b><ul><li>태스크마다 브라우저로 직접 눌러 봄</li><li>커밋 기록이 태스크 수만큼 쌓임</li></ul></div></div></div>
+  <div class="body"><div class="mid"><ol class="v1st"><li style="--d:0.00s"><em>1</em><span>태스크 하나 요청 · 「첫 태스크만」</span></li><li style="--d:0.25s"><em>2</em><span>브라우저로 눌러 보기</span></li><li style="--d:0.50s"><em>3</em><span>완료 기준 대조</span></li><li style="--d:0.75s"><em>4</em><span>「커밋해 줘」 → 다음 태스크</span></li></ol><div class="qk2"><b>확인</b><ul><li>태스크마다 브라우저로 직접 눌러 봄</li><li>커밋 기록이 태스크 수만큼 쌓임</li></ul></div></div></div>
 </section>
 
 <section class="slide lt" data-title="실습 1-6 · 1단계 태스크 하나 요청">
@@ -2938,7 +2938,7 @@ newPage.onclick = () =&gt; {
   <div class="eyebrow"><span class="tag">1-6</span></div>
   <h2 class="s-title sm">실습 1-6 · 1단계 태스크 하나 요청</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1ask"><span>Claude Code 입력창</span><p>개발계획.md 의 T1만 만들어 줘</p></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>한 번에</b><span>태스크 하나만</span></div><div class="v2tile" style="--d:0.08s"><b>승인</b><span>파일마다 패널에서 승인</span></div><div class="v2tile" style="--d:0.16s"><b>자동 승인</b><span>이 대화 동안 · 익숙해진 뒤</span></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v1ask"><span>Claude Code 입력창</span><p>개발계획.md 의 첫 태스크만 만들어 줘</p></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>한 번에</b><span>태스크 하나만</span></div><div class="v2tile" style="--d:0.08s"><b>승인</b><span>파일마다 패널에서 승인</span></div><div class="v2tile" style="--d:0.16s"><b>자동 승인</b><span>이 대화 동안 · 익숙해진 뒤</span></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="실습 1-6 · 2단계 브라우저 확인">
@@ -2946,7 +2946,7 @@ newPage.onclick = () =&gt; {
   <div class="eyebrow"><span class="tag">1-6</span></div>
   <h2 class="s-title sm">실습 1-6 · 2단계 브라우저 확인</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1ts"><img src="img/lab16_app.webp" alt="첫 태스크 뒤 화면 · 새 페이지 두 번 누름"/></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>열기</b><span>서버 주소 또는 index.html</span></div><div class="v2tile" style="--d:0.08s"><b>눌러 보기</b><span>「+ 새 페이지」 → 목록에 추가</span></div><div class="v2tile" style="--d:0.16s"><b>새로고침</b><span>macOS ⌘R · Windows F5</span></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v2tiles c2"><div class="v2tile" style="--d:0.00s"><b>열기</b><span>서버 주소 또는 index.html</span></div><div class="v2tile" style="--d:0.08s"><b>눌러 보기</b><span>방금 만든 기능 · 테스트 케이스대로</span></div><div class="v2tile" style="--d:0.16s"><b>새로고침</b><span>macOS ⌘R · Windows F5</span></div><div class="v2tile" style="--d:0.24s"><b>다르면</b><span>기대 · 실제 · 오류 원문으로 수정 요청</span></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="실습 1-6 · 3단계 완료 기준 대조">
@@ -2954,7 +2954,7 @@ newPage.onclick = () =&gt; {
   <div class="eyebrow"><span class="tag">1-6</span></div>
   <h2 class="s-title sm">실습 1-6 · 3단계 완료 기준 대조</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1ts"><div class="need-img"><span class="nk">캡처 필요</span><span class="nd">VS Code Claude Code 패널 캡처 · 첫 태스크 작업 보고 (만든 것 · 아직 없는 것)</span><span class="nm2">강사 화면 캡처로 교체</span></div></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>보고</b><span>만든 것 · 아직 없는 것</span></div><div class="v2tile" style="--d:0.08s"><b>대조</b><span>개발계획.md 완료 기준</span></div><div class="v2tile" style="--d:0.16s"><b>아직</b><span>저장 전 · 새로고침하면 사라짐 → T5</span></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v2tiles c2"><div class="v2tile" style="--d:0.00s"><b>보고</b><span>Claude Code 작업 보고 · 만든 것 · 아직 없는 것</span></div><div class="v2tile" style="--d:0.08s"><b>대조</b><span>개발계획.md 의 그 태스크 완료 기준</span></div><div class="v2tile" style="--d:0.16s"><b>아직 없는 것</b><span>다음 태스크에서 만들 것인지 확인</span></div><div class="v2tile" style="--d:0.24s"><b>빠진 것</b><span>그 태스크 안에서 다시 요청</span></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="실습 1-6 · 4단계 커밋해 줘">
@@ -2962,7 +2962,7 @@ newPage.onclick = () =&gt; {
   <div class="eyebrow"><span class="tag">1-6</span></div>
   <h2 class="s-title sm">실습 1-6 · 4단계 커밋해 줘</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1ask"><span>Claude Code 입력창</span><p>커밋해 줘</p></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>메시지</b><span>Claude Code 가 작성</span></div><div class="v2tile" style="--d:0.08s"><b>커밋</b><span>태스크마다 하나</span></div><div class="v2tile" style="--d:0.16s"><b>다음</b><span>T2 → 같은 순서 · 마지막 태스크까지</span></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v1ask"><span>Claude Code 입력창</span><p>커밋해 줘</p></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>메시지</b><span>Claude Code 가 작성</span></div><div class="v2tile" style="--d:0.08s"><b>커밋</b><span>태스크마다 하나</span></div><div class="v2tile" style="--d:0.16s"><b>다음</b><span>다음 태스크 → 같은 순서</span></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="실습 1-6 확인">
@@ -2970,13 +2970,7 @@ newPage.onclick = () =&gt; {
   <div class="eyebrow"><span class="tag">1-6</span></div>
   <h2 class="s-title sm">실습 1-6 확인</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">커밋 기록 · 예</span></div><pre><code>e41a0b2  T6 모바일 폭 정리
-c9d3f17  T5 새로고침 뒤 저장 유지
-5a8e2c0  T4 블록 끌어 옮기기
-91f6b3d  T3 「/」 메뉴
-2d7c4e9  T2 블록 편집
-a3b8e51  T1 화면 뼈대 · 페이지 목록
-7b21d04  기획서 · 개발 계획 첫 버전</code></pre></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>완료 기준</b><span>개발 계획 다섯 줄 모두 ✓</span></div><div class="v2tile" style="--d:0.08s"><b>커밋</b><span>태스크마다 하나</span></div><div class="v2tile" style="--d:0.16s"><b>막히면</b><span>labs/mini_notion/예시/app 과 비교</span></div></div></div></div>
+  <div class="body"><div class="mid"><div class="cks"><div class="ck" style="--d:0.00s"><span>1</span><b>태스크마다 브라우저로 눌러 봤나</b><em>테스트 케이스대로</em></div><div class="ck" style="--d:0.12s"><span>2</span><b>개발 계획 완료 기준을 다 확인했나</b><em>빠진 것은 다시 요청</em></div><div class="ck" style="--d:0.24s"><span>3</span><b>커밋 기록이 태스크 수만큼 쌓였나</b><em>「커밋 기록 보여 줘」</em></div></div><div class="ckr">막히면 labs/mini_notion/예시/app 과 비교</div></div></div>
 </section>
 
 <section class="slide dk" data-title="다음 단원">
