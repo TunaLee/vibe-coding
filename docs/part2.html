@@ -1310,6 +1310,21 @@
   .v2u2res table{width:auto; min-width:360px; border:1.5px solid #D9DDE3;}
   @keyframes v2u2in{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
   @media print{.v2u2snd,.v2u2go i,.v2u2rej,.v2u2res,.v2u2dv,.v2u2cap,.v2u2pipe,.v2u2db,.v2u2tr,.v2u2tag,.v2u2link{opacity:1; animation:none}}
+  /* 2-2 · 블로그의 표 관계 (v22blog) */
+  .v22blog .tbs{display:grid; grid-template-columns:.8fr 1.3fr 1.6fr; gap:18px; align-items:start; margin:0 0 14px;}
+  .v22blog .v2u2t td,.v22blog .v2u2t th{font-size:14.5px; padding:7px 9px;}
+  .v22blog .v2u2t th.k{color:#E07A12;}
+  .v22blog tr.a td{animation:v22a .4s .6s forwards;} .v22blog tr.b td{animation:v22b .4s 2.0s forwards;} .v22blog tr.c td{animation:v22c .4s 3.4s forwards;}
+  .v22blog tr.a.b td{animation:v22a .4s .6s forwards, v22b .4s 2.0s forwards;}
+  .v22blog tr.b.c td{animation:v22b .4s 2.0s forwards, v22c .4s 3.4s forwards;}
+  .v22blog .lk{display:flex; flex-direction:column; gap:6px; margin:0 0 10px;}
+  .v22blog .lk span{font-size:15.5px; font-weight:700; border-left:5px solid; padding:4px 12px; border-radius:4px; opacity:0;}
+  .v22blog .lk .a{border-color:#F28C28; background:#FFF3E0; color:#B85A00; animation:v22in .4s .6s forwards;}
+  .v22blog .lk .b{border-color:#264DE4; background:#E8EEFF; color:#1F3A9F; animation:v22in .4s 2.0s forwards;}
+  .v22blog .lk .c{border-color:#2E8B57; background:#E6F4EC; color:#1E7B45; animation:v22in .4s 3.4s forwards;}
+  @keyframes v22a{to{background:#FFE3C4}} @keyframes v22b{to{background:#D9E3FF}} @keyframes v22c{to{background:#CDEBD9}}
+  @keyframes v22in{to{opacity:1}}
+  @media print{.v22blog .lk span{opacity:1; animation:none}}
 
   /* 2-3 · 개발 계획 칸 지도 */
   .v2u4prd{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:8px 0 16px;}
@@ -1766,6 +1781,14 @@
   <h2 class="s-title sm">표와 표의 관계</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v2u2rel"><div><div class="v2u2tab">pages · 페이지</div><table class="v2u2t sm"><thead><tr><th>id</th><th class="v2u2kh">owner_id</th><th>title</th><th>date</th></tr></thead><tbody><tr><td>1</td><td class="v2u2k v2u2r1">1</td><td>주간 회의록</td><td>2026-11-27</td></tr><tr><td>2</td><td class="v2u2k v2u2r2">2</td><td>신규 입사자 교육 자료</td><td>2026-11-25</td></tr><tr><td>3</td><td class="v2u2k v2u2r1">1</td><td>고객 설문 결과</td><td>2026-11-19</td></tr></tbody></table></div><i class="v2u2link">owner_id → id</i><div><div class="v2u2tab">members · 팀원</div><table class="v2u2t sm"><thead><tr><th>id</th><th>name</th><th>email</th></tr></thead><tbody><tr class="v2u2r1"><td>1</td><td>김하늘</td><td>haneul@company.com</td></tr><tr class="v2u2r2"><td>2</td><td>이준호</td><td>junho@company.com</td></tr><tr class="v2u2r3"><td>3</td><td>박서연</td><td>seoyeon@company.com</td></tr></tbody></table></div></div><div class="v2pair"><div class="v2p"><div class="v2ph">한 표에 다 넣기</div><div class="v2pc" style="--d:0.00s"><b>팀원 이메일 변경</b><span>페이지 행마다 고치기</span></div><div class="v2pc" style="--d:0.08s"><b>오타</b><span>「김하늘」 「김 하늘」 섞임</span></div></div><div class="v2p on"><div class="v2ph">표 두 개 · 번호로 연결</div><div class="v2pc" style="--d:0.00s"><b>팀원 이메일 변경</b><span>members 한 칸만 고치기</span></div><div class="v2pc" style="--d:0.08s"><b>오타</b><span>번호라 섞이지 않음</span></div></div></div></div></div>
+</section>
+
+<section class="slide lt" data-title="블로그의 표 관계">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">2-2</span></div>
+  <h2 class="s-title sm">블로그의 표 관계</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v22blog"><div class="tbs"><div class="tb"><div class="v2u2tab">users · 회원</div><table class="v2u2t sm"><thead><tr><th class="">id</th><th class="">name</th></tr></thead><tbody><tr class="a"><td>1</td><td>김하늘</td></tr><tr class="c"><td>2</td><td>이준호</td></tr><tr class=""><td>3</td><td>박서연</td></tr></tbody></table></div><div class="tb"><div class="v2u2tab">posts · 글</div><table class="v2u2t sm"><thead><tr><th class="">id</th><th class="">title</th><th class="k">author_id</th></tr></thead><tbody><tr class="a b"><td>1</td><td>첫 바이브코딩 후기</td><td>1</td></tr><tr class=""><td>2</td><td>Supabase 써 보기</td><td>2</td></tr><tr class=""><td>3</td><td>MCP 정리</td><td>1</td></tr></tbody></table></div><div class="tb"><div class="v2u2tab">comments · 댓글</div><table class="v2u2t sm"><thead><tr><th class="">id</th><th class="k">post_id</th><th class="k">user_id</th><th class="">body</th></tr></thead><tbody><tr class="b c"><td>1</td><td>1</td><td>2</td><td>잘 읽었어요</td></tr><tr class="b"><td>2</td><td>1</td><td>3</td><td>저도 해 볼게요</td></tr><tr class=""><td>3</td><td>2</td><td>1</td><td>좋은 정리</td></tr></tbody></table></div></div><div class="lk"><span class="a">① 글 → 쓴 사람 · posts.author_id = users.id</span><span class="b">② 글 → 댓글 여러 개 · comments.post_id = posts.id</span><span class="c">③ 댓글 → 쓴 사람 · comments.user_id = users.id</span></div></div><div class="dbnote"><span>관계</span> 같은 내용을 두 번 적지 않고 번호로 가리킴 · 글 하나에 댓글 여러 개</div></div></div>
 </section>
 
 <section class="slide lt" data-title="SQL">

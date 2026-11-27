@@ -1,7 +1,7 @@
 """2-2 데이터베이스.
 
 배경 → 데이터 기록의 변화(종이 → 엑셀 → DB → 클라우드 DB) → 비유(엑셀 · 원시인 돌판 그림) → 페이지 표 애니메이션(행 · 열)
-→ 엑셀과 데이터베이스(동시 쓰기 · 형식 거절 애니메이션) → 관계(members · pages) → SQL 한 줄 뜻 → SQL 작성의 변화(손 → SQL → 말 · MCP) → Supabase 구성 · 이유 → 무료 플랜.
+→ 엑셀과 데이터베이스(동시 쓰기 · 형식 거절 애니메이션) → 관계(members · pages) → 블로그 예(users · posts · comments) → SQL 한 줄 뜻 → SQL 작성의 변화(손 → SQL → 말 · MCP) → Supabase 구성 · 이유 → 무료 플랜.
 사실 출처
 - Supabase 무료 플랜: supabase.com/pricing (프로젝트 2개 · DB 500 MB · 월 이용자 50,000 · 1주 미사용 시 일시정지 · Pro $25/월)
 - 프로젝트마다 Postgres 전체: supabase.com/docs/guides/database/overview
@@ -131,6 +131,24 @@ def sql_change():
             f'<div class="v2hQ">「작성 중인 페이지만 보여 줘」 · 같은 질문</div><div class="v2h v2h3">{c}</div>')
 
 
+def blog():
+    """블로그 예 — users · posts · comments 세 표. 번호 칸으로 이어진 행이 같은 색으로 차례로 켜짐.
+    ① 글 1번의 author_id 1 → users 1번(주황) ② post_id 1 인 댓글 2개 → 글 1번(파랑) ③ 댓글의 user_id 2 → users 2번(초록)."""
+    def tb(name, ko, head, rows, keys=()):
+        th = "".join(f'<th class="{"k" if h in keys else ""}">{h}</th>' for h in head)
+        tr = "".join(f'<tr class="{c}">' + "".join(f"<td>{x}</td>" for x in r) + "</tr>" for c, r in rows)
+        return f'<div class="tb"><div class="v2u2tab">{name} · {ko}</div><table class="v2u2t sm"><thead><tr>{th}</tr></thead><tbody>{tr}</tbody></table></div>'
+    users = tb("users", "회원", ["id", "name"], [("a", ["1", "김하늘"]), ("c", ["2", "이준호"]), ("", ["3", "박서연"])])
+    posts = tb("posts", "글", ["id", "title", "author_id"],
+               [("a b", ["1", "첫 바이브코딩 후기", "1"]), ("", ["2", "Supabase 써 보기", "2"]), ("", ["3", "MCP 정리", "1"])], ("author_id",))
+    cmts = tb("comments", "댓글", ["id", "post_id", "user_id", "body"],
+              [("b c", ["1", "1", "2", "잘 읽었어요"]), ("b", ["2", "1", "3", "저도 해 볼게요"]), ("", ["3", "2", "1", "좋은 정리"])], ("post_id", "user_id"))
+    tags = ('<div class="lk"><span class="a">① 글 → 쓴 사람 · posts.author_id = users.id</span>'
+            '<span class="b">② 글 → 댓글 여러 개 · comments.post_id = posts.id</span>'
+            '<span class="c">③ 댓글 → 쓴 사람 · comments.user_id = users.id</span></div>')
+    return f'<div class="v22blog"><div class="tbs">{users}{posts}{cmts}</div>{tags}</div>'
+
+
 def slides():
     return [
         light("데이터 기록의 변화", history()
@@ -147,6 +165,8 @@ def slides():
               + viz2.pair(
                   "한 표에 다 넣기", [("팀원 이메일 변경", "페이지 행마다 고치기"), ("오타", "「김하늘」 「김 하늘」 섞임")],
                   "표 두 개 · 번호로 연결", [("팀원 이메일 변경", "members 한 칸만 고치기"), ("오타", "번호라 섞이지 않음")]), T),
+        light("블로그의 표 관계", blog()
+              + note("관계", "같은 내용을 두 번 적지 않고 번호로 가리킴 · 글 하나에 댓글 여러 개"), T),
         light("SQL", codemap([
             ("select title, date", "제목 · 날짜 열만"),
             ("from pages", "pages 표에서"),
@@ -274,4 +294,19 @@ CSS = """
   .v2u2res table{width:auto; min-width:360px; border:1.5px solid #D9DDE3;}
   @keyframes v2u2in{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
   @media print{.v2u2snd,.v2u2go i,.v2u2rej,.v2u2res,.v2u2dv,.v2u2cap,.v2u2pipe,.v2u2db,.v2u2tr,.v2u2tag,.v2u2link{opacity:1; animation:none}}
+  /* 2-2 · 블로그의 표 관계 (v22blog) */
+  .v22blog .tbs{display:grid; grid-template-columns:.8fr 1.3fr 1.6fr; gap:18px; align-items:start; margin:0 0 14px;}
+  .v22blog .v2u2t td,.v22blog .v2u2t th{font-size:14.5px; padding:7px 9px;}
+  .v22blog .v2u2t th.k{color:#E07A12;}
+  .v22blog tr.a td{animation:v22a .4s .6s forwards;} .v22blog tr.b td{animation:v22b .4s 2.0s forwards;} .v22blog tr.c td{animation:v22c .4s 3.4s forwards;}
+  .v22blog tr.a.b td{animation:v22a .4s .6s forwards, v22b .4s 2.0s forwards;}
+  .v22blog tr.b.c td{animation:v22b .4s 2.0s forwards, v22c .4s 3.4s forwards;}
+  .v22blog .lk{display:flex; flex-direction:column; gap:6px; margin:0 0 10px;}
+  .v22blog .lk span{font-size:15.5px; font-weight:700; border-left:5px solid; padding:4px 12px; border-radius:4px; opacity:0;}
+  .v22blog .lk .a{border-color:#F28C28; background:#FFF3E0; color:#B85A00; animation:v22in .4s .6s forwards;}
+  .v22blog .lk .b{border-color:#264DE4; background:#E8EEFF; color:#1F3A9F; animation:v22in .4s 2.0s forwards;}
+  .v22blog .lk .c{border-color:#2E8B57; background:#E6F4EC; color:#1E7B45; animation:v22in .4s 3.4s forwards;}
+  @keyframes v22a{to{background:#FFE3C4}} @keyframes v22b{to{background:#D9E3FF}} @keyframes v22c{to{background:#CDEBD9}}
+  @keyframes v22in{to{opacity:1}}
+  @media print{.v22blog .lk span{opacity:1; animation:none}}
 """
