@@ -1070,6 +1070,28 @@
   .v2map{grid-template-columns:repeat(4,1fr); gap:10px;} .v2map .v1u{min-height:84px; padding:10px 14px;}
   .v2map .v1u b{font-size:20px;} .v2map .v1u small{font-size:14px;}
 
+  /* 2-1 · API = 은행 창구 (v21api) */
+  .v21api{display:grid; grid-template-columns:230px 1fr 40px 260px; gap:14px; align-items:stretch; margin:10px 0 16px; min-height:300px;}
+  .v21api .h{font-size:18px; font-weight:800; color:#16233A; margin-bottom:8px;} .v21api .h small{display:block; font-size:13px; font-weight:600; color:#6B7785;}
+  .v21api .cu,.v21api .ct,.v21api .vault{border:1.5px solid #C9CFD8; border-radius:12px; background:#fff; padding:10px 12px; display:flex; flex-direction:column; gap:7px;}
+  .v21api .slip{border:1.5px dashed #F28C28; background:#FFF8F0; border-radius:8px; padding:6px 10px; font-size:14px; color:#16233A; opacity:0; animation:v21in .35s var(--d) forwards;}
+  .v21api .slip em{display:block; font-style:normal; font-size:12px; font-weight:800; color:#E07A12;}
+  .v21api .slip.bad{border-color:#C0392B; background:#FDECEA;} .v21api .slip.bad em{color:#C0392B;}
+  .v21api .w{display:grid; grid-template-columns:44px 64px 1fr; align-items:center; gap:8px; border:1.5px solid #E3E7EC; border-radius:8px; padding:6px 10px;
+    opacity:0; animation:v21in .3s var(--d) forwards;}
+  .v21api .w.on{animation:v21in .3s var(--d) forwards, v21pick .35s var(--p) forwards;}
+  .v21api .w b{font-size:15px; color:#16233A;} .v21api .w code{font-size:13px; font-weight:700; color:#1F3A5F;} .v21api .w span{font-family:var(--mono); font-size:12.5px; color:#3A4657;}
+  .v21api .rej{margin-top:auto; font-size:14px; font-weight:800; color:#C0392B; background:#FDECEA; border-radius:8px; padding:6px 10px; opacity:0; animation:v21in .35s var(--d) forwards;}
+  .v21api .wall{background:repeating-linear-gradient(45deg,#D9DDE3 0 8px,#EEF1F5 8px 16px); border-radius:6px; position:relative;}
+  .v21api .wall span{position:absolute; top:50%; left:50%; transform:translate(-50%,-50%) rotate(-90deg); white-space:nowrap; font-size:12.5px; font-weight:800; color:#3A4657; background:#fff; padding:2px 8px; border-radius:6px;}
+  .v21api .vault{border:2px solid #1F3A5F; background:#F4F6F9;}
+  .v21api .sf{font-size:13px; color:#6B7785; margin:-6px 0 4px;}
+  .v21api .r{font-size:14px; color:#16233A; background:#fff; border:1px solid #E3E7EC; border-radius:6px; padding:5px 9px; animation:v21row .4s var(--d) forwards;}
+  @keyframes v21in{from{opacity:0} to{opacity:1}}
+  @keyframes v21pick{to{border-color:#F28C28; background:#FFF3E0}}
+  @keyframes v21row{to{background:#FFF3E0; border-color:#F7C99A}}
+  @media print{.v21api .slip,.v21api .w,.v21api .rej{opacity:1; animation:none}}
+
   /* 2-1 · SQL 작성의 변화 (v2q · 카드는 v2h 공용) */
   .v2hQ{font-size:16px; font-weight:700; color:#1F3A5F; margin:-4px 0 10px;}
   .v2hK .w{font-size:13px; color:#6B7785; margin-top:-6px;}
@@ -1481,6 +1503,14 @@
   <div class="body"><div class="mid"><div class="v2ms"><div class="v2mh"><span>칸</span><i></i><span>하는 일</span></div><div class="v2m" style="--d:0.00s"><div class="a">클라이언트</div><i>→</i><div class="b"><b>브라우저 · 화면</b><small>요청을 보내고 받은 데이터로 화면을 그림</small></div></div><div class="v2m" style="--d:0.12s"><div class="a">서버</div><i>→</i><div class="b"><b>요청을 받는 프로그램</b><small>누가 무엇을 원하는지 확인 · DB 에 묻기</small></div></div><div class="v2m" style="--d:0.24s"><div class="a">DB</div><i>→</i><div class="b"><b>데이터 저장소</b><small>표에 행으로 보관 · 서버만 직접 접근</small></div></div></div><div class="dbnote"><span>1-6 웹 구조</span> 같은 세 칸 · 2부는 서버 · DB 를 Supabase 가 맡음</div></div></div>
 </section>
 
+<section class="slide lt" data-title="API">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">2-1</span></div>
+  <h2 class="s-title sm">API</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v21api"><div class="cu"><div class="h">손님 · 브라우저</div><div class="slip" style="--d:2.0s"><em>신청서 = 요청</em>조회 · tasks 전체</div><div class="slip bad" style="--d:4.0s"><em>신청서 = 요청</em>금고 직접 열기</div></div><div class="ct"><div class="h">창구 = API<small>정해진 요청만 받음</small></div><div class="w on" style="--d:0.4s; --p:2.4s"><b>조회</b><code>GET</code><span>/rest/v1/tasks</span></div><div class="w" style="--d:0.7s; --p:2.4s"><b>등록</b><code>POST</code><span>/rest/v1/tasks</span></div><div class="w" style="--d:1.0s; --p:2.4s"><b>변경</b><code>PATCH</code><span>/rest/v1/tasks?id=…</span></div><div class="w" style="--d:1.3s; --p:2.4s"><b>삭제</b><code>DELETE</code><span>/rest/v1/tasks?id=…</span></div><div class="rej" style="--d:4.4s">창구 목록에 없는 요청 → 거절</div></div><div class="wall"><span>직원만 출입</span></div><div class="vault"><div class="h">금고 · DB</div><div class="sf">직원 = 서버</div><div class="r" style="--d:3.0s">41 · 주간 보고서 작성</div><div class="r" style="--d:3.15s">42 · 교육 자료 준비</div><div class="r" style="--d:3.3s">43 · 예산안 검토</div></div></div><div class="dbnote"><span>API</span> 서버가 정해 둔 요청 창구 · 형식대로 요청하면 응답 · 외부 API 도 같은 구조 (2-5)</div></div></div>
+</section>
+
 <section class="slide lt" data-title="요청과 응답">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">2-1</span></div>
@@ -1513,14 +1543,6 @@
   <h2 class="s-title sm">요청 방식과 상태 코드</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">방식</div><div class="v2pc" style="--d:0.00s"><b>GET</b><span>가져오기 · 보드 보기</span></div><div class="v2pc" style="--d:0.08s"><b>POST</b><span>새로 만들기 · 할 일 추가</span></div><div class="v2pc" style="--d:0.16s"><b>PATCH</b><span>고치기 · 상태 변경</span></div><div class="v2pc" style="--d:0.24s"><b>DELETE</b><span>지우기 · 할 일 삭제</span></div></div><div class="v2p"><div class="v2ph">상태 코드</div><div class="v2pc" style="--d:0.00s"><b>200 · 201</b><span>성공 · 만듦</span></div><div class="v2pc" style="--d:0.08s"><b>401 · 403</b><span>로그인 필요 · 권한 없음</span></div><div class="v2pc" style="--d:0.16s"><b>404</b><span>주소 · 행 없음</span></div><div class="v2pc" style="--d:0.24s"><b>500</b><span>서버 안의 오류</span></div></div></div><div class="dbnote"><span>에러를 전할 때</span> 방식 · 주소 · 상태 코드 세 가지를 같이</div><div class="src">출처 · <a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Reference/Methods" target="_blank" rel="noopener">MDN · HTTP 요청 메서드</a> · <a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Reference/Status" target="_blank" rel="noopener">MDN · HTTP 상태 코드</a></div></div></div>
-</section>
-
-<section class="slide lt" data-title="API">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">2-1</span></div>
-  <h2 class="s-title sm">API</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="phmap v3ph"><figure class="ph"><img src="img/v2_u3_menu.webp" alt="메뉴판을 보고 주문하는 손님"><figcaption><b>메뉴판을 보고 주문하는 손님</b></figcaption></figure><div class="v2ms"><div class="v2mh"><span>식당</span><i></i><span>API</span></div><div class="v2m" style="--d:0.00s"><div class="a">주방</div><i>→</i><div class="b"><b>서버</b><small>요청을 처리</small></div></div><div class="v2m" style="--d:0.12s"><div class="a">메뉴판</div><i>→</i><div class="b"><b>API 목록</b><small>받는 요청 · 주소 · 형식</small></div></div><div class="v2m" style="--d:0.24s"><div class="a">주문서</div><i>→</i><div class="b"><b>요청</b><small>GET /rest/v1/tasks</small></div></div><div class="v2m" style="--d:0.36s"><div class="a">나온 음식</div><i>→</i><div class="b"><b>응답</b><small>200 · JSON</small></div></div><div class="v2m" style="--d:0.48s"><div class="a">다른 가게 메뉴판</div><i>→</i><div class="b"><b>외부 API</b><small>공휴일 · 날씨 (2-5)</small></div></div></div></div><div class="dbnote"><span>API</span> 서버가 정해 둔 요청 창구 · 형식대로 요청하면 응답</div></div></div>
 </section>
 
 <section class="slide dk" data-title="다음 단원">
