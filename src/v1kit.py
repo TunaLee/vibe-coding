@@ -135,6 +135,9 @@ def tstep(no, i, name, u, img=None, alt="", term=None, rows=(), need=None, srcs=
     if ask:
         lines = "".join(f"<p>{esc(x)}</p>" for x in ask[1].split("\n"))
         body = f'<div class="v1ask"><span>{ask[0]}</span>{lines}</div>'
+    elif isinstance(img, (list, tuple)):
+        ims = "".join(f'<img src="img/{x}" alt="{alt}"/>' for x in img)
+        body = f'<div class="v1ts v1ts2"><span class="v1tsl">나오는 화면 · 예</span>{ims}</div>'
     elif img:
         body = f'<div class="v1ts"><img src="img/{img}" alt="{alt}"/></div>'
     elif term:
@@ -165,6 +168,9 @@ CSS = """
   .v1ts img{max-width:100%; max-height:310px; border-radius:10px; box-shadow:0 8px 24px rgba(22,35,58,.22);}
   .v1ts .need-img{width:760px; min-height:300px;}
   .v1tt{max-width:860px; margin:0 auto 18px;}
+  .v1ts2{position:relative; gap:24px; padding-top:30px;}
+  .v1ts2 img{max-height:300px;}
+  .v1tsl{position:absolute; top:0; left:50%; transform:translateX(-50%); font-size:15px; font-weight:700; color:#6B7686;}
   /* 실습 요청 단계 — 입력창에 쓸 문장 */
   .v1ask{max-width:900px; margin:20px auto 40px; border:2px solid #16233A; border-radius:16px; padding:20px 30px 22px; background:#fff; box-shadow:0 8px 24px rgba(22,35,58,.12);}
   .v1ask span{display:block; font-size:16px; font-weight:700; color:#6B7686; margin-bottom:10px;}

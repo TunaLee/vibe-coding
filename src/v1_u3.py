@@ -589,7 +589,7 @@ def slides():
               rows=[("새 폴더", "workspace 안에 mini_notion_v2 → VS Code 로 열기"), ("만들기", "탐색기 → 새 파일 → 기획자.md · 여섯 줄"), ("저장", "macOS ⌘S · Windows Ctrl+S")]),
         tstep("1-3", 2, "Plan Mode 요청", T, ask=("Claude Code 입력창 · Plan 모드", "기획자.md 대로 미니 노션 기획서를 같이 쓰자"),
               rows=[("먼저 묻기 모드", "입력창 아래 모드 표시 → Plan"), ("보내기", "Enter → 선택지 질문 시작"), ("파일", "아직 안 씀")]),
-        tstep("1-3", 3, "선택지 고르기", T, "lab13_q_screen.webp", "화면 선택지 질문 · 여러 개 고르기",
+        tstep("1-3", 3, "선택지 고르기", T, ["lab13_tab_problem.webp", "lab13_tab_user.webp"], "칸마다 탭으로 나오는 선택지 질문",
               rows=[("하나 · 여러 개", "질문에 적힌 대로 고르기"), ("없을 때", "Other 에 직접 적기"), ("모를 때", "첫 번째 선택지 · 추천")]),
         tstep("1-3", 4, "승인 · 저장", T, need="VS Code Claude Code 패널 캡처 · 기획서.md 저장 결과",
               rows=[("계획 승인", "패널에 뜬 정리본 확인 → 승인"), ("파일 승인", "기획서.md 만들기 → 승인"), ("결과", "mini_notion_v2/기획서.md")]),
