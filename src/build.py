@@ -102,6 +102,8 @@ def build():
             p3[j] = s.replace("<section ", f'<section id="u-{v3kit.AGENDA[k][0]}" ', 1)
             k += 1
     _write("part3.html", _tpl(BASE_CSS + vibe3.CSS), "3부 하네스 엔지니어링", [art.DEFS] + p3)
+    import script_html
+    script_html.build(1)
 
 
 if __name__ == "__main__":
