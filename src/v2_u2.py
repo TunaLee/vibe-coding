@@ -1,7 +1,7 @@
 """2-2 데이터베이스.
 
 배경(브라우저마다 따로 저장 → 한 곳에 저장) → 데이터 기록의 변화(종이 → 엑셀 → DB → 클라우드 DB) → 비유(엑셀 · 원시인 돌판 그림) → 할 일 표 애니메이션(행 · 열)
-→ 엑셀과 데이터베이스(동시 쓰기 · 형식 거절 애니메이션) → 관계(members · tasks) → SQL 한 줄 뜻 → Supabase 구성 · 이유 → 무료 플랜.
+→ 엑셀과 데이터베이스(동시 쓰기 · 형식 거절 애니메이션) → 관계(members · tasks) → SQL 한 줄 뜻 → SQL 작성의 변화(손 → SQL → 말 → MCP) → Supabase 구성 · 이유 → 무료 플랜.
 사실 출처
 - Supabase 무료 플랜: supabase.com/pricing (프로젝트 2개 · DB 500 MB · 월 이용자 50,000 · 1주 미사용 시 일시정지 · Pro $25/월)
 - 프로젝트마다 Postgres 전체: supabase.com/docs/guides/database/overview
@@ -122,6 +122,31 @@ def history():
     return (f'<div class="v2hTop"><span>예전</span><i></i><span>지금 · 2부</span></div><div class="v2h">{c}</div>')
 
 
+def sql_change():
+    """SQL 작성의 변화 — 손으로 찾기 → SQL 직접 작성 → 말로 요청(Claude Code 가 SQL) → MCP 로 직접 실행.
+    같은 질문 「진행 중인 할 일」이 단계마다 어떤 모양인지 + 사람 · AI 가 하는 일. 평택대 교안 「분석 도구의 변화」 구조."""
+    pic = [
+        '<div class="v2qF"><span>상태 ▾ 필터</span><p>진행 중 ✓</p><p class="x">완료</p><p class="x">할 일</p></div>',
+        '<pre class="v2qS">select title, due\nfrom tasks\nwhere status = \'진행 중\'\norder by due;</pre>',
+        '<div class="v2qM"><p class="me">진행 중인 할 일만 보여 줘</p><pre class="v2qS sm">select title, due …</pre><small>SQL Editor 에 붙여 넣기 · 실행</small></div>',
+        '<div class="v2qM"><p class="me">진행 중인 할 일만 보여 줘</p><p class="ai">진행 중 2건 · 내년 예산안 검토 · 신규 입사자 교육 자료</p></div>',
+    ]
+    st = [("손으로 찾기", "엑셀 필터 · 장부", "줄마다 눈으로 찾음", "—"),
+          ("SQL 직접 작성", "개발자 · 분석가", "문법 학습 · 작성 · 실행", "—"),
+          ("말로 요청", "Claude Code · 2-5", "요청 · 붙여 넣어 실행 · 결과 확인", "SQL 작성"),
+          ("MCP 연결", "Claude Code · 2-6", "요청 · 결과 확인", "SQL 작성 · 실행 · 보고")]
+    c = ""
+    for i, (name, who, me, ai) in enumerate(st):
+        d = .3 + i * 2.2
+        if i:
+            c += f'<i class="v2hA" style="--d:{d - .3:.1f}s">→</i>'
+        c += (f'<div class="v2hK{" on" if i == 3 else ""}" style="--d:{d:.1f}s"><b class="n">{name}</b><small class="w">{who}</small>'
+              f'<div class="pic">{pic[i]}</div>'
+              f'<dl><dt>사람이 하는 일</dt><dd>{me}</dd><dt>AI 가 하는 일</dt><dd>{ai}</dd></dl></div>')
+    return ('<div class="v2hTop"><span>예전</span><i></i><span>바이브코딩</span></div>'
+            f'<div class="v2hQ">「진행 중인 할 일만 보여 줘」 · 같은 질문</div><div class="v2h">{c}</div>')
+
+
 def slides():
     return [
         light("저장 위치의 한계", where_saved()
@@ -147,6 +172,8 @@ def slides():
             ("order by due;", "기한이 빠른 순서")], ask="「진행 중인 할 일만 보여 줘」", title="SQL")
               + result()
               + note("SQL 작성", "Claude Code 가 씀 · 사람은 결과 표를 확인"), T),
+        light("SQL 작성의 변화", sql_change()
+              + note("사람이 남기는 일", "질문 · 결과가 맞는지 판단"), T),
         light("Supabase", viz2.tiles([
             ("Postgres 데이터베이스", "프로젝트마다 Postgres 전체 하나"), ("로그인 (Auth)", "이메일 · 소셜 로그인"),
             ("표 편집 화면", "Table Editor · 엑셀처럼 행 보기 · 고치기"), ("Claude Code 연결", "공식 MCP 서버 · 표 만들기 · 조회")], 2)
@@ -161,6 +188,20 @@ def slides():
 
 
 CSS = """
+  /* 2-2 · SQL 작성의 변화 (v2q · 카드는 v2h 공용) */
+  .v2hQ{font-size:16px; font-weight:700; color:#1F3A5F; margin:-4px 0 10px;}
+  .v2hK .w{font-size:13px; color:#6B7785; margin-top:-6px;}
+  .v2qF{width:100%; border:1.5px solid #C9CFD8; border-radius:6px; background:#fff; font-size:13px; overflow:hidden;}
+  .v2qF span{display:block; background:#1D6F42; color:#fff; font-weight:700; padding:3px 8px;}
+  .v2qF p{margin:0; padding:3px 8px; border-top:1px solid #E3E7EC; color:#16233A;} .v2qF p.x{color:#A0A8B4;}
+  .v2qS{margin:0; width:100%; box-sizing:border-box; background:#16233A; color:#E8ECF1; border-radius:8px; padding:8px 10px; font-family:var(--mono);
+    font-size:12.5px; line-height:1.5; white-space:pre;}
+  .v2qS.sm{font-size:11.5px; padding:4px 8px;}
+  .v2qM{width:100%; display:flex; flex-direction:column; gap:5px;}
+  .v2qM p{margin:0; font-size:13px; border-radius:10px; padding:5px 9px;}
+  .v2qM p.me{align-self:flex-end; background:#FFF1E0; color:#16233A; font-weight:600;}
+  .v2qM p.ai{background:#EEF3FA; color:#16233A; border:1px solid #C9D6E6;}
+  .v2qM small{font-size:12px; color:#C0392B; font-weight:700;}
   /* 2-2 · 데이터 기록의 변화 (v2h) */
   .v2hTop{display:flex; align-items:center; gap:12px; margin:0 0 10px; font-size:15px; font-weight:700; color:#5A6B80;}
   .v2hTop i{flex:1; height:2px; background:#1F3A5F; position:relative;}

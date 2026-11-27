@@ -998,6 +998,20 @@
   @keyframes v2u1in{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
   @media print{.v2u1bx,.v2u1ar{opacity:1; animation:none}}
 
+  /* 2-2 · SQL 작성의 변화 (v2q · 카드는 v2h 공용) */
+  .v2hQ{font-size:16px; font-weight:700; color:#1F3A5F; margin:-4px 0 10px;}
+  .v2hK .w{font-size:13px; color:#6B7785; margin-top:-6px;}
+  .v2qF{width:100%; border:1.5px solid #C9CFD8; border-radius:6px; background:#fff; font-size:13px; overflow:hidden;}
+  .v2qF span{display:block; background:#1D6F42; color:#fff; font-weight:700; padding:3px 8px;}
+  .v2qF p{margin:0; padding:3px 8px; border-top:1px solid #E3E7EC; color:#16233A;} .v2qF p.x{color:#A0A8B4;}
+  .v2qS{margin:0; width:100%; box-sizing:border-box; background:#16233A; color:#E8ECF1; border-radius:8px; padding:8px 10px; font-family:var(--mono);
+    font-size:12.5px; line-height:1.5; white-space:pre;}
+  .v2qS.sm{font-size:11.5px; padding:4px 8px;}
+  .v2qM{width:100%; display:flex; flex-direction:column; gap:5px;}
+  .v2qM p{margin:0; font-size:13px; border-radius:10px; padding:5px 9px;}
+  .v2qM p.me{align-self:flex-end; background:#FFF1E0; color:#16233A; font-weight:600;}
+  .v2qM p.ai{background:#EEF3FA; color:#16233A; border:1px solid #C9D6E6;}
+  .v2qM small{font-size:12px; color:#C0392B; font-weight:700;}
   /* 2-2 · 데이터 기록의 변화 (v2h) */
   .v2hTop{display:flex; align-items:center; gap:12px; margin:0 0 10px; font-size:15px; font-weight:700; color:#5A6B80;}
   .v2hTop i{flex:1; height:2px; background:#1F3A5F; position:relative;}
@@ -1460,6 +1474,17 @@
   <h2 class="s-title sm">SQL</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v1cmask"><span>요청</span><b>「진행 중인 할 일만 보여 줘」</b></div><div class="v1cmap"><div class="v1cmt"><span>SQL</span><span>뜻</span></div><div class="v1cmr" style="--d:0.30s"><code>select title, due</code><i>→</i><span>할 일 · 기한 열만</span></div><div class="v1cmr" style="--d:0.65s"><code>from tasks</code><i>→</i><span>tasks 표에서</span></div><div class="v1cmr" style="--d:1.00s"><code>where status = '진행 중'</code><i>→</i><span>상태가 진행 중인 행만</span></div><div class="v1cmr" style="--d:1.35s"><code>order by due;</code><i>→</i><span>기한이 빠른 순서</span></div></div><div class="v2u2res"><span>결과 · 2행</span><table class="v2u2t sm"><thead><tr><th>title</th><th>due</th></tr></thead><tbody><tr><td>내년 예산안 검토</td><td>2026-11-18</td></tr><tr><td>신규 입사자 교육 자료</td><td>2026-11-25</td></tr></tbody></table></div><div class="dbnote"><span>SQL 작성</span> Claude Code 가 씀 · 사람은 결과 표를 확인</div></div></div>
+</section>
+
+<section class="slide lt" data-title="SQL 작성의 변화">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">2-2</span></div>
+  <h2 class="s-title sm">SQL 작성의 변화</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v2hTop"><span>예전</span><i></i><span>바이브코딩</span></div><div class="v2hQ">「진행 중인 할 일만 보여 줘」 · 같은 질문</div><div class="v2h"><div class="v2hK" style="--d:0.3s"><b class="n">손으로 찾기</b><small class="w">엑셀 필터 · 장부</small><div class="pic"><div class="v2qF"><span>상태 ▾ 필터</span><p>진행 중 ✓</p><p class="x">완료</p><p class="x">할 일</p></div></div><dl><dt>사람이 하는 일</dt><dd>줄마다 눈으로 찾음</dd><dt>AI 가 하는 일</dt><dd>—</dd></dl></div><i class="v2hA" style="--d:2.2s">→</i><div class="v2hK" style="--d:2.5s"><b class="n">SQL 직접 작성</b><small class="w">개발자 · 분석가</small><div class="pic"><pre class="v2qS">select title, due
+from tasks
+where status = '진행 중'
+order by due;</pre></div><dl><dt>사람이 하는 일</dt><dd>문법 학습 · 작성 · 실행</dd><dt>AI 가 하는 일</dt><dd>—</dd></dl></div><i class="v2hA" style="--d:4.4s">→</i><div class="v2hK" style="--d:4.7s"><b class="n">말로 요청</b><small class="w">Claude Code · 2-5</small><div class="pic"><div class="v2qM"><p class="me">진행 중인 할 일만 보여 줘</p><pre class="v2qS sm">select title, due …</pre><small>SQL Editor 에 붙여 넣기 · 실행</small></div></div><dl><dt>사람이 하는 일</dt><dd>요청 · 붙여 넣어 실행 · 결과 확인</dd><dt>AI 가 하는 일</dt><dd>SQL 작성</dd></dl></div><i class="v2hA" style="--d:6.6s">→</i><div class="v2hK on" style="--d:6.9s"><b class="n">MCP 연결</b><small class="w">Claude Code · 2-6</small><div class="pic"><div class="v2qM"><p class="me">진행 중인 할 일만 보여 줘</p><p class="ai">진행 중 2건 · 내년 예산안 검토 · 신규 입사자 교육 자료</p></div></div><dl><dt>사람이 하는 일</dt><dd>요청 · 결과 확인</dd><dt>AI 가 하는 일</dt><dd>SQL 작성 · 실행 · 보고</dd></dl></div></div><div class="dbnote"><span>사람이 남기는 일</span> 질문 · 결과가 맞는지 판단</div></div></div>
 </section>
 
 <section class="slide lt" data-title="Supabase">
