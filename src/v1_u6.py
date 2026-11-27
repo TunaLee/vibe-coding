@@ -119,21 +119,42 @@ def _bug():
 
 
 def _next():
-    """Next.js — 한 프로젝트 안에 화면(page.tsx)과 서버(api/login/route.ts). 「실행해 줘」 → npm run dev → Node.js 가 localhost:3000 을 엶.
-    로그인 요청이 브라우저 → 서버 코드로 갔다가 「통과」로 돌아옴. 비밀번호 확인은 서버 쪽에만 있음. 한 번 재생 후 정지."""
-    return ('<div class="v16x"><div class="row">'
-            '<div class="pj"><span class="cap">mini-notion · Next.js 프로젝트</span>'
-            '<div class="f a"><b>app/page.tsx</b><span>화면 · 브라우저로 보냄</span></div>'
-            '<div class="f b"><b>app/api/login/route.ts</b><span>서버 · 내 컴퓨터에만 남음</span></div>'
-            '<div class="f c"><b>package.json · node_modules</b><span>부품</span></div></div>'
-            '<div class="run"><code>npm run dev</code><small>「실행해 줘」</small><i></i><b>Node.js</b></div>'
-            '<div class="bw"><div class="bar"><i></i><i></i><i></i><span>localhost:3000/login</span></div>'
-            '<div class="lf"><p>이메일 <u>kim@…</u></p><p>비밀번호 <u>••••••</u></p><em>로그인</em>'
-            '<div class="ok">통과 · 미니 노션으로 이동</div></div>'
-            '<div class="req"><span class="go">이메일 · 비밀번호 →</span><span class="back">← 통과</span></div></div></div>'
-            '<div class="lg"><p><b>Next.js</b>React 기반 웹 프레임워크 · Vercel</p><p><b>한 프로젝트</b>화면 + 서버</p>'
-            '<p><b>열기</b>「실행해 줘」 → localhost:3000</p></div></div>')
+    """웹 구조 — 클라이언트(브라우저) ↔ 웹 서버(Next.js · Node.js) ↔ DB. 미니 노션 로그인 한 번을 7단계로 따라감.
+    ① 화면 요청 ② HTML · CSS · JS ③ 이메일 · 비밀번호 ④ 서버 → DB 사용자 찾기 ⑤ DB → 서버 ⑥ 비밀번호 비교 ⑦ 통과 · 페이지 목록.
+    Next.js 괄호는 화면 코드 + 서버 코드(클라이언트 · 서버 칸)만 묶고, DB 는 밖(2부 Supabase). 한 번 재생 후 정지."""
+    D = [.6 + 1.3 * k for k in range(7)]
+    tok = [("a r", "① 화면 요청"), ("a l", "② HTML · CSS · JS"), ("a r", "③ 이메일 · 비밀번호"),
+           ("b r", "④ kim@… 찾기"), ("b l", "⑤ 사용자 · 페이지 목록"), None, ("a l", "⑦ 통과 · 페이지 목록")]
+    lane = {"a": "", "b": ""}
+    for k, t in enumerate(tok):
+        if t:
+            ln, d = t[0].split()
+            lane[ln] += f'<span class="xk {d}" style="--d:{D[k]:.1f}s">{t[1]}</span>'
+    steps = ["화면 요청", "화면 받음", "로그인 정보 보냄", "DB 에 사용자 찾기", "DB 가 돌려줌", "비밀번호 비교", "통과 · 내 페이지"]
+    log = "".join(f'<li style="--d:{D[k]:.1f}s"><em>{"①②③④⑤⑥⑦"[k]}</em>{x}</li>' for k, x in enumerate(steps))
 
+    def lanes(k):
+        return (f'<div class="ln"><div class="tr"><i class="r"></i><small>요청</small></div>'
+                f'<div class="tr"><i class="l"></i><small>응답</small></div>{lane[k]}</div>')
+    return ('<div class="v16x"><div class="nx"><span>Next.js 프로젝트 하나 · 화면 코드 + 서버 코드</span></div>'
+            '<div class="row">'
+            '<div class="bx cl"><span class="cap">클라이언트 · 브라우저</span>'
+            '<div class="bar"><i></i><i></i><i></i><span>localhost:3000/login</span></div>'
+            '<div class="scr"><div class="ly l0">여는 중…</div>'
+            '<div class="ly l1" style="--d:3.0s"><p>이메일 <u>kim@posco.com</u></p><p>비밀번호 <u>••••••</u></p><em>로그인</em></div>'
+            '<div class="ly l2" style="--d:9.0s"><b>내 페이지</b><p>주간 회의</p><p>보고서 초안</p></div></div>'
+            '<small class="ft">app/login/page.tsx 가 그린 화면</small></div>'
+            + lanes("a") +
+            '<div class="bx sv"><span class="cap">웹 서버 · Next.js</span><small class="on">Node.js 위에서 실행</small>'
+            '<div class="f f1" style="--d:1.9s"><b>app/login/page.tsx</b><span>화면 · 브라우저로 보냄</span></div>'
+            '<div class="f f2" style="--d:4.2s"><b>app/api/login/route.ts</b><span>로그인 처리 · 서버에만 있음</span></div>'
+            '<div class="ok" style="--d:7.1s">⑥ 비밀번호 비교 → 통과</div></div>'
+            + lanes("b") +
+            '<div class="bx db"><span class="cap">DB</span><div class="cy"><i></i>'
+            '<p class="t" style="--d:5.4s"><b>users</b>kim@posco.com · 비밀번호</p>'
+            '<p class="t" style="--d:5.4s"><b>pages</b>주간 회의 · 보고서 초안</p></div><small class="ft">2부 · Supabase</small></div>'
+            f'</div><ol class="lg2">{log}</ol>'
+            '<div class="lg"><p><b>클라이언트</b>화면 · 요청 보냄</p><p><b>웹 서버</b>요청 처리 · 응답</p><p><b>DB</b>데이터 저장 · 찾기</p></div></div>')
 
 def _code():
     """화면 뒤의 코드 — 개발계획.md → 파일 세 개(뼈대 · 모양 · 동작)가 차례로 · 마지막에 데이터 모양. 예시 앱 실제 이름 · 줄 수."""
@@ -202,36 +223,50 @@ CSS = """
   .v16b li span{font-size:17px; color:#16233A; line-height:1.45;}
   .v16b li.k3 span{font-family:ui-monospace,Menlo,monospace; font-size:13.5px; color:#B4232A;}
   .v16b li.k4 b{background:#16233A;}
-  /* 1-6 · Next.js (v16x) */
-  .v16x .row{display:grid; grid-template-columns:390px 170px 1fr; align-items:center; gap:14px;}
-  .v16x .pj{position:relative; border:2px dashed #16233A; border-radius:16px; padding:34px 16px 16px; display:flex; flex-direction:column; gap:10px;}
-  .v16x .cap{position:absolute; top:-14px; left:16px; background:#16233A; color:#fff; font-size:15px; font-weight:800; padding:4px 12px; border-radius:8px;}
-  .v16x .f{border-radius:10px; padding:10px 14px; border:1.5px solid #D9DDE3; background:#fff; opacity:0; animation:v16wIn .4s forwards;}
-  .v16x .f b{display:block; font-family:ui-monospace,Menlo,monospace; font-size:16px; color:#16233A;} .v16x .f span{font-size:15px; color:#6B7785;}
-  .v16x .a{animation-delay:.3s; border-color:#8FB4FF;} .v16x .b{animation-delay:.7s; border-color:#F28C28; background:rgba(242,140,40,.06);} .v16x .c{animation-delay:1.1s;}
-  .v16x .run{display:flex; flex-direction:column; align-items:center; gap:7px; opacity:0; animation:v16wIn .4s 1.6s forwards;}
-  .v16x .run code{font-size:15px; background:#16233A; color:#fff; padding:6px 10px; border-radius:8px;}
-  .v16x .run small{font-size:14px; color:#6B7785;}
-  .v16x .run i{display:block; width:120px; height:3px; background:#F28C28; position:relative;}
-  .v16x .run i:after{content:""; position:absolute; right:-2px; top:-6px; border:7.5px solid transparent; border-left:11px solid #F28C28;}
-  .v16x .run b{font-size:16px; color:#F28C28;}
-  .v16x .bw{position:relative; border:1.5px solid #D9DDE3; border-radius:12px; background:#fff; opacity:0; animation:v16wIn .4s 2.2s forwards;}
-  .v16x .bar{border-radius:11px 11px 0 0; display:flex; align-items:center; gap:5px; padding:6px 10px; background:#E9ECF0;}
-  .v16x .bar i{width:9px; height:9px; border-radius:50%; background:#C3C9D1;}
-  .v16x .bar span{flex:1; margin-left:8px; padding:2px 10px; border-radius:6px; background:#fff; font-family:ui-monospace,Menlo,monospace; font-size:13px; color:#16233A;}
-  .v16x .lf{position:relative; padding:20px 26px 22px; display:flex; flex-direction:column; gap:10px; min-height:200px;}
-  .v16x .lf p{margin:0; font-size:16px; color:#37414F; display:flex; justify-content:space-between; align-items:center;}
-  .v16x .lf u{text-decoration:none; width:190px; padding:5px 10px; border:1.5px solid #D9DDE3; border-radius:7px; font-size:15px; color:#16233A;}
-  .v16x .lf em{font-style:normal; align-self:flex-end; background:#16233A; color:#fff; font-size:15px; padding:6px 16px; border-radius:8px;}
-  .v16x .ok{position:absolute; inset:0; border-radius:0 0 12px 12px; display:flex; align-items:center; justify-content:center; background:#fff; font-size:20px; font-weight:800; color:#1E8E5A; opacity:0; animation:v16wIn .4s 4.8s forwards;}
-  .v16x .req{position:absolute; left:-200px; top:96px; width:190px; height:60px;}
-  .v16x .req span{position:absolute; left:0; right:0; text-align:center; font-size:14px; font-weight:800; padding:4px 0; border-radius:8px; opacity:0;}
-  .v16x .go{color:#fff; background:#F28C28; top:0; animation:v16xGo 1.1s 2.6s forwards;}
-  .v16x .back{color:#fff; background:#1E8E5A; top:30px; animation:v16xBk 1.1s 3.7s forwards;}
-  @keyframes v16xGo{0%{opacity:0; transform:translateX(200px)} 20%{opacity:1} 80%{opacity:1} 100%{opacity:0; transform:translateX(-60px)}}
-  @keyframes v16xBk{0%{opacity:0; transform:translateX(-60px)} 20%{opacity:1} 80%{opacity:1} 100%{opacity:0; transform:translateX(200px)}}
-  .v16x .b{animation:v16wIn .4s .7s forwards, v16xHl .6s 3.7s forwards;}
-  @keyframes v16xHl{from{opacity:1} to{opacity:1; box-shadow:0 0 0 4px rgba(242,140,40,.35);}}
+  /* 1-6 · 웹 구조 · Next.js (v16x) */
+  .v16x .nx{width:calc(320px + 170px + 300px); margin-bottom:22px; border:2px solid #16233A; border-bottom:0; height:16px; border-radius:10px 10px 0 0; position:relative; opacity:0; animation:v16wIn .4s .2s forwards;}
+  .v16x .nx span{position:absolute; left:50%; top:-14px; transform:translateX(-50%); background:#16233A; color:#fff; font-size:15px; font-weight:800; padding:3px 14px; border-radius:8px; white-space:nowrap;}
+  .v16x .row{display:grid; grid-template-columns:320px 170px 300px 150px 1fr; align-items:stretch;}
+  .v16x .bx{position:relative; border:2px solid #D9DDE3; border-radius:14px; background:#fff; padding:26px 14px 12px; display:flex; flex-direction:column; gap:10px; min-height:300px;}
+  .v16x .cap{position:absolute; top:-13px; left:12px; background:#5B6B80; color:#fff; font-size:14px; font-weight:800; padding:3px 10px; border-radius:7px; white-space:nowrap;}
+  .v16x .cl .cap{background:#3C6FD1;} .v16x .sv{border-color:#F28C28;} .v16x .sv .cap{background:#F28C28;} .v16x .db .cap{background:#1E8E5A;}
+  .v16x .bar{display:flex; align-items:center; gap:4px; padding:5px 8px; background:#E9ECF0; border-radius:8px 8px 0 0;}
+  .v16x .bar i{width:8px; height:8px; border-radius:50%; background:#C3C9D1;}
+  .v16x .bar span{flex:1; margin-left:6px; padding:1px 8px; border-radius:5px; background:#fff; font-family:ui-monospace,Menlo,monospace; font-size:12px; color:#16233A;}
+  .v16x .scr{position:relative; height:180px; border:1px solid #E3E7EC; border-top:0; border-radius:0 0 8px 8px; margin-top:-8px;}
+  .v16x .ly{position:absolute; inset:0; padding:12px 16px; display:flex; flex-direction:column; gap:7px; background:#fff; border-radius:0 0 8px 8px;}
+  .v16x .l0{align-items:center; justify-content:center; color:#9AA6B5; font-size:15px;}
+  .v16x .l1,.v16x .l2{opacity:0; animation:v16wIn .4s var(--d) forwards;}
+  .v16x .ly p{margin:0; font-size:14px; color:#37414F; display:flex; justify-content:space-between; align-items:center;}
+  .v16x .ly u{text-decoration:none; width:150px; padding:3px 8px; border:1.5px solid #D9DDE3; border-radius:6px; font-size:13px; color:#16233A;}
+  .v16x .ly em{font-style:normal; align-self:flex-end; background:#16233A; color:#fff; font-size:13px; padding:4px 12px; border-radius:7px;}
+  .v16x .l2 b{font-size:17px; color:#16233A;} .v16x .l2 p{padding:5px 10px; background:#F4F6F8; border-radius:6px;}
+  .v16x .ft{font-size:13px; color:#6B7785; margin-top:auto;} .v16x .on{font-size:13px; color:#6B7785;}
+  .v16x .f{border-radius:9px; padding:8px 12px; border:1.5px solid #E3E7EC; transition:none; animation:v16xHi .5s var(--d) forwards;}
+  .v16x .f b{display:block; font-family:ui-monospace,Menlo,monospace; font-size:14px; color:#16233A;} .v16x .f span{font-size:13px; color:#6B7785;}
+  @keyframes v16xHi{to{border-color:#F28C28; background:rgba(242,140,40,.08);}}
+  .v16x .ok{margin-top:auto; text-align:center; font-size:15px; font-weight:800; color:#fff; background:#1E8E5A; border-radius:9px; padding:8px; opacity:0; animation:v16wIn .4s var(--d) forwards;}
+  .v16x .ln{position:relative; display:flex; flex-direction:column; justify-content:center; gap:46px; padding:0 8px;}
+  .v16x .tr{position:relative; height:20px;} .v16x .tr small{position:absolute; left:0; right:0; top:8px; text-align:center; font-size:12px; color:#9AA6B5;}
+  .v16x .tr i{position:absolute; left:0; right:0; top:0; height:2px; background:#C3C9D1;}
+  .v16x .tr i.r:after{content:""; position:absolute; right:-2px; top:-5px; border:6px solid transparent; border-left:9px solid #C3C9D1;}
+  .v16x .tr i.l:after{content:""; position:absolute; left:-2px; top:-5px; border:6px solid transparent; border-right:9px solid #C3C9D1;}
+  .v16x .xk{position:absolute; left:4px; right:4px; text-align:center; font-size:14px; font-weight:800; color:#fff; padding:5px 4px; border-radius:8px; opacity:0; line-height:1.3;}
+  .v16x .xk.r{top:calc(50% - 50px); background:#3C6FD1; animation:v16xR 1.1s var(--d) forwards;}
+  .v16x .xk.l{top:calc(50% + 14px); background:#F28C28; animation:v16xL 1.1s var(--d) forwards;}
+  .v16x .row > .ln:nth-of-type(4) .xk.r{background:#F28C28;} .v16x .row > .ln:nth-of-type(4) .xk.l{background:#1E8E5A;}
+  @keyframes v16xR{0%{opacity:0; transform:translateX(-80px)} 20%{opacity:1} 75%{opacity:1} 100%{opacity:0; transform:translateX(80px)}}
+  @keyframes v16xL{0%{opacity:0; transform:translateX(80px)} 20%{opacity:1} 75%{opacity:1} 100%{opacity:0; transform:translateX(-80px)}}
+  .v16x .cy{position:relative; flex:1; display:flex; flex-direction:column; gap:8px; padding:20px 10px 10px; background:#EEF7F2; border-radius:50% 50% 12px 12px / 22px 22px 12px 12px;}
+  .v16x .cy i{position:absolute; left:0; right:0; top:0; height:22px; border-radius:50%; background:#D3EDDF;}
+  .v16x .t{position:relative; margin:0; font-size:12.5px; color:#37414F; background:#fff; border-radius:6px; padding:5px 8px; animation:v16xDb .5s var(--d) forwards;}
+  .v16x .t b{display:block; font-family:ui-monospace,Menlo,monospace; color:#1E8E5A; font-size:13px;}
+  @keyframes v16xDb{to{box-shadow:0 0 0 3px #1E8E5A;}}
+  .v16x .lg2{list-style:none; margin:22px 0 0; padding:0; display:grid; grid-template-columns:repeat(7,1fr); gap:6px;}
+  .v16x .lg2 li{font-size:13.5px; color:#37414F; background:#F4F6F8; border-radius:8px; padding:6px 8px; opacity:.25; animation:v16xOn .3s var(--d) forwards;}
+  .v16x .lg2 em{font-style:normal; color:#F28C28; font-weight:800; margin-right:4px;}
+  @keyframes v16xOn{to{opacity:1;}}
+  .v16x .lg{margin-top:12px; animation-delay:9.6s;}
   /* 1-6 · 웹의 3요소 (v16w) — 평택대 p3w 구조 */
   .v16w{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; align-items:start;}
   .v16wc{display:flex; flex-direction:column; gap:10px; opacity:0; animation:v16wIn .5s var(--d) forwards;}
@@ -330,7 +365,7 @@ def slides():
             ("웹에서 동작 담당", "JS(JavaScript)")]), T),
         light("웹의 3요소", _web3(), T),
         light("Node.js", _node(), T),
-        light("Next.js", _next(), T),
+        light("웹 구조 · Next.js", _next(), T),
         # ── 서버
         light("브라우저로 열기", _open(), T),
         light("권한 모드", viz2.maprows([
