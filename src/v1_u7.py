@@ -97,17 +97,8 @@ def slides():
               ["GitHub", "비공개", "push", "Vercel"],
               ["저장소 주소가 열림", "배포 주소가 열림", "수정 뒤 같은 주소에 반영"],
               "오류 문구 그대로 전달", folder="내 앱 폴더"),
-        tstep("1-7", 1, "올리기 전 점검", T, need="VS Code Claude Code 패널 캡처 · 키 · 개인정보 점검 결과",
-              rows=[("요청", "키 · 개인정보 점검"), ("결과", "키 · 비밀번호 없음"), ("주의", "커밋 이메일 · 공개면 보임")]),
-        tstep("1-7", 2, "GitHub 저장소 만들기", T, need="github.com/new · 이름 mini-notion · Private · README 끔 화면",
-              rows=[("주소", go("github.com/new", "https://github.com/new")), ("공개 범위", "Private"), ("README", "끔 · 빈 저장소"),
-                    ("다음", "저장소 주소 복사")]),
         tstep("1-7", 3, "올리기", T, ask=("Claude Code 입력창", "이 폴더를 GitHub 저장소\nhttps://github.com/내계정/mini-notion 에 올려 줘"),
               rows=[("주소", "2단계에서 복사한 주소"), ("승인", "패널에 뜬 명령 확인 → 허용"), ("다음", "올린 결과 확인")]),
-        tstep("1-7", 3, "올린 결과", T, need="VS Code Claude Code 패널 캡처 · 비공개 저장소에 올린 결과",
-              rows=[("주소", "github.com/내계정/저장소"), ("비공개", "PRIVATE 확인"), ("다음", "Vercel 에서 가져오기")]),
-        tstep("1-7", 4, "Vercel 가져오기 · Deploy", T, need="vercel.com/new · 저장소 Import → Deploy 화면",
-              rows=[("주소", go("vercel.com/new", "https://vercel.com/new")), ("가져오기", "저장소 옆 Import"), ("배포", "Deploy → *.vercel.app")]),
         light("실습 1-7 확인", viz2.maprows([
             ("저장소", "github.com/내계정/저장소 이름", "파일 · 커밋 · 자물쇠"), ("배포 주소", "프로젝트명.vercel.app", "PC · 휴대폰에서 열림"),
             ("재배포", "push 1~2분 뒤 새로고침", "고친 곳이 보임"), ("공개 전 점검", "키 · 개인정보 없음", "Claude Code 점검 결과")], "볼 것", "확인")

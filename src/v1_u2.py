@@ -165,10 +165,6 @@ def slides():
               "결과가 마음에 안 들어도 고치지 않음 · 1-3 부터 기획으로", folder="mini_notion", example=""),
         tstep("1-2 ③", 1, "한 줄 요청", T, ask=("Claude Code 입력창", "미니 노션 만들어 줘"),
               rows=[("보내기", "Enter"), ("덧붙이지 않기", "기능 · 화면 · 저장"), ("모드", "수정마다 승인")]),
-        tstep("1-2 ③", 2, "파일 만들기 승인", T, need="VS Code Claude Code 패널 캡처 · index.html 만들기 승인",
-              rows=[("파일", "만들 파일 이름 확인"), ("승인", "패널의 승인 버튼 · 이번만"), ("자동 승인", "이 대화 동안 · 익숙해진 뒤")]),
-        tstep("1-2 ③", 3, "결과 보고 읽기", T, need="VS Code Claude Code 패널 캡처 · Claude Code 결과 보고",
-              rows=[("보고", "AI 가 정한 기능 목록"), ("저장", "브라우저 localStorage"), ("한계", "직접 눌러 보지는 않음")]),
         tstep("1-2 ③", 4, "브라우저로 보기", T, "lab12_v0app.webp", "한 줄 요청으로 만든 미니 노션",
               rows=[("index.html", "더블클릭 → 브라우저"), ("Next.js", "「실행해 줘」 → localhost:3000"), ("눌러 보기", "새 페이지 · 「/」 · 체크")]),
         light("결과물별 실행 방법", viz2.pair(
