@@ -18,54 +18,68 @@ def wire(top, bottom, d_top, d_bot):
             f'<div class="ln rs" {_at(d_bot)}><i></i><span>{bottom}</span></div></div>')
 
 
-def reqres(write=False):
-    """요청과 응답 — 브라우저(화면 + Network) · 서버 · DB.
-    읽기: 로딩 줄 → GET 요청 → 서버가 SQL → DB 행 3개 → JSON 응답 200 → 화면에 페이지 3개.
-    쓰기: 「추가」 클릭 → POST 요청 → insert → DB 새 행 → 201 → 목록에 1건 추가."""
+def reqres(write=False, mode=None):
+    """요청과 응답 — 브라우저(화면 + Network) · 서버(Next.js) · DB(Supabase). mode: read · create · update · delete.
+    read: 로딩 줄 → GET → 조회 → 행 3개 → 200 JSON → 화면에 페이지 3개.
+    create: 「+ 새 페이지」 → POST → insert → 새 행 → 201 → 목록에 1개 추가.
+    update: 「완료로」 → PATCH /api/pages/42 → update → 42번 행 상태 바뀜 → 200 → 목록 상태 바뀜.
+    delete: 「삭제」 → DELETE /api/pages/43 → delete → 43번 행 지워짐 → 204 → 목록에서 빠짐."""
+    mode = mode or ("create" if write else "read")
     T = [.3, 1.0, 1.8, 2.6, 3.3, 3.9, 4.5, 5.1, 5.8]
-    # ── 브라우저 화면
-    rows = "".join(f'<div class="rw" {_at(T[8] + i * .12)}><b>{t}</b><span>{d[5:].replace("-", "/")}</span><em>{s}</em></div>'
-                   for i, (t, d, s) in enumerate(TASKS))
-    if write:
-        rows = "".join(f'<div class="rw on"><b>{t}</b><span>{d[5:].replace("-", "/")}</span><em>{s}</em></div>' for t, d, s in TASKS)
-        rows += f'<div class="rw nw" {_at(T[8])}><b>{NEW[0]}</b><span>{NEW[1][5:].replace("-", "/")}</span><em>{NEW[2]}</em></div>'
-        top = (f'<div class="add"><span class="in">{NEW[0]}</span><span class="bt" {_at(T[1] - .3)}>+ 새 페이지</span></div>')
-        skel = ""
-    else:
-        top = ""
+    dt = lambda d: d[5:].replace("-", "/")
+    top, skel = "", ""
+    if mode == "read":
+        rows = "".join(f'<div class="rw" {_at(T[8] + i * .12)}><b>{t}</b><span>{dt(d)}</span><em>{st}</em></div>'
+                       for i, (t, d, st) in enumerate(TASKS))
         skel = f'<div class="sk" {_at(T[8])}><i></i><i></i><i></i></div>'
-    meth, path, code_, codet = ("POST", "/api/pages", "201", "Created") if write else ("GET", "/api/pages", "200", "OK")
-    if write:
-        js = '[{ "id": 44, "title": "고객사 미팅 회의록", … }]'
     else:
-        js = ('[{ "id": 41, "title": "주간 회의록", … },\n'
-              ' { "id": 42, "title": "교육 자료 정리", … },\n'
-              ' { "id": 43, "title": "예산안 메모", … }]')
+        rows = ""
+        for i, (t, d, st) in enumerate(TASKS):
+            if mode == "update" and i == 1:
+                rows += (f'<div class="rw on ch" {_at(T[8])}><b>{t}</b><span>{dt(d)}</span>'
+                         f'<em><i class="o" {_at(T[8])}>{st}</i><i class="n" {_at(T[8])}>완료</i></em>'
+                         f'<u class="bt2" {_at(T[1] - .3)}>완료</u></div>')
+            elif mode == "delete" and i == 2:
+                rows += (f'<div class="rw on gone" {_at(T[8])}><b>{t}</b><span>{dt(d)}</span><em>{st}</em>'
+                         f'<u class="bt2 dl" {_at(T[1] - .3)}>삭제</u></div>')
+            else:
+                rows += f'<div class="rw on"><b>{t}</b><span>{dt(d)}</span><em>{st}</em></div>'
+        if mode == "create":
+            rows += f'<div class="rw nw" {_at(T[8])}><b>{NEW[0]}</b><span>{dt(NEW[1])}</span><em>{NEW[2]}</em></div>'
+            top = (f'<div class="add"><span class="in">{NEW[0]}</span><span class="bt" {_at(T[1] - .3)}>+ 새 페이지</span></div>')
+    meth, path, code_, codet, js, sl, sql, res = {
+        "read": ("GET", "/api/pages", "200", "OK",
+                 '[{ "id": 41, "title": "주간 회의록", … },\n { "id": 42, "title": "교육 자료 정리", … },\n { "id": 43, "title": "예산안 메모", … }]',
+                 ["GET /api/pages", "pages 표 조회", "행 3개 → JSON"], "② 조회 · select", "④ 행 3개"),
+        "create": ("POST", "/api/pages", "201", "Created", '[{ "id": 44, "title": "고객사 미팅 회의록", … }]',
+                   ["POST /api/pages", "로그인 확인 → insert", "새 행 → JSON"], "② 추가 · insert", "④ 새 행"),
+        "update": ("PATCH", "/api/pages/42", "200", "OK", '[{ "id": 42, "status": "완료", … }]',
+                   ["PATCH /api/pages/42", "작성자 확인 → update", "바뀐 행 → JSON"], "② 수정 · update", "④ 바뀐 행"),
+        "delete": ("DELETE", "/api/pages/43", "204", "No Content", "(본문 없음 · 지웠다는 상태 코드만)",
+                   ["DELETE /api/pages/43", "작성자 확인 → delete", "지운 결과 → 204"], "② 삭제 · delete", "④ 지운 행 1개"),
+    }[mode]
+    name = path.rsplit("/", 1)[-1]
     net = (f'<div class="net"><div class="nh"><b>Network</b><span>Name</span><span>Method</span><span>Status</span></div>'
-           f'<div class="nr" {_at(T[1])}><span class="fn">pages</span><span>{meth}</span>'
+           f'<div class="nr" {_at(T[1])}><span class="fn">{name}</span><span>{meth}</span>'
            f'<span class="st"><i class="pd" {_at(T[7])}>(pending)</i><b class="ok" {_at(T[7])}>{code_} {codet}</b></span></div>'
            f'<pre class="pv" {_at(T[7])}><em>Response</em>{esc(js)}</pre></div>')
     browser = (f'<div class="v2sBr"><div class="bar"><i></i><i></i><i></i><span>mini-notion.vercel.app</span></div>'
                f'<div class="app"><div class="ah">미니 노션 · 페이지 목록</div>{top}<div class="ls">{skel}{rows}</div></div>{net}</div>')
-    # ── 서버
-    if write:
-        sl = [(f"POST {path}", T[2]), ("로그인 확인 → insert", T[2] + .3), ("새 행 → JSON", T[6])]
-    else:
-        sl = [(f"GET {path}", T[2]), ("pages 표 조회", T[2] + .3), ("행 3개 → JSON", T[6])]
     server = ('<div class="v2sBx srv"><div class="bh"><b>서버</b><small>Next.js · Vercel</small></div>'
-              + "".join(f'<div class="cl" {_at(d)}>{esc(x)}</div>' for x, d in sl) + '</div>')
-    # ── DB
-    dr = "".join(f'<tr class="{"hl" if not write else ""}" {_at(T[3] + i * .15)}><td>{41 + i}</td><td>{t}</td></tr>' for i, (t, _, _) in enumerate(TASKS))
-    if write:
-        dr += f'<tr class="nw" {_at(T[3])}><td>44</td><td>{NEW[0]}</td></tr>'
+              + "".join(f'<div class="cl" {_at(d)}>{esc(x)}</div>' for x, d in zip(sl, (T[2], T[2] + .3, T[6]))) + '</div>')
+    dr = ""
+    for i, (t, _, st) in enumerate(TASKS):
+        cls = {"read": "hl", "update": "hl" if i == 1 else "", "delete": "del" if i == 2 else ""}.get(mode, "")
+        cell = (f'<td>{t}</td><td><i class="o" {_at(T[3])}>{st}</i><i class="n" {_at(T[3])}>완료</i></td>' if mode == "update" and i == 1
+                else f'<td>{t}</td><td>{st}</td>')
+        dr += f'<tr class="{cls}" {_at(T[3] + (i * .15 if mode == "read" else 0))}><td>{41 + i}</td>{cell}</tr>'
+    if mode == "create":
+        dr += f'<tr class="nw" {_at(T[3])}><td>44</td><td>{NEW[0]}</td><td>{NEW[2]}</td></tr>'
     db = (f'<div class="v2sBx db"><div class="bh"><b>DB</b><small>Supabase · pages</small></div>'
-          f'<table><tr><th>id</th><th>title</th></tr>{dr}</table></div>')
-    req = "① 요청 · " + meth
+          f'<table><tr><th>id</th><th>title</th><th>status</th></tr>{dr}</table></div>')
     return ('<div class="v2s">' + browser
-            + wire(req, f"⑤ 응답 · {code_} · JSON", T[1], T[6])
-            + server
-            + wire("② 조회 · SQL", "④ 행 · 결과", T[2] + .3, T[4])
-            + db + '</div>')
+            + wire("① 요청 · " + meth, f"⑤ 응답 · {code_}", T[1], T[6])
+            + server + wire(sql, res, T[2] + .3, T[4]) + db + '</div>')
 
 
 def steps(items, d0=1.0, gap=None):
@@ -169,6 +183,22 @@ def tools(names, pick, d_list, d_pick):
 
 
 CSS += """
+  /* 수정 · 삭제 장면 */
+  .v2sBr .rw{position:relative;}
+  .v2sBr .rw .bt2{position:absolute; right:-6px; top:-9px; text-decoration:none; font-size:11.5px; font-weight:800; color:#fff; background:#1F3A5F; border-radius:6px; padding:1px 7px;
+    animation:v2sPress .35s var(--d) both;}
+  .v2sBr .rw .bt2.dl{background:#C0392B;}
+  .v2sBr .rw em{position:relative;} .v2sBr .rw em i,.v2sBx.db td i{font-style:normal;}
+  .v2sBr .rw.ch em .o,.v2sBx.db td .o{animation:v2sOut .3s var(--d) forwards;}
+  .v2sBr .rw.ch em .n,.v2sBx.db td .n{position:absolute; left:0; color:#1E7B45; font-weight:800; opacity:0; animation:v2sIn .3s var(--d) forwards;}
+  .v2sBx.db td{position:relative;}
+  .v2sBx.db td .n{left:6px;}
+  .v2sBr .rw.ch{animation:v2sCh 1.2s var(--d) forwards;}
+  .v2sBr .rw.gone{animation:v2sGone .6s var(--d) forwards;}
+  .v2sBx.db tr.del td{animation:v2sGoneT .6s var(--d) forwards;}
+  @keyframes v2sCh{to{background:#E6F4EC; box-shadow:inset 4px 0 0 #2E8B57}}
+  @keyframes v2sGone{to{opacity:.25; text-decoration:line-through; background:#FDECEA}}
+  @keyframes v2sGoneT{to{color:#9AA5B1; text-decoration:line-through; background:#FDECEA}}
   /* 2부 · AI 대화 장면 (v2sA) */
   .v2sA{grid-template-columns:400px 1fr 250px 1fr 290px;}
   .v2sAg{border:1.5px solid #C9CFD8; border-radius:12px; background:#fff; overflow:hidden; display:flex; flex-direction:column; box-shadow:0 6px 18px rgba(22,35,58,.10);}

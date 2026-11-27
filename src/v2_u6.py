@@ -141,8 +141,7 @@ def slides():
               + src(("OpenAI · ChatGPT plugins", "https://openai.com/index/chatgpt-plugins/"),
                     ("Claude · Tool use GA", "https://claude.com/blog/tool-use-ga"), ANN, AAIF), T),
         light("연결 수가 늘어나는 문제", wires()
-              + note("발표문", "「새 데이터 소스마다 따로 구현이 필요하다」 · Anthropic 2024-11-25 · 앱 · 서비스 수는 예")
-              + src(ANN), T),
+              + note("발표문", "「새 데이터 소스마다 따로 구현이 필요하다」 · Anthropic 2024-11-25 · 앱 · 서비스 수는 예"), T),
         light("USB-C 포트", phmap("usbc_port.webp", "노트북의 USB-C 포트", "사진 · Logant547 · CC BY 4.0",
                                     "https://commons.wikimedia.org/wiki/File:USB-C_connector_on_a_laptop.jpg", viz2.maprows([
             ("노트북", "AI 앱 · 호스트", "Claude Code · Claude · ChatGPT"), ("USB-C 규격", "MCP", "연결 · 주고받는 형식"),
@@ -152,8 +151,7 @@ def slides():
               + src(INTRO), T),
         light("MCP 구조", arch()
               + viz2.tiles([("도구 (Tools)", "AI 가 실행하는 기능 · 새 페이지"), ("리소스 (Resources)", "AI 가 읽는 자료 · 파일 · 표"),
-                            ("프롬프트 (Prompts)", "미리 만든 요청 틀")], 3)
-              + src(ARCH), T),
+                            ("프롬프트 (Prompts)", "미리 만든 요청 틀")], 3), T),
         light("MCP 동작", agent("Claude Code", [
             ("me", "마감 지난 페이지 몇 개야?", .3), ("tool", "<em>supabase</em> 도구 목록 읽기", 1.3),
             ("tool", "<em>execute_sql</em> select count(*) from pages where date &lt; today …", 2.0),
@@ -164,8 +162,7 @@ def slides():
             '<tr><td>보고서</td><td>12/04</td></tr></table></div>',
             (("도구 호출", 2.0), ("결과 · 2", 3.6), ("SQL", 2.4), ("행 2개", 3.2)))
               + v2scene.steps([("①", "질문", .3), ("②", "도구 목록 읽기", 1.3), ("③", "도구 고르기 · 실행", 2.0),
-                               ("④", "결과 받기", 3.6), ("⑤", "답하기", 4.4)])
-              + src(ARCH, SMCP), T),
+                               ("④", "결과 받기", 3.6), ("⑤", "답하기", 4.4)]), T),
         light("API와 MCP", viz2.pair(
             "API", [("부르는 쪽", "내 앱 코드"), ("형식", "서비스마다 다름"), ("쓰는 때", "이용자가 앱을 쓸 때 (2-1 · 2-5)")],
             "MCP", [("부르는 쪽", "AI · Claude Code · ChatGPT"), ("형식", "하나의 규격 · 도구 목록"), ("안에서", "MCP 서버가 각 서비스 API 호출")], hl="r"), T),
@@ -190,8 +187,7 @@ def slides():
               + note("Playwright MCP", "「보안 경계가 아님」 · 공식 문서 · 믿을 수 있는 사이트만")
               + src(SMCP, ("Playwright MCP", "https://github.com/microsoft/playwright-mcp")), T),
         light("캘린더 일정 → 회의록 페이지", cal_to_tasks()
-              + note("준비", "claude.ai 에서 Google Calendar 커넥터 켜기 · 읽기 전용 · Supabase MCP 는 쓰기 허용 · 개발용 DB")
-              + src(GCAL, CC, SMCP), T),
+              + note("준비", "claude.ai 에서 Google Calendar 커넥터 켜기 · 읽기 전용 · Supabase MCP 는 쓰기 허용 · 개발용 DB"), T),
         # ── 실습
         lab("2-6", "MCP 연결 · 캘린더 → 페이지", T, "Claude Code 에 MCP 를 붙여 캘린더 일정을 미니 노션 페이지로 옮긴다",
             ["claude.ai 에서 Google Calendar 커넥터 켜기", "Supabase MCP 연결 · 로그인", "/mcp 로 두 서버 확인",

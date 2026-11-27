@@ -285,41 +285,40 @@ def slides():
               + note("2부", "클라이언트 = 미니 노션 화면 · 서버 = Next.js (Vercel) · DB = Supabase"), T),
         # ── HTTP
         light("HTTP", http_what()
-              + note("HTTP", "HyperText Transfer Protocol · 클라이언트와 서버가 주고받는 글의 형식 · 만든 회사가 달라도 같은 약속")
-              + src(MDN_HTTP), T),
+              + note("HTTP", "HyperText Transfer Protocol · 클라이언트와 서버가 주고받는 글의 형식 · 만든 회사가 달라도 같은 약속"), T),
         light("편지 비유", letter()
               + note("요청 하나 = 편지 한 통", "보내면 반드시 답장 한 통 · 답장 첫 줄의 도장 = 상태 코드"), T),
         light("HTTP 메시지", message()
-              + note("직접 보기", "F12 → Network → 새로고침 · 요청 줄을 눌러 Headers · Response")
-              + src(MDN_MSG, NETP), T),
+              + note("직접 보기", "F12 → Network → 새로고침 · 요청 줄을 눌러 Headers · Response"), T),
         light("HTTP 특징", viz2.tiles([
             ("요청 → 응답", "클라이언트가 먼저 요청 · 서버는 답만"), ("한 번에 하나", "요청 하나에 응답 하나"),
             ("기억하지 않음", "요청마다 따로 · 로그인 정보를 매번 헤더에"), ("주소 맨 앞", "http:// · https:// · 쓸 약속 표시")], 4)
-              + note("HTTP", "클라이언트와 서버가 주고받는 글의 형식 · 웹의 기본 약속")
-              + src(MDN_HTTP), T),
+              + note("HTTP", "클라이언트와 서버가 주고받는 글의 형식 · 웹의 기본 약속"), T),
         light("HTTPS", https_scene()
               + viz2.tiles([("S = Secure", "HTTP 내용을 TLS 로 암호화"), ("인증서", "접속한 서버가 진짜인지 확인 · 주소창 자물쇠"),
-                            ("이 강의", "Vercel · Supabase 주소는 https · 따로 설정 없음")], 3)
-              + src(("MDN · HTTPS", "https://developer.mozilla.org/ko/docs/Glossary/HTTPS"), ("MDN · TLS", "https://developer.mozilla.org/ko/docs/Glossary/TLS")), T),
+                            ("이 강의", "Vercel · Supabase 주소는 https · 따로 설정 없음")], 3), T),
         light("요청 방식과 상태 코드", viz2.pair(
             "방식", [("GET", "가져오기 · 목록 보기"), ("POST", "새로 만들기 · 새 페이지"),
                     ("PATCH", "고치기 · 제목 · 상태 변경"), ("DELETE", "지우기 · 페이지 삭제")],
             "상태 코드", [("200 · 201", "성공 · 만듦"), ("401 · 403", "로그인 필요 · 권한 없음"),
                        ("404", "주소 · 행 없음"), ("500", "서버 안의 오류")], hl="")
-              + note("에러를 전할 때", "방식 · 주소 · 상태 코드 세 가지를 같이")
-              + src(MDN_M, MDN_S), T),
+              + note("에러를 전할 때", "방식 · 주소 · 상태 코드 세 가지를 같이"), T),
         # ── API
         light("API", counter()
               + note("은행 창구", "손님은 금고에 직접 못 들어감 · 정해진 창구 · 신청서로만 · 외부 API 도 같은 구조 (2-5)"), T),
         light("CRUD", crud()
               + note("CRUD", "데이터를 다루는 네 동작 · 메모장에 쓰기 · 읽기 · 고치기 · 지우기와 같음 · 거의 모든 앱의 기본"), T),
         # ── 장면
-        light("요청과 응답", reqres()
+        light("조회 요청", reqres()
               + steps([("①", "화면이 데이터 요청", 1.0), ("②", "서버가 SQL 로 DB 조회", 2.1), ("③", "DB 가 행 3개 돌려줌", 2.6),
-                       ("④", "서버가 JSON 으로 응답", 4.5), ("⑤", "받은 데이터로 화면 그림", 5.8)])
-              + src(SB_API, NETP), T),
+                       ("④", "서버가 JSON 으로 응답", 4.5), ("⑤", "받은 데이터로 화면 그림", 5.8)]), T),
         light("쓰기 요청", reqres(write=True)
               + steps([("①", "「+ 새 페이지」 · POST", 1.0), ("②", "서버가 insert", 2.1), ("③", "DB 에 새 행", 2.6),
-                       ("④", "201 · 만든 행 응답", 4.5), ("⑤", "목록에 페이지 추가", 5.8)])
-              + src(SB_API, MDN_M), T),
+                       ("④", "201 · 만든 행 응답", 4.5), ("⑤", "목록에 페이지 추가", 5.8)]), T),
+        light("수정 요청", reqres(mode="update")
+              + steps([("①", "「완료」 · PATCH", 1.0), ("②", "작성자 확인 · update", 2.1), ("③", "42번 행 상태 바뀜", 2.6),
+                       ("④", "200 · 바뀐 행 응답", 4.5), ("⑤", "목록 상태 바뀜", 5.8)]), T),
+        light("삭제 요청", reqres(mode="delete")
+              + steps([("①", "「삭제」 · DELETE", 1.0), ("②", "작성자 확인 · delete", 2.1), ("③", "43번 행 지워짐", 2.6),
+                       ("④", "204 · 본문 없음", 4.5), ("⑤", "목록에서 빠짐", 5.8)]), T),
     ]

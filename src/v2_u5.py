@@ -129,8 +129,7 @@ def slides():
         light("Next.js 서버의 키 보호", key_scene()
               + codemap([("app/api/holidays/route.ts", "Next.js 서버 코드 · Vercel 에서 실행"),
                          ("export function GET(request)", "주소로 요청이 오면 실행"),
-                         ("process.env.HOLIDAY_API_KEY", "키는 서버 안에서만 읽기")])
-              + src(FUNC), T),
+                         ("process.env.HOLIDAY_API_KEY", "키는 서버 안에서만 읽기")]), T),
         light("공휴일 차단 대화 예시", chat([
             ("me", "날짜가 공휴일이면 저장을 막아 줘. 공휴일은 공공데이터포털 특일 정보 API 에서 받고, 키는 Next.js 서버에서만 읽게 해 줘"),
             ("ai", "계획 · app/api/holidays/route.ts 생성 → 추가 창에서 호출. 경고 문구는 「공휴일 · 기독탄신일」 형식으로 할까요?"),
