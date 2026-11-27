@@ -99,19 +99,13 @@ def slides():
               + note("이전 이름", "anon 키 = publishable · service_role 키 = secret · 2026년 말 지원 종료")
               + src(KEYS), T),
         # ── CRUD
-        light("CRUD", viz2.maprows([
-            ("Create · 저장", "새 행 추가", "새 페이지"),
-            ("Read · 조회", "행 읽기", "페이지 목록 보기"),
-            ("Update · 수정", "행 고치기", "상태 바꾸기"),
-            ("Delete · 삭제", "행 지우기", "페이지 삭제")], "CRUD", "미니 노션에서")
-              + note("CRUD", "데이터를 다루는 네 동작 · 거의 모든 앱의 기본"), T),
         light("CRUD 코드 뜻", codemap([
             ('supabase.from("pages").insert({ title: "주간 회의록", … })', "페이지 표에 한 줄 저장"),
             ('supabase.from("pages").select("*").order("date")', "페이지 모두 · 날짜 순 조회"),
             ('supabase.from("pages").update({ status: "완료" }).eq("id", 7)', "7번 페이지 완료로"),
             ('supabase.from("pages").delete().eq("id", 7)', "7번 페이지 삭제")],
             ask="페이지 저장 · 조회를 Next.js 서버에서 Supabase pages 표로 하게 바꿔 줘", title="app/api/pages/route.ts · Claude Code가 쓴 코드 · 예")
-              + note("확인", "Supabase 대시보드 Table Editor · 행이 늘고 줄어드는지"), T),
+              + note("CRUD (2-1)", "insert · select · update · delete · 확인은 Supabase 대시보드 Table Editor"), T),
         # ── 로그인
         light("Supabase Auth 로그인", flow([("가입", "이메일 · 비밀번호"), ("확인 메일", "링크 클릭"), ("로그인", "signInWithPassword"),
                                             ("페이지 저장", "created_by = 로그인 계정")], hl=3)

@@ -1162,6 +1162,33 @@
   .v21tls .rw.s .mid{border-color:#2E8B57; background:#E6F4EC;}
   .v21tls .mid .who{display:block; font-size:12px; font-weight:800; color:#6B7785;}
   .v21tls .mid code{display:block; font-size:13.5px; line-height:1.45; color:#C0392B; background:none; font-weight:700;} .v21tls .rw.s .mid code{color:#1E7B45;}
+  /* 2-1 · CRUD (v21crud) */
+  .v21crud{display:grid; grid-template-columns:400px 1fr; gap:22px; align-items:start; margin:0 0 12px;}
+  .v21cb .app{min-height:0;}
+  .v21cb .ls2{display:flex; flex-direction:column; gap:6px;}
+  .v21cb .row{display:flex; justify-content:space-between; align-items:center; height:34px; padding:0 12px; border-radius:8px; background:#F1F4F8; border:2px solid transparent;
+    animation:v21rd 1.2s var(--r) both;}
+  .v21cb .row b{font-size:15px; font-weight:600; color:#16233A;} .v21cb .row em{position:relative; font-style:normal; font-size:13px; color:#6B7785; min-width:44px; text-align:right;}
+  .v21cb .row.nw{opacity:0; animation:v21cIn .4s var(--c) forwards, v21rd 1.2s var(--r) both;} .v21cb .row.nw{background:#FFF3E0;}
+  .v21cb .row.up .o{font-style:normal; animation:v21cOut .3s var(--u) forwards;} .v21cb .row.up .n{position:absolute; right:0; font-style:normal; color:#1E7B45; font-weight:800; opacity:0; animation:v21cIn .3s var(--u) forwards;}
+  .v21cb .row.up{animation:v21rd 1.2s var(--r) both, v21up 1s var(--u) forwards;}
+  .v21cb .row.del{animation:v21rd 1.2s var(--r) both, v21del .6s var(--x) forwards;}
+  .v21crud .cds{display:flex; flex-direction:column; gap:8px;}
+  .v21crud .hd,.v21crud .cd{display:grid; grid-template-columns:54px 110px 1fr 90px 90px; gap:10px; align-items:center;}
+  .v21crud .hd{padding:0 12px;} .v21crud .hd span{font-size:13px; font-weight:800; color:#6B7785;}
+  .v21crud .cd{border:2px solid #E3E7EC; border-radius:12px; background:#fff; padding:8px 10px; opacity:.3; animation:v21cLit .4s var(--d) forwards;}
+  .v21crud .cd .L{font-size:30px; font-weight:900; color:#F28C28; text-align:center;}
+  .v21crud .cd .w b{display:block; font-size:18px; color:#16233A;} .v21crud .cd .w small{font-size:12.5px; color:#6B7785;}
+  .v21crud .cd .ex{font-size:15px; color:#3A4657;}
+  .v21crud .cd code{font-size:14px; font-weight:800; text-align:center; border-radius:6px; padding:4px 0;}
+  .v21crud .cd .m{color:#1F4E8C; background:#E3ECF8;} .v21crud .cd .q{color:#1E7B45; background:#E6F4EC;}
+  @keyframes v21cIn{from{opacity:0} to{opacity:1}}
+  @keyframes v21cOut{to{opacity:0}}
+  @keyframes v21cLit{to{opacity:1; border-color:#F28C28}}
+  @keyframes v21rd{0%,100%{border-color:transparent} 40%{border-color:#264DE4}}
+  @keyframes v21up{to{background:#E6F4EC}}
+  @keyframes v21del{to{opacity:.3; text-decoration:line-through; background:#FDECEA}}
+  @media print{.v21cb .row.nw,.v21crud .cd{opacity:1; animation:none}}
 
   /* 2-1 · SQL 작성의 변화 (v2q · 카드는 v2h 공용) */
   .v2hQ{font-size:16px; font-weight:700; color:#1F3A5F; margin:-4px 0 10px;}
@@ -1630,6 +1657,14 @@
   <div class="body"><div class="mid"><div class="v21def"><b>API</b><span>Application Programming Interface · 프로그램이 다른 프로그램에 일을 맡기는 정해진 창구</span></div><div class="v21api"><div class="cu"><div class="h">손님 · 브라우저</div><div class="slip" style="--d:2.0s"><em>신청서 = 요청</em>조회 · 페이지 목록</div><div class="slip bad" style="--d:4.0s"><em>신청서 = 요청</em>금고 직접 열기</div></div><div class="ct"><div class="h">창구 = API<small>정해진 요청만 받음</small></div><div class="w on" style="--d:0.4s; --p:2.4s"><b>조회</b><code>GET</code><span>/api/pages</span></div><div class="w" style="--d:0.7s; --p:2.4s"><b>만들기</b><code>POST</code><span>/api/pages</span></div><div class="w" style="--d:1.0s; --p:2.4s"><b>변경</b><code>PATCH</code><span>/api/pages/41</span></div><div class="w" style="--d:1.3s; --p:2.4s"><b>삭제</b><code>DELETE</code><span>/api/pages/41</span></div><div class="rej" style="--d:4.4s">창구 목록에 없는 요청 → 거절</div></div><div class="wall"><span>직원만 출입</span></div><div class="vault"><div class="h">금고 · DB</div><div class="sf">직원 = 서버</div><div class="r" style="--d:3.0s">41 · 주간 회의록</div><div class="r" style="--d:3.15s">42 · 교육 자료 정리</div><div class="r" style="--d:3.3s">43 · 예산안 메모</div></div></div><div class="dbnote"><span>은행 창구</span> 손님은 금고에 직접 못 들어감 · 정해진 창구 · 신청서로만 · 외부 API 도 같은 구조 (2-5)</div></div></div>
 </section>
 
+<section class="slide lt" data-title="CRUD">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">2-1</span></div>
+  <h2 class="s-title sm">CRUD</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v21crud"><div class="v2sBr v21cb"><div class="bar"><i></i><i></i><i></i><span>mini-notion.vercel.app</span></div><div class="app"><div class="ah">미니 노션 · 페이지 목록</div><div class="ls2"><div class="row rd" style="--r:1.9s"><b>주간 회의록</b><em>작성 중</em></div><div class="row rd up" style="--r:1.9s; --u:3.3s"><b>교육 자료 정리</b><em><i class="o">초안</i><i class="n">완료</i></em></div><div class="row rd del" style="--r:1.9s; --x:4.7s"><b>예산안 메모</b><em>작성 중</em></div><div class="row rd nw" style="--c:.5s; --r:1.9s"><b>고객사 미팅 회의록</b><em>초안</em></div></div></div></div><div class="cds"><div class="hd"><span></span><span>뜻</span><span>미니 노션에서</span><span>HTTP</span><span>SQL</span></div><div class="cd" style="--d:0.5s"><span class="L">C</span><div class="w"><b>만들기</b><small>Create</small></div><div class="ex">새 페이지</div><code class="m">POST</code><code class="q">insert</code></div><div class="cd" style="--d:1.9s"><span class="L">R</span><div class="w"><b>읽기</b><small>Read</small></div><div class="ex">목록 · 페이지 열기</div><code class="m">GET</code><code class="q">select</code></div><div class="cd" style="--d:3.3s"><span class="L">U</span><div class="w"><b>고치기</b><small>Update</small></div><div class="ex">상태 · 제목 바꾸기</div><code class="m">PATCH</code><code class="q">update</code></div><div class="cd" style="--d:4.7s"><span class="L">D</span><div class="w"><b>지우기</b><small>Delete</small></div><div class="ex">페이지 삭제</div><code class="m">DELETE</code><code class="q">delete</code></div></div></div><div class="dbnote"><span>CRUD</span> 데이터를 다루는 네 동작 · 메모장에 쓰기 · 읽기 · 고치기 · 지우기와 같음 · 거의 모든 앱의 기본</div></div></div>
+</section>
+
 <section class="slide lt" data-title="요청과 응답">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">2-1</span></div>
@@ -1947,20 +1982,12 @@ order by date;</pre></div><dl><dt>사람이 하는 일</dt><dd>문법 학습 · 
   <div class="body"><div class="mid"><div class="v2pair"><div class="v2p on"><div class="v2ph">publishable 키</div><div class="v2pc" style="--d:0.00s"><b>모양</b><span>sb_publishable_…</span></div><div class="v2pc" style="--d:0.08s"><b>두는 곳</b><span>브라우저 · 앱 코드</span></div><div class="v2pc" style="--d:0.16s"><b>할 수 있는 일</b><span>RLS 규칙 안에서만</span></div></div><div class="v2p"><div class="v2ph">secret 키</div><div class="v2pc" style="--d:0.00s"><b>모양</b><span>sb_secret_…</span></div><div class="v2pc" style="--d:0.08s"><b>두는 곳</b><span>서버 전용 · 브라우저 · GitHub 금지</span></div><div class="v2pc" style="--d:0.16s"><b>할 수 있는 일</b><span>RLS 무시 · 모든 행</span></div></div></div><div class="dbnote"><span>이전 이름</span> anon 키 = publishable · service_role 키 = secret · 2026년 말 지원 종료</div><div class="src">출처 · <a href="https://supabase.com/docs/guides/api/api-keys" target="_blank" rel="noopener">Supabase · API keys</a></div></div></div>
 </section>
 
-<section class="slide lt" data-title="CRUD">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">2-4</span></div>
-  <h2 class="s-title sm">CRUD</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2ms"><div class="v2mh"><span>CRUD</span><i></i><span>미니 노션에서</span></div><div class="v2m" style="--d:0.00s"><div class="a">Create · 저장</div><i>→</i><div class="b"><b>새 행 추가</b><small>새 페이지</small></div></div><div class="v2m" style="--d:0.12s"><div class="a">Read · 조회</div><i>→</i><div class="b"><b>행 읽기</b><small>페이지 목록 보기</small></div></div><div class="v2m" style="--d:0.24s"><div class="a">Update · 수정</div><i>→</i><div class="b"><b>행 고치기</b><small>상태 바꾸기</small></div></div><div class="v2m" style="--d:0.36s"><div class="a">Delete · 삭제</div><i>→</i><div class="b"><b>행 지우기</b><small>페이지 삭제</small></div></div></div><div class="dbnote"><span>CRUD</span> 데이터를 다루는 네 동작 · 거의 모든 앱의 기본</div></div></div>
-</section>
-
 <section class="slide lt" data-title="CRUD 코드 뜻">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">2-4</span></div>
   <h2 class="s-title sm">CRUD 코드 뜻</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1cmask"><span>요청</span><b>페이지 저장 · 조회를 Next.js 서버에서 Supabase pages 표로 하게 바꿔 줘</b></div><div class="v1cmap"><div class="v1cmt"><span>app/api/pages/route.ts · Claude Code가 쓴 코드 · 예</span><span>뜻</span></div><div class="v1cmr" style="--d:0.30s"><code>supabase.from("pages").insert({ title: "주간 회의록", … })</code><i>→</i><span>페이지 표에 한 줄 저장</span></div><div class="v1cmr" style="--d:0.65s"><code>supabase.from("pages").select("*").order("date")</code><i>→</i><span>페이지 모두 · 날짜 순 조회</span></div><div class="v1cmr" style="--d:1.00s"><code>supabase.from("pages").update({ status: "완료" }).eq("id", 7)</code><i>→</i><span>7번 페이지 완료로</span></div><div class="v1cmr" style="--d:1.35s"><code>supabase.from("pages").delete().eq("id", 7)</code><i>→</i><span>7번 페이지 삭제</span></div></div><div class="dbnote"><span>확인</span> Supabase 대시보드 Table Editor · 행이 늘고 줄어드는지</div></div></div>
+  <div class="body"><div class="mid"><div class="v1cmask"><span>요청</span><b>페이지 저장 · 조회를 Next.js 서버에서 Supabase pages 표로 하게 바꿔 줘</b></div><div class="v1cmap"><div class="v1cmt"><span>app/api/pages/route.ts · Claude Code가 쓴 코드 · 예</span><span>뜻</span></div><div class="v1cmr" style="--d:0.30s"><code>supabase.from("pages").insert({ title: "주간 회의록", … })</code><i>→</i><span>페이지 표에 한 줄 저장</span></div><div class="v1cmr" style="--d:0.65s"><code>supabase.from("pages").select("*").order("date")</code><i>→</i><span>페이지 모두 · 날짜 순 조회</span></div><div class="v1cmr" style="--d:1.00s"><code>supabase.from("pages").update({ status: "완료" }).eq("id", 7)</code><i>→</i><span>7번 페이지 완료로</span></div><div class="v1cmr" style="--d:1.35s"><code>supabase.from("pages").delete().eq("id", 7)</code><i>→</i><span>7번 페이지 삭제</span></div></div><div class="dbnote"><span>CRUD (2-1)</span> insert · select · update · delete · 확인은 Supabase 대시보드 Table Editor</div></div></div>
 </section>
 
 <section class="slide lt" data-title="Supabase Auth 로그인">

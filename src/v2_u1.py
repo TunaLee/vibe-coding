@@ -117,6 +117,33 @@ CSS = """
   .v21tls .rw.s .mid{border-color:#2E8B57; background:#E6F4EC;}
   .v21tls .mid .who{display:block; font-size:12px; font-weight:800; color:#6B7785;}
   .v21tls .mid code{display:block; font-size:13.5px; line-height:1.45; color:#C0392B; background:none; font-weight:700;} .v21tls .rw.s .mid code{color:#1E7B45;}
+  /* 2-1 · CRUD (v21crud) */
+  .v21crud{display:grid; grid-template-columns:400px 1fr; gap:22px; align-items:start; margin:0 0 12px;}
+  .v21cb .app{min-height:0;}
+  .v21cb .ls2{display:flex; flex-direction:column; gap:6px;}
+  .v21cb .row{display:flex; justify-content:space-between; align-items:center; height:34px; padding:0 12px; border-radius:8px; background:#F1F4F8; border:2px solid transparent;
+    animation:v21rd 1.2s var(--r) both;}
+  .v21cb .row b{font-size:15px; font-weight:600; color:#16233A;} .v21cb .row em{position:relative; font-style:normal; font-size:13px; color:#6B7785; min-width:44px; text-align:right;}
+  .v21cb .row.nw{opacity:0; animation:v21cIn .4s var(--c) forwards, v21rd 1.2s var(--r) both;} .v21cb .row.nw{background:#FFF3E0;}
+  .v21cb .row.up .o{font-style:normal; animation:v21cOut .3s var(--u) forwards;} .v21cb .row.up .n{position:absolute; right:0; font-style:normal; color:#1E7B45; font-weight:800; opacity:0; animation:v21cIn .3s var(--u) forwards;}
+  .v21cb .row.up{animation:v21rd 1.2s var(--r) both, v21up 1s var(--u) forwards;}
+  .v21cb .row.del{animation:v21rd 1.2s var(--r) both, v21del .6s var(--x) forwards;}
+  .v21crud .cds{display:flex; flex-direction:column; gap:8px;}
+  .v21crud .hd,.v21crud .cd{display:grid; grid-template-columns:54px 110px 1fr 90px 90px; gap:10px; align-items:center;}
+  .v21crud .hd{padding:0 12px;} .v21crud .hd span{font-size:13px; font-weight:800; color:#6B7785;}
+  .v21crud .cd{border:2px solid #E3E7EC; border-radius:12px; background:#fff; padding:8px 10px; opacity:.3; animation:v21cLit .4s var(--d) forwards;}
+  .v21crud .cd .L{font-size:30px; font-weight:900; color:#F28C28; text-align:center;}
+  .v21crud .cd .w b{display:block; font-size:18px; color:#16233A;} .v21crud .cd .w small{font-size:12.5px; color:#6B7785;}
+  .v21crud .cd .ex{font-size:15px; color:#3A4657;}
+  .v21crud .cd code{font-size:14px; font-weight:800; text-align:center; border-radius:6px; padding:4px 0;}
+  .v21crud .cd .m{color:#1F4E8C; background:#E3ECF8;} .v21crud .cd .q{color:#1E7B45; background:#E6F4EC;}
+  @keyframes v21cIn{from{opacity:0} to{opacity:1}}
+  @keyframes v21cOut{to{opacity:0}}
+  @keyframes v21cLit{to{opacity:1; border-color:#F28C28}}
+  @keyframes v21rd{0%,100%{border-color:transparent} 40%{border-color:#264DE4}}
+  @keyframes v21up{to{background:#E6F4EC}}
+  @keyframes v21del{to{opacity:.3; text-decoration:line-through; background:#FDECEA}}
+  @media print{.v21cb .row.nw,.v21crud .cd{opacity:1; animation:none}}
 """
 
 
@@ -231,6 +258,27 @@ def https_scene():
             + '</div>')
 
 
+def crud():
+    """CRUD — 미니 노션 페이지 목록에서 네 동작이 차례로 일어남(만들기 → 읽기 → 고치기 → 지우기).
+    오른쪽 카드 네 장이 같은 때에 켜짐 · 카드마다 HTTP 방식 · SQL 단어. 칸은 제자리."""
+    T = {"c": .5, "r": 1.9, "u": 3.3, "d": 4.7}
+    rows = ('<div class="row rd" style="--r:1.9s"><b>주간 회의록</b><em>작성 중</em></div>'
+            '<div class="row rd up" style="--r:1.9s; --u:3.3s"><b>교육 자료 정리</b><em><i class="o">초안</i><i class="n">완료</i></em></div>'
+            '<div class="row rd del" style="--r:1.9s; --x:4.7s"><b>예산안 메모</b><em>작성 중</em></div>'
+            '<div class="row rd nw" style="--c:.5s; --r:1.9s"><b>고객사 미팅 회의록</b><em>초안</em></div>')
+    app = ('<div class="v2sBr v21cb"><div class="bar"><i></i><i></i><i></i><span>mini-notion.vercel.app</span></div>'
+           f'<div class="app"><div class="ah">미니 노션 · 페이지 목록</div><div class="ls2">{rows}</div></div></div>')
+    cards = [("C", "Create", "만들기", "새 페이지", "POST", "insert", "c"),
+             ("R", "Read", "읽기", "목록 · 페이지 열기", "GET", "select", "r"),
+             ("U", "Update", "고치기", "상태 · 제목 바꾸기", "PATCH", "update", "u"),
+             ("D", "Delete", "지우기", "페이지 삭제", "DELETE", "delete", "d")]
+    c = "".join(f'<div class="cd" style="--d:{T[k]}s"><span class="L">{L}</span><div class="w"><b>{ko}</b><small>{en}</small></div>'
+                f'<div class="ex">{ex}</div><code class="m">{m}</code><code class="q">{q}</code></div>'
+                for L, en, ko, ex, m, q, k in cards)
+    head = '<div class="hd"><span></span><span>뜻</span><span>미니 노션에서</span><span>HTTP</span><span>SQL</span></div>'
+    return f'<div class="v21crud">{app}<div class="cds">{head}{c}</div></div>'
+
+
 def slides():
     return [
         light("웹 앱의 3요소", three()
@@ -263,6 +311,8 @@ def slides():
         # ── API
         light("API", counter()
               + note("은행 창구", "손님은 금고에 직접 못 들어감 · 정해진 창구 · 신청서로만 · 외부 API 도 같은 구조 (2-5)"), T),
+        light("CRUD", crud()
+              + note("CRUD", "데이터를 다루는 네 동작 · 메모장에 쓰기 · 읽기 · 고치기 · 지우기와 같음 · 거의 모든 앱의 기본"), T),
         # ── 장면
         light("요청과 응답", reqres()
               + steps([("①", "화면이 데이터 요청", 1.0), ("②", "서버가 SQL 로 DB 조회", 2.1), ("③", "DB 가 행 3개 돌려줌", 2.6),
