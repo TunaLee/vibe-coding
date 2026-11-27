@@ -92,7 +92,8 @@ def build():
         for i, (u, _, _, _) in enumerate(kit.UNITS, 1):
             mod = importlib.import_module(f"{pre}{i}")
             css += getattr(mod, "CSS", "")
-            parts += [kit.cover(u), kit.roadmap(u)] + mod.slides() + [kit.nextup(u)]
+            rm = [kit.roadmap(u)] if (n == 1 or i == 1) else []   # 2부 지도는 첫 단원에서 한 번만
+            parts += [kit.cover(u)] + rm + mod.slides() + [kit.nextup(u)]
         _write(f"part{n}.html", _tpl(css), f"{n}부 {PARTS[n - 1][1]}", parts)
     p3 = vibe3.slides()
     p3[0] = p3[0].replace('data-title="표지"', 'id="p3" data-title="3부 하네스 엔지니어링"', 1)
