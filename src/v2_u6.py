@@ -1,7 +1,7 @@
 """2-6 외부 서비스 연결 (API · MCP).
 
 API 키(무엇 · 비유 출입증 · 보관 위치 · .env · .gitignore) → 공공데이터포털 특일 정보 발급 → 요청 · 응답
-→ 서버 함수(키 숨기기) → 요청 예 → MCP(Claude Code가 Supabase 직접 다루기 · 연결 · 안전 설정 · 대화 예) → 실습.
+→ 서버 함수(키 숨기기) → 요청 예 → MCP(Claude Code가 Supabase 직접 다루기 · 연결 · 안전 설정 · 대화 예 · 캘린더 일정 → 할 일) → 실습.
 API · MCP 개념은 2-3 에서 설명 — 여기서는 「발급 · 보관 · 붙이기」만.
 사실 출처: data.go.kr/data/15012690/openapi.do · vercel.com/docs/functions · supabase.com/docs/guides/getting-started/mcp
 · code.claude.com/docs/en/mcp
@@ -18,8 +18,71 @@ T = "2-6"
 GEN = ("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")
 HOLI = ("공공데이터포털 · 한국천문연구원 특일 정보", "https://www.data.go.kr/data/15012690/openapi.do")
 FUNC = ("Vercel · Functions", "https://vercel.com/docs/functions")
-CSS = v2anim.CSS
+CSS = v2anim.CSS + """
+  /* 2-6 · 캘린더 일정 → 할 일 (v2c) */
+  .v2c{display:grid; grid-template-columns:310px 52px 1fr 52px 330px; align-items:stretch; margin:0 0 12px;}
+  .v2cW{border:1.5px solid #D0D7DE; border-radius:12px; background:#fff; overflow:hidden; display:flex; flex-direction:column;}
+  .v2cH{display:flex; align-items:center; gap:8px; padding:10px 12px; background:#F6F8FA; border-bottom:1px solid #D0D7DE; font-size:16.5px; font-weight:800; color:#16233A;}
+  .v2cH i{width:12px; height:12px; border-radius:3px;} .v2cH i.g{background:#1A73E8;} .v2cH i.o{background:#D97757;} .v2cH i.b{background:#3ECF8E;}
+  .v2cWk{display:grid; grid-template-columns:repeat(5,1fr); flex:1;}
+  .v2cD{border-right:1px solid #E3E7EC; padding:8px 4px; display:flex; flex-direction:column; align-items:center; gap:2px; min-height:270px;}
+  .v2cD:last-child{border-right:0;} .v2cD span{font-size:13px; color:#6B7785;} .v2cD b{font-size:15.5px; color:#16233A; margin-bottom:10px;}
+  .v2cD .ev{width:100%; box-sizing:border-box; font-size:13.5px; font-weight:700; color:#fff; background:#1A73E8; border-radius:6px; padding:10px 3px; text-align:center; word-break:keep-all; line-height:1.3;
+    outline:3px solid transparent; outline-offset:2px; animation:v2cRead .4s var(--d) forwards;}
+  .v2cD .ev.c1{--c:#F28C28;} .v2cD .ev.c2{--c:#8E44AD;} .v2cD .ev.c3{--c:#2E8B57;}
+  .v2cChat{padding:10px 12px; display:flex; flex-direction:column; gap:8px;}
+  .v2cChat .m{font-size:15.5px; border-radius:10px; padding:7px 11px; opacity:0; animation:v2cIn .35s var(--d) forwards;}
+  .v2cChat .me{align-self:flex-end; background:#FFF1E0; color:#16233A; font-weight:600;}
+  .v2cChat .ai{background:#EEF3FA; border:1px solid #C9D6E6; color:#16233A;}
+  .v2cChat .tool{font-family:var(--mono); font-size:13.5px; color:#3A4657; background:#F4F6F9; border:1px dashed #9AA5B1;}
+  .v2cChat .tool em{font-style:normal; font-weight:800; margin-right:6px;} .v2cChat .tool.l em{color:#1A73E8;} .v2cChat .tool.r em{color:#1F9D63;}
+  .v2cP{align-self:center; justify-self:center; display:flex; flex-direction:column; align-items:center; gap:2px; border:2px solid #C9CFD8; border-radius:10px;
+    padding:6px 4px; width:46px; background:#fff; color:#9AA5B1; animation:v2cPlug .5s var(--d) forwards;}
+  .v2cP b{font-size:12px;} .v2cP span{font-size:11.5px;}
+  .v2cP.l{--pc:#1A73E8;} .v2cP.r{--pc:#1F9D63;}
+  .v2cT{width:100%; border-collapse:collapse; font-size:15.5px;}
+  .v2cT th{text-align:left; font-size:12.5px; color:#6B7785; font-weight:700; padding:7px 10px; border-bottom:1px solid #E3E7EC;}
+  .v2cT td{padding:9px 10px; border-bottom:1px solid #EEF1F4; color:#16233A;}
+  .v2cT td small{margin-left:6px; font-size:11px; font-weight:800; color:#1A73E8; background:#E8F0FE; border-radius:8px; padding:1px 6px;}
+  .v2cT tr.nw{opacity:0; animation:v2cRow .5s var(--d) forwards;}
+  .v2cT tr.c1{--c:#F28C28;} .v2cT tr.c2{--c:#8E44AD;} .v2cT tr.c3{--c:#2E8B57;}
+  @keyframes v2cIn{from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:none}}
+  @keyframes v2cRead{to{outline-color:var(--c)}}
+  @keyframes v2cPlug{to{border-color:var(--pc); color:var(--pc); background:#fff; box-shadow:0 0 0 4px rgba(0,0,0,.04)}}
+  @keyframes v2cRow{0%{opacity:0; background:transparent} 30%{opacity:1; background:#FFF8E6} 100%{opacity:1; background:transparent; box-shadow:inset 4px 0 0 var(--c)}}
+  @media print{.v2cChat .m,.v2cT tr.nw{opacity:1; animation:none}}
+"""
 SMCP = ("Supabase · MCP", "https://supabase.com/docs/guides/getting-started/mcp")
+
+
+def cal_to_tasks():
+    """Google 캘린더 일정 → Claude Code(MCP 두 개) → 팀 할 일 보드. 칸은 제자리 · 읽힌 일정과 추가된 행이 같은 색으로 켜짐."""
+    days = [("월", "11/30"), ("화", "12/1"), ("수", "12/2"), ("목", "12/3"), ("금", "12/4")]
+    ev = {0: ("주간 회의", "c1", 1.7), 2: ("고객사 미팅", "c2", 1.9), 4: ("보고서 마감", "c3", 2.1)}
+    cols = ""
+    for i, (w, dt) in enumerate(days):
+        e = ev.get(i)
+        blk = f'<div class="ev {e[1]}" style="--d:{e[2]}s">{e[0]}</div>' if e else ""
+        cols += f'<div class="v2cD"><span>{w}</span><b>{dt}</b>{blk}</div>'
+    cal = ('<div class="v2cW"><div class="v2cH"><i class="g"></i>Google 캘린더 · 이번 주</div>'
+           f'<div class="v2cWk">{cols}</div></div>')
+    def msg(cls, html_, d):
+        return f'<div class="m {cls}" style="--d:{d}s">{html_}</div>'
+    cc = ('<div class="v2cW"><div class="v2cH"><i class="o"></i>Claude Code</div><div class="v2cChat">'
+          + msg("me", "이번 주 캘린더 일정을 우리 할 일에 넣어 줘", .6)
+          + msg("tool l", "<em>Google Calendar MCP</em> 이번 주 일정 조회", 1.3)
+          + msg("ai", "일정 3건 · 날짜를 기한으로 할 일 3건 추가할까요?", 2.6)
+          + msg("me", "응", 3.3)
+          + msg("tool r", "<em>Supabase MCP</em> tasks 에 3행 추가", 3.8)
+          + msg("ai", "완료 · 할 일 3건 추가", 5.2) + '</div></div>')
+    rows = [("주간 보고서 작성", "11/27", "진행 중", "", 0), ("교육 자료 준비", "11/25", "할 일", "", 0),
+            ("주간 회의", "11/30", "할 일", "c1", 4.2), ("고객사 미팅", "12/2", "할 일", "c2", 4.5), ("보고서 마감", "12/4", "할 일", "c3", 4.8)]
+    tr = "".join(f'<tr class="{"nw " + c if c else ""}" style="--d:{d}s"><td>{t}{"<small>캘린더</small>" if c else ""}</td><td>{du}</td><td>{st}</td></tr>'
+                 for t, du, st, c, d in rows)
+    board = ('<div class="v2cW"><div class="v2cH"><i class="b"></i>팀 할 일 보드 · tasks</div>'
+             f'<table class="v2cT"><thead><tr><th>할 일</th><th>기한</th><th>상태</th></tr></thead><tbody>{tr}</tbody></table></div>')
+    plug = lambda side, name, d: f'<div class="v2cP {side}" style="--d:{d}s"><b>MCP</b><span>{name}</span></div>'
+    return ('<div class="v2c">' + cal + plug("l", "읽기", 1.3) + cc + plug("r", "쓰기", 3.8) + board + '</div>')
 
 
 def slides():
@@ -109,6 +172,9 @@ def slides():
                                (3, 2, "2", 4.8, False), (2, 1, "2", 6.0, False), (1, 0, "2건 · 박서연 1 · 최민재 1", 7.2, True)],
                               [(1, "실행 승인 · 사람", "ok", 1.8)], h=200)
               + note("화면 확인 없이", "표 구조 · 행 수 · RLS 정책을 대화로 확인"), T),
+        light("캘린더 일정 → 할 일", cal_to_tasks()
+              + note("준비", "Claude Code 에 Google Calendar MCP 연결 · Supabase MCP 는 쓰기 허용 · 개발용 DB")
+              + src(("Claude Code · MCP", "https://code.claude.com/docs/en/mcp"), SMCP), T),
         # ── 실습
         lab("2-6", "공휴일 API · Supabase MCP", T, "내 앱 → 공휴일 차단 · 키는 서버에만 · Claude Code에 Supabase MCP",
             ["공공데이터포털 인증키 발급", ".env · .gitignore 요청", "서버 함수 · 공휴일 차단 요청", "Supabase MCP 연결", "MCP 로 할 일 수 조회"],
