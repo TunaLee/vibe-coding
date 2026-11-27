@@ -1826,20 +1826,31 @@
   .v16wS ul{list-style:none; margin:0; padding:0;}
   .v16wS li{padding:4px 6px; border-radius:5px; white-space:nowrap;}
   .v16wS li.on, .v16wS li.on0{background:#E3E2DF; font-weight:600;}
-  .v16wS li.on0{animation:v16wOff .3s calc(var(--d) + 1.4s) forwards;}
-  .v16wS li.nw{opacity:0; background:#E3E2DF; font-weight:600; animation:v16wNew .4s calc(var(--d) + 1.4s) forwards;}
+  .v16wS li.on0{animation:v16wOff .3s calc(var(--d) + 2.1s) forwards;}
+  .v16wS li.nw{opacity:0; background:#E3E2DF; font-weight:600; animation:v16wNew .4s calc(var(--d) + 2.1s) forwards;}
   .v16wS .bt{display:block; font-weight:400; color:#6B6B6B; padding:4px 6px; margin-top:4px; border-radius:5px;}
-  .v16wc.on .v16wS .bt{animation:v16wClk .5s calc(var(--d) + .8s) 2 alternate;}
+  .v16wc.on .v16wS .bt{animation:v16wClk .3s calc(var(--d) + 1.2s) 2 alternate;}
   .v16wS .mn{padding:12px 12px;} .v16wS h1{font-size:20px; margin:0 0 10px; position:relative; height:26px;}
-  .v16wS h1 span{position:absolute; left:0; top:0; white-space:nowrap;} .v16wS h1 .t1{opacity:0; color:#C4C4C2; animation:v16wNew .3s calc(var(--d) + 1.4s) forwards;}
-  .v16wS h1 .t0{animation:v16wGone .3s calc(var(--d) + 1.4s) forwards;}
-  .v16wS .bk{padding:3px 0; font-size:12px;} .v16wS .bk.g{animation:v16wGone .3s calc(var(--d) + 1.4s) forwards;}
+  .v16wS h1 span{position:absolute; left:0; top:0; white-space:nowrap;} .v16wS h1 .t1{opacity:0; color:#C4C4C2; animation:v16wNew .3s calc(var(--d) + 2.1s) forwards;}
+  .v16wS h1 .t0{animation:v16wGone .3s calc(var(--d) + 2.1s) forwards;}
+  .v16wS .bk{padding:3px 0; font-size:12px;} .v16wS .bk.g{animation:v16wGone .3s calc(var(--d) + 2.1s) forwards;}
   .v16wS .bk u{display:inline-block; width:10px; height:10px; border:1.5px solid #9B9A97; border-radius:2px; margin-right:6px; vertical-align:-1px;}
   @keyframes v16wClk{to{background:#F6C99A; color:#16233A}}
   @keyframes v16wNew{to{opacity:1}} @keyframes v16wGone{to{opacity:0}} @keyframes v16wOff{to{background:transparent; font-weight:400}}
   .v16wk{margin:0; background:#1E1E2E; color:#E6E6E6; border-radius:10px; padding:10px 14px; font-family:var(--mono); font-size:12.5px; line-height:1.55; white-space:pre; overflow:hidden;}
+  .v16wc.on .v16wb{position:relative;}
+  .v16wM{position:absolute; left:0; top:0; width:22px; height:22px; z-index:3; opacity:0; pointer-events:none;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 2l7 19 2.6-7.6L20 11z' fill='%2316233A' stroke='white' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat;
+    transform:translate(260px,200px); animation:v16wMv 1s calc(var(--d) + .2s) ease-in-out forwards, v16wTap .2s calc(var(--d) + 1.2s) 2 alternate;}
+  @keyframes v16wMv{0%{opacity:0; transform:translate(260px,200px)} 20%{opacity:1} 100%{opacity:1; transform:translate(40px,136px)}}
+  @keyframes v16wTap{to{opacity:1; transform:translate(40px,136px) scale(.8)}}
+  .v16wP{position:absolute; left:43px; top:139px; width:10px; height:10px; margin:-5px 0 0 -5px; border-radius:50%; border:2.5px solid #F28C28; opacity:0; z-index:2; animation:v16wRp .6s calc(var(--d) + 1.2s) forwards;}
+  @keyframes v16wRp{0%{opacity:1; transform:scale(.5)} 100%{opacity:0; transform:scale(4)}}
+  .v16wE{position:absolute; right:8px; bottom:8px; font-style:normal; font-size:12px; font-weight:800; color:#fff; background:#F28C28; padding:3px 9px; border-radius:6px; opacity:0; z-index:3; animation:v16wIn .3s calc(var(--d) + 1.2s) forwards;}
+  .v16wL{display:block; border-radius:4px;} .v16wL.h{animation:v16wLn .3s calc(var(--d) + var(--h)) forwards;}
+  @keyframes v16wLn{to{background:rgba(242,140,40,.32); color:#fff;}}
   .v16wk em{font-style:normal; color:#F2B880; font-weight:700;}
-  @media print{.v16wc{animation:none; opacity:1} .v16wS li.nw, .v16wS h1 .t1{animation:none; opacity:1} .v16wS h1 .t0, .v16wS .bk.g{animation:none; opacity:0}
+  @media print{.v16wM,.v16wP,.v16wE{display:none} .v16wc{animation:none; opacity:1} .v16wS li.nw, .v16wS h1 .t1{animation:none; opacity:1} .v16wS h1 .t0, .v16wS .bk.g{animation:none; opacity:0}
     .v16wS li.on0{animation:none; background:transparent; font-weight:400}}
   /* 1-6 · 화면 뒤의 코드 (v16c) */
   .v16top{display:flex; gap:12px; align-items:center; font-size:16px; font-weight:800; color:#16233A; opacity:0; animation:v16In .4s var(--d) forwards;}
@@ -2978,12 +2989,8 @@ git config --global user.email "GitHub 가입 이메일"</code></pre></div><div 
 body { display: grid;
   grid-template-columns: 240px 1fr; }
 aside { background: #f7f7f5; }
-h1 { font-size: 34px; }</pre></div><div class="v16wc on" style="--d:4.3s"><div class="v16wh"><b>+ JS</b><span>누르면 동작 · 저장</span></div><div class="v16wb"><div class="br"><i></i><i></i><i></i><span>미니 노션</span></div><div class="v16wS"><div class="sd"><i>미니 노션</i><ul><li class="on0">시작하기</li><li>주간 회의록</li><li class="nw">제목 없음</li></ul><b class="bt">+ 새 페이지</b></div><div class="mn"><h1><span class=t0>시작하기</span><span class=t1>제목 없음</span></h1><div class="bk g"><u></u>보고서 초안</div><div class="bk g">회의 메모</div></div></div></div><pre class="v16wk"><em>app.js</em>
-newPage.onclick = () =&gt; {
-  state.pages.push(새 페이지);
-  save();     // 브라우저에 저장
-  render();   // 목록 다시 그리기
-};</pre></div></div></div></div>
+h1 { font-size: 34px; }</pre></div><div class="v16wc on" style="--d:4.3s"><div class="v16wh"><b>+ JS</b><span>누르면 동작 · 저장</span></div><div class="v16wb"><div class="br"><i></i><i></i><i></i><span>미니 노션</span></div><div class="v16wS"><div class="sd"><i>미니 노션</i><ul><li class="on0">시작하기</li><li>주간 회의록</li><li class="nw">제목 없음</li></ul><b class="bt">+ 새 페이지</b></div><div class="mn"><h1><span class=t0>시작하기</span><span class=t1>제목 없음</span></h1><div class="bk g"><u></u>보고서 초안</div><div class="bk g">회의 메모</div></div></div><i class="v16wM"></i><b class="v16wP"></b><em class="v16wE">click 이벤트 → onclick 실행</em></div><pre class="v16wk"><em>app.js</em>
+<span class="v16wL h" style="--h:1.3s">newPage.onclick = () =&gt; {</span><span class="v16wL h" style="--h:1.5s">  state.pages.push(새 페이지);</span><span class="v16wL h" style="--h:1.7s">  save();     // 브라우저에 저장</span><span class="v16wL h" style="--h:1.9s">  render();   // 목록 다시 그리기</span><span class="v16wL" style="--h:2.1s">};</span></pre></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="브라우저로 열기">
