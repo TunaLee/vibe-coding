@@ -2930,7 +2930,7 @@ newPage.onclick = () =&gt; {
   <div class="eyebrow"><span class="tag">1-6</span></div>
   <h2 class="s-title sm">실습 1-6 순서</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><ol class="v1st"><li style="--d:0.00s"><em>1</em><span>태스크 하나 요청 · 「첫 태스크만」</span></li><li style="--d:0.25s"><em>2</em><span>브라우저로 눌러 보기</span></li><li style="--d:0.50s"><em>3</em><span>완료 기준 대조</span></li><li style="--d:0.75s"><em>4</em><span>「커밋해 줘」 → 다음 태스크</span></li></ol><div class="qk2"><b>확인</b><ul><li>태스크마다 브라우저로 직접 눌러 봄</li><li>커밋 기록이 태스크 수만큼 쌓임</li></ul></div></div></div>
+  <div class="body"><div class="mid"><ol class="v1st"><li style="--d:0.00s"><em>1</em><span>태스크 하나 요청 · 「첫 태스크만」</span></li><li style="--d:0.25s"><em>2</em><span>브라우저로 눌러 보기</span></li><li style="--d:0.50s"><em>3</em><span>완료 기준 대조</span></li><li style="--d:0.75s"><em>4</em><span>「커밋해 줘」 → 다음 태스크</span></li><li style="--d:1.00s"><em>5</em><span>다 만든 뒤 순서도 → 빠진 조건 피드백</span></li></ol><div class="qk2"><b>확인</b><ul><li>태스크마다 브라우저로 직접 눌러 봄</li><li>순서도에 빠진 조건을 넣고 앱도 고침</li></ul></div></div></div>
 </section>
 
 <section class="slide lt" data-title="실습 1-6 · 1단계 태스크 하나 요청">
@@ -2965,12 +2965,28 @@ newPage.onclick = () =&gt; {
   <div class="body"><div class="mid"><div class="v1ask"><span>Claude Code 입력창</span><p>커밋해 줘</p></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>메시지</b><span>Claude Code 가 작성</span></div><div class="v2tile" style="--d:0.08s"><b>커밋</b><span>태스크마다 하나</span></div><div class="v2tile" style="--d:0.16s"><b>다음</b><span>다음 태스크 → 같은 순서</span></div></div></div></div>
 </section>
 
+<section class="slide lt" data-title="실습 1-6 · 5단계 순서도 그리기">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-6</span></div>
+  <h2 class="s-title sm">실습 1-6 · 5단계 순서도 그리기</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1ask"><span>Claude Code 입력창</span><p>지금까지 만든 앱이 동작하는 순서를 순서도로 그려 줘</p></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>때</b><span>태스크를 다 만든 뒤</span></div><div class="v2tile" style="--d:0.08s"><b>볼 것</b><span>처리 · 조건 · 반복 · 끝 (1-1)</span></div><div class="v2tile" style="--d:0.16s"><b>찾을 것</b><span>「이럴 땐?」 갈래가 없는 곳</span></div></div></div></div>
+</section>
+
+<section class="slide lt" data-title="실습 1-6 · 5단계 빠진 조건 피드백">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">1-6</span></div>
+  <h2 class="s-title sm">실습 1-6 · 5단계 빠진 조건 피드백</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v1ask"><span>Claude Code 입력창 · 예</span><p>「/」 메뉴에서 찾는 항목이 없으면</p><p>「결과 없음」을 보여 주는 조건을 순서도에 넣고 앱도 고쳐 줘</p></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>피드백</b><span>조건 하나씩 · 1-1 로그인 순서도처럼</span></div><div class="v2tile" style="--d:0.08s"><b>확인</b><span>고친 순서도 · 브라우저로 그 갈래 눌러 보기</span></div><div class="v2tile" style="--d:0.16s"><b>끝</b><span>「커밋해 줘」</span></div></div></div></div>
+</section>
+
 <section class="slide lt" data-title="실습 1-6 확인">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">1-6</span></div>
   <h2 class="s-title sm">실습 1-6 확인</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="cks"><div class="ck" style="--d:0.00s"><span>1</span><b>태스크마다 브라우저로 눌러 봤나</b><em>테스트 케이스대로</em></div><div class="ck" style="--d:0.12s"><span>2</span><b>개발 계획 완료 기준을 다 확인했나</b><em>빠진 것은 다시 요청</em></div><div class="ck" style="--d:0.24s"><span>3</span><b>커밋 기록이 태스크 수만큼 쌓였나</b><em>「커밋 기록 보여 줘」</em></div></div><div class="ckr">막히면 labs/mini_notion/예시/app 과 비교</div></div></div>
+  <div class="body"><div class="mid"><div class="cks"><div class="ck" style="--d:0.00s"><span>1</span><b>태스크마다 브라우저로 눌러 봤나</b><em>테스트 케이스대로</em></div><div class="ck" style="--d:0.12s"><span>2</span><b>개발 계획 완료 기준을 다 확인했나</b><em>빠진 것은 다시 요청</em></div><div class="ck" style="--d:0.24s"><span>3</span><b>커밋 기록이 태스크 수만큼 쌓였나</b><em>「커밋 기록 보여 줘」</em></div><div class="ck" style="--d:0.36s"><span>4</span><b>순서도에 빠진 조건을 하나 이상 넣었나</b><em>앱에도 반영됐는지 눌러 보기</em></div></div><div class="ckr">막히면 labs/mini_notion/예시/app 과 비교</div></div></div>
 </section>
 
 <section class="slide dk" data-title="다음 단원">
