@@ -188,14 +188,10 @@ def slides():
               + note("관계형 데이터베이스", "데이터를 행 · 열로 된 표에 담는 방식 · 표끼리 서로 연결"), T),
         light("엑셀과 데이터베이스", rules()
               + note("엑셀과 차이", "엑셀 · 아무 칸에 아무 값 / 데이터베이스 · 열마다 형식 · 여러 사람이 동시에"), T),
-        light("표와 표의 관계", relation()
-              + viz2.pair(
-                  "한 표에 다 넣기", [("팀원 이메일 변경", "페이지 행마다 고치기"), ("오타", "「김하늘」 「김 하늘」 섞임")],
-                  "표 두 개 · 번호로 연결", [("팀원 이메일 변경", "members 한 칸만 고치기"), ("오타", "번호라 섞이지 않음")]), T),
-        light("한 표 저장의 문제", blog_one()
-              + note("다음 장", "세 덩어리를 세 표로 · 번호 칸으로 연결"), T),
-        light("표 나누고 연결하기", blog()
+        light("블로그 표 나누기", '<div class="v22mx"><div class="la">' + blog_one() + '</div><div class="lb" style="--o:7.2s">' + blog() + '</div></div>'
               + note("관계", "같은 내용을 두 번 적지 않고 번호로 가리킴 · 글 하나에 댓글 여러 개"), T),
+        light("표와 표의 관계", relation()
+              + note("미니 노션", "같은 구조 · 작성자 한 명 ↔ 페이지 여러 개 · owner_id 로 연결"), T),
         light("SQL 작성의 변화", sql_change()
               + note("사람이 남기는 일", "질문 · 결과가 맞는지 판단"), T),
         light("Supabase", viz2.tiles([
@@ -320,14 +316,14 @@ CSS = """
   .v22blog .tbs{display:grid; grid-template-columns:.8fr 1.3fr 1.6fr; gap:18px; align-items:start; margin:0 0 14px;}
   .v22blog .v2u2t td,.v22blog .v2u2t th{font-size:14.5px; padding:7px 9px;}
   .v22blog .v2u2t th.k{color:#E07A12;}
-  .v22blog tr.a td{animation:v22a .4s .6s forwards;} .v22blog tr.b td{animation:v22b .4s 2.0s forwards;} .v22blog tr.c td{animation:v22c .4s 3.4s forwards;}
-  .v22blog tr.a.b td{animation:v22a .4s .6s forwards, v22b .4s 2.0s forwards;}
-  .v22blog tr.b.c td{animation:v22b .4s 2.0s forwards, v22c .4s 3.4s forwards;}
+  .v22blog tr.a td{animation:v22a .4s calc(var(--o,0s) + .6s) forwards;} .v22blog tr.b td{animation:v22b .4s calc(var(--o,0s) + 2s) forwards;} .v22blog tr.c td{animation:v22c .4s calc(var(--o,0s) + 3.4s) forwards;}
+  .v22blog tr.a.b td{animation:v22a .4s calc(var(--o,0s) + .6s) forwards, v22b .4s calc(var(--o,0s) + 2s) forwards;}
+  .v22blog tr.b.c td{animation:v22b .4s calc(var(--o,0s) + 2s) forwards, v22c .4s calc(var(--o,0s) + 3.4s) forwards;}
   .v22blog .lk{display:flex; flex-direction:column; gap:6px; margin:0 0 10px;}
   .v22blog .lk span{font-size:15.5px; font-weight:700; border-left:5px solid; padding:4px 12px; border-radius:4px; opacity:0;}
-  .v22blog .lk .a{border-color:#F28C28; background:#FFF3E0; color:#B85A00; animation:v22in .4s .6s forwards;}
-  .v22blog .lk .b{border-color:#264DE4; background:#E8EEFF; color:#1F3A9F; animation:v22in .4s 2.0s forwards;}
-  .v22blog .lk .c{border-color:#2E8B57; background:#E6F4EC; color:#1E7B45; animation:v22in .4s 3.4s forwards;}
+  .v22blog .lk .a{border-color:#F28C28; background:#FFF3E0; color:#B85A00; animation:v22in .4s calc(var(--o,0s) + .6s) forwards;}
+  .v22blog .lk .b{border-color:#264DE4; background:#E8EEFF; color:#1F3A9F; animation:v22in .4s calc(var(--o,0s) + 2s) forwards;}
+  .v22blog .lk .c{border-color:#2E8B57; background:#E6F4EC; color:#1E7B45; animation:v22in .4s calc(var(--o,0s) + 3.4s) forwards;}
   @keyframes v22a{to{background:#FFE3C4}} @keyframes v22b{to{background:#D9E3FF}} @keyframes v22c{to{background:#CDEBD9}}
   @keyframes v22in{to{opacity:1}}
   @media print{.v22blog .lk span{opacity:1; animation:none}}
@@ -357,4 +353,13 @@ CSS = """
   @keyframes v22g{to{background:var(--gc)}}
   @media print{.v22one .pb span{opacity:1; animation:none}}
   .v22blog .tb:nth-child(1) .v2u2tab{background:#264DE4;} .v22blog .tb:nth-child(2) .v2u2tab{background:#E07A12;} .v22blog .tb:nth-child(3) .v2u2tab{background:#2E8B57;}
+  /* 2-2 · 블로그 표 나누기 — 한 표(la) → 세 표 + 연결(lb) 같은 자리에서 바뀜 */
+  .v22mx{position:relative; min-height:400px;}
+  .v22mx .la{animation:v22out .5s 6.6s forwards;}
+  .v22mx .lb{position:absolute; inset:0; opacity:0; animation:v22in .5s 7.0s forwards;}
+  .v22mx .lb .tb{animation:v22drop .6s 7.0s both;}
+  .v22mx .lb .tb:nth-child(2){animation-delay:7.15s;} .v22mx .lb .tb:nth-child(3){animation-delay:7.3s;}
+  @keyframes v22out{to{opacity:0; visibility:hidden}}
+  @keyframes v22drop{from{transform:translateY(-10px)} to{transform:none}}
+  @media print{.v22mx .la{display:none} .v22mx .lb{position:static; opacity:1; animation:none}}
 """
