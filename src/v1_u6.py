@@ -195,6 +195,10 @@ CSS = """
 def slides():
     return [
         # ── 웹의 3요소
+        light("HTML과 프로그래밍 언어", shot("v1_u6_html_meme.webp", "개발자 유머 짤", [
+            ("HTML", "HyperText Markup Language · 화면 구조를 표시하는 언어"),
+            ("프로그래밍 언어", "조건 · 반복 · 계산으로 동작을 정함"),
+            ("웹에서 동작 담당", "JS(JavaScript)")]), T),
         light("웹의 3요소", _web3(), T),
         # ── 서버
         light("브라우저로 열기", _open(), T),
