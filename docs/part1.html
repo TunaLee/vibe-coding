@@ -1733,37 +1733,9 @@
   .v16n .mid span:first-child{font-weight:800; color:#F28C28; font-size:17px;}
   .v16n .mid i{display:block; width:120px; height:3px; background:#F28C28; position:relative;}
   .v16n .mid i:after{content:""; position:absolute; right:-2px; top:-6px; border:7.5px solid transparent; border-left:11px solid #F28C28;}
-  .v16n .lg,.v16p .lg,.v16x .lg{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:24px; opacity:0; animation:v16wIn .5s 4.4s forwards;}
-  .v16n .lg p,.v16p .lg p,.v16x .lg p{margin:0; font-size:18px; color:#37414F; padding:13px 18px; border-radius:10px; background:#F4F6F8;}
-  .v16n .lg b,.v16p .lg b,.v16x .lg b{color:#16233A; margin-right:10px; font-size:19px;}
-  /* 1-6 · npm (v16p) */
-  .v16p{display:grid; grid-template-columns:1.25fr 1fr; gap:22px 26px;} .v16p .lg{grid-column:1/-1; margin-top:4px; animation-delay:7.2s;}
-  .v16p .fl{display:grid; grid-template-columns:170px 116px 1fr; align-items:center; gap:10px;}
-  .v16p .pk,.v16p .nm{border:2px solid #D9DDE3; border-radius:14px; background:#fff; padding:14px 16px; display:flex; flex-direction:column; gap:6px;}
-  .v16p .pk b,.v16p .nm b{font-size:18px; color:#16233A;} .v16p small{font-size:13px; color:#6B7785; line-height:1.35;}
-  .v16p .pk code{font-size:15px; color:#37414F; background:#F4F6F8; border-radius:8px; padding:8px 10px; line-height:1.5;}
-  .v16p .cmd{display:flex; flex-direction:column; align-items:center; gap:6px; text-align:center; opacity:0; animation:v16wIn .4s .8s forwards;}
-  .v16p .cmd code{font-size:15px; background:#16233A; color:#fff; padding:6px 10px; border-radius:8px;}
-  .v16p .cmd i{display:block; width:90px; height:3px; background:#F28C28; position:relative;}
-  .v16p .cmd i:after{content:""; position:absolute; right:-2px; top:-6px; border:7.5px solid transparent; border-left:11px solid #F28C28;}
-  .v16p .nm{border-color:#F28C28;}
-  .v16p .gr{display:grid; grid-template-columns:repeat(12,1fr); gap:4px; margin-top:4px;}
-  .v16p .gr u{display:block; height:16px; border-radius:3px; background:#F28C28; opacity:0; animation:v16pPop .2s var(--d) forwards;}
-  .v16p .gr u:nth-child(3n){background:#F6B26B;} .v16p .gr u:nth-child(7n){background:#16233A;}
-  @keyframes v16pPop{from{opacity:0; transform:scale(.3)} to{opacity:1; transform:none}}
-  .v16p .jk{border-radius:16px; background:#0F1B2D; padding:16px 18px; display:flex; flex-direction:column; gap:10px; opacity:0; animation:v16wIn .4s 4s forwards;}
-  .v16p .jt{font-size:16px; font-weight:800; color:#F7C99A;}
-  .v16p .hs{display:grid; grid-template-columns:1fr 1fr 1fr 1.5fr; align-items:end; gap:8px; height:220px;}
-  .v16p .h{display:flex; flex-direction:column; align-items:center; gap:8px; opacity:0; animation:v16wIn .4s var(--d) forwards;}
-  .v16p .h span{font-size:14px; color:#C9D2DE; text-align:center;}
-  .v16p .h i{display:block; border-radius:50%;}
-  .v16p .sun i{width:62px; height:62px; background:radial-gradient(circle,#FFE08A,#F2A33A);}
-  .v16p .ns i{width:30px; height:30px; background:radial-gradient(circle,#fff,#8FB4FF); box-shadow:0 0 18px #8FB4FF;}
-  .v16p .bh i{width:56px; height:56px; background:#000; box-shadow:0 0 0 4px #F28C28, 0 0 22px #F28C28;}
-  .v16p .nm i{width:118px; height:150px; border-radius:10px; background:linear-gradient(#F6B26B,#F28C28); position:relative;}
-  .v16p .hs .nm{border:0; background:none; padding:0;}
-  .v16p .hs .nm i:before{content:""; position:absolute; top:-12px; left:0; width:50px; height:16px; border-radius:6px 6px 0 0; background:#F6B26B;}
-  .v16p .hs .nm span{font-size:16px; font-weight:800; color:#fff;}
+  .v16n .lg,.v16x .lg{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:24px; opacity:0; animation:v16wIn .5s 4.4s forwards;}
+  .v16n .lg p,.v16x .lg p{margin:0; font-size:18px; color:#37414F; padding:13px 18px; border-radius:10px; background:#F4F6F8;}
+  .v16n .lg b,.v16x .lg b{color:#16233A; margin-right:10px; font-size:19px;}
   /* 1-6 · Next.js (v16x) */
   .v16x .row{display:grid; grid-template-columns:390px 170px 1fr; align-items:center; gap:14px;}
   .v16x .pj{position:relative; border:2px dashed #16233A; border-radius:16px; padding:34px 16px 16px; display:flex; flex-direction:column; gap:10px;}
@@ -2979,14 +2951,6 @@ newPage.onclick = () =&gt; {
   <h2 class="s-title sm">Node.js</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v16n"><div class="row"><div class="bx br"><span class="cap">브라우저 · Chrome</span><div class="pg">웹 화면</div><div class="en"><b>V8 엔진</b><span>JS 실행기</span></div><small>JS 는 원래 여기서만 실행</small></div><div class="mid"><span>2009 · Node.js</span><i></i><span>브라우저 밖 실행</span></div><div class="bx pc"><span class="cap">내 컴퓨터 · 서버</span><div class="en mv"><b>Node.js</b><span>V8 + 컴퓨터 기능</span></div><ul><li style="--d:3.0s">파일 읽기 · 쓰기</li><li style="--d:3.4s">서버 열기 · localhost:3000</li><li style="--d:3.8s">로그인 · 비밀번호 확인</li></ul></div></div><div class="lg"><p><b>V8</b>크롬의 JS 엔진</p><p><b>Node.js</b>V8 을 브라우저 밖에서 실행</p><p><b>열린 일</b>JS 로 서버까지 작성</p></div></div></div></div>
-</section>
-
-<section class="slide lt" data-title="npm과 node_modules">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">1-6</span></div>
-  <h2 class="s-title sm">npm과 node_modules</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v16p"><div class="fl"><div class="pk"><b>package.json</b><small>부품 목록</small><code>"next"<br/>"react"<br/>"react-dom"</code></div><div class="cmd"><code>npm install</code><i></i><small>목록대로 내려받기</small></div><div class="nm"><b>node_modules</b><small>내려받은 부품 · 그 부품이 쓰는 부품까지</small><div class="gr"><u style="--d:1.60s"></u><u style="--d:1.63s"></u><u style="--d:1.66s"></u><u style="--d:1.69s"></u><u style="--d:1.72s"></u><u style="--d:1.75s"></u><u style="--d:1.78s"></u><u style="--d:1.81s"></u><u style="--d:1.84s"></u><u style="--d:1.87s"></u><u style="--d:1.90s"></u><u style="--d:1.93s"></u><u style="--d:1.96s"></u><u style="--d:1.99s"></u><u style="--d:2.02s"></u><u style="--d:2.05s"></u><u style="--d:2.08s"></u><u style="--d:2.11s"></u><u style="--d:2.14s"></u><u style="--d:2.17s"></u><u style="--d:2.20s"></u><u style="--d:2.23s"></u><u style="--d:2.26s"></u><u style="--d:2.29s"></u><u style="--d:2.32s"></u><u style="--d:2.35s"></u><u style="--d:2.38s"></u><u style="--d:2.41s"></u><u style="--d:2.44s"></u><u style="--d:2.47s"></u><u style="--d:2.50s"></u><u style="--d:2.53s"></u><u style="--d:2.56s"></u><u style="--d:2.59s"></u><u style="--d:2.62s"></u><u style="--d:2.65s"></u><u style="--d:2.68s"></u><u style="--d:2.71s"></u><u style="--d:2.74s"></u><u style="--d:2.77s"></u><u style="--d:2.80s"></u><u style="--d:2.83s"></u><u style="--d:2.86s"></u><u style="--d:2.89s"></u><u style="--d:2.92s"></u><u style="--d:2.95s"></u><u style="--d:2.98s"></u><u style="--d:3.01s"></u><u style="--d:3.04s"></u><u style="--d:3.07s"></u><u style="--d:3.10s"></u><u style="--d:3.13s"></u><u style="--d:3.16s"></u><u style="--d:3.19s"></u><u style="--d:3.22s"></u><u style="--d:3.25s"></u><u style="--d:3.28s"></u><u style="--d:3.31s"></u><u style="--d:3.34s"></u><u style="--d:3.37s"></u><u style="--d:3.40s"></u><u style="--d:3.43s"></u><u style="--d:3.46s"></u><u style="--d:3.49s"></u><u style="--d:3.52s"></u><u style="--d:3.55s"></u><u style="--d:3.58s"></u><u style="--d:3.61s"></u><u style="--d:3.64s"></u><u style="--d:3.67s"></u><u style="--d:3.70s"></u><u style="--d:3.73s"></u><u style="--d:3.76s"></u><u style="--d:3.79s"></u><u style="--d:3.82s"></u><u style="--d:3.85s"></u><u style="--d:3.88s"></u><u style="--d:3.91s"></u><u style="--d:3.94s"></u><u style="--d:3.97s"></u><u style="--d:4.00s"></u><u style="--d:4.03s"></u><u style="--d:4.06s"></u><u style="--d:4.09s"></u></div></div></div><div class="jk"><div class="jt">우주에서 가장 무거운 것 · 개발자 농담</div><div class="hs"><div class="h sun" style="--d:4.2s"><i></i><span>태양</span></div><div class="h ns" style="--d:4.9s"><i></i><span>중성자별</span></div><div class="h bh" style="--d:5.6s"><i></i><span>블랙홀</span></div><div class="h nm" style="--d:6.3s"><i></i><span>node_modules</span></div></div></div><div class="lg"><p><b>npm</b>Node.js 의 부품 가게</p><p><b>node_modules</b>Git 에 올리지 않음 · .gitignore</p><p><b>다시 받기</b>npm install</p></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="Next.js">

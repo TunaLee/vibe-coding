@@ -99,21 +99,6 @@ def _node():
             '<p><b>열린 일</b>JS 로 서버까지 작성</p></div></div>')
 
 
-def _npm():
-    """npm · node_modules — package.json(부품 목록) → npm install → node_modules 가 작은 부품으로 가득 참.
-    오른쪽은 개발자 농담 「우주에서 가장 무거운 것」을 덱 그림으로 다시 그림(태양 → 중성자별 → 블랙홀 → node_modules)."""
-    cells = "".join(f'<u style="--d:{1.6 + i * .03:.2f}s"></u>' for i in range(84))
-    heavy = [("태양", "sun"), ("중성자별", "ns"), ("블랙홀", "bh"), ("node_modules", "nm")]
-    hv = "".join(f'<div class="h {c}" style="--d:{4.2 + i * .7:.1f}s"><i></i><span>{t}</span></div>' for i, (t, c) in enumerate(heavy))
-    return ('<div class="v16p"><div class="fl">'
-            '<div class="pk"><b>package.json</b><small>부품 목록</small><code>"next"<br/>"react"<br/>"react-dom"</code></div>'
-            '<div class="cmd"><code>npm install</code><i></i><small>목록대로 내려받기</small></div>'
-            f'<div class="nm"><b>node_modules</b><small>내려받은 부품 · 그 부품이 쓰는 부품까지</small><div class="gr">{cells}</div></div></div>'
-            f'<div class="jk"><div class="jt">우주에서 가장 무거운 것 · 개발자 농담</div><div class="hs">{hv}</div></div>'
-            '<div class="lg"><p><b>npm</b>Node.js 의 부품 가게</p><p><b>node_modules</b>Git 에 올리지 않음 · .gitignore</p>'
-            '<p><b>다시 받기</b>npm install</p></div></div>')
-
-
 def _next():
     """Next.js — 한 프로젝트 안에 화면(page.tsx)과 서버(api/login/route.ts). 「실행해 줘」 → npm run dev → Node.js 가 localhost:3000 을 엶.
     로그인 요청이 브라우저 → 서버 코드로 갔다가 「통과」로 돌아옴. 비밀번호 확인은 서버 쪽에만 있음. 한 번 재생 후 정지."""
@@ -168,37 +153,9 @@ CSS = """
   .v16n .mid span:first-child{font-weight:800; color:#F28C28; font-size:17px;}
   .v16n .mid i{display:block; width:120px; height:3px; background:#F28C28; position:relative;}
   .v16n .mid i:after{content:""; position:absolute; right:-2px; top:-6px; border:7.5px solid transparent; border-left:11px solid #F28C28;}
-  .v16n .lg,.v16p .lg,.v16x .lg{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:24px; opacity:0; animation:v16wIn .5s 4.4s forwards;}
-  .v16n .lg p,.v16p .lg p,.v16x .lg p{margin:0; font-size:18px; color:#37414F; padding:13px 18px; border-radius:10px; background:#F4F6F8;}
-  .v16n .lg b,.v16p .lg b,.v16x .lg b{color:#16233A; margin-right:10px; font-size:19px;}
-  /* 1-6 · npm (v16p) */
-  .v16p{display:grid; grid-template-columns:1.25fr 1fr; gap:22px 26px;} .v16p .lg{grid-column:1/-1; margin-top:4px; animation-delay:7.2s;}
-  .v16p .fl{display:grid; grid-template-columns:170px 116px 1fr; align-items:center; gap:10px;}
-  .v16p .pk,.v16p .nm{border:2px solid #D9DDE3; border-radius:14px; background:#fff; padding:14px 16px; display:flex; flex-direction:column; gap:6px;}
-  .v16p .pk b,.v16p .nm b{font-size:18px; color:#16233A;} .v16p small{font-size:13px; color:#6B7785; line-height:1.35;}
-  .v16p .pk code{font-size:15px; color:#37414F; background:#F4F6F8; border-radius:8px; padding:8px 10px; line-height:1.5;}
-  .v16p .cmd{display:flex; flex-direction:column; align-items:center; gap:6px; text-align:center; opacity:0; animation:v16wIn .4s .8s forwards;}
-  .v16p .cmd code{font-size:15px; background:#16233A; color:#fff; padding:6px 10px; border-radius:8px;}
-  .v16p .cmd i{display:block; width:90px; height:3px; background:#F28C28; position:relative;}
-  .v16p .cmd i:after{content:""; position:absolute; right:-2px; top:-6px; border:7.5px solid transparent; border-left:11px solid #F28C28;}
-  .v16p .nm{border-color:#F28C28;}
-  .v16p .gr{display:grid; grid-template-columns:repeat(12,1fr); gap:4px; margin-top:4px;}
-  .v16p .gr u{display:block; height:16px; border-radius:3px; background:#F28C28; opacity:0; animation:v16pPop .2s var(--d) forwards;}
-  .v16p .gr u:nth-child(3n){background:#F6B26B;} .v16p .gr u:nth-child(7n){background:#16233A;}
-  @keyframes v16pPop{from{opacity:0; transform:scale(.3)} to{opacity:1; transform:none}}
-  .v16p .jk{border-radius:16px; background:#0F1B2D; padding:16px 18px; display:flex; flex-direction:column; gap:10px; opacity:0; animation:v16wIn .4s 4s forwards;}
-  .v16p .jt{font-size:16px; font-weight:800; color:#F7C99A;}
-  .v16p .hs{display:grid; grid-template-columns:1fr 1fr 1fr 1.5fr; align-items:end; gap:8px; height:220px;}
-  .v16p .h{display:flex; flex-direction:column; align-items:center; gap:8px; opacity:0; animation:v16wIn .4s var(--d) forwards;}
-  .v16p .h span{font-size:14px; color:#C9D2DE; text-align:center;}
-  .v16p .h i{display:block; border-radius:50%;}
-  .v16p .sun i{width:62px; height:62px; background:radial-gradient(circle,#FFE08A,#F2A33A);}
-  .v16p .ns i{width:30px; height:30px; background:radial-gradient(circle,#fff,#8FB4FF); box-shadow:0 0 18px #8FB4FF;}
-  .v16p .bh i{width:56px; height:56px; background:#000; box-shadow:0 0 0 4px #F28C28, 0 0 22px #F28C28;}
-  .v16p .nm i{width:118px; height:150px; border-radius:10px; background:linear-gradient(#F6B26B,#F28C28); position:relative;}
-  .v16p .hs .nm{border:0; background:none; padding:0;}
-  .v16p .hs .nm i:before{content:""; position:absolute; top:-12px; left:0; width:50px; height:16px; border-radius:6px 6px 0 0; background:#F6B26B;}
-  .v16p .hs .nm span{font-size:16px; font-weight:800; color:#fff;}
+  .v16n .lg,.v16x .lg{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:24px; opacity:0; animation:v16wIn .5s 4.4s forwards;}
+  .v16n .lg p,.v16x .lg p{margin:0; font-size:18px; color:#37414F; padding:13px 18px; border-radius:10px; background:#F4F6F8;}
+  .v16n .lg b,.v16x .lg b{color:#16233A; margin-right:10px; font-size:19px;}
   /* 1-6 · Next.js (v16x) */
   .v16x .row{display:grid; grid-template-columns:390px 170px 1fr; align-items:center; gap:14px;}
   .v16x .pj{position:relative; border:2px dashed #16233A; border-radius:16px; padding:34px 16px 16px; display:flex; flex-direction:column; gap:10px;}
@@ -327,7 +284,6 @@ def slides():
             ("웹에서 동작 담당", "JS(JavaScript)")]), T),
         light("웹의 3요소", _web3(), T),
         light("Node.js", _node(), T),
-        light("npm과 node_modules", _npm(), T),
         light("Next.js", _next(), T),
         # ── 서버
         light("브라우저로 열기", _open(), T),
