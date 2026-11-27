@@ -41,15 +41,6 @@ def slides():
             ("update_page", "페이지 번호 · 상태 · 날짜", "상태 · 날짜 바꾸기 · 쓰기"),
             ("list_by_date", "시작일 · 종료일", "기간 안 마감 · 일정 보기 · 읽기")], "도구 이름", "받는 칸 → 하는 일")
               + note("메뉴판", "도구 이름 · 설명 · 받는 칸을 AI 가 읽고 고름 · 설명이 흐리면 엉뚱한 도구 선택"), T),
-        light("MCP 서버 코드 뜻", codemap([
-            ("createMcpHandler((server) => {", "MCP 서버 만들기 · mcp-handler"),
-            ('  server.registerTool("add_page", {', "도구 하나 등록 · 이름"),
-            ('    description: "미니 노션에 페이지 하나를 추가한다",', "AI 가 읽는 설명"),
-            ("    inputSchema: { title: z.string(), date: z.string() },", "받는 칸 · 형식"),
-            ("  }, async ({ title, date }) => insertTask(title, date))", "실행 · 2-4 의 insert"),
-            ("})", "app/api/mcp/route.ts · 주소 /api/mcp")],
-            ask="개발 계획의 도구 목록대로 미니 노션 MCP 서버를 만들어 줘", title="Claude Code가 쓴 코드 · 예")
-              + src(VMCP, SDK), T),
         light("MCP 서버 동작", agent("Claude Code", [
             ("me", "내일까지 회의록 초안 페이지로 추가해 줘", .3), ("tool", "<em>mini-notion</em> 도구 목록 읽기", 1.2),
             ("tool", "<em>add_page</em> 회의록 초안 · 2026-11-29", 1.9), ("ai", "추가 완료 · 날짜 11/29", 4.4)],

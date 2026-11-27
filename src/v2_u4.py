@@ -113,15 +113,6 @@ def slides():
         light("팀 게시판 비유", shot("v2_u5_board.webp", "팀 게시판 · 내 쪽지만 떼기", [
             ("게시판 보기", "모두 읽기 · 로그인 전에도"), ("쪽지 붙이기", "로그인한 팀원"), ("쪽지 떼기", "내 이름표가 붙은 쪽지만")])
               + src(GEN), T),
-        light("RLS 정책 코드 뜻", codemap([
-            ("alter table pages enable row level security;", "페이지 표에 RLS 켜기"),
-            ('create policy "모두 보기" on pages for select', "읽기 규칙 · 누구나"),
-            ("  using ( true );", "모든 행 · 조건 없음"),
-            ('create policy "내 페이지만 삭제" on pages for delete', "삭제 규칙"),
-            ("  to authenticated", "로그인한 사람만"),
-            ("  using ( (select auth.uid()) = owner_id );", "로그인 계정 = 작성자인 행만")],
-            ask="개발 계획 7칸 권한대로 pages 표에 RLS 정책을 만들어 줘", title="Claude Code가 쓴 SQL · 예")
-              + src(RLS), T),
         light("RLS 동작", rls_scene()
               + note("규칙 위치", "DB 안 · 화면 · 코드를 우회해도 같은 결과"), T),
         light("계정 두 개로 권한 확인", flow([("계정 A 로그인", "A 작성 새 페이지"), ("계정 B 로그인", "다른 브라우저 · 시크릿 창"),

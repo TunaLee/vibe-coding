@@ -95,14 +95,6 @@ def slides():
             "코드에 직접", [("위치", "app.js 안 문자열"), ("GitHub 에 올리면", "누구나 검색 · 복사"), ("키 교체", "코드 수정 · 다시 커밋")],
             ".env 파일", [("위치", "프로젝트 폴더의 .env"), ("GitHub 에 올리면", ".gitignore 로 제외 · 안 올라감"), ("키 교체", ".env 한 줄")])
               + note("환경변수", "코드 밖에 둔 설정 값 · 코드는 이름으로만 읽음"), T),
-        light(".env · .gitignore", codemap([
-            (".env", "비밀 값을 적는 파일"),
-            ("HOLIDAY_API_KEY=발급받은_키", "이름 = 값 · 한 줄에 하나"),
-            (".gitignore", "Git 이 무시할 파일 목록"),
-            (".env", "이 줄 하나 · .env 는 커밋 · push 제외"),
-            ("process.env.HOLIDAY_API_KEY", "코드에서 이름으로 값 읽기")],
-            ask="공휴일 API 키를 .env 에 두고 .gitignore 에 추가해 줘", title="파일 · 코드 · 예")
-              + note("확인", "git status 에 .env 가 안 보이면 정상"), T),
         light("push 와 .env", push_scene()
               + note(".gitignore", "목록에 있는 파일은 커밋 · push 에서 빠짐 · 키는 내 컴퓨터에만"), T),
         # ── 공휴일 API
@@ -127,10 +119,7 @@ def slides():
                                       ("결과", "누구나 키 복사")],
             "브라우저 → Next.js 서버 → 공공데이터포털", [("키 위치", "Vercel 서버 · 환경변수"), ("보이는 곳", "없음 · 결과만 내려감"),
                                               ("결과", "키 노출 없음")]), T),
-        light("Next.js 서버의 키 보호", key_scene()
-              + codemap([("app/api/holidays/route.ts", "Next.js 서버 코드 · Vercel 에서 실행"),
-                         ("export function GET(request)", "주소로 요청이 오면 실행"),
-                         ("process.env.HOLIDAY_API_KEY", "키는 서버 안에서만 읽기")]), T),
+        light("Next.js 서버의 키 보호", key_scene(), T),
         light("공휴일 차단 대화 예시", chat([
             ("me", "날짜가 공휴일이면 저장을 막아 줘. 공휴일은 공공데이터포털 특일 정보 API 에서 받고, 키는 Next.js 서버에서만 읽게 해 줘"),
             ("ai", "계획 · app/api/holidays/route.ts 생성 → 추가 창에서 호출. 경고 문구는 「공휴일 · 기독탄신일」 형식으로 할까요?"),

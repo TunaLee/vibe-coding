@@ -196,13 +196,6 @@ def slides():
               + note("다음 장", "세 덩어리를 세 표로 · 번호 칸으로 연결"), T),
         light("표 나누고 연결하기", blog()
               + note("관계", "같은 내용을 두 번 적지 않고 번호로 가리킴 · 글 하나에 댓글 여러 개"), T),
-        light("SQL", codemap([
-            ("select title, date", "제목 · 날짜 열만"),
-            ("from pages", "pages 표에서"),
-            ("where status = '작성 중'", "상태가 작성 중인 행만"),
-            ("order by date;", "날짜가 빠른 순서")], ask="「작성 중인 페이지만 보여 줘」", title="SQL")
-              + result()
-              + note("SQL 작성", "Claude Code 가 씀 · 사람은 결과 표를 확인"), T),
         light("SQL 작성의 변화", sql_change()
               + note("사람이 남기는 일", "질문 · 결과가 맞는지 판단"), T),
         light("Supabase", viz2.tiles([
