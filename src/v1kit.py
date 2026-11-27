@@ -127,12 +127,15 @@ def labcard(no, title, u, inp, out, parts=(), files="", cards=()):
 
 
 
-def tstep(no, i, name, u, img=None, alt="", term=None, rows=(), need=None, srcs=()):
+def tstep(no, i, name, u, img=None, alt="", term=None, rows=(), need=None, srcs=(), ask=None):
     """실습 단계 화면(넓게) — 위에 실제 화면 · 아래에 할 일 칩."""
     import viz2
     from hx import code, esc
     from stats_hx import src
-    if img:
+    if ask:
+        lines = "".join(f"<p>{esc(x)}</p>" for x in ask[1].split("\n"))
+        body = f'<div class="v1ask"><span>{ask[0]}</span>{lines}</div>'
+    elif img:
         body = f'<div class="v1ts"><img src="img/{img}" alt="{alt}"/></div>'
     elif term:
         body = '<div class="v1tt">' + code(term[0], esc(term[1])) + "</div>"
@@ -162,6 +165,10 @@ CSS = """
   .v1ts img{max-width:100%; max-height:310px; border-radius:10px; box-shadow:0 8px 24px rgba(22,35,58,.22);}
   .v1ts .need-img{width:760px; min-height:300px;}
   .v1tt{max-width:860px; margin:0 auto 18px;}
+  /* 실습 요청 단계 — 입력창에 쓸 문장 */
+  .v1ask{max-width:900px; margin:20px auto 40px; border:2px solid #16233A; border-radius:16px; padding:20px 30px 22px; background:#fff; box-shadow:0 8px 24px rgba(22,35,58,.12);}
+  .v1ask span{display:block; font-size:16px; font-weight:700; color:#6B7686; margin-bottom:10px;}
+  .v1ask p{margin:0; font-size:30px; font-weight:700; color:#16233A; line-height:1.5;}
   /* 실습 소개 — 할 일 → 결과 카드 */
   .v1lk{display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:34px;}
   .v1lk .c{background:#F4F6F9; border-radius:18px; padding:24px 24px 22px; display:flex; flex-direction:column; align-items:flex-start; opacity:0; animation:v1stIn .45s var(--d) forwards;}
