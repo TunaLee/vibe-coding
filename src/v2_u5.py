@@ -1,7 +1,7 @@
 """2-5 외부 API · 키.
 
 API 키(무엇 · 비유 출입증 · 보관 위치 · .env · .gitignore) → 공공데이터포털 특일 정보 발급 → 요청 · 응답
-→ 서버 함수(키 숨기기 · 장면) → 요청 예 → 실습.
+→ Next.js 서버(키 숨기기 · 장면) → 요청 예 → 실습.
 요청 · 응답 · API 개념은 2-1 · MCP 는 2-6.
 사실 출처: data.go.kr/data/15012690/openapi.do · vercel.com/docs/functions · supabase.com/docs/guides/getting-started/mcp
 · code.claude.com/docs/en/mcp
@@ -32,7 +32,7 @@ CSS = """
   .v26p .gi span{display:block; font-size:13px; font-weight:800; color:#E07A12;} .v26p .gi code{font-size:17px; font-weight:700;}
   .v26p .cmd{text-align:center; font-family:var(--mono); font-size:16px; font-weight:700; color:#fff; background:#1F3A5F; border-radius:10px; padding:8px; opacity:0; animation:v26in .35s var(--d) forwards;}
   .v26p .gh{border-color:#1F3A5F;}
-  /* 2-5 · 서버 함수의 키 보호 (v26k) */
+  /* 2-5 · Next.js 서버의 키 보호 (v26k) */
   .v26k{grid-template-columns:400px 1fr 260px 1fr 220px;}
   .v26k .warn{margin-top:8px; font-size:14px; font-weight:800; color:#C0392B; background:#FDECEA; border-radius:8px; padding:6px 10px; opacity:0; animation:v26in .35s var(--d) forwards;}
   .v26k .nk{margin-top:6px; font-size:12.5px; font-weight:800; color:#1E7B45; opacity:0; animation:v26in .35s var(--d) forwards;}
@@ -46,9 +46,9 @@ SMCP = ("Supabase · MCP", "https://supabase.com/docs/guides/getting-started/mcp
 
 def push_scene():
     """push 와 .env — 내 폴더 파일 4개 · .gitignore · GitHub 저장소. 저장소에 파일이 하나씩 생기고 .env 자리는 「없음」."""
-    loc = [("app.js", ""), ("api/holidays.js", ""), (".gitignore", ""), (".env", "key")]
+    loc = [("app/page.tsx", ""), ("app/api/holidays/route.ts", ""), (".gitignore", ""), (".env", "key")]
     lf = "".join(f'<div class="f {k}"><b>{n}</b>{"<em>키</em>" if k else ""}</div>' for n, k in loc)
-    gh = [("app.js", 1.6), ("api/holidays.js", 1.9), (".gitignore", 2.2)]
+    gh = [("app/page.tsx", 1.6), ("app/api/holidays/route.ts", 1.9), (".gitignore", 2.2)]
     rf = "".join(f'<div class="f nw" style="--d:{d}s"><b>{n}</b></div>' for n, d in gh)
     rf += '<div class="f no" style="--d:2.8s"><b>.env</b><em>없음 · 제외됨</em></div>'
     return ('<div class="v26p"><div class="pn"><div class="h">내 컴퓨터 · 프로젝트 폴더</div>' + lf + '</div>'
@@ -58,15 +58,15 @@ def push_scene():
 
 
 def key_scene():
-    """서버 함수의 키 보호 — 브라우저(키 없는 요청) · 서버 함수(키를 붙여 요청) · 공공데이터포털. 칸은 제자리."""
-    br = ('<div class="v2sBr"><div class="bar"><i></i><i></i><i></i><span>team-board.vercel.app</span></div>'
-          '<div class="app"><div class="ah">할 일 추가</div><div class="add"><span class="in">기한 · 2026-12-25</span><span class="bt" style="--d:.5s">저장</span></div>'
+    """Next.js 서버의 키 보호 — 브라우저(키 없는 요청) · Next.js 서버(키를 붙여 요청) · 공공데이터포털. 칸은 제자리."""
+    br = ('<div class="v2sBr"><div class="bar"><i></i><i></i><i></i><span>mini-notion.vercel.app</span></div>'
+          '<div class="app"><div class="ah">새 페이지</div><div class="add"><span class="in">날짜 · 2026-12-25</span><span class="bt" style="--d:.5s">저장</span></div>'
           '<div class="warn" style="--d:5.0s">공휴일 · 기독탄신일 · 저장 안 됨</div></div>'
           '<div class="net"><div class="nh"><b>Network</b><span>Name</span><span>Method</span><span>Status</span></div>'
           '<div class="nr" style="--d:.9s"><span class="fn">holidays?year=2026&amp;month=12</span><span>GET</span>'
           '<span class="st"><i class="pd" style="--d:4.3s">(pending)</i><b class="ok" style="--d:4.3s">200 OK</b></span></div>'
           '<div class="nk" style="--d:4.6s">요청 · 응답 어디에도 키 없음</div></div></div>')
-    fn = ('<div class="v2sBx srv"><div class="bh"><b>서버 함수</b><small>api/holidays.js · Vercel</small></div>'
+    fn = ('<div class="v2sBx srv"><div class="bh"><b>Next.js 서버</b><small>app/api/holidays/route.ts · Vercel</small></div>'
           '<div class="cl" style="--d:1.6s">GET /api/holidays</div>'
           '<div class="cl ky" style="--d:2.1s">ServiceKey = process.env.HOLIDAY_API_KEY</div>'
           '<div class="cl" style="--d:3.8s">공휴일만 골라 전달</div></div>')
@@ -80,8 +80,8 @@ def key_scene():
 def slides():
     return [
         light("앱이 모르는 정보", viz2.pair(
-            "공휴일을 직접 입력", [("목록", "해마다 사람이 입력"), ("대체공휴일 · 임시공휴일", "발표 뒤 다시 수정"), ("틀리면", "공휴일이 기한으로 들어감")],
-            "가진 곳에 묻기 · 외부 API", [("목록", "한국천문연구원 특일 정보"), ("갱신", "제공하는 쪽이 관리"), ("앱이 할 일", "연도 · 월을 보내고 답 받기")])
+            "공휴일을 직접 입력", [("목록", "해마다 사람이 입력"), ("대체공휴일 · 임시공휴일", "발표 뒤 다시 수정"), ("틀리면", "공휴일이 날짜로 들어감")],
+            "가진 곳에 묻기 · 외부 API", [("목록", "한국천문연구원 특일 정보"), ("갱신", "제공하는 쪽이 관리"), ("앱이 페이지", "연도 · 월을 보내고 답 받기")])
               + note("외부 API", "다른 회사 · 기관 서버가 열어 둔 창구 · 요청 · 응답은 2-1 과 같음"), T),
         # ── API 키
         light("API 키", viz2.tiles([
@@ -118,41 +118,41 @@ def slides():
             ("dateName 기독탄신일", "공휴일 이름"),
             ("isHoliday Y", "공공기관 휴일 여부")],
             title="요청 · 응답 · 예")
-              + note("쓰는 곳", "기한으로 고른 날이 공휴일이면 「공휴일 · 이름」 경고 · 저장 막기")
+              + note("쓰는 곳", "날짜로 고른 날이 공휴일이면 「공휴일 · 이름」 경고 · 저장 막기")
               + src(HOLI), T),
-        # ── 서버 함수
+        # ── Next.js 서버
         light("키 노출 경로", viz2.pair(
             "브라우저 → 공공데이터포털", [("키 위치", "앱 코드 · 브라우저에 내려감"), ("보이는 곳", "개발자 도구 · 네트워크 탭"),
                                       ("결과", "누구나 키 복사")],
-            "브라우저 → 서버 함수 → 공공데이터포털", [("키 위치", "Vercel 서버 · 환경변수"), ("보이는 곳", "없음 · 결과만 내려감"),
+            "브라우저 → Next.js 서버 → 공공데이터포털", [("키 위치", "Vercel 서버 · 환경변수"), ("보이는 곳", "없음 · 결과만 내려감"),
                                               ("결과", "키 노출 없음")]), T),
-        light("서버 함수의 키 보호", key_scene()
-              + codemap([("api/holidays.js", "Vercel 이 서버에서 실행하는 파일"),
+        light("Next.js 서버의 키 보호", key_scene()
+              + codemap([("app/api/holidays/route.ts", "Next.js 서버 코드 · Vercel 에서 실행"),
                          ("export function GET(request)", "주소로 요청이 오면 실행"),
                          ("process.env.HOLIDAY_API_KEY", "키는 서버 안에서만 읽기")])
               + src(FUNC), T),
         light("공휴일 차단 대화 예시", chat([
-            ("me", "기한이 공휴일이면 저장을 막아 줘. 공휴일은 공공데이터포털 특일 정보 API 에서 받고, 키는 서버 함수에서만 읽게 해 줘"),
-            ("ai", "계획 · api/holidays.js 생성 → 추가 창에서 호출. 경고 문구는 「공휴일 · 기독탄신일」 형식으로 할까요?"),
+            ("me", "날짜가 공휴일이면 저장을 막아 줘. 공휴일은 공공데이터포털 특일 정보 API 에서 받고, 키는 Next.js 서버에서만 읽게 해 줘"),
+            ("ai", "계획 · app/api/holidays/route.ts 생성 → 추가 창에서 호출. 경고 문구는 「공휴일 · 기독탄신일」 형식으로 할까요?"),
             ("me", "응"),
-            ("ai", "완료 · 기한 2026-12-25 선택 → 공휴일 경고 · 저장 막힘")], "Claude Code 대화 예")
-              + note("확인", "기한에 12월 25일 · 1월 1일 넣고 저장"), T),
-        ba("공휴일 반영 전후", T, "기한 12월 25일 → 그대로 저장\n연휴가 끝난 뒤에야 알아챔",
-           "기한 12월 25일 → 「공휴일 · 기독탄신일」\n저장 막힘 · 다른 날 고르기",
-           "기획서 v2 문제점 「공휴일이 기한으로 들어감」 해결"),
+            ("ai", "완료 · 날짜 2026-12-25 선택 → 공휴일 경고 · 저장 막힘")], "Claude Code 대화 예")
+              + note("확인", "날짜에 12월 25일 · 1월 1일 넣고 저장"), T),
+        ba("공휴일 반영 전후", T, "날짜 12월 25일 → 그대로 저장\n연휴가 끝난 뒤에야 알아챔",
+           "날짜 12월 25일 → 「공휴일 · 기독탄신일」\n저장 막힘 · 다른 날 고르기",
+           "기획서 v2 문제점 「공휴일이 날짜로 들어감」 해결"),
         # ── 실습
         lab("2-5", "공휴일 API · 키 보관", T, "내 앱 → 공휴일 차단 · 키는 서버에만",
-            ["공공데이터포털 인증키 발급", ".env · .gitignore 요청", "서버 함수 · 공휴일 차단 요청", "Network 탭에서 키 확인"],
-            ["기한 12월 25일 저장 막힘", "git status · GitHub 에 키 없음"],
+            ["공공데이터포털 인증키 발급", ".env · .gitignore 요청", "Next.js 서버 · 공휴일 차단 요청", "Network 탭에서 키 확인"],
+            ["날짜 12월 25일 저장 막힘", "git status · GitHub 에 키 없음"],
             files="예시/개발계획.md 6 칸 (비교용)"),
-        brief("2-5", T, ["인증키 발급", ".env · .gitignore", "서버 함수 · 공휴일 차단", "Network 탭 확인"],
-              [("목표", "기한 공휴일 차단"), ("입력", "개발 계획 v2 · 6 칸 · 인증키"),
-               ("진행 방식", "키는 서버 함수에서만 · 태스크 하나씩"), ("하지 말 것", "키를 대화창 · 코드 · 커밋에 넣기")],
-              ["환경변수", ".gitignore", "서버 함수", "Network"],
-              ["기한이 공휴일이면 경고 · 저장 막힘", ".env 가 git status 에 없음"],
+        brief("2-5", T, ["인증키 발급", ".env · .gitignore", "Next.js 서버 · 공휴일 차단", "Network 탭 확인"],
+              [("목표", "날짜 공휴일 차단"), ("입력", "개발 계획 v2 · 6 칸 · 인증키"),
+               ("진행 방식", "키는 Next.js 서버에서만 · 태스크 하나씩"), ("하지 말 것", "키를 대화창 · 코드 · 커밋에 넣기")],
+              ["환경변수", ".gitignore", "Next.js 서버", "Network"],
+              ["날짜가 공휴일이면 경고 · 저장 막힘", ".env 가 git status 에 없음"],
               "공휴일 응답이 비면 인증키 반영 대기 · 하루 뒤 다시"),
         light("실습 2-5 확인", checks([
-            (".env 가 .gitignore 에 있나", "git status 에 안 보임"), ("브라우저 개발자 도구에 키가 안 보이나", "서버 함수 경유"),
-            ("기한이 공휴일이면 저장이 막히나", "12월 25일 · 1월 1일"), ("Network 탭 요청에 키가 없나", "holidays 요청 · 응답")],
+            (".env 가 .gitignore 에 있나", "git status 에 안 보임"), ("브라우저 개발자 도구에 키가 안 보이나", "Next.js 서버 경유"),
+            ("날짜가 공휴일이면 저장이 막히나", "12월 25일 · 1월 1일"), ("Network 탭 요청에 키가 없나", "holidays 요청 · 응답")],
             "넷 다 「예」 → 커밋 · 2-6 MCP"), T),
     ]

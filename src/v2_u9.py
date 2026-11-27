@@ -2,7 +2,7 @@
 
 SDLC 청사진(1부 · 2부 단원 위치) → 배경(직접 클릭 확인의 한계) → 비유(출고 전 검수 · 생성 그림) → 테스트 · 실행 결과(node --test 실측)
 → AI 에게 테스트 맡기기 · 브라우저 MCP → 에러 메시지 읽기(node 실측) · 자주 보는 에러 · 디버깅 흐름 → AI 코드 리뷰 · 보안 점검 → 실습.
-공통 예제: 팀 할 일 보드 v2 (기한 지남 판정 · 공휴일 차단 · 남의 할 일 삭제 불가).
+공통 예제: 미니 노션 v2 (마감 지남 판정 · 공휴일 차단 · 남의 페이지 삭제 불가).
 사실 출처: code.claude.com/docs/en/commands (/code-review · /review · /security-review · /diff) · github.com/microsoft/playwright-mcp
 · nodejs.org test runner · developer.mozilla.org HTTP 상태 코드 · supabase.com RLS
 실측: 겹침 함수 테스트(node --test · 실패 1 → 「<=」를 「<」로 고친 뒤 3개 통과) · TypeError 메시지(node app.js).
@@ -30,10 +30,10 @@ def sdlc():
 
 def testrun():
     """테스트 실행 애니메이션 — 1차 실행(ok · ok · not ok) → 수정 → 2차 실행(모두 ok). node --test TAP 실측 출력."""
-    t1 = [("ok", "ok 1 - 기한 11-19 · 할 일 → 기한 지남"), ("ok", "ok 2 - 기한 11-19 · 완료 → 기한 지남 아님"),
-          ("ng", "not ok 3 - 기한이 오늘 → 기한 지남 아님"), ("ng", "  error: 'true == false'"), ("", "# pass 2 · # fail 1")]
-    t2 = [("ok", "ok 1 - 기한 11-19 · 할 일 → 기한 지남"), ("ok", "ok 2 - 기한 11-19 · 완료 → 기한 지남 아님"),
-          ("ok", "ok 3 - 기한이 오늘 → 기한 지남 아님"), ("", "# pass 3 · # fail 0")]
+    t1 = [("ok", "ok 1 - 날짜 11-19 · 초안 → 마감 지남"), ("ok", "ok 2 - 날짜 11-19 · 완료 → 마감 지남 아님"),
+          ("ng", "not ok 3 - 날짜가 오늘 → 마감 지남 아님"), ("ng", "  error: 'true == false'"), ("", "# pass 2 · # fail 1")]
+    t2 = [("ok", "ok 1 - 날짜 11-19 · 초안 → 마감 지남"), ("ok", "ok 2 - 날짜 11-19 · 완료 → 마감 지남 아님"),
+          ("ok", "ok 3 - 날짜가 오늘 → 마감 지남 아님"), ("", "# pass 3 · # fail 0")]
     def term(head, lines, d0):
         r = "".join(f'<div class="l {c}" style="--d:{d0 + i * .45:.2f}s">{esc(x)}</div>' for i, (c, x) in enumerate(lines))
         return f'<div class="v2u7term"><div class="h">{head}</div>{r}</div>'
@@ -50,7 +50,7 @@ def stepflow(steps, cls="v2u7sf"):
 
 def logstream():
     """로그가 한 줄씩 쌓이는 화면 — 500 줄은 빨강 · 4xx 는 노랑. 값은 예."""
-    rows = [("", "", "GET", "/", "200", ""), ("", "", "POST", "/api/mcp", "200", "tools/call add_task"),
+    rows = [("", "", "GET", "/", "200", ""), ("", "", "POST", "/api/mcp", "200", "tools/call add_page"),
             ("err", "", "GET", "/api/holidays", "500", "Error: HOLIDAY_API_KEY is not set"),
             ("warn", "", "POST", "/api/mcp", "401", "토큰 없음"), ("", "", "GET", "/api/holidays", "200", "")]
     r = "".join(f'<div class="ln {c}" style="--d:{.4 + i * .6:.2f}s"><span>{t}</span><span>{m}</span><span>{u}</span><b>{st}</b><em>{x}</em></div>'
@@ -73,7 +73,7 @@ def slides():
         # ── 배경 · 비유
         light("직접 클릭 확인의 한계", viz2.pair(
             "1부 앱", [("확인할 기능", "완료 기준 5개"), ("사용자", "나 혼자 · 브라우저 하나"), ("확인 방법", "직접 클릭 · 몇 분")],
-            "2부 앱", [("확인할 기능", "기한 지남 · 로그인 · 공휴일 · 권한 · 입력값"), ("사용자", "로그인한 팀원 여럿"),
+            "2부 앱", [("확인할 기능", "마감 지남 · 로그인 · 공휴일 · 권한 · 입력값"), ("사용자", "로그인한 팀원 여럿"),
                      ("확인 방법", "고칠 때마다 전부 다시 · 빠뜨리기 쉬움")])
               + note("테스트", "확인 순서를 파일로 남겨 매번 같은 검사를 자동으로"), T),
         light("출고 전 검수 비유", phmap(
@@ -84,10 +84,10 @@ def slides():
                 "검수", "테스트")), T),
         # ── 테스트
         light("예제 앱 기준 테스트", viz2.maprows([
-            ("기한이 어제인 할 일 · 할 일 칸", "빨간 표시", "「기한 지남」 · 칸 맨 위"),
-            ("기한 2026-12-25 로 추가", "저장 막힘", "「공휴일 · 기독탄신일」"),
-            ("다른 사람이 담당인 할 일 삭제", "거부", "내가 담당인 할 일만 삭제"),
-            ("로그인 없이 추가", "로그인 화면", "「+ 할 일」 안 보임")], "입력 · 행동", "기대 결과")
+            ("날짜가 어제인 초안 페이지", "빨간 표시", "「마감 지남」 표시"),
+            ("날짜 2026-12-25 로 추가", "저장 막힘", "「공휴일 · 기독탄신일」"),
+            ("다른 사람이 작성자인 페이지 삭제", "거부", "내가 작성자인 페이지만 삭제"),
+            ("로그인 없이 추가", "로그인 화면", "「+ 새 페이지」 안 보임")], "입력 · 행동", "기대 결과")
               + note("테스트 한 개", "정해 둔 입력 → 기대 결과와 비교 → 통과 · 실패"), T),
         light("테스트 종류", viz2.pair(
             "단위 테스트", [("검사 대상", "함수 하나 · 예: 시간 겹침 판단"), ("속도", "수백 개도 몇 초"), ("못 잡는 것", "화면 · 로그인 · DB 연결")],
@@ -98,14 +98,14 @@ def slides():
               + note("읽는 법", "ok = 통과 · not ok = 실패 · 「true == false」 = 실제 true · 기대 false"), T),
         light("AI 에게 테스트 맡기기", chat([
             ("me", "개발 계획 완료 기준으로 테스트를 만들고 실행해 줘. 실패하면 고치기 전에 원인부터 알려 줘"),
-            ("ai", "테스트 6개 작성 · 5개 통과 · 1개 실패.\n기한이 오늘인 할 일이 「기한 지남」으로 표시됨 — 날짜 비교에 「<=」 사용. 고칠까요?"),
+            ("ai", "테스트 6개 작성 · 5개 통과 · 1개 실패.\n날짜가 오늘인 페이지가 「마감 지남」으로 표시됨 — 날짜 비교에 「<=」 사용. 고칠까요?"),
             ("me", "응. 고친 뒤 테스트 전체 다시 실행해 줘"),
             ("ai", "수정 · 테스트 6개 모두 통과")], "Claude Code 대화 예")
               + viz2.tiles([("기대 결과", "사람 · 개발 계획 완료 기준"), ("테스트 코드 · 실행", "Claude Code"),
                             ("금지", "통과시키려고 기대 결과 바꾸기")], 3), T),
         light("화면 테스트 요청 예", chat([
             ("me", "브라우저를 열어서 개발 계획 완료 기준을 하나씩 눌러 확인해 줘"),
-            ("ai", "localhost:3000 열기 → 로그인\n주간 보고서 작성 추가 ○\n기한 어제인 할 일 → 「기한 지남」 ○\n기한 12-25 → 「공휴일」 · 저장 막힘 ○\n다른 사람 할 일 → 삭제 버튼 없음 ○\n콘솔 에러 0건")], "Claude Code · 브라우저 MCP 대화 예")
+            ("ai", "localhost:3000 열기 → 로그인\n주간 회의록 추가 ○\n날짜 어제인 페이지 → 「마감 지남」 ○\n날짜 12-25 → 「공휴일」 · 저장 막힘 ○\n다른 사람 페이지 → 삭제 버튼 없음 ○\n콘솔 에러 0건")], "Claude Code · 브라우저 MCP 대화 예")
               + note("Playwright MCP (2-6)", "브라우저를 Claude Code 가 직접 열고 눌러 봄 · 완료 기준마다 통과 · 실패"), T),
         # ── 디버깅
         light("에러 메시지 읽는 법", codemap([
@@ -119,10 +119,10 @@ def slides():
             ("재현", "같은 순서로 다시 · 언제 나는지"), ("에러 · 로그 전달", "원문 그대로 · 캡처"),
             ("수정", "원인 설명 → Claude Code 수정"), ("재테스트", "같은 순서 + 테스트 전체")])
               + viz2.tiles([("브라우저 콘솔", "F12 → Console · 화면 쪽 에러"), ("터미널", "서버 실행 창 · 테스트 결과"),
-                            ("Vercel 로그", "배포 뒤 서버 함수 · MCP 서버 에러")], 3)
+                            ("Vercel 로그", "배포 뒤 Next.js 서버 · MCP 서버 에러")], 3)
               + note("고친 뒤", "재현 순서를 테스트로 남기기 · 같은 버그 재발 방지"), T),
-        ba("버그 전달 방법", T, "「할 일 추가가 안 돼」",
-           "「주간 보고서 작성 · 김하늘 · 11-27 저장 → 반응 없음.\n콘솔: new row violates row-level security policy」",
+        ba("버그 전달 방법", T, "「새 페이지가 안 돼」",
+           "「주간 회의록 · 김하늘 · 11-27 저장 → 반응 없음.\n콘솔: new row violates row-level security policy」",
            "재현 순서 · 기대 결과 · 실제 결과 · 에러 원문"),
         # ── 품질 관리
         light("AI 코드 리뷰", viz2.maprows([
@@ -133,7 +133,7 @@ def slides():
               + src(("Claude Code · Commands", "https://code.claude.com/docs/en/commands")), T),
         light("보안 기본 점검", viz2.tiles([
             ("키 노출", "API 키 · secret 키가 코드 · GitHub 에 없음 · .env 는 .gitignore (2-5)"),
-            ("권한", "RLS 켜짐 · 다른 사람 할 일 수정 · 삭제 불가 (2-4)"),
+            ("권한", "RLS 켜짐 · 다른 사람 페이지 수정 · 삭제 불가 (2-4)"),
             ("입력값 검증", "빈 칸 · 잘못된 날짜 · 너무 긴 글 · 스크립트 차단")], 3)
               + note("점검 요청", "/security-review + 「키 노출 · 권한 · 입력값 세 가지 확인해 줘」"), T),
         light("배포 뒤 오류 원인", viz2.pair(
@@ -164,7 +164,7 @@ def slides():
               + src(("Vercel · Runtime Logs", "https://vercel.com/docs/logs/runtime")), T),
         light("로그 남기기", chat([
             ("me", "공휴일 API 호출이 실패하면 원인을 Vercel 로그에 남겨 줘. 키 값은 로그에 쓰지 마"),
-            ("ai", "api/holidays.js 실패 지점에 console.error 추가\n· 상태 코드 · 실패한 날짜만 기록 · 키는 기록 안 함")], "Claude Code 대화 예")
+            ("ai", "app/api/holidays/route.ts 실패 지점에 console.error 추가\n· 상태 코드 · 실패한 날짜만 기록 · 키는 기록 안 함")], "Claude Code 대화 예")
               + viz2.tiles([("console.log", "로그의 일반 줄"), ("console.error", "로그의 에러 줄 · 빨강 필터에 잡힘"),
                             ("기록 금지", "키 · 비밀번호 · 개인정보")], 3), T),
         light("Web Analytics", flow([
@@ -172,7 +172,7 @@ def slides():
             ("push", "자동 재배포"), ("방문 기록", "며칠 뒤 그래프")], hl=1)
               + viz2.tiles([("보이는 것", "방문자 · 페이지 뷰 · 유입 경로 · 국가 · 기기"),
                             ("Hobby 한도", "월 50,000 이벤트 · 보고 기간 1개월 · 초과 시 수집 중지"),
-                            ("팀 할 일 보드 규모", "팀원 8명 · 무료 범위 안")], 3)
+                            ("미니 노션 규모", "팀원 8명 · 무료 범위 안")], 3)
               + src(("Vercel · Web Analytics quickstart", "https://vercel.com/docs/analytics/quickstart"),
                     ("Vercel · Web Analytics pricing", "https://vercel.com/docs/analytics/limits-and-pricing")), T),
         # ── 대응

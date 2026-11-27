@@ -4,7 +4,7 @@
 → 요청과 응답(장면: 로딩 → GET → SQL → 행 → JSON → 화면) → 요청 · 응답 읽기 → 쓰기 요청(POST → insert → 201 → 목록 추가)
 → 상태 코드.
 외부 API(공휴일)는 2-5 · MCP 는 2-6.
-사실 출처: supabase.com/docs/guides/api (REST · /rest/v1/표이름) · developer.mozilla.org HTTP 메서드 · 상태 코드
+사실 출처: nextjs.org/docs (Route Handlers · app/api/…/route.ts) · supabase.com/docs · developer.mozilla.org HTTP 메서드 · 상태 코드
 · developer.chrome.com/docs/devtools/network
 """
 import viz2
@@ -17,7 +17,7 @@ from v2scene import reqres, steps
 
 T = "2-1"
 GEN = ("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo")
-SB_API = ("Supabase · REST API", "https://supabase.com/docs/guides/api")
+SB_API = ("Next.js · Route Handlers", "https://nextjs.org/docs/app/building-your-application/routing/route-handlers")
 MDN_M = ("MDN · HTTP 요청 메서드", "https://developer.mozilla.org/ko/docs/Web/HTTP/Reference/Methods")
 MDN_S = ("MDN · HTTP 상태 코드", "https://developer.mozilla.org/ko/docs/Web/HTTP/Reference/Status")
 MDN_MSG = ("MDN · HTTP 메시지", "https://developer.mozilla.org/ko/docs/Web/HTTP/Guides/Messages")
@@ -123,20 +123,20 @@ CSS = """
 def counter():
     """은행 창구 = API — 손님(브라우저)은 금고(DB)에 직접 못 들어감 · 정해진 창구(요청 목록)로만 요청 · 직원(서버)이 금고에서 꺼내 줌.
     창구 4개가 차례로 켜짐 → 조회 창구에 신청서 → 금고 행이 켜짐 → 목록에 없는 요청은 거절. 칸은 제자리."""
-    win = [("조회", "GET", "/rest/v1/tasks", .4), ("등록", "POST", "/rest/v1/tasks", .7),
-           ("변경", "PATCH", "/rest/v1/tasks?id=…", 1.0), ("삭제", "DELETE", "/rest/v1/tasks?id=…", 1.3)]
+    win = [("조회", "GET", "/api/pages", .4), ("만들기", "POST", "/api/pages", .7),
+           ("변경", "PATCH", "/api/pages/41", 1.0), ("삭제", "DELETE", "/api/pages/41", 1.3)]
     w = "".join(f'<div class="w{" on" if i == 0 else ""}" style="--d:{d}s; --p:2.4s"><b>{k}</b><code>{m}</code><span>{u}</span></div>'
                 for i, (k, m, u, d) in enumerate(win))
     return ('<div class="v21def"><b>API</b><span>Application Programming Interface · 프로그램이 다른 프로그램에 일을 맡기는 정해진 창구</span></div>'
             '<div class="v21api">'
-            '<div class="cu"><div class="h">손님 · 브라우저</div><div class="slip" style="--d:2.0s"><em>신청서 = 요청</em>조회 · tasks 전체</div>'
+            '<div class="cu"><div class="h">손님 · 브라우저</div><div class="slip" style="--d:2.0s"><em>신청서 = 요청</em>조회 · 페이지 목록</div>'
             '<div class="slip bad" style="--d:4.0s"><em>신청서 = 요청</em>금고 직접 열기</div></div>'
             f'<div class="ct"><div class="h">창구 = API<small>정해진 요청만 받음</small></div>{w}'
             '<div class="rej" style="--d:4.4s">창구 목록에 없는 요청 → 거절</div></div>'
             '<div class="wall"><span>직원만 출입</span></div>'
             '<div class="vault"><div class="h">금고 · DB</div><div class="sf">직원 = 서버</div>'
-            '<div class="r" style="--d:3.0s">41 · 주간 보고서 작성</div><div class="r" style="--d:3.15s">42 · 교육 자료 준비</div>'
-            '<div class="r" style="--d:3.3s">43 · 예산안 검토</div></div></div>')
+            '<div class="r" style="--d:3.0s">41 · 주간 회의록</div><div class="r" style="--d:3.15s">42 · 교육 자료 정리</div>'
+            '<div class="r" style="--d:3.3s">43 · 예산안 메모</div></div></div>')
 
 
 def three():
@@ -145,12 +145,12 @@ def three():
           '<div class="mk br"><i></i><div class="chips"><em class="h">HTML</em><em class="c">CSS</em><em class="j">JS</em></div>'
           '<small>1-6 웹의 3요소</small></div>'
           '<ul><li>요청 보내기</li><li>받은 데이터로 화면 그리기</li></ul></div>')
-    sv = ('<div class="k" style="--d:1.1s"><div class="t"><b>서버</b><span>처리 · 프로그램</span></div>'
+    sv = ('<div class="k" style="--d:1.1s"><div class="t"><b>서버</b><span>처리 · Next.js</span></div>'
           '<div class="mk sv"><code>요청 받기</code><code>누구인지 · 권한 확인</code><code>DB 에 묻기 → 답 만들기</code></div>'
           '<ul><li>요청마다 실행</li><li>키 · 규칙은 여기에만</li></ul></div>')
-    db = ('<div class="k" style="--d:1.9s"><div class="t"><b>DB</b><span>저장 · 데이터베이스</span></div>'
-          '<div class="mk db"><table><tr><th>id</th><th>title</th></tr><tr><td>41</td><td>주간 보고서 작성</td></tr>'
-          '<tr><td>42</td><td>교육 자료 준비</td></tr></table></div>'
+    db = ('<div class="k" style="--d:1.9s"><div class="t"><b>DB</b><span>저장 · Supabase</span></div>'
+          '<div class="mk db"><table><tr><th>id</th><th>title</th></tr><tr><td>41</td><td>주간 회의록</td></tr>'
+          '<tr><td>42</td><td>교육 자료 정리</td></tr></table></div>'
           '<ul><li>표에 행으로 보관</li><li>서버만 직접 접근</li></ul></div>')
     ln = lambda a, b, d: f'<div class="ln" style="--d:{d}s"><span>{a} →</span><span>← {b}</span></div>'
     return ('<div class="v21three">' + cl + ln("요청", "응답", 1.0) + sv + ln("질의", "결과", 1.8) + db + '</div>'
@@ -167,20 +167,20 @@ def message():
             r += f'<div class="pt {cls}" style="--d:{d0 + i * .5:.1f}s"><div class="tx">{body}</div><em>{lab}</em></div>'
         return f'<div class="msg"><div class="h">{title}</div>{r}</div>'
     rq = blk("요청 · 클라이언트 → 서버", [
-        ("s", "시작 줄 · 방식 · 주소", ["GET /rest/v1/tasks?select=* HTTP/1.1"]),
-        ("h", "헤더 · 받는 곳 · 키 · 형식", ["Host: 프로젝트ID.supabase.co", "apikey: sb_publishable_…", "Accept: application/json"]),
+        ("s", "시작 줄 · 방식 · 주소", ["GET /api/pages HTTP/1.1"]),
+        ("h", "헤더 · 받는 곳 · 로그인 · 형식", ["Host: mini-notion.vercel.app", "Cookie: 로그인 세션 …", "Accept: application/json"]),
         ("b", "빈 줄 뒤 본문 · GET 은 없음", [""])], .3)
     rs = blk("응답 · 서버 → 클라이언트", [
         ("s", "시작 줄 · 상태 코드", ["HTTP/1.1 200 OK"]),
         ("h", "헤더 · 본문 형식", ["Content-Type: application/json"]),
-        ("b", "본문 · JSON", ['[{ "id": 41, "title": "주간 보고서 작성", … }]'])], 2.0)
+        ("b", "본문 · JSON", ['[{ "id": 41, "title": "주간 회의록", … }]'])], 2.0)
     return f'<div class="v21msg">{rq}{rs}</div>'
 
 
 def http_what():
     """HTTP 란 — 만든 회사가 다른 클라이언트 3개 · 서버 3개가 가운데 HTTP 띠 하나로 연결. 선이 차례로 그어짐."""
     cl = ["Chrome", "Safari", "휴대폰 앱"]
-    sv = ["Vercel · 팀 보드", "Supabase", "공공데이터포털"]
+    sv = ["Vercel · 미니 노션", "Supabase", "공공데이터포털"]
     W, H = 1120, 270
     s = ""
     ys = [55, 135, 215]
@@ -206,15 +206,15 @@ def letter():
         return (f'<div class="r" style="--d:{d}s"><span class="k">{k}</span><b>{v}</b>'
                 f'<em class="t{cls}" style="--d:{d + 1.6:.1f}s">{tag}</em></div>')
     rq = ('<div class="lt"><div class="h">보내는 편지 · 요청</div><div class="env">'
-          + row("받는 곳", "팀 보드 서버 · /tasks", "주소", "s", .3)
-          + row("용건", "할 일 목록 주세요", "방식 · GET", "s", .6)
-          + row("봉투에 적은 것", "출입증 번호 · 받을 형식", "헤더", "h", .9)
+          + row("받는 곳", "미니 노션 서버 · /api/pages", "주소", "s", .3)
+          + row("용건", "페이지 목록 주세요", "방식 · GET", "s", .6)
+          + row("봉투에 적은 것", "로그인 확인증 · 받을 형식", "헤더", "h", .9)
           + row("편지 내용", "없음 · 달라는 요청뿐", "본문", "b", 1.2) + '</div></div>')
     rs = ('<div class="lt rp"><div class="h">답장 · 응답</div><div class="env">'
           '<div class="stamp" style="--d:3.2s"><b>200 OK</b><span>처리 완료</span></div>'
           + row("도장", "성공 · 처리 완료", "상태 코드", "s", 3.2)
           + row("봉투에 적은 것", "내용 형식 · JSON", "헤더", "h", 3.5)
-          + row("편지 내용", "할 일 3건", "본문", "b", 3.8) + '</div></div>')
+          + row("편지 내용", "페이지 3개", "본문", "b", 3.8) + '</div></div>')
     return f'<div class="v21lt">{rq}<i class="ar" style="--d:2.4s">→<small>보내기 · 답장</small>←</i>{rs}</div>'
 
 
@@ -226,7 +226,7 @@ def https_scene():
                 f'<div class="mid"><span class="who">중간 경로 · 공용 Wi-Fi</span><code>{mid}</code></div>'
                 f'<i class="ln"></i><div class="ep">서버</div></div>')
     return ('<div class="v21tls">'
-            + row("p", "HTTP", "http://", "apikey: sb_publishable_…<br/>password: haneul1234", .3)
+            + row("p", "HTTP", "http://", "Cookie: session=a8f3…<br/>password: haneul1234", .3)
             + row("s", "HTTPS", "https://", "x9#Qe7!vL2@pZ0$kT4…<br/>%Rm8&amp;wJ1^cN6*yB3…", 2.0)
             + '</div>')
 
@@ -234,7 +234,7 @@ def https_scene():
 def slides():
     return [
         light("웹 앱의 3요소", three()
-              + note("2부", "서버 · DB 는 Supabase · 클라이언트는 팀 보드 화면"), T),
+              + note("2부", "클라이언트 = 미니 노션 화면 · 서버 = Next.js (Vercel) · DB = Supabase"), T),
         # ── HTTP
         light("HTTP", http_what()
               + note("HTTP", "HyperText Transfer Protocol · 클라이언트와 서버가 주고받는 글의 형식 · 만든 회사가 달라도 같은 약속")
@@ -254,8 +254,8 @@ def slides():
                             ("이 강의", "Vercel · Supabase 주소는 https · 따로 설정 없음")], 3)
               + src(("MDN · HTTPS", "https://developer.mozilla.org/ko/docs/Glossary/HTTPS"), ("MDN · TLS", "https://developer.mozilla.org/ko/docs/Glossary/TLS")), T),
         light("요청 방식과 상태 코드", viz2.pair(
-            "방식", [("GET", "가져오기 · 보드 보기"), ("POST", "새로 만들기 · 할 일 추가"),
-                    ("PATCH", "고치기 · 상태 변경"), ("DELETE", "지우기 · 할 일 삭제")],
+            "방식", [("GET", "가져오기 · 목록 보기"), ("POST", "새로 만들기 · 새 페이지"),
+                    ("PATCH", "고치기 · 제목 · 상태 변경"), ("DELETE", "지우기 · 페이지 삭제")],
             "상태 코드", [("200 · 201", "성공 · 만듦"), ("401 · 403", "로그인 필요 · 권한 없음"),
                        ("404", "주소 · 행 없음"), ("500", "서버 안의 오류")], hl="")
               + note("에러를 전할 때", "방식 · 주소 · 상태 코드 세 가지를 같이")

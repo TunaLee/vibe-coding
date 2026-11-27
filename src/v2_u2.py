@@ -1,7 +1,7 @@
 """2-2 데이터베이스.
 
-배경 → 데이터 기록의 변화(종이 → 엑셀 → DB → 클라우드 DB) → 비유(엑셀 · 원시인 돌판 그림) → 할 일 표 애니메이션(행 · 열)
-→ 엑셀과 데이터베이스(동시 쓰기 · 형식 거절 애니메이션) → 관계(members · tasks) → SQL 한 줄 뜻 → SQL 작성의 변화(손 → SQL → 말 → MCP) → Supabase 구성 · 이유 → 무료 플랜.
+배경 → 데이터 기록의 변화(종이 → 엑셀 → DB → 클라우드 DB) → 비유(엑셀 · 원시인 돌판 그림) → 페이지 표 애니메이션(행 · 열)
+→ 엑셀과 데이터베이스(동시 쓰기 · 형식 거절 애니메이션) → 관계(members · pages) → SQL 한 줄 뜻 → SQL 작성의 변화(손 → SQL → 말 → MCP) → Supabase 구성 · 이유 → 무료 플랜.
 사실 출처
 - Supabase 무료 플랜: supabase.com/pricing (프로젝트 2개 · DB 500 MB · 월 이용자 50,000 · 1주 미사용 시 일시정지 · Pro $25/월)
 - 프로젝트마다 Postgres 전체: supabase.com/docs/guides/database/overview
@@ -19,76 +19,76 @@ GEN = ("AI 생성 그림 · Z-Image Turbo (Apache 2.0)", "https://huggingface.co
 
 
 def sheet():
-    """할 일 표 — 행이 차례로 쌓이고, 행 하나 · 열 하나가 차례로 강조됨."""
-    head = ["할 일", "기한", "담당자", "상태"]
-    rows = [["주간 보고서 작성", "2026-11-27", "김하늘", "할 일"],
-            ["신규 입사자 교육 자료", "2026-11-25", "이준호", "진행 중"],
-            ["내년 예산안 검토", "2026-11-18", "박서연", "진행 중"],
-            ["10월 실적 정리", "2026-11-14", "최민재", "완료"]]
+    """페이지 표 — 행이 차례로 쌓이고, 행 하나 · 열 하나가 차례로 강조됨."""
+    head = ["제목", "날짜", "작성자", "상태"]
+    rows = [["주간 회의록", "2026-11-27", "김하늘", "초안"],
+            ["신규 입사자 교육 자료", "2026-11-25", "이준호", "작성 중"],
+            ["내년 예산안", "2026-11-18", "박서연", "작성 중"],
+            ["10월 실적 보고", "2026-11-14", "최민재", "완료"]]
     th = '<th class="v2u2rn"></th>' + "".join(f'<th class="{"v2u2col" if i == 1 else ""}">{h}</th>' for i, h in enumerate(head))
     tr = ""
     for r, row in enumerate(rows):
         cls = "v2u2tr v2u2row" if r == 1 else "v2u2tr"
         tds = "".join(f'<td class="{"v2u2col" if i == 1 else ""}">{c}</td>' for i, c in enumerate(row))
         tr += f'<tr class="{cls}" style="--d:{.3 + r * .4:.2f}s"><td class="v2u2rn">{r + 1}</td>{tds}</tr>'
-    tags = ('<div class="v2u2tags"><span class="v2u2tag t1">행 · 할 일 한 건</span>'
-            '<span class="v2u2tag t2">열 · 항목 하나 (기한)</span><span class="v2u2tag t3">표 · tasks</span></div>')
-    return f'<div class="v2u2sheet"><div class="v2u2tab">tasks</div><table class="v2u2t"><thead><tr>{th}</tr></thead><tbody>{tr}</tbody></table></div>{tags}'
+    tags = ('<div class="v2u2tags"><span class="v2u2tag t1">행 · 페이지 한 개</span>'
+            '<span class="v2u2tag t2">열 · 항목 하나 (날짜)</span><span class="v2u2tag t3">표 · pages</span></div>')
+    return f'<div class="v2u2sheet"><div class="v2u2tab">pages</div><table class="v2u2t"><thead><tr>{th}</tr></thead><tbody>{tr}</tbody></table></div>{tags}'
 
 
 def relation():
-    """두 표와 관계 — tasks.owner_id 칸과 같은 번호의 members 행이 같은 색으로 차례로 강조됨."""
+    """두 표와 관계 — pages.owner_id 칸과 같은 번호의 members 행이 같은 색으로 차례로 강조됨."""
     members = [("1", "김하늘", "haneul@company.com"), ("2", "이준호", "junho@company.com"), ("3", "박서연", "seoyeon@company.com")]
-    tk = [("1", "1", "주간 보고서 작성", "2026-11-27"), ("2", "2", "신규 입사자 교육 자료", "2026-11-25"),
-          ("3", "1", "고객 설문 결과 정리", "2026-11-19")]
+    tk = [("1", "1", "주간 회의록", "2026-11-27"), ("2", "2", "신규 입사자 교육 자료", "2026-11-25"),
+          ("3", "1", "고객 설문 결과", "2026-11-19")]
     mt = "".join(f'<tr class="v2u2r{a}"><td>{a}</td><td>{b}</td><td>{c}</td></tr>' for a, b, c in members)
     bt = "".join(f'<tr><td>{a}</td><td class="v2u2k v2u2r{b}">{b}</td><td>{c}</td><td>{d}</td></tr>' for a, b, c, d in tk)
     return ('<div class="v2u2rel">'
-            f'<div><div class="v2u2tab">tasks · 할 일</div><table class="v2u2t sm"><thead><tr><th>id</th><th class="v2u2kh">owner_id</th>'
-            f'<th>title</th><th>due</th></tr></thead><tbody>{bt}</tbody></table></div>'
+            f'<div><div class="v2u2tab">pages · 페이지</div><table class="v2u2t sm"><thead><tr><th>id</th><th class="v2u2kh">owner_id</th>'
+            f'<th>title</th><th>date</th></tr></thead><tbody>{bt}</tbody></table></div>'
             '<i class="v2u2link">owner_id → id</i>'
             f'<div><div class="v2u2tab">members · 팀원</div><table class="v2u2t sm"><thead><tr><th>id</th><th>name</th><th>email</th></tr></thead>'
             f'<tbody>{mt}</tbody></table></div></div>')
 
 
 def rules():
-    """세 사람이 동시에 할 일을 보냄 → 표에 들어감 · 기한 형식이 틀린 하나는 거절."""
-    sends = [("김하늘", "주간 보고서 작성 · 2026-11-27", False, .3), ("이준호", "신규 입사자 교육 자료 · 2026-11-25", False, .5),
-             ("박서연", "내년 예산안 검토 · 「월말쯤」", True, .7)]
+    """세 사람이 동시에 페이지를 보냄 → 표에 들어감 · 날짜 형식이 틀린 하나는 거절."""
+    sends = [("김하늘", "주간 회의록 · 2026-11-27", False, .3), ("이준호", "신규 입사자 교육 자료 · 2026-11-25", False, .5),
+             ("박서연", "내년 예산안 · 「월말쯤」", True, .7)]
     left = "".join(f'<div class="v2u2snd{" bad" if bad else ""}" style="--d:{d:.2f}s"><b>{who}</b><span>{x}</span></div>'
                    for who, x, bad, d in sends)
     ok = "".join(f'<tr class="v2u2tr" style="--d:{d:.2f}s"><td>{t}</td><td>{dt}</td><td>{w}</td></tr>'
-                 for t, dt, w, d in [("주간 보고서 작성", "2026-11-27", "김하늘", 1.7), ("신규 입사자 교육 자료", "2026-11-25", "이준호", 1.9)])
-    return ('<div class="v2u2rules"><div class="v2u2snds"><div class="v2u2h">동시에 보낸 할 일</div>' + left + '</div>'
+                 for t, dt, w, d in [("주간 회의록", "2026-11-27", "김하늘", 1.7), ("신규 입사자 교육 자료", "2026-11-25", "이준호", 1.9)])
+    return ('<div class="v2u2rules"><div class="v2u2snds"><div class="v2u2h">동시에 보낸 페이지</div>' + left + '</div>'
             '<div class="v2u2go"><i style="--d:1.2s">→</i><i style="--d:1.3s">→</i><i style="--d:1.4s">→</i></div>'
-            '<div><div class="v2u2sheet"><div class="v2u2tab">tasks</div><table class="v2u2t sm"><thead><tr>'
-            '<th>할 일</th><th class="v2u2kh">기한 · date 형식</th><th>담당자</th></tr></thead>'
+            '<div><div class="v2u2sheet"><div class="v2u2tab">pages</div><table class="v2u2t sm"><thead><tr>'
+            '<th>제목</th><th class="v2u2kh">날짜 · date 형식</th><th>작성자</th></tr></thead>'
             f'<tbody>{ok}</tbody></table></div>'
             '<div class="v2u2rej" style="--d:2.4s">✕ 박서연 · 「월말쯤」 · 날짜 형식 아님 → 저장 거절</div></div></div>')
 
 
 def result():
     """SQL 실행 결과 — 코드 줄 뒤에 나타나는 결과 표."""
-    rows = "".join(f"<tr><td>{a}</td><td>{b}</td></tr>" for a, b in [("내년 예산안 검토", "2026-11-18"), ("신규 입사자 교육 자료", "2026-11-25")])
-    return (f'<div class="v2u2res"><span>결과 · 2행</span><table class="v2u2t sm"><thead><tr><th>title</th><th>due</th></tr></thead>'
+    rows = "".join(f"<tr><td>{a}</td><td>{b}</td></tr>" for a, b in [("내년 예산안", "2026-11-18"), ("신규 입사자 교육 자료", "2026-11-25")])
+    return (f'<div class="v2u2res"><span>결과 · 2행</span><table class="v2u2t sm"><thead><tr><th>title</th><th>date</th></tr></thead>'
             f'<tbody>{rows}</tbody></table></div>')
 
 
 def history():
     """데이터 기록의 변화 — 종이 장부 → 엑셀 파일 → 데이터베이스 → 클라우드 DB.
-    같은 할 일 한 건이 단계마다 어떤 모양으로 남는지 + 쌓이는 방식 · 쌓이는 양 막대. 평택대 교안 「데이터 관리의 변화」 구조."""
-    R = ("주간 보고서 작성", "11/27", "김하늘")
+    같은 페이지 한 개가 단계마다 어떤 모양으로 남는지 + 쌓이는 방식 · 쌓이는 양 막대. 평택대 교안 「데이터 관리의 변화」 구조."""
+    R = ("주간 회의록", "11/27", "김하늘")
     paper = (f'<div class="v2hP"><p>{R[1]} {R[0]} — {R[2]}</p><p>11/25 신규 입사자 교육 — 이준호</p>'
-             '<p class="x">11/18 예산안 검토 — 박서연</p></div>')
+             '<p class="x">11/18 예산안 메모 — 박서연</p></div>')
     def grid(rows, head, idcol=False):
         th = "".join(f"<th>{h}</th>" for h in head)
         tr = "".join("<tr>" + "".join(f"<td>{c}</td>" for c in r) + "</tr>" for r in rows)
         return f'<table class="v2hT{" db" if idcol else ""}"><thead><tr>{th}</tr></thead><tbody>{tr}</tbody></table>'
     xl = ('<div class="v2hX"><div class="f">할일_최종_v3.xlsx</div>'
-          + grid([(R[0], R[1], R[2]), ("교육 자료", "11/25", "이준호")], ["A 할 일", "B 기한", "C 담당"]) + '</div>')
+          + grid([(R[0], R[1], R[2]), ("교육 자료", "11/25", "이준호")], ["A 제목", "B 날짜", "C 작성자"]) + '</div>')
     db = grid([("41", R[0], "2026-11-27", "1"), ("42", "교육 자료", "2026-11-25", "2"), ("43", "<em>새 행</em>", "…", "…")],
-              ["id", "title", "due", "owner_id"], True)
-    cl = ('<div class="v2hC">' + grid([("41", R[0], "2026-11-27"), ("42", "교육 자료", "2026-11-25")], ["id", "title", "due"], True)
+              ["id", "title", "date", "owner_id"], True)
+    cl = ('<div class="v2hC">' + grid([("41", R[0], "2026-11-27"), ("42", "교육 자료", "2026-11-25")], ["id", "title", "date"], True)
           + '<div class="v2hDv"><span>노트북</span><span>휴대폰</span><span>Vercel 앱</span></div></div>')
     st = [  # (이름, 그림, 기록, 보관, 쌓이는 방식, 막대 %)
         ("종이 장부", paper, "사람이 손으로 적음", "장부 · 화이트보드", "페이지가 늘어남 · 찾기 어려움", 8),
@@ -109,12 +109,12 @@ def history():
 
 def sql_change():
     """SQL 작성의 변화 — 손으로 찾기 → SQL 직접 작성 → 말로 요청(Claude Code 가 SQL) → MCP 로 직접 실행.
-    같은 질문 「진행 중인 할 일」이 단계마다 어떤 모양인지 + 사람 · AI 가 하는 일. 평택대 교안 「분석 도구의 변화」 구조."""
+    같은 질문 「작성 중인 페이지」가 단계마다 어떤 모양인지 + 사람 · AI 가 하는 일. 평택대 교안 「분석 도구의 변화」 구조."""
     pic = [
-        '<div class="v2qF"><span>상태 ▾ 필터</span><p>진행 중 ✓</p><p class="x">완료</p><p class="x">할 일</p></div>',
-        '<pre class="v2qS">select title, due\nfrom tasks\nwhere status = \'진행 중\'\norder by due;</pre>',
-        '<div class="v2qM"><p class="me">진행 중인 할 일만 보여 줘</p><pre class="v2qS sm">select title, due …</pre><small>SQL Editor 에 붙여 넣기 · 실행</small></div>',
-        '<div class="v2qM"><p class="me">진행 중인 할 일만 보여 줘</p><p class="ai">진행 중 2건 · 내년 예산안 검토 · 신규 입사자 교육 자료</p></div>',
+        '<div class="v2qF"><span>상태 ▾ 필터</span><p>작성 중 ✓</p><p class="x">완료</p><p class="x">초안</p></div>',
+        '<pre class="v2qS">select title, date\nfrom pages\nwhere status = \'작성 중\'\norder by date;</pre>',
+        '<div class="v2qM"><p class="me">작성 중인 페이지만 보여 줘</p><pre class="v2qS sm">select title, date …</pre><small>SQL Editor 에 붙여 넣기 · 실행</small></div>',
+        '<div class="v2qM"><p class="me">작성 중인 페이지만 보여 줘</p><p class="ai">작성 중 2개 · 내년 예산안 · 신규 입사자 교육 자료</p></div>',
     ]
     st = [("손으로 찾기", "엑셀 필터 · 장부", "줄마다 눈으로 찾음", "—"),
           ("SQL 직접 작성", "개발자 · 분석가", "문법 학습 · 작성 · 실행", "—"),
@@ -129,30 +129,30 @@ def sql_change():
               f'<div class="pic">{pic[i]}</div>'
               f'<dl><dt>사람이 하는 일</dt><dd>{me}</dd><dt>AI 가 하는 일</dt><dd>{ai}</dd></dl></div>')
     return ('<div class="v2hTop"><span>예전</span><i></i><span>바이브코딩</span></div>'
-            f'<div class="v2hQ">「진행 중인 할 일만 보여 줘」 · 같은 질문</div><div class="v2h">{c}</div>')
+            f'<div class="v2hQ">「작성 중인 페이지만 보여 줘」 · 같은 질문</div><div class="v2h">{c}</div>')
 
 
 def slides():
     return [
         light("데이터 기록의 변화", history()
-              + note("2부", "Supabase · 클라우드 DB 한 곳에 할 일 기록"), T),
+              + note("2부", "Supabase · 클라우드 DB 한 곳에 페이지 기록"), T),
         light("엑셀 표", phmap("v2_u2_tablet.webp", "칸을 나눠 기록하는 돌판", *GEN, viz2.maprows([
-            ("엑셀 파일", "데이터베이스", "Supabase 프로젝트 하나"), ("시트", "표 (테이블)", "tasks · members"),
-            ("가로 한 줄", "행", "할 일 한 건"), ("세로 한 칸", "열", "할 일 · 기한 · 담당자"),
+            ("엑셀 파일", "데이터베이스", "Supabase 프로젝트 하나"), ("시트", "표 (테이블)", "pages · members"),
+            ("가로 한 줄", "행", "페이지 한 개"), ("세로 한 칸", "열", "제목 · 날짜 · 작성자"),
             ("칸 하나", "값", "2026-11-27")], "엑셀", "데이터베이스")), T),
-        light("할 일 표의 행과 열", sheet()
+        light("페이지 표의 행과 열", sheet()
               + note("관계형 데이터베이스", "데이터를 행 · 열로 된 표에 담는 방식 · 표끼리 서로 연결"), T),
         light("엑셀과 데이터베이스", rules()
               + note("엑셀과 차이", "엑셀 · 아무 칸에 아무 값 / 데이터베이스 · 열마다 형식 · 여러 사람이 동시에"), T),
         light("표와 표의 관계", relation()
               + viz2.pair(
-                  "한 표에 다 넣기", [("팀원 이메일 변경", "할 일 행마다 고치기"), ("오타", "「김하늘」 「김 하늘」 섞임")],
+                  "한 표에 다 넣기", [("팀원 이메일 변경", "페이지 행마다 고치기"), ("오타", "「김하늘」 「김 하늘」 섞임")],
                   "표 두 개 · 번호로 연결", [("팀원 이메일 변경", "members 한 칸만 고치기"), ("오타", "번호라 섞이지 않음")]), T),
         light("SQL", codemap([
-            ("select title, due", "할 일 · 기한 열만"),
-            ("from tasks", "tasks 표에서"),
-            ("where status = '진행 중'", "상태가 진행 중인 행만"),
-            ("order by due;", "기한이 빠른 순서")], ask="「진행 중인 할 일만 보여 줘」", title="SQL")
+            ("select title, date", "제목 · 날짜 열만"),
+            ("from pages", "pages 표에서"),
+            ("where status = '작성 중'", "상태가 작성 중인 행만"),
+            ("order by date;", "날짜가 빠른 순서")], ask="「작성 중인 페이지만 보여 줘」", title="SQL")
               + result()
               + note("SQL 작성", "Claude Code 가 씀 · 사람은 결과 표를 확인"), T),
         light("SQL 작성의 변화", sql_change()
@@ -228,7 +228,7 @@ CSS = """
   .v2u2db{border:2px solid #F28C28; border-radius:14px; background:#FFF3E6; padding:12px 14px; text-align:center; opacity:0; animation:v2u2in .5s ease-out var(--d) forwards;}
   .v2u2db b{display:block; font-size:19px; color:#E07A12;} .v2u2db span{font-size:15px; color:#16233A;}
   .v2u2ar{font-style:normal; align-self:center; text-align:center; font-size:30px; font-weight:800; color:#F28C28;}
-  /* 2-1 · 할 일 표 */
+  /* 2-1 · 페이지 표 */
   .v2u2sheet{border:1.5px solid #D9DDE3; border-radius:12px; overflow:hidden; background:#fff; margin:4px 0 12px;}
   .v2u2tab{display:inline-block; font-family:var(--mono); font-size:14px; font-weight:800; color:#fff; background:#1F3A5F; padding:5px 14px; border-radius:8px 8px 0 0;}
   .v2u2sheet .v2u2tab{border-radius:0 0 8px 0;}

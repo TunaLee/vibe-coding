@@ -34,7 +34,7 @@ def slides():
             ("업무 등록 · 앱 화면에서만", "내 MCP 서버 · Claude · ChatGPT", ""),
             ("수동 오류 확인 · 기능마다 직접 클릭", "테스트 · 디버깅", ""),
             ("운영 상태 확인 불가 · 사용자 제보에 의존", "모니터링 · 로그", "")], "예제 앱의 한계", "2부")
-              + note("2부 공통 예제", "팀 할 일 보드 · 여럿이 함께 쓰는 앱으로 같은 순서를 한 번 더"), T),
+              + note("2부 공통 예제", "미니 노션 v2 · 여럿이 함께 쓰는 앱으로 같은 순서를 한 번 더"), T),
         light("2부 커리큘럼", '<div class="v1map" style="grid-template-columns:repeat(4,1fr); gap:10px">' + "".join(
             f'<a class="v1u" href="part2.html#u-{c}" style="min-height:84px; padding:10px 14px"><span class="c">{c}</span><b style="font-size:19px">{t}</b><small>{o}</small></a>'
             for c, t, _, o in __import__("v2kit").UNITS) + "</div>", T),

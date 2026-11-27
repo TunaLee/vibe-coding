@@ -4,8 +4,8 @@ CSS 접두어 v2s. 단원 모듈은 CSS 에 v2scene.CSS 를 더한다.
 """
 from hx import esc
 
-TASKS = [("주간 회의록", "2026-11-27", "페이지"), ("교육 자료 정리", "2026-11-25", "페이지"), ("예산안 메모", "2026-11-18", "페이지")]
-NEW = ("고객사 미팅 회의록", "2026-12-02", "페이지")
+TASKS = [("주간 회의록", "2026-11-27", "작성 중"), ("교육 자료 정리", "2026-11-25", "초안"), ("예산안 메모", "2026-11-18", "작성 중")]
+NEW = ("고객사 미팅 회의록", "2026-12-02", "초안")
 
 
 def _at(d):
@@ -20,7 +20,7 @@ def wire(top, bottom, d_top, d_bot):
 
 def reqres(write=False):
     """요청과 응답 — 브라우저(화면 + Network) · 서버 · DB.
-    읽기: 로딩 줄 → GET 요청 → 서버가 SQL → DB 행 3개 → JSON 응답 200 → 화면에 할 일 3건.
+    읽기: 로딩 줄 → GET 요청 → 서버가 SQL → DB 행 3개 → JSON 응답 200 → 화면에 페이지 3개.
     쓰기: 「추가」 클릭 → POST 요청 → insert → DB 새 행 → 201 → 목록에 1건 추가."""
     T = [.3, 1.0, 1.8, 2.6, 3.3, 3.9, 4.5, 5.1, 5.8]
     # ── 브라우저 화면
@@ -34,7 +34,7 @@ def reqres(write=False):
     else:
         top = ""
         skel = f'<div class="sk" {_at(T[8])}><i></i><i></i><i></i></div>'
-    meth, path, code_, codet = ("POST", "/rest/v1/pages", "201", "Created") if write else ("GET", "/rest/v1/pages?select=*", "200", "OK")
+    meth, path, code_, codet = ("POST", "/api/pages", "201", "Created") if write else ("GET", "/api/pages", "200", "OK")
     if write:
         js = '[{ "id": 44, "title": "고객사 미팅 회의록", … }]'
     else:
@@ -49,22 +49,22 @@ def reqres(write=False):
                f'<div class="app"><div class="ah">미니 노션 · 페이지 목록</div>{top}<div class="ls">{skel}{rows}</div></div>{net}</div>')
     # ── 서버
     if write:
-        sl = [(f"POST {path}", T[2]), ("insert into pages …", T[2] + .3), ("새 행 → JSON", T[6])]
+        sl = [(f"POST {path}", T[2]), ("로그인 확인 → insert", T[2] + .3), ("새 행 → JSON", T[6])]
     else:
-        sl = [(f"GET {path}", T[2]), ("select * from pages", T[2] + .3), ("행 3개 → JSON", T[6])]
-    server = ('<div class="v2sBx srv"><div class="bh"><b>서버</b><small>Supabase API</small></div>'
+        sl = [(f"GET {path}", T[2]), ("pages 표 조회", T[2] + .3), ("행 3개 → JSON", T[6])]
+    server = ('<div class="v2sBx srv"><div class="bh"><b>서버</b><small>Next.js · Vercel</small></div>'
               + "".join(f'<div class="cl" {_at(d)}>{esc(x)}</div>' for x, d in sl) + '</div>')
     # ── DB
     dr = "".join(f'<tr class="{"hl" if not write else ""}" {_at(T[3] + i * .15)}><td>{41 + i}</td><td>{t}</td></tr>' for i, (t, _, _) in enumerate(TASKS))
     if write:
         dr += f'<tr class="nw" {_at(T[3])}><td>44</td><td>{NEW[0]}</td></tr>'
-    db = (f'<div class="v2sBx db"><div class="bh"><b>DB</b><small>Postgres · pages</small></div>'
+    db = (f'<div class="v2sBx db"><div class="bh"><b>DB</b><small>Supabase · pages</small></div>'
           f'<table><tr><th>id</th><th>title</th></tr>{dr}</table></div>')
     req = "① 요청 · " + meth
     return ('<div class="v2s">' + browser
             + wire(req, f"⑤ 응답 · {code_} · JSON", T[1], T[6])
             + server
-            + wire("② SQL", "④ 행 · 결과", T[2] + .3, T[4])
+            + wire("② 조회 · SQL", "④ 행 · 결과", T[2] + .3, T[4])
             + db + '</div>')
 
 
@@ -142,7 +142,7 @@ CSS = """
 """
 
 
-# ── AI 대화 장면 — 대화창(호스트) · 가운데 칸(MCP 서버) · 오른쪽 칸(DB · 보드). 칸은 제자리 · 줄이 차례로 켜짐 ──
+# ── AI 대화 장면 — 대화창(호스트) · 가운데 칸(MCP 서버) · 오른쪽 칸(DB · 페이지 목록). 칸은 제자리 · 줄이 차례로 켜짐 ──
 def agent(host, msgs, mid, right, wires, host_cls="o"):
     """host: 대화창 이름 · msgs: [(cls me|ai|tool|ok, html, 초)] · mid: (제목, 작은 글, [(줄, 초)]) · right: html
     wires: ((위 글자, 초), (아래 글자, 초), (위2, 초), (아래2, 초))."""
@@ -155,11 +155,11 @@ def agent(host, msgs, mid, right, wires, host_cls="o"):
     return ('<div class="v2s v2sA">' + chat + wire(a, b, da, db_) + midb + wire(c, e, dc, de) + right + '</div>')
 
 
-def board(rows, title="팀 할 일 보드 · tasks"):
-    """rows: [(할 일, 기한, 상태, 새 행이면 초 · 아니면 None)]."""
+def board(rows, title="미니 노션 · pages"):
+    """rows: [(제목, 날짜, 상태, 새 행이면 초 · 아니면 None)]."""
     tr = "".join(f'<tr class="{"nw" if d is not None else ""}" {_at(d or 0)}><td>{t}</td><td>{du}</td><td>{st}</td></tr>' for t, du, st, d in rows)
     return (f'<div class="v2sBx db bd"><div class="bh"><b>{title.split(" · ")[0]}</b><small>{" · ".join(title.split(" · ")[1:])}</small></div>'
-            f'<table><tr><th>할 일</th><th>기한</th><th>상태</th></tr>{tr}</table></div>')
+            f'<table><tr><th>페이지</th><th>날짜</th><th>상태</th></tr>{tr}</table></div>')
 
 
 def tools(names, pick, d_list, d_pick):

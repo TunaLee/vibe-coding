@@ -2,7 +2,7 @@
 
 배경(AI 는 대화창 안 · 사람이 복사 · 붙여넣기) → 등장 계기(회사마다 따로 만든 연결 · 연결 수가 곱으로 늘어남 → 2024-11 MCP 공개 → 확산)
 → 비유(USB-C · 공식 문서) → 구조(호스트 · 클라이언트 · 서버 · 도구 · 리소스 · 프롬프트) → 동작(도구 목록 읽기 → 고르기 → 실행)
-→ API 와 MCP → 쓸 만한 MCP → 연결 방법 · 안전 설정 → 캘린더 일정 → 할 일 → 실습.
+→ API 와 MCP → 쓸 만한 MCP → 연결 방법 · 안전 설정 → 캘린더 일정 → 회의록 페이지 → 실습.
 사실 출처
 - anthropic.com/news/model-context-protocol (2024-11-25 · 「Every new data source requires its own custom implementation」)
 - openai.com/index/chatgpt-plugins (2023-03-23) · openai.com/index/function-calling-and-other-api-updates (2023-06-13) · claude.com/blog/tool-use-ga (2024-05-30)
@@ -44,14 +44,14 @@ def relay():
     return ('<div class="v2u3relay">'
             + row("MCP 없이", [("Claude", "SQL 작성", False), ("나", "복사", True), ("Supabase 화면", "붙여 넣기 · 실행", True),
                               ("나", "오류 문구 복사", True), ("Claude", "수정 SQL", False)], .3, False)
-            + row("MCP 연결", [("나", "「tasks 표 만들어 줘」", False), ("Claude Code", "SQL 작성", False),
+            + row("MCP 연결", [("나", "「pages 표 만들어 줘」", False), ("Claude Code", "SQL 작성", False),
                               ("Supabase", "직접 실행 · 결과", False), ("Claude Code", "오류면 다시 고침", False)], 2.3, True)
             + '<div class="v2u3cnt"><span class="c1">사람 손 3번 · 오류마다 반복</span><span class="c2">사람 손 0번 · 요청 한 줄</span></div>'
             + "</div>")
 
 
 def cal_to_tasks():
-    """Google 캘린더 일정 → Claude Code(MCP 두 개) → 팀 할 일 보드. 칸은 제자리 · 읽힌 일정과 추가된 행이 같은 색으로 켜짐."""
+    """Google 캘린더 일정 → Claude Code(MCP 두 개) → 미니 노션. 칸은 제자리 · 읽힌 일정과 추가된 행이 같은 색으로 켜짐."""
     days = [("월", "11/30"), ("화", "12/1"), ("수", "12/2"), ("목", "12/3"), ("금", "12/4")]
     ev = {0: ("주간 회의", "c1", 1.7), 2: ("고객사 미팅", "c2", 1.9), 4: ("보고서 마감", "c3", 2.1)}
     cols = ""
@@ -64,18 +64,18 @@ def cal_to_tasks():
     def msg(cls, html_, d):
         return f'<div class="m {cls}" style="--d:{d}s">{html_}</div>'
     cc = ('<div class="v2cW"><div class="v2cH"><i class="o"></i>Claude Code</div><div class="v2cChat">'
-          + msg("me", "이번 주 캘린더 일정을 팀 보드 할 일에 넣어 줘", .6)
+          + msg("me", "이번 주 회의마다 회의록 페이지 만들어 줘", .6)
           + msg("tool l", "<em>Google Calendar MCP</em> 이번 주 일정 조회", 1.3)
-          + msg("ai", "일정 3건 · 날짜를 기한으로 할 일 3건 추가할까요?", 2.6)
+          + msg("ai", "일정 3건 · 회의 날짜로 회의록 페이지 3개 만들까요?", 2.6)
           + msg("me", "응", 3.3)
-          + msg("tool r", "<em>Supabase MCP</em> tasks 에 3행 추가", 3.8)
-          + msg("ai", "완료 · 할 일 3건 추가", 5.2) + '</div></div>')
-    rows = [("주간 보고서 작성", "11/27", "진행 중", "", 0), ("교육 자료 준비", "11/25", "할 일", "", 0),
-            ("주간 회의", "11/30", "할 일", "c1", 4.2), ("고객사 미팅", "12/2", "할 일", "c2", 4.5), ("보고서 마감", "12/4", "할 일", "c3", 4.8)]
+          + msg("tool r", "<em>Supabase MCP</em> pages 에 3행 추가", 3.8)
+          + msg("ai", "완료 · 회의록 페이지 3개", 5.2) + '</div></div>')
+    rows = [("주간 회의록", "11/27", "작성 중", "", 0), ("교육 자료 정리", "11/25", "초안", "", 0),
+            ("주간 회의 회의록", "11/30", "초안", "c1", 4.2), ("고객사 미팅 회의록", "12/2", "초안", "c2", 4.5), ("보고서 마감 회의록", "12/4", "초안", "c3", 4.8)]
     tr = "".join(f'<tr class="{"nw " + c if c else ""}" style="--d:{d}s"><td>{t}{"<small>캘린더</small>" if c else ""}</td><td>{du}</td><td>{st}</td></tr>'
                  for t, du, st, c, d in rows)
-    board = ('<div class="v2cW"><div class="v2cH"><i class="b"></i>팀 할 일 보드 · tasks</div>'
-             f'<table class="v2cT"><thead><tr><th>할 일</th><th>기한</th><th>상태</th></tr></thead><tbody>{tr}</tbody></table></div>')
+    board = ('<div class="v2cW"><div class="v2cH"><i class="b"></i>미니 노션 · pages</div>'
+             f'<table class="v2cT"><thead><tr><th>페이지</th><th>날짜</th><th>상태</th></tr></thead><tbody>{tr}</tbody></table></div>')
     plug = lambda side, name, d: f'<div class="v2cP {side}" style="--d:{d}s"><b>MCP</b><span>{name}</span></div>'
     return ('<div class="v2c">' + cal + plug("l", "읽기", 1.3) + cc + plug("r", "쓰기", 3.8) + board + '</div>')
 
@@ -151,17 +151,17 @@ def slides():
               + note("공식 소개", "「MCP 는 AI 앱을 위한 USB-C 포트」 · Think of MCP like a USB-C port for AI applications")
               + src(INTRO), T),
         light("MCP 구조", arch()
-              + viz2.tiles([("도구 (Tools)", "AI 가 실행하는 기능 · 할 일 추가"), ("리소스 (Resources)", "AI 가 읽는 자료 · 파일 · 표"),
+              + viz2.tiles([("도구 (Tools)", "AI 가 실행하는 기능 · 새 페이지"), ("리소스 (Resources)", "AI 가 읽는 자료 · 파일 · 표"),
                             ("프롬프트 (Prompts)", "미리 만든 요청 틀")], 3)
               + src(ARCH), T),
         light("MCP 동작", agent("Claude Code", [
-            ("me", "기한 지난 할 일 몇 건이야?", .3), ("tool", "<em>supabase</em> 도구 목록 읽기", 1.3),
-            ("tool", "<em>execute_sql</em> select count(*) from tasks where due &lt; today …", 2.0),
-            ("ai", "기한 지난 할 일 2건 · 박서연 1 · 최민재 1", 4.4)],
+            ("me", "마감 지난 페이지 몇 개야?", .3), ("tool", "<em>supabase</em> 도구 목록 읽기", 1.3),
+            ("tool", "<em>execute_sql</em> select count(*) from pages where date &lt; today …", 2.0),
+            ("ai", "마감 지난 페이지 2개 · 박서연 1 · 최민재 1", 4.4)],
             ("Supabase MCP 서버", "도구 3개", supa_tools),
-            '<div class="v2sBx db"><div class="bh"><b>DB</b><small>tasks</small></div><table><tr><th>title</th><th>due</th></tr>'
-            '<tr class="hl" style="--d:2.8s"><td>예산안 검토</td><td>11/18</td></tr><tr class="hl" style="--d:2.95s"><td>설문 정리</td><td>11/19</td></tr>'
-            '<tr><td>보고서 작성</td><td>12/04</td></tr></table></div>',
+            '<div class="v2sBx db"><div class="bh"><b>DB</b><small>pages</small></div><table><tr><th>title</th><th>date</th></tr>'
+            '<tr class="hl" style="--d:2.8s"><td>예산안 메모</td><td>11/18</td></tr><tr class="hl" style="--d:2.95s"><td>설문 결과</td><td>11/19</td></tr>'
+            '<tr><td>보고서</td><td>12/04</td></tr></table></div>',
             (("도구 호출", 2.0), ("결과 · 2", 3.6), ("SQL", 2.4), ("행 2개", 3.2)))
               + v2scene.steps([("①", "질문", .3), ("②", "도구 목록 읽기", 1.3), ("③", "도구 고르기 · 실행", 2.0),
                                ("④", "결과 받기", 3.6), ("⑤", "답하기", 4.4)])
@@ -189,23 +189,23 @@ def slides():
             ("개발용 프로젝트", "실제 서비스 DB 에 연결하지 않기"), ("실행 승인", "도구 실행마다 내용 보고 허용")], 4)
               + note("Playwright MCP", "「보안 경계가 아님」 · 공식 문서 · 믿을 수 있는 사이트만")
               + src(SMCP, ("Playwright MCP", "https://github.com/microsoft/playwright-mcp")), T),
-        light("캘린더 일정 → 할 일", cal_to_tasks()
+        light("캘린더 일정 → 회의록 페이지", cal_to_tasks()
               + note("준비", "claude.ai 에서 Google Calendar 커넥터 켜기 · 읽기 전용 · Supabase MCP 는 쓰기 허용 · 개발용 DB")
               + src(GCAL, CC, SMCP), T),
         # ── 실습
-        lab("2-6", "MCP 연결 · 캘린더 → 할 일", T, "Claude Code 에 MCP 를 붙여 캘린더 일정을 팀 보드 할 일로 옮긴다",
+        lab("2-6", "MCP 연결 · 캘린더 → 페이지", T, "Claude Code 에 MCP 를 붙여 캘린더 일정을 미니 노션 페이지로 옮긴다",
             ["claude.ai 에서 Google Calendar 커넥터 켜기", "Supabase MCP 연결 · 로그인", "/mcp 로 두 서버 확인",
-             "이번 주 일정 → 할 일 요청", "보드 화면에서 확인"],
-            ["/mcp 에 두 서버 연결됨", "캘린더 일정 수만큼 할 일 추가", "일정 날짜 = 할 일 기한"], files="2-5 까지의 앱 · 개발용 Supabase 프로젝트"),
-        brief("2-6", T, ["Google Calendar 커넥터", "Supabase MCP 연결", "/mcp 확인", "일정 → 할 일 요청", "보드 확인"],
-              [("목표", "이번 주 캘린더 일정을 할 일로"), ("규칙", "일정 날짜 = 기한 · 담당자는 나"),
+             "이번 주 일정 → 페이지 요청", "미니 노션 화면에서 확인"],
+            ["/mcp 에 두 서버 연결됨", "캘린더 일정 수만큼 새 페이지", "일정 날짜 = 페이지 날짜"], files="2-5 까지의 앱 · 개발용 Supabase 프로젝트"),
+        brief("2-6", T, ["Google Calendar 커넥터", "Supabase MCP 연결", "/mcp 확인", "일정 → 페이지 요청", "페이지 목록 확인"],
+              [("목표", "이번 주 캘린더 일정을 페이지로"), ("규칙", "일정 날짜 = 날짜 · 작성자는 나"),
                ("승인", "추가 전에 목록 먼저 보여 주기"), ("하지 말 것", "실제 서비스 DB · 일정 수정")],
               ["MCP", "커넥터", "/mcp", "read_only"],
-              ["보드에 캘린더 일정 수만큼 새 할 일", "기한이 일정 날짜와 같음"],
+              ["페이지 목록에 캘린더 일정 수만큼 새 페이지", "날짜가 일정 날짜와 같음"],
               "도구가 안 보이면 /mcp 에서 로그인 상태 확인 · 다시 연결"),
         light("실습 2-6 확인", checks([
             ("/mcp 에 두 서버가 연결됐나", "Google Calendar · Supabase"), ("추가 전에 목록을 먼저 보여 줬나", "승인 단계"),
-            ("보드에 일정 수만큼 할 일이 생겼나", "기한 = 일정 날짜"), ("끝난 뒤 read_only 로 되돌렸나", "쓰기 차단")],
+            ("페이지 목록에 일정 수만큼 페이지가 생겼나", "날짜 = 일정 날짜"), ("끝난 뒤 read_only 로 되돌렸나", "쓰기 차단")],
             "넷 다 「예」 → 2-7 내 MCP 서버 만들기"), T),
     ]
 
@@ -230,7 +230,7 @@ CSS = """
   @media print{.v2u3wire{transform:none; animation:none} .v2u3rs,.v2u3ra,.v2u3cnt span,.v2u3hs,.v2u3msg,.v2u3lb,.v2u3la{opacity:1; animation:none}}
   @keyframes v2u3in{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
   @media print{.v2u3rs,.v2u3ra,.v2u3cnt span{opacity:1; animation:none}}
-  /* 2-5 · 캘린더 일정 → 할 일 (v2c) */
+  /* 2-5 · 캘린더 일정 → 페이지 (v2c) */
   .v2c{display:grid; grid-template-columns:310px 52px 1fr 52px 330px; align-items:stretch; margin:0 0 12px;}
   .v2cW{border:1.5px solid #D0D7DE; border-radius:12px; background:#fff; overflow:hidden; display:flex; flex-direction:column;}
   .v2cH{display:flex; align-items:center; gap:8px; padding:10px 12px; background:#F6F8FA; border-bottom:1px solid #D0D7DE; font-size:16.5px; font-weight:800; color:#16233A;}
