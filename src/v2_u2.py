@@ -207,12 +207,14 @@ def slides():
               + src(("supabase.com/pricing · 2026-11", "https://supabase.com/pricing")), T),
         # ── 실습
         lab("2-2", "Supabase 가입 · 첫 표", T, "Supabase 프로젝트를 만들고 pages 표에 행을 직접 넣어 본다",
-            ["supabase.com 가입 · GitHub 계정", "새 프로젝트 · 이름 · DB 비밀번호 · 지역", "Table Editor 에서 pages 표 만들기",
+            ["supabase.com 가입 · Continue with GitHub", "새 프로젝트 · 이름 · DB 비밀번호 · 지역", "Table Editor 에서 pages 표 만들기",
              "행 2개 직접 넣기", "date 칸에 「월말쯤」 넣어 보기"],
             ["대시보드에 mini-notion 프로젝트", "pages 표에 행 2개", "날짜 칸이 형식 안 맞는 값을 거절"]),
         light("실습 2-2 · 1단계 가입", viz2.tiles([
             ("주소", go("supabase.com/dashboard/sign-up", "https://supabase.com/dashboard/sign-up")),
-            ("방법", "Continue with GitHub · 1-2 에서 만든 계정"), ("요금", "Free 플랜 · 카드 등록 없음")], 3)
+            ("① 누를 버튼", "Continue with GitHub · 1-2 에서 만든 계정"), ("② GitHub 승인 화면", "Authorize supabase · 이메일 읽기 권한만"),
+            ("누르지 않을 것", "ChatGPT · SSO · 이메일 가입")], 4)
+              + note("GitHub 계정 하나", "GitHub · Vercel · Supabase 같은 로그인 · Free 플랜 · 카드 등록 없음")
               + src(("Supabase · Pricing", "https://supabase.com/pricing")), T),
         light("실습 2-2 · 2단계 새 프로젝트", viz2.tiles([
             ("이름", "mini-notion"), ("DB 비밀번호", "Generate · 따로 보관 · 대화창 · 코드에 붙이지 않기"),
