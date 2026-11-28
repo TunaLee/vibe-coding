@@ -2112,7 +2112,15 @@ order by date;</pre></div><dl><dt>사람이 하는 일</dt><dd>문법 학습 · 
   <div class="eyebrow"><span class="tag">2-4</span></div>
   <h2 class="s-title sm">AI와 데이터 구조 설계</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1chat"><div class="v1ch">Claude Code 대화 예</div><div class="v1b me"><span>나</span><p>개발 계획 5칸 데이터 구조를 읽고 Supabase 표 설계를 제안해 줘. 만들기 전에 표 모양부터 보여 줘</p></div><div class="v1b ai"><span>Claude</span><p>제안 · members · pages 두 표. 상태는 초안 · 작성 중 · 완료 셋만 받게 DB 에서도 막을까요?</p></div><div class="v1b me"><span>나</span><p>응 · 화면과 DB 둘 다에서 막아 줘</p></div><div class="v1b ai"><span>Claude</span><p>표 설계 · SQL 파일 저장 완료 · SQL Editor 에서 실행 필요</p></div></div><div class="dbnote"><span>사람이 정할 것</span> 표 이름 · 열 · 지켜야 할 규칙 · SQL 은 Claude Code</div></div></div>
+  <div class="body"><div class="mid"><div class="v1chat"><div class="v1ch">Claude Code 대화 예</div><div class="v1b me"><span>나</span><p>개발 계획 5칸 데이터 구조를 읽고 Supabase 표 설계를 제안해 줘. 만들기 전에 표 모양부터 보여 줘</p></div><div class="v1b ai"><span>Claude</span><p>제안 · members · pages 두 표. 상태는 초안 · 작성 중 · 완료 셋만 받게 DB 에서도 막을까요?</p></div><div class="v1b me"><span>나</span><p>응 · 화면과 DB 둘 다에서 막아 줘</p></div><div class="v1b ai"><span>Claude</span><p>마이그레이션 파일 supabase/migrations/…_create_pages.sql 작성 · supabase db push 로 반영할까요?</p></div></div><div class="dbnote"><span>사람이 정할 것</span> 표 이름 · 열 · 지켜야 할 규칙 · SQL 은 Claude Code</div></div></div>
+</section>
+
+<section class="slide lt" data-title="마이그레이션">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">2-4</span></div>
+  <h2 class="s-title sm">마이그레이션</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">Table Editor (2-2)</div><div class="v2pc" style="--d:0.00s"><b>만드는 법</b><span>화면에서 클릭</span></div><div class="v2pc" style="--d:0.08s"><b>기록</b><span>남지 않음 · 다른 프로젝트는 다시 클릭</span></div></div><div class="v2p on"><div class="v2ph">마이그레이션</div><div class="v2pc" style="--d:0.00s"><b>만드는 법</b><span>Claude Code 가 SQL 파일 작성 → db push</span></div><div class="v2pc" style="--d:0.08s"><b>기록</b><span>supabase/migrations · Git 커밋 · 같은 파일로 같은 표</span></div></div></div><div class="flow"><div class="fs"><b>요청</b><span>「pages 표 만들어 줘」</span></div><div class="fa">→</div><div class="fs hl"><b>파일 작성</b><span>Claude Code · migrations/</span></div><div class="fa">→</div><div class="fs"><b>db push</b><span>승인 → Supabase 에 반영</span></div><div class="fa">→</div><div class="fs"><b>확인</b><span>Table Editor</span></div><div class="fa">→</div><div class="fs"><b>커밋</b><span>표 변경 기록</span></div></div><div class="dbnote"><span>준비 한 번</span> 「Supabase CLI 설치하고 내 프로젝트에 연결해 줘」 · 로그인 · 연결은 브라우저 승인</div><div class="src">출처 · <a href="https://supabase.com/docs/guides/deployment/database-migrations" target="_blank" rel="noopener">Supabase · Database migrations</a></div></div></div>
 </section>
 
 <section class="slide lt" data-title="Supabase 연결 순서">
@@ -2186,7 +2194,7 @@ order by date;</pre></div><dl><dt>사람이 하는 일</dt><dd>문법 학습 · 
   <div class="rule"></div>
   <div class="body"><div class="labgrid">
     <div class="lc goal"><div class="lh">목표</div><p>내 앱 → 모두 같은 페이지 목록 · 로그인 · 내 페이지만 수정</p><div class="lf">사용 파일 · 예시/개발계획.md 5 · 7 칸 (비교용)</div></div>
-    <div class="lc steps"><div class="lh">단계</div><ol><li>2-2 의 Supabase 프로젝트 열기</li><li>Claude Code에 표 설계 요청 · SQL 실행</li><li>저장 위치 교체 요청</li><li>로그인 · RLS 요청</li><li>계정 두 개로 확인</li></ol></div>
+    <div class="lc steps"><div class="lh">단계</div><ol><li>2-2 의 Supabase 프로젝트 열기</li><li>표 설계 → 마이그레이션 · db push</li><li>저장 위치 교체 요청</li><li>로그인 · RLS 요청</li><li>계정 두 개로 확인</li></ol></div>
     <div class="lc done"><div class="lh">완료 기준</div><ul><li>다른 기기에서 같은 페이지가 보임</li><li>다른 계정 작성 페이지는 삭제 불가</li></ul></div>
   </div></div>
 </section>
@@ -2196,7 +2204,7 @@ order by date;</pre></div><dl><dt>사람이 하는 일</dt><dd>문법 학습 · 
   <div class="eyebrow"><span class="tag">2-4</span></div>
   <h2 class="s-title sm">실습 2-4 순서</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><ol class="v1st"><li style="--d:0.00s"><em>1</em><span>Supabase 프로젝트 만들기</span></li><li style="--d:0.25s"><em>2</em><span>표 설계 · SQL 실행</span></li><li style="--d:0.50s"><em>3</em><span>저장 · 조회를 DB 로 교체</span></li><li style="--d:0.75s"><em>4</em><span>로그인 · RLS</span></li><li style="--d:1.00s"><em>5</em><span>두 계정 확인</span></li></ol><div class="qk2"><b>확인</b><ul><li>Table Editor 에 페이지 행이 생김</li><li>계정 B 로 계정 A 페이지 삭제 불가</li></ul></div></div></div>
+  <div class="body"><div class="mid"><ol class="v1st"><li style="--d:0.00s"><em>1</em><span>Supabase CLI 연결</span></li><li style="--d:0.25s"><em>2</em><span>표 설계 → 마이그레이션</span></li><li style="--d:0.50s"><em>3</em><span>저장 · 조회를 DB 로 교체</span></li><li style="--d:0.75s"><em>4</em><span>로그인 · RLS</span></li><li style="--d:1.00s"><em>5</em><span>두 계정 확인</span></li></ol><div class="qk2"><b>확인</b><ul><li>Table Editor 에 페이지 행이 생김</li><li>계정 B 로 계정 A 페이지 삭제 불가</li></ul></div></div></div>
 </section>
 <section class="slide lt" data-title="실습 2-4 요청 항목">
   <div class="coord"><b></b> / <span class="tot"></span></div>

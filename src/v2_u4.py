@@ -1,6 +1,6 @@
 """2-4 데이터 다루기 (DB).
 
-데이터 구조 설계(표 두 개 · AI 와 설계) → Supabase 연결(키 두 종류) → CRUD(우리말 뜻 · 코드 뜻)
+데이터 구조 설계(표 두 개 · AI 와 설계 · 마이그레이션) → Supabase 연결(키 두 종류) → CRUD(우리말 뜻 · 코드 뜻)
 → 로그인 → 권한 RLS(배경 → 비유 → 정책 뜻 → 두 계정 확인) → 실습.
 DB 개념(표 · 행 · 열 · Supabase 소개)은 2-1 에서 설명 — 여기서는 다시 설명하지 않는다.
 사실 출처: supabase.com/docs/guides/api/api-keys · /database/postgres/row-level-security · /auth · /pricing
@@ -83,8 +83,15 @@ def slides():
             ("me", "개발 계획 5칸 데이터 구조를 읽고 Supabase 표 설계를 제안해 줘. 만들기 전에 표 모양부터 보여 줘"),
             ("ai", "제안 · members · pages 두 표. 상태는 초안 · 작성 중 · 완료 셋만 받게 DB 에서도 막을까요?"),
             ("me", "응 · 화면과 DB 둘 다에서 막아 줘"),
-            ("ai", "표 설계 · SQL 파일 저장 완료 · SQL Editor 에서 실행 필요")], "Claude Code 대화 예")
+            ("ai", "마이그레이션 파일 supabase/migrations/…_create_pages.sql 작성 · supabase db push 로 반영할까요?")], "Claude Code 대화 예")
               + note("사람이 정할 것", "표 이름 · 열 · 지켜야 할 규칙 · SQL 은 Claude Code"), T),
+        light("마이그레이션", viz2.pair(
+            "Table Editor (2-2)", [("만드는 법", "화면에서 클릭"), ("기록", "남지 않음 · 다른 프로젝트는 다시 클릭")],
+            "마이그레이션", [("만드는 법", "Claude Code 가 SQL 파일 작성 → db push"), ("기록", "supabase/migrations · Git 커밋 · 같은 파일로 같은 표")], hl="r")
+              + flow([("요청", "「pages 표 만들어 줘」"), ("파일 작성", "Claude Code · migrations/"), ("db push", "승인 → Supabase 에 반영"),
+                      ("확인", "Table Editor"), ("커밋", "표 변경 기록")], hl=1)
+              + note("준비 한 번", "「Supabase CLI 설치하고 내 프로젝트에 연결해 줘」 · 로그인 · 연결은 브라우저 승인")
+              + src(("Supabase · Database migrations", "https://supabase.com/docs/guides/deployment/database-migrations")), T),
         # ── Supabase 연결
         light("Supabase 연결 순서", flow([("프로젝트", "2-2 실습에서 만든 것"), ("Connect", "대시보드 위 초록 버튼"),
                                        ("Next.js · App Router", "Framework 탭"), ("Copy prompt", "Claude Code 에 붙여 넣기"), ("확인", "Table Editor")], hl=3)
@@ -123,15 +130,15 @@ def slides():
               + note("시크릿 창", "같은 컴퓨터에서 두 번째 계정 · 로그인 정보가 따로"), T),
         # ── 실습
         lab("2-4", "Supabase 저장 · 로그인 · 권한", T, "내 앱 → 모두 같은 페이지 목록 · 로그인 · 내 페이지만 수정",
-            ["2-2 의 Supabase 프로젝트 열기", "Claude Code에 표 설계 요청 · SQL 실행", "저장 위치 교체 요청", "로그인 · RLS 요청", "계정 두 개로 확인"],
+            ["2-2 의 Supabase 프로젝트 열기", "표 설계 → 마이그레이션 · db push", "저장 위치 교체 요청", "로그인 · RLS 요청", "계정 두 개로 확인"],
             ["다른 기기에서 같은 페이지가 보임", "다른 계정 작성 페이지는 삭제 불가"],
             files="예시/개발계획.md 5 · 7 칸 (비교용)"),
-        brief("2-4", T, ["Supabase 프로젝트 만들기", "표 설계 · SQL 실행", "저장 · 조회를 DB 로 교체", "로그인 · RLS", "두 계정 확인"],
+        brief("2-4", T, ["Supabase CLI 연결", "표 설계 → 마이그레이션", "저장 · 조회를 DB 로 교체", "로그인 · RLS", "두 계정 확인"],
               [("목표", "페이지 DB 저장 · 로그인 · 내 페이지만 수정 · 삭제"), ("입력", "개발 계획 v2 · 5 · 7 칸"),
                ("진행 방식", "표 설계 먼저 보여 주기 · 태스크 하나씩"), ("하지 말 것", "secret 키를 앱 코드에 넣기")],
               ["Supabase", "publishable 키", "RLS", "로그인"],
               ["Table Editor 에 페이지 행이 생김", "계정 B 로 계정 A 페이지 삭제 불가"],
-              "SQL 오류는 SQL Editor 의 빨간 문구를 그대로 Claude Code에 붙여 넣기"),
+              "db push 오류는 터미널의 빨간 문구를 그대로 Claude Code에 · 마이그레이션 파일은 커밋"),
         light("실습 2-4 확인", checks([
             ("다른 기기 · 브라우저에서 같은 페이지가 보이나", "DB 저장"), ("로그인 전에 「+ 새 페이지」가 안 보이나", "추가 권한"),
             ("다른 계정 작성 페이지를 삭제할 수 없나", "RLS"), ("앱 코드에 sb_secret_ 이 없나", "키 검색")],
