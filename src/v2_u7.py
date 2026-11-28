@@ -1,7 +1,7 @@
 """2-7 MCP 서버 만들기.
 
 배경(Supabase MCP 는 개발자용 · 표 전체 → 팀원이 쓰는 업무 도구만) → 도구 설계(이름 · 설명 · 입력 칸 = AI 가 읽는 메뉴판)
-→ 코드 뜻(mcp-handler · registerTool · 2-4 의 insert) → 동작 장면 → 만드는 순서 → Inspector · 로컬 연결 → 인증 → 배포 → 실습.
+→ 만드는 순서 → Inspector · 로컬 연결 → 인증 → 배포 → 실습.
 사실 출처
 - vercel.com/docs/mcp/deploy-mcp-servers-to-vercel (mcp-handler v2 · @modelcontextprotocol/server v2 · zod 4 · Node 22+ · app/api/mcp/route.ts
   · createMcpHandler · server.registerTool · Streamable HTTP · withMcpAuth · protectedResourceHandler · 토큰 발급은 별도 인증 서버 · Inspector 명령)
@@ -41,14 +41,6 @@ def slides():
             ("update_page", "페이지 번호 · 상태 · 날짜", "상태 · 날짜 바꾸기 · 쓰기"),
             ("list_by_date", "시작일 · 종료일", "기간 안 마감 · 일정 보기 · 읽기")], "도구 이름", "받는 칸 → 하는 일")
               + note("메뉴판", "도구 이름 · 설명 · 받는 칸을 AI 가 읽고 고름 · 설명이 흐리면 엉뚱한 도구 선택"), T),
-        light("MCP 서버 동작", agent("Claude Code", [
-            ("me", "내일까지 회의록 초안 페이지로 추가해 줘", .3), ("tool", "<em>mini-notion</em> 도구 목록 읽기", 1.2),
-            ("tool", "<em>add_page</em> 회의록 초안 · 2026-11-29", 1.9), ("ai", "추가 완료 · 날짜 11/29", 4.4)],
-            ("내 MCP 서버", "/api/mcp · Vercel", tools(TOOLS, "add_page", 1.2, 1.9)),
-            board(BOARD + [("회의록 초안", "11/29", "초안", 3.2)]),
-            (("add_page 호출", 1.9), ("결과 · 추가됨", 3.8), ("insert", 2.5), ("새 행", 3.2)))
-              + steps([("①", "요청", .3), ("②", "도구 목록 읽기", 1.2), ("③", "add_page 호출", 1.9),
-                       ("④", "DB 에 새 행", 3.2), ("⑤", "결과 보고", 4.4)]), T),
         light("만드는 순서", flow([
             ("도구 목록", "개발계획.md 에 도구 이름 · 받는 값"), ("서버 만들기 요청", "Claude Code · mcp-handler"), ("Inspector 확인", "도구 목록 · 직접 호출"),
             ("Claude Code 연결", "localhost 로 시험"), ("push · 배포", "Vercel · 공개 주소")], hl=2)
@@ -72,7 +64,7 @@ def slides():
         light("배포", flow([("push", "1-7 과 같음"), ("Vercel 자동 배포", "/api/mcp 포함"),
                             ("공개 주소", "mini-notion.vercel.app/api/mcp"), ("Inspector 재확인", "배포 주소 확인")], hl=2)
               + viz2.tiles([("공개 HTTPS 주소", "Claude · ChatGPT 등록 조건 · localhost 는 안 됨"),
-                            ("환경변수", "Supabase 키 · 인증 설정 · Vercel 에 등록 (2-9)")], 2)
+                            ("환경변수", "Supabase 키 · 인증 설정 · Vercel 에 등록 (2-4)")], 2)
               + src(VMCP), T),
         # ── 실습
         lab("2-7", "미니 노션 MCP 서버", T, "새 페이지 · 조회 도구를 가진 MCP 서버를 만들어 배포한다",

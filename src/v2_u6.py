@@ -1,6 +1,6 @@
 """2-6 MCP.
 
-배경(LLM · 도구가 필요한 이유 · 평택대 교안 · 대화창 밖의 데이터 · 내장 도구와 외부 도구) → 등장 계기(회사마다 따로 만든 연결 · 연결 수가 곱으로 늘어남 → 2024-11 MCP 공개 → 확산)
+배경(LLM · 도구가 필요한 이유 · 평택대 교안 · 내장 도구와 외부 도구) → 등장 계기(회사마다 따로 만든 연결 · 연결 수가 곱으로 늘어남 → 2024-11 MCP 공개 → 확산)
 → 비유(USB-C · 공식 문서) → 구조(호스트 · 클라이언트 · 서버 · 도구 · 리소스 · 프롬프트) → 동작(도구 목록 읽기 → 고르기 → 실행)
 → API 와 MCP → 쓸 만한 MCP → 연결 방법 · 안전 설정 → 캘린더 일정 → 회의록 페이지 → 실습.
 사실 출처
@@ -132,25 +132,6 @@ def token_pick(a=48217, b=29356):
     return d.svg(1160, 430, s)
 
 
-def relay():
-    """MCP 없이 — 사람이 복사 · 붙여 넣기를 오가는 줄 / MCP — 한 번 요청 · 직접 실행. 줄 안 칸이 차례로 나타남."""
-    def row(head, steps, d0, hl):
-        out = []
-        for i, (who, x, hand) in enumerate(steps):
-            d = d0 + i * .35
-            if i:
-                out.append(f'<i class="v2u3ra" style="--d:{d - .12:.2f}s">→</i>')
-            out.append(f'<div class="v2u3rs{" hand" if hand else ""}" style="--d:{d:.2f}s"><b>{who}</b><span>{x}</span></div>')
-        return f'<div class="v2u3rr{" on" if hl else ""}"><div class="v2u3rh">{head}</div><div class="v2u3rw">{"".join(out)}</div></div>'
-    return ('<div class="v2u3relay">'
-            + row("MCP 없이", [("Claude", "SQL 작성", False), ("나", "복사", True), ("Supabase 화면", "붙여 넣기 · 실행", True),
-                              ("나", "오류 문구 복사", True), ("Claude", "수정 SQL", False)], .3, False)
-            + row("MCP 연결", [("나", "「pages 표 만들어 줘」", False), ("Claude Code", "SQL 작성", False),
-                              ("Supabase", "직접 실행 · 결과", False), ("Claude Code", "오류면 다시 고침", False)], 2.3, True)
-            + '<div class="v2u3cnt"><span class="c1">사람 손 3번 · 오류마다 반복</span><span class="c2">사람 손 0번 · 요청 한 줄</span></div>'
-            + "</div>")
-
-
 def cal_to_tasks():
     """Google 캘린더 일정 → Claude Code(MCP 두 개) → 미니 노션. 칸은 제자리 · 읽힌 일정과 추가된 행이 같은 색으로 켜짐."""
     days = [("월", "11/30"), ("화", "12/1"), ("수", "12/2"), ("목", "12/3"), ("금", "12/4")]
@@ -251,9 +232,7 @@ def slides():
         # ── 배경 · 도구가 필요한 이유 → 외부 도구 → MCP
         light("LLM", llm(), T),
         light("도구가 필요한 이유", token_pick()
-              + note("LLM 혼자 못 하는 것", "정확한 계산 · 오늘의 정보 · 사내 데이터 · 실제 행동 → 무엇을 부를지는 LLM, 실행은 도구"), T),
-        light("대화창 밖의 데이터", relay()
-              + note("AI 의 한계", "캘린더 · DB · 사내 문서는 대화창 밖 · 사람이 옮겨 주는 만큼만 앎"), T),
+              + note("역할", "무엇을 부를지는 LLM · 실행은 도구"), T),
         light("내장 도구와 외부 도구", tool_kinds()
               + note("외부 도구", "다른 회사 서비스 · 회사마다 연결 방식이 달랐음 → 같은 규격이 필요해짐 = MCP"), T),
         light("회사마다 따로 만든 연결", timeline()
@@ -303,8 +282,7 @@ def slides():
         light("MCP 안전 설정", viz2.tiles([
             ("project_ref", "프로젝트 하나에만 연결"), ("read_only=true", "읽기만 · 쓸 때만 잠시 해제"),
             ("개발용 프로젝트", "실제 서비스 DB 에 연결하지 않기"), ("실행 승인", "도구 실행마다 내용 보고 허용")], 4)
-              + note("Playwright MCP", "「보안 경계가 아님」 · 공식 문서 · 믿을 수 있는 사이트만")
-              + src(SMCP, ("Playwright MCP", "https://github.com/microsoft/playwright-mcp")), T),
+              + src(SMCP), T),
         light("캘린더 일정 → 회의록 페이지", cal_to_tasks()
               + note("준비", "claude.ai 에서 Google Calendar 커넥터 켜기 · 읽기 전용 · Supabase MCP 는 쓰기 허용 · 개발용 DB"), T),
         # ── 실습

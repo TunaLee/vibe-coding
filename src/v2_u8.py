@@ -1,6 +1,6 @@
 """2-8 MCP 서버 등록 · 활용.
 
-등록할 곳(Claude Code · Claude 웹 · ChatGPT) → 원격 주소 조건 → Claude 에서 페이지 만들기(장면) → ChatGPT 에서 조회(장면)
+등록할 곳(Claude Code · Claude 웹 · ChatGPT) → Claude 에서 페이지 만들기(장면) → ChatGPT 에서 조회(장면)
 → 캘린더와 함께 일정 관리 → 쓰기 확인 · 점검 → 실습.
 사실 출처
 - support.claude.com/en/articles/11175166 (custom connector · Free 1개 · Customize → Connectors → Add custom connector · 공개 HTTPS 443 · localhost 불가)
@@ -36,11 +36,6 @@ def slides():
             ("ChatGPT", "Plugins → + → Add custom MCP server", "쓰기 도구는 Business · Enterprise · Edu")], "어디", "등록 경로")
               + note("같은 주소 하나", "mini-notion.vercel.app/api/mcp · 등록하는 곳만 다름")
               + src(CC, CL, OA), T),
-        light("원격 MCP 주소 조건", viz2.tiles([
-            ("공개 HTTPS", "인터넷에서 닿는 주소 · 443 포트"), ("localhost 안 됨", "Claude · ChatGPT 서버가 접속 · 내 컴퓨터는 못 찾음"),
-            ("로그인", "OAuth · 등록할 때 로그인 창"), ("쓰기 확인", "쓰기 도구는 실행 전 사용자 확인")], 4)
-              + note("등록 주소", "2-7 Vercel 배포 주소")
-              + src(CL, OAD), T),
         light("Claude에서 페이지 만들기", agent("Claude", [
             ("me", "12월 4일 고객 제안서 페이지 만들어 줘, 작성자는 나", .3),
             ("tool", "<em>mini-notion</em> add_page · 고객 제안서 · 2026-12-04", 1.4),
