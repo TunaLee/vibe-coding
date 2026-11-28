@@ -2267,12 +2267,28 @@ order by date;</pre></div><dl><dt>사람이 하는 일</dt><dd>문법 학습 · 
   <h1>MCP</h1>
 </section>
 
+<section class="slide lt" data-title="도구가 필요한 이유">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">2-6</span></div>
+  <h2 class="s-title sm">도구가 필요한 이유</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="tv2"><div class="tv2c no"><div class="tv2h">도구 없이</div><div class="tv2r" style="--d:0.00s"><b>질문</b><span>482,917 × 739,264</span></div><div class="tv2r" style="--d:0.45s"><b>LLM</b><span>도구 없이 바로 답함</span></div><div class="tv2r" style="--d:0.90s"><b>답</b><span><span class=tv2q>?</span></span></div></div><div class="tv2a">→</div><div class="tv2c yes"><div class="tv2h">계산 도구가 있으면</div><div class="tv2r" style="--d:1.60s"><b>LLM</b><span>calc 도구 호출로 결정</span></div><div class="tv2r" style="--d:2.05s"><b>도구</b><span>실제 곱셈 실행</span></div><div class="tv2r" style="--d:2.50s"><b>답 <em class=o>✓</em></b><span>357,003,153,088</span></div></div></div><div class="dbnote"><span>LLM 혼자 못 하는 것</span> 정확한 계산 · 오늘의 정보 · 사내 데이터 · 실제 행동 → 무엇을 부를지는 LLM, 실행은 도구</div></div></div>
+</section>
+
 <section class="slide lt" data-title="대화창 밖의 데이터">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">2-6</span></div>
   <h2 class="s-title sm">대화창 밖의 데이터</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="v2u3relay"><div class="v2u3rr"><div class="v2u3rh">MCP 없이</div><div class="v2u3rw"><div class="v2u3rs" style="--d:0.30s"><b>Claude</b><span>SQL 작성</span></div><i class="v2u3ra" style="--d:0.53s">→</i><div class="v2u3rs hand" style="--d:0.65s"><b>나</b><span>복사</span></div><i class="v2u3ra" style="--d:0.88s">→</i><div class="v2u3rs hand" style="--d:1.00s"><b>Supabase 화면</b><span>붙여 넣기 · 실행</span></div><i class="v2u3ra" style="--d:1.23s">→</i><div class="v2u3rs hand" style="--d:1.35s"><b>나</b><span>오류 문구 복사</span></div><i class="v2u3ra" style="--d:1.58s">→</i><div class="v2u3rs" style="--d:1.70s"><b>Claude</b><span>수정 SQL</span></div></div></div><div class="v2u3rr on"><div class="v2u3rh">MCP 연결</div><div class="v2u3rw"><div class="v2u3rs" style="--d:2.30s"><b>나</b><span>「pages 표 만들어 줘」</span></div><i class="v2u3ra" style="--d:2.53s">→</i><div class="v2u3rs" style="--d:2.65s"><b>Claude Code</b><span>SQL 작성</span></div><i class="v2u3ra" style="--d:2.88s">→</i><div class="v2u3rs" style="--d:3.00s"><b>Supabase</b><span>직접 실행 · 결과</span></div><i class="v2u3ra" style="--d:3.23s">→</i><div class="v2u3rs" style="--d:3.35s"><b>Claude Code</b><span>오류면 다시 고침</span></div></div></div><div class="v2u3cnt"><span class="c1">사람 손 3번 · 오류마다 반복</span><span class="c2">사람 손 0번 · 요청 한 줄</span></div></div><div class="dbnote"><span>AI 의 한계</span> 캘린더 · DB · 사내 문서는 대화창 밖 · 사람이 옮겨 주는 만큼만 앎</div></div></div>
+</section>
+
+<section class="slide lt" data-title="내장 도구와 외부 도구">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">2-6</span></div>
+  <h2 class="s-title sm">내장 도구와 외부 도구</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="tk"><div class="tk-in"><div class="tk-h">Claude Code 내장 도구</div><div class="tk-chips"><span style="--d:0.00s">Read</span><span style="--d:0.08s">Write · Edit</span><span style="--d:0.16s">Bash</span><span style="--d:0.24s">Grep · Glob</span><span style="--d:0.32s">WebFetch</span></div><div class="tk-f">설치하면 바로 · 내 컴퓨터의 파일 · 명령 · 웹</div></div><div class="tk-plug"><b>MCP</b><i>⇄</i></div><div class="tk-out"><div class="tk-h">외부 도구</div><div class="tk-o" style="--d:0.80s"><b>Google 캘린더</b><small>회의 일정</small></div><div class="tk-o" style="--d:0.92s"><b>Supabase</b><small>미니 노션 DB</small></div><div class="tk-o" style="--d:1.04s"><b>Notion · Slack</b><small>회사 협업 도구</small></div><div class="tk-o" style="--d:1.16s"><b>미니 노션 MCP 서버</b><small>2-7 에서 직접 만듦</small></div></div></div><div class="dbnote"><span>외부 도구</span> 다른 회사 서비스 · 회사마다 연결 방식이 달랐음 → 같은 규격이 필요해짐 = MCP</div></div></div>
 </section>
 
 <section class="slide lt" data-title="회사마다 따로 만든 연결">

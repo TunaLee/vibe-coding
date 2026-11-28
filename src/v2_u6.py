@@ -1,6 +1,6 @@
 """2-6 MCP.
 
-배경(AI 는 대화창 안 · 사람이 복사 · 붙여넣기) → 등장 계기(회사마다 따로 만든 연결 · 연결 수가 곱으로 늘어남 → 2024-11 MCP 공개 → 확산)
+배경(도구가 필요한 이유 · 평택대 교안 · 대화창 밖의 데이터 · 내장 도구와 외부 도구) → 등장 계기(회사마다 따로 만든 연결 · 연결 수가 곱으로 늘어남 → 2024-11 MCP 공개 → 확산)
 → 비유(USB-C · 공식 문서) → 구조(호스트 · 클라이언트 · 서버 · 도구 · 리소스 · 프롬프트) → 동작(도구 목록 읽기 → 고르기 → 실행)
 → API 와 MCP → 쓸 만한 MCP → 연결 방법 · 안전 설정 → 캘린더 일정 → 회의록 페이지 → 실습.
 사실 출처
@@ -130,13 +130,30 @@ def arch():
             f'<div class="lk">{"".join("<i></i>" for _ in range(3))}</div><div class="svs">{sv}</div></div>')
 
 
+def tool_kinds():
+    """Claude Code 내장 도구(내 컴퓨터 안) + 외부 도구(다른 회사 서비스) · 가운데 MCP 플러그. 평택대 교안 「내장 도구와 외부 도구」 구조."""
+    inner = ["Read", "Write · Edit", "Bash", "Grep · Glob", "WebFetch"]
+    outer = [("Google 캘린더", "회의 일정"), ("Supabase", "미니 노션 DB"), ("Notion · Slack", "회사 협업 도구"), ("미니 노션 MCP 서버", "2-7 에서 직접 만듦")]
+    i = "".join(f'<span style="--d:{k * .08:.2f}s">{t}</span>' for k, t in enumerate(inner))
+    o = "".join(f'<div class="tk-o" style="--d:{.8 + k * .12:.2f}s"><b>{h}</b><small>{d}</small></div>' for k, (h, d) in enumerate(outer))
+    return ('<div class="tk">'
+            f'<div class="tk-in"><div class="tk-h">Claude Code 내장 도구</div><div class="tk-chips">{i}</div>'
+            '<div class="tk-f">설치하면 바로 · 내 컴퓨터의 파일 · 명령 · 웹</div></div>'
+            '<div class="tk-plug"><b>MCP</b><i>⇄</i></div>'
+            f'<div class="tk-out"><div class="tk-h">외부 도구</div>{o}</div></div>')
+
+
 def slides():
     supa_tools = tools([("list_tables", "표 목록 보기"), ("execute_sql", "SQL 실행"), ("apply_migration", "표 만들기 · 바꾸기")],
                        "execute_sql", 1.3, 2.0)
     return [
-        # ── 배경
+        # ── 배경 · 도구가 필요한 이유 → 외부 도구 → MCP
+        light("도구가 필요한 이유", viz2.calc_compare()
+              + note("LLM 혼자 못 하는 것", "정확한 계산 · 오늘의 정보 · 사내 데이터 · 실제 행동 → 무엇을 부를지는 LLM, 실행은 도구"), T),
         light("대화창 밖의 데이터", relay()
               + note("AI 의 한계", "캘린더 · DB · 사내 문서는 대화창 밖 · 사람이 옮겨 주는 만큼만 앎"), T),
+        light("내장 도구와 외부 도구", tool_kinds()
+              + note("외부 도구", "다른 회사 서비스 · 회사마다 연결 방식이 달랐음 → 같은 규격이 필요해짐 = MCP"), T),
         light("회사마다 따로 만든 연결", timeline()
               + src(("OpenAI · ChatGPT plugins", "https://openai.com/index/chatgpt-plugins/"),
                     ("Claude · Tool use GA", "https://claude.com/blog/tool-use-ga"), ANN, AAIF), T),
