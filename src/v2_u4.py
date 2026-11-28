@@ -103,6 +103,15 @@ def slides():
                [("① Framework", "클라이언트 라이브러리 방식"), ("② Next.js · App Router", "미니 노션과 같은 구조"),
                 ("③ Copy prompt", "Claude Code 입력창에 붙여 넣기 · 설치 · 파일은 Claude Code"),
                 ("④ .env.local", "URL · publishable 키 · GitHub 에 올리지 않음")], no="2-4", u=T),
+        sbstep("", "Vercel 환경변수", "v2_u4_vc_env.webp", "Vercel 프로젝트 Environment Variables 화면",
+               [("①", "Add", 79.9, 12.7, 18, 5.2)],
+               [("왜", ".env.local 은 GitHub 에 안 올라감 → 배포한 앱에는 키가 없음"), ("위치", "Vercel 프로젝트 → Settings → Environment Variables"),
+                ("① Add Environment Variable", ".env.local 과 같은 이름 · 값")], no="2-4", u=T),
+        sbstep("", "환경변수 추가 창", "v2_u4_vc_add.webp", "Add Environment Variable 창",
+               [("①", "Type", 2.4, 12.7, 94.3, 12.2), ("②", "Key · Value", 2.4, 31.1, 94.3, 15.1), ("③", "Environments", 2.4, 74.4, 94.3, 4.8),
+                ("④", "Import .env", 2.4, 93.1, 15.4, 4.5)],
+               [("① Type", "secret 키 · 비밀번호는 Secret · URL · publishable 키는 Config"), ("② Key · Value", ".env.local 의 이름 = 값 그대로"),
+                ("③ Environments", "Production · Preview · Development"), ("④ Import .env", ".env.local 통째로 올리기 → Save → Redeploy")], no="2-4", u=T),
         light("Supabase 키 두 종류", viz2.pair(
             "publishable 키", [("모양", "sb_publishable_…"), ("두는 곳", "브라우저 · 앱 코드"), ("할 수 있는 일", "RLS 규칙 안에서만")],
             "secret 키", [("모양", "sb_secret_…"), ("두는 곳", "서버 전용 · 브라우저 · GitHub 금지"), ("할 수 있는 일", "RLS 무시 · 모든 행")], hl="l")
@@ -130,7 +139,7 @@ def slides():
               + note("시크릿 창", "같은 컴퓨터에서 두 번째 계정 · 로그인 정보가 따로"), T),
         # ── 실습
         lab("2-4", "Supabase 저장 · 로그인 · 권한", T, "내 앱 → 모두 같은 페이지 목록 · 로그인 · 내 페이지만 수정",
-            ["2-2 의 Supabase 프로젝트 열기", "표 설계 → 마이그레이션 · db push", "저장 위치 교체 요청", "로그인 · RLS 요청", "계정 두 개로 확인"],
+            ["2-2 의 Supabase 프로젝트 열기", "표 설계 → 마이그레이션 · db push", "저장 위치 교체 · Vercel 환경변수 등록", "로그인 · RLS 요청", "계정 두 개로 확인"],
             ["다른 기기에서 같은 페이지가 보임", "다른 계정 작성 페이지는 삭제 불가"],
             files="예시/개발계획.md 데이터 구조 · 권한 (비교용)"),
         brief("2-4", T, ["Supabase CLI 연결", "표 설계 → 마이그레이션", "저장 · 조회를 DB 로 교체", "로그인 · RLS", "두 계정 확인"],

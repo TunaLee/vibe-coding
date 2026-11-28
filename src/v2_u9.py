@@ -139,14 +139,7 @@ def slides():
         light("배포 뒤 오류 원인", viz2.pair(
             "내 컴퓨터", [(".env", "키 · Supabase 주소 · 인증 설정"), ("결과", "페이지 목록 · MCP 서버 정상")],
             "Vercel 배포", [(".env", "없음 · GitHub 에 안 올라감 (2-5)"), ("결과", "/api/pages · /api/mcp 500")], hl="r")
-              + note("환경변수 등록", "키를 Vercel 프로젝트 설정에 따로 입력 · 등록 뒤 Redeploy"), T),
-        light("Vercel 환경변수 등록", flow([
-            ("Vercel 프로젝트", "1-7 에서 만든 것"), ("Settings", "Environment Variables"), ("Key · Value", ".env 한 줄씩 · Import .env 가능"),
-            ("환경 선택", "Production · Preview"), ("Redeploy", "새 배포부터 적용")], hl=4)
-              + viz2.tiles([("Config", "저장 뒤 값 확인 가능 · Supabase 주소 · 공개 키"),
-                            ("Secret", "쓰기 전용 · Supabase secret 키 · MCP 인증 설정"),
-                            ("적용 시점", "새 배포부터 · 등록 · 수정 뒤 Redeploy")], 3)
-              + src(ENV_DOC), T),
+              + note("환경변수 등록 (2-4)", "새 키를 쓰면 Vercel 에도 등록 · 등록 · 수정 뒤 Redeploy"), T),
         light("모니터링", viz2.pair(
             "1부 방식", [("에러를 아는 때", "사용자가 단톡방에 제보"), ("방문 수", "모름"), ("원인 찾기", "제보 내용 추측")],
             "모니터링", [("에러를 아는 때", "로그에 빨간 줄 · 바로"), ("방문 수", "날짜별 그래프"), ("원인 찾기", "요청 · 상태 코드 · 에러 원문")])
