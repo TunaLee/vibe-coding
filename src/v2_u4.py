@@ -6,6 +6,7 @@ DB 개념(표 · 행 · 열 · Supabase 소개)은 2-1 에서 설명 — 여기�
 사실 출처: supabase.com/docs/guides/api/api-keys · /database/postgres/row-level-security · /auth · /pricing
 """
 import viz2
+from v2_u2 import sbstep
 from deck import ba, flow, lab, light
 from hx import checks, code, esc, note
 from stats_hx import src
@@ -85,10 +86,16 @@ def slides():
             ("ai", "표 설계 · SQL 파일 저장 완료 · SQL Editor 에서 실행 필요")], "Claude Code 대화 예")
               + note("사람이 정할 것", "표 이름 · 열 · 지켜야 할 규칙 · SQL 은 Claude Code"), T),
         # ── Supabase 연결
-        light("Supabase 연결 순서", flow([("프로젝트", "2-2 실습에서 만든 것"), ("표 만들기", "SQL Editor · 실행"),
-                                       ("URL · 키 확인", "Settings › API Keys"), ("앱에 연결", "Claude Code"), ("확인", "Table Editor")], hl=3)
+        light("Supabase 연결 순서", flow([("프로젝트", "2-2 실습에서 만든 것"), ("Connect", "대시보드 위 초록 버튼"),
+                                       ("Next.js · App Router", "Framework 탭"), ("Copy prompt", "Claude Code 에 붙여 넣기"), ("확인", "Table Editor")], hl=3)
               + viz2.tiles([("무료 플랜", "프로젝트 2개 · DB 500MB"), ("일시 정지", "1주일 사용 없으면 · 대시보드에서 다시 켜기")], 2)
               + src(("Supabase · Pricing", "https://supabase.com/pricing"), KEYS), T),
+        sbstep("", "Connect 화면", "v2_u4_sb_connect.webp", "Connect to your project 화면",
+               [("①", "Framework", 4, 16.1, 18.5, 12.1), ("②", "Next.js", 35.1, 36.6, 61.2, 11), ("③", "Copy prompt", 82.9, 64.9, 13.4, 3.3),
+                ("④", ".env.local", 45.2, 83.3, 51.1, 15.4)],
+               [("① Framework", "클라이언트 라이브러리 방식"), ("② Next.js · App Router", "미니 노션과 같은 구조"),
+                ("③ Copy prompt", "Claude Code 입력창에 붙여 넣기 · 설치 · 파일은 Claude Code"),
+                ("④ .env.local", "URL · publishable 키 · GitHub 에 올리지 않음")], no="2-4", u=T),
         light("Supabase 키 두 종류", viz2.pair(
             "publishable 키", [("모양", "sb_publishable_…"), ("두는 곳", "브라우저 · 앱 코드"), ("할 수 있는 일", "RLS 규칙 안에서만")],
             "secret 키", [("모양", "sb_secret_…"), ("두는 곳", "서버 전용 · 브라우저 · GitHub 금지"), ("할 수 있는 일", "RLS 무시 · 모든 행")], hl="l")

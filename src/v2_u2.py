@@ -177,11 +177,12 @@ def blog_one():
     return f'<div class="v22one"><div class="v2u2tab">blog · 한 표에 모두</div><table class="v2u2t sm">{"<tr>" + th + "</tr>"}{tr}</table>{probs}</div>'
 
 
-def sbstep(i, name, img, alt, boxes, rows):
+def sbstep(i, name, img, alt, boxes, rows, no="2-2", u=None):
     """실습 2-2 단계 화면 — 왼쪽 실제 화면(번호 상자가 차례로 켜짐) · 오른쪽 번호별 할 일."""
     from v1_u2 import annot
-    return light(f"실습 2-2 · {i}단계 {name}", '<div class="twocol v1vsgrid v1stp v22stp"><div>' + annot(img, alt, boxes, "")
-                 + "</div><div>" + viz2.tiles(rows, 1) + "</div></div>", T)
+    title = f"실습 {no} · {i}단계 {name}" if i != "" else f"{name}"
+    return light(title, '<div class="twocol v1vsgrid v1stp v22stp"><div>' + annot(img, alt, boxes, "")
+                 + "</div><div>" + viz2.tiles(rows, 1) + "</div></div>", u or T)
 
 
 def slides():
@@ -230,11 +231,15 @@ def slides():
                 ("④", "Data access", 34.8, 49.2, 61, 26.1), ("⑤", "Create", 78, 92.2, 18.7, 4.5)],
                [("① Project name", "mini_notion · 조직은 2단계 것 그대로"), ("② Database password", "Generate → Copy → 따로 보관"), ("③ Region", "Auto 그대로"),
                 ("④ Data access", "세 칸 모두 체크 · RLS 포함"), ("⑤ Create new project", "준비될 때까지 대기")]),
-        light("실습 2-2 · 4단계 pages 표", viz2.tiles([
+        sbstep(4, "프로젝트 화면", "v2_u2_sb_home.webp", "프로젝트 대시보드",
+               [("①", "URL", 18, 36.1, 56.4, 4), ("②", "Connect", 76.6, 1, 12.8, 4.5), ("③", "Table Editor", 1.1, 15.1, 4.5, 4.5)],
+               [("① 프로젝트 URL", "앱이 요청을 보낼 주소 · Copy"), ("② Connect", "앱에 연결하는 방법 · 2-4"),
+                ("③ Table Editor", "왼쪽 두 번째 · 표 만들기 · 다음 단계")]),
+        light("실습 2-2 · 5단계 pages 표", viz2.tiles([
             ("위치", "왼쪽 Table Editor → New table"), ("이름", "pages"),
             ("열 추가", "title · text / date · date / status · text"), ("RLS", "켜진 상태 · 3단계 설정 · 규칙은 2-4")], 4)
               + note("기본 열", "id · created_at 은 자동으로 들어 있음"), T),
-        light("실습 2-2 · 5단계 행 넣기", viz2.tiles([
+        light("실습 2-2 · 6단계 행 넣기", viz2.tiles([
             ("Insert row", "주간 회의록 · 2026-11-27 · 작성 중"), ("한 줄 더", "교육 자료 정리 · 2026-11-25 · 초안"),
             ("형식 시험", "date 칸에 「월말쯤」 → 저장 거절"), ("확인", "표에 행 2개 · id 1 · 2 자동")], 4)
               + note("엑셀과 차이", "열마다 정한 형식(스키마)에 맞지 않으면 저장 안 됨"), T),
@@ -409,5 +414,6 @@ CSS = """
   @media print{.v1anb{opacity:1; animation:none}}
   .v1vsgrid{grid-template-columns:1.7fr 1fr; align-items:center;}
   .v22stp{grid-template-columns:1.25fr 1fr;} .v22stp .v2tile{padding:10px 14px;}
-  .v22stp .v1anb em{left:auto; right:-3px; border-radius:0 5px 0 6px;}
+  .v22stp .v1anw{overflow:visible;} .v22stp .v1anw img{border-radius:10px;}
+  .v22stp .v1anb em{left:-3px; top:-24px; border-radius:5px 5px 0 0;}
 """
