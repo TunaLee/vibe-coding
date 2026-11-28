@@ -2030,7 +2030,7 @@ order by date;</pre></div><dl><dt>사람이 하는 일</dt><dd>문법 학습 · 
   <div class="eyebrow"><span class="tag">2-3</span></div>
   <h2 class="s-title sm">개발 계획 v2 추가 항목 예시</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2u4three"><div class="v2u4c" style="--d:0.3s"><div class="h"><span>5</span><b>데이터 구조</b><small>표 · 열 · 예</small></div><table><tr><th>표</th><th>열</th><th>예</th></tr><tr><td>members</td><td>id · name · email</td><td>(로그인 계정) · 김하늘 · haneul@company.com</td></tr><tr><td>pages</td><td>id · title · owner_id · date · status · content · created_at</td><td>41 · 주간 회의록 · (김하늘) · 2026-12-04 · 작성 중 · (블록) · 자동</td></tr></table></div><div class="v2u4c" style="--d:1.2s"><div class="h"><span>6</span><b>연동 대상</b><small>외부 서비스 · 키 보관</small></div><table><tr><th>대상</th><th>쓰는 곳</th><th>키 보관</th></tr><tr><td>Supabase DB · 로그인</td><td>페이지 저장 · 로그인</td><td>.env · Vercel 환경변수</td></tr><tr><td>공휴일 API · 특일 정보</td><td>날짜 공휴일 확인</td><td>HOLIDAY_API_KEY · 서버만</td></tr><tr><td>Supabase MCP (개발 중)</td><td>표 만들기 · 조회</td><td>개발자 로그인</td></tr><tr><td>Google Calendar (개발 중)</td><td>일정 → 회의록 · 읽기</td><td>claude.ai 계정</td></tr><tr><td>미니 노션 MCP 서버</td><td>Claude · ChatGPT 에서 페이지</td><td>로그인 (OAuth)</td></tr></table></div><div class="v2u4c" style="--d:2.1s"><div class="h"><span>7</span><b>권한</b><small>누가 · 무엇을</small></div><table><tr><th>누가</th><th>목록 보기</th><th>새 페이지</th><th>수정 · 삭제</th></tr><tr><td>로그인 전</td><td>○</td><td>✕</td><td>✕</td></tr><tr><td>로그인한 팀원</td><td>○</td><td>○</td><td>내가 작성자인 페이지만</td></tr></table></div></div><div class="dbnote"><span>파일</span> labs/mini_notion_v2/예시/개발계획.md · 5 · 6 · 7 칸</div></div></div>
+  <div class="body"><div class="mid"><div class="v2u4three"><div class="v2u4c" style="--d:0.3s"><div class="h"><span>5</span><b>데이터 구조</b><small>표 · 열 · 예</small></div><table><tr><th>표</th><th>열</th><th>예</th></tr><tr><td>members</td><td>id · name · email</td><td>(로그인 계정) · 김하늘 · haneul@company.com</td></tr><tr><td>pages</td><td>id · title · owner_id · date · status · content · created_at</td><td>41 · 주간 회의록 · (김하늘) · 2026-12-04 · 작성 중 · (블록) · 자동</td></tr></table></div><div class="v2u4c" style="--d:1.2s"><div class="h"><span>6</span><b>연동 대상</b><small>외부 서비스 · 키 보관</small></div><table><tr><th>대상</th><th>쓰는 곳</th><th>키 보관</th></tr><tr><td>Supabase DB · 로그인</td><td>페이지 저장 · 로그인</td><td>.env · Vercel 환경변수</td></tr><tr><td>공휴일 API · 특일 정보</td><td>날짜 공휴일 확인</td><td>HOLIDAY_API_KEY · 서버만</td></tr><tr><td>Supabase MCP (개발 중)</td><td>표 만들기 · 조회</td><td>개발자 로그인</td></tr><tr><td>Google Calendar (개발 중)</td><td>일정 → 회의록 · 읽기</td><td>claude.ai 계정</td></tr><tr><td>미니 노션 MCP 서버</td><td>Claude · ChatGPT 에서 페이지</td><td>로그인 (OAuth)</td></tr></table></div><div class="v2u4c" style="--d:2.1s"><div class="h"><span>7</span><b>권한</b><small>누가 · 무엇을</small></div><table><tr><th>누가</th><th>목록 보기</th><th>새 페이지</th><th>수정 · 삭제</th></tr><tr><td>로그인 전</td><td>○</td><td>✕</td><td>✕</td></tr><tr><td>로그인한 팀원</td><td>○</td><td>○</td><td>내가 작성자인 페이지만</td></tr></table></div></div><div class="dbnote"><span>파일</span> labs/mini_notion_v2/예시/개발계획.md · 데이터 구조 · 연동 대상 · 권한</div></div></div>
 </section>
 
 <section class="slide lt" data-title="확인 가능한 완료 기준 v2">
@@ -2070,7 +2070,7 @@ order by date;</pre></div><dl><dt>사람이 하는 일</dt><dd>문법 학습 · 
   <div class="eyebrow"><span class="tag">2-3</span></div>
   <h2 class="s-title sm">실습 2-3 순서</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><ol class="v1st"><li style="--d:0.00s"><em>1</em><span>1부 폴더 열기</span></li><li style="--d:0.25s"><em>2</em><span>기획자 페르소나 · 기획서 v2</span></li><li style="--d:0.50s"><em>3</em><span>개발자 페르소나 · 개발 계획 v2 요청</span></li><li style="--d:0.75s"><em>4</em><span>빈 칸 질문에 답하기</span></li><li style="--d:1.00s"><em>5</em><span>승인 → 개발계획.md 확인</span></li></ol><div class="qk2"><b>확인</b><ul><li>개발계획.md 에 5 · 6 · 7 칸이 생김</li><li>권한 표에 「내가 작성자인 페이지만」 같은 줄</li></ul></div></div></div>
+  <div class="body"><div class="mid"><ol class="v1st"><li style="--d:0.00s"><em>1</em><span>1부 폴더 열기</span></li><li style="--d:0.25s"><em>2</em><span>기획자 페르소나 · 기획서 v2</span></li><li style="--d:0.50s"><em>3</em><span>개발자 페르소나 · 개발 계획 v2 요청</span></li><li style="--d:0.75s"><em>4</em><span>빈 칸 질문에 답하기</span></li><li style="--d:1.00s"><em>5</em><span>승인 → 개발계획.md 확인</span></li></ol><div class="qk2"><b>확인</b><ul><li>개발계획.md 에 데이터 구조 · 연동 대상 · 권한이 생김</li><li>권한 표에 「내가 작성자인 페이지만」 같은 줄</li></ul></div></div></div>
 </section>
 <section class="slide lt" data-title="실습 2-3 요청 항목">
   <div class="coord"><b></b> / <span class="tot"></span></div>
@@ -2112,7 +2112,7 @@ order by date;</pre></div><dl><dt>사람이 하는 일</dt><dd>문법 학습 · 
   <div class="eyebrow"><span class="tag">2-4</span></div>
   <h2 class="s-title sm">AI와 데이터 구조 설계</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1chat"><div class="v1ch">Claude Code 대화 예</div><div class="v1b me"><span>나</span><p>개발 계획 5칸 데이터 구조를 읽고 Supabase 표 설계를 제안해 줘. 만들기 전에 표 모양부터 보여 줘</p></div><div class="v1b ai"><span>Claude</span><p>제안 · members · pages 두 표. 상태는 초안 · 작성 중 · 완료 셋만 받게 DB 에서도 막을까요?</p></div><div class="v1b me"><span>나</span><p>응 · 화면과 DB 둘 다에서 막아 줘</p></div><div class="v1b ai"><span>Claude</span><p>마이그레이션 파일 supabase/migrations/…_create_pages.sql 작성 · supabase db push 로 반영할까요?</p></div></div><div class="dbnote"><span>사람이 정할 것</span> 표 이름 · 열 · 지켜야 할 규칙 · SQL 은 Claude Code</div></div></div>
+  <div class="body"><div class="mid"><div class="v1chat"><div class="v1ch">Claude Code 대화 예</div><div class="v1b me"><span>나</span><p>개발계획.md 의 데이터 구조를 보고 Supabase 에 어떤 표를 만들지 정리해 줘. 만들기 전에 표 모양부터 보여 줘</p></div><div class="v1b ai"><span>Claude</span><p>제안 · members · pages 두 표. 상태는 초안 · 작성 중 · 완료 셋만 받게 DB 에서도 막을까요?</p></div><div class="v1b me"><span>나</span><p>응 · 화면과 DB 둘 다에서 막아 줘</p></div><div class="v1b ai"><span>Claude</span><p>마이그레이션 파일 supabase/migrations/…_create_pages.sql 작성 · supabase db push 로 반영할까요?</p></div></div><div class="dbnote"><span>사람이 정할 것</span> 표 이름 · 열 · 지켜야 할 규칙 · SQL 은 Claude Code</div></div></div>
 </section>
 
 <section class="slide lt" data-title="마이그레이션">
@@ -2193,7 +2193,7 @@ order by date;</pre></div><dl><dt>사람이 하는 일</dt><dd>문법 학습 · 
   <h2 class="s-title sm">Supabase 저장 · 로그인 · 권한</h2>
   <div class="rule"></div>
   <div class="body"><div class="labgrid">
-    <div class="lc goal"><div class="lh">목표</div><p>내 앱 → 모두 같은 페이지 목록 · 로그인 · 내 페이지만 수정</p><div class="lf">사용 파일 · 예시/개발계획.md 5 · 7 칸 (비교용)</div></div>
+    <div class="lc goal"><div class="lh">목표</div><p>내 앱 → 모두 같은 페이지 목록 · 로그인 · 내 페이지만 수정</p><div class="lf">사용 파일 · 예시/개발계획.md 데이터 구조 · 권한 (비교용)</div></div>
     <div class="lc steps"><div class="lh">단계</div><ol><li>2-2 의 Supabase 프로젝트 열기</li><li>표 설계 → 마이그레이션 · db push</li><li>저장 위치 교체 요청</li><li>로그인 · RLS 요청</li><li>계정 두 개로 확인</li></ol></div>
     <div class="lc done"><div class="lh">완료 기준</div><ul><li>다른 기기에서 같은 페이지가 보임</li><li>다른 계정 작성 페이지는 삭제 불가</li></ul></div>
   </div></div>
@@ -2211,7 +2211,7 @@ order by date;</pre></div><dl><dt>사람이 하는 일</dt><dd>문법 학습 · 
   <div class="eyebrow"><span class="tag">2-4</span></div>
   <h2 class="s-title sm">실습 2-4 요청 항목</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1sls"><div class="v1sl" style="--d:0.00s"><b>목표</b><span>페이지 DB 저장 · 로그인 · 내 페이지만 수정 · 삭제</span></div><div class="v1sl" style="--d:0.20s"><b>입력</b><span>개발 계획 v2 · 5 · 7 칸</span></div><div class="v1sl" style="--d:0.40s"><b>진행 방식</b><span>표 설계 먼저 보여 주기 · 태스크 하나씩</span></div><div class="v1sl" style="--d:0.60s"><b>하지 말 것</b><span>secret 키를 앱 코드에 넣기</span></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v1sls"><div class="v1sl" style="--d:0.00s"><b>목표</b><span>페이지 DB 저장 · 로그인 · 내 페이지만 수정 · 삭제</span></div><div class="v1sl" style="--d:0.20s"><b>입력</b><span>개발계획.md 의 데이터 구조 · 권한</span></div><div class="v1sl" style="--d:0.40s"><b>진행 방식</b><span>표 설계 먼저 보여 주기 · 태스크 하나씩</span></div><div class="v1sl" style="--d:0.60s"><b>하지 말 것</b><span>secret 키를 앱 코드에 넣기</span></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="실습 2-4 확인">
@@ -2331,7 +2331,7 @@ order by date;</pre></div><dl><dt>사람이 하는 일</dt><dd>문법 학습 · 
   <h2 class="s-title sm">공휴일 API · 키 보관</h2>
   <div class="rule"></div>
   <div class="body"><div class="labgrid">
-    <div class="lc goal"><div class="lh">목표</div><p>내 앱 → 공휴일 차단 · 키는 서버에만</p><div class="lf">사용 파일 · 예시/개발계획.md 6 칸 (비교용)</div></div>
+    <div class="lc goal"><div class="lh">목표</div><p>내 앱 → 공휴일 차단 · 키는 서버에만</p><div class="lf">사용 파일 · 예시/개발계획.md 연동 대상 (비교용)</div></div>
     <div class="lc steps"><div class="lh">단계</div><ol><li>공공데이터포털 인증키 발급</li><li>.env · .gitignore 요청</li><li>Next.js 서버 · 공휴일 차단 요청</li><li>Network 탭에서 키 확인</li></ol></div>
     <div class="lc done"><div class="lh">완료 기준</div><ul><li>날짜 12월 25일 저장 막힘</li><li>git status · GitHub 에 키 없음</li></ul></div>
   </div></div>
@@ -2349,7 +2349,7 @@ order by date;</pre></div><dl><dt>사람이 하는 일</dt><dd>문법 학습 · 
   <div class="eyebrow"><span class="tag">2-5</span></div>
   <h2 class="s-title sm">실습 2-5 요청 항목</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1sls"><div class="v1sl" style="--d:0.00s"><b>목표</b><span>날짜 공휴일 차단</span></div><div class="v1sl" style="--d:0.20s"><b>입력</b><span>개발 계획 v2 · 6 칸 · 인증키</span></div><div class="v1sl" style="--d:0.40s"><b>진행 방식</b><span>키는 Next.js 서버에서만 · 태스크 하나씩</span></div><div class="v1sl" style="--d:0.60s"><b>하지 말 것</b><span>키를 대화창 · 코드 · 커밋에 넣기</span></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v1sls"><div class="v1sl" style="--d:0.00s"><b>목표</b><span>날짜 공휴일 차단</span></div><div class="v1sl" style="--d:0.20s"><b>입력</b><span>개발계획.md 의 연동 대상 · 인증키</span></div><div class="v1sl" style="--d:0.40s"><b>진행 방식</b><span>키는 Next.js 서버에서만 · 태스크 하나씩</span></div><div class="v1sl" style="--d:0.60s"><b>하지 말 것</b><span>키를 대화창 · 코드 · 커밋에 넣기</span></div></div></div></div>
 </section>
 
 <section class="slide lt" data-title="실습 2-5 확인">
