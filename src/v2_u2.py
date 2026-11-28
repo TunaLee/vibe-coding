@@ -177,6 +177,13 @@ def blog_one():
     return f'<div class="v22one"><div class="v2u2tab">blog · 한 표에 모두</div><table class="v2u2t sm">{"<tr>" + th + "</tr>"}{tr}</table>{probs}</div>'
 
 
+def sbstep(i, name, img, alt, boxes, rows):
+    """실습 2-2 단계 화면 — 왼쪽 실제 화면(번호 상자가 차례로 켜짐) · 오른쪽 번호별 할 일."""
+    from v1_u2 import annot
+    return light(f"실습 2-2 · {i}단계 {name}", '<div class="twocol v1vsgrid v1stp v22stp"><div>' + annot(img, alt, boxes, "")
+                 + "</div><div>" + viz2.tiles(rows, 1) + "</div></div>", T)
+
+
 def slides():
     return [
         light("데이터 기록의 변화", history()
@@ -210,21 +217,19 @@ def slides():
             ["supabase.com 가입 · Continue with GitHub", "조직 만들기 · Free", "새 프로젝트 · mini_notion · DB 비밀번호",
              "Table Editor 에서 pages 표 · 행 2개", "date 칸에 「월말쯤」 넣어 보기"],
             ["대시보드에 mini_notion 프로젝트", "pages 표에 행 2개", "날짜 칸이 형식 안 맞는 값을 거절"]),
-        light("실습 2-2 · 1단계 가입", viz2.tiles([
-            ("주소", go("supabase.com/dashboard/sign-up", "https://supabase.com/dashboard/sign-up")),
-            ("① 누를 버튼", "Continue with GitHub · 1-2 에서 만든 계정"), ("② GitHub 승인 화면", "Authorize supabase · 이메일 읽기 권한만"),
-            ("누르지 않을 것", "ChatGPT · SSO · 이메일 가입")], 4)
-              + note("GitHub 계정 하나", "GitHub · Vercel · Supabase 같은 로그인 · Free 플랜 · 카드 등록 없음")
-              + src(("Supabase · Pricing", "https://supabase.com/pricing")), T),
-        light("실습 2-2 · 2단계 조직 만들기", viz2.tiles([
-            ("위치", "Your organizations → New organization"), ("Name", "팀 · 회사 이름 · 나중에 변경 가능"),
-            ("Plan", "Free - $0/month"), ("선택 질문", "Personal · 나머지는 비워도 됨 → Create organization")], 4)
-              + note("조직", "프로젝트를 묶는 단위 · 팀원 · 요금도 조직별"), T),
-        light("실습 2-2 · 3단계 새 프로젝트", viz2.tiles([
-            ("Project name", "mini_notion"), ("Database password", "Generate a password → Copy → 안전한 곳에 보관"),
-            ("Region", "Auto 그대로"), ("GitHub (optional)", "건너뜀"),
-            ("Data access", "Enable Data API ✓ · Grant API access ✓ · Enable RLS ✓"), ("마무리", "Create new project → 준비될 때까지 대기")], 3)
-              + note("RLS 켜 두기", "규칙을 만들기 전까지 앱에서는 아무도 못 읽음 · 규칙은 2-4 · 대시보드에서는 보임"), T),
+        sbstep(1, "가입", "v2_u2_sb_signup.webp", "Supabase 가입 화면",
+               [("①", "Continue with GitHub", 9.8, 37.2, 76.4, 12.3)],
+               [("주소", go("supabase.com/dashboard/sign-up", "https://supabase.com/dashboard/sign-up")),
+                ("① Continue with GitHub", "1-2 의 GitHub 계정 → Authorize supabase"), ("누르지 않을 것", "ChatGPT · SSO · 이메일 가입")]),
+        sbstep(2, "조직 만들기", "v2_u2_sb_orgform.webp", "Create a new organization 화면",
+               [("①", "Name", 35.2, 19.6, 61.6, 5.5), ("②", "Plan", 35.2, 38.4, 61.6, 5.5), ("③", "Create", 77.6, 92.8, 19.2, 4.2)],
+               [("시작", "Your organizations → New organization"), ("① Name", "팀 · 회사 이름 · 나중에 변경 가능"),
+                ("② Plan", "Free - $0/month"), ("③ Create organization", "선택 질문은 비워도 됨")]),
+        sbstep(3, "새 프로젝트", "v2_u2_sb_project.webp", "Create a new project 화면",
+               [("①", "Project name", 35, 2.4, 61.7, 5.9), ("②", "Password", 35, 14.3, 61.7, 13.4), ("③", "Region", 35, 33.4, 61.7, 6),
+                ("④", "Data access", 34.8, 49.2, 61, 26.1), ("⑤", "Create", 78, 92.2, 18.7, 4.5)],
+               [("① Project name", "mini_notion · 조직은 2단계 것 그대로"), ("② Database password", "Generate → Copy → 따로 보관"), ("③ Region", "Auto 그대로"),
+                ("④ Data access", "세 칸 모두 체크 · RLS 포함"), ("⑤ Create new project", "준비될 때까지 대기")]),
         light("실습 2-2 · 4단계 pages 표", viz2.tiles([
             ("위치", "왼쪽 Table Editor → New table"), ("이름", "pages"),
             ("열 추가", "title · text / date · date / status · text"), ("RLS", "켜진 상태 · 3단계 설정 · 규칙은 2-4")], 4)
@@ -391,4 +396,18 @@ CSS = """
   @keyframes v22out{to{opacity:0; visibility:hidden}}
   @keyframes v22drop{from{transform:translateY(-10px)} to{transform:none}}
   @media print{.v22mx .la{display:none} .v22mx .lb{position:static; opacity:1; animation:none}}
+  /* 2-2 · 실습 화면 + 번호 상자 (1-2 와 같은 모양) */
+  .v1an{margin:0;} .v1anw{position:relative; border-radius:10px; overflow:hidden; box-shadow:0 8px 24px rgba(22,35,58,.18);}
+  .v1anw img{display:block; width:100%;}
+  .v1stp > div:first-child{display:flex; justify-content:center;}
+  .v1stp .v1anw{width:fit-content; max-width:100%; margin:0 auto;}
+  .v1stp .v1anw img{width:auto; max-width:100%; max-height:440px;}
+  .v1anb{position:absolute; border:3px solid #F28C28; border-radius:6px; background:rgba(242,140,40,.12); opacity:0; animation:v1anIn .5s var(--d) forwards;}
+  .v1anb em{position:absolute; left:-3px; top:-3px; background:#F28C28; color:#fff; font-style:normal; font-weight:800; font-size:14px; padding:2px 7px; border-radius:5px 0 6px 0; white-space:nowrap;}
+  .v1anb span{display:none;}
+  @keyframes v1anIn{from{opacity:0; transform:scale(1.04)} to{opacity:1; transform:none}}
+  @media print{.v1anb{opacity:1; animation:none}}
+  .v1vsgrid{grid-template-columns:1.7fr 1fr; align-items:center;}
+  .v22stp{grid-template-columns:1.25fr 1fr;} .v22stp .v2tile{padding:10px 14px;}
+  .v22stp .v1anb em{left:auto; right:-3px; border-radius:0 5px 0 6px;}
 """
