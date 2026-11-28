@@ -1,7 +1,7 @@
 """2-2 데이터베이스.
 
 배경 → 데이터 기록의 변화(종이 → 엑셀 → DB → 클라우드 DB) → 비유(엑셀 · 원시인 돌판 그림) → 페이지 표 애니메이션(행 · 열)
-→ 엑셀과 데이터베이스(동시 쓰기 · 형식 거절 애니메이션) → 관계(members · pages) → 블로그 예(한 표 문제 → 세 표 · 번호로 연결) → SQL 한 줄 뜻 → SQL 작성의 변화(손 → SQL → 말 · MCP) → Supabase 구성 · 이유 → 무료 플랜.
+→ 엑셀과 데이터베이스(동시 쓰기 · 형식 거절 애니메이션) → 관계(members · pages) → 블로그 예(표 하나 문제 · 다음 장 세 표 · 번호로 연결) → SQL 한 줄 뜻 → SQL 작성의 변화(손 → SQL → 말 · MCP) → Supabase 구성 · 이유 → 무료 플랜.
 사실 출처
 - Supabase 무료 플랜: supabase.com/pricing (프로젝트 2개 · DB 500 MB · 월 이용자 50,000 · 1주 미사용 시 일시정지 · Pro $25/월)
 - 프로젝트마다 Postgres 전체: supabase.com/docs/guides/database/overview
@@ -208,7 +208,8 @@ def slides():
               + note("관계형 데이터베이스", "데이터를 행 · 열로 된 표에 담는 방식 · 표끼리 서로 연결"), T),
         light("엑셀과 데이터베이스", rules()
               + note("엑셀과 차이", "엑셀 · 아무 칸에 아무 값 / 데이터베이스 · 열마다 형식 · 여러 사람이 동시에"), T),
-        light("블로그 표 나누기", '<div class="v22mx"><div class="la">' + blog_one() + '</div><div class="lb" style="--o:7.2s">' + blog() + '</div></div>'
+        light("블로그 · 표 하나", blog_one(), T),
+        light("블로그 · 표 나누기", blog()
               + note("관계", "같은 내용을 두 번 적지 않고 번호로 가리킴 · 글 하나에 댓글 여러 개"), T),
         light("표와 표의 관계", relation()
               + note("미니 노션", "같은 구조 · 작성자 한 명 ↔ 페이지 여러 개 · owner_id 로 연결"), T),
@@ -407,15 +408,6 @@ CSS = """
   @keyframes v22g{to{background:var(--gc)}}
   @media print{.v22one .pb span{opacity:1; animation:none}}
   .v22blog .tb:nth-child(1) .v2u2tab{background:#264DE4;} .v22blog .tb:nth-child(2) .v2u2tab{background:#E07A12;} .v22blog .tb:nth-child(3) .v2u2tab{background:#2E8B57;}
-  /* 2-2 · 블로그 표 나누기 — 한 표(la) → 세 표 + 연결(lb) 같은 자리에서 바뀜 */
-  .v22mx{position:relative; min-height:400px;}
-  .v22mx .la{animation:v22out .5s 6.6s forwards;}
-  .v22mx .lb{position:absolute; inset:0; opacity:0; animation:v22in .5s 7.0s forwards;}
-  .v22mx .lb .tb{animation:v22drop .6s 7.0s both;}
-  .v22mx .lb .tb:nth-child(2){animation-delay:7.15s;} .v22mx .lb .tb:nth-child(3){animation-delay:7.3s;}
-  @keyframes v22out{to{opacity:0; visibility:hidden}}
-  @keyframes v22drop{from{transform:translateY(-10px)} to{transform:none}}
-  @media print{.v22mx .la{display:none} .v22mx .lb{position:static; opacity:1; animation:none}}
   /* 2-2 · 실습 화면 + 번호 상자 (1-2 와 같은 모양) */
   .v1an{margin:0;} .v1anw{position:relative; border-radius:10px; overflow:hidden; box-shadow:0 8px 24px rgba(22,35,58,.18);}
   .v1anw img{display:block; width:100%;}
