@@ -1,7 +1,7 @@
 """2-5 키 관리.
 
-키 종류(Supabase URL · publishable · secret · DB 비밀번호) → 비유(출입증) → 키를 두는 곳(.env.local) → NEXT_PUBLIC_ 규칙
-→ push 와 .env.local(장면) → 키 노출 경로 → 실습(키 점검).
+키 종류(Supabase URL · publishable · secret · DB 비밀번호) → 비유(출입증) → 키를 두는 곳(.env.local · 이름은 Claude Code 가 정함)
+→ push 와 .env.local(장면) → 실습(키 점검).
 사실 출처: nextjs.org/docs (환경변수 · NEXT_PUBLIC_ 은 브라우저 번들에 포함) · supabase.com/docs/guides/api/api-keys
 """
 import viz2
@@ -65,32 +65,22 @@ def slides():
         light("키를 두는 곳", viz2.pair(
             "코드에 직접", [("위치", "page.tsx 안 문자열"), ("GitHub 에 올리면", "누구나 검색 · 복사"), ("키 교체", "코드 수정 · 다시 커밋")],
             ".env.local 파일", [("위치", "프로젝트 폴더의 .env.local"), ("GitHub 에 올리면", ".gitignore 로 제외 · 안 올라감"), ("키 교체", ".env.local 한 줄")])
-              + note("환경변수", "코드 밖에 둔 설정 값 · 코드는 이름으로만 읽음"), T),
-        light("NEXT_PUBLIC_ 규칙", viz2.pair(
-            "NEXT_PUBLIC_ 붙은 이름", [("들어가는 곳", "브라우저로 내려가는 코드"), ("누가 보나", "개발자 도구로 누구나"), ("넣을 것", "URL · publishable 키")],
-            "안 붙은 이름", [("들어가는 곳", "Next.js 서버 코드에만"), ("누가 보나", "아무도"), ("넣을 것", "secret 키 · DB 비밀번호")], hl="r")
-              + note("가장 흔한 실수", "secret 키 이름에 NEXT_PUBLIC_ 을 붙여 브라우저로 내보내기")
-              + src(NEXTENV), T),
+              + note("환경변수", "코드 밖에 둔 설정 값 · 키 이름과 넣을 곳은 Claude Code 가 정함 · 사람은 값만 붙여 넣기"), T),
         light("push 와 .env.local", push_scene()
-              + note(".gitignore", "목록에 있는 파일은 커밋 · push 에서 빠짐 · 키는 내 컴퓨터에만 · 배포는 Vercel 환경변수 (2-9)"), T),
-        light("키 노출 경로", viz2.pair(
-            "secret 키를 브라우저에", [("키 위치", "NEXT_PUBLIC_ · 화면 코드"), ("보이는 곳", "개발자 도구 · Network · Sources"),
-                                  ("결과", "누구나 RLS 무시하고 전체 읽기 · 쓰기")],
-            "secret 키는 서버에만", [("키 위치", "Next.js 서버 · 환경변수"), ("보이는 곳", "없음 · 결과만 내려감"),
-                                ("결과", "키 노출 없음")], hl="r"), T),
+              + note(".gitignore", "목록에 있는 파일은 커밋 · push 에서 빠짐 · 키는 내 컴퓨터에만 · 배포는 Vercel 환경변수 (2-4)"), T),
         # ── 실습
-        lab("2-5", "키 점검", T, "내 앱의 키가 어디에 있는지 찾고, 브라우저 · GitHub 에 새는 곳을 막는다",
-            [".env.local 이 .gitignore 에 있는지 확인 요청", "키 이름 점검 · secret 에 NEXT_PUBLIC_ 없음", "Network · Sources 에서 secret 검색",
+        lab("2-5", "키 점검", T, "키가 .env.local 에만 있고 GitHub 에 올라가지 않는지 확인한다",
+            ["코드에 직접 적힌 키 찾기 요청", "있으면 .env.local 로 옮기기 · 이름은 Claude Code 가 정함", ".env.local 이 .gitignore 에 있는지 확인",
              "GitHub 저장소에서 키 검색"],
-            ["git status 에 .env.local 없음", "브라우저 · GitHub 어디에도 sb_secret_ 없음"], files="2-4 까지의 앱"),
-        brief("2-5", T, [".gitignore 확인", "키 이름 점검", "브라우저에서 검색", "GitHub 에서 검색"],
+            ["코드에 직접 적힌 키 0건", "git status · GitHub 어디에도 .env.local · 키 없음"], files="2-4 까지의 앱"),
+        brief("2-5", T, ["코드에서 키 찾기", ".env.local 로 옮기기", ".gitignore 확인", "GitHub 에서 검색"],
               [("목표", "키가 새는 곳 찾기 · 막기"), ("범위", ".env.local · 코드 · 커밋 기록"),
                ("진행 방식", "찾은 것부터 보여 주기 · 고치기는 승인 뒤"), ("하지 말 것", "키를 대화창에 붙여 넣기")],
-              ["환경변수", ".gitignore", "NEXT_PUBLIC_", "secret 키"],
-              ["git status 에 .env.local 없음", "sb_secret_ 검색 결과 0건"],
+              ["환경변수", ".env.local", ".gitignore", "secret 키"],
+              ["코드에 직접 적힌 키 0건", "GitHub 검색 결과 0건"],
               "이미 커밋한 키는 지우는 것으로 끝나지 않음 · Supabase 에서 새 키로 교체"),
         light("실습 2-5 확인", checks([
-            (".env.local 이 .gitignore 에 있나", "git status 에 안 보임"), ("secret 키 이름에 NEXT_PUBLIC_ 이 없나", "이름 점검"),
-            ("브라우저 개발자 도구에 secret 키가 없나", "Sources · Network 검색"), ("GitHub 저장소에 키가 없나", "저장소 검색")],
+            ("코드에 직접 적힌 키가 없나", "키는 .env.local 에만"), (".env.local 이 .gitignore 에 있나", "git status 에 안 보임"),
+            ("GitHub 저장소에 키가 없나", "저장소 검색"), ("앱이 그대로 동작하나", "페이지 목록이 보임")],
             "넷 다 「예」 → 커밋 · 2-6 MCP"), T),
     ]

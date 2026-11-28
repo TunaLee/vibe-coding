@@ -2142,7 +2142,7 @@ order by date;</pre></div><dl><dt>사람이 하는 일</dt><dd>문법 학습 · 
   <div class="eyebrow"><span class="tag">2-4</span></div>
   <h2 class="s-title sm">실습 2-4 확인</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="cks"><div class="ck" style="--d:0.00s"><span>1</span><b>다른 기기 · 브라우저에서 같은 페이지가 보이나</b><em>DB 저장</em></div><div class="ck" style="--d:0.12s"><span>2</span><b>로그인 전에 「+ 새 페이지」가 안 보이나</b><em>추가 권한</em></div><div class="ck" style="--d:0.24s"><span>3</span><b>다른 계정 작성 페이지를 삭제할 수 없나</b><em>RLS</em></div><div class="ck" style="--d:0.36s"><span>4</span><b>앱 코드에 sb_secret_ 이 없나</b><em>키 검색</em></div></div><div class="ckr">넷 다 「예」 → 커밋 · 2-5 외부 서비스 연결</div></div></div>
+  <div class="body"><div class="mid"><div class="cks"><div class="ck" style="--d:0.00s"><span>1</span><b>다른 기기 · 브라우저에서 같은 페이지가 보이나</b><em>DB 저장</em></div><div class="ck" style="--d:0.12s"><span>2</span><b>로그인 전에 「+ 새 페이지」가 안 보이나</b><em>추가 권한</em></div><div class="ck" style="--d:0.24s"><span>3</span><b>다른 계정 작성 페이지를 삭제할 수 없나</b><em>RLS</em></div><div class="ck" style="--d:0.36s"><span>4</span><b>앱 코드에 sb_secret_ 이 없나</b><em>키 검색</em></div></div><div class="ckr">넷 다 「예」 → 커밋 · 2-5 키 관리</div></div></div>
 </section>
 
 <section class="slide dk" data-title="다음 단원">
@@ -2177,15 +2177,7 @@ order by date;</pre></div><dl><dt>사람이 하는 일</dt><dd>문법 학습 · 
   <div class="eyebrow"><span class="tag">2-5</span></div>
   <h2 class="s-title sm">키를 두는 곳</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">코드에 직접</div><div class="v2pc" style="--d:0.00s"><b>위치</b><span>page.tsx 안 문자열</span></div><div class="v2pc" style="--d:0.08s"><b>GitHub 에 올리면</b><span>누구나 검색 · 복사</span></div><div class="v2pc" style="--d:0.16s"><b>키 교체</b><span>코드 수정 · 다시 커밋</span></div></div><div class="v2p on"><div class="v2ph">.env.local 파일</div><div class="v2pc" style="--d:0.00s"><b>위치</b><span>프로젝트 폴더의 .env.local</span></div><div class="v2pc" style="--d:0.08s"><b>GitHub 에 올리면</b><span>.gitignore 로 제외 · 안 올라감</span></div><div class="v2pc" style="--d:0.16s"><b>키 교체</b><span>.env.local 한 줄</span></div></div></div><div class="dbnote"><span>환경변수</span> 코드 밖에 둔 설정 값 · 코드는 이름으로만 읽음</div></div></div>
-</section>
-
-<section class="slide lt" data-title="NEXT_PUBLIC_ 규칙">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">2-5</span></div>
-  <h2 class="s-title sm">NEXT_PUBLIC_ 규칙</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">NEXT_PUBLIC_ 붙은 이름</div><div class="v2pc" style="--d:0.00s"><b>들어가는 곳</b><span>브라우저로 내려가는 코드</span></div><div class="v2pc" style="--d:0.08s"><b>누가 보나</b><span>개발자 도구로 누구나</span></div><div class="v2pc" style="--d:0.16s"><b>넣을 것</b><span>URL · publishable 키</span></div></div><div class="v2p on"><div class="v2ph">안 붙은 이름</div><div class="v2pc" style="--d:0.00s"><b>들어가는 곳</b><span>Next.js 서버 코드에만</span></div><div class="v2pc" style="--d:0.08s"><b>누가 보나</b><span>아무도</span></div><div class="v2pc" style="--d:0.16s"><b>넣을 것</b><span>secret 키 · DB 비밀번호</span></div></div></div><div class="dbnote"><span>가장 흔한 실수</span> secret 키 이름에 NEXT_PUBLIC_ 을 붙여 브라우저로 내보내기</div><div class="src">출처 · <a href="https://nextjs.org/docs/app/guides/environment-variables" target="_blank" rel="noopener">Next.js · Environment Variables</a></div></div></div>
+  <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">코드에 직접</div><div class="v2pc" style="--d:0.00s"><b>위치</b><span>page.tsx 안 문자열</span></div><div class="v2pc" style="--d:0.08s"><b>GitHub 에 올리면</b><span>누구나 검색 · 복사</span></div><div class="v2pc" style="--d:0.16s"><b>키 교체</b><span>코드 수정 · 다시 커밋</span></div></div><div class="v2p on"><div class="v2ph">.env.local 파일</div><div class="v2pc" style="--d:0.00s"><b>위치</b><span>프로젝트 폴더의 .env.local</span></div><div class="v2pc" style="--d:0.08s"><b>GitHub 에 올리면</b><span>.gitignore 로 제외 · 안 올라감</span></div><div class="v2pc" style="--d:0.16s"><b>키 교체</b><span>.env.local 한 줄</span></div></div></div><div class="dbnote"><span>환경변수</span> 코드 밖에 둔 설정 값 · 키 이름과 넣을 곳은 Claude Code 가 정함 · 사람은 값만 붙여 넣기</div></div></div>
 </section>
 
 <section class="slide lt" data-title="push 와 .env.local">
@@ -2193,15 +2185,7 @@ order by date;</pre></div><dl><dt>사람이 하는 일</dt><dd>문법 학습 · 
   <div class="eyebrow"><span class="tag">2-5</span></div>
   <h2 class="s-title sm">push 와 .env.local</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v26p"><div class="pn"><div class="h">내 컴퓨터 · 프로젝트 폴더</div><div class="f "><b>app/page.tsx</b></div><div class="f "><b>app/api/pages/route.ts</b></div><div class="f "><b>.gitignore</b></div><div class="f key"><b>.env.local</b><em>키</em></div></div><div class="mid"><div class="gi" style="--d:.6s"><span>.gitignore</span><code>.env*.local</code></div><div class="cmd" style="--d:1.2s">git push</div></div><div class="pn gh"><div class="h">GitHub 저장소</div><div class="f nw" style="--d:1.6s"><b>app/page.tsx</b></div><div class="f nw" style="--d:1.9s"><b>app/api/pages/route.ts</b></div><div class="f nw" style="--d:2.2s"><b>.gitignore</b></div><div class="f no" style="--d:2.8s"><b>.env.local</b><em>없음 · 제외됨</em></div></div></div><div class="dbnote"><span>.gitignore</span> 목록에 있는 파일은 커밋 · push 에서 빠짐 · 키는 내 컴퓨터에만 · 배포는 Vercel 환경변수 (2-9)</div></div></div>
-</section>
-
-<section class="slide lt" data-title="키 노출 경로">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">2-5</span></div>
-  <h2 class="s-title sm">키 노출 경로</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">secret 키를 브라우저에</div><div class="v2pc" style="--d:0.00s"><b>키 위치</b><span>NEXT_PUBLIC_ · 화면 코드</span></div><div class="v2pc" style="--d:0.08s"><b>보이는 곳</b><span>개발자 도구 · Network · Sources</span></div><div class="v2pc" style="--d:0.16s"><b>결과</b><span>누구나 RLS 무시하고 전체 읽기 · 쓰기</span></div></div><div class="v2p on"><div class="v2ph">secret 키는 서버에만</div><div class="v2pc" style="--d:0.00s"><b>키 위치</b><span>Next.js 서버 · 환경변수</span></div><div class="v2pc" style="--d:0.08s"><b>보이는 곳</b><span>없음 · 결과만 내려감</span></div><div class="v2pc" style="--d:0.16s"><b>결과</b><span>키 노출 없음</span></div></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v26p"><div class="pn"><div class="h">내 컴퓨터 · 프로젝트 폴더</div><div class="f "><b>app/page.tsx</b></div><div class="f "><b>app/api/pages/route.ts</b></div><div class="f "><b>.gitignore</b></div><div class="f key"><b>.env.local</b><em>키</em></div></div><div class="mid"><div class="gi" style="--d:.6s"><span>.gitignore</span><code>.env*.local</code></div><div class="cmd" style="--d:1.2s">git push</div></div><div class="pn gh"><div class="h">GitHub 저장소</div><div class="f nw" style="--d:1.6s"><b>app/page.tsx</b></div><div class="f nw" style="--d:1.9s"><b>app/api/pages/route.ts</b></div><div class="f nw" style="--d:2.2s"><b>.gitignore</b></div><div class="f no" style="--d:2.8s"><b>.env.local</b><em>없음 · 제외됨</em></div></div></div><div class="dbnote"><span>.gitignore</span> 목록에 있는 파일은 커밋 · push 에서 빠짐 · 키는 내 컴퓨터에만 · 배포는 Vercel 환경변수 (2-4)</div></div></div>
 </section>
 
 <section class="slide lt labs" data-title="[실습 2-5] 키 점검">
@@ -2210,9 +2194,9 @@ order by date;</pre></div><dl><dt>사람이 하는 일</dt><dd>문법 학습 · 
   <h2 class="s-title sm">키 점검</h2>
   <div class="rule"></div>
   <div class="body"><div class="labgrid">
-    <div class="lc goal"><div class="lh">목표</div><p>내 앱의 키가 어디에 있는지 찾고, 브라우저 · GitHub 에 새는 곳을 막는다</p><div class="lf">사용 파일 · 2-4 까지의 앱</div></div>
-    <div class="lc steps"><div class="lh">단계</div><ol><li>.env.local 이 .gitignore 에 있는지 확인 요청</li><li>키 이름 점검 · secret 에 NEXT_PUBLIC_ 없음</li><li>Network · Sources 에서 secret 검색</li><li>GitHub 저장소에서 키 검색</li></ol></div>
-    <div class="lc done"><div class="lh">완료 기준</div><ul><li>git status 에 .env.local 없음</li><li>브라우저 · GitHub 어디에도 sb_secret_ 없음</li></ul></div>
+    <div class="lc goal"><div class="lh">목표</div><p>키가 .env.local 에만 있고 GitHub 에 올라가지 않는지 확인한다</p><div class="lf">사용 파일 · 2-4 까지의 앱</div></div>
+    <div class="lc steps"><div class="lh">단계</div><ol><li>코드에 직접 적힌 키 찾기 요청</li><li>있으면 .env.local 로 옮기기 · 이름은 Claude Code 가 정함</li><li>.env.local 이 .gitignore 에 있는지 확인</li><li>GitHub 저장소에서 키 검색</li></ol></div>
+    <div class="lc done"><div class="lh">완료 기준</div><ul><li>코드에 직접 적힌 키 0건</li><li>git status · GitHub 어디에도 .env.local · 키 없음</li></ul></div>
   </div></div>
 </section>
 
@@ -2221,7 +2205,7 @@ order by date;</pre></div><dl><dt>사람이 하는 일</dt><dd>문법 학습 · 
   <div class="eyebrow"><span class="tag">2-5</span></div>
   <h2 class="s-title sm">실습 2-5 순서</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><ol class="v1st"><li style="--d:0.00s"><em>1</em><span>.gitignore 확인</span></li><li style="--d:0.25s"><em>2</em><span>키 이름 점검</span></li><li style="--d:0.50s"><em>3</em><span>브라우저에서 검색</span></li><li style="--d:0.75s"><em>4</em><span>GitHub 에서 검색</span></li></ol><div class="qk2"><b>확인</b><ul><li>git status 에 .env.local 없음</li><li>sb_secret_ 검색 결과 0건</li></ul></div></div></div>
+  <div class="body"><div class="mid"><ol class="v1st"><li style="--d:0.00s"><em>1</em><span>코드에서 키 찾기</span></li><li style="--d:0.25s"><em>2</em><span>.env.local 로 옮기기</span></li><li style="--d:0.50s"><em>3</em><span>.gitignore 확인</span></li><li style="--d:0.75s"><em>4</em><span>GitHub 에서 검색</span></li></ol><div class="qk2"><b>확인</b><ul><li>코드에 직접 적힌 키 0건</li><li>GitHub 검색 결과 0건</li></ul></div></div></div>
 </section>
 <section class="slide lt" data-title="실습 2-5 요청 항목">
   <div class="coord"><b></b> / <span class="tot"></span></div>
@@ -2236,7 +2220,7 @@ order by date;</pre></div><dl><dt>사람이 하는 일</dt><dd>문법 학습 · 
   <div class="eyebrow"><span class="tag">2-5</span></div>
   <h2 class="s-title sm">실습 2-5 확인</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="cks"><div class="ck" style="--d:0.00s"><span>1</span><b>.env.local 이 .gitignore 에 있나</b><em>git status 에 안 보임</em></div><div class="ck" style="--d:0.12s"><span>2</span><b>secret 키 이름에 NEXT_PUBLIC_ 이 없나</b><em>이름 점검</em></div><div class="ck" style="--d:0.24s"><span>3</span><b>브라우저 개발자 도구에 secret 키가 없나</b><em>Sources · Network 검색</em></div><div class="ck" style="--d:0.36s"><span>4</span><b>GitHub 저장소에 키가 없나</b><em>저장소 검색</em></div></div><div class="ckr">넷 다 「예」 → 커밋 · 2-6 MCP</div></div></div>
+  <div class="body"><div class="mid"><div class="cks"><div class="ck" style="--d:0.00s"><span>1</span><b>코드에 직접 적힌 키가 없나</b><em>키는 .env.local 에만</em></div><div class="ck" style="--d:0.12s"><span>2</span><b>.env.local 이 .gitignore 에 있나</b><em>git status 에 안 보임</em></div><div class="ck" style="--d:0.24s"><span>3</span><b>GitHub 저장소에 키가 없나</b><em>저장소 검색</em></div><div class="ck" style="--d:0.36s"><span>4</span><b>앱이 그대로 동작하나</b><em>페이지 목록이 보임</em></div></div><div class="ckr">넷 다 「예」 → 커밋 · 2-6 MCP</div></div></div>
 </section>
 
 <section class="slide dk" data-title="다음 단원">
