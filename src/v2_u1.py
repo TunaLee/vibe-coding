@@ -3,7 +3,7 @@
 클라이언트 · 서버 · DB(1-6 웹 구조 복습 · 한 장)
 → 요청과 응답(장면: 로딩 → GET → SQL → 행 → JSON → 화면) → 요청 · 응답 읽기 → 쓰기 요청(POST → insert → 201 → 목록 추가)
 → 상태 코드.
-외부 API(공휴일)는 2-5 · MCP 는 2-6.
+키 관리는 2-5 · MCP 는 2-6.
 사실 출처: nextjs.org/docs (Route Handlers · app/api/…/route.ts) · supabase.com/docs · developer.mozilla.org HTTP 메서드 · 상태 코드
 · developer.chrome.com/docs/devtools/network
 """
@@ -207,7 +207,7 @@ def message():
 def http_what():
     """HTTP 란 — 만든 회사가 다른 클라이언트 3개 · 서버 3개가 가운데 HTTP 띠 하나로 연결. 선이 차례로 그어짐."""
     cl = ["Chrome", "Safari", "휴대폰 앱"]
-    sv = ["Vercel · 미니 노션", "Supabase", "공공데이터포털"]
+    sv = ["Vercel · 미니 노션", "Supabase", "Google Calendar"]
     W, H = 1120, 270
     s = ""
     ys = [55, 135, 215]
@@ -305,7 +305,7 @@ def slides():
               + note("에러를 전할 때", "방식 · 주소 · 상태 코드 세 가지를 같이"), T),
         # ── API
         light("API", counter()
-              + note("은행 창구", "손님은 금고에 직접 못 들어감 · 정해진 창구 · 신청서로만 · 외부 API 도 같은 구조 (2-5)"), T),
+              + note("은행 창구", "손님은 금고에 직접 못 들어감 · 정해진 창구 · 신청서로만 · 다른 서비스의 API 도 같은 구조"), T),
         light("CRUD", crud()
               + note("CRUD", "데이터를 다루는 네 동작 · 메모장에 쓰기 · 읽기 · 고치기 · 지우기와 같음 · 거의 모든 앱의 기본"), T),
         # ── 장면

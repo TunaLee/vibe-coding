@@ -1,7 +1,7 @@
 """vibe2 공통 도구 — 2부 표지 · 2부 지도 · 다음 단원. 화면 · 대화 · 실습 진행 · 코드 뜻은 v1kit 것을 그대로 쓴다.
 
 바이브코딩 온라인 강의 2부 — 심화. 단원마다 HTML 한 파일(docs/2-N-이름.html).
-공통 예제 = 미니 노션 시작 버전(labs/mini_notion · 1부 방식)에 DB · 로그인 · 외부 API · MCP 를 붙인 「미니 노션 v2」 (labs/mini_notion_v2).
+공통 예제 = 미니 노션 시작 버전(labs/mini_notion · 1부 방식)에 DB · 로그인 · 키 관리 · MCP 를 붙인 「미니 노션 v2」 (labs/mini_notion_v2).
 이어지는 산출물: 2-1 요청 · 응답 → 2-2 DB → 2-3 개발 계획 v2 → 2-4 Supabase 저장 · 로그인 → 2-5 API 키 → 2-6 MCP 연결 → 2-7 내 MCP 서버 → 2-8 Claude · ChatGPT 등록 → 2-9 테스트 · 로그 → 2-10 운영 체크리스트
 """
 from deck import light
@@ -16,7 +16,7 @@ UNITS = [
     ("2-2", "데이터베이스", 15, "표 · 행 · 열 · Supabase"),
     ("2-3", "기획 · 요구사항", 20, "기획서 · 개발 계획 v2"),
     ("2-4", "데이터 다루기", 35, "저장 · 조회 · 로그인"),
-    ("2-5", "외부 API · 키", 25, "공휴일 API · 키 보관"),
+    ("2-5", "키 관리", 20, ".env.local · 키 점검"),
     ("2-6", "MCP", 30, "MCP 연결 · 캘린더 → 페이지"),
     ("2-7", "MCP 서버 만들기", 35, "미니 노션 MCP 서버 배포"),
     ("2-8", "MCP 서버 등록 · 활용", 25, "Claude · ChatGPT 에서 페이지 만들기"),
@@ -25,7 +25,7 @@ UNITS = [
 ]
 BY = {u[0]: u for u in UNITS}
 
-SLUG = {"2-1": "data-flow", "2-2": "database", "2-3": "planning", "2-4": "data", "2-5": "external-api",
+SLUG = {"2-1": "data-flow", "2-2": "database", "2-3": "planning", "2-4": "data", "2-5": "keys",
         "2-6": "mcp", "2-7": "mcp-server", "2-8": "mcp-anywhere", "2-9": "quality-ops", "2-10": "wrap-up"}
 
 
@@ -50,7 +50,7 @@ def roadmap(u):
         cls = "on" if i == cur else ("done" if i < cur else "")
         cells.append(f'<a class="v1u {cls}" href="{file_of(c)}"><span class="c">{c}</span><b>{t}</b><small>{out}</small></a>')
     return light("2부 커리큘럼", f'<div class="v1map v2map">{"".join(cells)}</div>'
-                 + note("공통 예제", "미니 노션 + DB · 로그인 · 외부 API · MCP"), u)
+                 + note("공통 예제", "미니 노션 + DB · 로그인 · 키 관리 · MCP"), u)
 
 
 def nextup(u):

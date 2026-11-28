@@ -17,13 +17,13 @@ T = "2-10"
 def slides():
     return [
         light("2부 회고", '<div class="v2u9q"><span>내 요청</span><i>=</i><span>결과</span><em>?</em></div>'
-              + flow([("요청 · 응답 · DB", "2-1 · 2-2"), ("DB · 로그인", "2-4 · Supabase"), ("외부 API · 키", "2-5 · 공휴일"),
+              + flow([("요청 · 응답 · DB", "2-1 · 2-2"), ("DB · 로그인", "2-4 · Supabase"), ("키 관리", "2-5 · .env.local"),
                       ("MCP", "2-6 · 연결 · 캘린더"), ("내 MCP 서버", "2-7 · 2-8 · Claude · ChatGPT"), ("테스트 · 운영", "2-9")], hl=4)
               + note("흐름", "1부와 같은 순서 · 데이터 · 외부 연결 · 검사가 더해짐"), T),
         light("시작 버전 → 2부 앱", viz2.maprows([
             ("페이지 · 공유 없음", "Supabase 한 곳", "팀원 모두 같은 페이지 목록"),
             ("수정 · 삭제 · 누구나", "로그인 · 내가 작성자인 페이지만", "RLS 권한"),
-            ("날짜 공휴일 · 달력 직접 확인", "공휴일 API", "공휴일 날짜 자동 차단"),
+            ("캘린더 일정 · 손으로 옮김", "Google Calendar MCP", "회의 일정 → 회의록 페이지"),
             ("페이지 만들기 · 앱 화면에서만", "내 MCP 서버", "Claude · ChatGPT 대화로 등록 · 조회"),
             ("확인 · 기능마다 직접 클릭", "자동 테스트 · 브라우저 MCP", "push 전 전체 검사"),
             ("장애 · 사용자 제보", "로그 · Web Analytics", "에러 · 방문 기록")], "시작 버전 (1부 방식)", "2부"), T),
@@ -31,7 +31,7 @@ def slides():
             ("배포 주소", "프로젝트명.vercel.app"), ("붙인 것", "DB · 로그인 · API · MCP 서버"),
             ("테스트", "통과 수 / 전체"), ("가장 오래 걸린 곳", "에러가 많았던 기능")], 4)
               + code("공유 글 · 예", esc("미니 노션 v2 · https://mini-notion.vercel.app\n"
-                                       "로그인 · 팀원 모두 같은 페이지 목록 · 공휴일 날짜 차단 · Claude · ChatGPT 에서 페이지 등록\n"
+                                       "로그인 · 팀원 모두 같은 페이지 목록 · Claude · ChatGPT 에서 페이지 등록\n"
                                        "테스트 8개 통과 · 가장 오래 걸린 곳: 권한(RLS) 설정")), T),
         light("운영 체크리스트", '<div class="v2u9ck">' + "".join(
             f'<div style="--d:{i * .07:.2f}s"><b>{h}</b><span>{x}</span></div>' for i, (h, x) in enumerate([

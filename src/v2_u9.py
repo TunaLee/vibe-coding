@@ -2,7 +2,7 @@
 
 SDLC 청사진(1부 · 2부 단원 위치) → 배경(직접 클릭 확인의 한계) → 비유(출고 전 검수 · 생성 그림) → 테스트 · 실행 결과(node --test 실측)
 → AI 에게 테스트 맡기기 · 브라우저 MCP → 에러 메시지 읽기(node 실측) · 자주 보는 에러 · 디버깅 흐름 → AI 코드 리뷰 · 보안 점검 → 실습.
-공통 예제: 미니 노션 v2 (마감 지남 판정 · 공휴일 차단 · 남의 페이지 삭제 불가).
+공통 예제: 미니 노션 v2 (마감 지남 판정 · 입력값 · 남의 페이지 삭제 불가).
 사실 출처: code.claude.com/docs/en/commands (/code-review · /review · /security-review · /diff) · github.com/microsoft/playwright-mcp
 · nodejs.org test runner · developer.mozilla.org HTTP 상태 코드 · supabase.com RLS
 실측: 겹침 함수 테스트(node --test · 실패 1 → 「<=」를 「<」로 고친 뒤 3개 통과) · TypeError 메시지(node app.js).
@@ -51,8 +51,8 @@ def stepflow(steps, cls="v2u7sf"):
 def logstream():
     """로그가 한 줄씩 쌓이는 화면 — 500 줄은 빨강 · 4xx 는 노랑. 값은 예."""
     rows = [("", "", "GET", "/", "200", ""), ("", "", "POST", "/api/mcp", "200", "tools/call add_page"),
-            ("err", "", "GET", "/api/holidays", "500", "Error: HOLIDAY_API_KEY is not set"),
-            ("warn", "", "POST", "/api/mcp", "401", "토큰 없음"), ("", "", "GET", "/api/holidays", "200", "")]
+            ("err", "", "GET", "/api/pages", "500", "Error: NEXT_PUBLIC_SUPABASE_URL is not set"),
+            ("warn", "", "POST", "/api/mcp", "401", "토큰 없음"), ("", "", "GET", "/api/pages", "200", "")]
     r = "".join(f'<div class="ln {c}" style="--d:{.4 + i * .6:.2f}s"><span>{t}</span><span>{m}</span><span>{u}</span><b>{st}</b><em>{x}</em></div>'
                 for i, (c, t, m, u, st, x) in enumerate(rows))
     return f'<div class="v2u8log"><div class="hd"><span></span><span>방식</span><span>주소</span><b>상태</b><em>메시지</em></div>{r}</div>'
@@ -73,7 +73,7 @@ def slides():
         # ── 배경 · 비유
         light("직접 클릭 확인의 한계", viz2.pair(
             "1부 앱", [("확인할 기능", "완료 기준 5개"), ("사용자", "나 혼자 · 브라우저 하나"), ("확인 방법", "직접 클릭 · 몇 분")],
-            "2부 앱", [("확인할 기능", "마감 지남 · 로그인 · 공휴일 · 권한 · 입력값"), ("사용자", "로그인한 팀원 여럿"),
+            "2부 앱", [("확인할 기능", "마감 지남 · 로그인 · 권한 · 입력값 · MCP 도구"), ("사용자", "로그인한 팀원 여럿"),
                      ("확인 방법", "고칠 때마다 전부 다시 · 빠뜨리기 쉬움")])
               + note("테스트", "확인 순서를 파일로 남겨 매번 같은 검사를 자동으로"), T),
         light("출고 전 검수 비유", phmap(
@@ -85,7 +85,7 @@ def slides():
         # ── 테스트
         light("예제 앱 기준 테스트", viz2.maprows([
             ("날짜가 어제인 초안 페이지", "빨간 표시", "「마감 지남」 표시"),
-            ("날짜 2026-12-25 로 추가", "저장 막힘", "「공휴일 · 기독탄신일」"),
+            ("제목 빈칸으로 저장", "저장 막힘", "「제목 입력」"),
             ("다른 사람이 작성자인 페이지 삭제", "거부", "내가 작성자인 페이지만 삭제"),
             ("로그인 없이 추가", "로그인 화면", "「+ 새 페이지」 안 보임")], "입력 · 행동", "기대 결과")
               + note("테스트 한 개", "정해 둔 입력 → 기대 결과와 비교 → 통과 · 실패"), T),
@@ -105,7 +105,7 @@ def slides():
                             ("금지", "통과시키려고 기대 결과 바꾸기")], 3), T),
         light("화면 테스트 요청 예", chat([
             ("me", "브라우저를 열어서 개발 계획 완료 기준을 하나씩 눌러 확인해 줘"),
-            ("ai", "localhost:3000 열기 → 로그인\n주간 회의록 추가 ○\n날짜 어제인 페이지 → 「마감 지남」 ○\n날짜 12-25 → 「공휴일」 · 저장 막힘 ○\n다른 사람 페이지 → 삭제 버튼 없음 ○\n콘솔 에러 0건")], "Claude Code · 브라우저 MCP 대화 예")
+            ("ai", "localhost:3000 열기 → 로그인\n주간 회의록 추가 ○\n날짜 어제인 페이지 → 「마감 지남」 ○\n제목 빈칸 → 저장 막힘 ○\n다른 사람 페이지 → 삭제 버튼 없음 ○\n콘솔 에러 0건")], "Claude Code · 브라우저 MCP 대화 예")
               + note("Playwright MCP (2-6)", "브라우저를 Claude Code 가 직접 열고 눌러 봄 · 완료 기준마다 통과 · 실패"), T),
         # ── 디버깅
         light("에러 메시지 읽는 법", codemap([
@@ -137,14 +137,14 @@ def slides():
             ("입력값 검증", "빈 칸 · 잘못된 날짜 · 너무 긴 글 · 스크립트 차단")], 3)
               + note("점검 요청", "/security-review + 「키 노출 · 권한 · 입력값 세 가지 확인해 줘」"), T),
         light("배포 뒤 오류 원인", viz2.pair(
-            "내 컴퓨터", [(".env", "키 · Supabase 주소 · 인증 설정"), ("결과", "공휴일 · MCP 서버 정상")],
-            "Vercel 배포", [(".env", "없음 · GitHub 에 안 올라감 (2-5)"), ("결과", "/api/holidays · /api/mcp 500")], hl="r")
+            "내 컴퓨터", [(".env", "키 · Supabase 주소 · 인증 설정"), ("결과", "페이지 목록 · MCP 서버 정상")],
+            "Vercel 배포", [(".env", "없음 · GitHub 에 안 올라감 (2-5)"), ("결과", "/api/pages · /api/mcp 500")], hl="r")
               + note("환경변수 등록", "키를 Vercel 프로젝트 설정에 따로 입력 · 등록 뒤 Redeploy"), T),
         light("Vercel 환경변수 등록", flow([
             ("Vercel 프로젝트", "1-7 에서 만든 것"), ("Settings", "Environment Variables"), ("Key · Value", ".env 한 줄씩 · Import .env 가능"),
             ("환경 선택", "Production · Preview"), ("Redeploy", "새 배포부터 적용")], hl=4)
               + viz2.tiles([("Config", "저장 뒤 값 확인 가능 · Supabase 주소 · 공개 키"),
-                            ("Secret", "쓰기 전용 · 공휴일 API 키 · Supabase secret 키"),
+                            ("Secret", "쓰기 전용 · Supabase secret 키 · MCP 인증 설정"),
                             ("적용 시점", "새 배포부터 · 등록 · 수정 뒤 Redeploy")], 3)
               + src(ENV_DOC), T),
         light("모니터링", viz2.pair(
@@ -163,8 +163,8 @@ def slides():
               + note("Live", "실시간 보기 · 배포 직후 직접 눌러 보며 확인 · 로그 화면은 예")
               + src(("Vercel · Runtime Logs", "https://vercel.com/docs/logs/runtime")), T),
         light("로그 남기기", chat([
-            ("me", "공휴일 API 호출이 실패하면 원인을 Vercel 로그에 남겨 줘. 키 값은 로그에 쓰지 마"),
-            ("ai", "app/api/holidays/route.ts 실패 지점에 console.error 추가\n· 상태 코드 · 실패한 날짜만 기록 · 키는 기록 안 함")], "Claude Code 대화 예")
+            ("me", "MCP 서버 호출이 실패하면 원인을 Vercel 로그에 남겨 줘. 토큰 값은 로그에 쓰지 마"),
+            ("ai", "app/api/mcp/route.ts 실패 지점에 console.error 추가\n· 도구 이름 · 상태 코드만 기록 · 토큰은 기록 안 함")], "Claude Code 대화 예")
               + viz2.tiles([("console.log", "로그의 일반 줄"), ("console.error", "로그의 에러 줄 · 빨강 필터에 잡힘"),
                             ("기록 금지", "키 · 비밀번호 · 개인정보")], 3), T),
         light("Web Analytics", flow([
@@ -181,11 +181,11 @@ def slides():
             ("수정 · 테스트", "2-6 흐름"), ("push", "자동 재배포 (1-7)"), ("로그 재확인", "빨간 줄 사라짐")])
               + note("급할 때", "Instant Rollback · 바로 이전 배포로 되돌린 뒤 천천히 수정 (Hobby 는 직전 배포만)")
               + src(("Vercel · Instant Rollback", "https://vercel.com/docs/instant-rollback")), T),
-        light("공휴일 표시 실패 대응", chat([
-            ("me", "배포 주소에서 공휴일이 안 보여. Vercel 로그:\nGET /api/holidays 500 · Error: HOLIDAY_API_KEY is not set"),
-            ("ai", "코드 문제 아님 · Vercel 환경변수에 HOLIDAY_API_KEY 없음.\nSettings → Environment Variables 에 Secret 으로 등록 → Redeploy"),
+        light("페이지 목록 실패 대응", chat([
+            ("me", "배포 주소에서 페이지 목록이 안 보여. Vercel 로그:\nGET /api/pages 500 · Error: NEXT_PUBLIC_SUPABASE_URL is not set"),
+            ("ai", "코드 문제 아님 · Vercel 환경변수에 Supabase URL 없음.\nSettings → Environment Variables 에 등록 → Redeploy"),
             ("me", "등록하고 Redeploy 했어"),
-            ("ai", "로그 확인 · GET /api/holidays 200 · 12-25 「공휴일」 표시")], "Claude Code 대화 예")
+            ("ai", "로그 확인 · GET /api/pages 200 · 목록 정상")], "Claude Code 대화 예")
               + note("원인 갈래", "코드 수정 → push · 설정 누락 → 환경변수 등록 · Redeploy"), T),
         # ── 실습
         lab("2-9", "테스트 · 운영", T, "완료 기준을 테스트로 만들고, 배포 주소의 로그로 MCP 호출까지 확인",
@@ -194,7 +194,7 @@ def slides():
             ["테스트 전부 통과", "배포 주소에서 2부 기능 동작", "Logs 에 MCP 호출 줄"], files="2-8 까지의 앱"),
         brief("2-9", T,
               ["테스트 요청 · 실행", "수정 승인", "리뷰 · 보안 점검", "환경변수 · Redeploy", "로그 확인"],
-              [("목표", "완료 기준 자동 테스트 · 배포 뒤 확인"), ("범위", "공휴일 · 권한 · MCP 도구"),
+              [("목표", "완료 기준 자동 테스트 · 배포 뒤 확인"), ("범위", "권한 · 입력값 · MCP 도구"),
                ("실패 시", "원인 설명 먼저 · 수정은 승인 뒤"), ("하지 말 것", "통과시키려고 기대 결과 바꾸기 · 키를 로그에")],
               ["테스트", "/security-review", "Environment Variables", "Logs"],
               ["not ok 0개", "Logs 에 5xx 없음", "POST /api/mcp 200"],
