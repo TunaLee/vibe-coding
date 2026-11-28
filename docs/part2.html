@@ -1376,6 +1376,27 @@
   .v22stp{grid-template-columns:1.25fr 1fr;} .v22stp .v2tile{padding:10px 14px;}
   .v22stp .v1anw{overflow:visible;} .v22stp .v1anw img{border-radius:10px;}
   .v22stp .v1anb em{left:-3px; top:-24px; border-radius:5px 5px 0 0;}
+  /* 2-2 · GitHub 승인 화면 재구성 (v22au) */
+  .v22au{width:430px; margin:0 auto; background:#0D1117; border-radius:12px; padding:18px 22px; color:#E6EDF3; font-family:-apple-system,"Segoe UI",sans-serif;}
+  .v22au .top{display:flex; align-items:center; justify-content:center; gap:6px;}
+  .v22au .top i{width:26px; border-top:2px dashed #484F58;}
+  .v22au .sb,.v22au .gh{width:52px; height:52px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:24px;}
+  .v22au .sb{background:#1C1C1C; color:#3ECF8E;} .v22au .gh{background:#F0F6FC;} .v22au .gh img{width:30px;}
+  .v22au .ck{width:24px; height:24px; border-radius:50%; background:#2EA043; color:#fff; font-size:13px; font-weight:800; display:flex; align-items:center; justify-content:center;}
+  .v22au h3{text-align:center; font-size:22px; font-weight:500; margin:10px 0 12px; color:#E6EDF3;}
+  .v22au .box{border:1px solid #30363D; border-radius:8px; padding:12px 14px; display:flex; flex-direction:column; gap:10px;}
+  .v22au .who{font-size:14px;} .v22au .who em{font-style:normal; color:#4493F8; font-weight:700;} .v22au .who small{color:#9198A1; font-size:13px;} .v22au .who small b{color:#E6EDF3;}
+  .v22au .perm,.v22au .ok{position:relative;}
+  .v22au .perm{border-top:1px solid #30363D; padding-top:8px; font-size:14px;} .v22au .perm small{display:block; color:#9198A1; font-size:12.5px;}
+  .v22au .btns{display:grid; grid-template-columns:1fr 1fr; gap:8px; border-top:1px solid #30363D; padding-top:10px;}
+  .v22au .btns span{text-align:center; font-size:13.5px; font-weight:600; border-radius:6px; padding:7px 0;}
+  .v22au .cc{background:#212830; border:1px solid #3D444D;} .v22au .ok{background:#238636; color:#fff;}
+  .v22au .rd{text-align:center; font-size:11.5px; color:#9198A1;} .v22au .rd b{color:#E6EDF3;}
+  .v22au u{position:absolute; inset:-4px; border:3px solid #F28C28; border-radius:6px; text-decoration:none; font-size:12px; font-weight:800; color:#fff;
+    opacity:0; animation:v1anIn .5s var(--d) forwards;}
+  .v22au .perm u{top:4px;}
+  .v22au u::before{content:attr(data-n); position:absolute; left:-3px; top:-22px; background:#F28C28; padding:1px 7px; border-radius:5px 5px 0 0;}
+  @media print{.v22au u{opacity:1; animation:none}}
 
   /* 2-3 · 개발 계획 칸 지도 */
   .v2u4prd{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:8px 0 16px;}
@@ -1887,6 +1908,14 @@ order by date;</pre></div><dl><dt>사람이 하는 일</dt><dd>문법 학습 · 
   <h2 class="s-title sm">실습 2-2 · 1단계 가입</h2>
   <div class="rule"></div>
   <div class="body"><div class="mid"><div class="twocol v1vsgrid v1stp v22stp"><div><figure class="v1an"><div class="v1anw"><img src="img/v2_u2_sb_signup.webp" alt="Supabase 가입 화면"/><div class="v1anb" style="--d:0.4s; left:9.8%; top:37.2%; width:76.4%; height:12.3%"><em>①</em><span>Continue with GitHub</span></div></div></figure></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>주소</b><span><a class="go" href="https://supabase.com/dashboard/sign-up" target="_blank" rel="noopener">supabase.com/dashboard/sign-up</a></span></div><div class="v2tile" style="--d:0.08s"><b>① Continue with GitHub</b><span>1-2 의 GitHub 계정 → Authorize supabase</span></div><div class="v2tile" style="--d:0.16s"><b>누르지 않을 것</b><span>ChatGPT · SSO · 이메일 가입</span></div></div></div></div></div></div>
+</section>
+
+<section class="slide lt" data-title="실습 2-2 · 1단계 GitHub 승인">
+  <div class="coord"><b></b> / <span class="tot"></span></div>
+  <div class="eyebrow"><span class="tag">2-2</span></div>
+  <h2 class="s-title sm">실습 2-2 · 1단계 GitHub 승인</h2>
+  <div class="rule"></div>
+  <div class="body"><div class="mid"><div class="twocol v1vsgrid v22stp"><div><div class="v22au"><div class="top"><span class="sb"><svg viewBox="0 0 24 24" width="26" height="26"><path d="M13 2 4 14h7l-1 8 9-12h-7z" fill="#3ECF8E"/></svg></span><i></i><span class="ck">✓</span><i></i><span class="gh"><img src="img/github_logo.svg" alt=""/></span></div><h3>Authorize Supabase</h3><div class="box"><div class="who"><b>Supabase</b> by <em>Supabase</em><br/><small>wants to access your <b>내 GitHub 계정</b> account</small></div><div class="perm" style="--d:.6s"><b>Personal user data</b><small>Email addresses (read-only)</small><u data-n="①"></u></div><div class="btns"><span class="cc">Cancel</span><span class="ok" style="--d:1.4s">Authorize supabase<u data-n="②"></u></span></div><div class="rd">Authorizing will redirect to <b>https://auth.supabase.io</b></div></div></div></div><div><div class="v2tiles c1"><div class="v2tile" style="--d:0.00s"><b>① 권한</b><span>Email addresses (read-only) · 이메일 읽기만</span></div><div class="v2tile" style="--d:0.08s"><b>② Authorize supabase</b><span>누르면 Supabase 로 돌아감</span></div><div class="v2tile" style="--d:0.16s"><b>처음 한 번</b><span>다음부터는 Continue with GitHub 만 누르면 로그인</span></div></div></div></div><div class="dbnote"><span>화면</span> GitHub 승인 화면 재구성 · 계정 이름 자리 바꿈</div></div></div>
 </section>
 
 <section class="slide lt" data-title="실습 2-2 · 2단계 조직 만들기">

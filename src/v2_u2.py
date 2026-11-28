@@ -185,6 +185,17 @@ def sbstep(i, name, img, alt, boxes, rows, no="2-2", u=None):
                  + "</div><div>" + viz2.tiles(rows, 1) + "</div></div>", u or T)
 
 
+def gh_auth():
+    """GitHub 승인 화면(Authorize Supabase) 재구성 — 계정 이름은 「내 GitHub 계정」. 번호 상자 ① 권한 ② 승인 버튼이 차례로 켜짐."""
+    return ('<div class="v22au"><div class="top"><span class="sb"><svg viewBox="0 0 24 24" width="26" height="26"><path d="M13 2 4 14h7l-1 8 9-12h-7z" fill="#3ECF8E"/></svg></span><i></i><span class="ck">✓</span><i></i>'
+            '<span class="gh"><img src="img/github_logo.svg" alt=""/></span></div>'
+            '<h3>Authorize Supabase</h3><div class="box"><div class="who"><b>Supabase</b> by <em>Supabase</em><br/>'
+            '<small>wants to access your <b>내 GitHub 계정</b> account</small></div>'
+            '<div class="perm" style="--d:.6s"><b>Personal user data</b><small>Email addresses (read-only)</small><u data-n="①"></u></div>'
+            '<div class="btns"><span class="cc">Cancel</span><span class="ok" style="--d:1.4s">Authorize supabase<u data-n="②"></u></span></div>'
+            '<div class="rd">Authorizing will redirect to <b>https://auth.supabase.io</b></div></div></div>')
+
+
 def slides():
     return [
         light("데이터 기록의 변화", history()
@@ -222,6 +233,10 @@ def slides():
                [("①", "Continue with GitHub", 9.8, 37.2, 76.4, 12.3)],
                [("주소", go("supabase.com/dashboard/sign-up", "https://supabase.com/dashboard/sign-up")),
                 ("① Continue with GitHub", "1-2 의 GitHub 계정 → Authorize supabase"), ("누르지 않을 것", "ChatGPT · SSO · 이메일 가입")]),
+        light("실습 2-2 · 1단계 GitHub 승인", '<div class="twocol v1vsgrid v22stp"><div>' + gh_auth() + '</div><div>' + viz2.tiles([
+            ("① 권한", "Email addresses (read-only) · 이메일 읽기만"), ("② Authorize supabase", "누르면 Supabase 로 돌아감"),
+            ("처음 한 번", "다음부터는 Continue with GitHub 만 누르면 로그인")], 1) + '</div></div>'
+              + note("화면", "GitHub 승인 화면 재구성 · 계정 이름 자리 바꿈"), T),
         sbstep(2, "조직 만들기", "v2_u2_sb_orgform.webp", "Create a new organization 화면",
                [("①", "Name", 35.2, 19.6, 61.6, 5.5), ("②", "Plan", 35.2, 38.4, 61.6, 5.5), ("③", "Create", 77.6, 92.8, 19.2, 4.2)],
                [("시작", "Your organizations → New organization"), ("① Name", "팀 · 회사 이름 · 나중에 변경 가능"),
@@ -416,4 +431,25 @@ CSS = """
   .v22stp{grid-template-columns:1.25fr 1fr;} .v22stp .v2tile{padding:10px 14px;}
   .v22stp .v1anw{overflow:visible;} .v22stp .v1anw img{border-radius:10px;}
   .v22stp .v1anb em{left:-3px; top:-24px; border-radius:5px 5px 0 0;}
+  /* 2-2 · GitHub 승인 화면 재구성 (v22au) */
+  .v22au{width:430px; margin:0 auto; background:#0D1117; border-radius:12px; padding:18px 22px; color:#E6EDF3; font-family:-apple-system,"Segoe UI",sans-serif;}
+  .v22au .top{display:flex; align-items:center; justify-content:center; gap:6px;}
+  .v22au .top i{width:26px; border-top:2px dashed #484F58;}
+  .v22au .sb,.v22au .gh{width:52px; height:52px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:24px;}
+  .v22au .sb{background:#1C1C1C; color:#3ECF8E;} .v22au .gh{background:#F0F6FC;} .v22au .gh img{width:30px;}
+  .v22au .ck{width:24px; height:24px; border-radius:50%; background:#2EA043; color:#fff; font-size:13px; font-weight:800; display:flex; align-items:center; justify-content:center;}
+  .v22au h3{text-align:center; font-size:22px; font-weight:500; margin:10px 0 12px; color:#E6EDF3;}
+  .v22au .box{border:1px solid #30363D; border-radius:8px; padding:12px 14px; display:flex; flex-direction:column; gap:10px;}
+  .v22au .who{font-size:14px;} .v22au .who em{font-style:normal; color:#4493F8; font-weight:700;} .v22au .who small{color:#9198A1; font-size:13px;} .v22au .who small b{color:#E6EDF3;}
+  .v22au .perm,.v22au .ok{position:relative;}
+  .v22au .perm{border-top:1px solid #30363D; padding-top:8px; font-size:14px;} .v22au .perm small{display:block; color:#9198A1; font-size:12.5px;}
+  .v22au .btns{display:grid; grid-template-columns:1fr 1fr; gap:8px; border-top:1px solid #30363D; padding-top:10px;}
+  .v22au .btns span{text-align:center; font-size:13.5px; font-weight:600; border-radius:6px; padding:7px 0;}
+  .v22au .cc{background:#212830; border:1px solid #3D444D;} .v22au .ok{background:#238636; color:#fff;}
+  .v22au .rd{text-align:center; font-size:11.5px; color:#9198A1;} .v22au .rd b{color:#E6EDF3;}
+  .v22au u{position:absolute; inset:-4px; border:3px solid #F28C28; border-radius:6px; text-decoration:none; font-size:12px; font-weight:800; color:#fff;
+    opacity:0; animation:v1anIn .5s var(--d) forwards;}
+  .v22au .perm u{top:4px;}
+  .v22au u::before{content:attr(data-n); position:absolute; left:-3px; top:-22px; background:#F28C28; padding:1px 7px; border-radius:5px 5px 0 0;}
+  @media print{.v22au u{opacity:1; animation:none}}
 """
