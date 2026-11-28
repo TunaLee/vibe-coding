@@ -86,7 +86,7 @@ def slides():
             ("ai", "마이그레이션 파일 supabase/migrations/…_create_pages.sql 작성 · supabase db push 로 반영할까요?")], "Claude Code 대화 예")
               + note("사람이 정할 것", "표 이름 · 열 · 지켜야 할 규칙 · SQL 은 Claude Code"), T),
         light("마이그레이션", viz2.pair(
-            "Table Editor (2-2)", [("만드는 법", "화면에서 클릭"), ("기록", "남지 않음 · 다른 프로젝트는 다시 클릭")],
+            "Table Editor", [("만드는 법", "화면에서 클릭"), ("기록", "남지 않음 · 다른 프로젝트는 다시 클릭")],
             "마이그레이션", [("만드는 법", "Claude Code 가 SQL 파일 작성 → db push"), ("기록", "supabase/migrations · Git 커밋 · 같은 파일로 같은 표")], hl="r")
               + flow([("요청", "「pages 표 만들어 줘」"), ("파일 작성", "Claude Code · migrations/"), ("db push", "승인 → Supabase 에 반영"),
                       ("확인", "Table Editor"), ("커밋", "표 변경 기록")], hl=1)

@@ -226,10 +226,10 @@ def slides():
               + note("유료", "Pro 월 $25부터 · 2부 실습은 무료 플랜으로 충분")
               + src(("supabase.com/pricing · 2026-11", "https://supabase.com/pricing")), T),
         # ── 실습
-        lab("2-2", "Supabase 가입 · 첫 표", T, "Supabase 프로젝트를 만들고 pages 표에 행을 직접 넣어 본다",
+        lab("2-2", "Supabase 가입 · 프로젝트 만들기", T, "Supabase 에 가입하고 미니 노션이 쓸 프로젝트를 만든다",
             ["supabase.com 가입 · Continue with GitHub", "조직 만들기 · Free", "새 프로젝트 · mini_notion · DB 비밀번호",
-             "Table Editor 에서 pages 표 · 행 2개", "date 칸에 「월말쯤」 넣어 보기"],
-            ["대시보드에 mini_notion 프로젝트", "pages 표에 행 2개", "날짜 칸이 형식 안 맞는 값을 거절"]),
+             "프로젝트 화면 확인"],
+            ["대시보드에 mini_notion 프로젝트", "프로젝트 URL · Connect 위치 확인"]),
         sbstep(1, "가입", "v2_u2_sb_signup.webp", "Supabase 가입 화면",
                [("①", "Continue with GitHub", 9.8, 37.2, 76.4, 12.3)],
                [("주소", go("supabase.com/dashboard/sign-up", "https://supabase.com/dashboard/sign-up")),
@@ -250,15 +250,7 @@ def slides():
         sbstep(4, "프로젝트 화면", "v2_u2_sb_home.webp", "프로젝트 대시보드",
                [("①", "URL", 18, 36.1, 56.4, 4), ("②", "Connect", 76.6, 1, 12.8, 4.5), ("③", "Table Editor", 1.1, 15.1, 4.5, 4.5)],
                [("① 프로젝트 URL", "앱이 요청을 보낼 주소 · Copy"), ("② Connect", "앱에 연결하는 방법 · 2-4"),
-                ("③ Table Editor", "왼쪽 두 번째 · 표 만들기 · 다음 단계")]),
-        light("실습 2-2 · 5단계 pages 표", viz2.tiles([
-            ("위치", "왼쪽 Table Editor → New table"), ("이름", "pages"),
-            ("열 추가", "title · text / date · date / status · text"), ("RLS", "켜진 상태 · 3단계 설정 · 규칙은 2-4")], 4)
-              + note("기본 열", "id · created_at 은 자동으로 들어 있음"), T),
-        light("실습 2-2 · 6단계 행 넣기", viz2.tiles([
-            ("Insert row", "주간 회의록 · 2026-11-27 · 작성 중"), ("한 줄 더", "교육 자료 정리 · 2026-11-25 · 초안"),
-            ("형식 시험", "date 칸에 「월말쯤」 → 저장 거절"), ("확인", "표에 행 2개 · id 1 · 2 자동")], 4)
-              + note("엑셀과 차이", "열마다 정한 형식(스키마)에 맞지 않으면 저장 안 됨"), T),
+                ("③ Table Editor", "왼쪽 두 번째 · 표는 2-4 에서 마이그레이션으로")]),
     ]
 
 
