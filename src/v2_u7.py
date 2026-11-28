@@ -50,9 +50,9 @@ def slides():
               + steps([("①", "요청", .3), ("②", "도구 목록 읽기", 1.2), ("③", "add_page 호출", 1.9),
                        ("④", "DB 에 새 행", 3.2), ("⑤", "결과 보고", 4.4)]), T),
         light("만드는 순서", flow([
-            ("도구 목록", "개발 계획에 이름 · 칸"), ("서버 만들기 요청", "Claude Code · mcp-handler"), ("Inspector 확인", "도구 목록 · 직접 호출"),
+            ("도구 목록", "개발계획.md 에 도구 이름 · 받는 값"), ("서버 만들기 요청", "Claude Code · mcp-handler"), ("Inspector 확인", "도구 목록 · 직접 호출"),
             ("Claude Code 연결", "localhost 로 시험"), ("push · 배포", "Vercel · 공개 주소")], hl=2)
-              + note("2-3 개발 계획", "연동 대상 칸에 「미니 노션 MCP 서버 · 도구 4개」 추가"), T),
+              + note("2-3 개발 계획", "연동 대상에 「미니 노션 MCP 서버 · 도구 4개」 추가"), T),
         light("MCP Inspector", code("터미널 · 서버 실행 중에", esc(
             "npx @modelcontextprotocol/inspector@latest \\\n  --server-url http://localhost:3000/api/mcp --transport http"))
               + viz2.tiles([("도구 목록", "이름 · 설명 · 받는 칸 확인"), ("직접 호출", "값을 넣고 add_page 실행"),
