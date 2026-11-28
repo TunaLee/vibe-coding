@@ -20,13 +20,13 @@ UNITS = [
     ("2-6", "MCP", 30, "MCP 연결 · 캘린더 → 페이지"),
     ("2-7", "MCP 서버 만들기", 35, "미니 노션 MCP 서버 배포"),
     ("2-8", "MCP 서버 등록 · 활용", 25, "Claude · ChatGPT 에서 페이지 만들기"),
-    ("2-9", "품질 · 운영", 30, "테스트 · 로그"),
+    ("2-9", "웹 점검 · E2E 테스트", 25, "Playwright 점검 · E2E 테스트"),
     ("2-10", "마무리", 10, "운영 체크리스트"),
 ]
 BY = {u[0]: u for u in UNITS}
 
 SLUG = {"2-1": "data-flow", "2-2": "database", "2-3": "planning", "2-4": "data", "2-5": "keys",
-        "2-6": "mcp", "2-7": "mcp-server", "2-8": "mcp-anywhere", "2-9": "quality-ops", "2-10": "wrap-up"}
+        "2-6": "mcp", "2-7": "mcp-server", "2-8": "mcp-anywhere", "2-9": "testing", "2-10": "wrap-up"}
 
 
 def file_of(u):

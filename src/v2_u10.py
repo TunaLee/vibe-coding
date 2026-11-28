@@ -18,7 +18,7 @@ def slides():
     return [
         light("2부 회고", '<div class="v2u9q"><span>내 요청</span><i>=</i><span>결과</span><em>?</em></div>'
               + flow([("요청 · 응답 · DB", "2-1 · 2-2"), ("DB · 로그인", "2-4 · Supabase"), ("키 관리", "2-5 · .env.local"),
-                      ("MCP", "2-6 · 연결 · 캘린더"), ("내 MCP 서버", "2-7 · 2-8 · Claude · ChatGPT"), ("테스트 · 운영", "2-9")], hl=4)
+                      ("MCP", "2-6 · 연결 · 캘린더"), ("내 MCP 서버", "2-7 · 2-8 · Claude · ChatGPT"), ("웹 점검 · E2E", "2-9")], hl=4)
               + note("흐름", "1부와 같은 순서 · 데이터 · 외부 연결 · 검사가 더해짐"), T),
         light("시작 버전 → 2부 앱", viz2.maprows([
             ("페이지 · 공유 없음", "Supabase 한 곳", "팀원 모두 같은 페이지 목록"),

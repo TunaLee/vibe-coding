@@ -1536,76 +1536,6 @@
   @keyframes v27fade{to{opacity:.15}}
   @media print{.v27tl .e,.v27grp span,.v27m,.v27cnt span,.v27ar .host,.v27ar .cli,.v27ar .srv{opacity:1; animation:none} .v27a,.v27b{stroke-dashoffset:0; animation:none}}
 
-  /* 2-6 · SDLC 청사진 */
-  .v2u7sd{position:relative; display:grid; grid-template-columns:repeat(6,1fr); gap:10px; margin:4px 0 46px;}
-  .v2u7s{position:relative; border:2px solid #D9DDE3; border-radius:14px; background:#fff; padding:16px 10px; text-align:center;
-         opacity:0; animation:v2u7in .45s ease-out var(--d) forwards;}
-  .v2u7s b{display:block; font-size:24px; color:#16233A;} .v2u7s span{display:block; margin-top:6px; font-size:14px; color:#6B7785; font-family:var(--mono);}
-  .v2u7s:not(:last-of-type)::after{content:"→"; position:absolute; right:-12px; top:50%; transform:translateY(-50%); color:#F28C28; font-weight:900; font-size:16px;}
-  .v2u7s.on{border-color:#F28C28; background:#FFF3E6; box-shadow:0 6px 18px rgba(242,140,40,.18);} .v2u7s.on span{color:#E07A12; font-weight:800;}
-  .v2u7back{position:absolute; left:50%; right:0; bottom:-36px; border:2px dashed #F7C99A; border-top:none; border-radius:0 0 14px 14px;
-            height:24px; font-size:13px; color:#E07A12; font-weight:700; text-align:center; padding-top:6px;}
-  /* 2-6 · 테스트 실행 애니메이션 */
-  .v2u7run{display:grid; grid-template-columns:1fr 150px 1fr; gap:16px; align-items:stretch;}
-  .v2u7term{background:#16233A; border-radius:14px; padding:14px 16px; min-height:250px; font-family:var(--mono); font-variant-ligatures:none; font-feature-settings:'liga' 0, 'calt' 0;}
-  .v2u7term .h{font-size:12px; color:#9AA6B5; font-weight:700; margin-bottom:10px;}
-  .v2u7term .l{font-size:13.5px; line-height:1.55; color:#C9D2DE; white-space:pre-wrap; opacity:0; animation:v2u7in .35s ease-out var(--d) forwards;}
-  .v2u7term .l.ok{color:#7FD38C;} .v2u7term .l.ng{color:#FF8A80; font-weight:700;}
-  .v2u7fix{align-self:center; text-align:center; border:2px solid #F28C28; border-radius:14px; background:#FFF3E6; padding:14px 10px;
-           opacity:0; animation:v2u7pop .5s ease-out var(--d) forwards;}
-  .v2u7fix b{display:block; font-size:20px; color:#E07A12;} .v2u7fix span{display:block; margin-top:6px; font-size:14px; color:#16233A; font-family:var(--mono); font-variant-ligatures:none; font-feature-settings:'liga' 0, 'calt' 0;}
-  /* 2-6 · 차례로 켜지는 흐름 */
-  .v2u7sf{display:grid; grid-template-columns:repeat(4,1fr); gap:28px; margin-bottom:22px;}
-  .v2u7sf .st{position:relative; border:2px solid #D9DDE3; border-radius:14px; background:#fff; padding:18px 14px; text-align:center;
-              animation:v2u7lit .5s ease-out var(--d) forwards;}
-  .v2u7sf .st:not(:last-child)::after{content:"→"; position:absolute; right:-22px; top:50%; transform:translateY(-50%); color:#F28C28; font-weight:900;}
-  .v2u7sf b{display:block; font-size:22px; color:#16233A;} .v2u7sf span{display:block; margin-top:6px; font-size:14px; color:#6B7785;}
-  @keyframes v2u7lit{to{border-color:#F28C28; background:#FFF3E6; box-shadow:0 6px 18px rgba(242,140,40,.18);}}
-  @keyframes v2u7pop{from{opacity:0; transform:scale(.8)} to{opacity:1; transform:none}}
-  @media print{.v2u7term .l,.v2u7fix{opacity:1; animation:none}}
-  @keyframes v2u7in{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
-  @media print{.v2u7s{opacity:1; animation:none}}
-
-  /* 2-7 · 키 이동 애니메이션 */
-  .v2u8mv{display:flex; flex-direction:column; gap:22px; margin-bottom:18px;}
-  .v2u8row{position:relative; display:grid; grid-template-columns:90px 1fr 1fr 1fr; gap:60px; align-items:center;}
-  .v2u8row .lb{font-size:15px; font-weight:800; color:#6B7785;}
-  .v2u8row .bx{position:relative; border:2px solid #D9DDE3; border-radius:14px; background:#fff; padding:14px 16px; min-height:78px;}
-  .v2u8row .bx:not(.z)::after{content:"→"; position:absolute; right:-40px; top:50%; transform:translateY(-50%); color:#9AA6B5; font-weight:900;}
-  .v2u8row .bx b{display:block; font-size:19px; color:#16233A;} .v2u8row .bx small{display:block; margin-top:4px; font-size:14px; color:#6B7785;}
-  .v2u8row .bx small:empty{display:none;}
-  .v2u8row .bad{color:#D93025!important; font-weight:800; opacity:0; animation:v2u8in .4s ease-out 1.9s forwards;}
-  .v2u8row .okk{color:#1E8E3E!important; font-weight:800; opacity:0; animation:v2u8in .4s ease-out 4.6s forwards;}
-  .v2u8row.r1 .z{animation:v2u8bad .4s ease-out 1.9s forwards;} .v2u8row.r2 .z{animation:v2u8good .4s ease-out 4.6s forwards;}
-  .v2u8row .key{position:absolute; top:50%; left:calc(150px + (100% - 270px) / 3 - 56px); transform:translateY(-50%); font-style:normal; font-size:13px; font-weight:800; color:#fff;
-                background:#F28C28; border-radius:999px; padding:5px 12px; opacity:0;}
-  .v2u8row.r1 .key{animation:v2u8k1 1.6s ease-in-out .3s forwards;}
-  .v2u8row.r2 .key{animation:v2u8k2 1.8s ease-in-out 2.8s forwards;}
-  .v2u8row .x{position:absolute; top:50%; left:calc(150px + (100% - 270px) / 3 + 18px); transform:translateY(-50%); font-style:normal; font-size:26px; color:#D93025; font-weight:900; opacity:0;}
-  .v2u8row.r1 .x{animation:v2u8in .3s ease-out 1.6s forwards; background:#fff; padding:0 4px; z-index:2;}
-  @keyframes v2u8k1{0%{opacity:0} 20%{opacity:1} 75%{left:calc(150px + (100% - 270px) / 3 + 8px); opacity:1} 100%{left:calc(150px + (100% - 270px) / 3 + 8px); opacity:0}}
-  @keyframes v2u8k2{0%{opacity:0} 15%{opacity:1} 100%{left:calc(100% - 64px); opacity:1}}
-  @keyframes v2u8bad{to{border-color:#D93025; background:#FDECEA;}}
-  @keyframes v2u8good{to{border-color:#1E8E3E; background:#E6F4EA;}}
-  @keyframes v2u8in{from{opacity:0} to{opacity:1}}
-  /* 2-7 · 로그가 쌓이는 화면 */
-  .v2u8log{margin-top:18px; border-radius:14px; overflow:hidden; background:#16233A; font-family:var(--mono); font-variant-ligatures:none;}
-  .v2u8log .hd, .v2u8log .ln{display:grid; grid-template-columns:110px 70px 170px 70px 1fr; gap:10px; padding:8px 18px; font-size:14px;}
-  .v2u8log .hd{color:#9AA6B5; font-size:12px; font-weight:700; border-bottom:1px solid #2A3A55;}
-  .v2u8log .hd em, .v2u8log .ln em{font-style:normal;}
-  .v2u8log .ln{color:#C9D2DE; opacity:0; animation:v2u8in .35s ease-out var(--d) forwards; border-left:4px solid transparent;}
-  .v2u8log .ln b{color:#7FD38C;}
-  .v2u8log .ln.err{background:rgba(217,48,37,.22); border-left-color:#FF6B5E;} .v2u8log .ln.err b, .v2u8log .ln.err em{color:#FF8A80; font-weight:800;}
-  .v2u8log .ln.warn{background:rgba(242,180,40,.16); border-left-color:#F2B428;} .v2u8log .ln.warn b, .v2u8log .ln.warn em{color:#F7D27A;}
-  /* 2-7 · 차례로 켜지는 흐름 */
-  .v2u8sf{display:grid; grid-template-columns:repeat(6,1fr); gap:22px; margin-bottom:22px;}
-  .v2u8sf .st{position:relative; border:2px solid #D9DDE3; border-radius:14px; background:#fff; padding:16px 10px; text-align:center;
-              animation:v2u8lit .5s ease-out var(--d) forwards;}
-  .v2u8sf .st:not(:last-child)::after{content:"→"; position:absolute; right:-18px; top:50%; transform:translateY(-50%); color:#F28C28; font-weight:900;}
-  .v2u8sf b{display:block; font-size:19px; color:#16233A;} .v2u8sf span{display:block; margin-top:6px; font-size:13px; color:#6B7785;}
-  @keyframes v2u8lit{to{border-color:#F28C28; background:#FFF3E6; box-shadow:0 6px 18px rgba(242,140,40,.18);}}
-  @media print{.v2u8row .key,.v2u8row .x{display:none} .v2u8row .bad,.v2u8row .okk,.v2u8log .ln{opacity:1; animation:none}}
-
   /* 2-8 · 요청 = 결과 ? */
   .v2u9q{display:flex; justify-content:center; align-items:center; gap:18px; margin:0 0 22px; padding:18px; border-radius:16px; background:#FFF8F0; border:2px solid #F28C28;}
   .v2u9q span{font-size:26px; font-weight:800; color:#16233A; padding:8px 22px; border-radius:12px; background:#fff; border:2px solid #D9DDE3;}
@@ -1689,7 +1619,7 @@
   <div class="eyebrow"><span class="tag">2-1</span></div>
   <h2 class="s-title sm">2부 커리큘럼</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1map v2map"><a class="v1u on" href="#u-2-1"><span class="c">2-1</span><b>웹 앱의 데이터 흐름</b><small>요청 · 응답 읽기</small></a><a class="v1u " href="#u-2-2"><span class="c">2-2</span><b>데이터베이스</b><small>표 · 행 · 열 · Supabase</small></a><a class="v1u " href="#u-2-3"><span class="c">2-3</span><b>기획 · 요구사항</b><small>기획서 · 개발 계획 v2</small></a><a class="v1u " href="#u-2-4"><span class="c">2-4</span><b>데이터 다루기</b><small>저장 · 조회 · 로그인</small></a><a class="v1u " href="#u-2-5"><span class="c">2-5</span><b>키 관리</b><small>.env.local · 키 점검</small></a><a class="v1u " href="#u-2-6"><span class="c">2-6</span><b>MCP</b><small>MCP 연결 · 캘린더 → 페이지</small></a><a class="v1u " href="#u-2-7"><span class="c">2-7</span><b>MCP 서버 만들기</b><small>미니 노션 MCP 서버 배포</small></a><a class="v1u " href="#u-2-8"><span class="c">2-8</span><b>MCP 서버 등록 · 활용</b><small>Claude · ChatGPT 에서 페이지 만들기</small></a><a class="v1u " href="#u-2-9"><span class="c">2-9</span><b>품질 · 운영</b><small>테스트 · 로그</small></a><a class="v1u " href="#u-2-10"><span class="c">2-10</span><b>마무리</b><small>운영 체크리스트</small></a></div><div class="dbnote"><span>공통 예제</span> 미니 노션 + DB · 로그인 · 키 관리 · MCP</div></div></div>
+  <div class="body"><div class="mid"><div class="v1map v2map"><a class="v1u on" href="#u-2-1"><span class="c">2-1</span><b>웹 앱의 데이터 흐름</b><small>요청 · 응답 읽기</small></a><a class="v1u " href="#u-2-2"><span class="c">2-2</span><b>데이터베이스</b><small>표 · 행 · 열 · Supabase</small></a><a class="v1u " href="#u-2-3"><span class="c">2-3</span><b>기획 · 요구사항</b><small>기획서 · 개발 계획 v2</small></a><a class="v1u " href="#u-2-4"><span class="c">2-4</span><b>데이터 다루기</b><small>저장 · 조회 · 로그인</small></a><a class="v1u " href="#u-2-5"><span class="c">2-5</span><b>키 관리</b><small>.env.local · 키 점검</small></a><a class="v1u " href="#u-2-6"><span class="c">2-6</span><b>MCP</b><small>MCP 연결 · 캘린더 → 페이지</small></a><a class="v1u " href="#u-2-7"><span class="c">2-7</span><b>MCP 서버 만들기</b><small>미니 노션 MCP 서버 배포</small></a><a class="v1u " href="#u-2-8"><span class="c">2-8</span><b>MCP 서버 등록 · 활용</b><small>Claude · ChatGPT 에서 페이지 만들기</small></a><a class="v1u " href="#u-2-9"><span class="c">2-9</span><b>웹 점검 · E2E 테스트</b><small>Playwright 점검 · E2E 테스트</small></a><a class="v1u " href="#u-2-10"><span class="c">2-10</span><b>마무리</b><small>운영 체크리스트</small></a></div><div class="dbnote"><span>공통 예제</span> 미니 노션 + DB · 로그인 · 키 관리 · MCP</div></div></div>
 </section>
 
 <section class="slide lt" data-title="웹 앱의 3요소">
@@ -2628,7 +2558,7 @@ order by date;</pre></div><dl><dt>사람이 하는 일</dt><dd>문법 학습 · 
   <div class="eyebrow"><span class="tag">2-8</span></div>
   <h2 class="s-title sm">쓰기 확인 · 점검</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2tiles c4"><div class="v2tile" style="--d:0.00s"><b>쓰기 확인</b><span>추가 · 변경 도구는 실행 전 허용 버튼</span></div><div class="v2tile" style="--d:0.08s"><b>읽기 표시</b><span>조회 도구는 읽기 전용으로 표시 · 없으면 쓰기로 취급</span></div><div class="v2tile" style="--d:0.16s"><b>권한</b><span>로그인 계정 기준 · 남의 페이지 변경 불가 (RLS)</span></div><div class="v2tile" style="--d:0.24s"><b>기록</b><span>도구 호출마다 Vercel 로그 (2-9)</span></div></div><div class="dbnote"><span>삭제 도구</span> 만들지 않음 · 지우기는 미니 노션 화면에서 사람이</div><div class="src">출처 · <a href="https://developers.openai.com/api/docs/guides/developer-mode" target="_blank" rel="noopener">OpenAI · Developer mode</a> · <a href="https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp" target="_blank" rel="noopener">Claude · Custom connectors</a></div></div></div>
+  <div class="body"><div class="mid"><div class="v2tiles c4"><div class="v2tile" style="--d:0.00s"><b>쓰기 확인</b><span>추가 · 변경 도구는 실행 전 허용 버튼</span></div><div class="v2tile" style="--d:0.08s"><b>읽기 표시</b><span>조회 도구는 읽기 전용으로 표시 · 없으면 쓰기로 취급</span></div><div class="v2tile" style="--d:0.16s"><b>권한</b><span>로그인 계정 기준 · 남의 페이지 변경 불가 (RLS)</span></div><div class="v2tile" style="--d:0.24s"><b>기록</b><span>도구 호출마다 Vercel 로그</span></div></div><div class="dbnote"><span>삭제 도구</span> 만들지 않음 · 지우기는 미니 노션 화면에서 사람이</div><div class="src">출처 · <a href="https://developers.openai.com/api/docs/guides/developer-mode" target="_blank" rel="noopener">OpenAI · Developer mode</a> · <a href="https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp" target="_blank" rel="noopener">Claude · Custom connectors</a></div></div></div>
 </section>
 
 <section class="slide lt labs" data-title="[실습 2-8] Claude · ChatGPT 에서 페이지 만들기">
@@ -2663,26 +2593,18 @@ order by date;</pre></div><dl><dt>사람이 하는 일</dt><dd>문법 학습 · 
   <div class="eyebrow"><span class="tag">2-8</span></div>
   <h2 class="s-title sm">실습 2-8 확인</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="cks"><div class="ck" style="--d:0.00s"><span>1</span><b>커넥터 추가 때 로그인 창이 떴나</b><em>인증</em></div><div class="ck" style="--d:0.12s"><span>2</span><b>대화로 넣은 페이지가 페이지 목록에 보이나</b><em>add_page</em></div><div class="ck" style="--d:0.24s"><span>3</span><b>추가 전에 허용을 물었나</b><em>쓰기 확인</em></div><div class="ck" style="--d:0.36s"><span>4</span><b>다른 앱에서 같은 페이지가 조회되나</b><em>같은 서버 · 같은 DB</em></div></div><div class="ckr">넷 다 「예」 → 2-9 품질 · 운영</div></div></div>
+  <div class="body"><div class="mid"><div class="cks"><div class="ck" style="--d:0.00s"><span>1</span><b>커넥터 추가 때 로그인 창이 떴나</b><em>인증</em></div><div class="ck" style="--d:0.12s"><span>2</span><b>대화로 넣은 페이지가 페이지 목록에 보이나</b><em>add_page</em></div><div class="ck" style="--d:0.24s"><span>3</span><b>추가 전에 허용을 물었나</b><em>쓰기 확인</em></div><div class="ck" style="--d:0.36s"><span>4</span><b>다른 앱에서 같은 페이지가 조회되나</b><em>같은 서버 · 같은 DB</em></div></div><div class="ckr">넷 다 「예」 → 2-9 웹 점검 · E2E 테스트</div></div></div>
 </section>
 
 <section class="slide dk" data-title="다음 단원">
   <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="v1end"><div class="v1got"><span>2-8 산출물</span><b>Claude · ChatGPT 에서 페이지 만들기</b></div><a class="v1next" href="#u-2-9"><span>2-9</span><b>품질 · 운영</b><small>→ 테스트 · 로그</small></a></div>
+  <div class="v1end"><div class="v1got"><span>2-8 산출물</span><b>Claude · ChatGPT 에서 페이지 만들기</b></div><a class="v1next" href="#u-2-9"><span>2-9</span><b>웹 점검 · E2E 테스트</b><small>→ Playwright 점검 · E2E 테스트</small></a></div>
 </section>
 
-<section id="u-2-9" class="slide dk cover-dk" data-title="2-9 품질 · 운영">
+<section id="u-2-9" class="slide dk cover-dk" data-title="2-9 웹 점검 · E2E 테스트">
   <div class="glow"></div>
   <div class="kick">바이브코딩 · 2-9</div>
-  <h1>품질 · 운영</h1>
-</section>
-
-<section class="slide lt" data-title="소프트웨어 개발 생명주기 (SDLC)">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">2-9</span></div>
-  <h2 class="s-title sm">소프트웨어 개발 생명주기 (SDLC)</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2u7sd"><div class="v2u7s" style="--d:0.00s"><b>기획</b><span>1-3 · 2-3</span></div><div class="v2u7s" style="--d:0.15s"><b>설계</b><span>1-4 개발 계획 · 2-3</span></div><div class="v2u7s" style="--d:0.30s"><b>구현</b><span>1-6 · 2-4 ~ 2-7</span></div><div class="v2u7s on" style="--d:0.45s"><b>테스트</b><span>2-9</span></div><div class="v2u7s" style="--d:0.60s"><b>배포</b><span>1-7 · 2-7</span></div><div class="v2u7s" style="--d:0.75s"><b>운영</b><span>2-9 · 2-10</span></div><div class="v2u7back">운영 중 버그 → 다시 구현 · 테스트</div></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>품질 관리</b><span>단계마다 기준을 정하고 확인</span></div><div class="v2tile" style="--d:0.08s"><b>테스트</b><span>기능이 기준대로 동작하는지 검사</span></div><div class="v2tile" style="--d:0.16s"><b>디버깅</b><span>버그의 원인을 찾아 고치기</span></div></div><div class="src">출처 · <a href="https://aws.amazon.com/what-is/sdlc/" target="_blank" rel="noopener">AWS · What is SDLC</a></div></div></div>
+  <h1>웹 점검 · E2E 테스트</h1>
 </section>
 
 <section class="slide lt" data-title="직접 클릭 확인의 한계">
@@ -2690,195 +2612,68 @@ order by date;</pre></div><dl><dt>사람이 하는 일</dt><dd>문법 학습 · 
   <div class="eyebrow"><span class="tag">2-9</span></div>
   <h2 class="s-title sm">직접 클릭 확인의 한계</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">1부 앱</div><div class="v2pc" style="--d:0.00s"><b>확인할 기능</b><span>완료 기준 5개</span></div><div class="v2pc" style="--d:0.08s"><b>사용자</b><span>나 혼자 · 브라우저 하나</span></div><div class="v2pc" style="--d:0.16s"><b>확인 방법</b><span>직접 클릭 · 몇 분</span></div></div><div class="v2p on"><div class="v2ph">2부 앱</div><div class="v2pc" style="--d:0.00s"><b>확인할 기능</b><span>마감 지남 · 로그인 · 권한 · 입력값 · MCP 도구</span></div><div class="v2pc" style="--d:0.08s"><b>사용자</b><span>로그인한 팀원 여럿</span></div><div class="v2pc" style="--d:0.16s"><b>확인 방법</b><span>고칠 때마다 전부 다시 · 빠뜨리기 쉬움</span></div></div></div><div class="dbnote"><span>테스트</span> 확인 순서를 파일로 남겨 매번 같은 검사를 자동으로</div></div></div>
+  <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">1부 앱</div><div class="v2pc" style="--d:0.00s"><b>확인할 기능</b><span>완료 기준 몇 개</span></div><div class="v2pc" style="--d:0.08s"><b>사용자</b><span>나 혼자 · 브라우저 하나</span></div><div class="v2pc" style="--d:0.16s"><b>확인 방법</b><span>직접 클릭 · 몇 분</span></div></div><div class="v2p on"><div class="v2ph">2부 앱</div><div class="v2pc" style="--d:0.00s"><b>확인할 기능</b><span>로그인 · 권한 · 페이지 CRUD · MCP</span></div><div class="v2pc" style="--d:0.08s"><b>사용자</b><span>로그인한 팀원 여럿</span></div><div class="v2pc" style="--d:0.16s"><b>확인 방법</b><span>고칠 때마다 전부 다시 · 빠뜨리기 쉬움</span></div></div></div><div class="dbnote"><span>2-9</span> 브라우저 점검과 반복 검사를 Claude Code 에 맡기기</div></div></div>
 </section>
 
-<section class="slide lt" data-title="출고 전 검수 비유">
+<section class="slide lt" data-title="Playwright MCP">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">2-9</span></div>
-  <h2 class="s-title sm">출고 전 검수 비유</h2>
+  <h2 class="s-title sm">Playwright MCP</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="phmap v3ph"><figure class="ph"><img src="img/v2_u7_check.webp" alt="출고 전 검수"><figcaption><b>출고 전 검수</b></figcaption></figure><div class="v2ms"><div class="v2mh"><span>검수</span><i></i><span>테스트</span></div><div class="v2m" style="--d:0.00s"><div class="a">검수 항목표</div><i>→</i><div class="b"><b>테스트 목록</b><small>개발 계획 완료 기준</small></div></div><div class="v2m" style="--d:0.12s"><div class="a">매번 같은 검사</div><i>→</i><div class="b"><b>자동 실행</b><small>명령 한 줄 · 몇 초</small></div></div><div class="v2m" style="--d:0.24s"><div class="a">불량 표시</div><i>→</i><div class="b"><b>실패한 테스트</b><small>어느 기능 · 어떤 입력</small></div></div><div class="v2m" style="--d:0.36s"><div class="a">검수 통과 → 출고</div><i>→</i><div class="b"><b>테스트 통과 → 배포</b><small>push 전 확인</small></div></div></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v2tiles c4"><div class="v2tile" style="--d:0.00s"><b>주소 열기</b><span>localhost · 배포 주소</span></div><div class="v2tile" style="--d:0.08s"><b>클릭 · 입력</b><span>로그인 · 「+ 새 페이지」</span></div><div class="v2tile" style="--d:0.16s"><b>화면 읽기</b><span>버튼 · 문구 · 깨진 곳</span></div><div class="v2tile" style="--d:0.24s"><b>콘솔 읽기</b><span>브라우저 에러</span></div></div><div class="code sm"><div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fn">연결 · 한 번만 (Claude Code 가 실행)</span></div><pre><code>claude mcp add playwright npx @playwright/mcp@latest</code></pre></div><div class="dbnote"><span>주의</span> 믿을 수 있는 사이트만 · 공식 문서 「보안 경계가 아님」</div><div class="src">출처 · <a href="https://github.com/microsoft/playwright-mcp" target="_blank" rel="noopener">Playwright MCP · Microsoft</a></div></div></div>
 </section>
 
-<section class="slide lt" data-title="예제 앱 기준 테스트">
+<section class="slide lt" data-title="실습 2-9 · 1단계 Playwright 연결">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">2-9</span></div>
-  <h2 class="s-title sm">예제 앱 기준 테스트</h2>
+  <h2 class="s-title sm">실습 2-9 · 1단계 Playwright 연결</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2ms"><div class="v2mh"><span>입력 · 행동</span><i></i><span>기대 결과</span></div><div class="v2m" style="--d:0.00s"><div class="a">날짜가 어제인 초안 페이지</div><i>→</i><div class="b"><b>빨간 표시</b><small>「마감 지남」 표시</small></div></div><div class="v2m" style="--d:0.12s"><div class="a">제목 빈칸으로 저장</div><i>→</i><div class="b"><b>저장 막힘</b><small>「제목 입력」</small></div></div><div class="v2m" style="--d:0.24s"><div class="a">다른 사람이 작성자인 페이지 삭제</div><i>→</i><div class="b"><b>거부</b><small>내가 작성자인 페이지만 삭제</small></div></div><div class="v2m" style="--d:0.36s"><div class="a">로그인 없이 추가</div><i>→</i><div class="b"><b>로그인 화면</b><small>「+ 새 페이지」 안 보임</small></div></div></div><div class="dbnote"><span>테스트 한 개</span> 정해 둔 입력 → 기대 결과와 비교 → 통과 · 실패</div></div></div>
+  <div class="body"><div class="mid"><div class="v1ask"><span>Claude Code 입력창</span><p>Playwright MCP 연결해 줘</p></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>확인</b><span>/mcp 에 playwright</span></div><div class="v2tile" style="--d:0.08s"><b>승인</b><span>패널에 뜬 명령 확인 → 허용</span></div><div class="v2tile" style="--d:0.16s"><b>다음</b><span>웹 점검 요청</span></div></div></div></div>
 </section>
 
-<section class="slide lt" data-title="테스트 종류">
+<section class="slide lt" data-title="실습 2-9 · 2단계 웹 점검">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">2-9</span></div>
-  <h2 class="s-title sm">테스트 종류</h2>
+  <h2 class="s-title sm">실습 2-9 · 2단계 웹 점검</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">단위 테스트</div><div class="v2pc" style="--d:0.00s"><b>검사 대상</b><span>함수 하나 · 예: 시간 겹침 판단</span></div><div class="v2pc" style="--d:0.08s"><b>속도</b><span>수백 개도 몇 초</span></div><div class="v2pc" style="--d:0.16s"><b>못 잡는 것</b><span>화면 · 로그인 · DB 연결</span></div></div><div class="v2p on"><div class="v2ph">화면 테스트 (E2E)</div><div class="v2pc" style="--d:0.00s"><b>검사 대상</b><span>브라우저에서 클릭 · 입력 전체 흐름</span></div><div class="v2pc" style="--d:0.08s"><b>속도</b><span>한 개에 수 초 ~ 수십 초</span></div><div class="v2pc" style="--d:0.16s"><b>잡는 것</b><span>버튼 · 화면 문구 · 로그인 흐름</span></div></div></div><div class="dbnote"><span>E2E</span> End to End · 사용자의 처음부터 끝까지</div></div></div>
+  <div class="body"><div class="mid"><div class="v1ask"><span>Claude Code 입력창</span><p>Playwright 로 배포 주소를 열어</p><p>완료 기준대로 눌러 보고 문제를 알려 줘</p></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>Claude Code 가 하는 일</b><span>브라우저 열기 · 로그인 · 클릭</span></div><div class="v2tile" style="--d:0.08s"><b>받을 결과</b><span>기준마다 통과 · 실패 · 콘솔 에러</span></div><div class="v2tile" style="--d:0.16s"><b>고치기</b><span>원인 듣고 승인 뒤</span></div></div></div></div>
 </section>
 
-<section class="slide lt" data-title="테스트 실행 결과 예">
+<section class="slide lt" data-title="E2E 테스트">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">2-9</span></div>
-  <h2 class="s-title sm">테스트 실행 결과 예</h2>
+  <h2 class="s-title sm">E2E 테스트</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2u7run"><div class="v2u7term"><div class="h">1차 실행 · node --test</div><div class="l ok" style="--d:0.30s">ok 1 - 날짜 11-19 · 초안 → 마감 지남</div><div class="l ok" style="--d:0.75s">ok 2 - 날짜 11-19 · 완료 → 마감 지남 아님</div><div class="l ng" style="--d:1.20s">not ok 3 - 날짜가 오늘 → 마감 지남 아님</div><div class="l ng" style="--d:1.65s">  error: 'true == false'</div><div class="l " style="--d:2.10s"># pass 2 · # fail 1</div></div><div class="v2u7fix" style="--d:2.9s"><b>수정</b><span>날짜 비교 「&lt;=」 → 「&lt;」</span></div><div class="v2u7term"><div class="h">2차 실행</div><div class="l ok" style="--d:3.60s">ok 1 - 날짜 11-19 · 초안 → 마감 지남</div><div class="l ok" style="--d:4.05s">ok 2 - 날짜 11-19 · 완료 → 마감 지남 아님</div><div class="l ok" style="--d:4.50s">ok 3 - 날짜가 오늘 → 마감 지남 아님</div><div class="l " style="--d:4.95s"># pass 3 · # fail 0</div></div></div><div class="dbnote"><span>읽는 법</span> ok = 통과 · not ok = 실패 · 「true == false」 = 실제 true · 기대 false</div></div></div>
+  <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">웹 점검 (Playwright MCP)</div><div class="v2pc" style="--d:0.00s"><b>누가</b><span>Claude Code 가 그때그때 눌러 봄</span></div><div class="v2pc" style="--d:0.08s"><b>남는 것</b><span>대화 속 결과</span></div><div class="v2pc" style="--d:0.16s"><b>다시 하려면</b><span>다시 요청</span></div></div><div class="v2p on"><div class="v2ph">E2E 테스트</div><div class="v2pc" style="--d:0.00s"><b>누가</b><span>테스트 파일이 정해진 순서로 실행</span></div><div class="v2pc" style="--d:0.08s"><b>남는 것</b><span>tests/ 파일 · Git 커밋</span></div><div class="v2pc" style="--d:0.16s"><b>다시 하려면</b><span>명령 한 줄 · 몇 초 ~ 몇 분</span></div></div></div><div class="dbnote"><span>E2E</span> End to End · 로그인부터 저장까지 사용자가 하는 흐름 전체를 브라우저로 검사</div><div class="src">출처 · <a href="https://playwright.dev/docs/writing-tests" target="_blank" rel="noopener">Playwright · Writing tests</a></div></div></div>
 </section>
 
-<section class="slide lt" data-title="AI 에게 테스트 맡기기">
+<section class="slide lt" data-title="실습 2-9 · 3단계 E2E 테스트 만들기">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">2-9</span></div>
-  <h2 class="s-title sm">AI 에게 테스트 맡기기</h2>
+  <h2 class="s-title sm">실습 2-9 · 3단계 E2E 테스트 만들기</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1chat"><div class="v1ch">Claude Code 대화 예</div><div class="v1b me"><span>나</span><p>개발 계획 완료 기준으로 테스트를 만들고 실행해 줘. 실패하면 고치기 전에 원인부터 알려 줘</p></div><div class="v1b ai"><span>Claude</span><p>테스트 6개 작성 · 5개 통과 · 1개 실패.<br/>날짜가 오늘인 페이지가 「마감 지남」으로 표시됨 — 날짜 비교에 「<=」 사용. 고칠까요?</p></div><div class="v1b me"><span>나</span><p>응. 고친 뒤 테스트 전체 다시 실행해 줘</p></div><div class="v1b ai"><span>Claude</span><p>수정 · 테스트 6개 모두 통과</p></div></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>기대 결과</b><span>사람 · 개발 계획 완료 기준</span></div><div class="v2tile" style="--d:0.08s"><b>테스트 코드 · 실행</b><span>Claude Code</span></div><div class="v2tile" style="--d:0.16s"><b>금지</b><span>통과시키려고 기대 결과 바꾸기</span></div></div></div></div>
+  <div class="body"><div class="mid"><div class="v1ask"><span>Claude Code 입력창</span><p>완료 기준을 E2E 테스트로 만들고 실행해 줘.</p><p>실패하면 고치기 전에 원인부터 알려 줘</p></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>만들어지는 것</b><span>tests/ 아래 테스트 파일</span></div><div class="v2tile" style="--d:0.08s"><b>받을 결과</b><span>통과 · 실패 수 · 실패한 기준</span></div><div class="v2tile" style="--d:0.16s"><b>하지 말 것</b><span>통과시키려고 기대 결과 바꾸기</span></div></div></div></div>
 </section>
 
-<section class="slide lt" data-title="화면 테스트 요청 예">
+<section class="slide lt" data-title="실습 2-9 · 4단계 고친 뒤 다시 실행">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">2-9</span></div>
-  <h2 class="s-title sm">화면 테스트 요청 예</h2>
+  <h2 class="s-title sm">실습 2-9 · 4단계 고친 뒤 다시 실행</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1chat"><div class="v1ch">Claude Code · 브라우저 MCP 대화 예</div><div class="v1b me"><span>나</span><p>브라우저를 열어서 개발 계획 완료 기준을 하나씩 눌러 확인해 줘</p></div><div class="v1b ai"><span>Claude</span><p>localhost:3000 열기 → 로그인<br/>주간 회의록 추가 ○<br/>날짜 어제인 페이지 → 「마감 지남」 ○<br/>제목 빈칸 → 저장 막힘 ○<br/>다른 사람 페이지 → 삭제 버튼 없음 ○<br/>콘솔 에러 0건</p></div></div><div class="dbnote"><span>Playwright MCP (2-6)</span> 브라우저를 Claude Code 가 직접 열고 눌러 봄 · 완료 기준마다 통과 · 실패</div></div></div>
+  <div class="body"><div class="mid"><div class="v1ask"><span>Claude Code 입력창</span><p>E2E 테스트 전체 다시 실행해 줘</p></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>통과</b><span>전부 통과 → 커밋 · push</span></div><div class="v2tile" style="--d:0.08s"><b>기능 수정 뒤</b><span>같은 요청 한 줄</span></div><div class="v2tile" style="--d:0.16s"><b>남는 것</b><span>테스트 파일 · 커밋 기록</span></div></div></div></div>
 </section>
 
-<section class="slide lt" data-title="에러 메시지 읽는 법">
+<section class="slide lt" data-title="실습 2-9 확인">
   <div class="coord"><b></b> / <span class="tot"></span></div>
   <div class="eyebrow"><span class="tag">2-9</span></div>
-  <h2 class="s-title sm">에러 메시지 읽는 법</h2>
+  <h2 class="s-title sm">실습 2-9 확인</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1cmap"><div class="v1cmt"><span>에러 메시지 · node app.js 실행 결과</span><span>뜻</span></div><div class="v1cmr" style="--d:0.30s"><code>TypeError</code><i>→</i><span>종류 · 값의 종류가 맞지 않음</span></div><div class="v1cmr" style="--d:0.65s"><code>Cannot read properties of undefined</code><i>→</i><span>내용 · 비어 있는 값(undefined)을 읽으려 함</span></div><div class="v1cmr" style="--d:1.00s"><code>(reading 'filter')</code><i>→</i><span>읽으려던 것 · filter</span></div><div class="v1cmr" style="--d:1.35s"><code>at render (app.js 3번째 줄)</code><i>→</i><span>위치 · app.js 3번째 줄 · render 함수</span></div></div><div class="dbnote"><span>읽는 순서</span> 종류 → 내용 → 위치 · 첫 줄과 첫 「at」 줄이 핵심</div></div></div>
-</section>
-
-<section class="slide lt" data-title="디버깅 흐름">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">2-9</span></div>
-  <h2 class="s-title sm">디버깅 흐름</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2u7sf"><div class="st" style="--d:0.40s"><b>재현</b><span>같은 순서로 다시 · 언제 나는지</span></div><div class="st" style="--d:1.20s"><b>에러 · 로그 전달</b><span>원문 그대로 · 캡처</span></div><div class="st" style="--d:2.00s"><b>수정</b><span>원인 설명 → Claude Code 수정</span></div><div class="st" style="--d:2.80s"><b>재테스트</b><span>같은 순서 + 테스트 전체</span></div></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>브라우저 콘솔</b><span>F12 → Console · 화면 쪽 에러</span></div><div class="v2tile" style="--d:0.08s"><b>터미널</b><span>서버 실행 창 · 테스트 결과</span></div><div class="v2tile" style="--d:0.16s"><b>Vercel 로그</b><span>배포 뒤 Next.js 서버 · MCP 서버 에러</span></div></div><div class="dbnote"><span>고친 뒤</span> 재현 순서를 테스트로 남기기 · 같은 버그 재발 방지</div></div></div>
-</section>
-
-<section class="slide lt" data-title="버그 전달 방법">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">2-9</span></div>
-  <h2 class="s-title sm">버그 전달 방법</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="ba">
-  <div class="b"><div class="lab">Before</div><div class="q">「새 페이지가 안 돼」</div></div>
-  <div class="arr">→</div>
-  <div class="a"><div class="lab">After</div><div class="q">「주간 회의록 · 김하늘 · 11-27 저장 → 반응 없음.<br/>콘솔: new row violates row-level security policy」</div></div>
-</div><div class="banote">재현 순서 · 기대 결과 · 실제 결과 · 에러 원문</div></div></div>
-</section>
-
-<section class="slide lt" data-title="AI 코드 리뷰">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">2-9</span></div>
-  <h2 class="s-title sm">AI 코드 리뷰</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2ms"><div class="v2mh"><span>명령</span><i></i><span>하는 일</span></div><div class="v2m" style="--d:0.00s"><div class="a">/diff</div><i>→</i><div class="b"><b>바뀐 곳 보기</b><small>Claude 가 고친 파일 · 줄</small></div></div><div class="v2m" style="--d:0.12s"><div class="a">/code-review (별칭 /review)</div><i>→</i><div class="b"><b>바뀐 코드의 버그 찾기</b><small>--fix 로 찾은 문제 바로 고치기</small></div></div><div class="v2m" style="--d:0.24s"><div class="a">/security-review</div><i>→</i><div class="b"><b>브랜치 변경의 보안 취약점</b><small>GitHub 저장소(origin) 필요 · 1-7 에서 연결</small></div></div></div><div class="dbnote"><span>시점</span> push 전 · 큰 기능 하나 끝날 때마다</div><div class="src">출처 · <a href="https://code.claude.com/docs/en/commands" target="_blank" rel="noopener">Claude Code · Commands</a></div></div></div>
-</section>
-
-<section class="slide lt" data-title="보안 기본 점검">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">2-9</span></div>
-  <h2 class="s-title sm">보안 기본 점검</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>키 노출</b><span>API 키 · secret 키가 코드 · GitHub 에 없음 · .env 는 .gitignore (2-5)</span></div><div class="v2tile" style="--d:0.08s"><b>권한</b><span>RLS 켜짐 · 다른 사람 페이지 수정 · 삭제 불가 (2-4)</span></div><div class="v2tile" style="--d:0.16s"><b>입력값 검증</b><span>빈 칸 · 잘못된 날짜 · 너무 긴 글 · 스크립트 차단</span></div></div><div class="dbnote"><span>점검 요청</span> /security-review + 「키 노출 · 권한 · 입력값 세 가지 확인해 줘」</div></div></div>
-</section>
-
-<section class="slide lt" data-title="배포 뒤 오류 원인">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">2-9</span></div>
-  <h2 class="s-title sm">배포 뒤 오류 원인</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">내 컴퓨터</div><div class="v2pc" style="--d:0.00s"><b>.env</b><span>키 · Supabase 주소 · 인증 설정</span></div><div class="v2pc" style="--d:0.08s"><b>결과</b><span>페이지 목록 · MCP 서버 정상</span></div></div><div class="v2p on"><div class="v2ph">Vercel 배포</div><div class="v2pc" style="--d:0.00s"><b>.env</b><span>없음 · GitHub 에 안 올라감 (2-5)</span></div><div class="v2pc" style="--d:0.08s"><b>결과</b><span>/api/pages · /api/mcp 500</span></div></div></div><div class="dbnote"><span>환경변수 등록 (2-4)</span> 새 키를 쓰면 Vercel 에도 등록 · 등록 · 수정 뒤 Redeploy</div></div></div>
-</section>
-
-<section class="slide lt" data-title="모니터링">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">2-9</span></div>
-  <h2 class="s-title sm">모니터링</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2pair"><div class="v2p"><div class="v2ph">1부 방식</div><div class="v2pc" style="--d:0.00s"><b>에러를 아는 때</b><span>사용자가 단톡방에 제보</span></div><div class="v2pc" style="--d:0.08s"><b>방문 수</b><span>모름</span></div><div class="v2pc" style="--d:0.16s"><b>원인 찾기</b><span>제보 내용 추측</span></div></div><div class="v2p on"><div class="v2ph">모니터링</div><div class="v2pc" style="--d:0.00s"><b>에러를 아는 때</b><span>로그에 빨간 줄 · 바로</span></div><div class="v2pc" style="--d:0.08s"><b>방문 수</b><span>날짜별 그래프</span></div><div class="v2pc" style="--d:0.16s"><b>원인 찾기</b><span>요청 · 상태 코드 · 에러 원문</span></div></div></div><div class="dbnote"><span>모니터링</span> 배포한 뒤에도 서비스가 잘 돌아가는지 지켜보는 일</div></div></div>
-</section>
-
-<section class="slide lt" data-title="가게 운영 비유">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">2-9</span></div>
-  <h2 class="s-title sm">가게 운영 비유</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="phmap v3ph"><figure class="ph"><img src="img/v2_u8_shop.webp" alt="가게 운영 · 손님 수 · 고장 신고"><figcaption><b>가게 운영 · 손님 수 · 고장 신고</b></figcaption></figure><div class="v2ms"><div class="v2mh"><span>가게</span><i></i><span>서비스</span></div><div class="v2m" style="--d:0.00s"><div class="a">가게 문 열기 (1-7)</div><i>→</i><div class="b"><b>배포</b><small>주소로 누구나</small></div></div><div class="v2m" style="--d:0.12s"><div class="a">손님 수 세기</div><i>→</i><div class="b"><b>Web Analytics</b><small>방문자 · 페이지 뷰</small></div></div><div class="v2m" style="--d:0.24s"><div class="a">영업 일지</div><i>→</i><div class="b"><b>로그</b><small>요청마다 시간 · 주소 · 결과</small></div></div><div class="v2m" style="--d:0.36s"><div class="a">고장 신고벨</div><i>→</i><div class="b"><b>5xx 에러 표시</b><small>빨간 줄</small></div></div></div></div></div></div>
-</section>
-
-<section class="slide lt" data-title="Vercel 로그">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">2-9</span></div>
-  <h2 class="s-title sm">Vercel 로그</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2tiles c4"><div class="v2tile" style="--d:0.00s"><b>위치</b><span>프로젝트 → Logs</span></div><div class="v2tile" style="--d:0.08s"><b>한 줄</b><span>시간 · 주소 · 상태 코드 · console 출력</span></div><div class="v2tile" style="--d:0.16s"><b>색</b><span>4xx 경고 (노랑) · 5xx 에러 (빨강)</span></div><div class="v2tile" style="--d:0.24s"><b>보관</b><span>Hobby 1시간 · Pro 1일</span></div></div><div class="v2u8log"><div class="hd"><span></span><span>방식</span><span>주소</span><b>상태</b><em>메시지</em></div><div class="ln " style="--d:0.40s"><span></span><span>GET</span><span>/</span><b>200</b><em></em></div><div class="ln " style="--d:1.00s"><span></span><span>POST</span><span>/api/mcp</span><b>200</b><em>tools/call add_page</em></div><div class="ln err" style="--d:1.60s"><span></span><span>GET</span><span>/api/pages</span><b>500</b><em>Error: NEXT_PUBLIC_SUPABASE_URL is not set</em></div><div class="ln warn" style="--d:2.20s"><span></span><span>POST</span><span>/api/mcp</span><b>401</b><em>토큰 없음</em></div><div class="ln " style="--d:2.80s"><span></span><span>GET</span><span>/api/pages</span><b>200</b><em></em></div></div><div class="dbnote"><span>Live</span> 실시간 보기 · 배포 직후 직접 눌러 보며 확인 · 로그 화면은 예</div><div class="src">출처 · <a href="https://vercel.com/docs/logs/runtime" target="_blank" rel="noopener">Vercel · Runtime Logs</a></div></div></div>
-</section>
-
-<section class="slide lt" data-title="로그 남기기">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">2-9</span></div>
-  <h2 class="s-title sm">로그 남기기</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1chat"><div class="v1ch">Claude Code 대화 예</div><div class="v1b me"><span>나</span><p>MCP 서버 호출이 실패하면 원인을 Vercel 로그에 남겨 줘. 토큰 값은 로그에 쓰지 마</p></div><div class="v1b ai"><span>Claude</span><p>app/api/mcp/route.ts 실패 지점에 console.error 추가<br/>· 도구 이름 · 상태 코드만 기록 · 토큰은 기록 안 함</p></div></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>console.log</b><span>로그의 일반 줄</span></div><div class="v2tile" style="--d:0.08s"><b>console.error</b><span>로그의 에러 줄 · 빨강 필터에 잡힘</span></div><div class="v2tile" style="--d:0.16s"><b>기록 금지</b><span>키 · 비밀번호 · 개인정보</span></div></div></div></div>
-</section>
-
-<section class="slide lt" data-title="Web Analytics">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">2-9</span></div>
-  <h2 class="s-title sm">Web Analytics</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="flow"><div class="fs"><b>프로젝트 → Analytics</b><span>Enable</span></div><div class="fa">→</div><div class="fs hl"><b>스크립트 추가</b><span>「Vercel Web Analytics 붙여 줘」</span></div><div class="fa">→</div><div class="fs"><b>push</b><span>자동 재배포</span></div><div class="fa">→</div><div class="fs"><b>방문 기록</b><span>며칠 뒤 그래프</span></div></div><div class="v2tiles c3"><div class="v2tile" style="--d:0.00s"><b>보이는 것</b><span>방문자 · 페이지 뷰 · 유입 경로 · 국가 · 기기</span></div><div class="v2tile" style="--d:0.08s"><b>Hobby 한도</b><span>월 50,000 이벤트 · 보고 기간 1개월 · 초과 시 수집 중지</span></div><div class="v2tile" style="--d:0.16s"><b>미니 노션 규모</b><span>팀원 8명 · 무료 범위 안</span></div></div><div class="src">출처 · <a href="https://vercel.com/docs/analytics/quickstart" target="_blank" rel="noopener">Vercel · Web Analytics quickstart</a> · <a href="https://vercel.com/docs/analytics/limits-and-pricing" target="_blank" rel="noopener">Vercel · Web Analytics pricing</a></div></div></div>
-</section>
-
-<section class="slide lt" data-title="문제 대응 흐름">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">2-9</span></div>
-  <h2 class="s-title sm">문제 대응 흐름</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2u8sf"><div class="st" style="--d:0.40s"><b>알아차림</b><span>로그 빨간 줄 · 제보</span></div><div class="st" style="--d:1.10s"><b>재현</b><span>배포 주소에서 같은 순서</span></div><div class="st" style="--d:1.80s"><b>에러 · 로그 전달</b><span>원문 그대로</span></div><div class="st" style="--d:2.50s"><b>수정 · 테스트</b><span>2-6 흐름</span></div><div class="st" style="--d:3.20s"><b>push</b><span>자동 재배포 (1-7)</span></div><div class="st" style="--d:3.90s"><b>로그 재확인</b><span>빨간 줄 사라짐</span></div></div><div class="dbnote"><span>급할 때</span> Instant Rollback · 바로 이전 배포로 되돌린 뒤 천천히 수정 (Hobby 는 직전 배포만)</div><div class="src">출처 · <a href="https://vercel.com/docs/instant-rollback" target="_blank" rel="noopener">Vercel · Instant Rollback</a></div></div></div>
-</section>
-
-<section class="slide lt" data-title="페이지 목록 실패 대응">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">2-9</span></div>
-  <h2 class="s-title sm">페이지 목록 실패 대응</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1chat"><div class="v1ch">Claude Code 대화 예</div><div class="v1b me"><span>나</span><p>배포 주소에서 페이지 목록이 안 보여. Vercel 로그:<br/>GET /api/pages 500 · Error: NEXT_PUBLIC_SUPABASE_URL is not set</p></div><div class="v1b ai"><span>Claude</span><p>코드 문제 아님 · Vercel 환경변수에 Supabase URL 없음.<br/>Settings → Environment Variables 에 등록 → Redeploy</p></div><div class="v1b me"><span>나</span><p>등록하고 Redeploy 했어</p></div><div class="v1b ai"><span>Claude</span><p>로그 확인 · GET /api/pages 200 · 목록 정상</p></div></div><div class="dbnote"><span>원인 갈래</span> 코드 수정 → push · 설정 누락 → 환경변수 등록 · Redeploy</div></div></div>
-</section>
-
-<section class="slide lt labs" data-title="[실습 2-9] 테스트 · 운영">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">2-9</span><span class="labtag">실습 2-9</span></div>
-  <h2 class="s-title sm">테스트 · 운영</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="labgrid">
-    <div class="lc goal"><div class="lh">목표</div><p>완료 기준을 테스트로 만들고, 배포 주소의 로그로 MCP 호출까지 확인</p><div class="lf">사용 파일 · 2-8 까지의 앱</div></div>
-    <div class="lc steps"><div class="lh">단계</div><ol><li>완료 기준으로 테스트 요청 · 실행</li><li>실패 원인 확인 → 수정</li><li>/code-review · /security-review</li><li>Vercel 환경변수 · Redeploy</li><li>Logs 에서 /api/mcp 호출 확인</li></ol></div>
-    <div class="lc done"><div class="lh">완료 기준</div><ul><li>테스트 전부 통과</li><li>배포 주소에서 2부 기능 동작</li><li>Logs 에 MCP 호출 줄</li></ul></div>
-  </div></div>
-</section>
-
-<section class="slide lt" data-title="실습 2-9 순서">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">2-9</span></div>
-  <h2 class="s-title sm">실습 2-9 순서</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><ol class="v1st"><li style="--d:0.00s"><em>1</em><span>테스트 요청 · 실행</span></li><li style="--d:0.25s"><em>2</em><span>수정 승인</span></li><li style="--d:0.50s"><em>3</em><span>리뷰 · 보안 점검</span></li><li style="--d:0.75s"><em>4</em><span>환경변수 · Redeploy</span></li><li style="--d:1.00s"><em>5</em><span>로그 확인</span></li></ol><div class="qk2"><b>확인</b><ul><li>not ok 0개</li><li>Logs 에 5xx 없음</li><li>POST /api/mcp 200</li></ul></div></div></div>
-</section>
-<section class="slide lt" data-title="실습 2-9 요청 항목">
-  <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="eyebrow"><span class="tag">2-9</span></div>
-  <h2 class="s-title sm">실습 2-9 요청 항목</h2>
-  <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v1sls"><div class="v1sl" style="--d:0.00s"><b>목표</b><span>완료 기준 자동 테스트 · 배포 뒤 확인</span></div><div class="v1sl" style="--d:0.20s"><b>범위</b><span>권한 · 입력값 · MCP 도구</span></div><div class="v1sl" style="--d:0.40s"><b>실패 시</b><span>원인 설명 먼저 · 수정은 승인 뒤</span></div><div class="v1sl" style="--d:0.60s"><b>하지 말 것</b><span>통과시키려고 기대 결과 바꾸기 · 키를 로그에</span></div></div></div></div>
+  <div class="body"><div class="mid"><div class="cks"><div class="ck" style="--d:0.00s"><span>1</span><b>/mcp 에 playwright 가 연결됐나</b><em>Playwright MCP</em></div><div class="ck" style="--d:0.12s"><span>2</span><b>웹 점검 결과에 콘솔 에러가 0건인가</b><em>브라우저 에러</em></div><div class="ck" style="--d:0.24s"><span>3</span><b>tests/ 에 E2E 테스트 파일이 생겼나</b><em>완료 기준마다 하나 이상</em></div><div class="ck" style="--d:0.36s"><span>4</span><b>E2E 테스트가 전부 통과하나</b><em>실패 0</em></div></div><div class="ckr">넷 다 「예」 → 커밋 · push · 2-10 마무리</div></div></div>
 </section>
 
 <section class="slide dk" data-title="다음 단원">
   <div class="coord"><b></b> / <span class="tot"></span></div>
-  <div class="v1end"><div class="v1got"><span>2-9 산출물</span><b>테스트 · 로그</b></div><a class="v1next" href="#u-2-10"><span>2-10</span><b>마무리</b><small>→ 운영 체크리스트</small></a></div>
+  <div class="v1end"><div class="v1got"><span>2-9 산출물</span><b>Playwright 점검 · E2E 테스트</b></div><a class="v1next" href="#u-2-10"><span>2-10</span><b>마무리</b><small>→ 운영 체크리스트</small></a></div>
 </section>
 
 <section id="u-2-10" class="slide dk cover-dk" data-title="2-10 마무리">
@@ -2892,7 +2687,7 @@ order by date;</pre></div><dl><dt>사람이 하는 일</dt><dd>문법 학습 · 
   <div class="eyebrow"><span class="tag">2-10</span></div>
   <h2 class="s-title sm">2부 회고</h2>
   <div class="rule"></div>
-  <div class="body"><div class="mid"><div class="v2u9q"><span>내 요청</span><i>=</i><span>결과</span><em>?</em></div><div class="flow"><div class="fs"><b>요청 · 응답 · DB</b><span>2-1 · 2-2</span></div><div class="fa">→</div><div class="fs"><b>DB · 로그인</b><span>2-4 · Supabase</span></div><div class="fa">→</div><div class="fs"><b>키 관리</b><span>2-5 · .env.local</span></div><div class="fa">→</div><div class="fs"><b>MCP</b><span>2-6 · 연결 · 캘린더</span></div><div class="fa">→</div><div class="fs hl"><b>내 MCP 서버</b><span>2-7 · 2-8 · Claude · ChatGPT</span></div><div class="fa">→</div><div class="fs"><b>테스트 · 운영</b><span>2-9</span></div></div><div class="dbnote"><span>흐름</span> 1부와 같은 순서 · 데이터 · 외부 연결 · 검사가 더해짐</div></div></div>
+  <div class="body"><div class="mid"><div class="v2u9q"><span>내 요청</span><i>=</i><span>결과</span><em>?</em></div><div class="flow"><div class="fs"><b>요청 · 응답 · DB</b><span>2-1 · 2-2</span></div><div class="fa">→</div><div class="fs"><b>DB · 로그인</b><span>2-4 · Supabase</span></div><div class="fa">→</div><div class="fs"><b>키 관리</b><span>2-5 · .env.local</span></div><div class="fa">→</div><div class="fs"><b>MCP</b><span>2-6 · 연결 · 캘린더</span></div><div class="fa">→</div><div class="fs hl"><b>내 MCP 서버</b><span>2-7 · 2-8 · Claude · ChatGPT</span></div><div class="fa">→</div><div class="fs"><b>웹 점검 · E2E</b><span>2-9</span></div></div><div class="dbnote"><span>흐름</span> 1부와 같은 순서 · 데이터 · 외부 연결 · 검사가 더해짐</div></div></div>
 </section>
 
 <section class="slide lt" data-title="시작 버전 → 2부 앱">
