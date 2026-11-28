@@ -207,24 +207,29 @@ def slides():
               + src(("supabase.com/pricing · 2026-11", "https://supabase.com/pricing")), T),
         # ── 실습
         lab("2-2", "Supabase 가입 · 첫 표", T, "Supabase 프로젝트를 만들고 pages 표에 행을 직접 넣어 본다",
-            ["supabase.com 가입 · Continue with GitHub", "새 프로젝트 · 이름 · DB 비밀번호 · 지역", "Table Editor 에서 pages 표 만들기",
-             "행 2개 직접 넣기", "date 칸에 「월말쯤」 넣어 보기"],
-            ["대시보드에 mini-notion 프로젝트", "pages 표에 행 2개", "날짜 칸이 형식 안 맞는 값을 거절"]),
+            ["supabase.com 가입 · Continue with GitHub", "조직 만들기 · Free", "새 프로젝트 · mini_notion · DB 비밀번호",
+             "Table Editor 에서 pages 표 · 행 2개", "date 칸에 「월말쯤」 넣어 보기"],
+            ["대시보드에 mini_notion 프로젝트", "pages 표에 행 2개", "날짜 칸이 형식 안 맞는 값을 거절"]),
         light("실습 2-2 · 1단계 가입", viz2.tiles([
             ("주소", go("supabase.com/dashboard/sign-up", "https://supabase.com/dashboard/sign-up")),
             ("① 누를 버튼", "Continue with GitHub · 1-2 에서 만든 계정"), ("② GitHub 승인 화면", "Authorize supabase · 이메일 읽기 권한만"),
             ("누르지 않을 것", "ChatGPT · SSO · 이메일 가입")], 4)
               + note("GitHub 계정 하나", "GitHub · Vercel · Supabase 같은 로그인 · Free 플랜 · 카드 등록 없음")
               + src(("Supabase · Pricing", "https://supabase.com/pricing")), T),
-        light("실습 2-2 · 2단계 새 프로젝트", viz2.tiles([
-            ("이름", "mini-notion"), ("DB 비밀번호", "Generate · 따로 보관 · 대화창 · 코드에 붙이지 않기"),
-            ("지역", "Northeast Asia (Seoul)"), ("기다리기", "준비 끝나면 대시보드 열림")], 4)
-              + note("한 프로젝트 = DB 하나", "Postgres 전체 · 로그인 · 저장소가 같이 생김"), T),
-        light("실습 2-2 · 3단계 pages 표", viz2.tiles([
+        light("실습 2-2 · 2단계 조직 만들기", viz2.tiles([
+            ("위치", "Your organizations → New organization"), ("Name", "팀 · 회사 이름 · 나중에 변경 가능"),
+            ("Plan", "Free - $0/month"), ("선택 질문", "Personal · 나머지는 비워도 됨 → Create organization")], 4)
+              + note("조직", "프로젝트를 묶는 단위 · 팀원 · 요금도 조직별"), T),
+        light("실습 2-2 · 3단계 새 프로젝트", viz2.tiles([
+            ("Project name", "mini_notion"), ("Database password", "Generate a password → Copy → 안전한 곳에 보관"),
+            ("Region", "Auto 그대로"), ("GitHub (optional)", "건너뜀"),
+            ("Data access", "Enable Data API ✓ · Grant API access ✓ · Enable RLS ✓"), ("마무리", "Create new project → 준비될 때까지 대기")], 3)
+              + note("RLS 켜 두기", "규칙을 만들기 전까지 앱에서는 아무도 못 읽음 · 규칙은 2-4 · 대시보드에서는 보임"), T),
+        light("실습 2-2 · 4단계 pages 표", viz2.tiles([
             ("위치", "왼쪽 Table Editor → New table"), ("이름", "pages"),
-            ("열 추가", "title · text / date · date / status · text"), ("RLS", "체크된 그대로 · 규칙은 2-4")], 4)
+            ("열 추가", "title · text / date · date / status · text"), ("RLS", "켜진 상태 · 3단계 설정 · 규칙은 2-4")], 4)
               + note("기본 열", "id · created_at 은 자동으로 들어 있음"), T),
-        light("실습 2-2 · 4단계 행 넣기", viz2.tiles([
+        light("실습 2-2 · 5단계 행 넣기", viz2.tiles([
             ("Insert row", "주간 회의록 · 2026-11-27 · 작성 중"), ("한 줄 더", "교육 자료 정리 · 2026-11-25 · 초안"),
             ("형식 시험", "date 칸에 「월말쯤」 → 저장 거절"), ("확인", "표에 행 2개 · id 1 · 2 자동")], 4)
               + note("엑셀과 차이", "열마다 정한 형식(스키마)에 맞지 않으면 저장 안 됨"), T),
